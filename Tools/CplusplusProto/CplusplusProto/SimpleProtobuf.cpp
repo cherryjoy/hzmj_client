@@ -1,3 +1,5 @@
+#include <stdlib.h>
+#include <stdio.h>
 #include "SimpleProtobuf.h"
 
 byte* SimpleProtobuf::buffer = NULL;
