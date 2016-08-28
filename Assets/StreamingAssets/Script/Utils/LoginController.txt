@@ -26,11 +26,11 @@ function LoginController:Start()
     end
 
     -- add back animation
-    if not self.loginAniObj then
+    --if not self.loginAniObj then
        --self.loginAniObj = LuaNTools.AddChildByResourcesPathNoBehaviour(self.LoginBackCam, "Login_interface/Sprite_interface_login_anim_002")
-    end
-    -- local mt=TextureMgr.get_Instance():LoadTexture("Login/denglubeijing_2")
-    -- self.Texture:set_material(mt)
+    --end
+    local mt=TextureMgr.get_Instance():LoadTexture("Login/denglubeijing_2")
+    self.Texture:set_material(mt)
     --[[
     if not self.loginLogo then
         require "Utils/PublicFuncHandle"
