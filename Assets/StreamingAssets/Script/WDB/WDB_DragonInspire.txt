@@ -1,0 +1,10 @@
+WDB_DragonInspire = {}
+--[[
+	WDB_DragonInspire.Id
+	WDB_DragonInspire.Type
+	WDB_DragonInspire.Consume
+	WDB_DragonInspire.AddCodeId
+	WDB_DragonInspire.Num
+]]--
+
+LuaDBTable.SetLuaTableField("DragonInspire")

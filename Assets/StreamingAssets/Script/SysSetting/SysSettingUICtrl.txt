@@ -1,0 +1,130 @@
+SysSettingUICtrl = {}
+
+function SysSettingUICtrl:Start()
+    self.RoleName:set_text(Client.RoleInfo.roleAttr.name)
+    if GameDefine_HideAccount then
+        self.AccountName:get_gameObject():SetActive(false)
+        self.Account:SetActive(false)
+    else
+        self.AccountName:set_text(PlayerPrefsEx.GetString("userName"))
+    end
+    self.CurrentServerName:set_text(PlayerPrefsEx.GetString("LastServerName"))
+    if GameDefine_HideBindAccount then
+        self.AccountBindBtn:SetActive(false)
+    end
+    Client.RoleInfo.SearchMgr.StopAutoSearch()
+    --LuaDebug.Log("****************"..PlayerPrefsEx.GetString("LastServerName"))
+end
+
+function SysSettingUICtrl:Init()
+    if PlayerPrefsEx.GetInt("Mute")~=0 then
+        self.MuteBG:SetActive(true)
+    else
+        self.MuteBG:SetActive(false)
+    end
+    -- if PlayerPrefsEx.HasKey("bgmValue") then
+    --     self.BGMSlider:rawValue(PlayerPrefsEx.GetFloat("bgmValue"))
+    -- else
+    --     self.BGMSlider:rawValue(1)
+    --     PlayerPrefsEx.SetFloat("bgmValue",1)
+    -- end
+    -- if PlayerPrefsEx.HasKey("ggmValue") then
+    --     self.GGMSlider:rawValue(PlayerPrefsEx.GetFloat("ggmValue"))
+    -- else
+    --     self.GGMSlider:rawValue(1)
+    --     PlayerPrefsEx.SetFloat("ggmValue",1)
+    -- end
+    if PlayerPrefsEx.GetInt("LockMove")==0 then
+        self.MultiJoystickBG:SetActive(false)
+        self.JoystickBG:SetActive(true)
+        CityControl.self_():SetLockMove(true) ------can Move
+    else
+        self.MultiJoystickBG:SetActive(true)
+        self.JoystickBG:SetActive(false)
+        CityControl.self_():SetLockMove(false)
+    end
+end
+
+function SysSettingUICtrl:CloseBtn_OnClick()
+    self.gameObject:Destroy1()
+end
+
+function SysSettingUICtrl:HidePlayerBtn_OnClick()
+    if self.HidePlayerBG:get_activeSelf() then
+        self.HidePlayerBG:SetActive(false)
+    else
+        self.HidePlayerBG:SetActive(true)
+    end
+end
+
+function SysSettingUICtrl:MuteBtn_OnClick()
+    local musicMgr=MusicManager.get_Instance()
+    if self.MuteBG:get_activeSelf() then
+        self.MuteBG:SetActive(false)
+        PlayerPrefsEx.SetInt("Mute",0)
+
+        PlayerPrefsEx.SetFloat("bgmValue", 1)
+        PlayerPrefsEx.SetFloat("ggmValue", 1)
+    else
+        self.MuteBG:SetActive(true)
+        PlayerPrefsEx.SetInt("Mute",1)
+
+        PlayerPrefsEx.SetFloat("bgmValue", 0)
+        PlayerPrefsEx.SetFloat("ggmValue", 0)
+    end
+
+    musicMgr:set_MusicVolume(PlayerPrefsEx.GetFloat("bgmValue"))
+    musicMgr:set_AudioVolume(PlayerPrefsEx.GetFloat("ggmValue"))
+end
+
+function SysSettingUICtrl:MoveJoystickBtn_OnClick()
+    self.MultiJoystickBG:SetActive(true)
+    self.JoystickBG:SetActive(false)
+    CityControl.self_():SetLockMove(false)
+    PlayerPrefsEx.SetInt("LockMove",1)
+end
+
+function SysSettingUICtrl:FixedJoystickBtn_OnClick()
+    self.MultiJoystickBG:SetActive(false)
+    self.JoystickBG:SetActive(true)
+    CityControl.self_():SetLockMove(true)
+    PlayerPrefsEx.SetInt("LockMove",0)
+end
+
+function SysSettingUICtrl:BackToLoginBtn_OnClick()
+    ClientSendMsg.SendRoleOut()
+end
+
+function SysSettingUICtrl:CloseBtn_OnClick()
+    self.gameObject:Destroy1()
+end
+
+function SysSettingUICtrl:AccountBindBtn_OnClick()
+    if Application.get_platform() ~= ERuntimePlatform.WindowsPlayer and Application.get_platform() ~= ERuntimePlatform.WindowsEditor then
+        PlatformHandler.CallUserCenter()
+    end
+end
+
+function SysSettingUICtrl:ActivationCodeBtn_OnClick()
+    local JSON = require "Utils/JSON"
+    local jsonTb = {}
+    jsonTb["appKey"] = "e6efa4beafc34bcfb47fdceedc0cc132"
+    jsonTb["userId"] = PlayerPrefsEx.GetString("userId")
+    jsonTb["nickname"] = Client.RoleInfo.roleAttr.name
+    local ext = JSON:encode_pretty(jsonTb)
+    PluginTool.SharedInstance():LKCustomer(ext)
+end
+
+-- function SysSettingUICtrl:BGMSlider_OnChangeValue(value)
+--     if PlayerPrefsEx.GetInt("Mute")==0 then
+--         MusicManager.get_Instance():set_MusicVolume(value)
+--     end
+--     PlayerPrefsEx.SetFloat("bgmValue",value)
+-- end
+--
+-- function SysSettingUICtrl:GGMSlider_OnChangeValue(value)
+--     if PlayerPrefsEx.GetInt("Mute")==0 then
+--         MusicManager.get_Instance():set_AudioVolume(value)
+--     end
+--     PlayerPrefsEx.SetFloat("ggmValue",value)
+-- end

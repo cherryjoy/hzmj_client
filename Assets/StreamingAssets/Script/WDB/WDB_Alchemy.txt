@@ -1,0 +1,9 @@
+WDB_Alchemy = {}
+--[[
+	WDB_Alchemy.Id
+	WDB_Alchemy.LevelMin
+	WDB_Alchemy.LevelMax
+	WDB_Alchemy.Money
+]]--
+
+LuaDBTable.SetLuaTableField("Alchemy")

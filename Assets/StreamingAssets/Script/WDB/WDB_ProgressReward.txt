@@ -1,0 +1,25 @@
+WDB_ProgressReward = {}
+--[[
+	WDB_ProgressReward.Id
+	WDB_ProgressReward.SceneId
+	WDB_ProgressReward.RewardType
+	WDB_ProgressReward.ProgressMin
+	WDB_ProgressReward.ProgressMax
+	WDB_ProgressReward.ItemType1
+	WDB_ProgressReward.ItemId1
+	WDB_ProgressReward.ItemNum1
+	WDB_ProgressReward.ItemType2
+	WDB_ProgressReward.ItemId2
+	WDB_ProgressReward.ItemNum2
+	WDB_ProgressReward.ItemType3
+	WDB_ProgressReward.ItemId3
+	WDB_ProgressReward.ItemNum3
+	WDB_ProgressReward.ItemType4
+	WDB_ProgressReward.ItemId4
+	WDB_ProgressReward.ItemNum4
+	WDB_ProgressReward.ItemType5
+	WDB_ProgressReward.ItemId5
+	WDB_ProgressReward.ItemNum5
+]]--
+
+LuaDBTable.SetLuaTableField("ProgressReward")

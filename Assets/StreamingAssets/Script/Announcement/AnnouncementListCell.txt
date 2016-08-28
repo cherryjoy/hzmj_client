@@ -1,0 +1,64 @@
+AnnouncementListCell = {}
+
+AnnouncementListCell.NoticeActiveMarkName = {
+    [0] = "biaotilan",                   -- Normal = 0,New = 1,Hot = 2,
+    [1] = "",
+    [2] = "",
+}
+
+function AnnouncementListCell:Start()
+
+end
+
+function AnnouncementListCell:OnDestroy()
+
+end
+
+function AnnouncementListCell:Init()
+    if self.isInit then return end
+    self.isInit = true
+
+end
+
+function AnnouncementListCell:SetData(control,index)
+    AnnouncementListCell.Init(self)
+    self.ctr = control
+    self.CallList = self.ctr.AnnouncementData[index+1]
+    self.Lbl:set_text(self.CallList.Title)
+
+    self.index=index
+    -- if self.CallList.Mark ~= nil then
+    --     self.typeMark:set_spriteName(AnnouncementListCell.NoticeActiveMarkName[tonumber(self.CallList.Mark)])
+    -- end
+    if self.CallList.TitleUrl ~= nil then
+        GlobalUpdate:get_Instance():GetWWW(self.AnnounBehav,self.CallList.TitleUrl,"DownRequestSuccess", "DownRequestFail")
+    end
+end
+
+function AnnouncementListCell:TitleBtn_OnClick()
+    if self.ctr.lastIndex==self.index then
+        return
+    else
+        self.ctr.lastIndex=self.index
+    end
+    -- LuaDebug.Log(self.CallList.Title)
+    AnnouncementMainUI.SetCheckMark(self.ctr,self.Mark,self.ctr.checkMarks)
+    for i,v in ipairs(self.ctr.MarksPrefab) do
+        v.gameObject:Destroy1()
+    end
+    self.ctr.Layout:RemoveAll()
+    self.ctr.CallDesObj:get_transform():set_localPosition(LuaVector3.Create(9,194,-6))
+    self.ctr.Layout:set_enabled(false)
+    AnnouncementMainUI.RefreshNotice(self.ctr,self.CallList)
+
+end
+
+function AnnouncementListCell:DownRequestSuccess(url,www)
+    local material = TextureMgr.get_Instance():LoadNetTexture(url,www)
+    -- self.Texture:SetDimesions(179,95)
+    self.Texture:set_material(material)
+end
+
+function AnnouncementListCell:DownRequestFail(www)
+    -- LuaDebug.Log("DownRequestFail")
+end

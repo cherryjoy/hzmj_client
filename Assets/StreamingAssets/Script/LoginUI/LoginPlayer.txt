@@ -1,0 +1,7 @@
+
+LoginPlayer = {}
+
+function LoginPlayer.SelectPlayer(occupation)
+    LoginPlayerLuaCtr.OnClick (Client.LoginPlayers[occupation],occupation,true)
+    Client.RoleSelect:Do(occupation)
+end

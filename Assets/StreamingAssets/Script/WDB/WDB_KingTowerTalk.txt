@@ -1,0 +1,8 @@
+WDB_KingTowerTalk = {}
+--[[
+	WDB_KingTowerTalk.ID
+	WDB_KingTowerTalk.Text
+	WDB_KingTowerTalk.Sound
+]]--
+
+LuaDBTable.SetLuaTableField("KingTowerTalk")

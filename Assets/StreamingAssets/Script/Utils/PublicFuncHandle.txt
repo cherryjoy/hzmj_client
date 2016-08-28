@@ -1,0 +1,9 @@
+UITextureHandle = {}
+
+UITextureHandle.HeadIconRootPath = "UI/Icon/HeadImg/"
+UITextureHandle.ItemIconRootPath = "UI/Icon/ItemIcon/"
+UITextureHandle.SkillIconRootPath = "UI/Icon/SkillIcon/"
+UITextureHandle.SceneIconRootPath = "UI/Icon/SceneIcon/"
+UITextureHandle.IconRootPath = "UI/Icon/"
+UITextureHandle.ModelRootPath = "Scene/UI_Model/"
+UITextureHandle.UIParticleRootPath = "Effect/particle/UIParticle/"

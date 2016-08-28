@@ -1,0 +1,188 @@
+require "Utils/GlobalEnum"
+
+CommonBackCtr = {}
+
+function CommonBackCtr:Start ()
+    Client.UpdateCurrency = Client.UpdateCurrency + {self, CommonBackCtr.UpdateCurrency}
+    Client.HideCurBackGround = Client.HideCurBackGround + {self, CommonBackCtr.HideCurBackGround}
+end
+
+function CommonBackCtr:OnDestroy ()
+    Client.UpdateCurrency = Client.UpdateCurrency - {self, CommonBackCtr.UpdateCurrency}
+    Client.HideCurBackGround = Client.HideCurBackGround - {self, CommonBackCtr.HideCurBackGround}
+    Client.SetTitleActive = Client.SetTitleActive - {self,CommonBackCtr.SetTitleActive}
+end
+
+function CommonBackCtr:Init (parent,nameIndex)
+    -- 1是纯蓝，2是雪山,3是带遮罩的雪山背景，4为不带背景，其余默认为雪山
+    self.UIPanelTypeTable = {
+        ["HallowSys"] = 6 ,  --  圣器
+        ["FairyStartUI"] = 4, ---精灵
+        ["FairyMainUI"] = 4,
+        ["EquipSys"] = 7,    --装备
+        ["FashionSys"] = 9, --时装
+        ["SysSettingUI"] = 2, --系统设置
+        ["GhostListUI"] = 2,
+        ["GhostRebornUI"] = 2,
+        ["SysSettingUI"] = 2,
+        ["GhostRecoverUI"] = 5,
+        ["AwardCenter"] = 2,    --  奖励
+        ["HonorShop"] = 2,   --商店
+        --["AmuletUI"] = 6,
+        ["PVEMoreMain"] = 2, --试炼场
+        ["PVPandPVAIUI"] = 2, -- 竞技场
+        ["TrialSys"] = 2,    --试炼场
+        ["HonorSys"]  = 2,  --荣誉殿堂
+        ["KingTowerUI"]  = 2,  --王者之塔
+        ["GodCityUI"] = 4,  --精灵培养
+        ["GhostInfoUI"] = 4,
+        ["GhostSacrificeUI"] = 4,
+        ["ChipInfoUI"] = 4,
+        ["GhostSelectUI"] = 5,
+        ["Skill"] = 4,   --技能
+        ["WipeCollectionUI"] = 4,   --魔法塔
+        ["GhostMainUI"] = 5 , --魔魂
+        ["SoulBattleUI"] = 4 , --魔魂秘境
+        -- ["FriendUI"] = 1,
+        ["GemStoneUI"] = 6,
+        ["FriendUI"] = 2,
+        ["FairySecret"] = 4,
+        ["FlowerSys"] = 10,
+        ["EggSys"] = 10,
+    }
+    --Start Invoke is too late,so put this event here
+    Client.SetTitleActive = Client.SetTitleActive + {self,CommonBackCtr.SetTitleActive}
+
+    self.UIBgTypePathTable = {
+        [2] = "CommonBackGround/beijing2",
+        [5] = "CommonBackGround/EquipBg",
+        [6] = "CommonBackGround/HallowBg", --圣器专用背景
+        [7] = "CommonBackGround/EquipBg", --装备背景
+        [9] = "CommonBackGround/shizhuang", --时装专用背景
+        [10] = "CommonBackGround/xianhuabeijing", --鲜花专用背景
+    }
+    --各个系统货币
+    self.CurrencyTable = {
+        HallowUI         = {EAwardType.DIAMOND,   EAwardType.MONEY,   EAwardType.STAMINA},  --  圣器
+        FairyStartUI     = {EAwardType.DIAMOND,   EAwardType.MONEY,   EAwardType.STAMINA},  ---精灵
+        FairyMainUI      = {EAwardType.DIAMOND,   EAwardType.MONEY,   EAwardType.STAMINA},
+        EquipUI          = {EAwardType.DIAMOND,   EAwardType.MONEY,   EAwardType.STAMINA},  --装备
+        FashionSys       = {EAwardType.DIAMOND,   EAwardType.MONEY,   EAwardType.FashionChip},  --时装
+        AwardCenter      = {EAwardType.DIAMOND,   EAwardType.MONEY,   EAwardType.STAMINA},  --奖励
+        RefreshShopUI    = {EAwardType.DIAMOND,   EAwardType.MONEY,   EAwardType.STAMINA},  --商店
+        GhostRefreshShop = {EAwardType.DIAMOND,   EAwardType.MONEY,   EAwardType.SPAR},   --魔魂商店
+        AmuletUI         = {EAwardType.DIAMOND,   EAwardType.MONEY,   EAwardType.STAMINA},
+        PVEMoreMain      = {EAwardType.DIAMOND,   EAwardType.MONEY,   EAwardType.STAMINA},  --试炼场
+        PVPandPVAIUI     = {EAwardType.DIAMOND,   EAwardType.MONEY,   EAwardType.STAMINA},  -- 竞技场
+        TrialSys         = {EAwardType.DIAMOND,   EAwardType.MONEY,   EAwardType.STAMINA},  --试炼场
+        HonorSys         = {EAwardType.DIAMOND,   EAwardType.MONEY,   EAwardType.STAMINA},  --荣誉殿堂
+        GodCityUI        = {EAwardType.DIAMOND,   EAwardType.MONEY,   EAwardType.STAMINA},  --精灵培养
+        SkillSys         = {EAwardType.DIAMOND,   EAwardType.MONEY,   EAwardType.STAMINA},  --技能
+        WipeCollectionUI = {EAwardType.DIAMOND,   EAwardType.MONEY,   EAwardType.STAMINA},  --魔法塔
+        SendFlowerPanel  = {EAwardType.DIAMOND,   EAwardType.STAMINA, EAwardType.LingeringFragrance},
+        CrackEggPanel    = {EAwardType.DIAMOND,   EAwardType.MONEY,   EAwardType.STAMINA},
+        Default          = {EAwardType.DIAMOND,   EAwardType.MONEY,   EAwardType.STAMINA},  --默认情况
+    }
+
+    self.ShowPlusTable = {
+        [EAwardType.RED_DIAMOND] = true,
+        [EAwardType.DIAMOND] = true,
+        [EAwardType.MONEY] = true,
+        [EAwardType.STAMINA] = true,
+    }
+
+    local _,_,uiName = string.find(parent.uiName,"/(%a+)$")
+    self.uiName = uiName
+    CommonBackCtr.SetTitle (self,nameIndex)
+    CommonBackCtr.SetBackGround(self,parent,nameIndex)
+    CommonBackCtr.UpdateCurrency(self)
+    self.CloseBtnMsg:target(parent.gameObject)
+end
+
+function CommonBackCtr:HideCurBackGround(showBack)
+    self.m_BackTexGo:SetActive(showBack)
+end
+
+function CommonBackCtr:SetTitleActive(isActive)
+    self.m_Title:SetActive(isActive)
+end
+
+function CommonBackCtr:SetBackGround(parent,nameIndex)
+    if nameIndex ~= nil then
+        local bgIndex = self.UIPanelTypeTable[nameIndex]
+        if bgIndex == nil then
+            bgIndex = 2
+        end
+
+        self.curTextName = self.UIBgTypePathTable[bgIndex]
+        if self.curTextName ~= nil then
+            local textureMat = TextureMgr.get_Instance():LoadTexture(self.curTextName)
+            self.m_mountainTex:set_material(textureMat)
+        end
+    end
+end
+
+function CommonBackCtr:SetTitle (nameIndex)
+    --self.Title:set_text(Text[nameIndex])
+end
+
+function CommonBackCtr:UpdateCurrency()
+    --如果有系统没有添加寄来显示默认值
+    if self.CurrencyTable[self.uiName] == nil then
+        self.CurrencyTable[self.uiName] = self.CurrencyTable.Default
+    end
+    CommonBackCtr.UpdateCurrencyAction(self, self.CurrencyTable[self.uiName][1], self.LeftLabel, self.LeftIcon, self.LeftPlus)
+    CommonBackCtr.UpdateCurrencyAction(self, self.CurrencyTable[self.uiName][2], self.MidLabel, self.MidIcon, self.MidPlus)
+    CommonBackCtr.UpdateCurrencyAction(self, self.CurrencyTable[self.uiName][3], self.RightLabel, self.RightIcon, self.RightPlus)
+    if not self.hasSetCurrency then
+        self.hasSetCurrency = true
+    end
+end
+
+function CommonBackCtr:UpdateCurrencyAction(Currencytype, CurrencyLabel, CurrencyIcon, plusBtn)
+    if not self.ShowPlusTable[Currencytype] then
+        plusBtn:SetActive(false)
+    end
+    if Currencytype ~= EAwardType.INVALID then
+        local stringNum=Util.NumToMil(Client.RoleInfo.currency[Currencytype])
+        if Currencytype == EAwardType.DIAMOND or Currencytype == EAwardType.RED_DIAMOND then
+            stringNum = Util.NumToMil(Client.RoleInfo.currency[EAwardType.DIAMOND]+Client.RoleInfo.currency[EAwardType.RED_DIAMOND])
+        end
+        CurrencyLabel:set_text(stringNum)
+        if not self.hasSetCurrency then
+            CurrencyIcon:set_spriteName(Util.GetMoneySpriteName(Currencytype))
+            CurrencyIcon:MakePixelPerfectWithSizeInAtlas()
+        end
+    end
+end
+
+function CommonBackCtr:ResetCurrency()
+    self.hasSetCurrency=false
+    CommonBackCtr.UpdateCurrency(self)
+end
+
+function CommonBackCtr:LeftPlus_OnClick()
+    CommonBackCtr.PlusAction(self, self.CurrencyTable[self.uiName][1])
+end
+
+function CommonBackCtr:MidPlus_OnClick()
+    CommonBackCtr.PlusAction(self, self.CurrencyTable[self.uiName][2])
+end
+
+function CommonBackCtr:RightPlus_OnClick()
+    CommonBackCtr.PlusAction(self, self.CurrencyTable[self.uiName][3])
+end
+
+function CommonBackCtr:PlusAction(Currencytype)
+    if Currencytype == EAwardType.RED_DIAMOND then
+        local ref = LuaUIViewCtr.OpenUINotLose("Charge/ChargeUI")
+        ChargeCtr.InitCtr(ref)
+    elseif Currencytype == EAwardType.DIAMOND then
+        local ref = LuaUIViewCtr.OpenUINotLose("Charge/ChargeUI")
+        ChargeCtr.InitCtr(ref)
+    elseif  Currencytype == EAwardType.MONEY then
+        LuaUIViewCtr.OpenUIHasBg("CommonUI/DiamondMoney")
+    elseif Currencytype == EAwardType.STAMINA then
+        Client.BuySinew()
+    end
+end

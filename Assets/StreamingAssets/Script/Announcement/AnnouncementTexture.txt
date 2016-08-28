@@ -1,0 +1,44 @@
+AnnouncementTexture = {}
+
+function AnnouncementTexture:Start()
+
+end
+
+function AnnouncementTexture:OnDestroy()
+
+end
+
+function AnnouncementTexture:Init()
+    if self.isInit then return end
+    self.isInit = true
+
+end
+
+function AnnouncementTexture:setData(data,control)
+    AnnouncementTexture.Init(self)
+    self.ctr = control
+    self.material = data
+    local width = self.material:get_mainTexture():get_width()
+    local height = self.material:get_mainTexture():get_height()
+    local MaxLength = self.ctr.Bgmid:get_Dimensions():x()-20
+    local imageWidth = self.ctr.textureDes.textureWidth
+    local textureWidth = 0
+    local textureHeight = 0
+    if not imageWidth then return end
+    if imageWidth > MaxLength then
+        imageWidth = MaxLength
+    end
+    if width > imageWidth then
+        local param = imageWidth/width
+        textureWidth = width*param
+        textureHeight = height*param
+    else
+        textureWidth = width
+        textureHeight = height
+    end
+
+    self.Texture:SetDimesions(textureWidth,textureHeight)
+    self.Texture:set_material(self.material)
+    -- TextureMgr.Instance.mTextures.add("hhh",mat);
+
+end

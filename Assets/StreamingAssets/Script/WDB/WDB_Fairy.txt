@@ -1,0 +1,21 @@
+WDB_Fairy = {}
+--[[
+	WDB_Fairy.Id
+	WDB_Fairy.Name
+	WDB_Fairy.FairyModel
+	WDB_Fairy.High
+	WDB_Fairy.NextId
+	WDB_Fairy.Icon
+	WDB_Fairy.GodcityId
+	WDB_Fairy.ActivityId
+	WDB_Fairy.NeedMoney
+	WDB_Fairy.NeedDiamond
+	WDB_Fairy.SkillId
+	WDB_Fairy.Exp
+	WDB_Fairy.Effect0
+	WDB_Fairy.Effect1
+	WDB_Fairy.Model
+	WDB_Fairy.BigIcon
+]]--
+
+LuaDBTable.SetLuaTableField("Fairy")

@@ -1,0 +1,12 @@
+WDB_ButtonConfigs = {}
+--[[
+	WDB_ButtonConfigs.ID
+	WDB_ButtonConfigs.ButtonType
+	WDB_ButtonConfigs.ButtonMaxNum
+	WDB_ButtonConfigs.ButtonLevelInterval
+	WDB_ButtonConfigs.ButtonVerticalInterval
+	WDB_ButtonConfigs.Duration
+	WDB_ButtonConfigs.InitialInterval
+]]--
+
+LuaDBTable.SetLuaTableField("ButtonConfigs")

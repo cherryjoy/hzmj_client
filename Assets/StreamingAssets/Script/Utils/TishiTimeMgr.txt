@@ -1,0 +1,107 @@
+TishiTimeMgr = {}
+TishiTimeMgr.__index = TishiTimeMgr
+
+function TishiTimeMgr.Init()
+	local ttMgr = setmetatable({},TishiTimeMgr)
+	ttMgr.isStart = false
+    ttMgr.eventTable = {}
+	ttMgr.eventWeight = {upPrompt = 3,guide = 5,upLv = 2,power = 4,task = 1}
+	return ttMgr
+end
+
+function TishiTimeMgr:TaskEnable(taskEvent)
+	-- LuaDebug.Log("TaskEnable")
+	TishiTimeMgr.StartEvent(self,self.eventWeight.task,taskEvent)
+end
+
+function TishiTimeMgr:TaskEnd()
+	TishiTimeMgr.PromptEnd(self,self.eventWeight.task)
+end
+
+function TishiTimeMgr:UpLvEnable(upLvEvent)
+	-- LuaDebug.Log("UpLvEnable")
+	TishiTimeMgr.StartEvent(self,self.eventWeight.upLv,upLvEvent)
+end
+
+function TishiTimeMgr:UpLvEnd()
+	-- LuaDebug.Log("UpLvEnd")
+	Client.RoleInfo.UpLvPromptData = nil
+	TishiTimeMgr.PromptEnd(self,self.eventWeight.upLv)
+end
+
+function TishiTimeMgr:PowerEnable(powerEvent)
+	-- LuaDebug.Log("PowerEnable")
+	TishiTimeMgr.StartEvent(self,self.eventWeight.power,powerEvent)
+end
+
+function TishiTimeMgr:PowerEnd()
+	Client.RoleInfo.PowerPromptData = nil
+	TishiTimeMgr.PromptEnd(self,self.eventWeight.power)
+end
+
+function TishiTimeMgr:GuideEventEnable(guideEvent)
+	-- LuaDebug.Log("guideEnable")
+	TishiTimeMgr.StartEvent(self,self.eventWeight.guide,guideEvent)
+end
+
+function TishiTimeMgr:GuideEnd()
+	TishiTimeMgr.PromptEnd(self,self.eventWeight.guide)
+end
+
+function TishiTimeMgr:UpPromptEventEnable(upPromptEvent)
+	TishiTimeMgr.StartEvent(self,self.eventWeight.upPrompt,upPromptEvent)
+end
+
+function TishiTimeMgr:UpPromptEnd()
+	TishiTimeMgr.PromptEnd(self,self.eventWeight.upPrompt)
+end
+
+function TishiTimeMgr:StartEvent(weight,event)
+	if not event or self.eventTable[weight] then return end
+	self.eventTable[weight]=event
+	local count = 0
+	for k,v in pairs(self.eventTable) do
+		if k<weight then
+			return
+		end
+		count = count + 1
+	end
+	if count == 0 then return end
+	local minIndex
+	for k,v in pairs(self.eventTable) do
+		if not minIndex then
+			minIndex = k
+		else
+			if k<minIndex then
+				minIndex = k
+			end
+		end
+	end
+	if minIndex then
+		self.eventTable[minIndex]()
+		if minIndex == self.eventWeight.guide then
+			self.eventTable[minIndex] = nil
+		end
+	end
+end
+
+function TishiTimeMgr:PromptEnd(weight)
+	Client.AutoBtnTaskGuide:Do(true)
+	self.eventTable[weight] = nil
+	local minK
+	for k,v in pairs(self.eventTable) do
+		if not minK then
+			minK = k
+		else
+			if k<minK then
+				minK = k
+			end
+		end
+	end
+	if minK then
+		self.eventTable[minK]()
+		if minK == self.eventWeight.guide then
+			self.eventTable[minK] = nil
+		end
+	end
+end

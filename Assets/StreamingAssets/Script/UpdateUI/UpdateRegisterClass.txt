@@ -1,0 +1,52 @@
+
+require("Utils/Util")
+require ("Utils/GlobalEnum")
+require("Utils/Text")
+require("Utils/TimerManager")
+require "Utils/UnityLevelMgr"
+require("Utils/LuaUIViewCtr")
+Register.RegisterWrapper(true)
+Register.RegisterClass("System.DateTime")
+Register.RegisterClass("System.GC")
+Register.RegisterClass("UnityEngine.SceneManagement.SceneManager")
+Register.RegisterClass("System.TimeSpan")
+Register.RegisterClass("UnityEngine.Object")
+Register.RegisterClass("UnityEngine.Component")
+Register.RegisterClass("UnityEngine.GameObject")
+Register.RegisterClass("UnityEngine.Transform")
+--Register.RegisterClass("UnityEngine.Resources") DO NOT use thi class ,use ResLoader instead
+Register.RegisterClass("UnityEngine.Application")
+Register.RegisterClass("UnityEngine.PlayerPrefs")
+if Application.get_platform()==ERuntimePlatform.IPhonePlayer then
+    Register.RegisterClass("UnityEngine.iOS.LocalNotification")
+    Register.RegisterClass("UnityEngine.iOS.NotificationServices")
+end
+Register.RegisterClass("UnityEngine.Material")
+Register.RegisterClass("UnityEngine.Texture2D")
+Register.RegisterClass("UnityEngine.AudioClip")
+Register.RegisterClass("UnityEngine.Shader")
+Register.RegisterClass("UnityEngine.Time")
+
+Register.RegisterClass("UILabel")
+Register.RegisterClass("UIRoot")
+Register.RegisterClass("UISprite")
+Register.RegisterClass("UISlicedSprite")
+Register.RegisterClass("UITexture")
+Register.RegisterClass("UICheckbox")
+Register.RegisterClass("UIButtonMessage")
+Register.RegisterClass("UISlider")
+Register.RegisterClass("TextureMgr")
+Register.RegisterClass("ResLoader")
+Register.RegisterClass("GlobalUpdate")
+
+Register.RegisterClass("PlayerPrefsEx")
+
+Register.RegisterClass("TimerManager")
+
+Register.RegisterClass("PluginTool")
+-----------------------
+
+Register.RegisterClass("UIViewCtr")
+
+Register.RegisterClass("UpdateInitController")
+Register.RegisterClass("NGUITools")

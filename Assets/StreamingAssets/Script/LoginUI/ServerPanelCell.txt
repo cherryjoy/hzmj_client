@@ -1,0 +1,89 @@
+ServerPanelCell = {}
+
+function ServerPanelCell:Start()
+end
+
+function ServerPanelCell:OnDestroy()
+end
+
+function ServerPanelCell:Init(ListCon,index)
+    self.ListCon = ListCon
+    self.ServerTableId = index
+    self.ServerTableCell = ListCon.ServerTable[index]
+    self.ServerCellList={}
+
+    if #(self.ServerCellList)~=0 then
+        for i,v in ipairs(self.ServerCellList) do
+            v:Destroy1()
+        end
+        self.ServerCellList={}
+    end
+
+    local index = 0
+    for i=1,#(self.ServerTableCell) do
+        local ref=LuaUIViewCtr.OpenUINotLoseNest("Login/ServerCell",self.DragTarget)
+        table.insert(self.ServerCellList,ref.gameObject)
+        ServerCell.Init(ref,self.ListCon,self.ServerTableCell[i])
+        ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(290*(math.floor(index%2))-145,-90*(math.floor(index/2))+80,0))
+        index=index+1
+    end
+end
+
+function ServerPanelCell:InitMyServer(ListCon)
+    self.ListCon = ListCon
+    self.LastLoginLabel:SetActive(false)
+    self.MyServerLabel:SetActive(false)
+    --重构serverList
+    local serverTableList = {}
+    for i,v in ipairs(self.ListCon.ServerTable) do
+        for j,k in ipairs(v) do
+            --相同的server_ID，视为同一个服务器
+            serverTableList[k.Number] = k
+        end
+    end
+
+    local ref=LuaUIViewCtr.OpenUINotLoseNest("Login/ServerCell",self.MyServerNode)
+    ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(80,0,0))
+    local lastLoginNumber = nil
+    --通过本地取
+    if serverTableList[self.ListCon.CurrentNumber] ~= nil then
+        lastLoginNumber = self.ListCon.CurrentNumber
+    --通过服务器取
+    elseif serverTableList[ServerPanelCell.GetNumByGatewayId(serverTableList, self.ListCon.LoginCtr.MyServerListInfo.lastLogin)] ~= nil then
+        lastLoginNumber = ServerPanelCell.GetNumByGatewayId(serverTableList, self.ListCon.LoginCtr.MyServerListInfo.lastLogin)
+    end
+
+    if lastLoginNumber then
+        ServerCell.Init(ref, self.ListCon, serverTableList[lastLoginNumber])
+        self.LastLoginLabel:SetActive(true)
+        -- ref.ipName:set_text(serverTableList[lastLoginNumber].ServerName)
+    end
+
+    --显示角色服务器
+    if self.ListCon.LoginCtr.MyServerListInfo.userInfo ~= nil then
+        local index = 0
+        for i,v in pairs(self.ListCon.LoginCtr.MyServerListInfo.userInfo) do
+            local tmpNum = ServerPanelCell.GetNumByGatewayId(serverTableList, v.gatewayId)
+            if serverTableList[tmpNum] ~= nil then
+                local refTmp =LuaUIViewCtr.OpenUINotLoseNest("Login/ServerCell",self.DragTarget)
+                refTmp.gameObject:get_transform():set_localPosition(LuaVector3.Create(290*(math.floor(index%2)) + 80,-90*(math.floor(index/2)),0))
+                ServerCell.Init(refTmp, self.ListCon, serverTableList[tmpNum])
+                refTmp.ipName:set_text(serverTableList[tmpNum].ServerName)
+                refTmp.Num:set_text("x"..v.roleCount)
+                refTmp.ipName:get_gameObject():get_transform():set_localPosition(LuaVector3.Create(-15, 5, 0))
+                index =index+1
+            end
+        end
+        if index > 0 then
+            self.MyServerLabel:SetActive(true)
+        end
+    end
+end
+
+function ServerPanelCell.GetNumByGatewayId(serverTableList, gatewayId)
+    for i, v in pairs(serverTableList) do
+        if v.ServerID == tostring(gatewayId) then
+            return v.Number
+        end
+    end
+end

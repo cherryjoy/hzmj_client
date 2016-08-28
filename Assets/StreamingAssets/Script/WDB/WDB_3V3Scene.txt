@@ -1,0 +1,13 @@
+WDB_3V3Scene = {}
+--[[
+	WDB_3V3Scene.Id
+	WDB_3V3Scene.SceneId
+	WDB_3V3Scene.BlueTower1
+	WDB_3V3Scene.BlueTower2
+	WDB_3V3Scene.BlueTower3
+	WDB_3V3Scene.RedTower1
+	WDB_3V3Scene.RedTower2
+	WDB_3V3Scene.RedTower3
+]]--
+
+LuaDBTable.SetLuaTableField("3V3Scene")

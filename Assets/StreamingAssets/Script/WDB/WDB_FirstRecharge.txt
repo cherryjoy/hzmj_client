@@ -1,0 +1,11 @@
+WDB_FirstRecharge = {}
+--[[
+	WDB_FirstRecharge.Id
+	WDB_FirstRecharge.Sequence
+	WDB_FirstRecharge.UseProfession
+	WDB_FirstRecharge.Icon
+	WDB_FirstRecharge.Desc
+	WDB_FirstRecharge.Quality
+]]--
+
+LuaDBTable.SetLuaTableField("FirstRecharge")

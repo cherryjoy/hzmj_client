@@ -1,0 +1,14 @@
+WDB_LegionBossInspire = {}
+--[[
+	WDB_LegionBossInspire.Id
+	WDB_LegionBossInspire.InspireNum
+	WDB_LegionBossInspire.Consume
+	WDB_LegionBossInspire.AddCodeId_01
+	WDB_LegionBossInspire.Num_01
+	WDB_LegionBossInspire.AddCodeId_02
+	WDB_LegionBossInspire.Num_02
+	WDB_LegionBossInspire.AddCodeId_03
+	WDB_LegionBossInspire.Num_03
+]]--
+
+LuaDBTable.SetLuaTableField("LegionBossInspire")

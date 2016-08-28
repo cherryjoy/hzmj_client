@@ -1,0 +1,101 @@
+UpInfoPrompt = {}
+
+function UpInfoPrompt.CreatePrompt(index,skillName,isCloseBigBtn)
+    require "WDB/WDB_TipInformation"
+    local text=LuaCDataMgr.TipInformation():GetData2(Client.RoleInfo.UpPromptData[index],WDB_TipInformation.Title)
+    local occupation = Client.RoleInfo.roleAttr.occupation
+    local tPath=LuaCDataMgr.TipInformation():GetData2(Client.RoleInfo.UpPromptData[index],WDB_TipInformation.Icon0+occupation)
+    local fPath=LuaCDataMgr.TipInformation():GetData2(Client.RoleInfo.UpPromptData[index],WDB_TipInformation.Template)
+    local iconType=LuaCDataMgr.TipInformation():GetData2(Client.RoleInfo.UpPromptData[index],WDB_TipInformation.IconType)
+    local ref = LuaUIViewCtr.OpenUINotLose("ToolsUI/UpInfoPrompt")
+    ref.gameObject:set_name("UpInfoPrompt")
+    ref.index=index
+    ref.isCloseBigBtn = isCloseBigBtn
+    if skillName==nil or skillName=="" then
+        ref.UpLv:SetActive(true)
+        ref.SkillOpen:SetActive(false)
+        UpInfoPrompt.ShowUpInfo(ref,text,tPath,fPath,iconType)
+    else
+        Client.SetBigBtnMoveInOut:Do(1,true)
+        ref.UpLv:SetActive(false)
+        ref.SkillOpen:SetActive(true)
+        ref.Icon:SetMainTextureByPath(tPath)
+        ref.skillName=skillName
+        Timer.NewEvent(ref, 10,10, UpInfoPrompt.WaitToMove)
+    end
+end
+
+function UpInfoPrompt:WaitToMove()
+    self.tweenPos:set_enabled(true)
+    local target = GameObject.Find(self.skillName)
+    self.MovePar:SetActive(true)
+    local MovePos = self.MovePar:get_transform():get_position()
+    MovePos:z(-1)
+    LuaNTools.AddEffect(self.MovePar,UITextureHandle.UIParticleRootPath .. "fx_FunctionOpen_trail",MovePos)
+    self.tweenPos:to(target:get_transform():get_position())
+    self.Static:SetActive(false)
+end
+
+function UpInfoPrompt:ShowUpInfo(text,tPath,fPath,iconType)
+    -- LuaDebug.Log(iconType)
+    self.lbl:set_text(text)
+    if iconType==1 then
+        self.spriteObj:SetActive(true)
+        self.sprite:set_spriteName(tPath)
+    elseif iconType==2 then
+        self.textureObj:SetActive(true)
+        self.Texture:SetMainTextureByPath(tPath)
+    end
+    self.frameBg:set_spriteName(fPath)
+end
+
+function UpInfoPrompt:TweenScale_TweenEnd()
+    UpInfoPrompt.TweenEnd(self)
+end
+
+function UpInfoPrompt:MovePar_TweenEnd()
+    UpInfoPrompt.TweenEnd(self)
+end
+
+function UpInfoPrompt:TweenEnd()
+    local index=self.index+1
+    local data = Client.RoleInfo.UpPromptData[index]
+    if data then
+        local skillName=LuaCDataMgr.TipInformation():GetData2(data,WDB_TipInformation.OpenName)
+        local flag=true
+        local condition1=(skillName~=nil and skillName~="")
+        local condition2=(not LuaUIViewCtr.UIPanelIsShow)
+        local cityId=Client.RoleInfo.CitySceneIdMgr:GetLastCitySceneId()
+        local cityType=LuaCDataMgr.City():GetData2(cityId,WDB_City.CityType)
+        local condition3=(cityType~=0 and cityType~=4)
+        while condition1 and (condition2 or condition3) do
+            index=index+1
+            data = Client.RoleInfo.UpPromptData[index]
+            if data then
+                skillName=LuaCDataMgr.TipInformation():GetData2(data,WDB_TipInformation.OpenName)
+                condition1=(skillName~=nil and skillName~="")
+            else
+                index=index-1
+                flag=false
+                break
+            end
+        end
+        if flag then
+            UpInfoPrompt.CreatePrompt(index,skillName)
+        else
+            UpInfoPrompt.UpPromptEnd(self)
+        end
+    else
+        UpInfoPrompt.UpPromptEnd(self)
+    end
+    self.gameObject:Destroy1()
+end
+
+function UpInfoPrompt:UpPromptEnd()
+    if self.isCloseBigBtn then
+        Client.SetBigBtnMoveInOut:Do(1,false)
+    end
+    Client.RoleInfo.TishiTimeMgr:UpPromptEnd()
+    Client.RoleInfo.UpPromptData = {}
+    Client.RoleInfo.isShowPrompt=false
+end

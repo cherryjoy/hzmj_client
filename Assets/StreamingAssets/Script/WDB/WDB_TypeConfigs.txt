@@ -1,0 +1,9 @@
+WDB_TypeConfigs = {}
+--[[
+	WDB_TypeConfigs.ID
+	WDB_TypeConfigs.ButtonType
+	WDB_TypeConfigs.OpneConditionType
+	WDB_TypeConfigs.OpneConditionNum
+]]--
+
+LuaDBTable.SetLuaTableField("TypeConfigs")

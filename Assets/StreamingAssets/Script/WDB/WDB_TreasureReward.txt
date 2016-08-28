@@ -1,0 +1,17 @@
+WDB_TreasureReward = {}
+--[[
+	WDB_TreasureReward.ID
+	WDB_TreasureReward.Pos
+	WDB_TreasureReward.Leveldown
+	WDB_TreasureReward.Levelup
+	WDB_TreasureReward.Icon
+	WDB_TreasureReward.RewardType
+	WDB_TreasureReward.RewardItemId
+	WDB_TreasureReward.RewardNum
+	WDB_TreasureReward.RewardProbability
+	WDB_TreasureReward.RedProbability
+	WDB_TreasureReward.DoubleProbability
+	WDB_TreasureReward.FreeProbability
+]]--
+
+LuaDBTable.SetLuaTableField("TreasureReward")

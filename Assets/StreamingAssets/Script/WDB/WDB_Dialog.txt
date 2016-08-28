@@ -1,0 +1,12 @@
+WDB_Dialog = {}
+--[[
+	WDB_Dialog.ID
+	WDB_Dialog.occupation
+	WDB_Dialog.Dialog
+	WDB_Dialog.Dialog_0
+	WDB_Dialog.Dialog_1
+	WDB_Dialog.Dialog_2
+	WDB_Dialog.MusicId
+]]--
+
+LuaDBTable.SetLuaTableField("Dialog")

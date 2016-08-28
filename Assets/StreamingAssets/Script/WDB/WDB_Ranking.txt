@@ -1,0 +1,13 @@
+WDB_Ranking = {}
+--[[
+	WDB_Ranking.Id
+	WDB_Ranking.Name0
+	WDB_Ranking.Name1
+	WDB_Ranking.Name2
+	WDB_Ranking.Name3
+	WDB_Ranking.Des0
+	WDB_Ranking.Des1
+	WDB_Ranking.Num
+]]--
+
+LuaDBTable.SetLuaTableField("Ranking")

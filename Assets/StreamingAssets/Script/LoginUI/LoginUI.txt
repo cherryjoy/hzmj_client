@@ -1,0 +1,70 @@
+require "Utils/ClientSendMsg"
+LoginUI = {}
+
+
+-- "^[a-zA-Z0-9]+[.a-zA-Z0-9@_-]*$"
+
+LoginUI.AccountsRegex = "^[%w]+[.%w@_-]*$"
+-- LoginUI.passwordRegex = "\\s+|\\r+|[\u4E00-\u9FA5]+"
+LoginUI.passwordRegex = "%S+[\u4E00-\u9FA5]+"
+
+
+function LoginUI:LoginBtn_OnClick()
+	local userName=self.userName:get_text()
+	local password=self.password:get_text()
+
+	userName = string.lower(userName)
+	
+
+	--userName
+	if string.len(userName) == 0 or userName == nil then
+		TishiCentre.DisPlayText(Text.AccountsTips)
+		return
+	end
+
+	if not string.find(userName,LoginUI.AccountsRegex) or string.sub(userName,1,2) == Text.AccountsErrorString then
+		TishiCentre.DisPlayText(Text.AccountsFormError)
+		return
+	end
+
+	if string.len(userName) < 6 then
+		TishiCentre.DisPlayText(Text.AccountsLeastNum)
+		return
+	elseif string.len(userName) > 32 then
+		TishiCentre.DisPlayText(Text.AccountsLongestNum)
+		return
+	end
+
+	--password
+	if string.len(password) == 0 or password == nil then
+		TishiCentre.DisPlayText(Text.PasswordTips)
+		return
+	end
+
+	if not string.find(password,LoginUI.passwordRegex) then
+		TishiCentre.DisPlayText(Text.PasswordFormError)
+		return
+	end
+	
+	if string.len(password) < 6 then
+		TishiCentre.DisPlayText(Text.PasswordLeastNum)
+		return
+	elseif string.len(password) > 32 then
+		TishiCentre.DisPlayText(Text.PasswordLongestNum)
+		return
+	end
+
+
+	ClientSendMsg.SendAuth(userName,password)
+end
+
+function LoginUI:RegisteBtn_OnClick()
+	self.regist:SetActive(true)
+	self.gameObject:SetActive(false)
+	LoginUI.ClearInfo(self)
+end
+
+function LoginUI:ClearInfo()
+	self.userName:set_text("")
+	self.password:set_text("")
+end

@@ -1,0 +1,9 @@
+WDB_HoroscopeConfig = {}
+--[[
+	WDB_HoroscopeConfig.Id
+	WDB_HoroscopeConfig.Name
+	WDB_HoroscopeConfig.Param
+	WDB_HoroscopeConfig.Param2
+]]--
+
+LuaDBTable.SetLuaTableField("HoroscopeConfig")

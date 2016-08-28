@@ -1,0 +1,12 @@
+WDB_Gem_Open = {}
+--[[
+	WDB_Gem_Open.ID
+	WDB_Gem_Open.Quality
+	WDB_Gem_Open.GemNum
+	WDB_Gem_Open.GemType
+	WDB_Gem_Open.CostType
+	WDB_Gem_Open.CostNum_0
+	WDB_Gem_Open.CostNum_1
+]]--
+
+LuaDBTable.SetLuaTableField("Gem_Open")

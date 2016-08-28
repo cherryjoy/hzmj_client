@@ -1,0 +1,18 @@
+LuaHelpTips = {}
+
+function LuaHelpTips:ShowHelpPanel(TitleName,Content,BtnName,OnOk,OnClose)
+    self.Title:set_text(TitleName);
+    self.Content:set_text(Content);	
+	self.BtnLabel:set_text(BtnName);
+	self.mOnOK = OnOk
+    self.mOnClose = OnClose
+end
+
+function LuaHelpTips:YellowMsgBtn_OnClick()	
+    if (self.mOnOK ~= nil) then self.mOnOK() end
+end
+
+function LuaHelpTips:CloseMsgBtn_OnClick()
+	if (self.mOnClose ~= nil) then self.mOnClose() end
+    GameObject.DestroyImmediate(self.gameObject,false)
+end

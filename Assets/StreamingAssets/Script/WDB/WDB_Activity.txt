@@ -1,0 +1,25 @@
+WDB_Activity = {}
+--[[
+	WDB_Activity.ID
+	WDB_Activity.Name
+	WDB_Activity.Type
+	WDB_Activity.sort
+	WDB_Activity.BattleId
+	WDB_Activity.Desc
+	WDB_Activity.LvExplanation
+	WDB_Activity.Lv
+	WDB_Activity.time
+	WDB_Activity.Day
+	WDB_Activity.Hour0
+	WDB_Activity.Minute0
+	WDB_Activity.Hour1
+	WDB_Activity.Minute1
+	WDB_Activity.award
+	WDB_Activity.Number
+	WDB_Activity.InterfaceType
+	WDB_Activity.icon
+	WDB_Activity.OpenDay
+	WDB_Activity.CdTimeType
+]]--
+
+LuaDBTable.SetLuaTableField("Activity")

@@ -1,0 +1,841 @@
+LuaCDataMgr = {}
+-------------------GetData--------------------
+function LuaCDataMgr.WDBData(typeName,rowIndex,columnIndex)
+	local line=typeName:GetData2(rowIndex,columnIndex)
+	return line:GetData(columnIndex)
+end
+------------------------
+-- function LuaCDataMgr.GetText(id)
+-- 	require "WDB/WDB_Texts"
+-- 	return LuaCDataMgr.Texts():GetData2(id, WDB_Texts.Text)
+-- end
+----------------------------------------------
+function LuaCDataMgr.Equip_Part()
+	if LuaCDataMgr.m_Equip_Part == nil then
+		LuaCDataMgr.m_Equip_Part = CDataMgr.get_Instance():GetOrCreateDB("Equip_Part") end
+	return LuaCDataMgr.m_Equip_Part
+end
+function LuaCDataMgr.Equip_Wash()
+	if LuaCDataMgr.m_Equip_Wash == nil then
+		LuaCDataMgr.m_Equip_Wash = CDataMgr.get_Instance():GetOrCreateDB("Equip_Wash") end
+	return LuaCDataMgr.m_Equip_Wash
+end
+function LuaCDataMgr.Item()
+	if LuaCDataMgr.m_Item == nil then
+		LuaCDataMgr.m_Item = CDataMgr.get_Instance():GetOrCreateDB("Item") end
+	return LuaCDataMgr.m_Item
+end
+function LuaCDataMgr.Equip_abi()
+	if LuaCDataMgr.m_Equip_abi == nil then
+		LuaCDataMgr.m_Equip_abi = CDataMgr.get_Instance():GetOrCreateDB("Equip_abi") end
+	return LuaCDataMgr.m_Equip_abi
+end
+function LuaCDataMgr.BufferParams()
+	if LuaCDataMgr.m_BufferParams == nil then
+		LuaCDataMgr.m_BufferParams = CDataMgr.get_Instance():GetOrCreateDB("BufferParams") end
+	return LuaCDataMgr.m_BufferParams
+end
+function LuaCDataMgr.GameAbi()
+	if LuaCDataMgr.m_GameAbi == nil then
+		LuaCDataMgr.m_GameAbi = CDataMgr.get_Instance():GetOrCreateDB("GameAbi") end
+	return LuaCDataMgr.m_GameAbi
+end
+function LuaCDataMgr.Equip_WashQuality()
+	if LuaCDataMgr.m_Equip_WashQuality == nil then
+		LuaCDataMgr.m_Equip_WashQuality = CDataMgr.get_Instance():GetOrCreateDB("Equip_WashQuality") end
+	return LuaCDataMgr.m_Equip_WashQuality
+end
+function LuaCDataMgr.Equip_RandomBank()
+	if LuaCDataMgr.m_Equip_RandomBank == nil then
+		LuaCDataMgr.m_Equip_RandomBank = CDataMgr.get_Instance():GetOrCreateDB("Equip_RandomBank") end
+	return LuaCDataMgr.m_Equip_RandomBank
+end
+function LuaCDataMgr.Equip_Move()
+	if LuaCDataMgr.m_Equip_Move == nil then
+		LuaCDataMgr.m_Equip_Move = CDataMgr.get_Instance():GetOrCreateDB("Equip_Move") end
+	return LuaCDataMgr.m_Equip_Move
+end
+function LuaCDataMgr.Equip_Step()
+	if LuaCDataMgr.m_Equip_Step == nil then
+		LuaCDataMgr.m_Equip_Step = CDataMgr.get_Instance():GetOrCreateDB("Equip_Step") end
+	return LuaCDataMgr.m_Equip_Step
+end
+function LuaCDataMgr.Equip_Upstar()
+	if LuaCDataMgr.m_Equip_Upstar == nil then
+		LuaCDataMgr.m_Equip_Upstar = CDataMgr.get_Instance():GetOrCreateDB("Equip_Upstar") end
+	return LuaCDataMgr.m_Equip_Upstar
+end
+function LuaCDataMgr.GameScene()
+	if LuaCDataMgr.m_GameScene == nil then
+		LuaCDataMgr.m_GameScene = CDataMgr.get_Instance():GetOrCreateDB("GameScene") end
+	return LuaCDataMgr.m_GameScene
+end
+function LuaCDataMgr.Battle()
+	if LuaCDataMgr.m_Battle == nil then
+		LuaCDataMgr.m_Battle = CDataMgr.get_Instance():GetOrCreateDB("Battle") end
+	return LuaCDataMgr.m_Battle
+end
+function LuaCDataMgr.Wipe()
+	if LuaCDataMgr.m_Wipe == nil then
+		LuaCDataMgr.m_Wipe = CDataMgr.get_Instance():GetOrCreateDB("Wipe")
+	end
+	return LuaCDataMgr.m_Wipe
+end
+function LuaCDataMgr.BattleReward()
+	if LuaCDataMgr.m_BattleReward == nil then
+		LuaCDataMgr.m_BattleReward = CDataMgr.get_Instance():GetOrCreateDB("BattleReward")
+	end
+	return LuaCDataMgr.m_BattleReward
+end
+function LuaCDataMgr.Fairy()
+	if LuaCDataMgr.m_Fairy == nil then
+		LuaCDataMgr.m_Fairy = CDataMgr.get_Instance():GetOrCreateDB("Fairy") end
+	return LuaCDataMgr.m_Fairy
+end
+function LuaCDataMgr.Skills()
+	if LuaCDataMgr.m_Skills == nil then
+		LuaCDataMgr.m_Skills = CDataMgr.get_Instance():GetOrCreateDB("Skills") end
+	return LuaCDataMgr.m_Skills
+end
+function LuaCDataMgr.Godcity()
+	if LuaCDataMgr.m_Godcity == nil then
+		LuaCDataMgr.m_Godcity = CDataMgr.get_Instance():GetOrCreateDB("Godcity") end
+	return LuaCDataMgr.m_Godcity
+end
+function LuaCDataMgr.Equip_RandomValue()
+	if LuaCDataMgr.m_Equip_RandomValue == nil then
+		LuaCDataMgr.m_Equip_RandomValue = CDataMgr.get_Instance():GetOrCreateDB("Equip_RandomValue") end
+	return LuaCDataMgr.m_Equip_RandomValue
+end
+function LuaCDataMgr.Godcity_Level()
+	if LuaCDataMgr.m_Godcity_Level == nil then
+		LuaCDataMgr.m_Godcity_Level = CDataMgr.get_Instance():GetOrCreateDB("Godcity_Level") end
+	return LuaCDataMgr.m_Godcity_Level
+end
+function LuaCDataMgr.Equip_Star()
+	if LuaCDataMgr.m_Equip_Star == nil then
+		LuaCDataMgr.m_Equip_Star = CDataMgr.get_Instance():GetOrCreateDB("Equip_Star") end
+	return LuaCDataMgr.m_Equip_Star
+end
+function LuaCDataMgr.Equip_Stareffect()
+	if LuaCDataMgr.m_Equip_Stareffect == nil then
+		LuaCDataMgr.m_Equip_Stareffect = CDataMgr.get_Instance():GetOrCreateDB("Equip_Stareffect") end
+	return LuaCDataMgr.m_Equip_Stareffect
+end
+function LuaCDataMgr.Fairy_Steps()
+	if LuaCDataMgr.m_Fairy_Steps == nil then
+		LuaCDataMgr.m_Fairy_Steps = CDataMgr.get_Instance():GetOrCreateDB("Fairy_Steps") end
+	return LuaCDataMgr.m_Fairy_Steps
+end
+function LuaCDataMgr.Fairy_Equip()
+	if LuaCDataMgr.m_Fairy_Equip == nil then
+		LuaCDataMgr.m_Fairy_Equip = CDataMgr.get_Instance():GetOrCreateDB("Fairy_Equip") end
+	return LuaCDataMgr.m_Fairy_Equip
+end
+function LuaCDataMgr.PlayerSkillEquips()
+	if LuaCDataMgr.m_PlayerSkillEquips == nil then
+		LuaCDataMgr.m_PlayerSkillEquips = CDataMgr.get_Instance():GetOrCreateDB("PlayerSkillEquips") end
+	return LuaCDataMgr.m_PlayerSkillEquips
+end
+function LuaCDataMgr.CityPlayers()
+	if LuaCDataMgr.m_CityPlayers == nil then
+		LuaCDataMgr.m_CityPlayers = CDataMgr.get_Instance():GetOrCreateDB("CityPlayers") end
+	return LuaCDataMgr.m_CityPlayers
+end
+function LuaCDataMgr.Fairy_Level()
+	if LuaCDataMgr.m_Fairy_Level == nil then
+		LuaCDataMgr.m_Fairy_Level = CDataMgr.get_Instance():GetOrCreateDB("Fairy_Level") end
+	return LuaCDataMgr.m_Fairy_Level
+end
+function LuaCDataMgr.Cost()
+	if LuaCDataMgr.m_Cost == nil then
+		LuaCDataMgr.m_Cost = CDataMgr.get_Instance():GetOrCreateDB("Cost") end
+	return LuaCDataMgr.m_Cost
+end
+-- function LuaCDataMgr.Texts()
+-- 	if LuaCDataMgr.m_Texts == nil then
+-- 		LuaCDataMgr.m_Texts = CDataMgr.get_Instance():GetOrCreateDB("Texts") end
+-- 	return LuaCDataMgr.m_Texts
+-- end
+function LuaCDataMgr.Weapon_abi()
+	if LuaCDataMgr.m_Weapon_abi == nil then
+		LuaCDataMgr.m_Weapon_abi = CDataMgr.get_Instance():GetOrCreateDB("Weapon_abi") end
+	return LuaCDataMgr.m_Weapon_abi
+end
+function LuaCDataMgr.Talents()
+	if LuaCDataMgr.m_Talents == nil then
+		LuaCDataMgr.m_Talents = CDataMgr.get_Instance():GetOrCreateDB("Talents") end
+	return LuaCDataMgr.m_Talents
+end
+function LuaCDataMgr.TalentConfigs()
+	if LuaCDataMgr.m_TalentConfigs == nil then
+		LuaCDataMgr.m_TalentConfigs = CDataMgr.get_Instance():GetOrCreateDB("TalentConfigs") end
+	return LuaCDataMgr.m_TalentConfigs
+end
+function LuaCDataMgr.NPC()
+	if LuaCDataMgr.m_NPC == nil then
+		LuaCDataMgr.m_NPC = CDataMgr.get_Instance():GetOrCreateDB("NPC") end
+	return LuaCDataMgr.m_NPC
+end
+function LuaCDataMgr.Soul_Config()
+	if LuaCDataMgr.m_Soul_Config == nil then
+		LuaCDataMgr.m_Soul_Config = CDataMgr.get_Instance():GetOrCreateDB("Soul_Config") end
+	return LuaCDataMgr.m_Soul_Config
+end
+function LuaCDataMgr.Weapon_Refine()
+	if LuaCDataMgr.m_Weapon_Refine == nil then
+		LuaCDataMgr.m_Weapon_Refine = CDataMgr.get_Instance():GetOrCreateDB("Weapon_Refine") end
+	return LuaCDataMgr.m_Weapon_Refine
+end
+function LuaCDataMgr.Weapon_RefineNum()
+	if LuaCDataMgr.m_Weapon_RefineNum == nil then
+		LuaCDataMgr.m_Weapon_RefineNum = CDataMgr.get_Instance():GetOrCreateDB("Weapon_RefineNum") end
+	return LuaCDataMgr.m_Weapon_RefineNum
+end
+function LuaCDataMgr.Weapon_Upstar()
+	if LuaCDataMgr.m_Weapon_Upstar == nil then
+		LuaCDataMgr.m_Weapon_Upstar = CDataMgr.get_Instance():GetOrCreateDB("Weapon_Upstar") end
+	return LuaCDataMgr.m_Weapon_Upstar
+end
+function LuaCDataMgr.Rune_Unlock()
+	if LuaCDataMgr.m_Rune_Unlock == nil then
+		LuaCDataMgr.m_Rune_Unlock = CDataMgr.get_Instance():GetOrCreateDB("Rune_Unlock") end
+	return LuaCDataMgr.m_Rune_Unlock
+end
+function LuaCDataMgr.Soul()
+	if LuaCDataMgr.m_Soul == nil then
+		LuaCDataMgr.m_Soul = CDataMgr.get_Instance():GetOrCreateDB("Soul") end
+	return LuaCDataMgr.m_Soul
+end
+function LuaCDataMgr.Soul_Level()
+	if LuaCDataMgr.m_Soul_Level == nil then
+		LuaCDataMgr.m_Soul_Level = CDataMgr.get_Instance():GetOrCreateDB("Soul_Level") end
+	return LuaCDataMgr.m_Soul_Level
+end
+
+function LuaCDataMgr.Soul_Quality()
+	if LuaCDataMgr.m_Soul_Quality == nil then
+		LuaCDataMgr.m_Soul_Quality = CDataMgr.get_Instance():GetOrCreateDB("Soul_Quality") end
+	return LuaCDataMgr.m_Soul_Quality
+end
+function LuaCDataMgr.Soul_Break()
+	if LuaCDataMgr.m_Soul_Break == nil then
+		LuaCDataMgr.m_Soul_Break = CDataMgr.get_Instance():GetOrCreateDB("Soul_Break") end
+	return LuaCDataMgr.m_Soul_Break
+end
+function LuaCDataMgr.Soul_Star()
+	if LuaCDataMgr.m_Soul_Star == nil then
+		LuaCDataMgr.m_Soul_Star = CDataMgr.get_Instance():GetOrCreateDB("Soul_Star") end
+	return LuaCDataMgr.m_Soul_Star
+end
+
+function LuaCDataMgr.Relives()
+	if LuaCDataMgr.m_Relives == nil then
+		LuaCDataMgr.m_Relives = CDataMgr.get_Instance():GetOrCreateDB("Relives") end
+	return LuaCDataMgr.m_Relives
+end
+
+function LuaCDataMgr.ButtonOpens()
+	if LuaCDataMgr.m_ButtonOpens == nil then
+		LuaCDataMgr.m_ButtonOpens = CDataMgr.get_Instance():GetOrCreateDB("ButtonOpens") end
+	return LuaCDataMgr.m_ButtonOpens
+end
+
+function LuaCDataMgr.ButtonConfigs()
+	if LuaCDataMgr.m_ButtonConfigs == nil then
+		LuaCDataMgr.m_ButtonConfigs = CDataMgr.get_Instance():GetOrCreateDB("ButtonConfigs") end
+	return LuaCDataMgr.m_ButtonConfigs
+end
+
+function LuaCDataMgr.Rune()
+	if LuaCDataMgr.m_Rune == nil then
+		LuaCDataMgr.m_Rune = CDataMgr.get_Instance():GetOrCreateDB("Rune") end
+	return LuaCDataMgr.m_Rune
+end
+function LuaCDataMgr.Soul_Equip()
+	if LuaCDataMgr.m_Soul_Equip == nil then
+		LuaCDataMgr.m_Soul_Equip = CDataMgr.get_Instance():GetOrCreateDB("Soul_Equip") end
+	return LuaCDataMgr.m_Soul_Equip
+end
+
+function LuaCDataMgr.City()
+	if LuaCDataMgr.m_City == nil then
+		LuaCDataMgr.m_City = CDataMgr.get_Instance():GetOrCreateDB("City") end
+	return LuaCDataMgr.m_City
+end
+
+function LuaCDataMgr.Players()
+	if LuaCDataMgr.m_Players == nil then
+		LuaCDataMgr.m_Players = CDataMgr.get_Instance():GetOrCreateDB("Players") end
+	return LuaCDataMgr.m_Players
+end
+function LuaCDataMgr.Monsters()
+	if LuaCDataMgr.m_Monsters == nil then
+		LuaCDataMgr.m_Monsters = CDataMgr.get_Instance():GetOrCreateDB("Monsters") end
+	return LuaCDataMgr.m_Monsters
+end
+function LuaCDataMgr.PlayerUIs()
+	if LuaCDataMgr.m_PlayerUIs == nil then
+		LuaCDataMgr.m_PlayerUIs = CDataMgr.get_Instance():GetOrCreateDB("PlayerUIs") end
+	return LuaCDataMgr.m_PlayerUIs
+end
+function LuaCDataMgr.GameStars()
+	if LuaCDataMgr.m_GameStars == nil then
+		LuaCDataMgr.m_GameStars = CDataMgr.get_Instance():GetOrCreateDB("GameStars") end
+	return LuaCDataMgr.m_GameStars
+end
+function LuaCDataMgr.SceneStars()
+	if LuaCDataMgr.m_SceneStars == nil then
+		LuaCDataMgr.m_SceneStars = CDataMgr.get_Instance():GetOrCreateDB("SceneStars") end
+	return LuaCDataMgr.m_SceneStars
+end
+function LuaCDataMgr.TypeConfigs()
+	if LuaCDataMgr.m_TypeConfigs == nil then
+		LuaCDataMgr.m_TypeConfigs = CDataMgr.get_Instance():GetOrCreateDB("TypeConfigs") end
+	return LuaCDataMgr.m_TypeConfigs
+end
+function LuaCDataMgr.BattleReward()
+	if LuaCDataMgr.m_BattleReward == nil then
+		LuaCDataMgr.m_BattleReward = CDataMgr.get_Instance():GetOrCreateDB("BattleReward") end
+	return LuaCDataMgr.m_BattleReward
+end
+function LuaCDataMgr.PlayerExp()
+	if LuaCDataMgr.m_PlayerExp == nil then
+		LuaCDataMgr.m_PlayerExp = CDataMgr.get_Instance():GetOrCreateDB("PlayerExp") end
+	return LuaCDataMgr.m_PlayerExp
+end
+function LuaCDataMgr.Quest()
+	if LuaCDataMgr.m_Quest == nil then
+		LuaCDataMgr.m_Quest = CDataMgr.get_Instance():GetOrCreateDB("Quest") end
+	return LuaCDataMgr.m_Quest
+end
+function LuaCDataMgr.GameConfig()
+	if LuaCDataMgr.m_GameConfig == nil then
+		LuaCDataMgr.m_GameConfig = CDataMgr.get_Instance():GetOrCreateDB("GameConfig") end
+	return LuaCDataMgr.m_GameConfig
+end
+function LuaCDataMgr.RewardTypeIcon()
+	if LuaCDataMgr.m_RewardTypeIcon == nil then
+		LuaCDataMgr.m_RewardTypeIcon = CDataMgr.get_Instance():GetOrCreateDB("RewardTypeIcon") end
+	return LuaCDataMgr.m_RewardTypeIcon
+end
+function LuaCDataMgr.Equip_Group()
+	if LuaCDataMgr.m_Equip_Group == nil then
+		LuaCDataMgr.m_Equip_Group = CDataMgr.get_Instance():GetOrCreateDB("Equip_Group") end
+	return LuaCDataMgr.m_Equip_Group
+end
+function LuaCDataMgr.Dialog()
+	if LuaCDataMgr.m_Dialog == nil then
+		LuaCDataMgr.m_Dialog = CDataMgr.get_Instance():GetOrCreateDB("Dialog") end
+	return LuaCDataMgr.m_Dialog
+end
+function LuaCDataMgr.Step_Item()
+	if LuaCDataMgr.m_Step_Item == nil then
+		LuaCDataMgr.m_Step_Item = CDataMgr.get_Instance():GetOrCreateDB("Step_Item") end
+	return LuaCDataMgr.m_Step_Item
+end
+function LuaCDataMgr.Fashion_Abi()
+	if LuaCDataMgr.m_Fashion_Abi == nil then
+		LuaCDataMgr.m_Fashion_Abi = CDataMgr.get_Instance():GetOrCreateDB("Fashion_Abi") end
+	return LuaCDataMgr.m_Fashion_Abi
+end
+function LuaCDataMgr.Fashion_Part()
+	if LuaCDataMgr.m_Fashion_Part == nil then
+		LuaCDataMgr.m_Fashion_Part = CDataMgr.get_Instance():GetOrCreateDB("Fashion_Part") end
+	return LuaCDataMgr.m_Fashion_Part
+end
+function LuaCDataMgr.Fashion_Train()
+	if LuaCDataMgr.m_Fashion_Train == nil then
+		LuaCDataMgr.m_Fashion_Train = CDataMgr.get_Instance():GetOrCreateDB("Fashion_Train") end
+	return LuaCDataMgr.m_Fashion_Train
+end
+function LuaCDataMgr.Train_Level()
+	if LuaCDataMgr.m_Train_Level == nil then
+		LuaCDataMgr.m_Train_Level = CDataMgr.get_Instance():GetOrCreateDB("Train_Level") end
+	return LuaCDataMgr.m_Train_Level
+end
+function LuaCDataMgr.Activity()
+	if LuaCDataMgr.m_Activity == nil then
+		LuaCDataMgr.m_Activity = CDataMgr.get_Instance():GetOrCreateDB("Activity") end
+	return LuaCDataMgr.m_Activity
+end
+function LuaCDataMgr.Achieve()
+	if LuaCDataMgr.m_Achieve == nil then
+		LuaCDataMgr.m_Achieve = CDataMgr.get_Instance():GetOrCreateDB("Achieve") end
+	return LuaCDataMgr.m_Achieve
+end
+function LuaCDataMgr.ActivityConfig()
+	if LuaCDataMgr.m_ActivityConfig == nil then
+		LuaCDataMgr.m_ActivityConfig = CDataMgr.get_Instance():GetOrCreateDB("ActivityConfig") end
+	return LuaCDataMgr.m_ActivityConfig
+end
+function LuaCDataMgr.Reward()
+	if LuaCDataMgr.m_Reward == nil then
+		LuaCDataMgr.m_Reward = CDataMgr.get_Instance():GetOrCreateDB("Reward") end
+	return LuaCDataMgr.m_Reward
+end
+function LuaCDataMgr.Alchemy()
+	if LuaCDataMgr.m_Alchemy == nil then
+		LuaCDataMgr.m_Alchemy = CDataMgr.get_Instance():GetOrCreateDB("Alchemy") end
+	return LuaCDataMgr.m_Alchemy
+end
+function LuaCDataMgr.Something_buy()
+	if LuaCDataMgr.m_Something_buy == nil then
+		LuaCDataMgr.m_Something_buy = CDataMgr.get_Instance():GetOrCreateDB("Something_buy") end
+	return LuaCDataMgr.m_Something_buy
+end
+function LuaCDataMgr.MonstersTalk()
+	if LuaCDataMgr.m_MonstersTalk == nil then
+		LuaCDataMgr.m_MonstersTalk = CDataMgr.get_Instance():GetOrCreateDB("MonstersTalk") end
+	return LuaCDataMgr.m_MonstersTalk
+end
+function LuaCDataMgr.Weapon_ARemove()
+	if LuaCDataMgr.m_Weapon_ARemove == nil then
+		LuaCDataMgr.m_Weapon_ARemove = CDataMgr.get_Instance():GetOrCreateDB("Weapon_ARemove") end
+	return LuaCDataMgr.m_Weapon_ARemove
+end
+function LuaCDataMgr.Weapon_RemoveStone()
+	if LuaCDataMgr.m_Weapon_RemoveStone == nil then
+		LuaCDataMgr.m_Weapon_RemoveStone = CDataMgr.get_Instance():GetOrCreateDB("Weapon_RemoveStone") end
+	return LuaCDataMgr.m_Weapon_RemoveStone
+end
+function LuaCDataMgr.Storys()
+	if LuaCDataMgr.m_Storys == nil then
+		LuaCDataMgr.m_Storys = CDataMgr.get_Instance():GetOrCreateDB("Storys") end
+	return LuaCDataMgr.m_Storys
+end
+function LuaCDataMgr.Vip()
+	if LuaCDataMgr.m_Vip == nil then
+		LuaCDataMgr.m_Vip = CDataMgr.get_Instance():GetOrCreateDB("Vip") end
+	return LuaCDataMgr.m_Vip
+end
+function LuaCDataMgr.Guides()
+	if LuaCDataMgr.m_Guides == nil then
+		LuaCDataMgr.m_Guides = CDataMgr.get_Instance():GetOrCreateDB("Guides") end
+	return LuaCDataMgr.m_Guides
+end
+function LuaCDataMgr.PopUps()
+	if LuaCDataMgr.m_PopUps == nil then
+		LuaCDataMgr.m_PopUps = CDataMgr.get_Instance():GetOrCreateDB("PopUps") end
+	return LuaCDataMgr.m_PopUps
+end
+function LuaCDataMgr.RewardType()
+	if LuaCDataMgr.m_RewardType == nil then
+		LuaCDataMgr.m_RewardType = CDataMgr.get_Instance():GetOrCreateDB("RewardType") end
+	return LuaCDataMgr.m_RewardType
+end
+function LuaCDataMgr.Weapon_Scene()
+	if LuaCDataMgr.m_Weapon_Scene == nil then
+		LuaCDataMgr.m_Weapon_Scene = CDataMgr.get_Instance():GetOrCreateDB("Weapon_Scene") end
+	return LuaCDataMgr.m_Weapon_Scene
+end
+function LuaCDataMgr.Musics()
+	if LuaCDataMgr.m_Musics == nil then
+		LuaCDataMgr.m_Musics = CDataMgr.get_Instance():GetOrCreateDB("Musics") end
+	return LuaCDataMgr.m_Musics
+end
+function LuaCDataMgr.SkillUpgradeInfo()
+	if LuaCDataMgr.m_SkillUpgradeInfo == nil then
+		LuaCDataMgr.m_SkillUpgradeInfo = CDataMgr.get_Instance():GetOrCreateDB("SkillUpgradeInfo") end
+	return LuaCDataMgr.m_SkillUpgradeInfo
+end
+function LuaCDataMgr.SkillLevelDes()
+	if LuaCDataMgr.m_SkillLevelDes == nil then
+		LuaCDataMgr.m_SkillLevelDes = CDataMgr.get_Instance():GetOrCreateDB("SkillLevelDes") end
+	return LuaCDataMgr.m_SkillLevelDes
+end
+function LuaCDataMgr.Arena()
+	if LuaCDataMgr.m_Arena == nil then
+		LuaCDataMgr.m_Arena = CDataMgr.get_Instance():GetOrCreateDB("Arena") end
+	return LuaCDataMgr.m_Arena
+end
+function LuaCDataMgr.LoginPlayers()
+	if LuaCDataMgr.m_LoginPlayers == nil then
+		LuaCDataMgr.m_LoginPlayers = CDataMgr.get_Instance():GetOrCreateDB("LoginPlayers") end
+	return LuaCDataMgr.m_LoginPlayers
+end
+function LuaCDataMgr.Drop()
+	if LuaCDataMgr.m_Drop == nil then
+		LuaCDataMgr.m_Drop = CDataMgr.get_Instance():GetOrCreateDB("Drop") end
+	return LuaCDataMgr.m_Drop
+end
+function LuaCDataMgr.FirstScene()
+	if LuaCDataMgr.m_FirstScene == nil then
+		LuaCDataMgr.m_FirstScene = CDataMgr.get_Instance():GetOrCreateDB("FirstScene") end
+	return LuaCDataMgr.m_FirstScene
+end
+function LuaCDataMgr.PlayerProperties()
+	if LuaCDataMgr.m_PlayerProperties == nil then
+		LuaCDataMgr.m_PlayerProperties = CDataMgr.get_Instance():GetOrCreateDB("PlayerProperties") end
+	return LuaCDataMgr.m_PlayerProperties
+end
+function LuaCDataMgr.Vitality()
+	if LuaCDataMgr.m_Vitality == nil then
+		LuaCDataMgr.m_Vitality = CDataMgr.get_Instance():GetOrCreateDB("Vitality") end
+	return LuaCDataMgr.m_Vitality
+end
+function LuaCDataMgr.Vitality_Reward()
+	if LuaCDataMgr.m_Vitality_Reward == nil then
+		LuaCDataMgr.m_Vitality_Reward = CDataMgr.get_Instance():GetOrCreateDB("Vitality_Reward") end
+	return LuaCDataMgr.m_Vitality_Reward
+end
+function LuaCDataMgr.Bag()
+	if LuaCDataMgr.m_Bag == nil then
+		LuaCDataMgr.m_Bag = CDataMgr.get_Instance():GetOrCreateDB("Bag") end
+	return LuaCDataMgr.m_Bag
+end
+function LuaCDataMgr.DragonInspire()
+	if LuaCDataMgr.m_DragonInspire == nil then
+		LuaCDataMgr.m_DragonInspire = CDataMgr.get_Instance():GetOrCreateDB("DragonInspire") end
+	return LuaCDataMgr.m_DragonInspire
+end
+function LuaCDataMgr.Gem_Open()
+	if LuaCDataMgr.m_Gem_Open == nil then
+		LuaCDataMgr.m_Gem_Open = CDataMgr.get_Instance():GetOrCreateDB("Gem_Open") end
+	return LuaCDataMgr.m_Gem_Open
+end
+function LuaCDataMgr.gem()
+	if LuaCDataMgr.m_gem == nil then
+		LuaCDataMgr.m_gem = CDataMgr.get_Instance():GetOrCreateDB("gem") end
+	return LuaCDataMgr.m_gem
+end
+function LuaCDataMgr.Shop()
+	if LuaCDataMgr.m_Shop == nil then
+		LuaCDataMgr.m_Shop = CDataMgr.get_Instance():GetOrCreateDB("Shop") end
+	return LuaCDataMgr.m_Shop
+end
+function LuaCDataMgr.Crusade()
+	if LuaCDataMgr.m_Crusade == nil then
+		LuaCDataMgr.m_Crusade = CDataMgr.get_Instance():GetOrCreateDB("Crusade") end
+	return LuaCDataMgr.m_Crusade
+end
+function LuaCDataMgr.Kingroad()
+	if LuaCDataMgr.m_Kingroad == nil then
+		LuaCDataMgr.m_Kingroad = CDataMgr.get_Instance():GetOrCreateDB("Kingroad") end
+	return LuaCDataMgr.m_Kingroad
+end
+function LuaCDataMgr.HoroscopeLevel()
+	if LuaCDataMgr.m_HoroscopeLevel == nil then
+		LuaCDataMgr.m_HoroscopeLevel = CDataMgr.get_Instance():GetOrCreateDB("HoroscopeLevel") end
+	return LuaCDataMgr.m_HoroscopeLevel
+end
+function LuaCDataMgr.HoroscopeReward()
+	if LuaCDataMgr.m_HoroscopeReward == nil then
+		LuaCDataMgr.m_HoroscopeReward = CDataMgr.get_Instance():GetOrCreateDB("HoroscopeReward") end
+	return LuaCDataMgr.m_HoroscopeReward
+end
+function LuaCDataMgr.Ranking()
+	if LuaCDataMgr.m_Ranking == nil then
+		LuaCDataMgr.m_Ranking = CDataMgr.get_Instance():GetOrCreateDB("Ranking") end
+	return LuaCDataMgr.m_Ranking
+end
+function LuaCDataMgr.Scene_Ability()
+	if LuaCDataMgr.m_Scene_Ability == nil then
+		LuaCDataMgr.m_Scene_Ability = CDataMgr.get_Instance():GetOrCreateDB("Scene_Ability") end
+	return LuaCDataMgr.m_Scene_Ability
+end
+function LuaCDataMgr.SoulScene()
+	if LuaCDataMgr.m_SoulScene == nil then
+		LuaCDataMgr.m_SoulScene = CDataMgr.get_Instance():GetOrCreateDB("SoulScene") end
+	return LuaCDataMgr.m_SoulScene
+end
+function LuaCDataMgr.GameScene_Show()
+	if LuaCDataMgr.m_GameScene_Show == nil then
+		LuaCDataMgr.m_GameScene_Show = CDataMgr.get_Instance():GetOrCreateDB("GameScene_Show") end
+	return LuaCDataMgr.m_GameScene_Show
+end
+function LuaCDataMgr.PushTower()
+	if LuaCDataMgr.m_PushTower == nil then
+		LuaCDataMgr.m_PushTower = CDataMgr.get_Instance():GetOrCreateDB("PushTower") end
+	return LuaCDataMgr.m_PushTower
+end
+function LuaCDataMgr.PushTowerReward()
+	if LuaCDataMgr.m_PushTowerReward == nil then
+		LuaCDataMgr.m_PushTowerReward = CDataMgr.get_Instance():GetOrCreateDB("PushTowerReward") end
+	return LuaCDataMgr.m_PushTowerReward
+end
+function LuaCDataMgr.PliesReward()
+	if LuaCDataMgr.m_PliesReward == nil then
+		LuaCDataMgr.m_PliesReward = CDataMgr.get_Instance():GetOrCreateDB("PliesReward") end
+	return LuaCDataMgr.m_PliesReward
+end
+function LuaCDataMgr.PushTowerInspire()
+	if LuaCDataMgr.m_PushTowerInspire == nil then
+		LuaCDataMgr.m_PushTowerInspire = CDataMgr.get_Instance():GetOrCreateDB("PushTowerInspire") end
+	return LuaCDataMgr.m_PushTowerInspire
+end
+function LuaCDataMgr.WinOrFailReward()
+	if LuaCDataMgr.m_WinOrFailReward == nil then
+		LuaCDataMgr.m_WinOrFailReward = CDataMgr.get_Instance():GetOrCreateDB("WinOrFailReward") end
+	return LuaCDataMgr.m_WinOrFailReward
+end
+
+function LuaCDataMgr.CrusadeConfig()
+	if LuaCDataMgr.m_CrusadeConfig == nil then
+		LuaCDataMgr.m_CrusadeConfig = CDataMgr.get_Instance():GetOrCreateDB("CrusadeConfig") end
+	return LuaCDataMgr.m_CrusadeConfig
+end
+
+function LuaCDataMgr.Miner()
+	if LuaCDataMgr.m_Miner == nil then
+		LuaCDataMgr.m_Miner = CDataMgr.get_Instance():GetOrCreateDB("Miner") end
+	return LuaCDataMgr.m_Miner
+end
+function LuaCDataMgr.MinerReward()
+	if LuaCDataMgr.m_MinerReward == nil then
+		LuaCDataMgr.m_MinerReward = CDataMgr.get_Instance():GetOrCreateDB("MinerReward") end
+	return LuaCDataMgr.m_MinerReward
+end
+function LuaCDataMgr.MinerConfig()
+	if LuaCDataMgr.m_MinerConfig == nil then
+		LuaCDataMgr.m_MinerConfig = CDataMgr.get_Instance():GetOrCreateDB("MinerConfig") end
+	return LuaCDataMgr.m_MinerConfig
+end
+function LuaCDataMgr.HoroscopeConfig()
+	if LuaCDataMgr.m_HoroscopeConfig == nil then
+		LuaCDataMgr.m_HoroscopeConfig = CDataMgr.get_Instance():GetOrCreateDB("HoroscopeConfig") end
+	return LuaCDataMgr.m_HoroscopeConfig
+end
+function LuaCDataMgr.LegionLevel()
+	if LuaCDataMgr.m_LegionLevel == nil then
+		LuaCDataMgr.m_LegionLevel = CDataMgr.get_Instance():GetOrCreateDB("LegionLevel") end
+	return LuaCDataMgr.m_LegionLevel
+end
+function LuaCDataMgr.LegionActivity()
+	if LuaCDataMgr.m_LegionActivity == nil then
+		LuaCDataMgr.m_LegionActivity = CDataMgr.get_Instance():GetOrCreateDB("LegionActivity") end
+	return LuaCDataMgr.m_LegionActivity
+end
+function LuaCDataMgr.Message()
+	if LuaCDataMgr.m_Message == nil then
+		LuaCDataMgr.m_Message = CDataMgr.get_Instance():GetOrCreateDB("Message") end
+	return LuaCDataMgr.m_Message
+end
+function LuaCDataMgr.Effects()
+	if LuaCDataMgr.m_Effects == nil then
+		LuaCDataMgr.m_Effects = CDataMgr.get_Instance():GetOrCreateDB("Effects") end
+	return LuaCDataMgr.m_Effects
+end
+function LuaCDataMgr.Soul_Chip()
+	if LuaCDataMgr.m_Soul_Chip == nil then
+		LuaCDataMgr.m_Soul_Chip = CDataMgr.get_Instance():GetOrCreateDB("Soul_Chip") end
+	return LuaCDataMgr.m_Soul_Chip
+end
+function LuaCDataMgr.KingRoad()
+	if LuaCDataMgr.m_KingRoad == nil then
+		LuaCDataMgr.m_KingRoad = CDataMgr.get_Instance():GetOrCreateDB("KingRoad") end
+	return LuaCDataMgr.m_KingRoad
+end
+function LuaCDataMgr.Fairy_Follow()
+	if LuaCDataMgr.m_Fairy_Follow == nil then
+		LuaCDataMgr.m_Fairy_Follow = CDataMgr.get_Instance():GetOrCreateDB("Fairy_Follow") end
+	return LuaCDataMgr.m_Fairy_Follow
+end
+function LuaCDataMgr.TipInformation()
+	if LuaCDataMgr.m_TipInformation == nil then
+		LuaCDataMgr.m_TipInformation = CDataMgr.get_Instance():GetOrCreateDB("TipInformation") end
+	return LuaCDataMgr.m_TipInformation
+end
+function LuaCDataMgr.Help()
+	if LuaCDataMgr.m_Help == nil then
+		LuaCDataMgr.m_Help = CDataMgr.get_Instance():GetOrCreateDB("Help") end
+	return LuaCDataMgr.m_Help
+end
+function LuaCDataMgr.LegionBoss()
+	if LuaCDataMgr.m_LegionBoss == nil then
+		LuaCDataMgr.m_LegionBoss = CDataMgr.get_Instance():GetOrCreateDB("LegionBoss") end
+	return LuaCDataMgr.m_LegionBoss
+end
+function LuaCDataMgr.LegionBossScene()
+	if LuaCDataMgr.m_LegionBossScene == nil then
+		LuaCDataMgr.m_LegionBossScene = CDataMgr.get_Instance():GetOrCreateDB("LegionBossScene") end
+	return LuaCDataMgr.m_LegionBossScene
+end
+function LuaCDataMgr.Tips()
+	if LuaCDataMgr.m_Tips == nil then
+		LuaCDataMgr.m_Tips = CDataMgr.get_Instance():GetOrCreateDB("Tips") end
+	return LuaCDataMgr.m_Tips
+end
+function LuaCDataMgr.LegionBossInspire()
+	if LuaCDataMgr.m_LegionBossInspire == nil then
+		LuaCDataMgr.m_LegionBossInspire = CDataMgr.get_Instance():GetOrCreateDB("LegionBossInspire") end
+	return LuaCDataMgr.m_LegionBossInspire
+end
+function LuaCDataMgr.Recharge()
+	if LuaCDataMgr.m_Recharge == nil then
+		LuaCDataMgr.m_Recharge = CDataMgr.get_Instance():GetOrCreateDB("Recharge") end
+	return LuaCDataMgr.m_Recharge
+end
+function LuaCDataMgr.LegionBossConfig()
+	if LuaCDataMgr.m_LegionBossConfig == nil then
+		LuaCDataMgr.m_LegionBossConfig = CDataMgr.get_Instance():GetOrCreateDB("LegionBossConfig") end
+	return LuaCDataMgr.m_LegionBossConfig
+end
+function LuaCDataMgr.ProgressReward()
+	if LuaCDataMgr.m_ProgressReward == nil then
+		LuaCDataMgr.m_ProgressReward = CDataMgr.get_Instance():GetOrCreateDB("ProgressReward") end
+	return LuaCDataMgr.m_ProgressReward
+end
+
+function LuaCDataMgr.SignRewards()
+	if LuaCDataMgr.m_SignRewards == nil then
+		LuaCDataMgr.m_SignRewards = CDataMgr.get_Instance():GetOrCreateDB("SignRewards") end
+	return LuaCDataMgr.m_SignRewards
+end
+
+function LuaCDataMgr.Shop_MoneyLevel()
+	if LuaCDataMgr.m_Shop_MoneyLevel == nil then
+		LuaCDataMgr.m_Shop_MoneyLevel = CDataMgr.get_Instance():GetOrCreateDB("Shop_MoneyLevel") end
+	return LuaCDataMgr.m_Shop_MoneyLevel
+end
+
+function LuaCDataMgr.FullTimeRewards()
+	if LuaCDataMgr.m_FullTimeRewards == nil then
+		LuaCDataMgr.m_FullTimeRewards = CDataMgr.get_Instance():GetOrCreateDB("FullTimeRewards") end
+	return LuaCDataMgr.m_FullTimeRewards
+end
+function LuaCDataMgr.UnlockItemPrice()
+	if LuaCDataMgr.m_UnlockItemPrice == nil then
+		LuaCDataMgr.m_UnlockItemPrice = CDataMgr.get_Instance():GetOrCreateDB("UnlockItemPrice") end
+	return LuaCDataMgr.m_UnlockItemPrice
+end
+function LuaCDataMgr.LegionBossDropShow()
+	if LuaCDataMgr.m_LegionBossDropShow == nil then
+		LuaCDataMgr.m_LegionBossDropShow = CDataMgr.get_Instance():GetOrCreateDB("LegionBossDropShow") end
+	return LuaCDataMgr.m_LegionBossDropShow
+end
+function LuaCDataMgr.SkillInitiatives()
+	if LuaCDataMgr.m_SkillInitiatives == nil then
+		LuaCDataMgr.m_SkillInitiatives = CDataMgr.get_Instance():GetOrCreateDB("SkillInitiatives") end
+	return LuaCDataMgr.m_SkillInitiatives
+end
+function LuaCDataMgr.SoulGroupShow()
+	if LuaCDataMgr.m_SoulGroupShow == nil then
+		LuaCDataMgr.m_SoulGroupShow = CDataMgr.get_Instance():GetOrCreateDB("SoulGroupShow") end
+	return LuaCDataMgr.m_SoulGroupShow
+end
+function LuaCDataMgr.Gem_Shop()
+	if LuaCDataMgr.m_Gem_Shop == nil then
+		LuaCDataMgr.m_Gem_Shop = CDataMgr.get_Instance():GetOrCreateDB("Gem_Shop") end
+	return LuaCDataMgr.m_Gem_Shop
+end
+function LuaCDataMgr.FairysScene()
+	if LuaCDataMgr.m_FairysScene == nil then
+		LuaCDataMgr.m_FairysScene = CDataMgr.get_Instance():GetOrCreateDB("FairysScene") end
+	return LuaCDataMgr.m_FairysScene
+end
+function LuaCDataMgr.Flowers()
+	if LuaCDataMgr.m_Flowers == nil then
+		LuaCDataMgr.m_Flowers = CDataMgr.get_Instance():GetOrCreateDB("Flowers") end
+	return LuaCDataMgr.m_Flowers
+end
+function LuaCDataMgr.Eggs()
+	if LuaCDataMgr.m_Eggs == nil then
+		LuaCDataMgr.m_Eggs = CDataMgr.get_Instance():GetOrCreateDB("Eggs") end
+	return LuaCDataMgr.m_Eggs
+end
+function LuaCDataMgr.MonsterProperties()
+	if LuaCDataMgr.m_MonsterProperties == nil then
+		LuaCDataMgr.m_MonsterProperties = CDataMgr.get_Instance():GetOrCreateDB("MonsterProperties") end
+	return LuaCDataMgr.m_MonsterProperties
+end
+function LuaCDataMgr.FlowerRankreward()
+	if LuaCDataMgr.m_FlowerRankreward == nil then
+		LuaCDataMgr.m_FlowerRankreward = CDataMgr.get_Instance():GetOrCreateDB("FlowerRankreward") end
+	return LuaCDataMgr.m_FlowerRankreward
+end
+function LuaCDataMgr.Weapon_Stone()
+	if LuaCDataMgr.m_Weapon_Stone == nil then
+		LuaCDataMgr.m_Weapon_Stone = CDataMgr.get_Instance():GetOrCreateDB("Weapon_Stone") end
+	return LuaCDataMgr.m_Weapon_Stone
+end
+function LuaCDataMgr.TreasureReward()
+	if LuaCDataMgr.m_TreasureReward == nil then
+		LuaCDataMgr.m_TreasureReward = CDataMgr.get_Instance():GetOrCreateDB("TreasureReward") end
+	return LuaCDataMgr.m_TreasureReward
+end
+function LuaCDataMgr.TreasureConfig()
+	if LuaCDataMgr.m_TreasureConfig == nil then
+		LuaCDataMgr.m_TreasureConfig = CDataMgr.get_Instance():GetOrCreateDB("TreasureConfig") end
+	return LuaCDataMgr.m_TreasureConfig
+end
+function LuaCDataMgr.SuppliesReward()
+	if LuaCDataMgr.m_SuppliesReward == nil then
+		LuaCDataMgr.m_SuppliesReward = CDataMgr.get_Instance():GetOrCreateDB("SuppliesReward") end
+	return LuaCDataMgr.m_SuppliesReward
+end
+function LuaCDataMgr.FirstRecharge()
+	if LuaCDataMgr.m_FirstRecharge == nil then
+		LuaCDataMgr.m_FirstRecharge = CDataMgr.get_Instance():GetOrCreateDB("FirstRecharge") end
+	return LuaCDataMgr.m_FirstRecharge
+end
+function LuaCDataMgr.Replace_Image()
+	if LuaCDataMgr.m_Replace_Image == nil then
+		LuaCDataMgr.m_Replace_Image = CDataMgr.get_Instance():GetOrCreateDB("Replace_Image") end
+	return LuaCDataMgr.m_Replace_Image
+end
+function LuaCDataMgr.Replace_image()
+	if LuaCDataMgr.m_Replace_image == nil then
+		LuaCDataMgr.m_Replace_image = CDataMgr.get_Instance():GetOrCreateDB("Replace_image") end
+	return LuaCDataMgr.m_Replace_image
+end
+function LuaCDataMgr.Envelopes()
+	if LuaCDataMgr.m_Envelopes == nil then
+		LuaCDataMgr.m_Envelopes = CDataMgr.get_Instance():GetOrCreateDB("Envelopes") end
+	return LuaCDataMgr.m_Envelopes
+end
+function LuaCDataMgr.Title()
+	if LuaCDataMgr.m_Title == nil then
+		LuaCDataMgr.m_Title = CDataMgr.get_Instance():GetOrCreateDB("Title") end
+	return LuaCDataMgr.m_Title
+end
+function LuaCDataMgr.FinalistCompetition()
+	if LuaCDataMgr.m_FinalistCompetition == nil then
+		LuaCDataMgr.m_FinalistCompetition = CDataMgr.get_Instance():GetOrCreateDB("FinalistCompetition") end
+	return LuaCDataMgr.m_FinalistCompetition
+end
+function LuaCDataMgr.FinalistCompetitionConfig()
+	if LuaCDataMgr.m_FinalistCompetitionConfig == nil then
+		LuaCDataMgr.m_FinalistCompetitionConfig = CDataMgr.get_Instance():GetOrCreateDB("FinalistCompetitionConfig") end
+	return LuaCDataMgr.m_FinalistCompetitionConfig
+end
+function LuaCDataMgr.CompetitionInspire()
+	if LuaCDataMgr.m_CompetitionInspire == nil then
+		LuaCDataMgr.m_CompetitionInspire = CDataMgr.get_Instance():GetOrCreateDB("CompetitionInspire") end
+	return LuaCDataMgr.m_CompetitionInspire
+end
+function LuaCDataMgr.KingTowerScene()
+	if LuaCDataMgr.m_KingTowerScene == nil then
+		LuaCDataMgr.m_KingTowerScene = CDataMgr.get_Instance():GetOrCreateDB("KingTowerScene") end
+	return LuaCDataMgr.m_KingTowerScene
+end
+function LuaCDataMgr.Funds()
+	if LuaCDataMgr.m_Funds == nil then
+		LuaCDataMgr.m_Funds = CDataMgr.get_Instance():GetOrCreateDB("Funds") end
+	return LuaCDataMgr.m_Funds
+end
+function LuaCDataMgr.KingTowerTalk()
+	if LuaCDataMgr.m_KingTowerTalk == nil then
+		LuaCDataMgr.m_KingTowerTalk = CDataMgr.get_Instance():GetOrCreateDB("KingTowerTalk") end
+	return LuaCDataMgr.m_KingTowerTalk
+end
+function LuaCDataMgr.Employ()
+	if LuaCDataMgr.m_Employ == nil then
+		LuaCDataMgr.m_Employ = CDataMgr.get_Instance():GetOrCreateDB("Employ") end
+	return LuaCDataMgr.m_Employ
+end
+function LuaCDataMgr.Sevendays()
+	if LuaCDataMgr.m_Sevendays == nil then
+		LuaCDataMgr.m_Sevendays = CDataMgr.get_Instance():GetOrCreateDB("Sevendays") end
+	return LuaCDataMgr.m_Sevendays
+end
+function LuaCDataMgr.Otherdays()
+	if LuaCDataMgr.m_Otherdays == nil then
+		LuaCDataMgr.m_Otherdays = CDataMgr.get_Instance():GetOrCreateDB("Otherdays") end
+	return LuaCDataMgr.m_Otherdays
+end
+function LuaCDataMgr.PushMessage()
+	if LuaCDataMgr.m_PushMessage == nil then
+		LuaCDataMgr.m_PushMessage = CDataMgr.get_Instance():GetOrCreateDB("PushMessage") end
+	return LuaCDataMgr.m_PushMessage
+end

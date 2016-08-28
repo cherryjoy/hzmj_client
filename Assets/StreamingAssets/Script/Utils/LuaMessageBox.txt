@@ -1,0 +1,263 @@
+LuaMessageBox = {}
+
+function LuaMessageBox:Start()
+end
+function LuaMessageBox:OnDestroy()
+end
+----兼容之前的用法
+function LuaMessageBox.ShowMessageBox(value,OnOk,OnCancel,paramTable)
+    -- local self = LuaUIViewCtr.OpenUINotLose("ToolsUI/MessageBox")
+    local self = LuaUIViewCtr.OpenUIHasBg("ToolsUI/MessageBox")
+    self.Message:set_text(value)
+    self.mOnOK = OnOk
+    self.mOnCancel = OnCancel
+    self.CancelName:set_text(Text.Cancel)
+    self.ConfirmName:set_text(Text.Confirm)
+    self.paramTable = paramTable
+    return self
+end
+
+function LuaMessageBox.ShowWait2EnableBox(value,OnOk,OnCancel,waitTime,paramTable)
+    -- local self = LuaUIViewCtr.OpenUINotLose("ToolsUI/MessageBox")
+    local self = LuaUIViewCtr.OpenUIHasBg("ToolsUI/MessageBox")
+    self.Message:set_text(value)
+    self.mOnOK = OnOk
+    self.mOnCancel = OnCancel
+    self.CancelName:set_text(Text.Cancel)
+
+
+    self.okLAnchor:set_enabled(false)
+    self.cancleAnchor:set_enabled(false)
+    local okpos = self.okTrans:get_localPosition()
+    local canclepos = self.cancelTrans:get_localPosition()
+    self.okTrans:set_localPosition(canclepos)
+    self.cancelTrans:set_localPosition(okpos)
+
+    self.button_ok:set_enable(false)
+    self.ConfirmName:set_text(tostring(waitTime))
+    self.waitTime = waitTime
+    Timer.NewEvent(self, 10, waitTime*10, LuaMessageBox.CountDownUpdate, false,LuaMessageBox.CountDownEnd)
+
+    self.paramTable = paramTable
+    return self
+end
+
+function LuaMessageBox:CountDownUpdate()
+    self.waitTime = self.waitTime - 1
+    self.ConfirmName:set_text(tostring(self.waitTime))
+end
+
+function LuaMessageBox:CountDownEnd()
+    self.button_ok:set_enable(true)
+    self.ConfirmName:set_text(Text.Confirm)
+end
+
+function LuaMessageBox.ShowMoneyMsgBox(value,OnOk,OnCancel,moneyType,moneyNum,paramTable,cancelname,confirmname,disabled,parent)
+    return LuaMessageBox.ShowMoneyMsgBoxWithPath("ToolsUI/MoneyMsgBox",value,OnOk,OnCancel,moneyType,moneyNum,paramTable,cancelname,confirmname,disabled,parent)
+end
+
+function LuaMessageBox.ShowMoneyMsgBoxWithPath(path,value,OnOk,OnCancel,moneyType,moneyNum,paramTable,cancelname,confirmname,disabled,parent)
+  local self = nil
+  if parent then
+      self = LuaUIViewCtr.OpenUINotLoseNest(path,parent)
+  else
+      self = LuaUIViewCtr.OpenUIHasBg(path)
+  end
+  self.Message:set_text(value)
+  self.mOnOK = OnOk
+  self.mOnCancel = OnCancel
+  self.disabled = disabled
+
+  self.CostNumLbl:set_text(tostring(moneyNum))
+  self.MoneySpr:set_spriteName(Util.GetMoneySpriteName(moneyType))
+  if cancelname ~= nil and cancelname ~= "" then
+      self.CancelName:set_text(cancelname)
+  else
+      self.CancelName:set_text(Text.Cancel)
+  end
+  if confirmname ~= nil and confirmname ~= "" then
+      self.ConfirmName:set_text(confirmname)
+  else
+      self.ConfirmName:set_text(Text.Confirm)
+  end
+  self.paramTable = paramTable
+  return self
+end
+
+function LuaMessageBox.ShowItemMsgBox(value,OnOk,OnCancel,ItemsInfo,paramTable)
+    -- local self = LuaUIViewCtr.OpenUINotLose("ToolsUI/MoneyMsgBox")
+    local self = LuaUIViewCtr.OpenUIHasBg("ToolsUI/ItemMsgBox")
+    self.Message:set_text(value)
+    self.mOnOK = OnOk
+    self.mOnCancel = OnCancel
+
+    local itemsStr = Text.Colon
+    local itemNum = #ItemsInfo
+    for i,item in ipairs(ItemsInfo) do
+        itemsStr = itemsStr .. item.name .. "x" .. item.num
+        if itemNum ~= i then
+            itemsStr = itemsStr .. ","
+        end
+    end
+
+    self.CostNumLbl:set_text(itemsStr)
+    self.CancelName:set_text(Text.Cancel)
+    self.ConfirmName:set_text(Text.Confirm)
+    self.paramTable = paramTable
+    return self
+end
+
+--costTable 和 awardTable的字段有 moneyNum,moneyType
+function LuaMessageBox.ShowMoneyAwardMsgBox(value,OnOk,OnCancel,costTable,awardTable,paramTable)
+    local self = LuaUIViewCtr.OpenUIHasBg("ToolsUI/MoneyAwardMsgBox")
+    self.Message:set_text(value)
+    self.mOnOK = OnOk
+    self.mOnCancel = OnCancel
+
+    self.CostMoneyPair:SetMoneyData(costTable.moneyType,costTable.moneyNum)
+    local awardnum = #awardTable
+    for i=1,#self.GainMoneyPairArray do
+        if i <= awardnum then
+            self.GainMoneyPairArray[i]:SetMoneyData(awardTable[i].moneyType,awardTable[i].moneyNum)
+        else
+            self.GainMoneyPairArray[i].gameObject:SetActive(false)
+        end
+    end
+
+    self.CancelName:set_text(Text.Cancel)
+    self.ConfirmName:set_text(Text.Confirm)
+    self.paramTable = paramTable
+    return self
+end
+
+--costTable 和 awardTable的字段有 moneyNum,moneyType
+function LuaMessageBox.ShowMoneyAwardMsgPlusBox(value,OnOk,OnCancel,costTable,awardTable,paramTable)
+    local self = LuaUIViewCtr.OpenUIHasBg("ToolsUI/MoneyAwardMsgPlusBox")
+    self.Message:set_text(value)
+    self.mOnOK = OnOk
+    self.mOnCancel = OnCancel
+
+    --self.CostMoneyPair:SetMoneyData(costTable.moneyType,costTable.moneyNum)
+    local awardnum = #awardTable
+    for i=1,#self.GainMoneyPairArray do
+        if i <= awardnum then
+            self.GainMoneyPairArray[i]:SetMoneyData(awardTable[i].moneyType,awardTable[i].moneyNum)
+        else
+            self.GainMoneyPairArray[i].gameObject:SetActive(false)
+        end
+    end
+
+    self.CancelName:set_text(Text.Cancel)
+    self.ConfirmName:set_text(Text.Confirm)
+    self.paramTable = paramTable
+    return self
+end
+
+----兼容之前的用法
+function LuaMessageBox:SetText(value)
+    self.Message:set_text(value)
+    self.CancelName:set_text(Text.Cancel)
+    self.ConfirmName:set_text(Text.Confirm)
+end
+
+function LuaMessageBox.ShowSingle(value, OnSingle, label, paramTable,isCloseBtn)
+    local self = LuaUIViewCtr.OpenUIHasBg("ToolsUI/MessageBox")
+    if label == nil then label = Text.Confirm end
+    self.SigLabel:set_text(label)
+    self.Message:set_text(value)
+    self.mOnOK = OnOk
+    self.button_ok_obj:SetActive(false)
+    self.button_cancel_obj:SetActive(false)
+    self.button_Single:SetActive(true)
+    self.CloseBtn:SetActive(isCloseBtn)
+    self.mOnSingle = OnSingle
+    self.paramTable = paramTable
+    return self
+end
+
+--Single,Message,CancelName,ConfirmFunc,CancelFunc,CancelName,CostLbl,MoneyNum,
+function LuaMessageBox:SetDataTable(paramTable)
+    self.paramTable = paramTable
+    if paramTable.Single == nil then
+        paramTable.Single = false
+    end
+
+    if paramTable.Single then
+        self.button_cancel:SetActive(false)
+        self.okLAnchor:set_enabled(false)
+        self.okTrans:set_localPosition(LuaVector3.Create(0, -65, 0))
+    end
+
+    if self.CancelName ~= nil then
+        self.CancelName:set_text(Text.Cancel)
+    end
+
+    if self.ConfirmName ~= nil then
+        self.ConfirmName:set_text(Text.Confirm)
+    end
+
+    if paramTable.Message ~= nil then
+        self.Message:set_text(paramTable.Message)
+    end
+
+    if paramTable.ConfirmName ~= nil then
+        self.ConfirmName:set_text(paramTable.ConfirmName)
+    end
+
+    if paramTable.CancelName ~= nil then
+        self.CancelName:set_text(paramTable.CancelName)
+    end
+
+    if paramTable.ConfirmFunc ~= nil then
+        self.mOnOK = paramTable.ConfirmFunc
+    end
+
+    if paramTable.CancelFunc ~= nil then
+        self.mOnCancel = paramTable.CancelFunc
+    end
+
+    if self.CostLbl ~= nil then
+        self.CostLbl:set_text(Text.Cost .. Text.Colon)
+    end
+
+    if paramTable.MoneyNum ~= nil then
+        self.CostNumLbl:set_text(tostring(paramTable.MoneyNum))
+    end
+
+    if paramTable.MoneyType ~= nil then
+        self.MoneySpr:set_spriteName(Util.GetMoneySpriteName(paramTable.MoneyType))
+    end
+end
+
+function LuaMessageBox:CloseBtn_OnClick()
+    GameObject.DestroyImmediate(self.gameObject,false)
+end
+
+function LuaMessageBox:JustDestroy()
+    LuaMessageBox.CloseBtn_OnClick(self)
+end
+
+function LuaMessageBox:button_ok_OnClick()
+    if (self.mOnOK ~= nil) then
+        self.mOnOK(self.paramTable)
+    end
+    if not self.disabled or self.disabled == nil then
+        GameObject.DestroyImmediate(self.gameObject, false)
+    end
+end
+
+function LuaMessageBox:button_cancel_OnClick()
+    if (self.mOnCancel ~= nil) then
+        self.mOnCancel(self.paramTable)
+    end
+    GameObject.DestroyImmediate(self.gameObject, false)
+end
+
+function LuaMessageBox:button_Single_OnClick()
+    if (self.mOnSingle ~= nil) then
+        self.mOnSingle(self.paramTable)
+    end
+    if not self.disabled then
+        GameObject.DestroyImmediate(self.gameObject, false)
+    end
+end

@@ -1,0 +1,22 @@
+AnnouncementLabel = {}
+
+function AnnouncementLabel:Start()
+
+end
+
+function AnnouncementLabel:OnDestroy()
+
+end
+
+function AnnouncementLabel:Init()
+    if self.isInit then return end
+    self.isInit = true
+
+end
+
+function AnnouncementLabel:setData(data,control)
+    AnnouncementLabel.Init(self)
+    self.ctr = control
+    self.label = data
+    self.Label:set_text(self.label)
+end

@@ -1,0 +1,17 @@
+WDB_PlayerProperties = {}
+--[[
+	WDB_PlayerProperties.Id
+	WDB_PlayerProperties.Life
+	WDB_PlayerProperties.Mp
+	WDB_PlayerProperties.Attack
+	WDB_PlayerProperties.Defence
+	WDB_PlayerProperties.CDefence
+	WDB_PlayerProperties.FireDam
+	WDB_PlayerProperties.IceDam
+	WDB_PlayerProperties.FireDef
+	WDB_PlayerProperties.IceDef
+	WDB_PlayerProperties.CFireDef
+	WDB_PlayerProperties.CIceDef
+]]--
+
+LuaDBTable.SetLuaTableField("PlayerProperties")

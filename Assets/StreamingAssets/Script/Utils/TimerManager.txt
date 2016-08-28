@@ -1,0 +1,216 @@
+--------Timer---------------------------
+Timer = {}
+Timer.__index = Timer
+Timer.AllEvents = {}
+Timer.GlobalTimer = {}
+
+function Timer:Update()
+	for i,v in ipairs(self.events) do
+		v:Update()
+	end
+end
+
+function Timer:NewEvent(interval,totalTime,timerEventHandle,isNeverStop,eventFinishHandle)
+	if self.Timer == nil then
+		LuaTimerManager.NewTimer(self)
+	end
+
+	local event = setmetatable({},TimerEvent)
+	event.Owner = self
+	event.Interval = interval
+	event.TotalTime = totalTime
+	event.TimerEventHandle = timerEventHandle
+	--it will not be called,if you stop event manualy
+	event.EventFinishHandle = eventFinishHandle
+	event.NeverStop = isNeverStop
+	event.TimeHavePast = 0
+	event.StartFrameCount = Time.get_frameCount()
+
+	table.insert(self.Timer.events,event)
+	table.insert(Timer.AllEvents,event)
+
+	if(#(Timer.AllEvents) == 1) then
+		TimerManager.get_Instance():SetTimerManager(true)
+	end
+
+	return event
+end
+
+function Timer.NewGlobalEvent(interval,totalTime,timerEventHandle,isNeverStop,eventFinishHandle)
+	if Timer.GlobalTimer.Timer == nil then
+		LuaTimerManager.NewTimer(Timer.GlobalTimer)
+	end
+
+	local event = setmetatable({},TimerEvent)
+	event.Owner = Timer.GlobalTimer
+	event.Interval = interval
+	event.TotalTime = totalTime
+	event.TimerEventHandle = timerEventHandle
+	--it will not be called,if you stop event manualy
+	event.EventFinishHandle = eventFinishHandle
+	event.NeverStop = isNeverStop
+	event.TimeHavePast = 0
+	event.StartFrameCount = Time.get_frameCount()
+
+	table.insert(Timer.GlobalTimer.Timer.events,event)
+	table.insert(Timer.AllEvents,event)
+
+	if(#(Timer.AllEvents) == 1) then
+		TimerManager.get_Instance():SetTimerManager(true)
+	end
+
+	return event
+end
+
+function Timer:RemoveEvent(event)
+	local index = Util.IndexOf(self.Timer.events,event)
+	if index >0 then
+		table.remove(self.Timer.events,index)
+	end
+
+	local indexA = Util.IndexOf(Timer.AllEvents,event)
+	if indexA >0 then
+		table.remove(Timer.AllEvents,indexA)
+	end
+
+	if(#(Timer.AllEvents) == 0) then
+		TimerManager.get_Instance():SetTimerManager(false)
+	end
+end
+
+function Timer.RemoveGlobalEvent(event)
+	local index = Util.IndexOf(Timer.GlobalTimer.Timer.events,event)
+	if index >0 then
+		table.remove(Timer.GlobalTimer.Timer.events,index)
+	end
+
+	local indexA = Util.IndexOf(Timer.AllEvents,event)
+	if indexA >0 then
+		table.remove(Timer.AllEvents,indexA)
+	end
+
+	if(#(Timer.AllEvents) == 0) then
+		TimerManager.get_Instance():SetTimerManager(false)
+	end
+end
+
+function Timer.NewGEvent(eventTable,interval,totalTime,timerEventHandle)
+	local event = nil
+	if eventTable then
+		event = setmetatable(eventTable,TimerEvent)
+	else
+		event = setmetatable({},TimerEvent)
+	end
+
+	event.Owner = event
+	event.Timer = LuaTimerManager.gTimer
+	event.Interval = interval
+	event.TotalTime = totalTime
+	event.TimerEventHandle = timerEventHandle
+
+	event.TimeHavePast = 0
+	event.StartFrameCount = Time.get_frameCount()
+
+	table.insert(LuaTimerManager.gTimer.events,event)
+
+	if(#(LuaTimerManager.gTimer.events) == 1) then
+		TimerManager.get_Instance():SetGTimerManager(true)
+	end
+
+	return event
+end
+
+function Timer.RemoveGEvent(event)
+	local index = Util.IndexOf(LuaTimerManager.gTimer.events,event)
+	if index >0 then
+		table.remove(LuaTimerManager.gTimer.events,index)
+	end
+
+	if(#(LuaTimerManager.gTimer.events) == 0) then
+		TimerManager.get_Instance():SetGTimerManager(false)
+	end
+end
+
+
+--------TimerEvent------------------------
+TimerEvent = {}
+TimerEvent.__index = TimerEvent
+
+function TimerEvent:ResetThisInter()
+	self.TimeHavePast = 0
+end
+
+function TimerEvent:Update()
+	--第一次可能在两个0.1秒之间，这样会造成第一次被调用时实际上度过的时间不足0.1s，这样会造成定时器提前结束
+	--第一次不调用会找出延后结束，但对客户端来说这种微小的延后是可以接受的
+	if not self.HaveCheckedFirstEnter then
+		self.HaveCheckedFirstEnter = true
+		return
+	end
+	--如果在比较卡的环境下，两个Update的间隔可能过长，而同一帧内可能定时器先生成，Timer的Update后执行。
+	--这会造成刚生成的计时器就过了很多时间，造成计时器提前结束，所有我们过滤掉这种情况
+	if not self.HaveCheckFirstUnWanted then
+		local nowFrameCount = Time.get_frameCount()
+		if nowFrameCount == self.StartFrameCount then
+			return
+		else
+			self.HaveCheckFirstUnWanted =  true
+		end
+	end
+
+	self.TimeHavePast = self.TimeHavePast + LuaTimerManager.MinimumCallTime
+
+	if self.TimeHavePast >= self.Interval then
+		self.TimeHavePast = 0
+		self.TotalTime = self.TotalTime - self.Interval
+		if self.TotalTime >= 0 or self.NeverStop then
+			self.TimerEventHandle(self.Owner,self)
+		end
+	end
+
+	if((self.TotalTime <= 0 or self.TotalTime - self.TimeHavePast <= 0) and (not self.NeverStop)) then
+		if(self.EventFinishHandle ~= nil) then
+			self.EventFinishHandle(self.Owner,self)
+		end
+		self.Owner.Timer.RemoveEvent(self.Owner,self)
+	end
+
+end
+
+-----------TimerManager-----------------
+LuaTimerManager = {}
+LuaTimerManager.Timers = {}
+LuaTimerManager.gTimer = setmetatable({},Timer)
+LuaTimerManager.gTimer.events = {}
+--note this 1 stand for 0.1s ,and this value must same as the value in Timer.cs
+LuaTimerManager.MinimumCallTime = 1
+
+function LuaTimerManager.Update()
+	for i,v in ipairs(LuaTimerManager.Timers) do
+		v:Update()
+	end
+end
+
+function LuaTimerManager:NewTimer( )
+	self.Timer = setmetatable({},Timer)
+	self.Timer.Stop = LuaTimerManager.RemoveTimer
+	self.Timer.events = {}
+	table.insert(LuaTimerManager.Timers,self.Timer)
+end
+
+function LuaTimerManager.RemoveTimer(timer)
+	local index = Util.IndexOf(LuaTimerManager.Timers,timer)
+	if index >0 then
+		table.remove(LuaTimerManager.Timers,index)
+	end
+	for k,event in pairs(timer.events) do
+		local indexA = Util.IndexOf(Timer.AllEvents,event)
+		if indexA >0 then
+			table.remove(Timer.AllEvents,indexA)
+		end
+	end
+end
+
+function LuaTimerManager.gUpdate( )
+	LuaTimerManager.gTimer:Update()
+end

@@ -1,0 +1,14 @@
+WDB_Weapon_RefineNum = {}
+--[[
+	WDB_Weapon_RefineNum.WeaponLv
+	WDB_Weapon_RefineNum.Effect0Min
+	WDB_Weapon_RefineNum.Effect0Max
+	WDB_Weapon_RefineNum.Effect1Min
+	WDB_Weapon_RefineNum.Effect1Max
+	WDB_Weapon_RefineNum.Effect2Min
+	WDB_Weapon_RefineNum.Effect2Max
+	WDB_Weapon_RefineNum.Iron
+	WDB_Weapon_RefineNum.IronNum
+]]--
+
+LuaDBTable.SetLuaTableField("Weapon_RefineNum")

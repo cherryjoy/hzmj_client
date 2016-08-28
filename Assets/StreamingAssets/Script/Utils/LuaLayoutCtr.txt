@@ -1,0 +1,9 @@
+require "CommonUI/CommonBackCtr"
+LuaLayoutCtr = {}
+LuaLayoutCtr.__index = LuaLayoutCtr
+
+function LuaLayoutCtr.Init (owner,nameIndex)
+    local ref = LuaUIViewCtr.AddChildNotLose("CommonUI/CommonBack",owner.gameObject)
+    owner.CommonBackRef = ref
+    CommonBackCtr.Init(ref,owner,nameIndex)
+end

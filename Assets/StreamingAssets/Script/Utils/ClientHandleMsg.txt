@@ -1,0 +1,71 @@
+require("NetOpcodes/NetOpcodes_S2C")
+require("NetOpcodes/NetOpcodes_C2S")
+--require "NetProtocol/NP_BaseType"
+require("NetProtocol/LuaProto")
+--require("NetProtocol/NP_ServerClient")
+require("Utils/Client")
+require("Utils/RoleInfo")
+--require("FairyUI/Client.RoleInfo.FairyMgr")
+--require ("GameBattleSelect/GameBattleMapMgr")
+--require "Corps/CorpsManager"
+--require "ChatUI/ChatManager"
+--require "GemStoneUI/GemStoneMgr"
+--require "ChatUI/RoleInfoCtrl"
+
+--require("SceneControl/KingroadActivity")
+
+--------------------------------------
+ClientHandleMsg = {}
+--msgNameTable =  Util.TableInvert(NetOpcodes_S2C)
+function ClientHandleMsg.Handle(msgId,data,dataLength)
+    -- if NetOpcodes_S2C.S2C_CHEAT_CHECK ~= msgId then
+    --     LuaDebug.Log("msgID: " .. msgId.."  "..msgNameTable[msgId])
+    -- end
+    local handleFunc = HandleFuncs[msgId]
+    if handleFunc then
+      handleFunc(data,dataLength)
+    end
+    Client.ServerMsgGet:Do(msgId)
+end
+--------------------------------------
+
+HandleFuncs = {}
+
+HandleFuncs[NetOpcodes_S2C.S2C_SESSION_CREATED] = function (data,dataLength)
+    Client.ClientInfo.SessionID = LuaProto.deserializeLong(data,dataLength)
+    -- Client.ConnectSuccess:Do()
+    ClientInfo.isFirstLogin = false
+    ClientInfo.ServerTime.SetTimer()
+    Client.SessionCreated:Do()
+    Client.NetState = EClientNetWorkState.NORMAL
+end
+
+HandleFuncs[NetOpcodes_S2C.S2C_SERVER_TIME] = function (data,dataLength)
+    local ServerTime = LuaProto.deserialize(S2CServerTime,data,dataLength)
+    if ServerTime.time == nil then
+        return
+    end
+    ClientInfo.ServerTime.TestNetWorkDelta(ServerTime)
+    if not ClientInfo.isFirstLogin then
+        Client.ConnectSuccess:Do()
+        ClientInfo.isFirstLogin = true
+    end
+end
+
+HandleFuncs[NetOpcodes_S2C.S2C_ERROR_CODE] = function (data,dataLength)
+    local i = LuaProto.deserializeInt(data,dataLength)
+    ----------------display in tishicentre-----------------
+    require("Utils/TishiCentre")
+    TishiCentre.DisplayServerErrorMsg(i)
+    TaskMgr.isAuto = false
+end
+
+HandleFuncs[NetOpcodes_S2C.S2C_AUTH] = function (data,dataLength)
+    local data=LuaProto.deserialize(S2CPassport,data,dataLength)
+
+    PlayerPrefsEx.SetString("userName",data.userName)
+    PlayerPrefsEx.SetString("password",data.password)
+    PlayerPrefsEx.SetString("userId",data.userId .. "")
+
+    Client.LoginSuccess:Do()
+end

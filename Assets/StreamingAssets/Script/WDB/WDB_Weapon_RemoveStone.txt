@@ -1,0 +1,8 @@
+WDB_Weapon_RemoveStone = {}
+--[[
+	WDB_Weapon_RemoveStone.Id
+	WDB_Weapon_RemoveStone.WeaponEffect
+	WDB_Weapon_RemoveStone.RefineStone
+]]--
+
+LuaDBTable.SetLuaTableField("Weapon_RemoveStone")

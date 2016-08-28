@@ -1,0 +1,24 @@
+WDB_Sevendays = {}
+--[[
+	WDB_Sevendays.Id
+	WDB_Sevendays.Day
+	WDB_Sevendays.CompleteType
+	WDB_Sevendays.Type
+	WDB_Sevendays.Name
+	WDB_Sevendays.Desc
+	WDB_Sevendays.Go
+	WDB_Sevendays.Icon
+	WDB_Sevendays.CompleteMin
+	WDB_Sevendays.CompleteMax
+	WDB_Sevendays.WinType_1
+	WDB_Sevendays.Win_1_1
+	WDB_Sevendays.Win_1_2
+	WDB_Sevendays.WinType_2
+	WDB_Sevendays.Win_2_1
+	WDB_Sevendays.Win_2_2
+	WDB_Sevendays.WinType_3
+	WDB_Sevendays.Win_3_1
+	WDB_Sevendays.Win_3_2
+]]--
+
+LuaDBTable.SetLuaTableField("Sevendays")

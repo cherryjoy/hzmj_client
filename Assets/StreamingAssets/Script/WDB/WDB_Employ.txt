@@ -1,0 +1,7 @@
+WDB_Employ = {}
+--[[
+	WDB_Employ.Id
+	WDB_Employ.Money
+]]--
+
+LuaDBTable.SetLuaTableField("Employ")

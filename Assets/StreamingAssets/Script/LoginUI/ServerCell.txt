@@ -1,0 +1,53 @@
+ServerCell={}
+
+function ServerCell:Start()
+end
+
+function ServerCell:OnDestroy()
+end
+
+function ServerCell:Init(ListCon,servercell)
+    if not self.IsInit then
+        self.ListCon=ListCon
+        self.ipTable=servercell
+
+        local flag,isOpenAllMaintain = LoginController.domFlag(self.ListCon.LoginCtr)
+        local isMaintain = false
+        if flag ~= nil then
+            for i,v in ipairs(flag) do
+                if v == tostring(self.ipTable.ServerID) then
+                    isMaintain = true
+                    break
+                end
+            end
+        end
+        if isMaintain or isOpenAllMaintain then
+            self.ipName:set_text(tostring(self.ipTable.ServerName)..Text.Maintain)
+            ServerCell.changeState(self)
+        else
+            if self.ipTable.New == "0" then
+                self.ipName:set_text(tostring(self.ipTable.ServerName)..Text.NewServer)
+            elseif self.ipTable.New == "1" then
+                self.ipName:set_text(tostring(self.ipTable.ServerName))
+            elseif self.ipTable.New == "2" then
+                self.ipName:set_text(tostring(self.ipTable.ServerName)..Text.HotServer)
+            end
+        end
+
+        self.IsInit=true
+    end
+end
+
+function ServerCell:changeState()
+    self.serverCellBtn:hoverSprite(self.serverCellBtn:disableSprite())
+    self.serverCellBtn:normalSprite(self.serverCellBtn:disableSprite())
+    self.serverCellBtn:pressedSprite(self.serverCellBtn:disableSprite())
+    self.bg:set_spriteName(self.serverCellBtn:disableSprite())
+end
+
+function ServerCell:OnClickSelf()
+    self.ListCon.CurrentServerNode = self.ipTable
+    self.ListCon.LoginCtr:SaveServerInfo(self.ListCon.CurrentServerNode)
+    LuaNetwork.DisConnect()
+    LuaNetwork.Connect(self.ipTable.Ip,self.ipTable.Port)
+end

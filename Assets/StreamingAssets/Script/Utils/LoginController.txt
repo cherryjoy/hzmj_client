@@ -1,0 +1,746 @@
+require "Utils/Client"
+--require "NetProtocol/NP_BaseType"
+require "NetProtocol/LuaProto"
+require "Utils/LuaMessageBox"
+require "Utils/ClientSendMsg"
+--require "WDB/WDB_Equip_Step"
+require "Utils/LuaCDataMgr"
+--require "WDB/WDB_GameScene"
+
+LoginController = {}
+LoginPanel = {}
+function LoginController:Start()
+    -- PlayerPrefs.DeleteAll()
+    Client.Quality = GameQualityChecker:get_Instance():EstimateGameQualityLevel()
+    if Client.Quality == 0 then
+        local lightObj = GameObject.Find("Directional light (1)")
+        local light = lightObj:GetComponent1("Light")
+        light:set_shadows(0)
+    end
+    if not PlayerPrefs.HasKey("bgmValue") then
+        PlayerPrefsEx.SetFloat("bgmValue",1)
+    end
+
+    if not PlayerPrefs.HasKey("ggmValue") then
+        PlayerPrefsEx.SetFloat("ggmValue",1)
+    end
+
+    -- add back animation
+    if not self.loginAniObj then
+       --self.loginAniObj = LuaNTools.AddChildByResourcesPathNoBehaviour(self.LoginBackCam, "Login_interface/Sprite_interface_login_anim_002")
+    end
+    -- local mt=TextureMgr.get_Instance():LoadTexture("Login/denglubeijing_2")
+    -- self.Texture:set_material(mt)
+    --[[
+    if not self.loginLogo then
+        require "Utils/PublicFuncHandle"
+    	local effectName = "fx_logo_wzzs"
+        if not GameDefine_WZZS then
+            effectName = "fx_logo_wzzj2"
+        end
+        local path = UITextureHandle.UIParticleRootPath .. effectName
+        self.loginLogo = LuaNTools.AddEffect(self.TopLeft,path,LuaVector3.Create(-1.262908,0.576739,0))
+        self.loginLogo:get_transform():set_localPosition(LuaVector3.Create(183,-136,0))
+    end
+    --]]
+    Client.ConnectSuccess = Client.ConnectSuccess + {self,LoginController.ConnectSuccess}
+    Client.ExitGameSuccess=Client.ExitGameSuccess+{self,LoginController.ExitGameSuccess}
+    Client.LoginSuccess = Client.LoginSuccess + {self,LoginController.LoginSuccess}
+    Client.RoleSummarySuccess = Client.RoleSummarySuccess + {self,LoginController.RoleSummarySuccess}
+    Client.ShowServerList = Client.ShowServerList + {self,LoginController.ShowServerList}
+    Client.ConnectGoWrong = Client.ConnectGoWrong + {self,LoginController.ConnectGoWrong}
+    self.userName=PlayerPrefsEx.GetString("userName")
+    self.password=PlayerPrefsEx.GetString("password")
+    LoginController.GetClientVersion()
+    if Client.ClientVersion then
+        self.VersionLbl:set_text("V"..Client.ClientVersion)
+    end
+    --self.AccountMusicPath = LuaCDataMgr.GameConfig():GetData2(90, WDB_GameConfig.Param2)
+    --self.ChooseRoleMusicPath = LuaCDataMgr.GameConfig():GetData2(91, WDB_GameConfig.Param2)
+    --MusicManager.get_Instance():PlayBackMusic(self.AccountMusicPath)
+    --local musicMgr=MusicManager.get_Instance()
+    --musicMgr:set_MusicVolume(PlayerPrefsEx.GetFloat("bgmValue"))
+    --musicMgr:set_AudioVolume(PlayerPrefsEx.GetFloat("ggmValue"))
+
+    self.HeadUpParent:SetActive(false)
+    --MapControl.get_Instance():LoadMap("Scene/level/scene_login_dawn","Scene/level/scene_login_dawn_env",false)
+    LoginController.SendServerListRequest(self)
+    LoginController.Init(self)
+end
+
+
+function LoginController.GetClientVersion()
+    require("Utils/UpdateConfig")
+    Client.ClientVersion = UpdateConfig.ReadClientVersionFromSdcard()
+end
+
+function LoginController:SendServerListRequest()
+    --初始化默认数据
+	if IS_PLATFORM_DEBUG then
+        require "Utils/GameDefine"
+    end
+    self.MyServerListInfo = {}
+    self.MyServerListInfo.lastLogin = -1
+
+    local uid = PlayerPrefsEx.GetString("userId")
+    if uid == nil or uid == "" then return end
+    local sign = LuaUtil.HashEncrypt(uid..GameDefine_gameID..GameDefine_AppHashCode)
+    local url = GameDefine_GetRoleInfoURL.."?passportId="..uid.."&gameId="..GameDefine_gameID.."&sign="..sign
+    self.ClientInitCtr:StartDownload(url, "DownRequestSuccess", "DownRequestFail")
+end
+
+function LoginController:DownRequestSuccess(text)
+    --local text = '{"userInfo":[{"gatewayId":588009, "maxRoleLevel":1, "roleCount":2, "roleName":"ss"}],"lastLogin":159002}'
+    local JSON = require "Utils/JSON"
+    self.MyServerListInfo = JSON:decode(text)
+end
+
+function LoginController:DownRequestFail(www)
+
+end
+
+function LoginController:Init()
+    local serverList = nil
+    if IS_PLATFORM_DEBUG then
+        require "Utils/GameDefine"
+        serverList = GameDefine_inside_serverlist_url
+    else
+        serverList = GameDefine_outside_serverlist_url
+    end
+    serverList = serverList .. "?id=" .. LuaLong.ToString(LuaDateTime.Ticks_Now())
+    if serverList ~= nil or serverList ~="" then
+        self.ClientInitCtr:StartDownload(serverList,"SeverListDownloadSuccss","SeverListDownloadFail")
+        self.downloadTimer = Timer.NewEvent(self,50,50,LoginController.DownLoadOverTime)
+    else
+        LuaDebug.Log("serverList is nil")
+    end
+    LoginController.InitServerName(self)
+end
+
+function LoginController:InitServerName()
+    local servername = PlayerPrefsEx.GetString("LastServerName")
+    if servername == nil or servername == "" then
+        servername = Text.PlaseSelectServer
+    end
+    self.IP:set_text(servername)
+end
+
+function LoginController:OnDestroy(  )
+    Client.ConnectSuccess = Client.ConnectSuccess - {self,LoginController.ConnectSuccess}
+    Client.ExitGameSuccess=Client.ExitGameSuccess - {self,LoginController.ExitGameSuccess}
+    Client.LoginSuccess = Client.LoginSuccess - {self,LoginController.LoginSuccess}
+    Client.RoleSummarySuccess = Client.RoleSummarySuccess - {self,LoginController.RoleSummarySuccess}
+    Client.ShowServerList = Client.ShowServerList - {self,LoginController.ShowServerList}
+    Client.ConnectGoWrong = Client.ConnectGoWrong - {self,LoginController.ConnectGoWrong}
+    Client.LoginPlayers = {}
+    LoginController.ClearTimer(self)
+end
+
+function LoginController:DownLoadOverTime()
+    require "Utils/LuaMessageBox"
+    if self.OverTimeMsgBox then
+        self.OverTimeMsgBox = LuaMessageBox.ShowSingle(Text.DownLoadServerOverTime,LoginController.Starts,Text.RetryText,self)
+        self.OverTimeMsgBox.gameObject:get_transform().set_localPosition(LuaVector3.Create(0,0,-502))
+    end
+end
+
+function LoginController:ClearTimer()
+    if self.downloadTimer ~= nil then
+        Timer.RemoveEvent(self,self.downloadTimer)
+        self.downloadTimer = nil
+    end
+end
+
+function LoginController:ClearNoticeTimer()
+    if self.NoticeDownTimer ~= nil then
+        Timer.RemoveEvent(self,self.NoticeDownTimer)
+        self.NoticeDownTimer = nil
+    end
+end
+
+function LoginController:SeverListDownloadSuccss(xmlString)
+    local SLAXML = require "Utils/slaxdom"
+    self.doc = SLAXML:dom(xmlString)
+    if self.doc ~= nil then
+       LoginController.InitServerList(self)
+    end
+    LoginController.ClearTimer(self)
+    LoginController.StartDownloadNoticeList(self)    --开始下载公告
+    LoginController.StartDownloadChargeList(self)    --开始下载充值配置
+    LoginController.CheakUpdate(self)
+
+end
+
+function LoginController:InitServerList()
+    self.ServerTable={}
+    self.ServerTableInfo={}
+    for i=1,#(self.doc.kids[2].el[1].el) do
+        self.ServerTable[i]={}
+        table.insert(self.ServerTableInfo,{ServerTableId=i,ServerTableName=self.doc.kids[2].el[1].el[i].attr.name})
+    end
+    if self.isInit == nil then
+       self.isInit = false
+    end
+
+   if not self.isInit then
+      for k=1,#(self.ServerTable) do
+         for i=1,#(self.doc.kids[2].el[1].el[k].el) do
+            local url=Util.Split(self.doc.kids[2].el[1].el[k].el[i].attr.game, ":")
+            local ip=url[1]
+            local port=url[2]
+            local new=self.doc.kids[2].el[1].el[k].el[i].attr.new
+            local number=self.doc.kids[2].el[1].el[k].el[i].attr.number
+            local recommend=self.doc.kids[2].el[1].el[k].el[i].attr.recommend
+            local serverid=self.doc.kids[2].el[1].el[k].el[i].attr.server_ID
+            local servername=self.doc.kids[2].el[1].el[k].el[i].attr.server_name
+            table.insert(self.ServerTable[k],{Ip=ip,Port=port,New=new,Number=number,Rec=recommend,ServerID=serverid,ServerName=servername})
+         end
+      end
+      self.isInit=true
+    end
+
+    -- LoginController.GetRecommendAndNewServer(self)
+    LoginController.GetLastServer(self)
+    LoginController.GetActiveCodeStatus(self)
+    LoginController.GetDefaultServer(self)
+end
+
+-- 推荐服暂时不显示
+function LoginController:GetRecommendAndNewServer()
+    local recommendServerNode = {}
+    local newServerNode = {}
+    local newServerList = {}
+    local hasRecommond = false
+    for i,v in ipairs(self.ServerTable) do
+        for j,k in ipairs(v) do
+            if k.Rec == "0" then
+                table.insert(recommendServerNode, k)
+                hasRecommond = true
+            end
+            if k.New == "0" then
+                table.insert(newServerNode, k)
+            end
+        end
+    end
+    if hasRecommond then
+        table.insert(newServerList, recommendServerNode)
+        for i,v in ipairs(self.ServerTable) do
+            table.insert(newServerList, v)
+        end
+        self.ServerTable = newServerList
+
+        local newServerInfoList = {}
+        table.insert(newServerInfoList, {ServerTableName=Text.RecommondServer, ServerTableId = 1})
+        for i,v in ipairs(self.ServerTableInfo) do
+            v.ServerTableId = v.ServerTableId + 1
+            table.insert(newServerInfoList, v)
+        end
+        self.ServerTableInfo = newServerInfoList
+    end
+end
+
+function LoginController:GetLastServer()
+    local lastIpStr = PlayerPrefsEx.GetString("LastIp")
+    local lastPortStr = PlayerPrefsEx.GetString("LastPort")
+    if lastIpStr == nil or lastIpStr == "" or lastPortStr == nil or lastPortStr == "" then
+        return
+    end
+    for i,v in ipairs(self.ServerTable) do
+        for j,k in ipairs(v) do
+            if k.Ip == lastIpStr and k.Port == lastPortStr then
+                self.LastServer = k
+                LoginController.SaveServerInfo(self, self.LastServer)
+                return
+            end
+        end
+    end
+end
+
+function LoginController:GetActiveCodeStatus()
+    Client.activeCodeStatus = false
+    local activeCodeStatus = self.doc.root.el[1].attr.activecode
+    if activeCodeStatus == "true" then
+        Client.activeCodeStatus = true
+    end
+end
+
+function LoginController:GetDefaultServer()
+    if self.ServerTable ~= nil then
+        local NewServerList = {}
+        for k=1 , #(self.ServerTable) do
+            for i=1,#(self.ServerTable[k]) do
+                if self.ServerTable[k][i].New == "0" then
+                    table.insert(NewServerList,self.ServerTable[k][i])
+                end
+            end
+        end
+
+        --选择新区中的最后一个
+        if NewServerList[1] ~= nil then
+            self.DefaultServer = NewServerList[1]
+        end
+        for i,v in ipairs(NewServerList) do
+            if self.DefaultServer.Number < v.Number then
+                self.DefaultServer = v
+            end
+        end
+
+        --如果没有新区,选取number最大的一个区
+        if self.DefaultServer == nil then
+            self.DefaultServer = self.ServerTable[1][1]
+            for k=1 , #(self.ServerTable) do
+                for i=1,#(self.ServerTable[k]) do
+                    if self.DefaultServer.Number < self.ServerTable[k][i].Number then
+                        self.DefaultServer = self.ServerTable[k][i]
+                    end
+                end
+            end
+        end
+    end
+end
+
+function LoginController:DefaultServerLogic()
+    LuaNetwork.DisConnect()
+    LuaDebug.Log("To Connect")
+    local ret = nil
+    if self.LastServer ~= nil then
+        ret = LuaNetwork.Connect(self.LastServer.Ip, self.LastServer.Port)
+    elseif self.DefaultServer ~= nil then
+        ret = LuaNetwork.Connect(self.DefaultServer.Ip,self.DefaultServer.Port)
+    end
+
+    if ret then
+        if not ClientInfo.isFirstLogin then
+            Client.ConnectSuccess:Do()
+            ClientInfo.isFirstLogin = true
+        end
+    end
+end
+
+function LoginController:SeverListDownloadFail(www)
+    LoginController.ClearTimer(self)
+    require "Utils/LuaMessageBox"
+    self.DownLoadFailMB = LuaMessageBox.ShowSingle(Text.ServerListError,LoginController.Starts,Text.RetryText,self)
+    --self.DownLoadFailMB.gameObject:get_transform().set_localPosition(LuaVector3.Create(0,0,-505))
+end
+
+function LoginController:Starts()
+    self.OverTimeMsgBox = nil
+    LoginController.Init(self)
+end
+
+function LoginController:ShowServerList()
+    if LuaUIViewCtr.UIPanel["ServerList"] ~= nil then return end
+    if self.doc ~=nil then
+      local ServerListCon = LuaUIViewCtr.OpenUIHasBg("Login/ServerListCenter")
+      ServerListController.Init(ServerListCon,self)
+    end
+end
+
+function LoginController:ServerName_OnClick()
+    if self.doc ~=nil then
+      local ServerListCon = LuaUIViewCtr.OpenUIHasBg("Login/ServerListCenter")
+      ServerListController.Init(ServerListCon,self)
+    end
+end
+--账号
+function LoginController:LoginGameBtn_OnClick()
+    if not GameDefine_isLoginForLK then
+        PlatformHandler.CallLogout()
+    else
+        LoginController.OpenLoginInputUI(self,true)
+    end
+end
+
+--公告
+function LoginController:GongGaoBtn_OnClick()
+    LoginController.RefreshNoticeList(self)
+end
+
+--开始游戏
+function LoginController:StartGameBtn_OnClick()
+    if not GameDefine_isLoginForLK then
+        if self.IsConnect then
+            PlatformHandler.CallLogin()
+        else
+            LoginController.DefaultServerLogic(self)
+        end
+        LuaDebug.Log("not GameDefine_isLoginForLK")
+    else
+        if self.IsConnect then
+            if self.userName ~= "" then
+                LuaDebug.Log("ClientSendMsg.SendRawAuth")
+                ClientSendMsg.SendRawAuth(self.userName,self.password)
+            else
+                LuaDebug.Log("OpenLoginInputUI")
+                LoginController.OpenLoginInputUI(self,false)
+            end
+        else
+            LuaDebug.Log("DefaultServerLogic")
+            LoginController.DefaultServerLogic(self)
+        end
+    end
+end
+
+function LoginController:LoginSuccess()
+    self.userName=PlayerPrefsEx.GetString("userName")
+    self.password=PlayerPrefsEx.GetString("password")
+    ClientSendMsg.SendRoleSummary()
+end
+
+function LoginController:RoleSummarySuccess()
+    if LuaUIViewCtr.UIPanel["ServerList"] ~= nil then
+        LuaUIViewCtr.UIPanel["ServerList"]:Destroy1()
+    end
+    Client.m_CurrentState=EClientState.E_CS_ChooseRole
+    if self.LoginUI:get_activeInHierarchy() then
+        LoginControl.self_():IsCheck(true)
+    end
+
+    self.LoginUI:SetActive(false)
+    self.HeadUpParent:SetActive(true)
+    if self.ChooseRoleRef then
+        self.ChooseRoleRef.gameObject:SetActive(true)
+    else
+        self.ChooseRoleRef = LuaUIViewCtr.OpenUINotLose("Login/ChooseRoleUI")
+        if self.ChooseRoleRef ~= nil then
+            self.ChooseRoleRef.LoginUIRoot = self
+        end
+    end
+
+    ChooseRoleUI.RefreshRoleList(self.ChooseRoleRef)
+    -- MusicManager.get_Instance():PlayBackMusic(self.ChooseRoleMusicPath)
+    if LoginPanel["LoginInput"] ~= nil then
+       LoginPanel["LoginInput"].gameObject:Destroy1()
+    end
+end
+
+function LoginController:OpenLoginInputUI(state)
+    if self.doc ~=nil then
+        local ref = LuaUIViewCtr.OpenUIHasBg("Login/LoginInput")
+        if ref ~= nil then
+            ref.FirstShow = state
+            LoginPanel["LoginInput"] = ref
+        end
+    end
+end
+
+function LoginController.ExitGameSuccess()
+    -- LuaDebug.Log("ExitGame!")
+end
+
+function LoginController:ConnectSuccess()
+    self.IsConnect = true
+    LoginController.RefreshNoticeList(self)
+    LoginController.UpdateServerInfo(self)
+    Client.m_CurrentState=EClientState.E_CS_Login
+end
+
+function LoginController:ConnectGoWrong ()
+    self.IsConnect = false
+    LoginController.UpdateServerInfo(self)
+end
+
+function LoginController:UpdateServerInfo()
+    if self.LastServer ~= nil then
+        LoginController.SaveServerInfo(self, self.LastServer)
+    else
+        if self.DefaultServer ~= nil then
+            LoginController.SaveServerInfo(self, self.DefaultServer)
+        end
+    end
+end
+
+function LoginController:SaveServerInfo(serverNode)
+    local flag,isOpenAllMaintain = LoginController.domFlag(self)
+    local isMaintain = false
+    if flag ~= nil then
+        for i,v in ipairs(flag) do
+            if v == tostring(serverNode.ServerID) then
+                isMaintain = true
+                break
+            end
+        end
+    end
+    if isMaintain or isOpenAllMaintain then
+        self.IP:set_text(serverNode.ServerName..Text.Maintain)
+    elseif serverNode.New == "0" then
+        self.IP:set_text(serverNode.ServerName..Text.NewServer)
+    elseif serverNode.New == "1" then
+        self.IP:set_text(serverNode.ServerName)
+    elseif serverNode.New == "2" then
+        self.IP:set_text(serverNode.ServerName..Text.HotServer)
+    end
+
+    PlayerPrefsEx.SetString("LastServerId",serverNode.ServerID)
+    PlayerPrefsEx.SetString("LastServerName",serverNode.ServerName)
+    PlayerPrefsEx.SetString("LastIp",serverNode.Ip)
+    PlayerPrefsEx.SetString("LastPort",serverNode.Port)
+    PlayerPrefsEx.SetString("LastServerNumber",serverNode.Number)
+end
+
+function LoginController:ClosedBtn_OnClick( )
+    self.gameObject:Destroy1()
+end
+------------------公告-------------------
+function LoginController:StartDownloadNoticeList()
+    local AnnouncementServerList = self.doc.kids[2].el[1].attr.noticeurl .. "?id=" .. LuaLong.ToString(LuaDateTime.Ticks_Now())
+    -- local AnnouncementServerList = "file:///D:/xml/lk_auther2_notice.xml"
+    if AnnouncementServerList ~= nil and AnnouncementServerList ~="" then
+        self.ClientInitCtr:StartDownload(AnnouncementServerList,"DownloadNoticeSuccss","DownloadNoticeFail")
+        self.NoticeDownTimer = Timer.NewEvent(self,10,10,LoginController.DefaultServerLogic)
+    else
+        LoginController.DefaultServerLogic(self)          --连接服务器
+    end
+end
+
+function LoginController:DownloadNoticeSuccss(xmlString)
+    local SLAXML = require "Utils/slaxdom"
+    self.notice = SLAXML:dom(xmlString)
+    if self.notice ~= nil then
+        LoginController.InitNoticeList(self)
+    end
+    LoginController.ClearNoticeTimer(self)
+    if self.LastServer ~= nil then
+        LoginController.SaveServerInfo(self, self.LastServer)
+    end
+    local flag,isOpenAllMaintain = LoginController.domFlag(self)
+    if isOpenAllMaintain then return end           --全服维护
+    if not self.IsConnect then
+        LoginController.DefaultServerLogic(self)   --连接服务器
+    end
+end
+
+------------------充值---------------------
+function LoginController:StartDownloadChargeList()
+    local serverList = nil
+    if IS_PLATFORM_DEBUG then
+        require "Utils/GameDefine"
+        serverList = GameDefine_inside_charge_url
+    else
+        serverList = GameDefine_outside_charge_url
+    end
+    serverList = serverList .. "?id=" .. LuaLong.ToString(LuaDateTime.Ticks_Now())
+    if serverList ~= nil or serverList ~="" then
+        self.ClientInitCtr:StartDownload(serverList,"DownloadChargeSucess","DownloadChargeFail")
+    else
+        LuaDebug.Log("serverList is nil")
+    end
+end
+
+function LoginController:DownloadChargeSucess(xmlString)
+    local SLAXML = require "Utils/slaxdom"
+    self.charge = SLAXML:dom(xmlString)
+    --for k, v in pairs(self.charge.kids[2]) do
+    --    LuaDebug.Log("k: "..k)
+    --end
+    Client.Recharge = {}
+    for i=1,#(self.charge.kids[2].el) do
+       local id = tonumber(self.charge.kids[2].el[i].attr.ID)
+       local type = tonumber(self.charge.kids[2].el[i].attr.Type)
+       local recharge = tonumber(self.charge.kids[2].el[i].attr.Recharge)
+       local rewardNum1 = tonumber(self.charge.kids[2].el[i].attr.RewardNum1)
+       local rewardNum2 = tonumber(self.charge.kids[2].el[i].attr.RewardNum2)
+       local icon = self.charge.kids[2].el[i].attr.Icon
+       local title = self.charge.kids[2].el[i].attr.Title
+       local describe = self.charge.kids[2].el[i].attr.Describe
+       local productID = self.charge.kids[2].el[i].attr.ProductID
+       local particle = self.charge.kids[2].el[i].attr.Particle
+       table.insert(Client.Recharge,{ID=id,Type=type,Recharge=recharge,RewardNum1=rewardNum1,RewardNum2=rewardNum2,Icon=icon,Title=title,Describe=describe,ProductID=productID,Particle=particle})
+       --LuaDebug.Log("ProductID: "..Client.Recharge[i].ProductID)
+    end
+    LuaDebug.Log("charge info download sucess")
+end
+
+function LoginController:DownloadChargeFail(www)
+    LuaDebug.Log("charge info download fail")
+end
+
+function LoginController:InitNoticeList()
+    self.NoticeList = {}
+    -- k:1、notice 2、维护公告 i:公告条目
+    -- self.notice.kids[2].el[k].el[i]
+    for k=1,#(self.notice.kids[2].el) do
+       for i=1,#(self.notice.kids[2].el[k].el) do
+           local begin_date = self.notice.kids[2].el[k].el[i].attr.begin_date
+           local end_date = self.notice.kids[2].el[k].el[i].attr.end_date
+           local title = self.notice.kids[2].el[k].el[i].attr.Title
+           local titleUrl = self.notice.kids[2].el[k].el[i].attr.TitleUrl
+           local flag = self.notice.kids[2].el[k].el[i].attr.flag
+           local mark = self.notice.kids[2].el[k].el[i].attr.Mark
+           local noticeDes = self.notice.kids[2].el[k].el[i].el[1].kids[1].value
+           table.insert(self.NoticeList,{Begin_date=begin_date,End_date=end_date,Title=title,TitleUrl=titleUrl,Flag=flag,Mark=mark,NoticeDes=noticeDes})
+       end
+    end
+    -- for i,v in ipairs(self.NoticeList) do
+    --     LuaDebug.Log("begin_date:"..v.Begin_date)
+    --     LuaDebug.Log("end_date:"..v.End_date)
+    --     LuaDebug.Log("noticeDes:"..v.NoticeDes)
+    -- end
+    LoginController.isHasAllMaintain(self)
+end
+
+function LoginController:RefreshNoticeList()
+    -- LuaDebug.Log("#self.NoticeList"..#self.NoticeList)
+    if self.NoticeList ~= nil then
+        local NoticeList = {}
+        LoginController.isHasAllMaintain(self)
+        NoticeList = LoginController:NoticeDataScreen(self.NoticeList,false)
+        if self.prefab == nil and #NoticeList ~= 0 then
+            self.prefab = LuaUIViewCtr.AddChildNotLose("AnnouncementUI/AnnouncementUI",self.LoginUI)   --弹出公告
+            self.prefab:setData(NoticeList,self)
+        end
+    end
+end
+
+function LoginController:isHasAllMaintain()
+    -- local isHasAllMaintain = false                      --是否有全服维护公告
+    local isOpenAllMaintain = false                     --是否开启全服维护公告
+    local NoticeList = {}
+    for i,v in ipairs(self.NoticeList) do
+        if v.Flag ~= nil and v.Flag == "all" then
+            -- isHasAllMaintain = true
+            table.insert(NoticeList,v)
+        end
+    end
+    NoticeList = LoginController:NoticeDataScreen(NoticeList)
+    if self.prefab == nil and #NoticeList ~= 0 then
+        self.prefab = LuaUIViewCtr.AddChildNotLose("AnnouncementUI/AnnouncementUI",self.LoginUI)   --弹出公告
+        self.prefab:setData(NoticeList,self)
+    end
+end
+
+function LoginController:NoticeDataScreen(dataList)
+    local data = {}
+    if dataList ~= nil then
+        for i,v in ipairs(dataList) do
+            if LoginController.NoticeOpen(self,v.Begin_date,v.End_date,v.Flag) then
+                table.insert(data,v)
+            end
+        end
+    end
+    return data
+end
+
+function LoginController:NoticeOpen(beginDate,endDate,flag)
+    local isNoticeOpen = false
+    local isHasAllMaintain = false
+    local currDate = nil
+    if (flag ~= nil and flag == "all") or not self.IsConnect  then
+        isHasAllMaintain = true
+    end
+
+    if isHasAllMaintain == true then
+        currDate = DateTime.get_Now()
+    elseif isHasAllMaintain == false then
+        currDate = ServerTime.GetServerTime()
+    end
+    if not self.IsConnect then
+        currDate = DateTime.get_Now()
+    end
+    if LoginController.checkDateTime(beginDate,"-") and LoginController.checkDateTime(endDate,"-") then
+        local BeginDate = DateTime.Parse(beginDate)
+        local EndDate = DateTime.Parse(endDate)
+        if DateTime.Compare(currDate,BeginDate) > 0 and DateTime.Compare(currDate,EndDate) < 0 then
+            isNoticeOpen = true
+        end
+    else
+        LuaDebug.LogError("Target:" .. beginDate .." to ".. endDate .. "  DateTime is Error!")
+    end
+    return isNoticeOpen
+end
+
+function LoginController.checkDateTime(dateString,splitChar)
+    local result = Util.StringSplit(dateString,splitChar)
+    if tonumber(result[1]) < 1970 then return false end
+    if tonumber(result[2]) < 1 or tonumber(result[2]) > 12 then return false end
+    local days = DateTime.DaysInMonth(tonumber(result[1]),tonumber(result[2]))
+    local index = string.find(result[3],"%s")
+    local dayNum = string.sub(result[3],1,index-1)
+    if tonumber(dayNum) < 1 or tonumber(dayNum) > days then return false end
+    return true
+end
+
+function LoginController:domFlag()
+    -- flag = "1-2,3,5-6,8,9-10"
+    local flagList = {}
+    local isOpenAllMaintain = false
+    local selectedlist = LoginController:NoticeDataScreen(self.NoticeList,false)
+    for i,v in ipairs(selectedlist) do
+        if v.Flag ~= nil and v.Flag ~= "all" then
+            local flag = v.Flag
+            while string.len(flag) > 0 do
+                local index = string.find(flag,",")
+                if index ~= nil then
+                    local des = string.sub(flag,1,index-1)
+                    local interval = string.find(des,"-")
+                    if interval == nil then
+                        table.insert(flagList,des)
+                    else
+                        for i=tonumber(string.sub(des,1,interval-1)),tonumber(string.sub(des,interval+1,string.len(des))) do
+                            table.insert(flagList,tostring(i))
+                        end
+                    end
+                    flag = string.sub(flag,index+1,string.len(flag))
+                else
+                    local interval = string.find(flag,"-")
+                    if interval == nil then
+                        table.insert(flagList,flag)
+                    else
+                        for i=tonumber(string.sub(flag,1,interval-1)),tonumber(string.sub(flag,interval+1,string.len(flag))) do
+                            table.insert(flagList,tostring(i))
+                        end
+                    end
+                    break
+                end
+            end
+        end
+        if v.Flag ~= nil and v.Flag == "all" then
+            isOpenAllMaintain = true
+            break
+        end
+    end
+
+    return flagList,isOpenAllMaintain
+end
+
+function LoginController:DownloadNoticeFail(www)
+    LoginController.ClearNoticeTimer(self)
+    LoginController.DefaultServerLogic(self)
+end
+
+function LoginController:OnCancel()
+    LoginController.DefaultServerLogic(self)          --连接服务器
+end
+
+function LoginController:DownloadTextureSuccss(url,www)
+    if self.prefab ~= nil then
+        self.prefab:SetTextureData(url,www)
+        for i,v in ipairs(self.prefab.MarksPrefab) do
+            v.widget:set_color(LuaColor.Get(1,1,1,1))
+        end
+        self.prefab.Layout:set_enabled(true)
+        self.prefab.Layout:RefreshNow()
+    end
+end
+
+function LoginController:DownloadTextureFail(www)
+
+end
+
+function LoginController:CheakUpdate()
+    if Application.get_platform()==ERuntimePlatform.WindowsPlayer or Application.get_platform()==ERuntimePlatform.WindowsEditor then
+        return
+    end
+    local xmlversion =  self.doc.kids[2].el[1].attr.version
+    require("Utils/UpdateConfig")
+    LuaDebug.Log("xmlversion  "..xmlversion.."   cc "..Client.ClientVersion)
+    if UpdateConfig.CompareVersion(xmlversion,Client.ClientVersion) then
+        local loadUpdateScene = function ()
+           UnityLevelMgr.LoadLevelName("Update")
+        end
+        local box = LuaMessageBox.ShowSingle(Text.NeedUpdate,loadUpdateScene,Text.Confirm,self)
+        box.gameObject:get_transform():set_localPosition(LuaVector3.Create(0,0,-550))
+    end
+
+end

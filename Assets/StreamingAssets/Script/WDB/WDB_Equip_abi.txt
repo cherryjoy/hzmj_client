@@ -1,0 +1,18 @@
+WDB_Equip_abi = {}
+--[[
+	WDB_Equip_abi.Id
+	WDB_Equip_abi.Name
+	WDB_Equip_abi.PartID
+	WDB_Equip_abi.Model
+	WDB_Equip_abi.RandomEffectNum
+	WDB_Equip_abi.EquiLv
+	WDB_Equip_abi.UseProfession
+	WDB_Equip_abi.Effect_0
+	WDB_Equip_abi.num_0
+	WDB_Equip_abi.Effect_1
+	WDB_Equip_abi.num_1
+	WDB_Equip_abi.StarExp
+	WDB_Equip_abi.StarLvMax
+]]--
+
+LuaDBTable.SetLuaTableField("Equip_abi")

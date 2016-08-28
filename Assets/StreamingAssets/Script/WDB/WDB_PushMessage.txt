@@ -1,0 +1,17 @@
+WDB_PushMessage = {}
+--[[
+	WDB_PushMessage.Id
+	WDB_PushMessage.Type
+	WDB_PushMessage.RedPointcheck
+	WDB_PushMessage.OpenCondition1_1
+	WDB_PushMessage.ConditionValue1_1
+	WDB_PushMessage.OpenCondition1_2
+	WDB_PushMessage.ConditionValue1_2
+	WDB_PushMessage.IconType
+	WDB_PushMessage.Icon
+	WDB_PushMessage.Title
+	WDB_PushMessage.Des
+	WDB_PushMessage.OpenUi
+]]--
+
+LuaDBTable.SetLuaTableField("PushMessage")

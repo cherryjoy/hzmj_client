@@ -1,0 +1,16 @@
+ClickClose = {}
+
+function ClickClose:Start()
+    ClickClose.Init(self)
+end
+
+function ClickClose:Init()
+  if not self.isInit then
+    setmetatable(self,{__index = ClickClose})
+    self.isInit = true
+  end
+end
+
+function ClickClose:OnClickSelf()
+    self.m_ParrentGo:Destroy1()
+end

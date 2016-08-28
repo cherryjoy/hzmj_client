@@ -1,0 +1,19 @@
+WDB_gem = {}
+--[[
+	WDB_gem.ID
+	WDB_gem.Name
+	WDB_gem.LastId
+	WDB_gem.NextId
+	WDB_gem.LvNum
+	WDB_gem.Lv
+	WDB_gem.Effect_1
+	WDB_gem.Eff_1_1
+	WDB_gem.Effect_2
+	WDB_gem.Eff_2_1
+	WDB_gem.Effect_3
+	WDB_gem.Eff_3_1
+	WDB_gem.Typename
+	WDB_gem.Type
+]]--
+
+LuaDBTable.SetLuaTableField("gem")

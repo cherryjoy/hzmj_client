@@ -1,0 +1,27 @@
+WDB_Godcity_Level = {}
+--[[
+	WDB_Godcity_Level.Id
+	WDB_Godcity_Level.GodcityId
+	WDB_Godcity_Level.NextId
+	WDB_Godcity_Level.Level
+	WDB_Godcity_Level.Renown
+	WDB_Godcity_Level.Money
+	WDB_Godcity_Level.Exp
+	WDB_Godcity_Level.Exp_Level
+	WDB_Godcity_Level.Effect_0
+	WDB_Godcity_Level.Num_0
+	WDB_Godcity_Level.Effect_1
+	WDB_Godcity_Level.Num_1
+	WDB_Godcity_Level.Effect_2
+	WDB_Godcity_Level.Num_2
+	WDB_Godcity_Level.Effect_3
+	WDB_Godcity_Level.Num_3
+	WDB_Godcity_Level.Effect_4
+	WDB_Godcity_Level.Num_4
+	WDB_Godcity_Level.Effect_5
+	WDB_Godcity_Level.Num_5
+	WDB_Godcity_Level.Effect_6
+	WDB_Godcity_Level.Num_6
+]]--
+
+LuaDBTable.SetLuaTableField("Godcity_Level")

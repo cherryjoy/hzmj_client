@@ -1,0 +1,9 @@
+WDB_LegionBossConfig = {}
+--[[
+	WDB_LegionBossConfig.Id
+	WDB_LegionBossConfig.Name
+	WDB_LegionBossConfig.Param
+	WDB_LegionBossConfig.Param2
+]]--
+
+LuaDBTable.SetLuaTableField("LegionBossConfig")

@@ -1,0 +1,9 @@
+WDB_FinalistCompetitionConfig = {}
+--[[
+	WDB_FinalistCompetitionConfig.Id
+	WDB_FinalistCompetitionConfig.Name
+	WDB_FinalistCompetitionConfig.Param
+	WDB_FinalistCompetitionConfig.Param2
+]]--
+
+LuaDBTable.SetLuaTableField("FinalistCompetitionConfig")

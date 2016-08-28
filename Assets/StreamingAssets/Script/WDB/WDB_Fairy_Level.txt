@@ -1,0 +1,29 @@
+WDB_Fairy_Level = {}
+--[[
+	WDB_Fairy_Level.Id
+	WDB_Fairy_Level.FairyId
+	WDB_Fairy_Level.Level
+	WDB_Fairy_Level.Equip_0
+	WDB_Fairy_Level.Equip_1
+	WDB_Fairy_Level.Equip_2
+	WDB_Fairy_Level.Equip_3
+	WDB_Fairy_Level.Equip_4
+	WDB_Fairy_Level.Equip_5
+	WDB_Fairy_Level.Equip_6
+	WDB_Fairy_Level.Effect_0
+	WDB_Fairy_Level.Num_0
+	WDB_Fairy_Level.Effect_1
+	WDB_Fairy_Level.Num_1
+	WDB_Fairy_Level.Effect_2
+	WDB_Fairy_Level.Num_2
+	WDB_Fairy_Level.SkillEffectId0
+	WDB_Fairy_Level.SkillEffectNum0
+	WDB_Fairy_Level.SkillEffectId1
+	WDB_Fairy_Level.SkillEffectNum1
+	WDB_Fairy_Level.SkillName
+	WDB_Fairy_Level.SkillIcon
+	WDB_Fairy_Level.SmallIcon
+	WDB_Fairy_Level.SkillDesc
+]]--
+
+LuaDBTable.SetLuaTableField("Fairy_Level")

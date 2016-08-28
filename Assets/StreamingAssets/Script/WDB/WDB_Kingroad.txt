@@ -1,0 +1,32 @@
+WDB_Kingroad = {}
+--[[
+	WDB_Kingroad.Id
+	WDB_Kingroad.Order
+	WDB_Kingroad.Name
+	WDB_Kingroad.SceneId
+	WDB_Kingroad.Model
+	WDB_Kingroad.Zoom
+	WDB_Kingroad.X
+	WDB_Kingroad.Y
+	WDB_Kingroad.LevelMin
+	WDB_Kingroad.LevelMax
+	WDB_Kingroad.Reward_1
+	WDB_Kingroad.Num_1_1
+	WDB_Kingroad.Num_1_2
+	WDB_Kingroad.Reward_2
+	WDB_Kingroad.Num_2_1
+	WDB_Kingroad.Num_2_2
+	WDB_Kingroad.Reward_3
+	WDB_Kingroad.Num_3_1
+	WDB_Kingroad.Num_3_2
+	WDB_Kingroad.Reward_4
+	WDB_Kingroad.Num_4_1
+	WDB_Kingroad.Num_4_2
+	WDB_Kingroad.Reward_5
+	WDB_Kingroad.Num_5_1
+	WDB_Kingroad.Num_5_2
+	WDB_Kingroad.Attack
+	WDB_Kingroad.Life
+]]--
+
+LuaDBTable.SetLuaTableField("Kingroad")

@@ -1,0 +1,29 @@
+fileFormatVersion: 2
+guid: 72baa1b05800f0d4788de5f67c761cb1
+timeCreated: 1462607727
+licenseType: Pro
+PluginImporter:
+  serializedVersion: 1
+  iconMap: {}
+  executionOrder:
+    AutoScreenScale: -20
+    GlobalUpdate: 100
+    TableViewController: -5
+    UIAnchor: -10
+    UIRoot: -100
+  isPreloaded: 0
+  platformData:
+    Any:
+      enabled: 1
+      settings: {}
+    Editor:
+      enabled: 0
+      settings:
+        DefaultValueInitialized: true
+    WindowsStoreApps:
+      enabled: 0
+      settings:
+        CPU: AnyCPU
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,264 @@
+
+require("Utils/UpdateConfig")
+require "Utils/LuaMessageBox"
+UpdateController = {}
+UpdateController.BGPath="Update/UpdateBG"
+function UpdateController:Start()
+	if Application.get_platform()==ERuntimePlatform.IPhonePlayer then
+		NotificationServices.RegisterForNotifications(7)
+	end
+	self.gameObject:SetActive(false)
+	local bgMat = TextureMgr.get_Instance():LoadTexture(UpdateController.BGPath)
+	self.Texture:set_material(bgMat)
+	self.Texture:get_gameObject():SetActive(true)
+	self.gameObject:SetActive(true)
+	if GameDefine_WZZS then
+		self.wzzslogo:get_gameObject():SetActive(true)
+	else
+		self.wzzj2:SetMainTextureByPath("UI/Texture/logo3")
+		self.wzzj2:get_gameObject():SetActive(true)
+		-- self.jian:SetMainTextureByPath("UI/Texture/logo2")
+		-- self.jian:get_gameObject():SetActive(true)
+	end
+	UpdateController.ProgressBar = self.ProgressBar
+	UpdateController.ProgressLabel = self.ProgressLabel
+	UpdateController.UpdateCtr = self.UpdateCtr
+	UpdateController.UpdateCtrSelf = self
+	if Application.get_platform()==ERuntimePlatform.WindowsPlayer or Application.get_platform()==ERuntimePlatform.WindowsEditor then
+		UpdateController.LoadLoginScene()
+		return
+	end
+	UpdateController.CheackUpdate()
+end
+
+function UpdateController.DownLoadErrorCallback(code)
+	LuaDebug.Log("DownLoadErrorCallback  "..code)
+	LuaMessageBox.ShowSingle(Text.ConnectError2,UpdateController.DownloadServerlist,Text.Confirm,UpdateController)
+end
+
+function  UpdateController:CheackUpdate()
+	if UpdateConfig.IsNeedExtractAssetFromPackage() then
+		if  not UpdateController.CheackFreeStorage() then
+		LuaMessageBox.ShowSingle(Text.FreeStorage,UpdateController.CheackUpdate,Text.Confirm,UpdateController)
+		else
+			UpdateController.ExtractAssetFromPackageToSD()
+		end
+	else
+		UpdateController.DownloadServerlist()
+	end
+end
+function UpdateController.Quit()
+		Application.Quit()
+end
+function UpdateController.CheckSDScrad( )
+	return  PluginTool.SharedInstance():SDCardExists()
+end
+function UpdateController.CheackFreeStorage()
+	if Application.get_platform()==ERuntimePlatform.WindowsPlayer or Application.get_platform()==ERuntimePlatform.WindowsEditor then
+		return true
+	else
+		return PluginTool.SharedInstance():GetClientFreeStorage()>400
+	end
+end
+
+function UpdateController:ExtractAssetFromPackageToSD()
+	LuaDebug.Log("ExtractAssetFromPackageToSD")
+	UpdateController.ProgressLabel:set_text(Text.CopyData)
+	UpdateController.ProgressBar:set_sliderValue(0)
+	UpdateController.ProgressBar:get_gameObject():SetActive(true)
+	if Application.get_platform()==ERuntimePlatform.Android then
+		if not UpdateController.CheckSDScrad() then
+			LuaMessageBox.ShowSingle(Text.SDCardNotFound,UpdateController.Quit,Text.Confirm,UpdateController)
+			return
+		end
+	end
+	if Application.get_platform()==ERuntimePlatform.Android then
+		PluginTool.SharedInstance():CopyAssetFromPackageToSdcard("index",PERSISTENTDATAPATH)
+		PluginTool.SharedInstance():CopyAssetFromPackageToSdcard("fragment",PERSISTENTDATAPATH)
+		PluginTool.SharedInstance():ThreadCopyAssetFromPackageToSdcard(UpdateController.UpdateCtr:get_gameObject():get_name(),"data",PERSISTENTDATAPATH);
+	else
+		 UpdateController.UpdateCtr:ThreadCopyFile(STREAMINGASSETSPATH.."data",PERSISTENTDATAPATH,"UnzipStreamingAssetSuccess","UnzipProgress","PackageError")
+		 UpdateController.UpdateCtr:CopyFile(STREAMINGASSETSPATH.."fragment",PERSISTENTDATAPATH.."fragment")
+		 UpdateController.UpdateCtr:CopyFile(STREAMINGASSETSPATH.."index",PERSISTENTDATAPATH.."index")
+	end
+end
+
+function UpdateController.PackageError()
+	LuaMessageBox.ShowSingle(Text.PackageError,UpdateController.Quit,Text.Confirm,UpdateController)
+end
+
+function UpdateController.AndroidCopayEnd()
+	UpdateController.UnzipStreamingAssetSuccess()
+end
+
+function  UpdateController.UnzipStreamingAssetSuccess()
+		UpdateConfig.SetClientVersion(GameDefine_version)
+		UpdateController.UpdateCtrSelf.VersionLbl:set_text("V"..GameDefine_version)
+		UpdateController.ProgressBar:get_gameObject():SetActive(false)
+		GameObject.Destroy(UpdateController.UpdateCtrSelf.gameObject)
+		GameObject.Destroy(UpdateController.UpdateCtr:get_gameObject())
+		TextureMgr.get_Instance():ReleaseAll()
+		SceneManager.LoadScene("Update")
+		--UpdateController.DownloadServerlist()
+end
+
+function UpdateController.DownloadServerlist()
+	UpdateController.ProgressLabel:set_text(Text.CheckUpdate)
+	local clientVersion = UpdateConfig.ReadClientVersionFromSdcard()
+	UpdateController.UpdateCtrSelf.VersionLbl:set_text("V"..clientVersion)
+	UpdateController.UpdateCtr:HttpDownLoadXml(GameDefine_outside_serverlist_url,"DownloadServerlistCallback","DownLoadErrorCallback")
+end
+
+function UpdateController.DownloadServerlistCallback(str)
+	UpdateController.lkHttpRequest  = nil
+		local SLAXML = require "Utils/slaxdom"
+    	local doc = SLAXML:dom(str)
+    	UpdateConfig.xmlVersion = doc.kids[2].el[1].attr.version
+    	local updateServer = doc.kids[2].el[1].attr.updateserver
+    	local updateMode =  doc.kids[2].el[1].attr.lanchermode
+    	local lancherversion  = doc.kids[2].el[1].attr.lancherversion
+    	if UpdateConfig.CompareVersion(lancherversion,PluginTool.SharedInstance():GetVersionName()) then
+    		if not updateMode or  updateMode=="1" then
+    			local UpdatePackageFun=function ()
+    				local url  = doc.kids[2].el[1].attr.lancherurl
+    				if Application.get_platform()==ERuntimePlatform.Android then
+    					UpdateController.DownloadAPK(url)
+    				else
+    					Application.OpenURL(url)
+    					return
+    				end
+    			end
+    			LuaMessageBox.ShowSingle(Text.DownloadAPK,UpdatePackageFun,Text.Confirm,UpdateController)
+    		else
+    			UpdateController.LoadLoginScene()
+    		end
+    	else
+    		local clientVersion = UpdateConfig.ReadClientVersionFromSdcard()
+    		if UpdateConfig.CompareVersion(UpdateConfig.xmlVersion,clientVersion) then
+    			UpdateController.updateZipName=clientVersion.."-"..UpdateConfig.xmlVersion..".zip"
+    			local url = updateServer..UpdateController.updateZipName
+    			UpdateController.DownloadUpdateData(url)
+    		else
+    			UpdateController.LoadLoginScene()
+    		end
+    	end
+end
+
+function UpdateController.DownloadAPK(url)
+	UpdateController.ProgressLabel:set_text (Text.DownloadAPK)
+	local downloadOKFile = io.open(PERSISTENTDATAPATH.."downloadAPKOK","r")
+	if tmpFile and downloadOKFile then
+		downloadOKFile:close()
+		UpdateController.DownloadAPKSuccessCallback()
+		return
+	end
+	if tmpFile then
+		tmpFile:close()
+	end
+	UpdateController.UpdateCtr:HttpDownLoadFile(url,PERSISTENTDATAPATH.."tmp.apk",PERSISTENTDATAPATH.."apksize","DownloadAPKBeginCallback","DownloadUpdateDataProgressCallback",
+		"DownloadAPKSuccessCallback","DownLoadErrorCallback")
+end
+
+function UpdateController.DownloadAPKBeginCallback( length )
+	UpdateController.UpdateCtrSelf.VersionLbl:get_gameObject():SetActive(false)
+	UpdateController.ProgressBar:get_gameObject():SetActive(true)
+	LuaDebug.Log("DownloadUpdateBeginDataCallback  "..length..'  '..type(length))
+	UpdateController.NeedDownSize=tonumber(string.format("%.3f",tonumber(length)/1024/1024))
+	local str = string.format(Text.ReadUpdateAPK,UpdateController.NeedDownSize)
+	LuaMessageBox.ShowSingle(str,UpdateController.ConfirmDownload,Text.Confirm,UpdateController)
+end
+
+function UpdateController.DownloadAPKSuccessCallback()
+	 PluginTool.SharedInstance():InstallApk(PERSISTENTDATAPATH.."tmp.apk")
+	 UpdateController.UpdateCtr:DeleteFile(PERSISTENTDATAPATH.."downloadAPKOK")
+	 UpdateController.UpdateCtr:DeleteFile(PERSISTENTDATAPATH.."tmp.apk")
+	 UpdateController.UpdateCtr:DeleteFile(PERSISTENTDATAPATH.."apksize")
+end
+
+function UpdateController.DownloadUpdateData(url)
+	--local tmpFile  = io.open(PERSISTENTDATAPATH.."tmp.zip","r")
+	UpdateController.UpdateCtrSelf.VersionLbl:get_gameObject():SetActive(false)
+	local downloadOKFile = io.open(PERSISTENTDATAPATH.."downloadOK","r")
+	if  downloadOKFile then
+		downloadOKFile:close()
+		UpdateController.DownloadUpdateDataEndCallback()
+		return
+	end
+	UpdateController.UpdateCtr:HttpDownLoadFile(url,PERSISTENTDATAPATH..UpdateController.updateZipName,PERSISTENTDATAPATH.."size","DownloadUpdateBeginDataCallback","DownloadUpdateDataProgressCallback",
+		"DownloadUpdateDataEndCallback","DownLoadErrorCallback")
+
+end
+
+function UpdateController.DownloadUpdateDataEndCallback()
+	local file =  io.open(PERSISTENTDATAPATH.."downloadOK","w+")
+	file:close()
+	local indexfile =  io.open(PERSISTENTDATAPATH.."index1","w+")
+	indexfile:close()
+	UpdateController.UpdateCtr:DeleteFile(PERSISTENTDATAPATH.."size")
+	UpdateController.ProgressBar:get_gameObject():SetActive(false)
+	UpdateController.lkHttpRequest = nil
+	UpdateController.NeedDownSize= nil
+	UpdateController.Unzip()
+end
+
+function UpdateController.DownloadUpdateBeginDataCallback(offsset,length)
+	UpdateController.ProgressBar:get_gameObject():SetActive(true)
+	UpdateController.NeedDownSize=tonumber(string.format("%.2f",tonumber(length)/1024/1024))
+	UpdateController.AllDownSize=tonumber(string.format("%.2f",tonumber(offsset)/1024/1024))+UpdateController.NeedDownSize
+	local str = string.format(Text.ReadUpdate,UpdateController.NeedDownSize)
+	LuaMessageBox.ShowSingle(str,UpdateController.ConfirmDownload,Text.Confirm,UpdateController)
+end
+function UpdateController.DownloadUpdateDataProgressCallback(progress)
+	local pro =  tonumber(string.format("%.2f",progress*UpdateController.AllDownSize))
+	UpdateController.ProgressLabel:set_text (string.format(Text.DownloadingData,pro,UpdateController.AllDownSize))
+	UpdateController.ProgressBar:set_sliderValue(progress)
+end
+
+function UpdateController.Unzip()
+	UpdateController.ProgressBar:get_gameObject():SetActive(true)
+	UpdateController.ProgressLabel:set_text (Text.UnzipData)
+	UpdateController.UpdateCtr:Unzip(PERSISTENTDATAPATH..UpdateController.updateZipName,"UnzipSuccess","UnzipProgress","UnzipError")
+end
+
+function  UpdateController:UnzipProgress(progress)
+	UpdateController.ProgressBar:set_sliderValue(progress)
+end
+
+function UpdateController:UnzipSuccess(existsUpdateLua)
+	UpdateController.ProgressBar:set_sliderValue(1)
+	UpdateController.ProgressBar:get_gameObject():SetActive(false)
+	UpdateController.UpdateCtrSelf.VersionLbl:set_text("V"..UpdateConfig.xmlVersion)
+	UpdateController.UpdateCtrSelf.VersionLbl:get_gameObject():SetActive(true)
+	UpdateController.UpdateCtr:DeleteFile(PERSISTENTDATAPATH.."downloadOK")
+	UpdateController.UpdateCtr:DeleteFile(PERSISTENTDATAPATH..UpdateController.updateZipName)
+	UpdateController.updateZipName=nil
+	UpdateController.UpdateCtr:DeleteFile(PERSISTENTDATAPATH.."index1")
+	UpdateConfig.SetClientVersion(UpdateConfig.xmlVersion)
+	if existsUpdateLua then 
+		GameObject.Destroy(UpdateController.UpdateCtrSelf.gameObject)
+		GameObject.Destroy(UpdateController.UpdateCtr:get_gameObject())
+		TextureMgr.get_Instance():ReleaseAll()
+		SceneManager.LoadScene("Update")		
+	else
+		UpdateController.LoadLoginScene()
+	end
+end
+
+function UpdateController.UnzipError( ... )
+	UpdateController.UpdateCtr:DeleteFile(PERSISTENTDATAPATH.."downloadOK")
+	UpdateController.UpdateCtr:DeleteFile(PERSISTENTDATAPATH..UpdateController.updateZipName)
+	UpdateController.UpdateCtr:DeleteFile(PERSISTENTDATAPATH.."index1")
+	LuaMessageBox.ShowSingle(Text.ConnectError2,UpdateController.DownloadServerlist,Text.Confirm,UpdateController)
+end
+
+function UpdateController.LoadLoginScene()
+	GameObject.Destroy(UpdateController.UpdateCtrSelf.gameObject)
+	GameObject.Destroy(UpdateController.UpdateCtr:get_gameObject())
+	-- ResLoader.Load("Scene/level/scene_login_dawn")
+ --    SceneManager.LoadScene1("scene_login_dawn",1)
+	-- SceneManager.LoadScene1("Login",1)
+end
+
+function UpdateController.ConfirmDownload()
+	UpdateController.UpdateCtr:ConfirmDownload()
+end

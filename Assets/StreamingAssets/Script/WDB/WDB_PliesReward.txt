@@ -1,0 +1,22 @@
+WDB_PliesReward = {}
+--[[
+	WDB_PliesReward.Id
+	WDB_PliesReward.NumOfPlies
+	WDB_PliesReward.Reward_1
+	WDB_PliesReward.Num_1_1
+	WDB_PliesReward.Num_1_2
+	WDB_PliesReward.Reward_2
+	WDB_PliesReward.Num_2_1
+	WDB_PliesReward.Num_2_2
+	WDB_PliesReward.Reward_3
+	WDB_PliesReward.Num_3_1
+	WDB_PliesReward.Num_3_2
+	WDB_PliesReward.Reward_4
+	WDB_PliesReward.Num_4_1
+	WDB_PliesReward.Num_4_2
+	WDB_PliesReward.Reward_5
+	WDB_PliesReward.Num_5_1
+	WDB_PliesReward.Num_5_2
+]]--
+
+LuaDBTable.SetLuaTableField("PliesReward")

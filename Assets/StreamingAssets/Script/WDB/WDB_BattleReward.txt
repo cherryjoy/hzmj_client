@@ -1,0 +1,14 @@
+WDB_BattleReward = {}
+--[[
+	WDB_BattleReward.Id
+	WDB_BattleReward.BattleId
+	WDB_BattleReward.StarNun
+	WDB_BattleReward.Item0
+	WDB_BattleReward.ItemNum0
+	WDB_BattleReward.Item1
+	WDB_BattleReward.ItemNum1
+	WDB_BattleReward.Item2
+	WDB_BattleReward.ItemNum2
+]]--
+
+LuaDBTable.SetLuaTableField("BattleReward")

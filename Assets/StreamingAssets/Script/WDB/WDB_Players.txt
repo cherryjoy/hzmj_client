@@ -1,0 +1,28 @@
+WDB_Players = {}
+--[[
+	WDB_Players.Id
+	WDB_Players.Name
+	WDB_Players.MoveSpeedX
+	WDB_Players.MoveSpeedZ
+	WDB_Players.AI_Id
+	WDB_Players.Weapon
+	WDB_Players.Weapon_Type
+	WDB_Players.Body
+	WDB_Players.Bone
+	WDB_Players.Player_Contrller
+	WDB_Players.AnimationPath
+	WDB_Players.BornToward
+	WDB_Players.View
+	WDB_Players.Rush_Length
+	WDB_Players.Rush_Width
+	WDB_Players.Rush_Speed
+	WDB_Players.UnderAttackEffectId
+	WDB_Players.UnderAttackEffectId2
+	WDB_Players.Zoom
+	WDB_Players.TurnSpeed
+	WDB_Players.HalfBodyThickness
+	WDB_Players.DefaultSkill
+	WDB_Players.WinTime
+]]--
+
+LuaDBTable.SetLuaTableField("Players")

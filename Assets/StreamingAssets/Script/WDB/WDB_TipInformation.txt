@@ -1,0 +1,14 @@
+WDB_TipInformation = {}
+--[[
+	WDB_TipInformation.ID
+	WDB_TipInformation.Title
+	WDB_TipInformation.IconType
+	WDB_TipInformation.Icon0
+	WDB_TipInformation.Icon1
+	WDB_TipInformation.Icon2
+	WDB_TipInformation.Trigger
+	WDB_TipInformation.TriggerParam
+	WDB_TipInformation.Template
+]]--
+
+LuaDBTable.SetLuaTableField("TipInformation")

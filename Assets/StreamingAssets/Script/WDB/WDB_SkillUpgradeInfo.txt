@@ -1,0 +1,11 @@
+WDB_SkillUpgradeInfo = {}
+--[[
+	WDB_SkillUpgradeInfo.Id
+	WDB_SkillUpgradeInfo.SkillUpgradData
+	WDB_SkillUpgradeInfo.Class1Lvl
+	WDB_SkillUpgradeInfo.Class2Lvl
+	WDB_SkillUpgradeInfo.Class3Lvl
+	WDB_SkillUpgradeInfo.Class4Lvl
+]]--
+
+LuaDBTable.SetLuaTableField("SkillUpgradeInfo")

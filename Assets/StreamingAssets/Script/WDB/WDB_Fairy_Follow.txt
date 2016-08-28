@@ -1,0 +1,17 @@
+WDB_Fairy_Follow = {}
+--[[
+	WDB_Fairy_Follow.Id
+	WDB_Fairy_Follow.Name
+	WDB_Fairy_Follow.Color
+	WDB_Fairy_Follow.Alpha
+	WDB_Fairy_Follow.Effect
+	WDB_Fairy_Follow.MonsterId
+	WDB_Fairy_Follow.Add_Speed
+	WDB_Fairy_Follow.Speed
+	WDB_Fairy_Follow.Dis_X
+	WDB_Fairy_Follow.Dis_Y
+	WDB_Fairy_Follow.Min_Time
+	WDB_Fairy_Follow.Max_Time
+]]--
+
+LuaDBTable.SetLuaTableField("Fairy_Follow")

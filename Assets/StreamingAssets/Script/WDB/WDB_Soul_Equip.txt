@@ -1,0 +1,22 @@
+WDB_Soul_Equip = {}
+--[[
+	WDB_Soul_Equip.Id
+	WDB_Soul_Equip.Name
+	WDB_Soul_Equip.Effect_0
+	WDB_Soul_Equip.Num_0
+	WDB_Soul_Equip.Effect_1
+	WDB_Soul_Equip.Num_1
+	WDB_Soul_Equip.Effect_2
+	WDB_Soul_Equip.Num_2
+	WDB_Soul_Equip.SceneId_0
+	WDB_Soul_Equip.SceneId_1
+	WDB_Soul_Equip.SceneId_2
+	WDB_Soul_Equip.Equip_0
+	WDB_Soul_Equip.EquipNum_0
+	WDB_Soul_Equip.Equip_1
+	WDB_Soul_Equip.EquipNum_1
+	WDB_Soul_Equip.Equip_2
+	WDB_Soul_Equip.EquipNum_2
+]]--
+
+LuaDBTable.SetLuaTableField("Soul_Equip")

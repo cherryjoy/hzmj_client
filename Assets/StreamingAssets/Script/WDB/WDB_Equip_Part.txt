@@ -1,0 +1,13 @@
+WDB_Equip_Part = {}
+--[[
+	WDB_Equip_Part.PartID
+	WDB_Equip_Part.PartName
+	WDB_Equip_Part.PartIcon
+	WDB_Equip_Part.PartNum
+	WDB_Equip_Part.UpstarEffect_0
+	WDB_Equip_Part.Upstarnum_0
+	WDB_Equip_Part.UpstarEffect_1
+	WDB_Equip_Part.Upstarnum_1
+]]--
+
+LuaDBTable.SetLuaTableField("Equip_Part")

@@ -1,0 +1,30 @@
+OrderTishiCeneter = {}
+
+function OrderTishiCeneter.DisPlayText(dataList,pos)
+    if Client.RoleInfo.isOrderTishi then return end
+    Client.RoleInfo.isOrderTishi = true
+    OrderTishiCeneter.ShowText(dataList,pos)
+end
+
+function OrderTishiCeneter.ShowText(dataList,pos)
+    local ref = OrderTishiCeneter.CreateTishi(pos)
+    ref.LabelStatic:set_text(dataList[1])
+    ref.dataList = dataList
+end
+
+function OrderTishiCeneter.CreateTishi(pos)
+    local ref = LuaUIViewCtr.OpenUINotLose("ToolsUI/OrderTishiCenter")
+    ref.transform:set_localPosition(pos)
+    ref.pos = pos
+    return ref
+end
+
+function OrderTishiCeneter:TishiStatic_TweenEnd()
+    self.gameObject:Destroy1()
+    table.remove(self.dataList,1)
+    if #self.dataList == 0 then
+        Client.RoleInfo.isOrderTishi = false
+    else
+        OrderTishiCeneter.ShowText(self.dataList,self.pos)
+    end
+end

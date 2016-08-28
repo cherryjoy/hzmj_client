@@ -1,0 +1,17 @@
+WDB_SoulGroupShow = {}
+--[[
+	WDB_SoulGroupShow.ID
+	WDB_SoulGroupShow.Class
+	WDB_SoulGroupShow.GroupName
+	WDB_SoulGroupShow.SkillID1
+	WDB_SoulGroupShow.SkillID2
+	WDB_SoulGroupShow.SkillID3
+	WDB_SoulGroupShow.SkillName1
+	WDB_SoulGroupShow.SkillName2
+	WDB_SoulGroupShow.SkillName3
+	WDB_SoulGroupShow.SoulID1
+	WDB_SoulGroupShow.SoulID2
+	WDB_SoulGroupShow.SoulID3
+]]--
+
+LuaDBTable.SetLuaTableField("SoulGroupShow")

@@ -1,0 +1,12 @@
+WDB_City = {}
+--[[
+	WDB_City.CityID
+	WDB_City.CityName
+	WDB_City.CityType
+	WDB_City.UnScene
+	WDB_City.UnLock
+	WDB_City.GameScene
+	WDB_City.UIName
+]]--
+
+LuaDBTable.SetLuaTableField("City")

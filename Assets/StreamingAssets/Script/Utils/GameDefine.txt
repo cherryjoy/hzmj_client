@@ -1,0 +1,19 @@
+
+GameDefine_version = "0.23.0"
+GameDefine_versioncode = 23
+GameDefine_gameID = 78   --156越狱自主 159安卓自主
+GameDefine_AppHashCode = "ae2dbe456c09d76852beca29e146aedc"
+GameDefine_platformCode = 5
+GameDefine_windows_cache_path = "d:/HeroRes/assetbundles/"
+GameDefine_inside_serverlist_url = "http://www.cherryjoy.com/hzmj/cj_hzmj.xml"
+GameDefine_outside_serverlist_url_5 = "http://113.208.129.53:56710/serverlist/lk_auther2.xml"
+GameDefine_inside_charge_url = "http://10.10.41.19/serverlist/wzzj2_product.xml"
+GameDefine_outside_charge_url = "http://113.208.129.53:56710/serverlist/wzzj2_product.xml"
+GameDefine_GetRoleInfoURL = "http://sdkapi.8864.com/getGatewayRoles"
+GameDefine_GetActiveCodeAwardURL = "http://api.common.union.8864.com/activate.php"
+GameDefine_QATips = "客服微信号：LKHDKF"
+GameDefine_IsNeedAddPlatformSDKObj = false
+GameDefine_IsDefaultAuth = true
+GameDefine_isLoginForLK = true
+GameDefine_InitConfig = '"appkey":"appkey"'
+GameDefine_ProductName = "red"

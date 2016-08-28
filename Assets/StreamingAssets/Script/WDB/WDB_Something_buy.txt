@@ -1,0 +1,16 @@
+WDB_Something_buy = {}
+--[[
+	WDB_Something_buy.Level
+	WDB_Something_buy.Pvp_buy
+	WDB_Something_buy.Alchemy_buy
+	WDB_Something_buy.Wipe_buy
+	WDB_Something_buy.Sinew_buy
+	WDB_Something_buy.SoulScene_buy
+	WDB_Something_buy.FindBoss
+	WDB_Something_buy.TowerInspire
+	WDB_Something_buy.StarBuy
+	WDB_Something_buy.PlunderTimes
+	WDB_Something_buy.SoulSceneReset
+]]--
+
+LuaDBTable.SetLuaTableField("Something_buy")

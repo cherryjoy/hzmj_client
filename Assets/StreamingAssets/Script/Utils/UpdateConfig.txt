@@ -1,0 +1,63 @@
+UpdateConfig={}
+CLIENT_VERSION_FILE = "ClientVersion.txt"
+PLATFORM_CONFRIG_FILE = "platformconfig"
+ASSET_PACKAGE_FILE = "data1"
+ASSET_CONFIG_FILE = "index"
+ASSET_FRAGMENT_FILE = "fragment"
+ASSET_DIR_IN_SDCARD = "assets/"
+TEMP_IN_SDCARD = "temp/"
+PERSISTENTDATAPATH = PluginTool.SharedInstance():get_PersisitentDataPath()
+STREAMINGASSETSPATH = Application:get_streamingAssetsPath().. "/"
+function  UpdateConfig.ReadClientVersionFromSdcard()
+	local tmpFlie = io.open(PERSISTENTDATAPATH..CLIENT_VERSION_FILE,"r")
+	if  tmpFlie==nil  then 
+		return nil
+	end
+	local str = tmpFlie:read("*a")
+	LuaDebug.Log("clientverison "..str)
+	tmpFlie:close()
+	return str
+end
+
+function UpdateConfig.IsNeedExtractAssetFromPackage()
+	local  clientVersion = UpdateConfig.ReadClientVersionFromSdcard()
+	if not clientVersion then
+		return true
+	end
+	LuaDebug.Log("clientverison "..clientVersion.."  Version "..GameDefine_version)
+	if UpdateConfig.CompareVersion(GameDefine_version,clientVersion) then
+		return true
+	end
+	return false
+end
+
+function  UpdateConfig.CompareVersion(version1,version2)
+	if not version1 or not version2 then
+		return false
+	end
+ 	local versionData1 = Util.StringSplit(version1,"%p")
+	local versionData2 = Util.StringSplit(version2,"%p")
+	if tonumber(versionData1[1])>tonumber(versionData2[1]) then
+		return true
+	elseif tonumber(versionData1[1])<tonumber(versionData2[1]) then
+		return false
+	elseif tonumber(versionData1[2])>tonumber(versionData2[2]) then
+		return true
+	elseif tonumber(versionData1[2])<tonumber(versionData2[2]) then
+		return false
+	elseif tonumber(versionData1[3])>tonumber(versionData2[3]) then
+		return true
+	elseif tonumber(versionData1[3])<tonumber(versionData2[3]) then
+		return false
+	else 
+		return false
+	end
+end
+
+function UpdateConfig.SetClientVersion(version)
+	local tmpFlie =  io.open(PERSISTENTDATAPATH..CLIENT_VERSION_FILE,"w+")
+	tmpFlie:write(version)
+	tmpFlie:flush()
+	tmpFlie:close()
+end
+

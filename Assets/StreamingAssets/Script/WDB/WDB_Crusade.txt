@@ -1,0 +1,13 @@
+WDB_Crusade = {}
+--[[
+	WDB_Crusade.ID
+	WDB_Crusade.MonsterLevel
+	WDB_Crusade.MonterQuality
+	WDB_Crusade.NpcId
+	WDB_Crusade.SceneId
+	WDB_Crusade.Coefficient_Attack
+	WDB_Crusade.Coefficient_Life
+	WDB_Crusade.OpenDays
+]]--
+
+LuaDBTable.SetLuaTableField("Crusade")

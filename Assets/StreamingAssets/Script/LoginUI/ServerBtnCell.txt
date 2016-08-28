@@ -1,0 +1,14 @@
+ServerBtnCell={}
+
+function ServerBtnCell:Init(ListCon,index)
+    self.ServerTableId = index
+    self.ServerTableName:set_text(ListCon.ServerTableInfo[index].ServerTableName)
+    self.RadioButton:AttachShow(ListCon.ServerPanelList[index])
+    self.RadioButton:Startstate(self.startstate)
+end
+
+function ServerBtnCell:InitMyServer(ListCon, serverPanel)
+    self.ServerTableName:set_text(Text.MyServer)
+    self.RadioButton:AttachShow(serverPanel)
+    self.RadioButton:Startstate(true)
+end

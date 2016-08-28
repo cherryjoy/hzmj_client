@@ -1,0 +1,17 @@
+ClientOperator = {}
+
+function ClientOperator.CheckDiamond(count )
+	if count>10 then
+		return true
+	else 
+		return false
+	end
+end
+
+function ClientOperator.CheckGold(gold)
+	if gold>10 then
+		return true
+	else 
+		return false
+	end
+end

@@ -1,0 +1,9 @@
+WDB_Message = {}
+--[[
+	WDB_Message.Id
+	WDB_Message.Type
+	WDB_Message.Desc
+	WDB_Message.Roll
+]]--
+
+LuaDBTable.SetLuaTableField("Message")

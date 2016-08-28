@@ -1,0 +1,10 @@
+WDB_RewardTypeIcon = {}
+--[[
+	WDB_RewardTypeIcon.ID
+	WDB_RewardTypeIcon.Name
+	WDB_RewardTypeIcon.Icon
+	WDB_RewardTypeIcon.Quality
+	WDB_RewardTypeIcon.tips
+]]--
+
+LuaDBTable.SetLuaTableField("RewardTypeIcon")

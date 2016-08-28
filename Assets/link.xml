@@ -1,0 +1,14 @@
+
+<linker>  
+<assembly fullname="UnityEngine">
+<namespace fullname="UnityEngine" preserve="all"/>
+<namespace fullname="UnityEngine.iOS" preserve="all"/> 
+</assembly>
+
+<assembly fullname="mscorlib">
+<type fullname="System.GC" preserve="all"/>
+</assembly>
+<assembly fullname="System">
+<type fullname="System.GC" preserve="all"/>
+</assembly>
+</linker> 

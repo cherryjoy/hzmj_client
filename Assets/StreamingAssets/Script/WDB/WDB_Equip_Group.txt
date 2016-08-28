@@ -1,0 +1,14 @@
+WDB_Equip_Group = {}
+--[[
+	WDB_Equip_Group.Id
+	WDB_Equip_Group.UseProfession
+	WDB_Equip_Group.Level
+	WDB_Equip_Group.EquipQuality
+	WDB_Equip_Group.Effect_0
+	WDB_Equip_Group.num_0
+	WDB_Equip_Group.Effect_1
+	WDB_Equip_Group.num_1
+	WDB_Equip_Group.Num
+]]--
+
+LuaDBTable.SetLuaTableField("Equip_Group")

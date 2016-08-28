@@ -1,0 +1,26 @@
+PromptCallBack = {}
+
+function PromptCallBack:Start()
+    if self.upLv then
+        Timer.NewEvent(self,15,15,PromptCallBack.UpLvEnd,false)
+    elseif self.power then
+        PromptCallBack.PowerEnd()
+    elseif self.task then
+        Timer.NewEvent(self,10,10,PromptCallBack.TaskEnd,false)
+    end
+end
+
+function PromptCallBack:UpLvEnd()
+    self.gameObject:Destroy1()
+    Client.RoleInfo.TishiTimeMgr:UpLvEnd()
+end
+
+function PromptCallBack.PowerEnd()
+    -- LuaDebug.Log("PowerEnd")
+    Client.RoleInfo.TishiTimeMgr:PowerEnd()
+end
+
+function PromptCallBack:TaskEnd()
+    self.gameObject:Destroy1()
+    Client.RoleInfo.TishiTimeMgr:TaskEnd()
+end

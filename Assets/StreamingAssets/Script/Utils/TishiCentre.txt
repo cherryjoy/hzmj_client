@@ -1,0 +1,306 @@
+require "Utils/ColorFilter"
+
+TishiCentre = {}
+
+TishiCentre.Mref = nil
+TishiCentre.LoopTextTable = {}
+TishiCentre.isLooping = false
+TishiCentre.GlobalTimer = nil
+
+function TishiCentre:Init()
+    if self.TweenColorStatic ~= nil then
+        self.TweenColorStatic:set_enabled(false)
+    end
+
+    if self.TweenTransformVertical ~= nil then
+        self.TweenTransformVertical:set_enabled(false)
+    end
+
+    if self.TweenColorVertical ~= nil then
+        self.TweenColorVertical:set_enabled(false)
+    end
+
+    if self.TweenTransformHorizontal ~= nil then
+        self.TweenTransformHorizontal:set_enabled(false)
+    end
+
+    if self.TweenScaleCrit ~= nil then
+        self.TweenScaleCrit:set_enabled(false)
+    end
+
+    if self.TweenColorCrit ~= nil then
+        self.TweenColorCrit:set_enabled(false)
+    end
+
+    if self.TweenPositionCrit ~= nil then
+        self.TweenPositionCrit:set_enabled(false)
+    end
+
+    if self.TweenTransformPower ~= nil then
+        self.TweenTransformPower:set_enabled(false)
+    end
+
+end
+
+function TishiCentre:OnDestroy()
+    TishiCentre.Mref = nil
+end
+
+---------带背景的提示centre需要互斥---
+function TishiCentre.CreatTishiCentre()
+    if TishiCentre.Mref ~= nil then
+        GameObject.DestroyImmediate(TishiCentre.Mref.gameObject, false)
+    end
+    local prefab = LuaUIViewCtr.OpenUINotLose("ToolsUI/PrettyTiShiCentre")
+    TishiCentre.Init(prefab)
+    TishiCentre.Mref = prefab
+    return TishiCentre.Mref
+end
+
+--单纯文字的提示centre
+function TishiCentre.CreateTishiLabel()
+    local ref = LuaUIViewCtr.OpenUINotLose("ToolsUI/TiShiCentre")
+    TishiCentre.Init(ref)
+    return ref
+end
+
+function TishiCentre:SetVerticalPrompt(text)
+    self.LabelVertical:set_text(text)
+    self.TweenTransformVertical:set_enabled(true)
+    self.TweenColorVertical:set_enabled(true)
+    self.TweenTransformVertical:Reset()
+    self.TweenColorVertical:Reset()
+end
+
+function TishiCentre:SetHorizontalPrompt(text)
+    self.LabelHorizontal:set_text(text)
+
+    self.TweenTransformHorizontal:set_enabled(true)
+    self.TweenTransformHorizontal:Reset()
+end
+
+function TishiCentre:SetStaticPrompt(text)
+    self.LabelStatic:set_text(text)
+
+    self.TweenColorStatic:set_enabled(true)
+    self.TweenColorStatic:Reset()
+end
+
+function TishiCentre:SetPowerPrompt(text)
+    self.TishiPower:set_text(text)
+    self.TweenTransformPower:set_enabled(true)
+    self.TweenTransformPower:Reset()
+end
+
+function TishiCentre:SetCritPrompt(text)
+    self.TishiCritLabel:set_text(text)
+
+    self.TweenScaleCrit:set_enabled(true)
+    self.TweenColorCrit:set_enabled(true)
+    self.TweenPositionCrit:set_enabled(true)
+
+    self.TweenColorCrit:Reset()
+    self.TweenPositionCrit:Reset()
+    self.TweenScaleCrit:Reset()
+end
+
+
+function TishiCentre:TishiStatic_TweenEnd()
+    self.gameObject:Destroy1()
+end
+
+function TishiCentre:TishiVertical_TweenEnd()
+    self.gameObject:Destroy1()
+end
+
+function TishiCentre:TishiPower_TweenEnd()
+    self.gameObject:Destroy1()
+end
+
+function TishiCentre:TishiHorizontal_TweenEnd()
+    self.gameObject:Destroy1()
+end
+
+function TishiCentre:AnnounceMentLabel_TweenEnd()
+    --因为该引用存放在luauiview的self中,所以跳转场景时会自动清除,故不用再ondestroy中销毁
+    if self.owner~=nil then
+        self.owner.AnnounceUI = nil
+    end
+    TishiCentre.DoFinishCall(self)
+    self.gameObject:Destroy1()
+end
+
+function TishiCentre:TishiCrit_TweenEnd()
+    self.gameObject:Destroy1()
+end
+
+function TishiCentre:DoFinishCall()
+    if self.control ~= nil and self.finishHandle ~= nil then
+        self.finishHandle(self.control)
+        self.control = nil
+        self.finishHandle = nil
+    end
+end
+
+---------------利用提示中心显示文本提示信息---------------------
+function TishiCentre.DisPlayText(text)
+    local tiShiCentre = TishiCentre.CreatTishiCentre()
+    TishiCentre.SetStaticPrompt(tiShiCentre, text)
+    return tiShiCentre
+end
+
+--纵向滚动
+function TishiCentre.DisPlayTextVertical(text,posFrom,posTo,color)
+    if color == nil then
+        color = ColorFilter.Color_51BF53
+    end
+    text = "["..color.."]"..text.."[-]"
+
+    local tiShiCentre = TishiCentre.CreateTishiLabel()
+    if posFrom ~= nil then
+        tiShiCentre.VerticalFrom:get_transform():set_localPosition(posFrom)
+    end
+    if posTo ~= nil then
+        tiShiCentre.VerticalTo:get_transform():set_localPosition(posTo)
+    end
+    TishiCentre.SetVerticalPrompt(tiShiCentre, text)
+    return tiShiCentre
+end
+
+--带有背景的跑马灯横向滚动
+function TishiCentre:DisPlayRollTitleHorizontal(text,control,finishHandle)
+    local tiShiCentre = TishiCentre.CreateTishiLabel()
+    tiShiCentre.gameObject:get_transform():set_localPosition(LuaVector3.Create(0,0,-50))
+    tiShiCentre.control = control
+    tiShiCentre.finishHandle = finishHandle
+    tiShiCentre.AnnounceNode.NodeCtrl:SetActive(true)
+    tiShiCentre.AnnounceMentLabel:set_text(text)
+    tiShiCentre.AnnounceMentLabel:set_FontSize(22)
+    tiShiCentre.AnnounceMentLabel:set_width(22)
+    tiShiCentre.AnnounceMentLabel:set_height(22)
+
+    local labelOffset = tiShiCentre.AnnounceMentLabel:get_width() * tiShiCentre.AnnounceMentLabel:get_relativeSize():x() / 2
+    local bgpos = tiShiCentre.AnnounceNode.Tishi_Bg:get_transform():get_localPosition()
+    local bgOffset = tiShiCentre.AnnounceNode.m_bgSprite:get_width() / 2
+
+    tiShiCentre.TweenHorizontalFromAnchor:set_enabled(false)
+    tiShiCentre.TweenHorizontalToAnchor:set_enabled(false)
+
+    tiShiCentre.HorizontalFrom:get_transform():set_localPosition(LuaVector3.Create(bgpos:x() + labelOffset + bgOffset, bgpos:y()+4, bgpos:z()))
+    tiShiCentre.HorizontalTo:get_transform():set_localPosition(LuaVector3.Create(bgpos:x()-labelOffset - bgOffset, bgpos:y()+4, bgpos:z()))
+    tiShiCentre.TishiCentrePostion:get_transform():set_localPosition(LuaVector3.Create(0,190,0))
+
+    local announceMentLabelWidth = tiShiCentre.AnnounceMentLabel:get_width() * tiShiCentre.AnnounceMentLabel:get_relativeSize():x()
+    local duration  = 10
+    if announceMentLabelWidth > Screen.get_width() then
+        duration = duration * announceMentLabelWidth / Screen.get_width() * 1.5
+    end
+    tiShiCentre.TweenTransformAnnounce:duration(duration)
+
+    --判断公告是否该显示
+    tiShiCentre.TweenTransformAnnounce:set_enabled(true)
+    tiShiCentre.TweenTransformAnnounce:Reset()
+
+    Client.AnnounceHandle:Do(tiShiCentre)
+end
+
+--横向滚动
+function TishiCentre.DisPlayTextHorizontal(text, posFrom, posTo)
+    local tiShiCentre = TishiCentre.CreateTishiLabel()
+    if posFrom ~= nil then
+        tiShiCentre.TweenHorizontalFromAnchor:set_enabled(false)
+        tiShiCentre.HorizontalFrom:get_transform():set_localPosition(posFrom)
+    end
+
+    if posTo ~= nil then
+        tiShiCentre.TweenHorizontalToAnchor:set_enabled(false)
+        tiShiCentre.HorizontalTo:get_transform():set_localPosition(posTo)
+    end
+
+
+    TishiCentre.SetHorizontalPrompt(tiShiCentre, text)
+end
+
+--循环延时显示text
+function TishiCentre.DisPlayTextLoopV(text)
+    table.insert(TishiCentre.LoopTextTable,text)
+    TishiCentre.PlayLoopV()
+end
+
+function TishiCentre.PlayLoopV()
+    if Client.TishiCentreGlobalTimer == nil then
+        TishiCentre.UpdateLoopV()
+        Client.TishiCentreGlobalTimer = Timer.NewGlobalEvent(3,100,TishiCentre.UpdateLoopV,false,TishiCentre.EndLoopV)
+    end
+end
+
+function TishiCentre.UpdateLoopV()
+    if #(TishiCentre.LoopTextTable) == 0 then
+        TishiCentre.EndLoopV()
+        return
+    end
+    TishiCentre.DisPlayTextVertical(TishiCentre.LoopTextTable[1])
+    table.remove(TishiCentre.LoopTextTable,1)
+end
+
+function TishiCentre.EndLoopV()
+    Timer.RemoveGlobalEvent(Client.TishiCentreGlobalTimer)
+    TishiCentre.LoopTextTable = {}
+    TishiCentre.isLooping = false
+    Client.TishiCentreGlobalTimer = nil
+end
+
+
+----------------获取服务器错误码提示--------------------
+function TishiCentre.DisplayServerErrorMsg(id)
+    local tiShiCentre = TishiCentre.CreatTishiCentre()
+    local text = tostring(id)
+    if TextSever[id] ~= nil then
+        text = TextSever[id]
+    end
+    TishiCentre.SetStaticPrompt(tiShiCentre, text)
+end
+
+function TishiCentre:DisPlayPowerText(prompt,num,size)
+    local time=10
+    local once=time/num
+    self.num=num
+    self.value=1
+    self.total=0
+    if once<1 then
+        once=1
+        self.value=math.ceil(num/time)
+    end
+    if not size then
+        size=30
+    end
+    self.PowerValue:SetDimesions(size,size)
+    self.TweenTransformVertical:set_enabled(true)
+    TishiCentre.SetPowerPrompt(self, prompt)
+    Timer.NewEvent(self,once,time,TishiCentre.ChangeText,false,nil)
+end
+
+function TishiCentre:ChangeText()
+    self.total=self.total+self.value
+    if self.total>self.num then
+        self.total=self.num
+    end
+    self.PowerValue:set_text(string.format("+%d",self.total))
+end
+
+--暴击需要做互斥
+function TishiCentre.DisPlayCrit(text, posFrom, posTo)
+    local tishicentre = TishiCentre.CreateTishiLabel()
+
+    if posFrom ~= nil then
+        tishicentre.TweenPositionCrit:set_enabled(true)
+        tishicentre.TweenPositionCrit:from(posFrom)
+    end
+
+    if posTo ~= nil then
+        tishicentre.TweenPositionCrit:set_enabled(true)
+        tishicentre.TweenPositionCrit:to(posTo)
+    end
+
+    TishiCentre.SetCritPrompt(tishicentre, text)
+end

@@ -1,0 +1,134 @@
+require "NetProtocol/LuaProto"
+require "NetProtocol/module_05_core"
+--require "NetProtocol/NP_BaseType"
+--require "NetProtocol/NP_ClientServer"
+--require "NetProtocol/NP_World_Client2Server"
+ClientSendMsg = {}
+
+sendMsgNameTable =  Util.TableInvert(NetOpcodes_C2S)
+function ClientSendMsg.SendNetMsg(netCode,buffer,bufferLength )
+	LuaDebug.Log("sendId:"..netCode)
+	LuaNetwork.SendNetMessage(netCode,buffer,bufferLength)
+end
+
+function ClientSendMsg.SendEmptyMsg(netCode)
+		--LuaDebug.Log("sendId:"..netCode .. " " .. sendMsgNameTable[netCode])
+	LuaNetwork.SendNetEmptyMessage(netCode)
+end
+
+function ClientSendMsg.SendCastMsg(netCode,dataTypeId,buffer,bufferLength)
+	LuaNetwork.SendCastNetMessage(netCode,dataTypeId,buffer,bufferLength)
+end
+
+
+--Base type msg send
+function ClientSendMsg.SendIntMsg(netCode,intValue)
+	local buffer,bufferLength = LuaProto.serializeInt(intValue)
+	LuaNetwork.SendNetMessage(netCode,buffer,bufferLength)
+end
+function ClientSendMsg.SendLongMsg(netCode,longValue)
+	local buffer,bufferLength = LuaProto.serializeLong(longValue)
+	LuaNetwork.SendNetMessage(netCode,buffer,bufferLength)
+end
+function ClientSendMsg.SendLongIdMsg(netCode,longIdValue)
+	local buffer,bufferLength = LuaProto.serializeLongId(longIdValue)
+	LuaNetwork.SendNetMessage(netCode,buffer,bufferLength)
+end
+function ClientSendMsg.SendFloatMsg(netCode,floatValue)
+	local buffer,bufferLength = LuaProto.serializeFloat(floatValue)
+	LuaNetwork.SendNetMessage(netCode,buffer,bufferLength)
+end
+function ClientSendMsg.SendStringMsg(netCode,stringValue)
+	local buffer,bufferLength = LuaProto.serializeString(stringValue)
+	LuaNetwork.SendNetMessage(netCode,buffer,bufferLength)
+end
+function ClientSendMsg.SendBoolMsg(netCode,boolValue)
+	local buffer,bufferLength = LuaProto.serializeBool(boolValue)
+	LuaNetwork.SendNetMessage(netCode,buffer,bufferLength)
+end
+
+function  ClientSendMsg.SendAuth(name,password)
+	local data = PBMsgRoleInfoReq.Create()
+	data.UserName = name
+	data.Passwd = password
+	local buffer,length = LuaProto.serialize(data)
+	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_ROLE_REQ,buffer,length)
+end
+
+function ClientSendMsg.SendUserCreate(name,password)
+	--[[
+	local data = C2SUserCreate.Create()
+	data.userName=name
+	password = string.lower(name) .. " " .. string.lower(password)
+	data.password=LuaUtil.HashEncrypt(password)--]]
+
+	local data = PBVector3.Create()
+	data.x = 0.9
+	data.y = 1.1
+	data.z = -1
+	data.count = number_to_id(1)
+	--local buffer, length = LuaProto.serialize(data)
+	--ClientSendMsg.SendNetMsg(NetOpcodes_C2S.C2S_USER_CREATE,buffer,length)
+
+	local test = PBTest.Create()
+	test.intv = 123456
+	test.longv = long_get(10)
+	test.floatv = -0.88
+	test.stringv = "hello world!"
+	test.boolv = true
+	test.vectorv = data
+	test.enumv = enumChatMessageType.WORLD
+	test.longvop = long_get(88888888888)
+	test.floatvre = {}
+	test.floatvre[1] = 12.3
+	test.floatvre[2] = 1.11111
+
+	local buffer, length = LuaProto.serialize(test)
+	ClientSendMsg.SendNetMsg(NetOpcodes_C2S.C2S_AUTH,buffer,length)
+	--]]
+end
+
+
+--normally roleId is nil
+function  ClientSendMsg.SendRawAuth(name,password,ext,roleId)
+	local data = C2SAuth.Create()
+	data.userName = name
+	data.password = password
+	data.userType = GameDefine_platformCode
+	data.extended = ext
+	data.mac = ClientSendMsg.GetIDFA()
+	if Application.get_platform()==ERuntimePlatform.IPhonePlayer then
+		data.device = 'ios'
+	elseif Application.get_platform()==ERuntimePlatform.Android then
+		data.device = 'android'
+	else
+		data.device = 'windows'
+	end
+
+	--if roleId is not null, we reconnect and log direct to gamehall
+	if roleId then
+		data.roleId = roleId
+	end
+	data.version = Client.ClientVersion
+	local buffer,length = LuaProto.serialize(data)
+	ClientSendMsg.SendNetMsg(NetOpcodes_C2S.C2S_AUTH,buffer,length)
+end
+
+--我们的游戏在appstore上就要求ios6以上，所以没有必要判断系统
+function  ClientSendMsg.GetIDFA()
+	local IDFA = ""
+	if Device then
+		IDFA = PluginTool.SharedInstance():GetMacAddress()
+	end
+	return IDFA
+end
+
+function ClientSendMsg.SendGM(command,params)
+   local data=C2SGM.Create()
+   data.command=command
+   data.params=params
+   local buffer,length = LuaProto.serialize(data)
+   ClientSendMsg.SendNetMsg(NetOpcodes_C2S.C2S_GM,buffer,length)
+   LuaDebug.Log(command)
+   LuaDebug.Log(params[1])
+end

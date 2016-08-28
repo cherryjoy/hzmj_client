@@ -1,0 +1,17 @@
+WDB_Skills = {}
+--[[
+	WDB_Skills.Id
+	WDB_Skills.Skill_Name
+	WDB_Skills.Desc
+	WDB_Skills.Desc1
+	WDB_Skills.UnLock
+	WDB_Skills.UseProfession
+	WDB_Skills.Skill_Type
+	WDB_Skills.MoneyCost
+	WDB_Skills.SkillUpgradFlag
+	WDB_Skills.Icon
+	WDB_Skills.Skill_Quality
+	WDB_Skills.Skill_QualityDesc
+]]--
+
+LuaDBTable.SetLuaTableField("Skills")

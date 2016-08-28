@@ -1,0 +1,18 @@
+WDB_Weapon_ARemove = {}
+--[[
+	WDB_Weapon_ARemove.Id
+	WDB_Weapon_ARemove.WeaponLv
+	WDB_Weapon_ARemove.UpstarLv
+	WDB_Weapon_ARemove.StoneId
+	WDB_Weapon_ARemove.StoneNum
+	WDB_Weapon_ARemove.IronId0
+	WDB_Weapon_ARemove.IronNum0
+	WDB_Weapon_ARemove.SpecialStoneId
+	WDB_Weapon_ARemove.SpecialStoneNum
+	WDB_Weapon_ARemove.RefineLv
+	WDB_Weapon_ARemove.RefineStoneNum
+	WDB_Weapon_ARemove.IronId1
+	WDB_Weapon_ARemove.IronNum1
+]]--
+
+LuaDBTable.SetLuaTableField("Weapon_ARemove")

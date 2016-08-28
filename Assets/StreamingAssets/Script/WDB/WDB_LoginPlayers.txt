@@ -1,0 +1,18 @@
+WDB_LoginPlayers = {}
+--[[
+	WDB_LoginPlayers.Id
+	WDB_LoginPlayers.Name
+	WDB_LoginPlayers.Bone
+	WDB_LoginPlayers.CityPlayer_Controller
+	WDB_LoginPlayers.CallFunction
+	WDB_LoginPlayers.Pos_X
+	WDB_LoginPlayers.Pos_Y
+	WDB_LoginPlayers.Angle
+	WDB_LoginPlayers.Adjunct_prefab
+	WDB_LoginPlayers.Adjunct_Controller
+	WDB_LoginPlayers.Adjunct_Pos_X
+	WDB_LoginPlayers.Adjunct_Pos_Y
+	WDB_LoginPlayers.Adjunct_Angle
+]]--
+
+LuaDBTable.SetLuaTableField("LoginPlayers")

@@ -1,0 +1,322 @@
+require "WDB/WDB_LoginPlayers"
+require "LoginUI/LoginPlayer"
+require "WDB/WDB_Players"
+ChooseRoleUI = {}
+
+function ChooseRoleUI:Start(  )
+	self.Cams = {}
+	self.ResetCams = {}
+	Client.CreateRoleSuccess = Client.CreateRoleSuccess + {self,ChooseRoleUI.CreateRoleSuccess}
+	Client.RemoveRoleSuccess = Client.RemoveRoleSuccess + {self,ChooseRoleUI.RemoveRoleSuccess}
+	Client.CityEnter = Client.CityEnter + {self,ChooseRoleUI.EnterCity}
+	Client.RoleSelect = Client.RoleSelect + {self,ChooseRoleUI.RoleSelect}
+	Client.RoleAnimationEnd = Client.RoleAnimationEnd + {self,ChooseRoleUI.RoleAnimationEnd}
+	Client.LoginBeReplaced = Client.LoginBeReplaced + {self,ChooseRoleUI.LoginBeReplaced}
+	Client.LoginAccountExit = Client.LoginAccountExit + {self, ChooseRoleUI.ExitBtn_OnClick}
+	Client.GetRoleNameSuccess = Client.GetRoleNameSuccess + {self,ChooseRoleUI.GetRoleNameSuccess}
+	local role = Client.LoginPlayers[2]
+	--ClientSendMsg.SendRoleEnter(role.attr.roleId)
+end
+
+function ChooseRoleUI:OnDestroy(  )
+	Client.CreateRoleSuccess = Client.CreateRoleSuccess - {self,ChooseRoleUI.CreateRoleSuccess}
+	Client.RemoveRoleSuccess = Client.RemoveRoleSuccess - {self,ChooseRoleUI.RemoveRoleSuccess}
+	Client.CityEnter = Client.CityEnter - {self,ChooseRoleUI.EnterCity}
+	Client.RoleSelect = Client.RoleSelect - {self,ChooseRoleUI.RoleSelect}
+	Client.RoleAnimationEnd = Client.RoleAnimationEnd - {self,ChooseRoleUI.RoleAnimationEnd}
+	Client.LoginBeReplaced = Client.LoginBeReplaced - {self,ChooseRoleUI.LoginBeReplaced}
+	Client.LoginAccountExit = Client.LoginAccountExit - {self, ChooseRoleUI.ExitBtn_OnClick}
+	Client.GetRoleNameSuccess = Client.GetRoleNameSuccess - {self,ChooseRoleUI.GetRoleNameSuccess}
+end
+
+function ChooseRoleUI:GetRoleNameSuccess(roleName)
+	self.LabelInput:set_text(roleName)
+end
+
+function ChooseRoleUI:LoginBeReplaced()
+	require "BattleSceneUI/GameBase"
+	GameBase.GameExit()
+end
+
+function ChooseRoleUI:EnterBtn_OnClick( )
+	local role = ChooseRoleUI.GetSelectRole()
+	if role.attr.roleId~=nil then
+		ClientSendMsg.SendRoleEnter(role.attr.roleId)
+		ChooseRoleUI.PreloadModel(role.attr.occupation)
+	else
+		require "Utils/TishiCentre"
+		TishiCentre.DisPlayText(Text.NullRolePrompt)
+	end
+end
+
+--预加载资源
+function ChooseRoleUI.PreloadModel(occupation)
+	CacheManager.get_Instance():model_cache():PreloadModel(occupation)
+	CacheManager.get_Instance():model_cache():PreloadAllModel()
+end
+
+function ChooseRoleUI:RemoveRoleBtn_OnClick( )
+	local ref=LuaUIViewCtr.OpenUIHasBg("ToolsUI/MessageBox")
+    LuaMessageBox.SetText(ref,Text.RemoveRolePrompt)
+    ref.mOnOK=function()
+		local roleId = ChooseRoleUI.GetSelectRoleId()
+        ClientSendMsg.SendRoleRemove(roleId)
+    end
+end
+
+function ChooseRoleUI:ReturnBtn_OnClick( )
+	self.RemoveRoleBtn:SetActive(false)
+	self.EnterBtn:SetActive(false)
+	self.CreateRoleBtn:SetActive(false)
+	self.Bottom:SetActive(false)
+	self.ReturnBtn:SetActive(false)
+	LoginPlayerLuaCtr.OnClick (Client.LoginPlayers[self.SelectOccupation],self.SelectOccupation,false)
+	ChooseRoleUI.MoveCamera(self,"back",self.SelectOccupation)
+	self.ExitBtn:SetActive(true)
+    self.CurUser:SetActive(true)
+	self.RoleDesObj:get_gameObject():SetActive(false)
+	self.SelectOccupation = -1
+end
+
+function ChooseRoleUI:ExitBtn_OnClick()
+	Client.m_CurrentState=EClientState.E_CS_Login
+	self.gameObject:SetActive(false)
+	self.LoginUIRoot.LoginUI:SetActive(true)
+	--reset fobj
+	for k,v in pairs(Client.LoginPlayers) do
+		v.HUD.gameObject:SetActive(false)
+		v.FObj:animation_():animator_():EnterStateByName("Ready01")
+		v.FObj:move_control_():MoveImmediately1(v.OriPos)
+		if v.FFObj then
+			v.FFObj:animation_():animator_():EnterStateByName("Ready01")
+			v.FFObj:move_control_():MoveImmediately1(v.FOriPos)
+		end
+	end
+	--reset Cams
+	for i,v in ipairs(self.ResetCams) do
+		v:Stop()
+		v:Seek(0)
+	end
+
+	MusicManager.get_Instance():PlayBackMusic(self.LoginUIRoot.AccountMusicPath)
+	LoginControl.self_():IsCheck(false)
+	Client.ChooseRoleExitBtn:Do()
+end
+
+function ChooseRoleUI:CreateRoleBtn_OnClick( )
+	ChooseRoleUI.LimiteRoleName(self)
+end
+
+function ChooseRoleUI:LimiteRoleName()
+	self.roleName=self.LabelInput:get_text()
+	self.length=#(self.roleName)
+    self.bytewidth=0
+	self.CharByteWidth=0
+	self.OtherByteWidth=0
+	self.ifChinese=false
+	local len = self.length
+	--LuaDebug.Log("总长度"..len)
+
+    if self.length <= 16 then
+		--LuaDebug.Log("总长度 < 16"..len)
+	  for i=1,self.length do
+		   if string.byte(tostring(self.roleName),i) > 127 then
+	          self.ifChinese=true
+			  self.CharByteWidth=self.CharByteWidth+1
+		   else
+			  self.OtherByteWidth=self.OtherByteWidth+1
+		   end
+	  end
+	  self.bytewidth=self.CharByteWidth+self.OtherByteWidth
+   --else
+	--  TishiCentre.DisPlayText(Text.CreateRoleName)
+	--  LuaDebug.Log("超长，错误")
+   end
+
+   if self.ifChinese == true then
+     local CharNum = self.CharByteWidth/3
+	 if self.CharByteWidth == 3*CharNum and self.OtherByteWidth <= (6-CharNum) then
+         self.roleName=string.sub(self.roleName,1,self.bytewidth)
+   	     ClientSendMsg.SendRoleCreate(self.SelectOccupation,self.roleName)
+   	    --LuaDebug.Log("总字节："..self.bytewidth.."有："..CharNum.."个中文，正确")
+	 else
+		 TishiCentre.DisPlayText(Text.CreateRoleName)
+		--LuaDebug.Log("超长，错误")
+	 end
+   else
+   	 ClientSendMsg.SendRoleCreate(self.SelectOccupation,self.roleName)
+   	-- LuaDebug.Log("总长10 ，无中文，正确")
+   end
+
+end
+
+function ChooseRoleUI:ButtonSaZi_OnClick()
+	self.LabelInput:set_text("")
+	ClientSendMsg.SendRoleName(self.isMan)
+end
+
+function ChooseRoleUI:SendRoleRemove()
+	local roleId = ChooseRoleUI.GetSelectRoleId()
+    ClientSendMsg.SendRoleRemove(roleId)
+end
+
+function ChooseRoleUI:RefreshRoleList()
+	self.loginCtr = LoginControl.self_()
+	self.luaCtrName = "LoginPlayerLuaCtr"
+
+	local recoredNum = LuaCDataMgr.LoginPlayers():GetRecordCount() - 1
+	for i=0,recoredNum do
+		local playerId = LuaCDataMgr.LoginPlayers():GetDataByNumber(i, WDB_LoginPlayers.Id)
+		ChooseRoleUI.RefreshRole(self,playerId)
+	end
+
+ 	self.userNameLbl:set_text(PlayerPrefsEx.GetString("userName"))
+ end
+
+function ChooseRoleUI:RefreshRole(occupation)
+	if Client.LoginPlayers[occupation] == nil then
+		local playerRef = {}
+		Client.LoginPlayers[occupation] = playerRef
+		self.loginCtr:CreatePlayer(occupation,self.luaCtrName)
+		--remember the ori position
+	    playerRef.OriPos = playerRef.FObj:get_Trans_():get_position()
+		playerRef.FFObj =  playerRef.FObj:follow_control_():GetFollower(0)
+		if playerRef.FFObj then
+			playerRef.FOriPos = playerRef.FFObj:get_Trans_():get_position()
+		end
+	else
+		LoginPlayerLuaCtr.DoEnd (Client.LoginPlayers[occupation])
+		local FObj = Client.LoginPlayers[occupation].FObj
+		FObj:animation_():DoEnd()
+		FObj:DoStart()
+		local angle = LuaCDataMgr.LoginPlayers():GetDataByNumber(occupation, WDB_LoginPlayers.Angle)
+   		FObj:rotate_control_():TurnByAngle(angle);
+	end
+end
+
+ function ChooseRoleUI.GetSelectRoleId()
+	 local roleId = ChooseRoleUI.GetSelectRole().attr.roleId
+	 return roleId
+ end
+
+ function ChooseRoleUI.GetSelectRole()
+	 for k,role in pairs(Client.LoginPlayers) do
+	 	if role.IsSelect then
+	 		return role
+	 	end
+	 end
+ end
+
+ function ChooseRoleUI.CreateRoleSuccess( )
+ 	local index=#(Client.Roles)
+ 	ClientSendMsg.SendRoleEnter(Client.Roles[index].roleId)
+ end
+
+ function ChooseRoleUI:RemoveRoleSuccess(roleId)
+	ChooseRoleUI.RefreshRole(self,self.SelectOccupation,self.luaCtrName)
+	local delFightTable = Client.LoginPlayers[self.SelectOccupation]
+	delFightTable.FObj:animation_():animator_():EnterStateByName("Ready02")
+	delFightTable.haveCreated = false
+	self.RemoveRoleBtn:SetActive(false)
+	self.EnterBtn:SetActive(false)
+	self.CreateRoleBtn:SetActive(true)
+	self.Bottom:SetActive(true)
+	ChooseRoleUI.ButtonSaZi_OnClick(self)
+	ChooseRoleUI.ShowRoleDetail(self,self.SelectOccupation)
+ end
+
+ function ChooseRoleUI:EnterCity(data)
+ 	local JSON = require "Utils/JSON"
+    local jsonTb = {}
+    jsonTb["userName"]=PlayerPrefsEx.GetString("userName")
+    jsonTb["roleId"]=''..Client.RoleInfo.roleAttr.roleId
+    jsonTb["roleName"]=Client.RoleInfo.roleAttr.name
+    jsonTb["roleLevel"]=""..Client.RoleInfo.roleAttr.level
+    jsonTb["serverId"]=PlayerPrefsEx.GetString("LastServerId")
+    jsonTb["vipLevel"]=Client.RoleInfo.roleAttr.vipLevel
+    jsonTb["goodsNum"]=redCount
+    jsonTb["gameId"]=GameDefine_gameID
+    local ext = JSON:encode_pretty(jsonTb)
+    LuaDebug.Log("llllllllll"..ext)
+    LKPush.SharedInstance():Init(ext)
+    LKPush.SharedInstance():LKAllowRemoteNotifications(true)
+ 	require "WDB/WDB_GameConfig"
+     local firstSceneId = LuaCDataMgr.GameConfig():GetData2(70, WDB_GameConfig.Param)
+     local secondSceneId = LuaCDataMgr.GameConfig():GetData2(71, WDB_GameConfig.Param)
+     if not Client.RoleInfo.GameBattleMapMgr:IsGameScenePassed(firstSceneId) then
+         ClientSendMsg.SendSceneEnter(firstSceneId)
+     elseif not Client.RoleInfo.GameBattleMapMgr:IsGameScenePassed(secondSceneId) then
+         ClientSendMsg.SendSceneEnter(secondSceneId)
+     else
+		Util.EnterCity(data)
+     end
+ end
+
+function ChooseRoleUI:RoleSelect(occupation)
+	self.SelectOccupation = occupation
+	self.ExitBtn:SetActive(false)
+	self.CurUser:SetActive(false)
+	ChooseRoleUI.MoveCamera(self,"run",occupation)
+	if LuaCDataMgr.Players():GetData2(occupation,WDB_Players.Sex)==0 then
+		self.isMan=true
+	else
+		self.isMan=false
+	end
+end
+
+function ChooseRoleUI:RoleAnimationEnd(occupation)
+	if not Client.LoginPlayers[occupation].IsOut then
+		self.ReturnBtn:SetActive(true)
+		if Client.LoginPlayers[occupation].haveCreated then
+			self.RemoveRoleBtn:SetActive(true)
+			self.EnterBtn:SetActive(true)
+			self.CreateRoleBtn:SetActive(false)
+			self.Bottom:SetActive(false)
+		else
+			self.RemoveRoleBtn:SetActive(false)
+			self.EnterBtn:SetActive(false)
+			self.CreateRoleBtn:SetActive(true)
+			self.Bottom:SetActive(true)
+			ChooseRoleUI.ButtonSaZi_OnClick(self)
+			-- LuaDebug.Log("end")
+			--show occupation detail
+			ChooseRoleUI.ShowRoleDetail(self,occupation)
+		end
+	else
+		LoginControl.self_():IsCheck(true)
+    end
+ end
+
+ function ChooseRoleUI:ShowRoleDetail(occupation)
+	 require "GamePlayConfig/UtilConfig"
+	 local posT = LoginRoleDesPosConfig[occupation]
+	 self.RoleDesObj:set_localPosition(LuaVector3.Create(posT.x,posT.y,0))
+	 self.RoleDesObj:get_gameObject():SetActive(true)
+	 self.RoleDesLbl:set_text(Text.RoleDescribTable[occupation])
+	 local roleStarNumT = LoginRoleStarNum[occupation]
+	 for i,line in ipairs(self.RoleDesCtr) do
+		 for j,star in ipairs(line.Stars) do
+			 if j>roleStarNumT[i] then
+				 star:SetActive(false)
+			 else
+				 star:SetActive(true)
+			 end
+		 end
+	 end
+
+ end
+
+ function ChooseRoleUI:MoveCamera(camName,occupation)
+	 LoginControl.self_():IsCheck(false)
+	 local camIndex = "Cam" .. camName .. occupation
+	 if self.Cams[camIndex] == nil then
+	 	local camObj = GameObject.Find(camName .. occupation)
+		local camAni = camObj:GetComponent1("CameraPathBezierAnimator")
+		self.Cams[camIndex] = camAni
+		if camName == "run" then
+			table.insert(self.ResetCams,camAni)
+		end
+	 end
+	 self.Cams[camIndex]:Stop()
+	 self.Cams[camIndex]:Play()
+ end

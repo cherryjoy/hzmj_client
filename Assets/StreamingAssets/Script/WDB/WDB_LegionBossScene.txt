@@ -1,0 +1,13 @@
+WDB_LegionBossScene = {}
+--[[
+	WDB_LegionBossScene.ID
+	WDB_LegionBossScene.BossId
+	WDB_LegionBossScene.PosId
+	WDB_LegionBossScene.PartName
+	WDB_LegionBossScene.Icon
+	WDB_LegionBossScene.SceneId
+	WDB_LegionBossScene.LegionJob
+	WDB_LegionBossScene.Life
+]]--
+
+LuaDBTable.SetLuaTableField("LegionBossScene")

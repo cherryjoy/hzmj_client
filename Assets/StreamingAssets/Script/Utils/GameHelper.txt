@@ -1,0 +1,33 @@
+GameHelper = {}
+
+function GameHelper.CreateHelper()
+    local ref = LuaUIViewCtr.OpenUINotLose("CommonUI/GameHelper")
+    return ref
+end
+
+function GameHelper.ShowHelper(text, confirmCBFunc, parm, tittle)
+    local ref = GameHelper.CreateHelper()
+    ref.Message:set_text(text)
+    ref.confirmCBFunc = confirmCBFunc
+    if tittle == nil then
+        tittle = Text.PlayDes
+    end
+    ref.parm = parm
+    ref.HelperTittle:set_text(tittle)
+    return ref
+end
+
+--兼容
+function GameHelper:ConfirmBtn_OnClick()
+    if self.confirmCBFunc ~= nil then
+        self.confirmCBFunc(self.parm)
+    end
+    GameObject.DestroyImmediate(self.gameObject, false)
+end
+
+function GameHelper:CloseBtn_OnClick()
+    if self.confirmCBFunc ~= nil then
+        self.confirmCBFunc(self.parm)
+    end
+    GameObject.DestroyImmediate(self.gameObject, false)
+end

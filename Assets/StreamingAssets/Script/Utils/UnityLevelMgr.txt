@@ -1,0 +1,43 @@
+UnityLevelMgr = {}
+
+function UnityLevelMgr.LoadLevel (levelName,sceneId)
+    UnityLevelMgr.ClearUnloadBundles()
+    if sceneId then
+        Client.CurrentCityId = sceneId
+        MapControl.get_Instance():LoadScene(sceneId)
+        SceneManager.LoadScene1(levelName,1)
+    else
+        Client.CurrentCityId = 0
+        --[[
+        if levelName == "Login" then
+            if Application.get_platform()==ERuntimePlatform.WindowsPlayer or Application.get_platform()==ERuntimePlatform.WindowsEditor then
+               SceneManager.LoadScene("Resources/Scene/level/scene_login_dawn")
+           else
+               ResLoader.Load("Scene/level/scene_login_dawn")
+               SceneManager.LoadScene("scene_login_dawn")
+           end
+
+       end
+       --]]
+        SceneManager.LoadScene1(levelName,1)
+    end
+
+     ResLoader.UnloadUnusedAssets()
+end
+
+function UnityLevelMgr.ClearUnloadBundles()
+    --LuaUtil.HideAllCam(false)
+    TextureMgr.get_Instance():ReleaseAll()
+    SkinnedModelGenerator.Clear()
+    LKAtlasMaker.ClearAtlas()
+    LKUIRoot.Instance():OnDestroy()
+    ResLoader.UnloadBundles()
+    collectgarbage()
+    GC.Collect()
+end
+
+function UnityLevelMgr.LoadLevelName(levelName)
+    UnityLevelMgr.ClearUnloadBundles()
+    SceneManager.LoadScene(levelName)
+    ResLoader.UnloadUnusedAssets()
+end

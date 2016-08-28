@@ -1,0 +1,24 @@
+WDB_Item = {}
+--[[
+	WDB_Item.Id
+	WDB_Item.Name
+	WDB_Item.Desc
+	WDB_Item.Body
+	WDB_Item.Quality
+	WDB_Item.Bag
+	WDB_Item.Use
+	WDB_Item.AutuGein
+	WDB_Item.StackSum
+	WDB_Item.IsResolve
+	WDB_Item.IsSold
+	WDB_Item.Price
+	WDB_Item.IsAffirmSold
+	WDB_Item.Icon
+	WDB_Item.Function
+	WDB_Item.BuffId
+	WDB_Item.Drop
+	WDB_Item.TrunAround
+	WDB_Item.GainEffect
+]]--
+
+LuaDBTable.SetLuaTableField("Item")

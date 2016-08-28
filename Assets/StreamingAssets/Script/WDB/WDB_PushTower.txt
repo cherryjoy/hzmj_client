@@ -1,0 +1,11 @@
+WDB_PushTower = {}
+--[[
+	WDB_PushTower.ID
+	WDB_PushTower.OpenTimes
+	WDB_PushTower.Plies
+	WDB_PushTower.Coefficient_Attack
+	WDB_PushTower.Coefficient_Life
+	WDB_PushTower.Rewardcient
+]]--
+
+LuaDBTable.SetLuaTableField("PushTower")

@@ -1,0 +1,11 @@
+WDB_LegionActivity = {}
+--[[
+	WDB_LegionActivity.ID
+	WDB_LegionActivity.ActivityId
+	WDB_LegionActivity.Name
+	WDB_LegionActivity.LegionLevel
+	WDB_LegionActivity.Level
+	WDB_LegionActivity.VipLevel
+]]--
+
+LuaDBTable.SetLuaTableField("LegionActivity")

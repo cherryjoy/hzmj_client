@@ -1,0 +1,12 @@
+WDB_MonstersTalk = {}
+--[[
+	WDB_MonstersTalk.Id
+	WDB_MonstersTalk.Type
+	WDB_MonstersTalk.Talk
+	WDB_MonstersTalk.Probability
+	WDB_MonstersTalk.Duration
+	WDB_MonstersTalk.Check_Time
+	WDB_MonstersTalk.MusicId
+]]--
+
+LuaDBTable.SetLuaTableField("MonstersTalk")

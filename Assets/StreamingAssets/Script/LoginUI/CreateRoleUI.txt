@@ -1,0 +1,11 @@
+
+CreateRoleUI = {}
+
+function CreateRoleUI:CloseBtn_OnClick()
+	self.gameObject:Destroy1()
+end
+
+function CreateRoleUI:CreateRoleBtn_OnClick(  )
+	local roleName=self.roleName:get_text()
+	ClientSendMsg.SendRoleCreate(self.occupation,roleName)
+end

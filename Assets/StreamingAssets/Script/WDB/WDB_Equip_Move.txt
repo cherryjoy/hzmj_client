@@ -1,0 +1,10 @@
+WDB_Equip_Move = {}
+--[[
+	WDB_Equip_Move.Id
+	WDB_Equip_Move.EquiLvMin
+	WDB_Equip_Move.EquiLvMax
+	WDB_Equip_Move.MoneyType0
+	WDB_Equip_Move.MoneyCord0
+]]--
+
+LuaDBTable.SetLuaTableField("Equip_Move")

@@ -1,0 +1,17 @@
+WDB_Fashion_Train = {}
+--[[
+	WDB_Fashion_Train.ID
+	WDB_Fashion_Train.TrainType
+	WDB_Fashion_Train.TrainLevel
+	WDB_Fashion_Train.MoneyType_0
+	WDB_Fashion_Train.MoneyNum_0
+	WDB_Fashion_Train.MoneyType_1
+	WDB_Fashion_Train.MoneyNum_1
+	WDB_Fashion_Train.start_pro
+	WDB_Fashion_Train.add_pro
+	WDB_Fashion_Train.min_pro
+	WDB_Fashion_Train.TrainMin
+	WDB_Fashion_Train.TrainMax
+]]--
+
+LuaDBTable.SetLuaTableField("Fashion_Train")

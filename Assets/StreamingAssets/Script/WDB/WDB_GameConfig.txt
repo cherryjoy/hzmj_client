@@ -1,0 +1,9 @@
+WDB_GameConfig = {}
+--[[
+	WDB_GameConfig.Id
+	WDB_GameConfig.Name
+	WDB_GameConfig.Param
+	WDB_GameConfig.Param2
+]]--
+
+LuaDBTable.SetLuaTableField("GameConfig")

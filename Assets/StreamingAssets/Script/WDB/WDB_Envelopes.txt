@@ -1,0 +1,15 @@
+WDB_Envelopes = {}
+--[[
+	WDB_Envelopes.Id
+	WDB_Envelopes.Title
+	WDB_Envelopes.Desc
+	WDB_Envelopes.ButtonName
+	WDB_Envelopes.Action
+	WDB_Envelopes.Type
+	WDB_Envelopes.Param1
+	WDB_Envelopes.Param2
+	WDB_Envelopes.IsOnline
+	WDB_Envelopes.Clear
+]]--
+
+LuaDBTable.SetLuaTableField("Envelopes")

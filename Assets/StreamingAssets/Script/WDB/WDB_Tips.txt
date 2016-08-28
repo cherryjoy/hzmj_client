@@ -1,0 +1,26 @@
+WDB_Tips = {}
+--[[
+	WDB_Tips.Id
+	WDB_Tips.Type
+	WDB_Tips.OpenCondition1
+	WDB_Tips.ConditionValue1
+	WDB_Tips.IconType1
+	WDB_Tips.Icon1
+	WDB_Tips.Title1
+	WDB_Tips.OpenUi1
+	WDB_Tips.OpenCondition2
+	WDB_Tips.ConditionValue2
+	WDB_Tips.IconType2
+	WDB_Tips.Icon2
+	WDB_Tips.Title2
+	WDB_Tips.OpenUi2
+	WDB_Tips.OpenCondition3
+	WDB_Tips.ConditionValue3
+	WDB_Tips.IconType3
+	WDB_Tips.Icon3
+	WDB_Tips.Title3
+	WDB_Tips.OpenUi3
+	WDB_Tips.Describe
+]]--
+
+LuaDBTable.SetLuaTableField("Tips")

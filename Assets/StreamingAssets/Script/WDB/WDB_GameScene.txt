@@ -1,0 +1,45 @@
+WDB_GameScene = {}
+--[[
+	WDB_GameScene.Id
+	WDB_GameScene.SceneName
+	WDB_GameScene.UnLock
+	WDB_GameScene.UnLockNum
+	WDB_GameScene.NeedQuest
+	WDB_GameScene.TurnOn
+	WDB_GameScene.Battle
+	WDB_GameScene.Cost
+	WDB_GameScene.CostNum
+	WDB_GameScene.GateType
+	WDB_GameScene.SceneType
+	WDB_GameScene.IsRevive
+	WDB_GameScene.ReviveCondition
+	WDB_GameScene.IsCanBlood
+	WDB_GameScene.BloodNum
+	WDB_GameScene.SceneTime
+	WDB_GameScene.RushCount
+	WDB_GameScene.MonsterConut
+	WDB_GameScene.PositonDrop
+	WDB_GameScene.IsStars
+	WDB_GameScene.IsShowUi
+	WDB_GameScene.LastId
+	WDB_GameScene.Path
+	WDB_GameScene.Flag
+	WDB_GameScene.Map
+	WDB_GameScene.UseSence
+	WDB_GameScene.UseSenceEnv
+	WDB_GameScene.BirthPlace1
+	WDB_GameScene.BirthDir1
+	WDB_GameScene.BirthPlace2
+	WDB_GameScene.BirthDir2
+	WDB_GameScene.CameraBoundaryLeft
+	WDB_GameScene.CameraBoundaryRight
+	WDB_GameScene.MusicPath
+	WDB_GameScene.PrintPath
+	WDB_GameScene.FirstNum2
+	WDB_GameScene.MonsterGroupId
+	WDB_GameScene.ScenePower
+	WDB_GameScene.m
+	WDB_GameScene.Times
+]]--
+
+LuaDBTable.SetLuaTableField("GameScene")

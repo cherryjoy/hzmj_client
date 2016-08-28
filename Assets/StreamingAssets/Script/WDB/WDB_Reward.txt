@@ -1,0 +1,21 @@
+WDB_Reward = {}
+--[[
+	WDB_Reward.Id
+	WDB_Reward.Type
+	WDB_Reward.Desc
+	WDB_Reward.Leveldown
+	WDB_Reward.Levelup
+	WDB_Reward.CompleteMin
+	WDB_Reward.CompleteMax
+	WDB_Reward.WinType_1
+	WDB_Reward.Win_1_1
+	WDB_Reward.Win_1_2
+	WDB_Reward.WinType_2
+	WDB_Reward.Win_2_1
+	WDB_Reward.Win_2_2
+	WDB_Reward.WinType_3
+	WDB_Reward.Win_3_1
+	WDB_Reward.Win_3_2
+]]--
+
+LuaDBTable.SetLuaTableField("Reward")

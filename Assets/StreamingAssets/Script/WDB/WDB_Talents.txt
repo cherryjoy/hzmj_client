@@ -1,0 +1,17 @@
+WDB_Talents = {}
+--[[
+	WDB_Talents.Id
+	WDB_Talents.TalentId
+	WDB_Talents.TalentDesc
+	WDB_Talents.TalentLevel
+	WDB_Talents.UpgradeLevel
+	WDB_Talents.TalentCost
+	WDB_Talents.Effect_1
+	WDB_Talents.Num_1
+	WDB_Talents.Effect_2
+	WDB_Talents.Num_2
+	WDB_Talents.Effect_3
+	WDB_Talents.Num_3
+]]--
+
+LuaDBTable.SetLuaTableField("Talents")

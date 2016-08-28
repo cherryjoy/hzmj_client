@@ -1,0 +1,169 @@
+ServerTime = {}
+
+ServerTime.LocalTimeAdjust = 0
+ServerTime.ServerTicks = 0
+ServerTime.TimeZone = 0
+ServerTime.NetWorkDeltaTicks = 0
+ServerTime.ClientTime = 0
+ServerTime.RecServerTimeCount  = 0
+ServerTime.DeltaTable = { }
+
+------get the server tiem from client
+function ServerTime.GetServerTimeTicks()
+	local ServerTimeTicks = LuaDateTime.LongSub(LuaDateTime.Ticks_UtcNow(), ServerTime.LocalTimeAdjust)
+
+	ServerTimeTicks = LuaDateTime.LongAdd(ServerTimeTicks, ServerTime.ServerTicks)
+	ServerTimeTicks = LuaDateTime.LongAdd(ServerTimeTicks, ServerTime.NetWorkDeltaTicks)
+	return ServerTimeTicks
+end
+
+function ServerTime.GetServerTime()
+	return LuaDateTime.GetWithTimeZone(ServerTime.GetServerTimeTicks(),ServerTime.TimeZone)
+end
+
+function ServerTime.GetServerTimeWithOutTimeZone()
+	return LuaDateTime.Get(ServerTime.GetServerTimeTicks())
+end
+
+function ServerTime.GetServerTimeSeconds()
+	local severDateTime = ServerTime.GetServerTimeWithOutTimeZone()
+	return LuaDateTime.GetServerSeconds(severDateTime)
+end
+
+function ServerTime.GetTimeByServerSeconds(serverSecond)
+	return  LuaDateTime.GetByServerSeconds(serverSecond,ServerTime.TimeZone)
+end
+
+function ServerTime.GetClientTimeByServerSeconds(serverSecond)
+	return  LuaDateTime.GetClientTimeByServerSeconds(serverSecond)
+end
+
+function ServerTime.GetClientNowTime()
+	return  LuaDateTime.GetClientNowTime()
+end
+
+
+function ServerTime.GetLeftSeconds(endServerSecond)
+	local endDateTime = ServerTime.GetTimeByServerSeconds(endServerSecond)
+	local severDateTime = ServerTime.GetServerTime()
+
+	--this means (serverDateTime - endDateTime)
+	--if (isSecondsLeft == true) means endDateTime is LATER than serverDateTime
+	local leftTimeToRefresh,isSecondsLeft = LuaDateTime.GetSecondsLeft(endDateTime,severDateTime)
+	return math.ceil(leftTimeToRefresh),isSecondsLeft
+end
+
+function ServerTime.GetTimestampStr(ServerSecond)
+	local serverHappenedDateTime = ServerTime.GetTimeByServerSeconds(ServerSecond)
+	local severDateTime = ServerTime.GetServerTime()
+
+	local TimeDif = LuaDateTime.GetSecondsLeft(serverHappenedDateTime,severDateTime)
+	local difTimeSpan = LuaDateTime.GetBySeconds(TimeDif)
+
+	local difDay = difTimeSpan:get_Days()
+	--difDay = difDay -  1
+	local difHour = difTimeSpan:get_Hours()
+	if difDay == 0 then
+		if difHour < 1 then
+			return Text.NJustAgo
+		else
+			return string.format(Text.NHourAgo,difHour)
+		end
+	else
+		return string.format(Text.NDayAgo,difDay)
+	end
+
+end
+
+function ServerTime.GetTimestampStrForCorps(ServerSecond)
+	local serverHappenedDateTime = ServerTime.GetTimeByServerSeconds(ServerSecond)
+	local severDateTime = ServerTime.GetServerTime()
+
+	local TimeDif = LuaDateTime.GetSecondsLeft(serverHappenedDateTime,severDateTime)
+	local difTimeSpan = LuaDateTime.GetBySeconds(TimeDif)
+
+	local difDay = difTimeSpan:get_Days()
+	local difHour = difTimeSpan:get_Hours()
+	local difMinute = difTimeSpan:get_Minutes()
+	if difDay == 0 then
+		if difHour < 1 then
+		    if difMinute < 10 then
+			    return Text.NJustAgo
+		    else
+			    return string.format(Text.MinuteAgo,difMinute)
+		    end
+	    else
+			return string.format(Text.HoursAgo,difHour,difMinute)
+		end
+	else
+		return string.format(Text.NDayAgo,difDay)
+	end
+end
+
+---get time by time intervel
+function ServerTime.GetTimeStrByIntervel(ServerSecond)
+	local intervelDateTime = ServerTime.GetTimeByServerSeconds(ServerSecond)
+	local difDay = intervelDateTime:get_Day()
+	local difHour = intervelDateTime:get_Hour()
+	local difMinute = intervelDateTime:get_Minute()
+	if difDay == 0 then
+		if difHour < 1 then
+		    if difMinute < 10 then
+			    return Text.NJustAgo
+		    else
+			    return string.format(Text.MinuteAgo,difMinute)
+		    end
+	    else
+			return string.format(Text.HoursAgo,difHour,difMinute)
+		end
+	else
+		return string.format(Text.NDayAgo,difDay)
+	end
+end
+
+-----get the server time form server
+function ServerTime.SetServerTime(ServerTimeStruct)
+	ServerTime.LocalTimeAdjust = LuaDateTime.Ticks_UtcNow()
+    ServerTime.ServerTicks = LuaDateTime.LongAdd(ServerTimeStruct.time,LuaDateTime.Ticks_197011())
+    ServerTime.TimeZone = ServerTimeStruct.timeZone  -- C Long    Must Use LongAddForServer For ADD
+end
+
+function ServerTime.TestNetWorkDelta(ServerTimeStruct)
+	ServerTime.SetServerTime(ServerTimeStruct)
+    ServerTime.RecServerTimeCount = ServerTime.RecServerTimeCount + 1
+    local tmp = LuaDateTime.LongSub(LuaDateTime.Ticks_UtcNow(), ServerTime.ClientTime)
+    local delta = LuaDateTime.LongDivide(tmp, 2)
+    table.insert(ServerTime.DeltaTable, delta)
+    if ServerTime.RecServerTimeCount >= 5 or ServerTime.RecServerTimeCount == 1 then
+        table.sort(ServerTime.DeltaTable, function(a,b) return LuaDateTime.LongLess(a, b) end)
+        local Median = ServerTime.DeltaTable[math.ceil((#ServerTime.DeltaTable)/2)]
+        local Sum = 0
+        local Count = 0
+        for i,v in ipairs(ServerTime.DeltaTable) do
+        	if LuaDateTime.LongLess(LuaDateTime.LongSub(v, Median), LuaDateTime.LongMultiply(Median, 1.5)) then
+                if i == 1 then
+                    Sum = v
+                else
+                	Sum = LuaDateTime.LongAdd(Sum, v)
+                end
+                Count = Count + 1
+        	end
+        end
+		if Count >0 then
+			ServerTime.NetWorkDeltaTicks = LuaDateTime.LongDivide(Sum, Count)
+		end
+	end
+end
+
+function ServerTime.SetTimer()
+	if(ServerTime.GetServerTimeTimer ~= nil)then
+		Timer.RemoveEvent(ServerTime,ServerTime.GetServerTimeTimer)
+	end
+	ServerTime.SendGetServerTime()
+	ServerTime.GetServerTimeTimer = Timer.NewEvent(ServerTime, 5,20, ServerTime.SendGetServerTime, false)
+end
+
+function ServerTime.SendGetServerTime()
+    ClientSendMsg.SendEmptyMsg(NetOpcodes_C2S.C2S_SERVER_TIME)
+	ServerTime.ClientTime = LuaDateTime.Ticks_UtcNow()
+end

@@ -1,0 +1,93 @@
+
+LuaTree = {}
+LuaTree.__index = LuaTree
+
+function LuaTree:New(root)
+  local tree = {child = {},parent = nil,node = root}
+
+  setmetatable(tree,LuaTree)
+
+  return tree
+end
+
+function LuaTree:AppendTreeNode(node)
+  node.parent = self
+  table.insert(self.child,treeNode)
+end
+
+function LuaTree:RemoveTreeNode(node)
+  if self == node then
+    if self.parent ~= nil then
+      for i=1,#(self.parent.child) do
+        local spNode = self.parent.child[i]
+        if spNode == node then
+          table.remove(self.parent.child,i)
+          return
+        end
+      end
+    else
+        self = nil
+        return
+    end
+  else
+    for i=1,#(self.child) do
+      self.child[i]:RemoveTreeNode(node)
+    end
+  end
+end
+
+--[[
+local element = testTree:IteratorForWidth()
+local data = element()
+while data~=nil do
+  LuaDebug.Log("FFFF"..data)
+  data = element()
+end
+]]
+function LuaTree:IteratorForWidth()
+  local listTable = {}
+  local node = self
+
+  table.insert(listTable,node)
+
+  return function ()
+    if node ~= nil then
+      for i=1,#(node.child) do
+        table.insert(listTable,node.child[i])
+      end
+
+      if table.getn(listTable) > 0 then
+        node = listTable[1]
+        table.remove(listTable,1)
+      else
+        return  nil
+      end
+
+      return node.node
+    end
+  end
+end
+
+function LuaTree:IteratorForHeight(node)
+  local listTable = {}
+  local node = self
+
+  table.insert(listTable,node)
+
+  return function ()
+    if node ~= nil then
+      for i=1,#(node.child) do
+        table.insert(listTable,i+1,node.child[i])
+      end
+
+      if table.getn(listTable) >0 then
+        node = listTable[1]
+        table.remove(listTable,1)
+      else
+        return nil
+      end
+
+      return node.node
+    end
+  end
+end

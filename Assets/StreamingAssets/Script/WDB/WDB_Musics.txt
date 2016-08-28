@@ -1,0 +1,9 @@
+WDB_Musics = {}
+--[[
+	WDB_Musics.ID
+	WDB_Musics.ConversationalSpeech0
+	WDB_Musics.ConversationalSpeech1
+	WDB_Musics.ConversationalSpeech2
+]]--
+
+LuaDBTable.SetLuaTableField("Musics")

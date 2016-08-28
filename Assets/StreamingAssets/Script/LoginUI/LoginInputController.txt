@@ -1,0 +1,24 @@
+LoginInputController = {}
+
+function LoginInputController:Start()
+	LoginInputController.Init(self)
+
+end
+
+function LoginInputController:OnDestroy()
+
+end
+
+function LoginInputController:Init()
+	if self.FirstShow == true then
+		self.login:SetActive(true)
+		self.regist:SetActive(false)
+	else
+		self.login:SetActive(false)
+		self.regist:SetActive(true)
+	end
+end
+
+function LoginInputController:CloseBtn_OnClick()
+	self.gameObject:Destroy1()
+end

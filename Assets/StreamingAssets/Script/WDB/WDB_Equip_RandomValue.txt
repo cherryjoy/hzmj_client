@@ -1,0 +1,31 @@
+WDB_Equip_RandomValue = {}
+--[[
+	WDB_Equip_RandomValue.Id
+	WDB_Equip_RandomValue.Effect
+	WDB_Equip_RandomValue.Name
+	WDB_Equip_RandomValue.EquiLvMin
+	WDB_Equip_RandomValue.EquiLvMax
+	WDB_Equip_RandomValue.Rise0
+	WDB_Equip_RandomValue.Colour0
+	WDB_Equip_RandomValue.Num_0
+	WDB_Equip_RandomValue.Rise1
+	WDB_Equip_RandomValue.Colour1
+	WDB_Equip_RandomValue.Num_1
+	WDB_Equip_RandomValue.Rise2
+	WDB_Equip_RandomValue.Colour2
+	WDB_Equip_RandomValue.Num_2
+	WDB_Equip_RandomValue.Rise3
+	WDB_Equip_RandomValue.Colour3
+	WDB_Equip_RandomValue.Num_3
+	WDB_Equip_RandomValue.Rise4
+	WDB_Equip_RandomValue.Colour4
+	WDB_Equip_RandomValue.Num_4
+	WDB_Equip_RandomValue.Rise5
+	WDB_Equip_RandomValue.Colour5
+	WDB_Equip_RandomValue.Num_5
+	WDB_Equip_RandomValue.Rise6
+	WDB_Equip_RandomValue.Colour6
+	WDB_Equip_RandomValue.Num_6
+]]--
+
+LuaDBTable.SetLuaTableField("Equip_RandomValue")

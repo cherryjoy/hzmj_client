@@ -1,0 +1,23 @@
+WDB_PopUps = {}
+--[[
+	WDB_PopUps.ID
+	WDB_PopUps.Desc
+	WDB_PopUps.PopUpType
+	WDB_PopUps.PopUpParam
+	WDB_PopUps.PopUpParam0
+	WDB_PopUps.PopUpParam1
+	WDB_PopUps.PopUpParam2
+	WDB_PopUps.EndType
+	WDB_PopUps.EndParam
+	WDB_PopUps.Direction
+	WDB_PopUps.TextArrowdirection
+	WDB_PopUps.Text
+	WDB_PopUps.OffsetX
+	WDB_PopUps.OffsetY
+	WDB_PopUps.NextPopUp
+	WDB_PopUps.delate
+	WDB_PopUps.mask
+	WDB_PopUps.maskcorrect
+]]--
+
+LuaDBTable.SetLuaTableField("PopUps")

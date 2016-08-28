@@ -1,0 +1,23 @@
+WDB_Soul_Break = {}
+--[[
+	WDB_Soul_Break.ID
+	WDB_Soul_Break.Level
+	WDB_Soul_Break.SoulId
+	WDB_Soul_Break.NeedSoulNum
+	WDB_Soul_Break.NeedItem
+	WDB_Soul_Break.NeedItemNum
+	WDB_Soul_Break.NeedLevel
+	WDB_Soul_Break.NeedMoney
+	WDB_Soul_Break.Effect_0
+	WDB_Soul_Break.num_0
+	WDB_Soul_Break.Effect_1
+	WDB_Soul_Break.num_1
+	WDB_Soul_Break.Effect_2
+	WDB_Soul_Break.num_2
+	WDB_Soul_Break.EffectType
+	WDB_Soul_Break.EffectNum
+	WDB_Soul_Break.EffectDesc
+	WDB_Soul_Break.SkillName
+]]--
+
+LuaDBTable.SetLuaTableField("Soul_Break")

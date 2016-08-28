@@ -1,0 +1,51 @@
+WDB_Scene_Ability = {}
+--[[
+	WDB_Scene_Ability.Id
+	WDB_Scene_Ability.Atk_C
+	WDB_Scene_Ability.Hp_C
+	WDB_Scene_Ability.Ability
+	WDB_Scene_Ability.Scene1
+	WDB_Scene_Ability.M1
+	WDB_Scene_Ability.Scene2
+	WDB_Scene_Ability.M2
+	WDB_Scene_Ability.Scene3
+	WDB_Scene_Ability.M3
+	WDB_Scene_Ability.Scene4
+	WDB_Scene_Ability.M4
+	WDB_Scene_Ability.Scene5
+	WDB_Scene_Ability.M5
+	WDB_Scene_Ability.Scene6
+	WDB_Scene_Ability.M6
+	WDB_Scene_Ability.Scene7
+	WDB_Scene_Ability.M7
+	WDB_Scene_Ability.Scene8
+	WDB_Scene_Ability.M8
+	WDB_Scene_Ability.Scene9
+	WDB_Scene_Ability.M9
+	WDB_Scene_Ability.Scene10
+	WDB_Scene_Ability.M10
+	WDB_Scene_Ability.Scene11
+	WDB_Scene_Ability.M11
+	WDB_Scene_Ability.Scene12
+	WDB_Scene_Ability.M12
+	WDB_Scene_Ability.Scene13
+	WDB_Scene_Ability.M13
+	WDB_Scene_Ability.Scene14
+	WDB_Scene_Ability.M14
+	WDB_Scene_Ability.Scene15
+	WDB_Scene_Ability.M15
+	WDB_Scene_Ability.Scene16
+	WDB_Scene_Ability.M16
+	WDB_Scene_Ability.Scene17
+	WDB_Scene_Ability.M17
+	WDB_Scene_Ability.Scene18
+	WDB_Scene_Ability.M18
+	WDB_Scene_Ability.Scene19
+	WDB_Scene_Ability.M19
+	WDB_Scene_Ability.Scene20
+	WDB_Scene_Ability.M20
+	WDB_Scene_Ability.Scene21
+	WDB_Scene_Ability.M21
+]]--
+
+LuaDBTable.SetLuaTableField("Scene_Ability")

@@ -1,0 +1,28 @@
+WDB_Vip = {}
+--[[
+	WDB_Vip.Level
+	WDB_Vip.Cost
+	WDB_Vip.PlayLv
+	WDB_Vip.Desc
+	WDB_Vip.SceneBuy
+	WDB_Vip.WipeMax
+	WDB_Vip.Sinew
+	WDB_Vip.FindBoss
+	WDB_Vip.FreeBoss
+	WDB_Vip.WeaponBuy
+	WDB_Vip.Alchemy
+	WDB_Vip.SoulSceneBuy
+	WDB_Vip.SoulSceneReset
+	WDB_Vip.SoulSceneMax
+	WDB_Vip.SoulMoney
+	WDB_Vip.TowerInspire
+	WDB_Vip.LegionBoss
+	WDB_Vip.StarBuy
+	WDB_Vip.PlunderTimes
+	WDB_Vip.ShopMoney
+	WDB_Vip.ResurgenceBuy
+	WDB_Vip.Pvp
+	WDB_Vip.SoulShop
+]]--
+
+LuaDBTable.SetLuaTableField("Vip")

@@ -1,0 +1,27 @@
+WDB_SignRewards = {}
+--[[
+	WDB_SignRewards.Id
+	WDB_SignRewards.Days
+	WDB_SignRewards.LevelMin
+	WDB_SignRewards.LevelMax
+	WDB_SignRewards.Icon
+	WDB_SignRewards.Type1
+	WDB_SignRewards.ItemId1
+	WDB_SignRewards.Count1
+	WDB_SignRewards.Type2
+	WDB_SignRewards.ItemId2
+	WDB_SignRewards.Count2
+	WDB_SignRewards.Type3
+	WDB_SignRewards.ItemId3
+	WDB_SignRewards.Count3
+	WDB_SignRewards.CritMultiple_01
+	WDB_SignRewards.CritOdds_01
+	WDB_SignRewards.CritMultiple_02
+	WDB_SignRewards.CritOdds_02
+	WDB_SignRewards.CritMultiple_03
+	WDB_SignRewards.CritOdds_03
+	WDB_SignRewards.VipCrit
+	WDB_SignRewards.VipLevel
+]]--
+
+LuaDBTable.SetLuaTableField("SignRewards")

@@ -1,0 +1,24 @@
+CountLblCtr = {}
+
+
+function CountLblCtr:Start()
+    -- Client.MagicBookCountChanged = Client.MagicBookCountChanged + {self,CountLblCtr.OnWipeCountChanged}
+end
+
+function CountLblCtr:OnDestroy()
+    Client.MagicBookCountChanged = Client.MagicBookCountChanged - {self,CountLblCtr.OnWipeCountChanged}
+end
+
+function CountLblCtr:SetData(count,ctrl)
+    self.ctrl = ctrl
+    if count > 0 then
+        self.countLbl:set_text(tostring(count))
+    end
+end
+
+function CountLblCtr:OnWipeCountChanged()
+    if Client.WipeInfo.collection_num > 0 then
+        self.countLbl:set_text(tostring(Client.WipeInfo.collection_num))
+    end
+    GameHallUIController.RefreshMagicBookEffect(self.ctrl)
+end

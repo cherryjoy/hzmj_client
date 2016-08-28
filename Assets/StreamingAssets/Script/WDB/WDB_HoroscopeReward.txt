@@ -1,0 +1,13 @@
+WDB_HoroscopeReward = {}
+--[[
+	WDB_HoroscopeReward.ID
+	WDB_HoroscopeReward.Point
+	WDB_HoroscopeReward.Combination
+	WDB_HoroscopeReward.Odds
+	WDB_HoroscopeReward.RewardMulti
+	WDB_HoroscopeReward.LegionExp
+	WDB_HoroscopeReward.HoroscopeExp
+	WDB_HoroscopeReward.EquipOdds
+]]--
+
+LuaDBTable.SetLuaTableField("HoroscopeReward")

@@ -1,0 +1,22 @@
+WDB_Achieve = {}
+--[[
+	WDB_Achieve.Id
+	WDB_Achieve.Type
+	WDB_Achieve.NextAchieve
+	WDB_Achieve.Name
+	WDB_Achieve.Desc
+	WDB_Achieve.Icon
+	WDB_Achieve.CompleteMin
+	WDB_Achieve.CompleteMax
+	WDB_Achieve.WinType_1
+	WDB_Achieve.Win_1_1
+	WDB_Achieve.Win_1_2
+	WDB_Achieve.WinType_2
+	WDB_Achieve.Win_2_1
+	WDB_Achieve.Win_2_2
+	WDB_Achieve.WinType_3
+	WDB_Achieve.Win_3_1
+	WDB_Achieve.Win_3_2
+]]--
+
+LuaDBTable.SetLuaTableField("Achieve")

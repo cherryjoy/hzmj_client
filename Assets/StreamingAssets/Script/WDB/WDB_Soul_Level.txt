@@ -1,0 +1,16 @@
+WDB_Soul_Level = {}
+--[[
+	WDB_Soul_Level.ID
+	WDB_Soul_Level.Level
+	WDB_Soul_Level.Explvlup
+	WDB_Soul_Level.Expfusion
+	WDB_Soul_Level.GodCord
+	WDB_Soul_Level.Effect_0
+	WDB_Soul_Level.num_0
+	WDB_Soul_Level.Effect_1
+	WDB_Soul_Level.num_1
+	WDB_Soul_Level.Effect_2
+	WDB_Soul_Level.num_2
+]]--
+
+LuaDBTable.SetLuaTableField("Soul_Level")

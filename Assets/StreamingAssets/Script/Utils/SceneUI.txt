@@ -1,0 +1,22 @@
+SceneUI = { }
+
+function SceneUI:CreatSceneUI()
+    local self = LuaUIViewCtr.OpenUI("Utils/ServerTime")
+    return self
+end
+
+function SceneUI:InitSceneUI(self)
+    self.Label001:set_text(CDataMgr.get_GameScene():GetData2(0,1))
+end
+
+function SceneUI:Start()
+    SceneUI:InitSceneUI(self)
+end
+
+function SceneUI:Close_OnClick()
+    GameObject.DestroyImmediate(self.gameObject,false)
+end
+
+function SceneUI:scene001_OnClick()
+    --UnityLevelMgr.LoadLevel("scene")
+end

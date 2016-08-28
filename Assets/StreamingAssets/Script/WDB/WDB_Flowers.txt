@@ -1,0 +1,12 @@
+WDB_Flowers = {}
+--[[
+	WDB_Flowers.Id
+	WDB_Flowers.FloNum
+	WDB_Flowers.BuyType
+	WDB_Flowers.BuyNum
+	WDB_Flowers.Reward1
+	WDB_Flowers.Reward2
+	WDB_Flowers.VIPLimit
+]]--
+
+LuaDBTable.SetLuaTableField("Flowers")

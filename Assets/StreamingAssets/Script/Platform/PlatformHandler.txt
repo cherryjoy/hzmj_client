@@ -1,0 +1,213 @@
+local JSON = require "Utils/JSON"
+PlatformHandler = {}
+function PlatformHandler.Start()
+	Client.CreateRoleSuccess = Client.CreateRoleSuccess + {PlatformHandler,PlatformHandler.CallCreateRole}
+	Client.EnterGameSuccess = Client.EnterGameSuccess + {PlatformHandler,PlatformHandler.CallSDKEnterGame}
+	Client.PlayerLevelUp = Client.PlayerLevelUp + {PlatformHandler,PlatformHandler.CallPlayerLevelUp}
+	Client.RoleSummarySuccess = Client.RoleSummarySuccess + {PlatformHandler,PlatformHandler.RoleSummarySuccess}
+	Client.ConnectSuccess = Client.ConnectSuccess + {PlatformHandler,PlatformHandler.ConnectSuccess}
+	Client.ChooseRoleExitBtn = Client.ChooseRoleExitBtn+{PlatformHandler,PlatformHandler.ChooseRoleExitBtn}
+end
+
+function PlatformHandler.OnDestroy()
+	Client.CreateRoleSuccess = Client.CreateRoleSuccess - {PlatformHandler,PlatformHandler.CallCreateRole}
+	Client.EnterGameSuccess = Client.EnterGameSuccess - {PlatformHandler,PlatformHandler.CallSDKEnterGame}
+	Client.PlayerLevelUp = Client.PlayerLevelUp - {PlatformHandler,PlatformHandler.CallPlayerLevelUp}
+	Client.RoleSummarySuccess = Client.RoleSummarySuccess - {PlatformHandler,PlatformHandler.RoleSummarySuccess}
+	Client.ConnectSuccess = Client.ConnectSuccess - {PlatformHandler,PlatformHandler.ConnectSuccess}
+	Client.ChooseRoleExitBtn = Client.ChooseRoleExitBtn- {PlatformHandler,PlatformHandler.ChooseRoleExitBtn}
+end
+
+function PlatformHandler.onSdkInit()
+	LuaDebug.Log('onSdkInit')
+	PlatformHandler.EnterChooseRoleUI=false
+	PlatformHandler.state = PlatformSDKController.mSelf():SDKState()
+	if not  GameDefine_IsDefaultAuth and not PlatformHandler.InitFinish then
+		param = string.format("{%s,\"gameId\":\"%s\",\"serverId\":\"%s\"}",GameDefine_InitConfig,
+			GameDefine_gameID,PlayerPrefsEx.GetString("lastServerID"))
+		PlatformHandler.gameName=PlatformSDKController.mSelf():get_gameObject():get_name()
+		PlatformHandler.state:OKSDKInit(PlatformHandler.gameName,param)
+	end
+end
+
+
+function PlatformHandler.CallLogin()
+	if PlatformHandler.InitFinish then
+		if not PlatformHandler.Logining then
+			PlatformHandler.state:OKSDKLogin(PlatformHandler.gameName,"")
+			PlatformHandler.Logining=true
+		end
+	end
+end
+
+function  PlatformHandler.CallLogout()
+	PlatformHandler.state:OKSDKLogout(PlatformHandler.gameName,"")
+end
+
+function PlatformHandler.CallSetMuteAndThirdLogin(msg)
+	PlatformHandler.SetMuteWithMessage(msg)
+	PlatformHandler.CallLogin(msg)
+end
+function  PlatformHandler.SetMuteWithMessage(msg)
+	MusicManager.get_Instance():set_MusicVolume(0)
+end
+
+function PlatformHandler.CallPay(productId,money,redCount,custonInfo)
+	--LuaDebug.Log('CallPay')
+	local jsonTb = {}
+	jsonTb["userName"]=PlayerPrefsEx.GetString("userName")
+	jsonTb["roleId"]=''..Client.RoleInfo.roleAttr.roleId
+	jsonTb["roleName"]=Client.RoleInfo.roleAttr.name
+	jsonTb["roleLevel"]=""..Client.RoleInfo.roleAttr.level
+	jsonTb["serverId"]=PlayerPrefsEx.GetString("LastServerId")
+	jsonTb["vipLevel"]=""..Client.RoleInfo.roleAttr.vipLevel
+	jsonTb["goodsNum"]=""..redCount
+	jsonTb["productDesc"]=GameDefine_ProductName
+	ext = JSON:encode_pretty(jsonTb)
+	--LuaDebug.Log(ext)
+	PlatformHandler.state:OKSDKPay(PlatformHandler.gameName,""..money,custonInfo,GameDefine_ProductName,productId,ext)
+end
+
+function PlatformHandler.CallCreateRole()
+	LuaDebug.Log('CallCreateRole')
+	local index=#(Client.Roles)
+ 	local jsonTb = {}
+ 	jsonTb["userName"]= PlayerPrefsEx.GetString("userName")
+ 	jsonTb["roleId"]=''..Client.Roles[index].roleId
+ 	jsonTb["roleName"]=Client.Roles[index].roleName
+ 	jsonTb["serverId"]=PlayerPrefsEx.GetString("LastServerId")
+ 	jsonTb["serverName"]=PlayerPrefsEx.GetString("LastServerName")
+ 	local params = JSON:encode_pretty(jsonTb)
+ 	PlatformHandler.state:OKSDKCreateRole(params)
+end
+
+function PlatformHandler.CallUserCenter()
+ 	PlatformHandler.state:OKSDKUserCenter("")
+end
+
+function PlatformHandler.CallEnterBBS()
+	PlatformHandler.state:OKSDKEnterBBS("")
+end
+
+function PlatformHandler.CallSDKExit()
+	PlatformHandler.state:OKSDKExit("")
+end
+
+function PlatformHandler.CallSDKEnterGame()
+	--LuaDebug.Log('CallSDKEnterGame')
+ 	local jsonTb = {}
+	jsonTb["userName"]=PlayerPrefsEx.GetString("userName")
+	jsonTb["roleId"]= "" .. Client.RoleInfo.roleAttr.roleId
+	jsonTb["roleName"]=Client.RoleInfo.roleAttr.name
+	jsonTb["roleLevel"]=""..Client.RoleInfo.roleAttr.level
+	jsonTb["serverId"]=PlayerPrefsEx.GetString("LastServerId")
+	jsonTb["serverName"]=PlayerPrefsEx.GetString("LastServerName")
+	jsonTb["vipLevel"]=Client.RoleInfo.roleAttr.vipLevel or "0"
+	jsonTb["roleUnion"]=Client.RoleInfo.roleAttr.roleUnion or ""
+	jsonTb["roleBalance"]=Client.RoleInfo.roleAttr.roleBalance or "0"
+	msg = JSON:encode_pretty(jsonTb)
+	PlatformHandler.EnterChooseRoleUI=false
+	--LuaDebug.Log(msg)
+	PlatformHandler.state:OKSDKEnterGame(msg)
+end
+
+function PlatformHandler.CallPlayerLevelUp(self,roleLevel)
+	level = roleLevel.level
+	LuaDebug.Log(level)
+	PlatformHandler.state:OKSDKLevelUp(tostring(level))
+end
+
+
+function PlatformHandler.ExitGameSuccess()
+	if Application.get_loadedLevelName()=='Login' then
+		PlatformHandler.CallLogin()
+	end
+end
+
+function PlatformHandler.RoleSummarySuccess()
+	--LuaDebug.Log("loginsuccess")
+ 	PlatformHandler.Logining=false
+ 	PlatformHandler.EnterChooseRoleUI=true
+end
+
+function PlatformHandler.ConnectSuccess()
+	-- body
+	PlatformHandler.Logining=false
+end
+
+function  PlatformHandler.ChooseRoleExitBtn()
+	PlatformHandler.EnterChooseRoleUI=false
+end
+--------------------------------------------------------------------------------------
+-------SDK CallBack
+--------------------------------------------------------------------------------------
+function PlatformHandler.onInitFinish (msg)
+	--LuaDebug.Log(msg)
+	local json = JSON:decode(msg)
+	if json['code']~=1 then
+		LuaDebug.Log("init false")
+		return
+	end
+	--LuaDebug.Log("InitFinish")
+	if json['isMusic']=='false' or json['isMusic']==false then
+		PlatformHandler.SetMuteWithMessage()
+	end
+	PlatformHandler.InitFinish=true
+	if json['hasLogoutUI']=='true' or json['hasLogoutUI']==true then
+		PlatformHandler.hasLogoutUI=true
+	end
+end
+
+function  PlatformHandler.onLoginFinish(msg)
+	--LuaDebug.Log('onLoginFinish')
+	local json = JSON:decode(msg)
+	if json["code"]==1 then
+		local platformInfo = Client.PlatformInfo
+		platformInfo.userId = json['userId']
+		platformInfo.token = json['token']
+		platformInfo.ext = json['ext']
+		ClientSendMsg.SendRawAuth(platformInfo.userId,platformInfo.token,platformInfo.ext)
+
+	else
+		LuaDebug.Log('onLoginFinish false')
+		PlatformHandler.Logining=false
+	end
+
+end
+
+function PlatformHandler.onLogoutFinish(msg)
+	LuaDebug.Log("logoutfinsh "..msg)
+	LuaDebug.Log("get_loadedLevelName "..Application.get_loadedLevelName())
+	local json = JSON:decode(msg)
+	if json["code"]==1 then
+		if  Client.m_CurrentState==EClientState.E_CS_ChooseRole then
+			LuaDebug.Log("EnterChooseRoleUI ")
+			PlatformHandler.EnterChooseRoleUI=false
+			Client.LoginAccountExit:Do()
+
+			--PlatformHandler.CallLogin()
+		elseif Client.m_CurrentState==EClientState.E_CS_Login or Client.m_CurrentState==EClientState.E_CS_Reconect then
+			LuaDebug.Log("get_loadedLevelName "..Application.get_loadedLevelName())
+			PlatformHandler.CallLogin()
+		else
+			LuaDebug.Log("SendRoleOut ")
+			ClientSendMsg.SendRoleOut()
+		end
+	end
+end
+
+function PlatformHandler.onExitFinish(msg)
+	local json = JSON:decode(msg)
+	if json["code"]==1 then
+		LuaNetwork.DisConnect()
+		Application.Quit()
+	end
+end
+
+function PlatformHandler.OnPayFinish(msg)
+
+end
+
+function PlatformHandler.onSwitchAccountFinish(msg)
+
+end

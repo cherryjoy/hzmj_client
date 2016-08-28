@@ -1,0 +1,62 @@
+require "WDB/WDB_Alchemy"
+require "WDB/WDB_Something_buy"
+require "WDB/WDB_Vip"
+DiamondMoney = {}
+
+function DiamondMoney:Start()
+    local lv=Client.RoleInfo.roleAttr.level
+    local count=LuaCDataMgr.Alchemy():GetRecordCount()
+    for i=0,count-1 do
+        local minLv=LuaCDataMgr.Alchemy():GetDataByNumber(i,WDB_Alchemy.LevelMin)
+        local maxLv=LuaCDataMgr.Alchemy():GetDataByNumber(i,WDB_Alchemy.LevelMax)
+        if lv>=minLv and lv<=maxLv then
+            local money=LuaCDataMgr.Alchemy():GetDataByNumber(i,WDB_Alchemy.Money)
+            self.gainValueLbl:set_text(tostring(money))
+            break
+        end
+    end
+    local mt=TextureMgr.get_Instance():LoadTexture("DiamondMoney/DM")
+    self.Texture:set_material(mt)
+    DiamondMoney.RefreshUI(self)
+    Client.AlchemySuccess = Client.AlchemySuccess + {self,DiamondMoney.AlchemySuccess}
+end
+
+function DiamondMoney:OnDestroy()
+    Client.AlchemySuccess = Client.AlchemySuccess - {self,DiamondMoney.AlchemySuccess}
+end
+
+function DiamondMoney:AlchemySuccess(rate,gold)
+    DiamondMoney.RefreshUI(self)
+    LuaNTools.AddEffect(self.bgObj,UITextureHandle.UIParticleRootPath.."fx_DiamondMoney_BG_gold_Up_01",self.bgTran:get_position())
+    if rate~=0 then
+        TishiCentre.DisPlayCrit(string.format(Text.MultipleReiki,gold),
+                                LuaVector3.Create(0,180,0),LuaVector3.Create(0,30,0))
+    else
+        TishiCentre.DisPlayTextVertical(string.format(Text.GainMoney,gold),LuaVector3.Create(0,-130,0),LuaVector3.Create(0,-56,0))
+    end
+end
+
+function DiamondMoney:RefreshUI()
+    local useCount=Client.RoleInfo.DayCountInfo[EDayCountType.Alchemy]
+    self.alchemyBuy=LuaCDataMgr.Something_buy():GetData2(useCount+1,WDB_Something_buy.Alchemy_buy)
+    self.consumeValueLbl:set_text(tostring(self.alchemyBuy))
+end
+
+function DiamondMoney:UseBtn_OnClick()
+    local count=LuaCDataMgr.Vip():GetData2(Client.RoleInfo.roleAttr.vipLevel,WDB_Vip.Alchemy)
+    if Client.RoleInfo.DayCountInfo[EDayCountType.Alchemy]>=count then
+        TishiCentre.DisPlayText(Text.DayCountOut)
+        return
+    end
+    if HelpTips.CreateHelpTips(EAwardType.DIAMOND,DiamondMoney.CloseBtn_OnClick,self,self.alchemyBuy) then
+         ClientSendMsg.SendAlchemy()
+    end
+end
+
+function DiamondMoney:CloseBtn_OnClick()
+    self.gameObject:Destroy1()
+end
+
+function DiamondMoney:JustDestroy()
+    DiamondMoney.CloseBtn_OnClick(self)
+end

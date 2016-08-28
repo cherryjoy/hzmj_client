@@ -1,0 +1,9 @@
+WDB_LegionBoss = {}
+--[[
+	WDB_LegionBoss.ID
+	WDB_LegionBoss.BossName
+	WDB_LegionBoss.LegionLevel
+	WDB_LegionBoss.TurnOn
+]]--
+
+LuaDBTable.SetLuaTableField("LegionBoss")

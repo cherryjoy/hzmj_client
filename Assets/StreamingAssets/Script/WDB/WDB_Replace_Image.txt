@@ -1,0 +1,9 @@
+WDB_Replace_image = {}
+--[[
+	WDB_Replace_image.Id
+	WDB_Replace_image.ProfessionIcon0
+	WDB_Replace_image.ProfessionIcon1
+	WDB_Replace_image.ProfessionIcon2
+]]--
+
+LuaDBTable.SetLuaTableField("Replace_image")

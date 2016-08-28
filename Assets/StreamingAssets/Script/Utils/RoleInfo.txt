@@ -1,0 +1,87 @@
+RoleInfo = {}
+
+function RoleInfo.Init()
+
+	local roleInfo = {}
+
+	roleInfo.roleAttr=nil
+	roleInfo.state = {}
+	roleInfo.battleAttr=nil
+	roleInfo.equipBagPart = nil
+	roleInfo.currency = nil
+	roleInfo.skills = nil
+	roleInfo.NavigationInfo = nil
+	roleInfo.hallowBagPart = nil
+	roleInfo.equipHallowList = {} --已装备的圣器列表
+	roleInfo.FObj = nil
+	roleInfo.FakePlayer={}
+	roleInfo.currency = RoleInfo.InitCurrency() --货币
+	roleInfo.DayCountInfo = {}
+	roleInfo.CountInfo = RoleInfo.InitCountInfo() --各种次数,但不是dayCount,在某些条件下刷新,不会每日刷新
+	roleInfo.BuyDayCountInfo = {}
+	roleInfo.IsBackFromBattle = false
+	roleInfo.isPassedScene = false
+	roleInfo.isOrderTishi = false
+	roleInfo.isShowPrompt = false
+	roleInfo.LastPosToBattle = {x =0,z=0}
+	roleInfo.LastPlayerPos = {x =0,z=0}
+	roleInfo.LastPosToMine = {x =0,z=0}
+	roleInfo.CDTimeInfo = {}
+	roleInfo.Vitalitys = {}
+	roleInfo.UpPromptData = {}
+	roleInfo.PowerPromptData = nil
+	roleInfo.UpLvPromptData = nil
+	roleInfo.SigInData = {}
+	roleInfo.openFairyId = nil
+	roleInfo.titleList = {}
+	roleInfo.fundAwardStateList = nil
+	roleInfo.wipeCollectionState = 0
+	roleInfo.PushMessageList = PushMessageMgr.CreatePushMessageList()
+
+	roleInfo.BagMgr = BagMgr.Init()
+	roleInfo.GemStoneMgr = GemStoneMgr.Init()
+	roleInfo.GameBattleMapMgr = GameBattleMapMgr.Init()
+	roleInfo.FairyMgr=FairyMgr.Init()
+	roleInfo.FashionMgr=FashionMgr.Init()
+	roleInfo.TaskMgr = TaskMgr.Init()
+	roleInfo.SearchMgr = SearchMgr.Init()
+	roleInfo.GuideMgr = GuideManager.Init()
+	roleInfo.NewPromptMgr = NewPromptMgr.InitMgr()
+	roleInfo.GhostMgr = GhostManager.Init()
+	roleInfo.CorpsMgr = CorpsManager.Init()
+	roleInfo.ChatMgr = ChatManager.Init()
+	roleInfo.TishiTimeMgr = TishiTimeMgr.Init()
+	roleInfo.FairySecretMgr = FairySecretMgr.Init()
+	roleInfo.CitySceneIdMgr =  CitySceneIdMgr.Init()
+	roleInfo.GVGMgr =  GVGMgr.Init()
+	roleInfo.KingTowerMgr = KingTowerMgr.Init()
+	roleInfo.FlowerRedDotMgr = FlowerRedDotMgr.Init()
+	----------------GoBackSys-----------------------
+	roleInfo.goBackUI=nil
+	roleInfo.BackCityOpenUI = {}
+	roleInfo.ActivityTime = {}
+	roleInfo.netPlayerState = ENetPlayerStates.Active --设置网络玩家状态
+
+	roleInfo.FriendMgr = FriendMgr.Init()
+	roleInfo.MessageMgr = MessageMgr.Init()
+	roleInfo.vipLevel = 0
+
+	return roleInfo
+end
+
+function RoleInfo.InitCurrency()
+	local data = {}
+	for i,v in pairs(EAwardType) do
+		if v~=EAwardType.ITEM and v~=EAwardType.INVALID and v~=EAwardType.GROUP then
+            data[v] = 0
+	    end
+	end
+	return data
+end
+
+function RoleInfo.InitCountInfo()
+	local data = {
+		[ECountType.GROUP_ROOM_FREE_REVIVAL_TIMES]=0,  --多人本免费复活次数
+	}
+	return data
+end

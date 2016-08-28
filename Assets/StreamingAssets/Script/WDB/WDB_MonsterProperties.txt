@@ -1,0 +1,39 @@
+WDB_MonsterProperties = {}
+--[[
+	WDB_MonsterProperties.Id
+	WDB_MonsterProperties.Life
+	WDB_MonsterProperties.Attack
+	WDB_MonsterProperties.Defence
+	WDB_MonsterProperties.CDefence
+	WDB_MonsterProperties.FireDam
+	WDB_MonsterProperties.IceDam
+	WDB_MonsterProperties.FireDef
+	WDB_MonsterProperties.IceDef
+	WDB_MonsterProperties.CFireDef
+	WDB_MonsterProperties.CIceDef
+	WDB_MonsterProperties.CritPro
+	WDB_MonsterProperties.CritMulti
+	WDB_MonsterProperties.DotPro
+	WDB_MonsterProperties.DotMulti
+	WDB_MonsterProperties.DotLastTime
+	WDB_MonsterProperties.SlayMulti
+	WDB_MonsterProperties.AttackSpeed
+	WDB_MonsterProperties.RecoverMana
+	WDB_MonsterProperties.CommonDmgMulti
+	WDB_MonsterProperties.CommonAmorMult
+	WDB_MonsterProperties.AntiAmor
+	WDB_MonsterProperties.CDReduceMulti
+	WDB_MonsterProperties.StifleMulti
+	WDB_MonsterProperties.EarthShieldMulti
+	WDB_MonsterProperties.DmgExchangePro
+	WDB_MonsterProperties.ShieldPro
+	WDB_MonsterProperties.Shield
+	WDB_MonsterProperties.AntiAttackSpeedPro
+	WDB_MonsterProperties.AntiAttackSpeedMulti
+	WDB_MonsterProperties.Withstand
+	WDB_MonsterProperties.AntiControl
+	WDB_MonsterProperties.ComboMulti
+	WDB_MonsterProperties.SpeedMulit
+]]--
+
+LuaDBTable.SetLuaTableField("MonsterProperties")

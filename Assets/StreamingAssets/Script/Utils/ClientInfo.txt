@@ -1,0 +1,15 @@
+require "Utils/ServerTime"
+
+ClientInfo = {}
+
+ClientInfo.SessionID = -1
+ClientInfo.userId=0
+ClientInfo.userName=""
+ClientInfo.isFirstLogin = false
+function ClientInfo.ClearUserInfo(  )
+	ClientInfo.userId=0
+	ClientInfo.userName=""
+	ClientInfo.isFirstLogin = false
+end
+---------ServerTime---------
+ClientInfo.ServerTime = ServerTime

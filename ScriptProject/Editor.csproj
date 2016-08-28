@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8D7A6116-2302-4495-9E86-91D223DCD775}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Editor</RootNamespace>
+    <AssemblyName>Editor</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_MONO;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_GENERICS;ENABLE_SUBSTANCE;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;UNITY_4_3_4;UNITY_4_3;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;SIMPLE_STATE_EDITER;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleaseIOS|AnyCPU'">
+    <OutputPath>bin\ReleaseIOS\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleaseAndroid|AnyCPU'">
+    <OutputPath>bin\ReleaseAndroid\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UnityEditor, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\UnityEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\UnityEngine.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Main.csproj">
+      <Project>{C7B311AA-A0E2-4B44-9F75-91265C258D90}</Project>
+      <Name>Main</Name>
+    </ProjectReference>
+    <ProjectReference Include="LKBase.csproj">
+      <Project>{d14fae4e-eb17-4d7e-90a8-037935f4a521}</Project>
+      <Name>LKBase</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Code\Editor\LuaEditor\LuaBehaviourInspector.cs" />
+    <Compile Include="Code\Editor\LuaEditor\LuaBehaviourUpdateInspector.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Code\Editor\LuaEditor\LuaScriptTemplateCreator.cs" />
+    <Compile Include="Code\Editor\NGUIEditor\BMFontReader.cs" />
+    <Compile Include="Code\Editor\NGUIEditor\ComponentSelector.cs" />
+    <Compile Include="Code\Editor\NGUIEditor\ComponentSelectorNew.cs" />
+    <Compile Include="Code\Editor\NGUIEditor\LKBaseUIEditor\UIButtonInspector.cs" />
+    <Compile Include="Code\Editor\NGUIEditor\NGUIEditorTools.cs" />
+    <Compile Include="Code\Editor\NGUIEditor\NGUIJson.cs" />
+    <Compile Include="Code\Editor\NGUIEditor\NGUILayoutEditor.cs" />
+    <Compile Include="Code\Editor\NGUIEditor\NGUIMenu.cs" />
+    <Compile Include="Code\Editor\NGUIEditor\NGUISelectionTools.cs" />
+    <Compile Include="Code\Editor\NGUIEditor\NGUISettings.cs" />
+    <Compile Include="Code\Editor\NGUIEditor\NGUITransformInspector.cs" />
+    <Compile Include="Code\Editor\NGUIEditor\SpriteSelector.cs" />
+    <Compile Include="Code\Editor\NGUIEditor\UIAtlasInspector.cs" />
+    <Compile Include="Code\Editor\NGUIEditor\UIAtlasMaker.cs" />
+    <Compile Include="Code\Editor\NGUIEditor\UICameraTool.cs" />
+    <Compile Include="Code\Editor\NGUIEditor\UIColorLabelInspector.cs" />
+    <Compile Include="Code\Editor\NGUIEditor\UIColorSpriteInspector.cs" />
+    <Compile Include="Code\Editor\NGUIEditor\UICreateNewUIWizard.cs" />
+    <Compile Include="Code\Editor\NGUIEditor\UICreateWidgetWizard.cs" />
+    <Compile Include="Code\Editor\NGUIEditor\UIDrawCallInspector.cs" />
+    <Compile Include="Code\Editor\NGUIEditor\UIFilledSpriteInspector.cs" />
+    <Compile Include="Code\Editor\NGUIEditor\UIImageButtonInspector.cs" />
+    <Compile Include="Code\Editor\NGUIEditor\UILabelInspector.cs" />
+    <Compile Include="Code\Editor\NGUIEditor\UIPanelInspector.cs" />
+    <Compile Include="Code\Editor\NGUIEditor\UIPanelTool.cs" />
+    <Compile Include="Code\Editor\NGUIEditor\UIParticleInspector.cs" />
+    <Compile Include="Code\Editor\NGUIEditor\UIPopupListInspector.cs" />
+    <Compile Include="Code\Editor\NGUIEditor\UISettings.cs" />
+    <Compile Include="Code\Editor\NGUIEditor\UISlicedSpriteInspector.cs" />
+    <Compile Include="Code\Editor\NGUIEditor\UISprite2colorInspector.cs" />
+    <Compile Include="Code\Editor\NGUIEditor\UISpriteAnimationInspector.cs" />
+    <Compile Include="Code\Editor\NGUIEditor\UISpriteInspector.cs" />
+    <Compile Include="Code\Editor\NGUIEditor\UITextureInspector.cs" />
+    <Compile Include="Code\Editor\NGUIEditor\UITexturePacker.cs" />
+    <Compile Include="Code\Editor\NGUIEditor\UITiledSpriteInspector.cs" />
+    <Compile Include="Code\Editor\NGUIEditor\UIWidgetInspector.cs" />
+    <Compile Include="Code\Editor\NGUIEditor\Viewer\WidgetViewer.cs" />
+    <Compile Include="Code\Editor\Tools\DataViewer.cs" />
+    <Compile Include="Code\Editor\Tools\FrameLayoutHelperEditor.cs" />
+    <Compile Include="Code\Editor\Tools\OneKeyAtlasChange.cs" />
+    <Compile Include="Code\Editor\Tools\OneKeyChangeSlotSize.cs" />
+    <Compile Include="Code\Editor\Postprocessor\LuaDoFileImmediately.cs" />
+    <Compile Include="Code\Editor\Tools\CheckMissingScript.cs" />
+    <Compile Include="Code\Editor\Tools\ColorOperation.cs" />
+    <Compile Include="Code\Editor\Tools\CopyAssetPath.cs" />
+    <Compile Include="Code\Editor\Tools\CopySprite.cs" />
+    <Compile Include="Code\Editor\Tools\DBScriptGenrator.cs" />
+    <Compile Include="Code\Editor\Tools\EditorTools.cs" />
+    <Compile Include="Code\Editor\Tools\ModifyColor.cs" />
+    <Compile Include="Code\Editor\Tools\NDBLocalizationWindow.cs" />
+    <Compile Include="Code\Editor\Tools\ResourceChecker.cs" />
+    <Compile Include="Code\Editor\Tools\SetGameobjectActive.cs" />
+    <Compile Include="Code\Editor\EZTools\GameObjectRefFinder.cs" />
+    <Compile Include="Code\Editor\Tools\TranTextrueTo16Bit.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>Copy $(TargetDir)\Editor.dll ..\..\..\Assets\Plugins\Editor
+Copy $(TargetDir)\Editor.pdb ..\..\..\Assets\Plugins\Editor</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

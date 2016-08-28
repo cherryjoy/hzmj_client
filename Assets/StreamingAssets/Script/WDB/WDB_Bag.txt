@@ -1,0 +1,7 @@
+WDB_Bag = {}
+--[[
+	WDB_Bag.Id
+	WDB_Bag.Num
+]]--
+
+LuaDBTable.SetLuaTableField("Bag")

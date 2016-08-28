@@ -1,0 +1,9 @@
+WDB_TreasureConfig = {}
+--[[
+	WDB_TreasureConfig.Id
+	WDB_TreasureConfig.Name
+	WDB_TreasureConfig.Param
+	WDB_TreasureConfig.Param2
+]]--
+
+LuaDBTable.SetLuaTableField("TreasureConfig")

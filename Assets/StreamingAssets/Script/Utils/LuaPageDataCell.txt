@@ -1,0 +1,16 @@
+LuaPageDataCell = {}
+
+function LuaPageDataCell:Start()	
+	local m_index = -1
+end
+
+function LuaPageDataCell:SetData(index,content)
+
+if index == self.m_index then return end
+
+self.m_index = index
+self.m_lable:set_text(content)
+
+LuaDebug.Log("Set Data: "..index)
+
+end

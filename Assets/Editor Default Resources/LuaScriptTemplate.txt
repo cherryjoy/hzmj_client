@@ -1,0 +1,9 @@
+﻿#NAME# = {}
+
+function #NAME#:Start( )
+
+end
+
+function #NAME#:OnDestroy( )
+
+end

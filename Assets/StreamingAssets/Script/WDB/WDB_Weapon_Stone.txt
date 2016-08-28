@@ -1,0 +1,10 @@
+WDB_Weapon_Stone = {}
+--[[
+	WDB_Weapon_Stone.ID
+	WDB_Weapon_Stone.LevelMin
+	WDB_Weapon_Stone.LevelMax
+	WDB_Weapon_Stone.MoneyType
+	WDB_Weapon_Stone.Num
+]]--
+
+LuaDBTable.SetLuaTableField("Weapon_Stone")

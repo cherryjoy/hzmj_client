@@ -1,0 +1,2 @@
+SceneEventLua = {SceneEventHappen = function(eve) LuaDebug.Log(eve)  end
+}

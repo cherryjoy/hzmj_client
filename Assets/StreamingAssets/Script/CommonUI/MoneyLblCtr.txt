@@ -1,0 +1,9 @@
+MoneyLblCtr = {}
+
+function MoneyLblCtr:SetMoneyData(moneyType,num,preText)
+	if preText == nil then preText = "" end
+	local spriteName = Util.GetMoneySpriteName (moneyType)
+	self.MoneySpr:set_spriteName(spriteName)
+	self.MoneySpr:MakePixelPerfectWithSizeInAtlas()
+	self.PriceLbl:set_text(preText..tostring(num))
+end

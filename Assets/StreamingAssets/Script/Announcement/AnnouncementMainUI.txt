@@ -1,0 +1,131 @@
+AnnouncementMainUI = {}
+
+function AnnouncementMainUI:Start()
+
+end
+
+function AnnouncementMainUI:OnDestroy()
+
+end
+
+function AnnouncementMainUI:Init()
+    if self.isInit then return end
+    self.isInit = true
+    self.checkMarks = {}
+    self.MarksPrefab = {}
+    self.lastIndex=0
+    -- LuaDebug.Log("noticeNum:"..#self.AnnouncementData)
+    if #self.AnnouncementData ~=0 then
+        self.CallListDragTarget:SetDataSources(#self.AnnouncementData, false)
+        AnnouncementMainUI.SetCheckMark(self,self.checkMarks[1],self.checkMarks)
+        AnnouncementMainUI.RefreshNotice(self,self.AnnouncementData[1])
+    end
+end
+
+function AnnouncementMainUI:setData(data,control)
+    self.ctr = control
+    self.AnnouncementData = data
+    if self.AnnouncementData == nil then return end
+    AnnouncementMainUI.Init(self)
+end
+
+function AnnouncementMainUI:RefreshNotice(noticeDes)
+    local noticeDesList = AnnouncementMainUI.GetNodeLabel(self,noticeDes.NoticeDes)
+    local pureLabel = false
+    for i,v in ipairs(noticeDesList) do
+        if string.find(v,"%[%/i%]") then
+            self.textureDes = AnnouncementMainUI.GetUrl(self,v)
+            local AnnouncementServerList = self.textureDes.textureUrl
+            if AnnouncementServerList ~= nil and AnnouncementServerList ~="" then
+                self.ctr.ClientInitCtr:GetDownLoadTexture(AnnouncementServerList,"DownloadTextureSuccss","DownloadTextureFail")
+                AnnouncementMainUI.addTexture(self)
+                pureLabel = true
+            else
+                -- LuaDebug.Log("AnnouncementServerList is nil")
+            end
+        else
+            AnnouncementMainUI.addLabel(self,v)
+        end
+    end
+    --  是纯文本
+    if not pureLabel then
+        for i,v in ipairs(self.MarksPrefab) do
+            v.widget:set_color(LuaColor.Get(1,1,1,1))
+        end
+        self.Layout:set_enabled(true)
+        self.Layout:RefreshNow()
+    end
+
+end
+
+function AnnouncementMainUI:SetCellData(index)
+    AnnouncementListCell.SetData(self.Cells[index%self.CellsCount+1],self,index)
+    table.insert(self.checkMarks,self.Cells[index%self.CellsCount+1].Mark)
+end
+
+function AnnouncementMainUI:GetNodeLabel(noticeDes)
+    local notice = noticeDes
+    local noticeDesList = {}
+    while string.len(notice)>0 do
+        local index = string.find(notice,"\\r")
+        if index ~= nil then
+            local des = string.sub(notice,1,index-1)
+            table.insert(noticeDesList,des)
+            notice = string.sub(notice,index+2,string.len(notice))
+        else
+            table.insert(noticeDesList,notice)
+            break
+        end
+    end
+    return noticeDesList
+end
+
+function AnnouncementMainUI:GetUrl(DesString)
+    local textureDes = {}
+    local startIndex,endIndex = string.find(DesString,"i=")
+    local index = string.find(DesString,"]")
+    local startIndex1,endIndex2 = string.find(DesString,"/i]")
+    if endIndex ~= nil and index ~= nil and startIndex1 ~= nil then
+        local textureWidth = tonumber(string.sub(DesString,endIndex+1,index-1))
+        local textureUrl = string.sub(DesString,index+1,startIndex1-2)
+        textureDes.textureWidth = textureWidth
+        textureDes.textureUrl = textureUrl
+    end
+    return textureDes
+end
+
+function AnnouncementMainUI:addLabel(label)
+    local labelPrefab  = LuaUIViewCtr.AddChildNotLose("AnnouncementUI/AnnouncementLabel",self.CallDesObj)
+    labelPrefab:setData(label,self)
+    self.Layout:AddChild(labelPrefab.gameObject)
+    table.insert(self.MarksPrefab,labelPrefab)
+end
+
+function AnnouncementMainUI:addTexture()
+    if self.texturePrefabs == nil then self.texturePrefabs = {} end
+    local texturePrefab  = LuaUIViewCtr.AddChildNotLose("AnnouncementUI/AnnouncementTexture",self.CallDesObj)
+    table.insert(self.texturePrefabs, texturePrefab)
+    table.insert(self.MarksPrefab,texturePrefab)
+    self.Layout:AddChild(texturePrefab.gameObject)
+end
+
+function AnnouncementMainUI:SetTextureData(url,www)
+    local material = TextureMgr.get_Instance():LoadNetTexture(url,www)
+    if self.texturePrefabs[1] ~= nil then
+        self.texturePrefabs[1]:setData(material,self)
+        table.remove(self.texturePrefabs, 1)
+    end
+    -- self.texturePrefab:setData(material,self)
+end
+
+function AnnouncementMainUI:SetCheckMark(checkMark,checkMarks)
+    for i,v in ipairs(checkMarks) do
+        v:set_enabled(false)
+    end
+    checkMark:set_enabled(true)
+end
+
+function AnnouncementMainUI:CloseBtn_OnClick( )
+    self.gameObject:Destroy1()
+    self.ctr.prefab = nil
+end

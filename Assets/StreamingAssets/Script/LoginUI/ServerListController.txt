@@ -1,0 +1,101 @@
+ServerListController={}
+
+function ServerListController:Start()
+    LuaUIViewCtr.UIPanel["ServerList"] = self.gameObject
+    Client.ConnectSuccess = Client.ConnectSuccess + {self,ServerListController.ConnectSuccess}
+end
+
+function ServerListController:OnDestroy()
+    LuaUIViewCtr.UIPanel["ServerList"] = nil
+    Client.ConnectSuccess = Client.ConnectSuccess - {self,ServerListController.ConnectSuccess}
+end
+
+function ServerListController:Init(LoginCtr)
+    self.ServerTable = LoginCtr.ServerTable
+    self.ServerTableInfo = LoginCtr.ServerTableInfo
+    self.LoginCtr=LoginCtr
+    self.ServerBtnList={}
+    self.ServerPanelList={}
+
+    if #(self.ServerBtnList) ~= 0 then
+        for i,v in ipairs(self.ServerBtnList) do
+            v:Destroy1()
+        end
+        self.ServerBtnList={}
+    end
+
+    local offset = 0
+    if ServerListController.HasMyServerList(self) then
+        offset = 1
+    end
+    for i=1,#(self.ServerTableInfo) do
+        local ref1 = LuaUIViewCtr.OpenUINotLoseNest("Login/ServerPanel",self.RightPanel)
+        table.insert(self.ServerPanelList,ref1.gameObject)
+        ServerPanelCell.Init(ref1,self,i)
+
+        local ref = LuaUIViewCtr.OpenUINotLoseNest("Login/ServerBtn",self.BtnDragTarget)
+        table.insert(self.ServerBtnList,ref.gameObject)
+        ref.DragObj:target(self.BtnDragTarget:get_transform())
+        -- LuaDebug.Log(offset)
+        if offset == 0 and i==1 then
+            ref.startstate = true
+        else
+            ref.startstate = false
+        end
+        ServerBtnCell.Init(ref,self,i)
+        ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(30,-90*(i-1+offset)+160,0))
+    end
+
+    if ServerListController.HasMyServerList(self) then
+        ServerListController.InitMyServer(self)
+    end
+end
+
+function ServerListController:InitMyServer()
+    local ref1 = LuaUIViewCtr.OpenUINotLoseNest("Login/MyServerPanel",self.RightPanel)
+    table.insert(self.ServerPanelList,ref1.gameObject)
+    ServerPanelCell.InitMyServer(ref1,self)
+
+    local ref = LuaUIViewCtr.OpenUINotLoseNest("Login/ServerBtn",self.BtnDragTarget)
+    table.insert(self.ServerBtnList,ref.gameObject)
+    ref.DragObj:target(self.BtnDragTarget:get_transform())
+
+    ServerBtnCell.InitMyServer(ref,self,ref1.gameObject)
+    ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(30,160,0))
+end
+
+function ServerListController:HasMyServerList()
+    if self.CurrentNumber == nil then
+        self.CurrentNumber = PlayerPrefsEx.GetString("LastServerNumber")
+    end
+    if (self.CurrentNumber == nil or self.CurrentNumber == "") then self.CurrentNumber = "-1" end
+    if self.CurrentNumber == "-1" and self.LoginCtr.MyServerListInfo.lastLogin == -1 then
+        return false
+    end
+
+    --重构serverList
+    local serverTableList = {}
+    for i,v in ipairs(self.ServerTable) do
+        for j,k in ipairs(v) do
+            --相同的server_ID，视为同一个服务器
+            serverTableList[k.Number] = k
+        end
+    end
+
+    if serverTableList[self.CurrentNumber] == nil and serverTableList[self.LoginCtr.MyServerListInfo.lastLogin] == nil then
+        return false
+    end
+
+    return true
+end
+
+function ServerListController:ConnectSuccess()
+    if self.CurrentServerNode ~= nil then
+        self.LoginCtr:SaveServerInfo(self.CurrentServerNode)
+    end
+    self.gameObject:Destroy1()
+end
+
+function ServerListController:ClosedBtn_OnClick()
+    self.gameObject:Destroy1()
+end

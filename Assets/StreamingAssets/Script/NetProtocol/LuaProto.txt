@@ -1,0 +1,137 @@
+LuaProto = {}
+TypesSizeTable = {
+	int = 5,
+	long = 9,
+	float = 5,
+	bool = 1,
+}
+function LuaProto:serialize()
+	serialize_start(self:GetSize())
+	self:Serialize()
+	local buffer,bufferLength = serialize_get_buffer()
+	return buffer,bufferLength
+end
+--deserialize
+function LuaProto.deserialize( protoType,buffer,bufferLength)
+	local proto = protoType.Create()
+	deserialize_start(buffer,bufferLength)
+	proto:DeSerialize()
+	return proto
+end
+function LuaProto.deserializeInt( buffer,bufferLength )
+	deserialize_start(buffer,bufferLength)
+	local int=deserialize_int32()
+	return int
+end
+function LuaProto.deserializeLong( buffer,bufferLength )
+	deserialize_start(buffer,bufferLength)
+	local long=deserialize_int64()
+	return long
+end
+function LuaProto.deserializeFloat( buffer,bufferLength )
+	deserialize_start(buffer,bufferLength)
+	local float=deserialize_float()
+	return float
+end
+function LuaProto.deserializeString( buffer ,bufferLength)
+	deserialize_start(buffer,bufferLength)
+	local string=deserialize_string()
+	return string
+end
+function LuaProto.deserializeBool( buffer ,bufferLength)
+	deserialize_start(buffer,bufferLength)
+	local bool=deserialize_bool()
+	return bool
+end
+function LuaProto.deserializeLongId(buffer,bufferLength)
+	deserialize_start(buffer,bufferLength)
+	local longId=deserialize_long_id()
+	return longId
+end
+
+--deserializeInlua
+function LuaProto.deserializeInLua(protoType,buffer,bufferLength)
+	local proto = protoType.Create()
+	deserialize_in_lua_start(buffer,bufferLength)
+	proto:DeSerialize()
+	return proto
+end
+function LuaProto.deserializeIntInLua( buffer,bufferLength )
+	deserialize_in_lua_start(buffer,bufferLength)
+	local int=deserialize_int32()
+	return int
+end
+function LuaProto.deserializeLongInLua( buffer ,bufferLength)
+	deserialize_in_lua_start(buffer,bufferLength)
+	local long =deserialize_int64()
+	return long
+end
+function LuaProto.deserializeLongIdInLua(buffer,bufferLength)
+	deserialize_in_lua_start(buffer,bufferLength)
+	local longId=deserialize_long_id()
+	return longId
+end
+function LuaProto.deserializeFloatInLua( buffer ,bufferLength)
+	deserialize_in_lua_start(buffer,bufferLength)
+	local float=deserialize_float()
+	return float
+end
+function LuaProto.deserializeStringInLua( buffer ,bufferLength)
+	deserialize_in_lua_start(buffer,bufferLength)
+	local string=deserialize_string()
+	return string
+end
+function LuaProto.deserializeBoolInLua( buffer ,bufferLength)
+	deserialize_in_lua_start(buffer,bufferLength)
+	local bool=deserialize_bool()
+	return bool
+end
+
+--serialize base type
+function LuaProto.serializeInt(buffer)
+	serialize_start(TypesSizeTable.int)
+	serialize_int32(buffer)
+	local bufferLength=0
+	buffer,bufferLength = serialize_get_buffer()
+	return buffer,bufferLength
+end
+
+function LuaProto.serializeFloat( buffer )
+	serialize_start(TypesSizeTable.float)
+    serialize_float(buffer)
+    local bufferLength=0
+    buffer,bufferLength = serialize_get_buffer()
+	return buffer,bufferLength
+end
+
+function LuaProto.serializeLong( buffer )
+	serialize_start(TypesSizeTable.long)
+    serialize_int64(buffer)
+    local bufferLength=0
+    buffer,bufferLength = serialize_get_buffer()
+	return buffer,bufferLength
+end
+
+function LuaProto.serializeLongId(buffer)
+	serialize_start(TypesSizeTable.long)
+	serialize_long_id(buffer)
+	local bufferLength=0
+	buffer,bufferLength = serialize_get_buffer()
+	return buffer,bufferLength
+end
+
+function LuaProto.serializeString( buffer )
+	serialize_start(serialize_get_str_actual_size(string.len(buffer)))
+	serialize_string(buffer)
+	local bufferLength=0
+	buffer,bufferLength = serialize_get_buffer()
+	return buffer,bufferLength
+end
+
+function LuaProto.serializeBool( buffer )
+	serialize_start(TypesSizeTable.bool)
+	serialize_bool(buffer)
+	local bufferLength=0
+	buffer,bufferLength = serialize_get_buffer()
+	return buffer,bufferLength
+end

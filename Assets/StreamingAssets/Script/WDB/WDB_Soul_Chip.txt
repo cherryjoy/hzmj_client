@@ -1,0 +1,17 @@
+WDB_Soul_Chip = {}
+--[[
+	WDB_Soul_Chip.ID
+	WDB_Soul_Chip.Scene0
+	WDB_Soul_Chip.Scene1
+	WDB_Soul_Chip.Scene2
+	WDB_Soul_Chip.Scene3
+	WDB_Soul_Chip.Scene4
+	WDB_Soul_Chip.Scene5
+	WDB_Soul_Chip.Scene6
+	WDB_Soul_Chip.Scene7
+	WDB_Soul_Chip.Scene8
+	WDB_Soul_Chip.Scene9
+	WDB_Soul_Chip.Scene10
+]]--
+
+LuaDBTable.SetLuaTableField("Soul_Chip")

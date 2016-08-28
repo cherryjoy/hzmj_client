@@ -1,0 +1,12 @@
+WDB_Step_Item = {}
+--[[
+	WDB_Step_Item.ItemId
+	WDB_Step_Item.Scene_0
+	WDB_Step_Item.Scene_1
+	WDB_Step_Item.Scene_2
+	WDB_Step_Item.Scene_3
+	WDB_Step_Item.Scene_4
+	WDB_Step_Item.Scene_5
+]]--
+
+LuaDBTable.SetLuaTableField("Step_Item")

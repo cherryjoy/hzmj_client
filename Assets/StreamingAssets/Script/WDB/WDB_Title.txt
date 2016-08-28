@@ -1,0 +1,18 @@
+WDB_Title = {}
+--[[
+	WDB_Title.Id
+	WDB_Title.Type
+	WDB_Title.TitlePic
+	WDB_Title.Dynamic
+	WDB_Title.Effect
+	WDB_Title.ConditionType
+	WDB_Title.ConditionNum1
+	WDB_Title.ConditionNum2
+	WDB_Title.EffectiveTime
+	WDB_Title.ObtainConditiondesc
+	WDB_Title.TitleAbilitydesc
+	WDB_Title.TitleAbilitytype
+	WDB_Title.TitleAbilitynum
+]]--
+
+LuaDBTable.SetLuaTableField("Title")

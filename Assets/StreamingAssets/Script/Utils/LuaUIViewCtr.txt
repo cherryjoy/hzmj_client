@@ -1,0 +1,505 @@
+
+LuaUIViewCtr = {}
+LuaUIViewCtr.UIPanel={}
+
+function LuaUIViewCtr:Start ()
+    if(LuaUIViewCtr.UIParent == nil) then
+        LuaUIViewCtr.UIParent = UIViewCtr.self_():get_gameObject()
+    end
+    Client.SessionCreated = Client.SessionCreated +{self,LuaUIViewCtr.SessionCreated}
+    Client.EnterGameSuccess = Client.EnterGameSuccess + {self,LuaUIViewCtr.EnterGameSuccess}
+    Client.CityEnter = Client.CityEnter + {self,LuaUIViewCtr.CityEnter}
+    Client.PlayerLevelUp = Client.PlayerLevelUp + {self, LuaUIViewCtr.PlayerLevelUp}
+    Client.ShowToolTips = Client.ShowToolTips + {self,LuaUIViewCtr.OnShowToolTips}
+    Client.EnterBattle = Client.EnterBattle + {self, LuaUIViewCtr.EnterBattle}
+    Client.FinishBattle = Client.FinishBattle + {self, LuaUIViewCtr.FinishBattle}
+    Client.TaskStateUpdate = Client.TaskStateUpdate + {self,LuaUIViewCtr.TaskStateUpdate}
+    Client.ScenePassSuccess = Client.ScenePassSuccess + {self,LuaUIViewCtr.ScenePassSuccess}
+    Client.UIOpen=Client.UIOpen + {self,LuaUIViewCtr.UIOpen}
+    Client.UIDestroy = Client.UIDestroy + {self,LuaUIViewCtr.UIDestroy}
+    Client.ServerMsgGet=Client.ServerMsgGet + {self,LuaUIViewCtr.ServerMsgGet}
+    Client.StartGuide = Client.StartGuide + {self,LuaUIViewCtr.ContinueGuide}
+    Client.PromptStateChanged = Client.PromptStateChanged + {self,LuaUIViewCtr.OnCheckPromptStateChanged}
+    Client.AnnounceHandle = Client.AnnounceHandle + {self, LuaUIViewCtr.HandleAnnounce}
+    Client.ShowOrHideAnnounce = Client.ShowOrHideAnnounce + {self, LuaUIViewCtr.ShowOrHideAnnounce}
+    Client.ApplicationPause = Client.ApplicationPause + {self,LuaUIViewCtr.ApplicationPause}
+    Client.SinewBuySuccess = Client.SinewBuySuccess + {self,LuaUIViewCtr.OnBuySinewSuccess}
+
+    if LuaUIViewCtr.UIPanel ~= nil then
+        LuaUIViewCtr.UIPanel = {}
+        LuaUIViewCtr.UIPanelIsShow = true
+    end
+    -- LuaUIViewCtr.ShowPrompt()
+    LuaUIViewCtr.UIPanel["HUDContainer"]=self.HUDContainer
+    LuaUIViewCtr.mainCam=Camera.get_main()
+end
+
+function LuaUIViewCtr:OnDestroy ()
+    Client.SessionCreated = Client.SessionCreated -{self,LuaUIViewCtr.SessionCreated}
+    Client.EnterGameSuccess = Client.EnterGameSuccess - {self,LuaUIViewCtr.EnterGameSuccess}
+    Client.CityEnter = Client.CityEnter - {self,LuaUIViewCtr.CityEnter}
+    Client.PlayerLevelUp = Client.PlayerLevelUp - {self, LuaUIViewCtr.PlayerLevelUp}
+    Client.ShowToolTips = Client.ShowToolTips - {self,LuaUIViewCtr.OnShowToolTips}
+    Client.EnterBattle = Client.EnterBattle - {self, LuaUIViewCtr.EnterBattle}
+    Client.FinishBattle = Client.FinishBattle - {self, LuaUIViewCtr.FinishBattle}
+    Client.TaskStateUpdate = Client.TaskStateUpdate - {self,LuaUIViewCtr.TaskStateUpdate}
+    Client.ScenePassSuccess = Client.ScenePassSuccess - {self,LuaUIViewCtr.ScenePassSuccess}
+    Client.UIOpen=Client.UIOpen - {self,LuaUIViewCtr.UIOpen}
+    Client.UIDestroy = Client.UIDestroy - {self,LuaUIViewCtr.UIDestroy}
+    Client.ServerMsgGet=Client.ServerMsgGet - {self,LuaUIViewCtr.ServerMsgGet}
+    Client.StartGuide = Client.StartGuide - {self,LuaUIViewCtr.ContinueGuide}
+    Client.PromptStateChanged = Client.PromptStateChanged - {self,LuaUIViewCtr.OnCheckPromptStateChanged}
+    Client.AnnounceHandle = Client.AnnounceHandle - {self, LuaUIViewCtr.HandleAnnounce}
+    Client.ShowOrHideAnnounce = Client.ShowOrHideAnnounce - {self, LuaUIViewCtr.ShowOrHideAnnounce}
+    Client.ApplicationPause = Client.ApplicationPause - {self,LuaUIViewCtr.ApplicationPause}
+    Client.SinewBuySuccess = Client.SinewBuySuccess - {self,LuaUIViewCtr.OnBuySinewSuccess}
+    LuaUIViewCtr.UIParent = nil
+    if Client.RoleInfo then
+        Client.RoleInfo.TaskMgr.autoLbl = nil
+    end
+end
+
+function LuaUIViewCtr:SessionCreated()
+    local clientState = Client.m_CurrentState
+    if Client.NetState ~= EClientNetWorkState.NORMAL and clientState~=EClientState.E_CS_Login and clientState ~= EClientState.E_CS_ChooseRole and clientState ~= EClientState.E_CS_Reconect then
+       if not GameDefine_isLoginForLK then
+           local platformInfo = Client.PlatformInfo
+           local userId=platformInfo.userId
+           if not userId then
+               userId=""
+           end
+           ClientSendMsg.SendRawAuth(userId,platformInfo.token,platformInfo.ext,Client.RoleInfo.roleAttr.roleId)
+       else
+           local userName=PlayerPrefsEx.GetString("userName")
+           local password=PlayerPrefsEx.GetString("password")
+           ClientSendMsg.SendRawAuth(userName,password,nil,Client.RoleInfo.roleAttr.roleId)
+       end
+    end
+end
+
+function LuaUIViewCtr:EnterGameSuccess()
+   ClientSendMsg.SendCityEnter(Client.RoleInfo.roleAttr.cityId)
+end
+
+function LuaUIViewCtr:CityEnter(data)
+    local curState =  Client.m_CurrentState
+   if curState ~= EClientState.E_CS_Login and curState ~= EClientState.E_CS_ChooseRole then
+       if BattleCommonCtr ~= nil then
+           BattleCommonCtr.ClearSceneWhenExit()
+       end
+       --require "Utils/MainCity"
+      Util.EnterCity(data)
+   end
+end
+
+function LuaUIViewCtr:ContinueGuide(delayParam)
+    Client.RoleInfo.GuideMgr:ContinueGuide(delayParam)
+end
+
+---推送
+function LuaUIViewCtr.LocalNotification(isPause)
+    if isPause then
+        LuaUtil.NotificationMessage(12,0,Text.SinewLunch)
+        LuaUtil.NotificationMessage(19,50,Text.Tulong)
+        if not Client.RoleInfo  or not Client.RoleInfo.currency then  return end
+        local curSinewRestore = Client.RoleInfo.currency[EAwardType.STAMINA]
+        if curSinewRestore < 150 then
+            local sinewRestoreMax = tonumber(LuaCDataMgr.GameConfig():GetData2(48,WDB_GameConfig.Param2))
+            local restoreTime = LuaCDataMgr.GameConfig():GetData2(68,WDB_GameConfig.Param)
+            local cdTime =  (sinewRestoreMax-curSinewRestore)*restoreTime
+            LuaDebug.Log(sinewRestoreMax.."  "..curSinewRestore.."  "..restoreTime.."  "..cdTime)
+            LuaUtil.NotificationMessageAddSeconds(cdTime,Text.SinewRestore,8,22)
+        end
+        if not InOutBtnMoveCtr.IsActiveForSmallBtn("MagicBookUI") then return end
+        local openLevel = LuaCDataMgr.GameConfig():GetData2(EGlobalConfig.MagicTowerOpenedLevelID,WDB_GameConfig.Param)
+        if Client.RoleInfo.roleAttr.level >= openLevel then
+            local vipLevel = Client.RoleInfo.roleAttr.vipLevel
+            local wipeMaxCount = LuaCDataMgr.Vip():GetData2(vipLevel,WDB_Vip.WipeMax)
+            wipeMaxCount = tonumber(wipeMaxCount)
+            local wipeInfoInBag = Client.RoleInfo.BagMgr:GetWipeInfoInBag()
+            local curWipeCount = 0
+            for k,v in pairs(wipeInfoInBag) do
+                curWipeCount = curWipeCount + v
+            end
+            curWipeCount = curWipeCount + Client.WipeInfo.collection_num
+            if wipeMaxCount-curWipeCount >0 then
+                local leftTime,isSecondsLeft = ServerTime.GetLeftSeconds(Client.WipeInfo.countdown)
+                local restoreWipeTime  = (wipeMaxCount-curWipeCount-1)*Client.WipeRestoreTimeInSec+leftTime
+                LuaDebug.Log("  "..leftTime.. "  "..restoreWipeTime)
+                LuaUtil.NotificationMessageAddSeconds(restoreWipeTime,Text.WipeRestore,8,22)
+            end
+        end
+    else
+        LuaUtil.CleanNotification()
+    end
+end
+
+--Listen event
+function LuaUIViewCtr:ApplicationPause(isPause)
+    if Client.m_CurrentState==EClientState.E_CS_PVEOne then
+        if isPause then
+            --pause only when fighting is going on
+            if SceneControl.self_():GameState() == 1  then
+                require "BattleSceneUI/GameBase"
+                GameBase.DoGamePause()
+            end
+        end
+    end
+    if Application.get_platform()==ERuntimePlatform.IPhonePlayer then
+        LuaUIViewCtr.LocalNotification(isPause)
+    end
+end
+
+function LuaUIViewCtr:PlayerLevelUp(roleLevel)
+    require "WDB/WDB_GameConfig"
+    Client.RoleInfo.UpLvPromptData = function()
+        Client.AutoBtnTaskGuide:Do(false)
+        local effectPath = LuaCDataMgr.GameConfig():GetData2(73, WDB_GameConfig.Param2)
+        LuaNTools.AddEffect(LuaUIViewCtr.GetParent (),effectPath,LuaVector3.Create(0,0.627,-1.875))
+    end
+    --listen guide event
+    if Client.m_CurrentState~=EClientState.E_CS_Hall then
+        Client.RoleInfo.GuideMgr.ListenBuffer = {trigger = GuideTriggerType.LevelUp, param = roleLevel}
+        --update HUD of player if in battle
+        local sceneCtr = SceneControl.self_()
+        if sceneCtr ~= nil then
+            Client.RoleInfo.roleAttr.level = roleLevel.level
+            local fobj = sceneCtr:GetPlayer()
+            local playerRefTable = {}
+            playerRefTable.FObj = fobj
+            local level = Client.RoleInfo.roleAttr.level
+            local name = Client.RoleInfo.roleAttr.name
+            PlayerLuaCtr.SetHeadUp (playerRefTable,level,name)
+        end
+    end
+    --Up Tishi
+    LuaUIViewCtr.PushPromptData(EUpPromptType.UpLv+roleLevel.level*10)
+    if Client.m_CurrentState==EClientState.E_CS_Hall then
+        Client.RoleInfo.TishiTimeMgr:UpLvEnable(Client.RoleInfo.UpLvPromptData)
+        LuaUIViewCtr.ShowUpInfoPrompt()
+    end
+end
+
+function LuaUIViewCtr:EnterBattle(sceneId)
+    Client.RoleInfo.GuideMgr:ListenGuideEvent(GuideTriggerType.EnterBattle,sceneId)
+end
+
+function LuaUIViewCtr:FinishBattle(sceneId,data)
+    if data.pass then
+        Client.RoleInfo.GuideMgr:ListenGuideEvent(GuideTriggerType.FinishBattle,sceneId)
+    else
+        local sceneType = LuaCDataMgr.GameScene():GetData2(sceneId,WDB_GameScene.SceneType)
+        Client.RoleInfo.GuideMgr:ListenGuideEvent(GuideTriggerType.FailFromBattle,sceneType)
+        Client.RoleInfo.GuideMgr.ListenBuffer = {trigger = GuideTriggerType.FailFromBattle, param = sceneType}
+        --LuaDebug.Log("FinishBattle Failed***********")
+    end
+end
+
+function LuaUIViewCtr:TaskStateUpdate(questId,state)
+    if state == 3 then
+        Client.RoleInfo.GuideMgr:ListenGuideEvent(GuideTriggerType.GetQuest,questId)
+    elseif state == 5 then
+        Client.RoleInfo.GuideMgr:ListenGuideEvent(GuideTriggerType.FinishQuest,questId)
+    end
+end
+
+function LuaUIViewCtr:ScenePassSuccess (sceneInfo)
+    if sceneInfo.isFirst then
+        Client.RoleInfo.GuideMgr:ListenGuideEvent(GuideTriggerType.SuccessEndBattle,sceneInfo.sceneId)
+        Client.RoleInfo.GuideMgr.ListenBuffer = {trigger = GuideTriggerType.SuccessFromBattle, param = sceneInfo.sceneId}
+        LuaUIViewCtr.PushPromptData(EUpPromptType.ScenePass+sceneInfo.sceneId*10)
+    end
+    if sceneInfo.starsAward then
+        LuaUIViewCtr.PushPromptData(EUpPromptType.SceneStar+sceneInfo.sceneId*10)
+    end
+    if Client.m_CurrentState==EClientState.E_CS_Hall then
+        LuaUIViewCtr.ShowUpInfoPrompt()
+    end
+end
+
+function LuaUIViewCtr:UIOpen (uirefTable)
+    if Client.m_CurrentState~=EClientState.E_CS_Login and Client.m_CurrentState~=EClientState.E_CS_Reconect and Client.m_CurrentState ~= EClientState.E_CS_ChooseRole then
+        Client.RoleInfo.GuideMgr:ListenGuideEnd(GuideEndType.UIOpen,uirefTable.uiName)
+    end
+end
+
+function LuaUIViewCtr:UIDestroy (uirefTable)
+    if Client.m_CurrentState~=EClientState.E_CS_Login and Client.m_CurrentState~=EClientState.E_CS_Reconect and Client.m_CurrentState ~= EClientState.E_CS_ChooseRole then
+        Client.RoleInfo.GuideMgr:ListenGuideEnd(GuideEndType.UIDestroy,uirefTable.uiName)
+    end
+end
+
+function LuaUIViewCtr:ServerMsgGet (msgId)
+    if Client.m_CurrentState~=EClientState.E_CS_Login and Client.m_CurrentState~=EClientState.E_CS_Reconect and Client.m_CurrentState ~= EClientState.E_CS_ChooseRole then
+        Client.RoleInfo.GuideMgr:ListenGuideEnd(GuideEndType.ServerReturn,msgId)
+    end
+end
+
+----------------
+function LuaUIViewCtr.AddGameHallBaseUI ()
+    if Client.m_CurrentState == EClientState.E_CS_Hall then
+        require "WDB/WDB_City"
+        local gameHallUIName = LuaCDataMgr.City():GetData2(Client.RoleInfo.CitySceneIdMgr:GetLastCitySceneId() ,WDB_City.UIName)
+        LuaUIViewCtr.OpenUI (gameHallUIName)
+    end
+end
+
+--if parent is nil,the ui's parent will be UIViewCtr
+--if titleNameIndex is nil,no background attach,or ui will attach a commonBackground named Text[titleNameIndex]
+function LuaUIViewCtr.OpenUINotLoseNest (uiName,parent,titleNameIndex)
+    local ObjRefTable =  LuaUIViewCtr.AddChildNotLose(uiName,parent)
+    LuaUIViewCtr.CreateLayoutCtr(ObjRefTable,uiName,titleNameIndex)
+    return ObjRefTable
+end
+
+function LuaUIViewCtr.OpenUINest (uiName,parent,titleNameIndex)
+    local ObjRefTable = LuaUIViewCtr.AddChild(uiName,parent)
+    LuaUIViewCtr.CreateLayoutCtr(ObjRefTable,uiName,titleNameIndex)
+    return ObjRefTable
+end
+
+function LuaUIViewCtr.OpenUIByPathNest (uiName,parent,titleNameIndex)
+    local ObjRefTable = LuaUIViewCtr.AddChildByResourcesPath(uiName,parent)
+    LuaUIViewCtr.CreateLayoutCtr(ObjRefTable,uiName,titleNameIndex)
+    return ObjRefTable
+end
+
+function LuaUIViewCtr.OpenUINotLose (uiName,titleNameIndex)
+    local ObjRefTable =  LuaUIViewCtr.AddChildNotLose(uiName,nil)
+    LuaUIViewCtr.CreateLayoutCtr(ObjRefTable,uiName,titleNameIndex)
+    return ObjRefTable
+end
+
+function LuaUIViewCtr.OpenUI (uiName,titleNameIndex)
+    local ObjRefTable = LuaUIViewCtr.AddChild(uiName,nil)
+    LuaUIViewCtr.CreateLayoutCtr(ObjRefTable,uiName,titleNameIndex)
+    return ObjRefTable
+end
+
+function LuaUIViewCtr.OpenUIByPath (uiName,titleNameIndex)
+    local ObjRefTable = LuaUIViewCtr.AddChildByResourcesPath(uiName,nil)
+    LuaUIViewCtr.CreateLayoutCtr(ObjRefTable,uiName,titleNameIndex)
+    return ObjRefTable
+end
+
+function LuaUIViewCtr.OpenUIHasBg (uiName,titleNameIndex)
+    local ObjRefTable =  LuaUIViewCtr.AddChildNotLose(uiName,nil)
+    LuaUIViewCtr.CreateLayoutCtr(ObjRefTable,uiName,titleNameIndex)
+    if titleNameIndex == nil then
+        NGUITools.AddChildByResourcesPath("UI/Prefab/CommonUI/BlackBack",ObjRefTable.gameObject)
+        -- LuaUIViewCtr.AddChildNotLose("CommonUI/BlackBack",ObjRefTable.gameObject)
+    end
+
+    return ObjRefTable
+end
+
+function LuaUIViewCtr.CreateLayoutCtr (uiRefTable,uiName,titleNameIndex)
+    require "Utils/LuaLayoutCtr"
+    uiRefTable.uiName = uiName
+    if(titleNameIndex ~= nil) then
+        uiRefTable.LayoutCtr = setmetatable({},LuaLayoutCtr)
+        uiRefTable.LayoutCtr.Init(uiRefTable,titleNameIndex)
+
+        if uiName ~= "City/MainCitySelectUI" then
+            --终止自动任务，和停止角色
+            TaskMgr.isAuto = false
+            --Client.RoleInfo.FObj:city_player_control_():ColliderEnabled(true)
+            Client.RoleInfo.SearchMgr.StopAutoSearch()
+        end
+
+    end
+end
+
+function LuaUIViewCtr.GetParent (parent)
+    if(parent ~=nil)then
+        return parent
+    else
+        if(LuaUIViewCtr.UIParent == nil) then
+            LuaUIViewCtr.UIParent = UIViewCtr.self_():get_gameObject()
+        end
+        return LuaUIViewCtr.UIParent
+    end
+end
+
+function LuaUIViewCtr.AddChildNotLose(uiName,parent)
+    local realP = LuaUIViewCtr.GetParent (parent)
+
+    local ObjRefTable = LuaNTools.AddChildNotLose(realP, uiName)
+    return ObjRefTable
+end
+
+function LuaUIViewCtr.AddChildNoBehaviour(uiName,parent)
+    local realP = LuaUIViewCtr.GetParent (parent)
+
+    local ObjRefTable = LuaNTools.AddChildNoBehaviour(realP, uiName)
+    return ObjRefTable
+end
+
+function LuaUIViewCtr.AddChild(uiName,parent)
+    local realP = LuaUIViewCtr.GetParent (parent)
+
+    local ObjRefTable = LuaNTools.AddChild(realP, uiName)
+    return ObjRefTable
+end
+
+function LuaUIViewCtr.AddChildByResourcesPath(uiName,parent)
+    local realP = LuaUIViewCtr.GetParent (parent)
+
+    local ObjRefTable = LuaNTools.AddChildByResourcesPath(realP, uiName)
+    return ObjRefTable
+end
+
+function LuaUIViewCtr:OnShowToolTips(tipType,items,actions)
+    require "ToolTips/ToolTipMgr"
+    ToolTipMgr.ShowToolTips(tipType,items,actions)
+end
+
+function LuaUIViewCtr.OnSwitchUIByPath(uiPath,titleNameIndex,from,isCloseFrom,...)
+  if isCloseFrom and from ~= nil  then
+    from.gameObject:Destroy1()
+  end
+
+  local newUI = LuaUIViewCtr.OpenUINotLose(uiPath,titleNameIndex)
+  if #({...}) > 0 then
+    newUI:SetData(...)
+  end
+end
+
+function LuaUIViewCtr.OpenBackCityUI()
+  if Client.m_CurrentState == EClientState.E_CS_Hall then
+  --open back city ui
+      if Client.RoleInfo.BackCityOpenUI.UIName ~= nil then
+          LuaUIViewCtr.OpenUINotLose (Client.RoleInfo.BackCityOpenUI.UIName,Client.RoleInfo.BackCityOpenUI.UITitileName)
+          Client.RoleInfo.BackCityOpenUI.UIName = nil
+          Client.RoleInfo.BackCityOpenUI.UITitileName = nil
+      end
+  end
+end
+
+function LuaUIViewCtr.ClearBackCityUI()
+    Client.RoleInfo.BackCityOpenUI.UIName = nil
+    Client.RoleInfo.BackCityOpenUI.UITitileName = nil
+end
+
+function LuaUIViewCtr.OpenEliteBattle()
+    local sceneId = Client.RoleInfo.GameBattleMapMgr:GetGuideHardScene()
+    if sceneId ~= -1 then
+        LuaUIViewCtr.OnSwitchUIByPath("GameBattleUI/GameBattleUI",nil,nil,false,sceneId)
+    else
+        LuaUIViewCtr.OnSwitchUIByPath("GameBattleUI/GameBattleUI",nil,self,true,nil,Client.RoleInfo.GameBattleMapMgr:GetLastCityID())
+    end
+end
+
+function LuaUIViewCtr.ShowOrHideUIPanel(isShow)
+    LuaUIViewCtr.UIPanelIsShow = isShow
+    for k,v in pairs(LuaUIViewCtr.UIPanel) do
+        v:SetActive(isShow)
+    end
+end
+
+function LuaUIViewCtr.GetUIPanelState()
+    if LuaUIViewCtr.UIPanelIsShow == nil then
+        LuaUIViewCtr.UIPanelIsShow = true
+    end
+    return LuaUIViewCtr.UIPanelIsShow
+end
+
+function LuaUIViewCtr:ShowOrHideAnnounce(isShow)
+    if self.CommonBackUICount == nil then
+        self.CommonBackUICount = 0
+    end
+
+    if isShow then
+        self.CommonBackUICount = self.CommonBackUICount + 1
+    else
+        self.CommonBackUICount = self.CommonBackUICount - 1
+    end
+
+    LuaUIViewCtr.HandleAnnounce(self)
+end
+
+function LuaUIViewCtr:HandleAnnounce(announceUI)
+    if announceUI ~= nil then
+        self.AnnounceUI = announceUI
+        announceUI.owner = self
+    end
+    if self.AnnounceUI ~= nil then
+        if LuaUIViewCtr.GetUIPanelAnnounce(self) then
+            self.AnnounceUI.AnnounceNode.Tishi_Bg:SetActive(true)
+            self.AnnounceUI.AnnounceMentLabel:set_enabled(true)
+        else
+            self.AnnounceUI.AnnounceNode.Tishi_Bg:SetActive(false)
+            self.AnnounceUI.AnnounceMentLabel:set_enabled(false)
+        end
+    end
+end
+
+--true可以显示公告,false不能显示公告
+function LuaUIViewCtr:GetUIPanelAnnounce()
+    if self.CommonBackUICount == nil then
+        self.CommonBackUICount = 0
+    end
+    return (self.CommonBackUICount == 0)
+end
+
+function LuaUIViewCtr:OnCheckPromptStateChanged(updateType)
+  Client.RoleInfo.NewPromptMgr:OnPromptChangeByUpdateType(updateType)
+end
+
+---------------------UpPrompt--------------------------
+
+function LuaUIViewCtr.ShowUpInfoPrompt()
+    local upPromptData = Client.RoleInfo.UpPromptData[1]
+    if upPromptData and not Client.RoleInfo.isShowPrompt then
+        local upPromptEvent = function()
+            require "Utils/UpInfoPrompt"
+            Client.AutoBtnTaskGuide:Do(false)
+            local isCloseBigBtn = true
+            if upPromptData > 40000000 then
+                isCloseBigBtn = false
+            end
+            UpInfoPrompt.CreatePrompt(1,nil,isCloseBigBtn)
+        end
+        Client.RoleInfo.TishiTimeMgr:UpPromptEventEnable(upPromptEvent)
+        Client.RoleInfo.isShowPrompt=true
+    end
+end
+
+function LuaUIViewCtr.PushPromptData(index)
+    require "WDB/WDB_TipInformation"
+    local value=LuaCDataMgr.TipInformation():GetData2(index,WDB_TipInformation.TriggerParam)
+    if value then
+        for i,v in ipairs(Client.RoleInfo.UpPromptData) do
+            if index==v then
+                return
+            end
+        end
+    end
+    while value do
+        table.insert(Client.RoleInfo.UpPromptData,index)
+        index=index+1
+        value=LuaCDataMgr.TipInformation():GetData2(index,WDB_TipInformation.TriggerParam)
+    end
+end
+
+function LuaUIViewCtr.ShowPrompt() -- 重战斗返回主城处理提示
+    if Client.m_CurrentState == EClientState.E_CS_Hall then
+        Client.RoleInfo.TishiTimeMgr:UpLvEnable(Client.RoleInfo.UpLvPromptData)
+        LuaUIViewCtr.ShowUpInfoPrompt()
+        Client.RoleInfo.TishiTimeMgr:PowerEnable( Client.RoleInfo.PowerPromptData)
+    end
+end
+
+function LuaUIViewCtr:OnBuySinewSuccess()
+  TishiCentre.DisPlayTextLoopV(Text.BuySuccess)
+  Client.ShowBuyMessageBox()
+end
+
+function LuaUIViewCtr.ShowNewSecretFairy()
+    if Client.RoleInfo.openFairyId then
+        require "WDB/WDB_Fairy"
+        local fairyName = LuaCDataMgr.Fairy():GetData2(Client.RoleInfo.openFairyId,WDB_Fairy.Name)
+        TishiCentre.DisPlayText(string.format(Text.ActiveSecretFairy,fairyName))
+        Client.RoleInfo.openFairyId = nil
+    end
+end
