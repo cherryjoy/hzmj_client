@@ -1,9 +1,6 @@
-//======================================================
-//  NetWork Stream Writer
-//  2011.12.15 created by Wangnannan
-//======================================================
+
 /*
- Message Stream Format:Size(2),MsgID(4),NOTUSE(4),PB(0~)
+ Message Stream Format:Size(2),MsgID(4),NOTUSE(4),SessionId(8),PB(0~)
  */
 using UnityEngine;
 using System.Collections;
@@ -16,6 +13,12 @@ namespace GEM_NET_LIB
 	{
 		private MemoryStreamEx m_Buffer = new MemoryStreamEx ();
 		private byte[] m_NotUseByte = new byte[4]{0,0,0,0};
+		private byte[] m_SessionByte = new byte[8]{0, 0, 0, 0, 0, 0, 0, 0};
+		private long sessionId = 0;
+		for (int i = 0; i < 8; i++)
+		{
+			m_SessionByte[i] = (byte)(sessionId >> (8 * (7 - i)));
+		}
 		
 		private byte mCounter = 0;
 		//-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -30,6 +33,7 @@ namespace GEM_NET_LIB
 			m_Buffer.Write(net_Data_Size_byte,0,net_Data_Size_byte.Length);
 			m_Buffer.Write(net_MsgID_byte,0,net_MsgID_byte.Length);
 			m_Buffer.Write(m_NotUseByte,0,m_NotUseByte.Length);
+			m_Buffer.Write(m_SessionByte,0,m_SessionByte.Length);
 			mCounter ++;
             if (data != null)
                 m_Buffer.Write(data, 0, data.Length);
