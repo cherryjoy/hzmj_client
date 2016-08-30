@@ -1,0 +1,581 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &113098
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400776}
+  - 114: {fileID: 11495814}
+  m_Layer: 0
+  m_Name: Home
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &400776
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 113098}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11495814
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 113098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1582492658, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaterialPath: Assets/Resources/UI/Atlas/Bit32/Home.mat
+  material: {fileID: 2100000, guid: 867d9305987e8f442a2aed6e6881ef1b, type: 2}
+  sprites:
+  - name: homelaba
+    outer:
+      serializedVersion: 2
+      x: 0
+      y: 969
+      width: 50
+      height: 55
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 0
+      y: 969
+      width: 50
+      height: 55
+    inner:
+      serializedVersion: 2
+      x: 0
+      y: 969
+      width: 50
+      height: 55
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: moneyback
+    outer:
+      serializedVersion: 2
+      x: 0
+      y: 894
+      width: 201
+      height: 74
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 0
+      y: 894
+      width: 201
+      height: 74
+    inner:
+      serializedVersion: 2
+      x: 0
+      y: 894
+      width: 201
+      height: 74
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: z_biaoti
+    outer:
+      serializedVersion: 2
+      x: 202
+      y: 917
+      width: 345
+      height: 107
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 202
+      y: 917
+      width: 345
+      height: 107
+    inner:
+      serializedVersion: 2
+      x: 202
+      y: 917
+      width: 345
+      height: 107
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: z_datingtouxiang
+    outer:
+      serializedVersion: 2
+      x: 548
+      y: 939
+      width: 83
+      height: 85
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 548
+      y: 939
+      width: 83
+      height: 85
+    inner:
+      serializedVersion: 2
+      x: 548
+      y: 939
+      width: 83
+      height: 85
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: homeHeadCusPic
+    outer:
+      serializedVersion: 2
+      x: 632
+      y: 919
+      width: 106
+      height: 105
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 632
+      y: 919
+      width: 106
+      height: 105
+    inner:
+      serializedVersion: 2
+      x: 632
+      y: 919
+      width: 106
+      height: 105
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_chuangjianfangjian__button
+    outer:
+      serializedVersion: 2
+      x: 739
+      y: 707
+      width: 239
+      height: 317
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 739
+      y: 707
+      width: 239
+      height: 317
+    inner:
+      serializedVersion: 2
+      x: 739
+      y: 707
+      width: 239
+      height: 317
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: joingame1
+    outer:
+      serializedVersion: 2
+      x: 202
+      y: 597
+      width: 239
+      height: 319
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 202
+      y: 597
+      width: 239
+      height: 319
+    inner:
+      serializedVersion: 2
+      x: 202
+      y: 597
+      width: 239
+      height: 319
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: z_shezhi_h
+    outer:
+      serializedVersion: 2
+      x: 548
+      y: 844
+      width: 62
+      height: 94
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 548
+      y: 844
+      width: 62
+      height: 94
+    inner:
+      serializedVersion: 2
+      x: 548
+      y: 844
+      width: 62
+      height: 94
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: paomadengbeijing
+    outer:
+      serializedVersion: 2
+      x: 51
+      y: 979
+      width: 93
+      height: 45
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 51
+      y: 979
+      width: 93
+      height: 45
+    inner:
+      serializedVersion: 2
+      x: 81
+      y: 979
+      width: 33
+      height: 45
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: z_plus_h-42
+    outer:
+      serializedVersion: 2
+      x: 145
+      y: 978
+      width: 46
+      height: 46
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 145
+      y: 978
+      width: 46
+      height: 46
+    inner:
+      serializedVersion: 2
+      x: 145
+      y: 978
+      width: 46
+      height: 46
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: z_bangzhu
+    outer:
+      serializedVersion: 2
+      x: 442
+      y: 820
+      width: 61
+      height: 96
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 442
+      y: 820
+      width: 61
+      height: 96
+    inner:
+      serializedVersion: 2
+      x: 442
+      y: 820
+      width: 61
+      height: 96
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: z_bangzhu_h
+    outer:
+      serializedVersion: 2
+      x: 611
+      y: 822
+      width: 61
+      height: 96
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 611
+      y: 822
+      width: 61
+      height: 96
+    inner:
+      serializedVersion: 2
+      x: 611
+      y: 822
+      width: 61
+      height: 96
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: z_zhanji_h
+    outer:
+      serializedVersion: 2
+      x: 673
+      y: 826
+      width: 62
+      height: 92
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 673
+      y: 826
+      width: 62
+      height: 92
+    inner:
+      serializedVersion: 2
+      x: 673
+      y: 826
+      width: 62
+      height: 92
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: z_plus_h
+    outer:
+      serializedVersion: 2
+      x: 673
+      y: 779
+      width: 46
+      height: 46
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 673
+      y: 779
+      width: 46
+      height: 46
+    inner:
+      serializedVersion: 2
+      x: 673
+      y: 779
+      width: 46
+      height: 46
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: joinGame
+    outer:
+      serializedVersion: 2
+      x: 442
+      y: 459
+      width: 239
+      height: 319
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 442
+      y: 459
+      width: 239
+      height: 319
+    inner:
+      serializedVersion: 2
+      x: 442
+      y: 459
+      width: 239
+      height: 319
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: z_zhanji
+    outer:
+      serializedVersion: 2
+      x: 0
+      y: 801
+      width: 62
+      height: 92
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 0
+      y: 801
+      width: 62
+      height: 92
+    inner:
+      serializedVersion: 2
+      x: 0
+      y: 801
+      width: 62
+      height: 92
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: z_shezhi
+    outer:
+      serializedVersion: 2
+      x: 63
+      y: 799
+      width: 62
+      height: 94
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 63
+      y: 799
+      width: 62
+      height: 94
+    inner:
+      serializedVersion: 2
+      x: 63
+      y: 799
+      width: 62
+      height: 94
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_chuangjianfangjian__button_h
+    outer:
+      serializedVersion: 2
+      x: 682
+      y: 389
+      width: 239
+      height: 317
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 682
+      y: 389
+      width: 239
+      height: 317
+    inner:
+      serializedVersion: 2
+      x: 682
+      y: 389
+      width: 239
+      height: 317
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  mCoordinates: 0
+  mReplacement: {fileID: 0}
+  mPixelSize: 1
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 113098}
+  m_IsPrefabParent: 1
