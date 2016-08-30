@@ -354,7 +354,8 @@ end
 
 --公告
 function LoginController:GongGaoBtn_OnClick()
-    LoginController.RefreshNoticeList(self)
+    local ref = LuaUIViewCtr.OpenUIHasBg("Home/MainUI")
+    --LoginController.RefreshNoticeList(self)
 end
 
 --开始游戏

@@ -73,7 +73,7 @@ namespace GEM_NET_LIB
 	public class CNetStreamReader : INetMessageReader
 	{
 		private int m_nProgress = 0;
-		private int m_nStreamSize = 0;
+		private short m_nStreamSize = 0;
 		private int m_nMsgID = 0;
 		private int m_nDataType = 0;
 		//Except progress = 0;
@@ -98,42 +98,66 @@ namespace GEM_NET_LIB
             func_handle_ref_ = lua_.L_Ref(LuaAPI.LUA_REGISTRYINDEX);
             lua_.Pop(1);
         }
-        
-		//-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+        //-=-=-=-=-=-=-=-=-=Message Stream Format:Size(2),MsgID(4),NOTUSE(4),PB(0~)=-=-=-=-=-=-=-=-=-=-=-=-=
 		void INetMessageReader.DidReadData (byte[] data, int size)
 		{
 			MemoryStream activedStream = m_NetBuffer.GetActivedStream ();
 			//Get Current Active Stream Buffer
 			activedStream.Write (data, 0, size);
 			byte[] nowData = activedStream.GetBuffer ();
+            /*for (int i = 0; i < size; ++i)
+            {
+                Debug.Log("recv byte " + i + " : " + (int)nowData[i]);
+            }*/
+
 			long nowStreamLength = activedStream.Length;
+            Debug.Log("nowStreamLength: " + nowStreamLength);
 			while (true) {
 				try {
-					if (m_nProgress != 4) {
-						while (m_nProgress < 3) {
+					if (m_nProgress != 4) 
+                    {
+						while (m_nProgress < 3) 
+                        {
 							int tmpvalue = 0;
-							if (nowStreamLength < sizeof(int))
+							if (nowStreamLength < (sizeof(short) + sizeof(int)))
 								//throw new Exception ("Data Not Enough");
 							{
 								if (m_nProgress != 4)
 									m_nProgress = 0;
 								return;
 							}
-							tmpvalue = BitConverter.ToInt32 (nowData, m_nProgress * sizeof(int));
-							tmpvalue = IPAddress.NetworkToHostOrder (tmpvalue);
-							switch (m_nProgress) {
-							case 0:
-								m_nStreamSize = tmpvalue;
-								break;
-							case 1:
-								m_nMsgID = tmpvalue;
-								break;
-							case 2:
-								m_nDataType = tmpvalue;
-								break;
+							
+							switch (m_nProgress) 
+                            {
+                                case 0:
+                                    {
+                                        m_nStreamSize = BitConverter.ToInt16(nowData, 0);
+                                        m_nStreamSize = IPAddress.NetworkToHostOrder(m_nStreamSize);
+                                        nowStreamLength -= sizeof(short);
+                                        Debug.Log("size: " + m_nStreamSize);
+                                        break;
+                                    }
+                                case 1:
+                                    {
+                                        tmpvalue = BitConverter.ToInt32(nowData, 2);
+                                        tmpvalue = IPAddress.NetworkToHostOrder(tmpvalue);
+                                        m_nMsgID = tmpvalue;
+                                        nowStreamLength -= sizeof(int);
+                                        Debug.Log("m_nMsgID: " + m_nMsgID);
+                                        break;
+                                    }
+                                case 2:
+                                    {
+                                        tmpvalue = BitConverter.ToInt32(nowData, 6);
+                                        tmpvalue = IPAddress.NetworkToHostOrder(tmpvalue);
+                                        m_nDataType = tmpvalue;
+                                        nowStreamLength -= sizeof(int);
+                                        Debug.Log("m_nDataType: " + m_nDataType);
+                                        break;
+                                    }
 							}
 							m_nProgress++;
-							nowStreamLength -= sizeof(int);
 						}
 						if (CheckHead ()) {
 							m_nProgress = 4;
@@ -143,16 +167,21 @@ namespace GEM_NET_LIB
 							return;
 						}
 					}
-					int nDataSize = m_nStreamSize - 8;
+					int nDataSize = m_nStreamSize - 10;
 					//Must >= 0
 					bool bReturn = false;
 					m_MsgDataBody.Clear();
 					//ClearData
-					if (nDataSize > 0) {
-						if (nowStreamLength >= nDataSize) {
+					if (nDataSize > 0) 
+                    {
+                        Debug.Log("nowStreamLength: " + nowStreamLength + ", nDataSize: " + nDataSize);
+						if (nowStreamLength >= nDataSize) 
+                        {
 							m_MsgDataBody.Write (nowData, (int)(activedStream.Length - nowStreamLength), nDataSize);
 							nowStreamLength -= nDataSize;
-						} else {
+						} 
+                        else 
+                        {
 							bReturn = true;
 							//Can't Process any more.
 						}
@@ -162,12 +191,17 @@ namespace GEM_NET_LIB
 						return;
 					else {
 						try {
-							if (m_nMsgID >= 1 && m_nMsgID < 10000)
+							if (m_nMsgID >= 1 && m_nMsgID < 1024)
 							{
 								m_Logic.ClientHandleMessage(m_nMsgID, m_MsgDataBody);
 							}
 							else
 							{
+                                for (int i = 0; i < m_MsgDataBody.Length; ++i)
+                                {
+                                    Debug.Log("msgData " + i + " : " + (int)(m_MsgDataBody.GetBuffer()[i]));
+                                }
+
 								lua_.RawGetI(LuaAPI.LUA_REGISTRYINDEX, func_handle_ref_);
 								lua_.PushInteger(m_nMsgID);
 								userdata_ = lua_.NewUnManageMem(m_MsgDataBody.GetBuffer());
@@ -208,7 +242,7 @@ namespace GEM_NET_LIB
 		//-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 		private bool CheckHead ()
 		{
-			if (m_nStreamSize < 8 || m_nStreamSize > CNetStreamReader.m_nMaxDataSize)
+			if (m_nStreamSize < 10 || m_nStreamSize > CNetStreamReader.m_nMaxDataSize)
 				return false;
 			return true;
 		}

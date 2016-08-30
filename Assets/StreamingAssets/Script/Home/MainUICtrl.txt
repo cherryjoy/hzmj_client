@@ -1,0 +1,11 @@
+MainUICtrl = {}
+
+function MainUICtrl:Start()
+
+end
+
+
+
+function MainUICtrl:OnDestroy()
+
+end

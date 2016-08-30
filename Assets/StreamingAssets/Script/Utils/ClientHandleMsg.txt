@@ -11,6 +11,7 @@ require("Utils/RoleInfo")
 --require "ChatUI/ChatManager"
 --require "GemStoneUI/GemStoneMgr"
 --require "ChatUI/RoleInfoCtrl"
+require("NetProtocol/module_05_core")
 
 --require("SceneControl/KingroadActivity")
 
@@ -19,7 +20,7 @@ ClientHandleMsg = {}
 --msgNameTable =  Util.TableInvert(NetOpcodes_S2C)
 function ClientHandleMsg.Handle(msgId,data,dataLength)
     -- if NetOpcodes_S2C.S2C_CHEAT_CHECK ~= msgId then
-    --     LuaDebug.Log("msgID: " .. msgId.."  "..msgNameTable[msgId])
+         LuaDebug.Log("msgID: " .. msgId)
     -- end
     local handleFunc = HandleFuncs[msgId]
     if handleFunc then
@@ -30,6 +31,12 @@ end
 --------------------------------------
 
 HandleFuncs = {}
+
+HandleFuncs[enumMSGID_MODULE_05.ID_ROLE_RES] = function(data, dataLength)
+    local pbMsg = LuaProto.deserialize(PBMsgRoleInfoRes, data, dataLength)
+    LuaDebug.Log("roleName: "..pbMsg.RoleName)
+    LuaDebug.Log("roleId: "..pbMsg.RoleID)
+end
 
 HandleFuncs[NetOpcodes_S2C.S2C_SESSION_CREATED] = function (data,dataLength)
     Client.ClientInfo.SessionID = LuaProto.deserializeLong(data,dataLength)

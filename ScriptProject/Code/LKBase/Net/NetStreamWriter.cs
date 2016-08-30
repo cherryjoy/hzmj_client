@@ -15,20 +15,23 @@ namespace GEM_NET_LIB
 		private byte[] m_NotUseByte = new byte[4]{0,0,0,0};
 		private byte[] m_SessionByte = new byte[8]{0, 0, 0, 0, 0, 0, 0, 0};
 		private long sessionId = 0;
-		for (int i = 0; i < 8; i++)
-		{
-			m_SessionByte[i] = (byte)(sessionId >> (8 * (7 - i)));
-		}
 		
 		private byte mCounter = 0;
 		//-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 		byte[] INetMessageWriter.MakeStream (int msgID, byte[] data)
 		{
+            //
+            for (int i = 0; i < 8; i++)
+            {
+                m_SessionByte[i] = (byte)(sessionId >> (8 * (7 - i)));
+            }
+
 			m_NotUseByte[0] = mCounter;
 			m_Buffer.Clear();
 			int net_msgID = IPAddress.HostToNetworkOrder (msgID);
-			byte[] net_MsgID_byte = BitConverter.GetBytes(net_msgID);			
-			int net_data_size = IPAddress.HostToNetworkOrder (/*sizeof(short) +*/ net_MsgID_byte.Length + m_NotUseByte.Length + (data != null ?data.Length : 0));
+			byte[] net_MsgID_byte = BitConverter.GetBytes(net_msgID);
+            short net_data_size = (short)(sizeof(short) + net_MsgID_byte.Length + m_NotUseByte.Length + m_SessionByte.Length + (data != null ? data.Length : 0));
+            net_data_size = IPAddress.HostToNetworkOrder(net_data_size);
 			byte[] net_Data_Size_byte = BitConverter.GetBytes(net_data_size);
 			m_Buffer.Write(net_Data_Size_byte,0,net_Data_Size_byte.Length);
 			m_Buffer.Write(net_MsgID_byte,0,net_MsgID_byte.Length);

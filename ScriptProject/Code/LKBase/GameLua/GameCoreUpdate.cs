@@ -22,7 +22,7 @@ public class GameCoreUpdate : MonoBehaviour
         LuaAPI.lua_IdleDB(lua_.GetLuaPtr());
 #endif
 
-        PingManager.Instance.UpdatePingServer();
+        //PingManager.Instance.UpdatePingServer();
 
         LuaNetwork.Net.Update();
     }
