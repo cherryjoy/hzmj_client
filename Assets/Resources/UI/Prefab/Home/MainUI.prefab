@@ -307,7 +307,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 486206}
-  - 114: {fileID: 11465600}
+  - 114: {fileID: 11457078}
   m_Layer: 8
   m_Name: Icon
   m_TagString: Untagged
@@ -528,7 +528,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 165674}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 420.23566, y: 263, z: 0}
+  m_LocalPosition: {x: 420.2627, y: 263, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -662,7 +662,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 122854}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -430.23563, y: 267, z: 0}
+  m_LocalPosition: {x: -430.26276, y: 267, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -1302,15 +1302,15 @@ MonoBehaviour:
     e00: 320
     e01: 0
     e02: 0
-    e03: 0.47127005
+    e03: 0.5254568
     e10: 0
     e11: 320
     e12: 0
-    e13: -0.4712677
+    e13: -0.5254364
     e20: 0
     e21: 0
     e22: 320
-    e23: 0
+    e23: 1
     e30: 0
     e31: 0
     e32: 0
@@ -1481,6 +1481,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mTextKeyID: StartGame
   textLabel: {fileID: 11405030}
+--- !u!114 &11457078
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 157490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1019752268, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  changeFlag: -1
+  mMat: {fileID: 0}
+  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mPivot: 4
+  mWidth: 76
+  mHeight: 76
+  mDepth: 1
+  mIsHidePanel: 0
+  UVOffset: {x: 0, y: 0, z: 0, w: 0}
+  MaterialPath: 
 --- !u!114 &11459164
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1495,35 +1516,32 @@ MonoBehaviour:
   LuaBehavType: -1
   scriptShortPath: Home/MainUICtrl.txt
   ScriptName: MainUICtrl
-  lua_params: []
+  lua_params:
+  - Obj: {fileID: 154314}
+    regObj: {fileID: 11490108}
+    Name: Texture
+    TypeIndex: 1
+  - Obj: {fileID: 157490}
+    regObj: {fileID: 11457078}
+    Name: 
+    TypeIndex: 1
+  - Obj: {fileID: 192686}
+    regObj: {fileID: 11485246}
+    Name: 
+    TypeIndex: 1
+  - Obj: {fileID: 100448}
+    regObj: {fileID: 11417336}
+    Name: 
+    TypeIndex: 1
+  - Obj: {fileID: 182990}
+    regObj: {fileID: 11452988}
+    Name: 
+    TypeIndex: 1
   LuaBehavArray: []
   IsOnClickPassGameObject: 0
   isArray: 0
   isBehavArray: 0
   Luaclass_ref: -1
---- !u!114 &11465600
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 157490}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1990421164, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  changeFlag: -1
-  mMat: {fileID: 2100000, guid: 867d9305987e8f442a2aed6e6881ef1b, type: 2}
-  mColor: {r: 1, g: 1, b: 1, a: 1}
-  mPivot: 4
-  mWidth: 76
-  mHeight: 76
-  mDepth: 1
-  mIsHidePanel: 0
-  mAtlas: {fileID: 11495814, guid: 4692061f104ab46409ece630eec5b15a, type: 2}
-  mSpriteName: homeHeadCusPic
-  IsKeepOriSize: 0
-  mFillCenter: 1
 --- !u!114 &11468080
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1720,7 +1738,7 @@ MonoBehaviour:
   m_Script: {fileID: -1019752268, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  changeFlag: -1
+  changeFlag: 1
   mMat: {fileID: 0}
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4

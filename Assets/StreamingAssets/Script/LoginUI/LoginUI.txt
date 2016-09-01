@@ -14,7 +14,7 @@ function LoginUI:LoginBtn_OnClick()
 	local password=self.password:get_text()
 
 	userName = string.lower(userName)
-	
+
 
 	--userName
 	if string.len(userName) == 0 or userName == nil then
@@ -45,7 +45,7 @@ function LoginUI:LoginBtn_OnClick()
 		TishiCentre.DisPlayText(Text.PasswordFormError)
 		return
 	end
-	
+
 	if string.len(password) < 6 then
 		TishiCentre.DisPlayText(Text.PasswordLeastNum)
 		return

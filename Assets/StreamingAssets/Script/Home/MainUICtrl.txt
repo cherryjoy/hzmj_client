@@ -1,11 +1,39 @@
 MainUICtrl = {}
 
 function MainUICtrl:Start()
+    local mt=TextureMgr.get_Instance():LoadTexture("Home/hallBg")
+    self.Texture:set_material(mt)
+
+    local mt2 = TextureMgr.get_Instance():LoadTexture("Home/homeHeadCusPic", true)
+    self.Icon:set_material(mt2)
+end
+
+function MainUICtrl:Init(name, id, cardNum)
+    self.Name:set_text(string.format(Text.RoleName, name))
+    self.Id:set_text(string.format(Text.RoleId, id))
+    self.Card:set_text(string.format(Text.RoleCardNum, cardNum))
+end
+
+function MainUICtrl:OnDestroy()
 
 end
 
+function MainUICtrl:Score_OnClick()
 
+end
 
-function MainUICtrl:OnDestroy()
+function MainUICtrl:Help_OnClick()
+
+end
+
+function MainUICtrl:Setting_OnClick()
+
+end
+
+function MainUICtrl:JoinGame_OnClick()
+    local ref = LuaUIViewCtr.OpenUIHasBg("Home/JoinGame")
+end
+
+function MainUICtrl:CreateRoom_OnClick()
 
 end

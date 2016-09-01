@@ -1,0 +1,158 @@
+JoinGameCtrl = {}
+
+function JoinGameCtrl:Start( )
+    local mt=TextureMgr.get_Instance():LoadTexture("Home/Z_jiaruyouxitangchuang", true)
+    self.Texture:set_material(mt)
+    self.index = 1
+    self.number = {}
+end
+
+function JoinGameCtrl:OnDestroy( )
+
+end
+
+function JoinGameCtrl:Num1_OnClick()
+    if JoinGameCtrl.IsFull(self) then
+        return
+    end
+
+    self.number[self.index] = 1
+    self["num"..self.index]:set_text("1")
+
+    JoinGameCtrl.AddIndex(self)
+end
+
+function JoinGameCtrl:Num2_OnClick()
+    if JoinGameCtrl.IsFull(self) then
+        return
+    end
+
+    self.number[self.index] = 2
+    self["num"..self.index]:set_text("2")
+
+    JoinGameCtrl.AddIndex(self)
+end
+
+function JoinGameCtrl:Num3_OnClick()
+    if JoinGameCtrl.IsFull(self) then
+        return
+    end
+
+    self.number[self.index] = 3
+    self["num"..self.index]:set_text("3")
+
+    JoinGameCtrl.AddIndex(self)
+end
+
+function JoinGameCtrl:Num4_OnClick()
+    if JoinGameCtrl.IsFull(self) then
+        return
+    end
+
+    self.number[self.index] = 4
+    self["num"..self.index]:set_text("4")
+
+    JoinGameCtrl.AddIndex(self)
+end
+
+function JoinGameCtrl:Num5_OnClick()
+    if JoinGameCtrl.IsFull(self) then
+        return
+    end
+
+    self.number[self.index] = 5
+    self["num"..self.index]:set_text("5")
+
+    JoinGameCtrl.AddIndex(self)
+end
+
+function JoinGameCtrl:Num6_OnClick()
+    if JoinGameCtrl.IsFull(self) then
+        return
+    end
+
+    self.number[self.index] = 6
+    self["num"..self.index]:set_text("6")
+
+    JoinGameCtrl.AddIndex(self)
+end
+
+function JoinGameCtrl:Num7_OnClick()
+    if JoinGameCtrl.IsFull(self) then
+        return
+    end
+
+    self.number[self.index] = 7
+    self["num"..self.index]:set_text("7")
+
+    JoinGameCtrl.AddIndex(self)
+end
+
+function JoinGameCtrl:Num8_OnClick()
+    if JoinGameCtrl.IsFull(self) then
+        return
+    end
+
+    self.number[self.index] = 8
+    self["num"..self.index]:set_text("8")
+
+    JoinGameCtrl.AddIndex(self)
+end
+
+function JoinGameCtrl:Num9_OnClick()
+    if JoinGameCtrl.IsFull(self) then
+        return
+    end
+
+    self.number[self.index] = 9
+    self["num"..self.index]:set_text("9")
+
+    JoinGameCtrl.AddIndex(self)
+end
+
+function JoinGameCtrl:Num0_OnClick()
+    if JoinGameCtrl.IsFull(self) then
+        return
+    end
+
+    self.number[self.index] = 0
+    self["num"..self.index]:set_text("0")
+
+    JoinGameCtrl.AddIndex(self)
+end
+
+function JoinGameCtrl:Del_OnClick()
+    if self.index == 1 then
+        return
+    end
+
+    self.index = self.index - 1
+
+    self["num"..self.index]:set_text("")
+    self.number[self.index] = nil
+end
+
+function JoinGameCtrl:Clear_OnClick()
+    for i = 1, self.index - 1 do
+        self["num"..i]:set_text("")
+        self.number[i] = nil
+    end
+
+    self.index = 1
+end
+
+function JoinGameCtrl:AddIndex()
+    if JoinGameCtrl.IsFull(self) then
+        return
+    end
+
+    self.index = self.index + 1
+end
+
+function JoinGameCtrl:IsFull()
+    if self.index == 8 then
+        return true
+    end
+
+    return false
+end

@@ -47,7 +47,7 @@ MonoBehaviour:
     outer:
       serializedVersion: 2
       x: 0
-      y: 969
+      y: 855
       width: 50
       height: 55
     outerOffset:
@@ -59,13 +59,13 @@ MonoBehaviour:
     oriOuter:
       serializedVersion: 2
       x: 0
-      y: 969
+      y: 855
       width: 50
       height: 55
     inner:
       serializedVersion: 2
       x: 0
-      y: 969
+      y: 855
       width: 50
       height: 55
     paddingLeft: 0
@@ -76,7 +76,7 @@ MonoBehaviour:
     outer:
       serializedVersion: 2
       x: 0
-      y: 894
+      y: 780
       width: 201
       height: 74
     outerOffset:
@@ -88,13 +88,13 @@ MonoBehaviour:
     oriOuter:
       serializedVersion: 2
       x: 0
-      y: 894
+      y: 780
       width: 201
       height: 74
     inner:
       serializedVersion: 2
       x: 0
-      y: 894
+      y: 780
       width: 201
       height: 74
     paddingLeft: 0
@@ -104,7 +104,7 @@ MonoBehaviour:
   - name: z_biaoti
     outer:
       serializedVersion: 2
-      x: 202
+      x: 56
       y: 917
       width: 345
       height: 107
@@ -116,13 +116,13 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 202
+      x: 56
       y: 917
       width: 345
       height: 107
     inner:
       serializedVersion: 2
-      x: 202
+      x: 56
       y: 917
       width: 345
       height: 107
@@ -133,7 +133,7 @@ MonoBehaviour:
   - name: z_datingtouxiang
     outer:
       serializedVersion: 2
-      x: 548
+      x: 402
       y: 939
       width: 83
       height: 85
@@ -145,13 +145,13 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 548
+      x: 402
       y: 939
       width: 83
       height: 85
     inner:
       serializedVersion: 2
-      x: 548
+      x: 402
       y: 939
       width: 83
       height: 85
@@ -162,7 +162,7 @@ MonoBehaviour:
   - name: homeHeadCusPic
     outer:
       serializedVersion: 2
-      x: 632
+      x: 486
       y: 919
       width: 106
       height: 105
@@ -174,13 +174,13 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 632
+      x: 486
       y: 919
       width: 106
       height: 105
     inner:
       serializedVersion: 2
-      x: 632
+      x: 486
       y: 919
       width: 106
       height: 105
@@ -191,7 +191,7 @@ MonoBehaviour:
   - name: Z_chuangjianfangjian__button
     outer:
       serializedVersion: 2
-      x: 739
+      x: 593
       y: 707
       width: 239
       height: 317
@@ -203,13 +203,13 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 739
+      x: 593
       y: 707
       width: 239
       height: 317
     inner:
       serializedVersion: 2
-      x: 739
+      x: 593
       y: 707
       width: 239
       height: 317
@@ -249,8 +249,8 @@ MonoBehaviour:
   - name: z_shezhi_h
     outer:
       serializedVersion: 2
-      x: 548
-      y: 844
+      x: 442
+      y: 824
       width: 62
       height: 94
     outerOffset:
@@ -261,14 +261,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 548
-      y: 844
+      x: 442
+      y: 824
       width: 62
       height: 94
     inner:
       serializedVersion: 2
-      x: 548
-      y: 844
+      x: 442
+      y: 824
       width: 62
       height: 94
     paddingLeft: 0
@@ -279,7 +279,7 @@ MonoBehaviour:
     outer:
       serializedVersion: 2
       x: 51
-      y: 979
+      y: 865
       width: 93
       height: 45
     outerOffset:
@@ -291,13 +291,13 @@ MonoBehaviour:
     oriOuter:
       serializedVersion: 2
       x: 51
-      y: 979
+      y: 865
       width: 93
       height: 45
     inner:
       serializedVersion: 2
       x: 81
-      y: 979
+      y: 865
       width: 33
       height: 45
     paddingLeft: 0
@@ -308,7 +308,7 @@ MonoBehaviour:
     outer:
       serializedVersion: 2
       x: 145
-      y: 978
+      y: 870
       width: 46
       height: 46
     outerOffset:
@@ -320,13 +320,13 @@ MonoBehaviour:
     oriOuter:
       serializedVersion: 2
       x: 145
-      y: 978
+      y: 870
       width: 46
       height: 46
     inner:
       serializedVersion: 2
       x: 145
-      y: 978
+      y: 870
       width: 46
       height: 46
     paddingLeft: 0
@@ -336,8 +336,8 @@ MonoBehaviour:
   - name: z_bangzhu
     outer:
       serializedVersion: 2
-      x: 442
-      y: 820
+      x: 505
+      y: 822
       width: 61
       height: 96
     outerOffset:
@@ -348,14 +348,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 442
-      y: 820
+      x: 505
+      y: 822
       width: 61
       height: 96
     inner:
       serializedVersion: 2
-      x: 442
-      y: 820
+      x: 505
+      y: 822
       width: 61
       height: 96
     paddingLeft: 0
@@ -365,8 +365,8 @@ MonoBehaviour:
   - name: z_bangzhu_h
     outer:
       serializedVersion: 2
-      x: 611
-      y: 822
+      x: 442
+      y: 727
       width: 61
       height: 96
     outerOffset:
@@ -377,14 +377,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 611
-      y: 822
+      x: 442
+      y: 727
       width: 61
       height: 96
     inner:
       serializedVersion: 2
-      x: 611
-      y: 822
+      x: 442
+      y: 727
       width: 61
       height: 96
     paddingLeft: 0
@@ -394,8 +394,8 @@ MonoBehaviour:
   - name: z_zhanji_h
     outer:
       serializedVersion: 2
-      x: 673
-      y: 826
+      x: 504
+      y: 729
       width: 62
       height: 92
     outerOffset:
@@ -406,14 +406,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 673
-      y: 826
+      x: 504
+      y: 729
       width: 62
       height: 92
     inner:
       serializedVersion: 2
-      x: 673
-      y: 826
+      x: 504
+      y: 729
       width: 62
       height: 92
     paddingLeft: 0
@@ -423,8 +423,8 @@ MonoBehaviour:
   - name: z_plus_h
     outer:
       serializedVersion: 2
-      x: 673
-      y: 779
+      x: 504
+      y: 682
       width: 46
       height: 46
     outerOffset:
@@ -435,14 +435,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 673
-      y: 779
+      x: 504
+      y: 682
       width: 46
       height: 46
     inner:
       serializedVersion: 2
-      x: 673
-      y: 779
+      x: 504
+      y: 682
       width: 46
       height: 46
     paddingLeft: 0
@@ -452,8 +452,8 @@ MonoBehaviour:
   - name: joinGame
     outer:
       serializedVersion: 2
-      x: 442
-      y: 459
+      x: 551
+      y: 387
       width: 239
       height: 319
     outerOffset:
@@ -464,14 +464,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 442
-      y: 459
+      x: 551
+      y: 387
       width: 239
       height: 319
     inner:
       serializedVersion: 2
-      x: 442
-      y: 459
+      x: 551
+      y: 387
       width: 239
       height: 319
     paddingLeft: 0
@@ -481,8 +481,8 @@ MonoBehaviour:
   - name: z_zhanji
     outer:
       serializedVersion: 2
-      x: 0
-      y: 801
+      x: 442
+      y: 589
       width: 62
       height: 92
     outerOffset:
@@ -493,14 +493,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 0
-      y: 801
+      x: 442
+      y: 589
       width: 62
       height: 92
     inner:
       serializedVersion: 2
-      x: 0
-      y: 801
+      x: 442
+      y: 589
       width: 62
       height: 92
     paddingLeft: 0
@@ -510,8 +510,8 @@ MonoBehaviour:
   - name: z_shezhi
     outer:
       serializedVersion: 2
-      x: 63
-      y: 799
+      x: 0
+      y: 685
       width: 62
       height: 94
     outerOffset:
@@ -522,14 +522,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 63
-      y: 799
+      x: 0
+      y: 685
       width: 62
       height: 94
     inner:
       serializedVersion: 2
-      x: 63
-      y: 799
+      x: 0
+      y: 685
       width: 62
       height: 94
     paddingLeft: 0
@@ -539,8 +539,8 @@ MonoBehaviour:
   - name: Z_chuangjianfangjian__button_h
     outer:
       serializedVersion: 2
-      x: 682
-      y: 389
+      x: 0
+      y: 279
       width: 239
       height: 317
     outerOffset:
@@ -551,16 +551,799 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 682
-      y: 389
+      x: 0
+      y: 279
       width: 239
       height: 317
     inner:
       serializedVersion: 2
-      x: 682
-      y: 389
+      x: 0
+      y: 279
       width: 239
       height: 317
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_button_Lose_weight_h
+    outer:
+      serializedVersion: 2
+      x: 0
+      y: 600
+      width: 156
+      height: 84
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 0
+      y: 600
+      width: 156
+      height: 84
+    inner:
+      serializedVersion: 2
+      x: 0
+      y: 600
+      width: 156
+      height: 84
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_button_7_h
+    outer:
+      serializedVersion: 2
+      x: 240
+      y: 512
+      width: 156
+      height: 84
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 240
+      y: 512
+      width: 156
+      height: 84
+    inner:
+      serializedVersion: 2
+      x: 240
+      y: 512
+      width: 156
+      height: 84
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_button_2
+    outer:
+      serializedVersion: 2
+      x: 240
+      y: 427
+      width: 156
+      height: 84
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 240
+      y: 427
+      width: 156
+      height: 84
+    inner:
+      serializedVersion: 2
+      x: 240
+      y: 427
+      width: 156
+      height: 84
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_button_3
+    outer:
+      serializedVersion: 2
+      x: 240
+      y: 342
+      width: 156
+      height: 84
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 240
+      y: 342
+      width: 156
+      height: 84
+    inner:
+      serializedVersion: 2
+      x: 240
+      y: 342
+      width: 156
+      height: 84
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_button_1
+    outer:
+      serializedVersion: 2
+      x: 791
+      y: 622
+      width: 156
+      height: 84
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 791
+      y: 622
+      width: 156
+      height: 84
+    inner:
+      serializedVersion: 2
+      x: 791
+      y: 622
+      width: 156
+      height: 84
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_button_4
+    outer:
+      serializedVersion: 2
+      x: 833
+      y: 940
+      width: 156
+      height: 84
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 833
+      y: 940
+      width: 156
+      height: 84
+    inner:
+      serializedVersion: 2
+      x: 833
+      y: 940
+      width: 156
+      height: 84
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_button_5_h
+    outer:
+      serializedVersion: 2
+      x: 833
+      y: 855
+      width: 156
+      height: 84
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 833
+      y: 855
+      width: 156
+      height: 84
+    inner:
+      serializedVersion: 2
+      x: 833
+      y: 855
+      width: 156
+      height: 84
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_button_1_h
+    outer:
+      serializedVersion: 2
+      x: 833
+      y: 770
+      width: 156
+      height: 84
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 833
+      y: 770
+      width: 156
+      height: 84
+    inner:
+      serializedVersion: 2
+      x: 833
+      y: 770
+      width: 156
+      height: 84
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_button_6
+    outer:
+      serializedVersion: 2
+      x: 791
+      y: 537
+      width: 156
+      height: 84
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 791
+      y: 537
+      width: 156
+      height: 84
+    inner:
+      serializedVersion: 2
+      x: 791
+      y: 537
+      width: 156
+      height: 84
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_button_5
+    outer:
+      serializedVersion: 2
+      x: 791
+      y: 452
+      width: 156
+      height: 84
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 791
+      y: 452
+      width: 156
+      height: 84
+    inner:
+      serializedVersion: 2
+      x: 791
+      y: 452
+      width: 156
+      height: 84
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_button_2_h
+    outer:
+      serializedVersion: 2
+      x: 791
+      y: 367
+      width: 156
+      height: 84
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 791
+      y: 367
+      width: 156
+      height: 84
+    inner:
+      serializedVersion: 2
+      x: 791
+      y: 367
+      width: 156
+      height: 84
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_button_del
+    outer:
+      serializedVersion: 2
+      x: 397
+      y: 302
+      width: 156
+      height: 84
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 397
+      y: 302
+      width: 156
+      height: 84
+    inner:
+      serializedVersion: 2
+      x: 397
+      y: 302
+      width: 156
+      height: 84
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_button_0
+    outer:
+      serializedVersion: 2
+      x: 240
+      y: 257
+      width: 156
+      height: 84
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 240
+      y: 257
+      width: 156
+      height: 84
+    inner:
+      serializedVersion: 2
+      x: 240
+      y: 257
+      width: 156
+      height: 84
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_button_9_h
+    outer:
+      serializedVersion: 2
+      x: 0
+      y: 194
+      width: 156
+      height: 84
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 0
+      y: 194
+      width: 156
+      height: 84
+    inner:
+      serializedVersion: 2
+      x: 0
+      y: 194
+      width: 156
+      height: 84
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_button_Lose_weight
+    outer:
+      serializedVersion: 2
+      x: 554
+      y: 302
+      width: 156
+      height: 84
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 554
+      y: 302
+      width: 156
+      height: 84
+    inner:
+      serializedVersion: 2
+      x: 554
+      y: 302
+      width: 156
+      height: 84
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_button_4_h
+    outer:
+      serializedVersion: 2
+      x: 711
+      y: 282
+      width: 156
+      height: 84
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 711
+      y: 282
+      width: 156
+      height: 84
+    inner:
+      serializedVersion: 2
+      x: 711
+      y: 282
+      width: 156
+      height: 84
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_button_8_h
+    outer:
+      serializedVersion: 2
+      x: 397
+      y: 217
+      width: 156
+      height: 84
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 397
+      y: 217
+      width: 156
+      height: 84
+    inner:
+      serializedVersion: 2
+      x: 397
+      y: 217
+      width: 156
+      height: 84
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_button_0_h
+    outer:
+      serializedVersion: 2
+      x: 554
+      y: 217
+      width: 156
+      height: 84
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 554
+      y: 217
+      width: 156
+      height: 84
+    inner:
+      serializedVersion: 2
+      x: 554
+      y: 217
+      width: 156
+      height: 84
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_button_9
+    outer:
+      serializedVersion: 2
+      x: 157
+      y: 172
+      width: 156
+      height: 84
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 157
+      y: 172
+      width: 156
+      height: 84
+    inner:
+      serializedVersion: 2
+      x: 157
+      y: 172
+      width: 156
+      height: 84
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_button_7
+    outer:
+      serializedVersion: 2
+      x: 0
+      y: 109
+      width: 156
+      height: 84
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 0
+      y: 109
+      width: 156
+      height: 84
+    inner:
+      serializedVersion: 2
+      x: 0
+      y: 109
+      width: 156
+      height: 84
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_button_8
+    outer:
+      serializedVersion: 2
+      x: 711
+      y: 197
+      width: 156
+      height: 84
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 711
+      y: 197
+      width: 156
+      height: 84
+    inner:
+      serializedVersion: 2
+      x: 711
+      y: 197
+      width: 156
+      height: 84
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_shurukuang
+    outer:
+      serializedVersion: 2
+      x: 63
+      y: 706
+      width: 73
+      height: 73
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 63
+      y: 706
+      width: 73
+      height: 73
+    inner:
+      serializedVersion: 2
+      x: 63
+      y: 706
+      width: 73
+      height: 73
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_button_del_h
+    outer:
+      serializedVersion: 2
+      x: 314
+      y: 132
+      width: 156
+      height: 84
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 314
+      y: 132
+      width: 156
+      height: 84
+    inner:
+      serializedVersion: 2
+      x: 314
+      y: 132
+      width: 156
+      height: 84
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_button_6_h
+    outer:
+      serializedVersion: 2
+      x: 157
+      y: 87
+      width: 156
+      height: 84
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 157
+      y: 87
+      width: 156
+      height: 84
+    inner:
+      serializedVersion: 2
+      x: 157
+      y: 87
+      width: 156
+      height: 84
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_button_3_h
+    outer:
+      serializedVersion: 2
+      x: 0
+      y: 24
+      width: 156
+      height: 84
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 0
+      y: 24
+      width: 156
+      height: 84
+    inner:
+      serializedVersion: 2
+      x: 0
+      y: 24
+      width: 156
+      height: 84
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: close
+    outer:
+      serializedVersion: 2
+      x: 0
+      y: 968
+      width: 55
+      height: 56
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 0
+      y: 968
+      width: 55
+      height: 56
+    inner:
+      serializedVersion: 2
+      x: 0
+      y: 968
+      width: 55
+      height: 56
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: close_h
+    outer:
+      serializedVersion: 2
+      x: 0
+      y: 911
+      width: 55
+      height: 56
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 0
+      y: 911
+      width: 55
+      height: 56
+    inner:
+      serializedVersion: 2
+      x: 0
+      y: 911
+      width: 55
+      height: 56
     paddingLeft: 0
     paddingRight: 0
     paddingTop: 0
