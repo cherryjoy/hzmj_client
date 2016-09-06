@@ -1,0 +1,14 @@
+MJTableCtrl = {}
+
+function MJTableCtrl:Start( )
+    local mt=TextureMgr.get_Instance():LoadTexture("MJTable/MJTable", true)
+    self.Texture:set_material(mt)
+end
+
+function MJTableCtrl:Init()
+    
+end
+
+function MJTableCtrl:OnDestroy( )
+
+end

@@ -141,6 +141,10 @@ function JoinGameCtrl:Clear_OnClick()
     self.index = 1
 end
 
+function JoinGameCtrl:Close_OnClick()
+    self.gameObject:Destroy1()
+end
+
 function JoinGameCtrl:AddIndex()
     if JoinGameCtrl.IsFull(self) then
         return

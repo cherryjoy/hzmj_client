@@ -14,7 +14,7 @@ namespace GEM_NET_LIB
 		private MemoryStreamEx m_Buffer = new MemoryStreamEx ();
 		private byte[] m_NotUseByte = new byte[4]{0,0,0,0};
 		private byte[] m_SessionByte = new byte[8]{0, 0, 0, 0, 0, 0, 0, 0};
-		private long sessionId = 0;
+		//private long sessionId = 0;
 		
 		private byte mCounter = 0;
 		//-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -23,8 +23,10 @@ namespace GEM_NET_LIB
             //
             for (int i = 0; i < 8; i++)
             {
-                m_SessionByte[i] = (byte)(sessionId >> (8 * (7 - i)));
+                m_SessionByte[i] = (byte)(PingManager.Instance.sessionId >> (8 * (7 - i)));
             }
+
+            Debug.Log("sessionId: " + PingManager.Instance.sessionId);
 
 			m_NotUseByte[0] = mCounter;
 			m_Buffer.Clear();

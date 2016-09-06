@@ -1,0 +1,755 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &173500
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 490470}
+  - 114: {fileID: 11459290}
+  m_Layer: 0
+  m_Name: MJTable
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &490470
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 173500}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11459290
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 173500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1582492658, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaterialPath: Assets/Resources/UI/Atlas/Bit32/MJTable.mat
+  material: {fileID: 2100000, guid: 34f56bbc1680ae64a83524fe52a79874, type: 2}
+  sprites:
+  - name: Z_shengqingjiesandiananniuji
+    outer:
+      serializedVersion: 2
+      x: 0
+      y: 460
+      width: 252
+      height: 52
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 0
+      y: 460
+      width: 252
+      height: 52
+    inner:
+      serializedVersion: 2
+      x: 0
+      y: 460
+      width: 252
+      height: 52
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_zhuang
+    outer:
+      serializedVersion: 2
+      x: 253
+      y: 483
+      width: 41
+      height: 29
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 253
+      y: 483
+      width: 41
+      height: 29
+    inner:
+      serializedVersion: 2
+      x: 253
+      y: 483
+      width: 41
+      height: 29
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_jiesanfangjian
+    outer:
+      serializedVersion: 2
+      x: 295
+      y: 458
+      width: 205
+      height: 54
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 295
+      y: 458
+      width: 205
+      height: 54
+    inner:
+      serializedVersion: 2
+      x: 295
+      y: 458
+      width: 205
+      height: 54
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: money_frame
+    outer:
+      serializedVersion: 2
+      x: 0
+      y: 432
+      width: 86
+      height: 27
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 0
+      y: 432
+      width: 86
+      height: 27
+    inner:
+      serializedVersion: 2
+      x: 15
+      y: 432
+      width: 56
+      height: 27
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_jujuedianji
+    outer:
+      serializedVersion: 2
+      x: 87
+      y: 407
+      width: 177
+      height: 52
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 87
+      y: 407
+      width: 177
+      height: 52
+    inner:
+      serializedVersion: 2
+      x: 87
+      y: 407
+      width: 177
+      height: 52
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_jujue
+    outer:
+      serializedVersion: 2
+      x: 265
+      y: 405
+      width: 177
+      height: 52
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 265
+      y: 405
+      width: 177
+      height: 52
+    inner:
+      serializedVersion: 2
+      x: 265
+      y: 405
+      width: 177
+      height: 52
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_tongyi
+    outer:
+      serializedVersion: 2
+      x: 0
+      y: 354
+      width: 177
+      height: 52
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 0
+      y: 354
+      width: 177
+      height: 52
+    inner:
+      serializedVersion: 2
+      x: 0
+      y: 354
+      width: 177
+      height: 52
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_quxiao
+    outer:
+      serializedVersion: 2
+      x: 178
+      y: 352
+      width: 177
+      height: 52
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 178
+      y: 352
+      width: 177
+      height: 52
+    inner:
+      serializedVersion: 2
+      x: 178
+      y: 352
+      width: 177
+      height: 52
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: homeHeadCusPic
+    outer:
+      serializedVersion: 2
+      x: 0
+      y: 248
+      width: 106
+      height: 105
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 0
+      y: 248
+      width: 106
+      height: 105
+    inner:
+      serializedVersion: 2
+      x: 0
+      y: 248
+      width: 106
+      height: 105
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: ok
+    outer:
+      serializedVersion: 2
+      x: 356
+      y: 287
+      width: 88
+      height: 117
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 356
+      y: 287
+      width: 88
+      height: 117
+    inner:
+      serializedVersion: 2
+      x: 356
+      y: 287
+      width: 88
+      height: 117
+    paddingLeft: 0.20454545
+    paddingRight: 0.25
+    paddingTop: 0.051282052
+    paddingBottom: 0.042735044
+  - name: Z_zhunbei2dianji
+    outer:
+      serializedVersion: 2
+      x: 107
+      y: 299
+      width: 177
+      height: 52
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 107
+      y: 299
+      width: 177
+      height: 52
+    inner:
+      serializedVersion: 2
+      x: 107
+      y: 299
+      width: 177
+      height: 52
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_tongyidianji
+    outer:
+      serializedVersion: 2
+      x: 107
+      y: 246
+      width: 177
+      height: 52
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 107
+      y: 246
+      width: 177
+      height: 52
+    inner:
+      serializedVersion: 2
+      x: 107
+      y: 246
+      width: 177
+      height: 52
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_zhunbei2
+    outer:
+      serializedVersion: 2
+      x: 285
+      y: 234
+      width: 177
+      height: 52
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 285
+      y: 234
+      width: 177
+      height: 52
+    inner:
+      serializedVersion: 2
+      x: 285
+      y: 234
+      width: 177
+      height: 52
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_weixinyaoqingdianji
+    outer:
+      serializedVersion: 2
+      x: 0
+      y: 191
+      width: 205
+      height: 54
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 0
+      y: 191
+      width: 205
+      height: 54
+    inner:
+      serializedVersion: 2
+      x: 0
+      y: 191
+      width: 205
+      height: 54
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_shengqingjiesananniu
+    outer:
+      serializedVersion: 2
+      x: 206
+      y: 181
+      width: 252
+      height: 52
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 206
+      y: 181
+      width: 252
+      height: 52
+    inner:
+      serializedVersion: 2
+      x: 206
+      y: 181
+      width: 252
+      height: 52
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: tile_pointer
+    outer:
+      serializedVersion: 2
+      x: 443
+      y: 412
+      width: 37
+      height: 45
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 443
+      y: 412
+      width: 37
+      height: 45
+    inner:
+      serializedVersion: 2
+      x: 443
+      y: 412
+      width: 37
+      height: 45
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_quxiaodianji
+    outer:
+      serializedVersion: 2
+      x: 0
+      y: 138
+      width: 177
+      height: 52
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 0
+      y: 138
+      width: 177
+      height: 52
+    inner:
+      serializedVersion: 2
+      x: 0
+      y: 138
+      width: 177
+      height: 52
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_shurukuang
+    outer:
+      serializedVersion: 2
+      x: 178
+      y: 107
+      width: 73
+      height: 73
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 178
+      y: 107
+      width: 73
+      height: 73
+    inner:
+      serializedVersion: 2
+      x: 178
+      y: 107
+      width: 73
+      height: 73
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: tingpai
+    outer:
+      serializedVersion: 2
+      x: 0
+      y: 96
+      width: 140
+      height: 41
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 0
+      y: 96
+      width: 140
+      height: 41
+    inner:
+      serializedVersion: 2
+      x: 0
+      y: 96
+      width: 140
+      height: 41
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_jiesanfangjiandianji
+    outer:
+      serializedVersion: 2
+      x: 141
+      y: 52
+      width: 205
+      height: 54
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 141
+      y: 52
+      width: 205
+      height: 54
+    inner:
+      serializedVersion: 2
+      x: 141
+      y: 52
+      width: 205
+      height: 54
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: fangzhu
+    outer:
+      serializedVersion: 2
+      x: 285
+      y: 322
+      width: 54
+      height: 29
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 285
+      y: 322
+      width: 54
+      height: 29
+    inner:
+      serializedVersion: 2
+      x: 285
+      y: 322
+      width: 54
+      height: 29
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Z_weixinyaoqing
+    outer:
+      serializedVersion: 2
+      x: 252
+      y: 126
+      width: 205
+      height: 54
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 252
+      y: 126
+      width: 205
+      height: 54
+    inner:
+      serializedVersion: 2
+      x: 252
+      y: 126
+      width: 205
+      height: 54
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: voiceNormal
+    outer:
+      serializedVersion: 2
+      x: 445
+      y: 335
+      width: 52
+      height: 76
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 445
+      y: 335
+      width: 52
+      height: 76
+    inner:
+      serializedVersion: 2
+      x: 445
+      y: 335
+      width: 52
+      height: 76
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: voicePress
+    outer:
+      serializedVersion: 2
+      x: 458
+      y: 104
+      width: 52
+      height: 76
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 458
+      y: 104
+      width: 52
+      height: 76
+    inner:
+      serializedVersion: 2
+      x: 458
+      y: 104
+      width: 52
+      height: 76
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  mCoordinates: 0
+  mReplacement: {fileID: 0}
+  mPixelSize: 1
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 173500}
+  m_IsPrefabParent: 1

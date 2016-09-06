@@ -1,5 +1,5 @@
-require "Utils/ColorFilter"
-require "Utils/GlobalEnum"
+--require "Utils/ColorFilter"
+--require "Utils/GlobalEnum"
 Text = {
     Confirm = "确定",
     Cancel = "取消",
@@ -64,8 +64,8 @@ Text = {
     ServerList = "服务器列表",
     SwitchServerOnClick = "点击换区",
     ------------------------------serverList---------------------
-    NewServer = "["..ColorFilter.Color_51BF53.."] (新区)[-]",
-    HotServer = "["..ColorFilter.Color_D53E52.."] (火爆)[-]",
+    --NewServer = "["..ColorFilter.Color_51BF53.."] (新区)[-]",
+    --HotServer = "["..ColorFilter.Color_D53E52.."] (火爆)[-]",
 
     Skip = "跳过",
     GameWarning = "抵制不良游戏，拒绝盗版游戏。注意自我保护，谨防受骗上当。适度游戏益脑，沉迷游戏伤身。合理安排时间，享受健康生活。",
@@ -75,6 +75,11 @@ Text = {
     RoleName = "名字: %s",
     RoleId = "编号: %d",
     RoleCardNum = "房卡: %d",
+
+    -------------------Table--------------------
+    TableName = "房号:%d",
+    MaShuName = "%d倍 %d个码",
+    JuShuName = "%d/%d局 剩%d张",
 }
 
 TextSever = {

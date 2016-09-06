@@ -51,6 +51,9 @@ function  ClientSendMsg.SendAuth(name,password)
 	local data = PBMsgRoleInfoReq.Create()
 	data.UserName = name
 	data.Passwd = password
+	data.ServerID = 584002
+	data.GameID = 584
+	data.EratingID = 584002
 	local buffer,length = LuaProto.serialize(data)
 	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_ROLE_REQ,buffer,length)
 end
@@ -131,4 +134,13 @@ function ClientSendMsg.SendGM(command,params)
    ClientSendMsg.SendNetMsg(NetOpcodes_C2S.C2S_GM,buffer,length)
    LuaDebug.Log(command)
    LuaDebug.Log(params[1])
+end
+
+function  ClientSendMsg.SendCreateRoom(amount, horse, addition)
+	local data = PBMsgCreateRoomReq.Create()
+	data.amount = amount
+	data.horse = horse
+	data.addition = addition
+	local buffer,length = LuaProto.serialize(data)
+	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_ROOM_CREATE_REQ,buffer,length)
 end

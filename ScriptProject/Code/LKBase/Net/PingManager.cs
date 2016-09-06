@@ -14,6 +14,8 @@ public class PingManager : Singleton<PingManager>
     private float sendPingInterval = 5f;
     private bool isCallBackLua = false;
 
+    public long sessionId = 0;
+
 #if OPEN_BROAD_PING
 	public float mBroadPingTime;
 #endif
@@ -29,7 +31,6 @@ public class PingManager : Singleton<PingManager>
 	public void UpdatePingServer()
 	{
 		//LKDebug.Log("PING = " + netPing);
-
 		if (LuaNetwork.Net.IsConnected() == true)
 		{
 			mTimeCount += Time.deltaTime;

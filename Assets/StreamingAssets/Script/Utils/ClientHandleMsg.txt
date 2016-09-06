@@ -37,6 +37,12 @@ HandleFuncs[enumMSGID_MODULE_05.ID_ROLE_RES] = function(data, dataLength)
     LuaDebug.Log("roleName: "..pbMsg.RoleName)
     LuaDebug.Log("roleId: "..pbMsg.RoleID)
 
+    PlayerPrefsEx.SetString("userName", pbMsg.RoleName)
+    --PlayerPrefsEx.SetString("password",data.password)
+    --PlayerPrefsEx.SetString("userId",data.userId .. "")
+    Client.RoleInfo = {}
+    Client.RoleInfo.RoleID = pbMsg.RoleID
+
     local ref = LuaUIViewCtr.OpenUIHasBg("Home/MainUI")
     ref.Init(ref, pbMsg.RoleName, pbMsg.RoleID, 99)
 end
@@ -78,4 +84,26 @@ HandleFuncs[NetOpcodes_S2C.S2C_AUTH] = function (data,dataLength)
     PlayerPrefsEx.SetString("userId",data.userId .. "")
 
     Client.LoginSuccess:Do()
+end
+
+HandleFuncs[enumMSGID_MODULE_05.ID_ERROR_CODE_NOTICE] = function(data, dataLength)
+    local data = LuaProto.deserialize(PBMsgErrorCodeNotice, data, dataLength)
+
+    LuaDebug.Log("errcode: "..data.err_code)
+end
+
+HandleFuncs[enumMSGID_MODULE_05.ID_ROLE_SESSION_ID_NOTICE] = function(data, dataLength)
+    local data = LuaProto.deserialize(PBMsgRoleSessionIdNotice, data, dataLength)
+
+    LuaDebug.Log("session_id: ".. long_to_id(data.session_id))
+
+    PingManager.get_Instance():sessionId(long_to_id(data.session_id))
+end
+
+HandleFuncs[enumMSGID_MODULE_05.ID_GAME_ROOM_CREATE_RES] = function(data, dataLength)
+    local data = LuaProto.deserialize(PBMsgCreateRoomRes, data, dataLength)
+
+    LuaDebug.Log("passwd: "..data.passwd..", amount: "..data.amount..", horse: "..data.horse..", add: "..data.addition)
+    --local ref = LuaUIViewCtr.OpenUIHasBg("MJTable/MJTable")
+    --ref.Init(ref, data.)
 end

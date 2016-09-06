@@ -1,0 +1,86 @@
+CreateRoomCtrl = {}
+
+function CreateRoomCtrl:Start( )
+    local mt=TextureMgr.get_Instance():LoadTexture("Home/Z_jiaruyouxitangchuang", true)
+    self.Texture:set_material(mt)
+
+    self.jushu = 8
+    self.mashu = 2
+    self.beishu = 1
+end
+
+function CreateRoomCtrl:OnDestroy( )
+
+end
+
+function CreateRoomCtrl:Close_OnClick()
+    self.gameObject:Destroy1()
+end
+
+function CreateRoomCtrl:Create_OnClick()
+    ClientSendMsg.SendCreateRoom(self.jushu, self.mashu, self.beishu)
+
+    self.gameObject:Destroy1()
+end
+
+function CreateRoomCtrl:Ju8_OnClick()
+    self.Ju8Check:set_enabled(true)
+    self.Ju16Check:set_enabled(false)
+
+    self.jushu = 8
+end
+
+function CreateRoomCtrl:Ju16_OnClick()
+    self.Ju8Check:set_enabled(false)
+    self.Ju16Check:set_enabled(true)
+
+    self.jushu = 16
+end
+
+function CreateRoomCtrl:Ma2_OnClick()
+    self.Ma2Check:set_enabled(true)
+    self.Ma3Check:set_enabled(false)
+    self.Ma4Check:set_enabled(false)
+
+    self.mashu = 2
+end
+
+function CreateRoomCtrl:Ma3_OnClick()
+    self.Ma2Check:set_enabled(false)
+    self.Ma3Check:set_enabled(true)
+    self.Ma4Check:set_enabled(false)
+
+    self.mashu = 3
+end
+
+function CreateRoomCtrl:Ma4_OnClick()
+    self.Ma2Check:set_enabled(false)
+    self.Ma3Check:set_enabled(false)
+    self.Ma4Check:set_enabled(true)
+
+    self.mashu = 4
+end
+
+function CreateRoomCtrl:Bei1_OnClick()
+    self.Bei1Check:set_enabled(true)
+    self.Bei2Check:set_enabled(false)
+    self.Bei5Check:set_enabled(false)
+
+    self.beishu = 1
+end
+
+function CreateRoomCtrl:Bei2_OnClick()
+    self.Bei1Check:set_enabled(false)
+    self.Bei2Check:set_enabled(true)
+    self.Bei5Check:set_enabled(false)
+
+    self.beishu = 2
+end
+
+function CreateRoomCtrl:Bei5_OnClick()
+    self.Bei1Check:set_enabled(false)
+    self.Bei2Check:set_enabled(false)
+    self.Bei5Check:set_enabled(true)
+
+    self.beishu = 5
+end

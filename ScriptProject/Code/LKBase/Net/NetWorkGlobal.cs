@@ -10,6 +10,7 @@ public class CNetWorkGlobal
 {
 	private CClientNetworkCtrl m_Ctrl;
 
+
 	public CNetWorkGlobal ()
 	{
 		CNetStreamReader reader = new CNetStreamReader();
