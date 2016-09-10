@@ -371,7 +371,8 @@ function LoginController:StartGameBtn_OnClick()
         if self.IsConnect then
             if self.userName ~= "" then
                 LuaDebug.Log("ClientSendMsg.SendRawAuth")
-                ClientSendMsg.SendRawAuth(self.userName,self.password)
+                --ClientSendMsg.SendRawAuth(self.userName,self.password)
+                 ClientSendMsg.SendAuth(self.userName,self.password)
             else
                 LuaDebug.Log("OpenLoginInputUI")
                 LoginController.OpenLoginInputUI(self,false)

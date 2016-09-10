@@ -105,5 +105,14 @@ HandleFuncs[enumMSGID_MODULE_05.ID_GAME_ROOM_CREATE_RES] = function(data, dataLe
 
     LuaDebug.Log("passwd: "..data.passwd..", amount: "..data.amount..", horse: "..data.horse..", add: "..data.addition)
     --local ref = LuaUIViewCtr.OpenUIHasBg("MJTable/MJTable")
-    --ref.Init(ref, data.)
+    --ref.Init(ref, data.passwd, data.amount, data.horse, 1, 0)
+
+    ClientSendMsg.SendEnterRoom(Client.RoleInfo.RoleID, data.passwd)
+end
+
+HandleFuncs[enumMSGID_MODULE_05.ID_GAME_ROOM_ENTER_RES] = function(data,dataLength)
+    local data = LuaProto.deserialize(PBMsgEnterRoomRes, data, dataLength)
+
+    local ref = LuaUIViewCtr.OpenUIHasBg("MJTable/MJTable")
+    ref.Init(ref, data.passwd, data.amount, data.horse, 1, data.used)
 end

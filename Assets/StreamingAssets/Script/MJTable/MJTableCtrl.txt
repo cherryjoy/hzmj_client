@@ -5,10 +5,16 @@ function MJTableCtrl:Start( )
     self.Texture:set_material(mt)
 end
 
-function MJTableCtrl:Init()
-    
+function MJTableCtrl:Init(passwd, amount, horse, beishu, used)
+    self.ID:set_text(string.format(Text.TableName, passwd))
+    self.MaShu:set_text(string.format(Text.MaShuName, beishu, horse))
+    self.JuShu:set_text(string.format(Text.JuShuName, used, amount, 112))
 end
 
 function MJTableCtrl:OnDestroy( )
 
 end
+
+
+
+--Bottom -460,-240
