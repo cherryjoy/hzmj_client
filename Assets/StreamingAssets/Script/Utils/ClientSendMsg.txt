@@ -152,3 +152,10 @@ function ClientSendMsg.SendEnterRoom(roleid, passwd)
 	local buffer,length = LuaProto.serialize(data)
 	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_ROOM_ENTER_REQ,buffer,length)
 end
+
+function ClientSendMsg.SendReadyRoom()
+	local data = PBMsgReadyReq.Create()
+
+	local buffer,length = LuaProto.serialize(data)
+	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_READY_REQ, buffer, length)
+end

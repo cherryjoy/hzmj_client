@@ -1,0 +1,4583 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &112904
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 417742}
+  - 114: {fileID: 11410790}
+  m_Layer: 0
+  m_Name: Mahjong
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &417742
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 112904}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11410790
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 112904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1582492658, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaterialPath: 
+  material: {fileID: 2100000, guid: b632e0289e700ad41a4592b9b77a03bf, type: 2}
+  sprites:
+  - name: tileBase_meUp_0
+    outer:
+      serializedVersion: 2
+      x: 0
+      y: 453
+      width: 39
+      height: 59
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 0
+      y: 453
+      width: 39
+      height: 59
+    inner:
+      serializedVersion: 2
+      x: 0
+      y: 453
+      width: 39
+      height: 59
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: tile_me_48
+    outer:
+      serializedVersion: 2
+      x: 0
+      y: 388
+      width: 47
+      height: 64
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 0
+      y: 388
+      width: 47
+      height: 64
+    inner:
+      serializedVersion: 2
+      x: 0
+      y: 388
+      width: 47
+      height: 64
+    paddingLeft: 0.25531915
+    paddingRight: 0.29787233
+    paddingTop: 0.078125
+    paddingBottom: 0.203125
+  - name: tile_leftRight_13
+    outer:
+      serializedVersion: 2
+      x: 40
+      y: 489
+      width: 35
+      height: 23
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 40
+      y: 489
+      width: 35
+      height: 23
+    inner:
+      serializedVersion: 2
+      x: 40
+      y: 489
+      width: 35
+      height: 23
+    paddingLeft: 0.114285715
+    paddingRight: 0.114285715
+    paddingTop: 0.26086956
+    paddingBottom: 0.26086956
+  - name: grey_tile_me_31
+    outer:
+      serializedVersion: 2
+      x: 0
+      y: 311
+      width: 57
+      height: 76
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 0
+      y: 311
+      width: 57
+      height: 76
+    inner:
+      serializedVersion: 2
+      x: 0
+      y: 311
+      width: 57
+      height: 76
+    paddingLeft: 0.1754386
+    paddingRight: 0.10526316
+    paddingTop: 0.05263158
+    paddingBottom: 0.02631579
+  - name: tile_leftRight_31
+    outer:
+      serializedVersion: 2
+      x: 40
+      y: 458
+      width: 39
+      height: 30
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 40
+      y: 458
+      width: 39
+      height: 30
+    inner:
+      serializedVersion: 2
+      x: 40
+      y: 458
+      width: 39
+      height: 30
+    paddingLeft: 0.025641026
+    paddingRight: 0.07692308
+    paddingTop: 0.1
+    paddingBottom: 0.06666667
+  - name: tile_meUp_17
+    outer:
+      serializedVersion: 2
+      x: 48
+      y: 422
+      width: 21
+      height: 35
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 48
+      y: 422
+      width: 21
+      height: 35
+    inner:
+      serializedVersion: 2
+      x: 48
+      y: 422
+      width: 21
+      height: 35
+    paddingLeft: 0.2857143
+    paddingRight: 0.3809524
+    paddingTop: 0.114285715
+    paddingBottom: 0.114285715
+  - name: tile_meUp_35
+    outer:
+      serializedVersion: 2
+      x: 0
+      y: 271
+      width: 24
+      height: 39
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 0
+      y: 271
+      width: 24
+      height: 39
+    inner:
+      serializedVersion: 2
+      x: 0
+      y: 271
+      width: 24
+      height: 39
+    paddingLeft: 0.29166666
+    paddingRight: 0.16666667
+    paddingTop: 0.051282052
+    paddingBottom: 0.051282052
+  - name: tile_leftRight_22
+    outer:
+      serializedVersion: 2
+      x: 76
+      y: 497
+      width: 31
+      height: 15
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 76
+      y: 497
+      width: 31
+      height: 15
+    inner:
+      serializedVersion: 2
+      x: 76
+      y: 497
+      width: 31
+      height: 15
+    paddingLeft: 0.22580644
+    paddingRight: 0.16129032
+    paddingTop: 0.6666667
+    paddingBottom: 0.6666667
+  - name: tile_leftRight_7
+    outer:
+      serializedVersion: 2
+      x: 48
+      y: 396
+      width: 39
+      height: 25
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 48
+      y: 396
+      width: 39
+      height: 25
+    inner:
+      serializedVersion: 2
+      x: 48
+      y: 396
+      width: 39
+      height: 25
+    paddingLeft: 0.07692308
+    paddingRight: 0.025641026
+    paddingTop: 0.12
+    paddingBottom: 0.28
+  - name: tile_leftRight_3
+    outer:
+      serializedVersion: 2
+      x: 70
+      y: 432
+      width: 39
+      height: 25
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 70
+      y: 432
+      width: 39
+      height: 25
+    inner:
+      serializedVersion: 2
+      x: 70
+      y: 432
+      width: 39
+      height: 25
+    paddingLeft: 0.051282052
+    paddingRight: 0.051282052
+    paddingTop: 0.12
+    paddingBottom: 0.28
+  - name: tileBase_me_0
+    outer:
+      serializedVersion: 2
+      x: 0
+      y: 159
+      width: 77
+      height: 111
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 0
+      y: 159
+      width: 77
+      height: 111
+    inner:
+      serializedVersion: 2
+      x: 0
+      y: 159
+      width: 77
+      height: 111
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: tile_me_21
+    outer:
+      serializedVersion: 2
+      x: 108
+      y: 462
+      width: 51
+      height: 50
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 108
+      y: 462
+      width: 51
+      height: 50
+    inner:
+      serializedVersion: 2
+      x: 108
+      y: 462
+      width: 51
+      height: 50
+    paddingLeft: 0.23529412
+    paddingRight: 0.19607843
+    paddingTop: 0.28
+    paddingBottom: 0.36
+  - name: tile_me_28
+    outer:
+      serializedVersion: 2
+      x: 58
+      y: 321
+      width: 41
+      height: 74
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 58
+      y: 321
+      width: 41
+      height: 74
+    inner:
+      serializedVersion: 2
+      x: 58
+      y: 321
+      width: 41
+      height: 74
+    paddingLeft: 0.36585367
+    paddingRight: 0.41463414
+    paddingTop: 0.054054055
+    paddingBottom: 0.054054055
+  - name: grey_tile_me_21
+    outer:
+      serializedVersion: 2
+      x: 0
+      y: 108
+      width: 50
+      height: 50
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 0
+      y: 108
+      width: 50
+      height: 50
+    inner:
+      serializedVersion: 2
+      x: 0
+      y: 108
+      width: 50
+      height: 50
+    paddingLeft: 0.26
+    paddingRight: 0.2
+    paddingTop: 0.28
+    paddingBottom: 0.36
+  - name: tile_meUp_32
+    outer:
+      serializedVersion: 2
+      x: 80
+      y: 465
+      width: 26
+      height: 31
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 80
+      y: 465
+      width: 26
+      height: 31
+    inner:
+      serializedVersion: 2
+      x: 80
+      y: 465
+      width: 26
+      height: 31
+    paddingLeft: 0.1923077
+    paddingRight: 0.15384616
+    paddingTop: 0.19354838
+    paddingBottom: 0.19354838
+  - name: tile_meUp_1
+    outer:
+      serializedVersion: 2
+      x: 88
+      y: 396
+      width: 25
+      height: 35
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 88
+      y: 396
+      width: 25
+      height: 35
+    inner:
+      serializedVersion: 2
+      x: 88
+      y: 396
+      width: 25
+      height: 35
+    paddingLeft: 0.12
+    paddingRight: 0.28
+    paddingTop: 0.14285715
+    paddingBottom: 0.08571429
+  - name: tile_meUp_27
+    outer:
+      serializedVersion: 2
+      x: 25
+      y: 273
+      width: 25
+      height: 37
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 25
+      y: 273
+      width: 25
+      height: 37
+    inner:
+      serializedVersion: 2
+      x: 25
+      y: 273
+      width: 25
+      height: 37
+    paddingLeft: 0.2
+    paddingRight: 0.2
+    paddingTop: 0.054054055
+    paddingBottom: 0.10810811
+  - name: tile_leftRight_6
+    outer:
+      serializedVersion: 2
+      x: 110
+      y: 436
+      width: 39
+      height: 25
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 110
+      y: 436
+      width: 39
+      height: 25
+    inner:
+      serializedVersion: 2
+      x: 110
+      y: 436
+      width: 39
+      height: 25
+    paddingLeft: 0.051282052
+    paddingRight: 0.051282052
+    paddingTop: 0.12
+    paddingBottom: 0.28
+  - name: tile_me_47
+    outer:
+      serializedVersion: 2
+      x: 0
+      y: 37
+      width: 58
+      height: 70
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 0
+      y: 37
+      width: 58
+      height: 70
+    inner:
+      serializedVersion: 2
+      x: 0
+      y: 37
+      width: 58
+      height: 70
+    paddingLeft: 0.15517241
+    paddingRight: 0.10344828
+    paddingTop: 0.071428575
+    paddingBottom: 0.1
+  - name: grey_tile_me_9
+    outer:
+      serializedVersion: 2
+      x: 59
+      y: 80
+      width: 49
+      height: 78
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 59
+      y: 80
+      width: 49
+      height: 78
+    inner:
+      serializedVersion: 2
+      x: 59
+      y: 80
+      width: 49
+      height: 78
+    paddingLeft: 0.24489796
+    paddingRight: 0.24489796
+    paddingTop: 0
+    paddingBottom: 0.051282052
+  - name: tile_dealLeftRight_0
+    outer:
+      serializedVersion: 2
+      x: 58
+      y: 278
+      width: 65
+      height: 42
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 58
+      y: 278
+      width: 65
+      height: 42
+    inner:
+      serializedVersion: 2
+      x: 58
+      y: 278
+      width: 65
+      height: 42
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0.023809524
+    paddingBottom: 0.071428575
+  - name: tile_me_8
+    outer:
+      serializedVersion: 2
+      x: 100
+      y: 321
+      width: 49
+      height: 74
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 100
+      y: 321
+      width: 49
+      height: 74
+    inner:
+      serializedVersion: 2
+      x: 100
+      y: 321
+      width: 49
+      height: 74
+    paddingLeft: 0.20408164
+    paddingRight: 0.2857143
+    paddingTop: 0.04054054
+    paddingBottom: 0.067567565
+  - name: grey_tile_me_32
+    outer:
+      serializedVersion: 2
+      x: 59
+      y: 19
+      width: 49
+      height: 60
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 59
+      y: 19
+      width: 49
+      height: 60
+    inner:
+      serializedVersion: 2
+      x: 59
+      y: 19
+      width: 49
+      height: 60
+    paddingLeft: 0.26530612
+    paddingRight: 0.2244898
+    paddingTop: 0.16666667
+    paddingBottom: 0.2
+  - name: tile_me_22
+    outer:
+      serializedVersion: 2
+      x: 78
+      y: 211
+      width: 33
+      height: 66
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 78
+      y: 211
+      width: 33
+      height: 66
+    inner:
+      serializedVersion: 2
+      x: 78
+      y: 211
+      width: 33
+      height: 66
+    paddingLeft: 0.57575756
+    paddingRight: 0.6363636
+    paddingTop: 0.121212125
+    paddingBottom: 0.121212125
+  - name: tile_leftRight_12
+    outer:
+      serializedVersion: 2
+      x: 0
+      y: 29
+      width: 35
+      height: 7
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 0
+      y: 29
+      width: 35
+      height: 7
+    inner:
+      serializedVersion: 2
+      x: 0
+      y: 29
+      width: 35
+      height: 7
+    paddingLeft: 0.114285715
+    paddingRight: 0.114285715
+    paddingTop: 1.8571428
+    paddingBottom: 2.142857
+  - name: tile_me_37
+    outer:
+      serializedVersion: 2
+      x: 109
+      y: 136
+      width: 50
+      height: 74
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 109
+      y: 136
+      width: 50
+      height: 74
+    inner:
+      serializedVersion: 2
+      x: 109
+      y: 136
+      width: 50
+      height: 74
+    paddingLeft: 0.22
+    paddingRight: 0.24
+    paddingTop: 0.04054054
+    paddingBottom: 0.067567565
+  - name: tile_leftRight_19
+    outer:
+      serializedVersion: 2
+      x: 0
+      y: 7
+      width: 37
+      height: 21
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 0
+      y: 7
+      width: 37
+      height: 21
+    inner:
+      serializedVersion: 2
+      x: 0
+      y: 7
+      width: 37
+      height: 21
+    paddingLeft: 0.054054055
+    paddingRight: 0.10810811
+    paddingTop: 0.33333334
+    paddingBottom: 0.33333334
+  - name: tile_me_6
+    outer:
+      serializedVersion: 2
+      x: 124
+      y: 242
+      width: 49
+      height: 78
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 124
+      y: 242
+      width: 49
+      height: 78
+    inner:
+      serializedVersion: 2
+      x: 124
+      y: 242
+      width: 49
+      height: 78
+    paddingLeft: 0.20408164
+    paddingRight: 0.2857143
+    paddingTop: 0
+    paddingBottom: 0.051282052
+  - name: tile_leftRight_26
+    outer:
+      serializedVersion: 2
+      x: 112
+      y: 222
+      width: 35
+      height: 19
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 112
+      y: 222
+      width: 35
+      height: 19
+    inner:
+      serializedVersion: 2
+      x: 112
+      y: 222
+      width: 35
+      height: 19
+    paddingLeft: 0.114285715
+    paddingRight: 0.114285715
+    paddingTop: 0.42105263
+    paddingBottom: 0.42105263
+  - name: grey_tile_me_12
+    outer:
+      serializedVersion: 2
+      x: 150
+      y: 391
+      width: 14
+      height: 70
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 150
+      y: 391
+      width: 14
+      height: 70
+    inner:
+      serializedVersion: 2
+      x: 150
+      y: 391
+      width: 14
+      height: 70
+    paddingLeft: 2.0714285
+    paddingRight: 2.142857
+    paddingTop: 0.08571429
+    paddingBottom: 0.08571429
+  - name: grey_tile_me_16
+    outer:
+      serializedVersion: 2
+      x: 109
+      y: 63
+      width: 45
+      height: 72
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 109
+      y: 63
+      width: 45
+      height: 72
+    inner:
+      serializedVersion: 2
+      x: 109
+      y: 63
+      width: 45
+      height: 72
+    paddingLeft: 0.31111112
+    paddingRight: 0.31111112
+    paddingTop: 0.06944445
+    paddingBottom: 0.06944445
+  - name: tile_me_35
+    outer:
+      serializedVersion: 2
+      x: 155
+      y: 59
+      width: 46
+      height: 76
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 155
+      y: 59
+      width: 46
+      height: 76
+    inner:
+      serializedVersion: 2
+      x: 155
+      y: 59
+      width: 46
+      height: 76
+    paddingLeft: 0.3478261
+    paddingRight: 0.23913044
+    paddingTop: 0.039473683
+    paddingBottom: 0.039473683
+  - name: grey_tile_me_19
+    outer:
+      serializedVersion: 2
+      x: 160
+      y: 167
+      width: 45
+      height: 74
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 160
+      y: 167
+      width: 45
+      height: 74
+    inner:
+      serializedVersion: 2
+      x: 160
+      y: 167
+      width: 45
+      height: 74
+    paddingLeft: 0.26666668
+    paddingRight: 0.35555556
+    paddingTop: 0.054054055
+    paddingBottom: 0.054054055
+  - name: tile_meUp_15
+    outer:
+      serializedVersion: 2
+      x: 114
+      y: 400
+      width: 21
+      height: 35
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 114
+      y: 400
+      width: 21
+      height: 35
+    inner:
+      serializedVersion: 2
+      x: 114
+      y: 400
+      width: 21
+      height: 35
+    paddingLeft: 0.33333334
+    paddingRight: 0.33333334
+    paddingTop: 0.08571429
+    paddingBottom: 0.14285715
+  - name: tile_me_46
+    outer:
+      serializedVersion: 2
+      x: 202
+      y: 92
+      width: 57
+      height: 74
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 202
+      y: 92
+      width: 57
+      height: 74
+    inner:
+      serializedVersion: 2
+      x: 202
+      y: 92
+      width: 57
+      height: 74
+    paddingLeft: 0.15789473
+    paddingRight: 0.12280702
+    paddingTop: 0.04054054
+    paddingBottom: 0.067567565
+  - name: tile_me_16
+    outer:
+      serializedVersion: 2
+      x: 202
+      y: 19
+      width: 45
+      height: 72
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 202
+      y: 19
+      width: 45
+      height: 72
+    inner:
+      serializedVersion: 2
+      x: 202
+      y: 19
+      width: 45
+      height: 72
+    paddingLeft: 0.31111112
+    paddingRight: 0.31111112
+    paddingTop: 0.06944445
+    paddingBottom: 0.06944445
+  - name: tile_leftRight_27
+    outer:
+      serializedVersion: 2
+      x: 160
+      y: 141
+      width: 37
+      height: 25
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 160
+      y: 141
+      width: 37
+      height: 25
+    inner:
+      serializedVersion: 2
+      x: 160
+      y: 141
+      width: 37
+      height: 25
+    paddingLeft: 0.10810811
+    paddingRight: 0.054054055
+    paddingTop: 0.2
+    paddingBottom: 0.2
+  - name: tile_meUp_37
+    outer:
+      serializedVersion: 2
+      x: 78
+      y: 173
+      width: 26
+      height: 37
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 78
+      y: 173
+      width: 26
+      height: 37
+    inner:
+      serializedVersion: 2
+      x: 78
+      y: 173
+      width: 26
+      height: 37
+    paddingLeft: 0.15384616
+    paddingRight: 0.1923077
+    paddingTop: 0.08108108
+    paddingBottom: 0.08108108
+  - name: tile_leftRight_24
+    outer:
+      serializedVersion: 2
+      x: 109
+      y: 39
+      width: 31
+      height: 23
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 109
+      y: 39
+      width: 31
+      height: 23
+    inner:
+      serializedVersion: 2
+      x: 109
+      y: 39
+      width: 31
+      height: 23
+    paddingLeft: 0.16129032
+    paddingRight: 0.22580644
+    paddingTop: 0.2173913
+    paddingBottom: 0.3043478
+  - name: tile_leftRight_16
+    outer:
+      serializedVersion: 2
+      x: 109
+      y: 17
+      width: 35
+      height: 21
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 109
+      y: 17
+      width: 35
+      height: 21
+    inner:
+      serializedVersion: 2
+      x: 109
+      y: 17
+      width: 35
+      height: 21
+    paddingLeft: 0.114285715
+    paddingRight: 0.114285715
+    paddingTop: 0.33333334
+    paddingBottom: 0.33333334
+  - name: tile_me_14
+    outer:
+      serializedVersion: 2
+      x: 248
+      y: 21
+      width: 39
+      height: 70
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 248
+      y: 21
+      width: 39
+      height: 70
+    inner:
+      serializedVersion: 2
+      x: 248
+      y: 21
+      width: 39
+      height: 70
+    paddingLeft: 0.41025642
+    paddingRight: 0.46153846
+    paddingTop: 0.08571429
+    paddingBottom: 0.08571429
+  - name: tile_meUp_19
+    outer:
+      serializedVersion: 2
+      x: 145
+      y: 21
+      width: 21
+      height: 37
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 145
+      y: 21
+      width: 21
+      height: 37
+    inner:
+      serializedVersion: 2
+      x: 145
+      y: 21
+      width: 21
+      height: 37
+    paddingLeft: 0.33333334
+    paddingRight: 0.33333334
+    paddingTop: 0.08108108
+    paddingBottom: 0.08108108
+  - name: tile_meUp_24
+    outer:
+      serializedVersion: 2
+      x: 167
+      y: 27
+      width: 23
+      height: 31
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 167
+      y: 27
+      width: 23
+      height: 31
+    inner:
+      serializedVersion: 2
+      x: 167
+      y: 27
+      width: 23
+      height: 31
+    paddingLeft: 0.2173913
+    paddingRight: 0.3043478
+    paddingTop: 0.19354838
+    paddingBottom: 0.19354838
+  - name: tile_leftRight_5
+    outer:
+      serializedVersion: 2
+      x: 160
+      y: 487
+      width: 37
+      height: 25
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 160
+      y: 487
+      width: 37
+      height: 25
+    inner:
+      serializedVersion: 2
+      x: 160
+      y: 487
+      width: 37
+      height: 25
+    paddingLeft: 0.08108108
+    paddingRight: 0.08108108
+    paddingTop: 0.16
+    paddingBottom: 0.24
+  - name: grey_tile_me_14
+    outer:
+      serializedVersion: 2
+      x: 165
+      y: 416
+      width: 39
+      height: 70
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 165
+      y: 416
+      width: 39
+      height: 70
+    inner:
+      serializedVersion: 2
+      x: 165
+      y: 416
+      width: 39
+      height: 70
+    paddingLeft: 0.41025642
+    paddingRight: 0.46153846
+    paddingTop: 0.08571429
+    paddingBottom: 0.08571429
+  - name: tile_me_7
+    outer:
+      serializedVersion: 2
+      x: 165
+      y: 337
+      width: 49
+      height: 78
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 165
+      y: 337
+      width: 49
+      height: 78
+    inner:
+      serializedVersion: 2
+      x: 165
+      y: 337
+      width: 49
+      height: 78
+    paddingLeft: 0.1632653
+    paddingRight: 0.3265306
+    paddingTop: 0
+    paddingBottom: 0.051282052
+  - name: tile_meUp_34
+    outer:
+      serializedVersion: 2
+      x: 205
+      y: 484
+      width: 25
+      height: 28
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 205
+      y: 484
+      width: 25
+      height: 28
+    inner:
+      serializedVersion: 2
+      x: 205
+      y: 484
+      width: 25
+      height: 28
+    paddingLeft: 0.16
+    paddingRight: 0.24
+    paddingTop: 0.25
+    paddingBottom: 0.2857143
+  - name: tile_me_3
+    outer:
+      serializedVersion: 2
+      x: 174
+      y: 260
+      width: 49
+      height: 76
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 174
+      y: 260
+      width: 49
+      height: 76
+    inner:
+      serializedVersion: 2
+      x: 174
+      y: 260
+      width: 49
+      height: 76
+    paddingLeft: 0.18367347
+    paddingRight: 0.30612245
+    paddingTop: 0.02631579
+    paddingBottom: 0.05263158
+  - name: tile_meUp_13
+    outer:
+      serializedVersion: 2
+      x: 205
+      y: 448
+      width: 23
+      height: 35
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 205
+      y: 448
+      width: 23
+      height: 35
+    inner:
+      serializedVersion: 2
+      x: 205
+      y: 448
+      width: 23
+      height: 35
+    paddingLeft: 0.26086956
+    paddingRight: 0.26086956
+    paddingTop: 0.08571429
+    paddingBottom: 0.14285715
+  - name: tile_leftRight_8
+    outer:
+      serializedVersion: 2
+      x: 205
+      y: 422
+      width: 37
+      height: 25
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 205
+      y: 422
+      width: 37
+      height: 25
+    inner:
+      serializedVersion: 2
+      x: 205
+      y: 422
+      width: 37
+      height: 25
+    paddingLeft: 0.08108108
+    paddingRight: 0.08108108
+    paddingTop: 0.16
+    paddingBottom: 0.24
+  - name: tile_leftRight_21
+    outer:
+      serializedVersion: 2
+      x: 167
+      y: 3
+      width: 25
+      height: 23
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 167
+      y: 3
+      width: 25
+      height: 23
+    inner:
+      serializedVersion: 2
+      x: 167
+      y: 3
+      width: 25
+      height: 23
+    paddingLeft: 0.4
+    paddingRight: 0.32
+    paddingTop: 0.26086956
+    paddingBottom: 0.26086956
+  - name: tile_me_5
+    outer:
+      serializedVersion: 2
+      x: 215
+      y: 347
+      width: 49
+      height: 74
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 215
+      y: 347
+      width: 49
+      height: 74
+    inner:
+      serializedVersion: 2
+      x: 215
+      y: 347
+      width: 49
+      height: 74
+    paddingLeft: 0.2244898
+    paddingRight: 0.26530612
+    paddingTop: 0.04054054
+    paddingBottom: 0.067567565
+  - name: tile_leftRight_11
+    outer:
+      serializedVersion: 2
+      x: 229
+      y: 456
+      width: 37
+      height: 27
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 229
+      y: 456
+      width: 37
+      height: 27
+    inner:
+      serializedVersion: 2
+      x: 229
+      y: 456
+      width: 37
+      height: 27
+    paddingLeft: 0.054054055
+    paddingRight: 0.10810811
+    paddingTop: 0.14814815
+    paddingBottom: 0.14814815
+  - name: tile_meUp_3
+    outer:
+      serializedVersion: 2
+      x: 206
+      y: 220
+      width: 25
+      height: 39
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 206
+      y: 220
+      width: 25
+      height: 39
+    inner:
+      serializedVersion: 2
+      x: 206
+      y: 220
+      width: 25
+      height: 39
+    paddingLeft: 0.12
+    paddingRight: 0.28
+    paddingTop: 0.025641026
+    paddingBottom: 0.07692308
+  - name: grey_tile_me_2
+    outer:
+      serializedVersion: 2
+      x: 224
+      y: 272
+      width: 49
+      height: 74
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 224
+      y: 272
+      width: 49
+      height: 74
+    inner:
+      serializedVersion: 2
+      x: 224
+      y: 272
+      width: 49
+      height: 74
+    paddingLeft: 0.24489796
+    paddingRight: 0.24489796
+    paddingTop: 0.054054055
+    paddingBottom: 0.054054055
+  - name: grey_tile_me_15
+    outer:
+      serializedVersion: 2
+      x: 265
+      y: 385
+      width: 45
+      height: 70
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 265
+      y: 385
+      width: 45
+      height: 70
+    inner:
+      serializedVersion: 2
+      x: 265
+      y: 385
+      width: 45
+      height: 70
+    paddingLeft: 0.2888889
+    paddingRight: 0.33333334
+    paddingTop: 0.08571429
+    paddingBottom: 0.08571429
+  - name: grey_tile_me_29
+    outer:
+      serializedVersion: 2
+      x: 232
+      y: 197
+      width: 57
+      height: 74
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 232
+      y: 197
+      width: 57
+      height: 74
+    inner:
+      serializedVersion: 2
+      x: 232
+      y: 197
+      width: 57
+      height: 74
+    paddingLeft: 0.14035088
+    paddingRight: 0.14035088
+    paddingTop: 0.067567565
+    paddingBottom: 0.04054054
+  - name: tile_me_17
+    outer:
+      serializedVersion: 2
+      x: 260
+      y: 124
+      width: 43
+      height: 72
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 260
+      y: 124
+      width: 43
+      height: 72
+    inner:
+      serializedVersion: 2
+      x: 260
+      y: 124
+      width: 43
+      height: 72
+    paddingLeft: 0.3255814
+    paddingRight: 0.37209302
+    paddingTop: 0.06944445
+    paddingBottom: 0.06944445
+  - name: tile_me_24
+    outer:
+      serializedVersion: 2
+      x: 274
+      y: 322
+      width: 49
+      height: 62
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 274
+      y: 322
+      width: 49
+      height: 62
+    inner:
+      serializedVersion: 2
+      x: 274
+      y: 322
+      width: 49
+      height: 62
+    paddingLeft: 0.2244898
+    paddingRight: 0.26530612
+    paddingTop: 0.19354838
+    paddingBottom: 0.12903225
+  - name: tileBack_up_0
+    outer:
+      serializedVersion: 2
+      x: 288
+      y: 64
+      width: 40
+      height: 59
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 288
+      y: 64
+      width: 40
+      height: 59
+    inner:
+      serializedVersion: 2
+      x: 288
+      y: 64
+      width: 40
+      height: 59
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: tile_me_27
+    outer:
+      serializedVersion: 2
+      x: 311
+      y: 436
+      width: 53
+      height: 76
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 311
+      y: 436
+      width: 53
+      height: 76
+    inner:
+      serializedVersion: 2
+      x: 311
+      y: 436
+      width: 53
+      height: 76
+    paddingLeft: 0.18867925
+    paddingRight: 0.18867925
+    paddingTop: 0.05263158
+    paddingBottom: 0.02631579
+  - name: tileBaseFinish_me_0
+    outer:
+      serializedVersion: 2
+      x: 290
+      y: 210
+      width: 75
+      height: 111
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 290
+      y: 210
+      width: 75
+      height: 111
+    inner:
+      serializedVersion: 2
+      x: 290
+      y: 210
+      width: 75
+      height: 111
+    paddingLeft: 0.013333334
+    paddingRight: 0.013333334
+    paddingTop: 0
+    paddingBottom: 0
+  - name: tile_leftRight_9
+    outer:
+      serializedVersion: 2
+      x: 206
+      y: 171
+      width: 39
+      height: 25
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 206
+      y: 171
+      width: 39
+      height: 25
+    inner:
+      serializedVersion: 2
+      x: 206
+      y: 171
+      width: 39
+      height: 25
+    paddingLeft: 0.051282052
+    paddingRight: 0.051282052
+    paddingTop: 0.12
+    paddingBottom: 0.28
+  - name: tile_leftRight_29
+    outer:
+      serializedVersion: 2
+      x: 231
+      y: 485
+      width: 35
+      height: 27
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 231
+      y: 485
+      width: 35
+      height: 27
+    inner:
+      serializedVersion: 2
+      x: 231
+      y: 485
+      width: 35
+      height: 27
+    paddingLeft: 0.114285715
+    paddingRight: 0.114285715
+    paddingTop: 0.14814815
+    paddingBottom: 0.14814815
+  - name: tile_me_26
+    outer:
+      serializedVersion: 2
+      x: 304
+      y: 137
+      width: 41
+      height: 72
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 304
+      y: 137
+      width: 41
+      height: 72
+    inner:
+      serializedVersion: 2
+      x: 304
+      y: 137
+      width: 41
+      height: 72
+    paddingLeft: 0.3902439
+    paddingRight: 0.3902439
+    paddingTop: 0.11111111
+    paddingBottom: 0.027777778
+  - name: grey_tile_me_24
+    outer:
+      serializedVersion: 2
+      x: 288
+      y: 1
+      width: 49
+      height: 62
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 288
+      y: 1
+      width: 49
+      height: 62
+    inner:
+      serializedVersion: 2
+      x: 288
+      y: 1
+      width: 49
+      height: 62
+    paddingLeft: 0.2244898
+    paddingRight: 0.26530612
+    paddingTop: 0.19354838
+    paddingBottom: 0.12903225
+  - name: grey_tile_me_26
+    outer:
+      serializedVersion: 2
+      x: 329
+      y: 64
+      width: 41
+      height: 72
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 329
+      y: 64
+      width: 41
+      height: 72
+    inner:
+      serializedVersion: 2
+      x: 329
+      y: 64
+      width: 41
+      height: 72
+    paddingLeft: 0.3902439
+    paddingRight: 0.3902439
+    paddingTop: 0.11111111
+    paddingBottom: 0.027777778
+  - name: tile_me_44
+    outer:
+      serializedVersion: 2
+      x: 346
+      y: 141
+      width: 55
+      height: 68
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 346
+      y: 141
+      width: 55
+      height: 68
+    inner:
+      serializedVersion: 2
+      x: 346
+      y: 141
+      width: 55
+      height: 68
+    paddingLeft: 0.16363636
+    paddingRight: 0.16363636
+    paddingTop: 0.073529415
+    paddingBottom: 0.13235295
+  - name: tile_meUp_22
+    outer:
+      serializedVersion: 2
+      x: 243
+      y: 424
+      width: 15
+      height: 31
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 243
+      y: 424
+      width: 15
+      height: 31
+    inner:
+      serializedVersion: 2
+      x: 243
+      y: 424
+      width: 15
+      height: 31
+    paddingLeft: 0.6666667
+    paddingRight: 0.6666667
+    paddingTop: 0.16129032
+    paddingBottom: 0.22580644
+  - name: tileBack_left_0
+    outer:
+      serializedVersion: 2
+      x: 338
+      y: 2
+      width: 27
+      height: 61
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 338
+      y: 2
+      width: 27
+      height: 61
+    inner:
+      serializedVersion: 2
+      x: 338
+      y: 2
+      width: 27
+      height: 61
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: grey_tile_me_33
+    outer:
+      serializedVersion: 2
+      x: 366
+      y: 9
+      width: 53
+      height: 54
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 366
+      y: 9
+      width: 53
+      height: 54
+    inner:
+      serializedVersion: 2
+      x: 366
+      y: 9
+      width: 53
+      height: 54
+    paddingLeft: 0.24528302
+    paddingRight: 0.13207547
+    paddingTop: 0.25925925
+    paddingBottom: 0.25925925
+  - name: grey_tile_me_3
+    outer:
+      serializedVersion: 2
+      x: 371
+      y: 64
+      width: 49
+      height: 76
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 371
+      y: 64
+      width: 49
+      height: 76
+    inner:
+      serializedVersion: 2
+      x: 371
+      y: 64
+      width: 49
+      height: 76
+    paddingLeft: 0.18367347
+    paddingRight: 0.30612245
+    paddingTop: 0.02631579
+    paddingBottom: 0.05263158
+  - name: tile_leftRight_37
+    outer:
+      serializedVersion: 2
+      x: 267
+      y: 487
+      width: 37
+      height: 25
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 267
+      y: 487
+      width: 37
+      height: 25
+    inner:
+      serializedVersion: 2
+      x: 267
+      y: 487
+      width: 37
+      height: 25
+    paddingLeft: 0.08108108
+    paddingRight: 0.08108108
+    paddingTop: 0.2
+    paddingBottom: 0.2
+  - name: tile_meUp_4
+    outer:
+      serializedVersion: 2
+      x: 311
+      y: 398
+      width: 25
+      height: 37
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 311
+      y: 398
+      width: 25
+      height: 37
+    inner:
+      serializedVersion: 2
+      x: 311
+      y: 398
+      width: 25
+      height: 37
+    paddingLeft: 0.12
+    paddingRight: 0.28
+    paddingTop: 0.054054055
+    paddingBottom: 0.10810811
+  - name: tileUpSet_leftRight_0
+    outer:
+      serializedVersion: 2
+      x: 420
+      y: 17
+      width: 52
+      height: 46
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 420
+      y: 17
+      width: 52
+      height: 46
+    inner:
+      serializedVersion: 2
+      x: 420
+      y: 17
+      width: 52
+      height: 46
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: tile_meUp_16
+    outer:
+      serializedVersion: 2
+      x: 324
+      y: 362
+      width: 21
+      height: 35
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 324
+      y: 362
+      width: 21
+      height: 35
+    inner:
+      serializedVersion: 2
+      x: 324
+      y: 362
+      width: 21
+      height: 35
+    paddingLeft: 0.33333334
+    paddingRight: 0.33333334
+    paddingTop: 0.114285715
+    paddingBottom: 0.114285715
+  - name: tile_leftRight_34
+    outer:
+      serializedVersion: 2
+      x: 267
+      y: 461
+      width: 28
+      height: 25
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 267
+      y: 461
+      width: 28
+      height: 25
+    inner:
+      serializedVersion: 2
+      x: 267
+      y: 461
+      width: 28
+      height: 25
+    paddingLeft: 0.2857143
+    paddingRight: 0.25
+    paddingTop: 0.16
+    paddingBottom: 0.24
+  - name: tile_me_12
+    outer:
+      serializedVersion: 2
+      x: 346
+      y: 365
+      width: 15
+      height: 70
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 346
+      y: 365
+      width: 15
+      height: 70
+    inner:
+      serializedVersion: 2
+      x: 346
+      y: 365
+      width: 15
+      height: 70
+    paddingLeft: 1.8666667
+    paddingRight: 2
+    paddingTop: 0.08571429
+    paddingBottom: 0.08571429
+  - name: tile_meUp_12
+    outer:
+      serializedVersion: 2
+      x: 265
+      y: 349
+      width: 7
+      height: 35
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 265
+      y: 349
+      width: 7
+      height: 35
+    inner:
+      serializedVersion: 2
+      x: 265
+      y: 349
+      width: 7
+      height: 35
+    paddingLeft: 1.8571428
+    paddingRight: 2.142857
+    paddingTop: 0.08571429
+    paddingBottom: 0.14285715
+  - name: grey_tile_me_4
+    outer:
+      serializedVersion: 2
+      x: 362
+      y: 361
+      width: 49
+      height: 74
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 362
+      y: 361
+      width: 49
+      height: 74
+    inner:
+      serializedVersion: 2
+      x: 362
+      y: 361
+      width: 49
+      height: 74
+    paddingLeft: 0.18367347
+    paddingRight: 0.30612245
+    paddingTop: 0.054054055
+    paddingBottom: 0.054054055
+  - name: tile_meUp_2
+    outer:
+      serializedVersion: 2
+      x: 324
+      y: 324
+      width: 25
+      height: 37
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 324
+      y: 324
+      width: 25
+      height: 37
+    inner:
+      serializedVersion: 2
+      x: 324
+      y: 324
+      width: 25
+      height: 37
+    paddingLeft: 0.16
+    paddingRight: 0.24
+    paddingTop: 0.054054055
+    paddingBottom: 0.10810811
+  - name: grey_tile_me_23
+    outer:
+      serializedVersion: 2
+      x: 365
+      y: 446
+      width: 60
+      height: 66
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 365
+      y: 446
+      width: 60
+      height: 66
+    inner:
+      serializedVersion: 2
+      x: 365
+      y: 446
+      width: 60
+      height: 66
+    paddingLeft: 0.11666667
+    paddingRight: 0.1
+    paddingTop: 0.10606061
+    paddingBottom: 0.13636364
+  - name: tile_leftRight_25
+    outer:
+      serializedVersion: 2
+      x: 350
+      y: 337
+      width: 31
+      height: 23
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 350
+      y: 337
+      width: 31
+      height: 23
+    inner:
+      serializedVersion: 2
+      x: 350
+      y: 337
+      width: 31
+      height: 23
+    paddingLeft: 0.16129032
+    paddingRight: 0.22580644
+    paddingTop: 0.26086956
+    paddingBottom: 0.26086956
+  - name: tile_leftRight_33
+    outer:
+      serializedVersion: 2
+      x: 366
+      y: 309
+      width: 28
+      height: 27
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 366
+      y: 309
+      width: 28
+      height: 27
+    inner:
+      serializedVersion: 2
+      x: 366
+      y: 309
+      width: 28
+      height: 27
+    paddingLeft: 0.25
+    paddingRight: 0.2857143
+    paddingTop: 0.22222222
+    paddingBottom: 0.074074075
+  - name: grey_tile_me_37
+    outer:
+      serializedVersion: 2
+      x: 366
+      y: 234
+      width: 50
+      height: 74
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 366
+      y: 234
+      width: 50
+      height: 74
+    inner:
+      serializedVersion: 2
+      x: 366
+      y: 234
+      width: 50
+      height: 74
+    paddingLeft: 0.22
+    paddingRight: 0.24
+    paddingTop: 0.04054054
+    paddingBottom: 0.067567565
+  - name: tile_meUp_25
+    outer:
+      serializedVersion: 2
+      x: 260
+      y: 92
+      width: 23
+      height: 31
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 260
+      y: 92
+      width: 23
+      height: 31
+    inner:
+      serializedVersion: 2
+      x: 260
+      y: 92
+      width: 23
+      height: 31
+    paddingLeft: 0.26086956
+    paddingRight: 0.26086956
+    paddingTop: 0.19354838
+    paddingBottom: 0.19354838
+  - name: tile_meUp_5
+    outer:
+      serializedVersion: 2
+      x: 395
+      y: 323
+      width: 25
+      height: 37
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 395
+      y: 323
+      width: 25
+      height: 37
+    inner:
+      serializedVersion: 2
+      x: 395
+      y: 323
+      width: 25
+      height: 37
+    paddingLeft: 0.16
+    paddingRight: 0.24
+    paddingTop: 0.08108108
+    paddingBottom: 0.08108108
+  - name: tile_meUp_31
+    outer:
+      serializedVersion: 2
+      x: 412
+      y: 407
+      width: 30
+      height: 38
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 412
+      y: 407
+      width: 30
+      height: 38
+    inner:
+      serializedVersion: 2
+      x: 412
+      y: 407
+      width: 30
+      height: 38
+    paddingLeft: 0.1
+    paddingRight: 0.06666667
+    paddingTop: 0.078947365
+    paddingBottom: 0.05263158
+  - name: tile_me_25
+    outer:
+      serializedVersion: 2
+      x: 426
+      y: 450
+      width: 49
+      height: 62
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 426
+      y: 450
+      width: 49
+      height: 62
+    inner:
+      serializedVersion: 2
+      x: 426
+      y: 450
+      width: 49
+      height: 62
+    paddingLeft: 0.24489796
+    paddingRight: 0.24489796
+    paddingTop: 0.19354838
+    paddingBottom: 0.12903225
+  - name: tile_leftRight_14
+    outer:
+      serializedVersion: 2
+      x: 248
+      y: 1
+      width: 35
+      height: 19
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 248
+      y: 1
+      width: 35
+      height: 19
+    inner:
+      serializedVersion: 2
+      x: 248
+      y: 1
+      width: 35
+      height: 19
+    paddingLeft: 0.114285715
+    paddingRight: 0.114285715
+    paddingTop: 0.36842105
+    paddingBottom: 0.47368422
+  - name: tile_leftRight_15
+    outer:
+      serializedVersion: 2
+      x: 366
+      y: 212
+      width: 35
+      height: 21
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 366
+      y: 212
+      width: 35
+      height: 21
+    inner:
+      serializedVersion: 2
+      x: 366
+      y: 212
+      width: 35
+      height: 21
+    paddingLeft: 0.114285715
+    paddingRight: 0.114285715
+    paddingTop: 0.33333334
+    paddingBottom: 0.33333334
+  - name: tile_me_34
+    outer:
+      serializedVersion: 2
+      x: 402
+      y: 179
+      width: 47
+      height: 54
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 402
+      y: 179
+      width: 47
+      height: 54
+    inner:
+      serializedVersion: 2
+      x: 402
+      y: 179
+      width: 47
+      height: 54
+    paddingLeft: 0.23404256
+    paddingRight: 0.31914893
+    paddingTop: 0.24074075
+    paddingBottom: 0.2777778
+  - name: tile_meUp_21
+    outer:
+      serializedVersion: 2
+      x: 402
+      y: 153
+      width: 23
+      height: 25
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 402
+      y: 153
+      width: 23
+      height: 25
+    inner:
+      serializedVersion: 2
+      x: 402
+      y: 153
+      width: 23
+      height: 25
+    paddingLeft: 0.26086956
+    paddingRight: 0.26086956
+    paddingTop: 0.28
+    paddingBottom: 0.44
+  - name: tile_me_1
+    outer:
+      serializedVersion: 2
+      x: 421
+      y: 82
+      width: 49
+      height: 70
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 421
+      y: 82
+      width: 49
+      height: 70
+    inner:
+      serializedVersion: 2
+      x: 421
+      y: 82
+      width: 49
+      height: 70
+    paddingLeft: 0.2244898
+    paddingRight: 0.26530612
+    paddingTop: 0.114285715
+    paddingBottom: 0.057142857
+  - name: tile_me_19
+    outer:
+      serializedVersion: 2
+      x: 417
+      y: 248
+      width: 45
+      height: 74
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 417
+      y: 248
+      width: 45
+      height: 74
+    inner:
+      serializedVersion: 2
+      x: 417
+      y: 248
+      width: 45
+      height: 74
+    paddingLeft: 0.26666668
+    paddingRight: 0.35555556
+    paddingTop: 0.054054055
+    paddingBottom: 0.054054055
+  - name: tile_meUp_14
+    outer:
+      serializedVersion: 2
+      x: 38
+      y: 1
+      width: 19
+      height: 35
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 38
+      y: 1
+      width: 19
+      height: 35
+    inner:
+      serializedVersion: 2
+      x: 38
+      y: 1
+      width: 19
+      height: 35
+    paddingLeft: 0.36842105
+    paddingRight: 0.47368422
+    paddingTop: 0.08571429
+    paddingBottom: 0.14285715
+  - name: grey_tile_me_28
+    outer:
+      serializedVersion: 2
+      x: 421
+      y: 332
+      width: 40
+      height: 74
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 421
+      y: 332
+      width: 40
+      height: 74
+    inner:
+      serializedVersion: 2
+      x: 421
+      y: 332
+      width: 40
+      height: 74
+    paddingLeft: 0.4
+    paddingRight: 0.425
+    paddingTop: 0.054054055
+    paddingBottom: 0.054054055
+  - name: tile_me_9
+    outer:
+      serializedVersion: 2
+      x: 450
+      y: 169
+      width: 49
+      height: 78
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 450
+      y: 169
+      width: 49
+      height: 78
+    inner:
+      serializedVersion: 2
+      x: 450
+      y: 169
+      width: 49
+      height: 78
+    paddingLeft: 0.24489796
+    paddingRight: 0.24489796
+    paddingTop: 0
+    paddingBottom: 0.051282052
+  - name: tileDown_me_0
+    outer:
+      serializedVersion: 2
+      x: 462
+      y: 338
+      width: 77
+      height: 111
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 462
+      y: 338
+      width: 77
+      height: 111
+    inner:
+      serializedVersion: 2
+      x: 462
+      y: 338
+      width: 77
+      height: 111
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: grey_tile_me_35
+    outer:
+      serializedVersion: 2
+      x: 463
+      y: 261
+      width: 46
+      height: 76
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 463
+      y: 261
+      width: 46
+      height: 76
+    inner:
+      serializedVersion: 2
+      x: 463
+      y: 261
+      width: 46
+      height: 76
+    paddingLeft: 0.3478261
+    paddingRight: 0.23913044
+    paddingTop: 0.039473683
+    paddingBottom: 0.039473683
+  - name: tile_me_23
+    outer:
+      serializedVersion: 2
+      x: 471
+      y: 102
+      width: 60
+      height: 66
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 471
+      y: 102
+      width: 60
+      height: 66
+    inner:
+      serializedVersion: 2
+      x: 471
+      y: 102
+      width: 60
+      height: 66
+    paddingLeft: 0.11666667
+    paddingRight: 0.1
+    paddingTop: 0.10606061
+    paddingBottom: 0.13636364
+  - name: grey_tile_me_25
+    outer:
+      serializedVersion: 2
+      x: 476
+      y: 450
+      width: 49
+      height: 62
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 476
+      y: 450
+      width: 49
+      height: 62
+    inner:
+      serializedVersion: 2
+      x: 476
+      y: 450
+      width: 49
+      height: 62
+    paddingLeft: 0.24489796
+    paddingRight: 0.24489796
+    paddingTop: 0.19354838
+    paddingBottom: 0.12903225
+  - name: tile_me_4
+    outer:
+      serializedVersion: 2
+      x: 500
+      y: 186
+      width: 49
+      height: 74
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 500
+      y: 186
+      width: 49
+      height: 74
+    inner:
+      serializedVersion: 2
+      x: 500
+      y: 186
+      width: 49
+      height: 74
+    paddingLeft: 0.18367347
+    paddingRight: 0.30612245
+    paddingTop: 0.054054055
+    paddingBottom: 0.054054055
+  - name: tile_meUp_23
+    outer:
+      serializedVersion: 2
+      x: 471
+      y: 70
+      width: 29
+      height: 31
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 471
+      y: 70
+      width: 29
+      height: 31
+    inner:
+      serializedVersion: 2
+      x: 471
+      y: 70
+      width: 29
+      height: 31
+    paddingLeft: 0.13793103
+    paddingRight: 0.06896552
+    paddingTop: 0.16129032
+    paddingBottom: 0.22580644
+  - name: tile_meUp_28
+    outer:
+      serializedVersion: 2
+      x: 526
+      y: 475
+      width: 19
+      height: 37
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 526
+      y: 475
+      width: 19
+      height: 37
+    inner:
+      serializedVersion: 2
+      x: 526
+      y: 475
+      width: 19
+      height: 37
+    paddingLeft: 0.42105263
+    paddingRight: 0.42105263
+    paddingTop: 0.027027028
+    paddingBottom: 0.13513513
+  - name: tile_me_13
+    outer:
+      serializedVersion: 2
+      x: 510
+      y: 267
+      width: 47
+      height: 70
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 510
+      y: 267
+      width: 47
+      height: 70
+    inner:
+      serializedVersion: 2
+      x: 510
+      y: 267
+      width: 47
+      height: 70
+    paddingLeft: 0.27659574
+    paddingRight: 0.27659574
+    paddingTop: 0.1
+    paddingBottom: 0.071428575
+  - name: tile_me_33
+    outer:
+      serializedVersion: 2
+      x: 473
+      y: 15
+      width: 53
+      height: 54
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 473
+      y: 15
+      width: 53
+      height: 54
+    inner:
+      serializedVersion: 2
+      x: 473
+      y: 15
+      width: 53
+      height: 54
+    paddingLeft: 0.24528302
+    paddingRight: 0.13207547
+    paddingTop: 0.25925925
+    paddingBottom: 0.25925925
+  - name: tile_me_11
+    outer:
+      serializedVersion: 2
+      x: 527
+      y: 25
+      width: 57
+      height: 76
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 527
+      y: 25
+      width: 57
+      height: 76
+    inner:
+      serializedVersion: 2
+      x: 527
+      y: 25
+      width: 57
+      height: 76
+    paddingLeft: 0.15789473
+    paddingRight: 0.12280702
+    paddingTop: 0.039473683
+    paddingBottom: 0.039473683
+  - name: grey_tile_me_1
+    outer:
+      serializedVersion: 2
+      x: 532
+      y: 115
+      width: 49
+      height: 70
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 532
+      y: 115
+      width: 49
+      height: 70
+    inner:
+      serializedVersion: 2
+      x: 532
+      y: 115
+      width: 49
+      height: 70
+    paddingLeft: 0.2244898
+    paddingRight: 0.26530612
+    paddingTop: 0.114285715
+    paddingBottom: 0.057142857
+  - name: tile_leftRight_1
+    outer:
+      serializedVersion: 2
+      x: 550
+      y: 241
+      width: 35
+      height: 25
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 550
+      y: 241
+      width: 35
+      height: 25
+    inner:
+      serializedVersion: 2
+      x: 550
+      y: 241
+      width: 35
+      height: 25
+    paddingLeft: 0.057142857
+    paddingRight: 0.17142858
+    paddingTop: 0.12
+    paddingBottom: 0.28
+  - name: tile_dealMeUp_0
+    outer:
+      serializedVersion: 2
+      x: 546
+      y: 373
+      width: 75
+      height: 139
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 546
+      y: 373
+      width: 75
+      height: 139
+    inner:
+      serializedVersion: 2
+      x: 546
+      y: 373
+      width: 75
+      height: 139
+    paddingLeft: 0.093333334
+    paddingRight: 0.093333334
+    paddingTop: 0
+    paddingBottom: 0
+  - name: tile_leftRight_17
+    outer:
+      serializedVersion: 2
+      x: 527
+      y: 3
+      width: 35
+      height: 21
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 527
+      y: 3
+      width: 35
+      height: 21
+    inner:
+      serializedVersion: 2
+      x: 527
+      y: 3
+      width: 35
+      height: 21
+    paddingLeft: 0.114285715
+    paddingRight: 0.114285715
+    paddingTop: 0.2857143
+    paddingBottom: 0.3809524
+  - name: grey_tile_me_13
+    outer:
+      serializedVersion: 2
+      x: 558
+      y: 302
+      width: 47
+      height: 70
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 558
+      y: 302
+      width: 47
+      height: 70
+    inner:
+      serializedVersion: 2
+      x: 558
+      y: 302
+      width: 47
+      height: 70
+    paddingLeft: 0.27659574
+    paddingRight: 0.27659574
+    paddingTop: 0.1
+    paddingBottom: 0.071428575
+  - name: tile_me_31
+    outer:
+      serializedVersion: 2
+      x: 582
+      y: 164
+      width: 57
+      height: 76
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 582
+      y: 164
+      width: 57
+      height: 76
+    inner:
+      serializedVersion: 2
+      x: 582
+      y: 164
+      width: 57
+      height: 76
+    paddingLeft: 0.1754386
+    paddingRight: 0.10526316
+    paddingTop: 0.05263158
+    paddingBottom: 0.02631579
+  - name: tile_me_45
+    outer:
+      serializedVersion: 2
+      x: 606
+      y: 304
+      width: 53
+      height: 68
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 606
+      y: 304
+      width: 53
+      height: 68
+    inner:
+      serializedVersion: 2
+      x: 606
+      y: 304
+      width: 53
+      height: 68
+    paddingLeft: 0.18867925
+    paddingRight: 0.18867925
+    paddingTop: 0.0882353
+    paddingBottom: 0.11764706
+  - name: grey_tile_me_7
+    outer:
+      serializedVersion: 2
+      x: 622
+      y: 434
+      width: 49
+      height: 78
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 622
+      y: 434
+      width: 49
+      height: 78
+    inner:
+      serializedVersion: 2
+      x: 622
+      y: 434
+      width: 49
+      height: 78
+    paddingLeft: 0.1632653
+    paddingRight: 0.3265306
+    paddingTop: 0
+    paddingBottom: 0.051282052
+  - name: grey_tile_me_11
+    outer:
+      serializedVersion: 2
+      x: 585
+      y: 87
+      width: 57
+      height: 76
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 585
+      y: 87
+      width: 57
+      height: 76
+    inner:
+      serializedVersion: 2
+      x: 585
+      y: 87
+      width: 57
+      height: 76
+    paddingLeft: 0.15789473
+    paddingRight: 0.12280702
+    paddingTop: 0.039473683
+    paddingBottom: 0.039473683
+  - name: tile_leftRight_23
+    outer:
+      serializedVersion: 2
+      x: 550
+      y: 211
+      width: 31
+      height: 29
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 550
+      y: 211
+      width: 31
+      height: 29
+    inner:
+      serializedVersion: 2
+      x: 550
+      y: 211
+      width: 31
+      height: 29
+    paddingLeft: 0.22580644
+    paddingRight: 0.16129032
+    paddingTop: 0.13793103
+    paddingBottom: 0.06896552
+  - name: grey_tile_me_22
+    outer:
+      serializedVersion: 2
+      x: 585
+      y: 20
+      width: 33
+      height: 66
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 585
+      y: 20
+      width: 33
+      height: 66
+    inner:
+      serializedVersion: 2
+      x: 585
+      y: 20
+      width: 33
+      height: 66
+    paddingLeft: 0.57575756
+    paddingRight: 0.6363636
+    paddingTop: 0.121212125
+    paddingBottom: 0.121212125
+  - name: tile_meUp_7
+    outer:
+      serializedVersion: 2
+      x: 622
+      y: 394
+      width: 25
+      height: 39
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 622
+      y: 394
+      width: 25
+      height: 39
+    inner:
+      serializedVersion: 2
+      x: 622
+      y: 394
+      width: 25
+      height: 39
+    paddingLeft: 0.12
+    paddingRight: 0.28
+    paddingTop: 0.025641026
+    paddingBottom: 0.07692308
+  - name: tile_me_29
+    outer:
+      serializedVersion: 2
+      x: 619
+      y: 12
+      width: 57
+      height: 74
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 619
+      y: 12
+      width: 57
+      height: 74
+    inner:
+      serializedVersion: 2
+      x: 619
+      y: 12
+      width: 57
+      height: 74
+    paddingLeft: 0.14035088
+    paddingRight: 0.14035088
+    paddingTop: 0.067567565
+    paddingBottom: 0.04054054
+  - name: tileBase_leftRight_0
+    outer:
+      serializedVersion: 2
+      x: 648
+      y: 386
+      width: 50
+      height: 47
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 648
+      y: 386
+      width: 50
+      height: 47
+    inner:
+      serializedVersion: 2
+      x: 648
+      y: 386
+      width: 50
+      height: 47
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: tile_meUp_29
+    outer:
+      serializedVersion: 2
+      x: 606
+      y: 268
+      width: 27
+      height: 35
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 606
+      y: 268
+      width: 27
+      height: 35
+    inner:
+      serializedVersion: 2
+      x: 606
+      y: 268
+      width: 27
+      height: 35
+    paddingLeft: 0.14814815
+    paddingRight: 0.14814815
+    paddingTop: 0.114285715
+    paddingBottom: 0.114285715
+  - name: tile_me_42
+    outer:
+      serializedVersion: 2
+      x: 672
+      y: 444
+      width: 49
+      height: 68
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 672
+      y: 444
+      width: 49
+      height: 68
+    inner:
+      serializedVersion: 2
+      x: 672
+      y: 444
+      width: 49
+      height: 68
+    paddingLeft: 0.24489796
+    paddingRight: 0.24489796
+    paddingTop: 0.073529415
+    paddingBottom: 0.13235295
+  - name: tile_leftRight_2
+    outer:
+      serializedVersion: 2
+      x: 558
+      y: 276
+      width: 37
+      height: 25
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 558
+      y: 276
+      width: 37
+      height: 25
+    inner:
+      serializedVersion: 2
+      x: 558
+      y: 276
+      width: 37
+      height: 25
+    paddingLeft: 0.08108108
+    paddingRight: 0.08108108
+    paddingTop: 0.16
+    paddingBottom: 0.24
+  - name: grey_tile_me_5
+    outer:
+      serializedVersion: 2
+      x: 640
+      y: 229
+      width: 49
+      height: 74
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 640
+      y: 229
+      width: 49
+      height: 74
+    inner:
+      serializedVersion: 2
+      x: 640
+      y: 229
+      width: 49
+      height: 74
+    paddingLeft: 0.2244898
+    paddingRight: 0.26530612
+    paddingTop: 0.04054054
+    paddingBottom: 0.067567565
+  - name: tile_me_2
+    outer:
+      serializedVersion: 2
+      x: 660
+      y: 311
+      width: 49
+      height: 74
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 660
+      y: 311
+      width: 49
+      height: 74
+    inner:
+      serializedVersion: 2
+      x: 660
+      y: 311
+      width: 49
+      height: 74
+    paddingLeft: 0.24489796
+    paddingRight: 0.24489796
+    paddingTop: 0.054054055
+    paddingBottom: 0.054054055
+  - name: grey_tile_me_34
+    outer:
+      serializedVersion: 2
+      x: 699
+      y: 389
+      width: 47
+      height: 54
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 699
+      y: 389
+      width: 47
+      height: 54
+    inner:
+      serializedVersion: 2
+      x: 699
+      y: 389
+      width: 47
+      height: 54
+    paddingLeft: 0.23404256
+    paddingRight: 0.31914893
+    paddingTop: 0.24074075
+    paddingBottom: 0.2777778
+  - name: tile_leftRight_35
+    outer:
+      serializedVersion: 2
+      x: 586
+      y: 243
+      width: 39
+      height: 24
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 586
+      y: 243
+      width: 39
+      height: 24
+    inner:
+      serializedVersion: 2
+      x: 586
+      y: 243
+      width: 39
+      height: 24
+    paddingLeft: 0.051282052
+    paddingRight: 0.051282052
+    paddingTop: 0.29166666
+    paddingBottom: 0.16666667
+  - name: tile_me_32
+    outer:
+      serializedVersion: 2
+      x: 722
+      y: 452
+      width: 49
+      height: 60
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 722
+      y: 452
+      width: 49
+      height: 60
+    inner:
+      serializedVersion: 2
+      x: 722
+      y: 452
+      width: 49
+      height: 60
+    paddingLeft: 0.26530612
+    paddingRight: 0.2244898
+    paddingTop: 0.16666667
+    paddingBottom: 0.2
+  - name: tile_tileLight
+    outer:
+      serializedVersion: 2
+      x: 677
+      y: 86
+      width: 109
+      height: 142
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 677
+      y: 86
+      width: 109
+      height: 142
+    inner:
+      serializedVersion: 2
+      x: 677
+      y: 86
+      width: 109
+      height: 142
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: tile_me_36
+    outer:
+      serializedVersion: 2
+      x: 690
+      y: 250
+      width: 59
+      height: 60
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 690
+      y: 250
+      width: 59
+      height: 60
+    inner:
+      serializedVersion: 2
+      x: 690
+      y: 250
+      width: 59
+      height: 60
+    paddingLeft: 0.15254237
+    paddingRight: 0.084745765
+    paddingTop: 0.16666667
+    paddingBottom: 0.2
+  - name: tile_me_15
+    outer:
+      serializedVersion: 2
+      x: 710
+      y: 318
+      width: 45
+      height: 70
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 710
+      y: 318
+      width: 45
+      height: 70
+    inner:
+      serializedVersion: 2
+      x: 710
+      y: 318
+      width: 45
+      height: 70
+    paddingLeft: 0.2888889
+    paddingRight: 0.33333334
+    paddingTop: 0.08571429
+    paddingBottom: 0.08571429
+  - name: grey_tile_me_17
+    outer:
+      serializedVersion: 2
+      x: 750
+      y: 245
+      width: 43
+      height: 72
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 750
+      y: 245
+      width: 43
+      height: 72
+    inner:
+      serializedVersion: 2
+      x: 750
+      y: 245
+      width: 43
+      height: 72
+    paddingLeft: 0.3255814
+    paddingRight: 0.37209302
+    paddingTop: 0.06944445
+    paddingBottom: 0.06944445
+  - name: grey_tile_me_36
+    outer:
+      serializedVersion: 2
+      x: 747
+      y: 391
+      width: 59
+      height: 60
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 747
+      y: 391
+      width: 59
+      height: 60
+    inner:
+      serializedVersion: 2
+      x: 747
+      y: 391
+      width: 59
+      height: 60
+    paddingLeft: 0.15254237
+    paddingRight: 0.084745765
+    paddingTop: 0.16666667
+    paddingBottom: 0.2
+  - name: tile_meUp_8
+    outer:
+      serializedVersion: 2
+      x: 640
+      y: 191
+      width: 25
+      height: 37
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 640
+      y: 191
+      width: 25
+      height: 37
+    inner:
+      serializedVersion: 2
+      x: 640
+      y: 191
+      width: 25
+      height: 37
+    paddingLeft: 0.16
+    paddingRight: 0.24
+    paddingTop: 0.054054055
+    paddingBottom: 0.10810811
+  - name: grey_tile_me_27
+    outer:
+      serializedVersion: 2
+      x: 677
+      y: 9
+      width: 53
+      height: 76
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 677
+      y: 9
+      width: 53
+      height: 76
+    inner:
+      serializedVersion: 2
+      x: 677
+      y: 9
+      width: 53
+      height: 76
+    paddingLeft: 0.18867925
+    paddingRight: 0.18867925
+    paddingTop: 0.05263158
+    paddingBottom: 0.02631579
+  - name: tile_meUp_26
+    outer:
+      serializedVersion: 2
+      x: 643
+      y: 155
+      width: 19
+      height: 35
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 643
+      y: 155
+      width: 19
+      height: 35
+    inner:
+      serializedVersion: 2
+      x: 643
+      y: 155
+      width: 19
+      height: 35
+    paddingLeft: 0.42105263
+    paddingRight: 0.42105263
+    paddingTop: 0.114285715
+    paddingBottom: 0.114285715
+  - name: tile_meUp_9
+    outer:
+      serializedVersion: 2
+      x: 643
+      y: 115
+      width: 25
+      height: 39
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 643
+      y: 115
+      width: 25
+      height: 39
+    inner:
+      serializedVersion: 2
+      x: 643
+      y: 115
+      width: 25
+      height: 39
+    paddingLeft: 0.12
+    paddingRight: 0.28
+    paddingTop: 0.025641026
+    paddingBottom: 0.07692308
+  - name: grey_tile_me_6
+    outer:
+      serializedVersion: 2
+      x: 731
+      y: 7
+      width: 49
+      height: 78
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 731
+      y: 7
+      width: 49
+      height: 78
+    inner:
+      serializedVersion: 2
+      x: 731
+      y: 7
+      width: 49
+      height: 78
+    paddingLeft: 0.20408164
+    paddingRight: 0.2857143
+    paddingTop: 0
+    paddingBottom: 0.051282052
+  - name: tile_meUp_33
+    outer:
+      serializedVersion: 2
+      x: 772
+      y: 483
+      width: 27
+      height: 29
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 772
+      y: 483
+      width: 27
+      height: 29
+    inner:
+      serializedVersion: 2
+      x: 772
+      y: 483
+      width: 27
+      height: 29
+    paddingLeft: 0.22222222
+    paddingRight: 0.074074075
+    paddingTop: 0.2413793
+    paddingBottom: 0.2413793
+  - name: tile_meUp_36
+    outer:
+      serializedVersion: 2
+      x: 800
+      y: 481
+      width: 30
+      height: 31
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 800
+      y: 481
+      width: 30
+      height: 31
+    inner:
+      serializedVersion: 2
+      x: 800
+      y: 481
+      width: 30
+      height: 31
+    paddingLeft: 0.1
+    paddingRight: 0.06666667
+    paddingTop: 0.16129032
+    paddingBottom: 0.22580644
+  - name: tile_meUp_18
+    outer:
+      serializedVersion: 2
+      x: 756
+      y: 355
+      width: 21
+      height: 35
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 756
+      y: 355
+      width: 21
+      height: 35
+    inner:
+      serializedVersion: 2
+      x: 756
+      y: 355
+      width: 21
+      height: 35
+    paddingLeft: 0.2857143
+    paddingRight: 0.3809524
+    paddingTop: 0.08571429
+    paddingBottom: 0.14285715
+  - name: tile_me_41
+    outer:
+      serializedVersion: 2
+      x: 778
+      y: 322
+      width: 53
+      height: 68
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 778
+      y: 322
+      width: 53
+      height: 68
+    inner:
+      serializedVersion: 2
+      x: 778
+      y: 322
+      width: 53
+      height: 68
+    paddingLeft: 0.18867925
+    paddingRight: 0.18867925
+    paddingTop: 0.073529415
+    paddingBottom: 0.13235295
+  - name: tile_leftRight_28
+    outer:
+      serializedVersion: 2
+      x: 690
+      y: 230
+      width: 37
+      height: 19
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 690
+      y: 230
+      width: 37
+      height: 19
+    inner:
+      serializedVersion: 2
+      x: 690
+      y: 230
+      width: 37
+      height: 19
+    paddingLeft: 0.10810811
+    paddingRight: 0.054054055
+    paddingTop: 0.42105263
+    paddingBottom: 0.42105263
+  - name: tile_meUp_6
+    outer:
+      serializedVersion: 2
+      x: 807
+      y: 441
+      width: 25
+      height: 39
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 807
+      y: 441
+      width: 25
+      height: 39
+    inner:
+      serializedVersion: 2
+      x: 807
+      y: 441
+      width: 25
+      height: 39
+    paddingLeft: 0.12
+    paddingRight: 0.28
+    paddingTop: 0.025641026
+    paddingBottom: 0.07692308
+  - name: grey_tile_me_8
+    outer:
+      serializedVersion: 2
+      x: 781
+      y: 11
+      width: 49
+      height: 74
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 781
+      y: 11
+      width: 49
+      height: 74
+    inner:
+      serializedVersion: 2
+      x: 781
+      y: 11
+      width: 49
+      height: 74
+    paddingLeft: 0.20408164
+    paddingRight: 0.2857143
+    paddingTop: 0.04054054
+    paddingBottom: 0.067567565
+  - name: grey_tile_me_18
+    outer:
+      serializedVersion: 2
+      x: 787
+      y: 174
+      width: 45
+      height: 70
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 787
+      y: 174
+      width: 45
+      height: 70
+    inner:
+      serializedVersion: 2
+      x: 787
+      y: 174
+      width: 45
+      height: 70
+    paddingLeft: 0.26666668
+    paddingRight: 0.35555556
+    paddingTop: 0.08571429
+    paddingBottom: 0.08571429
+  - name: tile_me_18
+    outer:
+      serializedVersion: 2
+      x: 794
+      y: 251
+      width: 45
+      height: 70
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 794
+      y: 251
+      width: 45
+      height: 70
+    inner:
+      serializedVersion: 2
+      x: 794
+      y: 251
+      width: 45
+      height: 70
+    paddingLeft: 0.26666668
+    paddingRight: 0.35555556
+    paddingTop: 0.08571429
+    paddingBottom: 0.08571429
+  - name: tile_leftRight_4
+    outer:
+      serializedVersion: 2
+      x: 831
+      y: 487
+      width: 37
+      height: 25
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 831
+      y: 487
+      width: 37
+      height: 25
+    inner:
+      serializedVersion: 2
+      x: 831
+      y: 487
+      width: 37
+      height: 25
+    paddingLeft: 0.08108108
+    paddingRight: 0.08108108
+    paddingTop: 0.12
+    paddingBottom: 0.28
+  - name: tileBack_right_0
+    outer:
+      serializedVersion: 2
+      x: 787
+      y: 112
+      width: 28
+      height: 61
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 787
+      y: 112
+      width: 28
+      height: 61
+    inner:
+      serializedVersion: 2
+      x: 787
+      y: 112
+      width: 28
+      height: 61
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: tile_meUp_11
+    outer:
+      serializedVersion: 2
+      x: 807
+      y: 403
+      width: 27
+      height: 37
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 807
+      y: 403
+      width: 27
+      height: 37
+    inner:
+      serializedVersion: 2
+      x: 807
+      y: 403
+      width: 27
+      height: 37
+    paddingLeft: 0.14814815
+    paddingRight: 0.14814815
+    paddingTop: 0.10810811
+    paddingBottom: 0.054054055
+  - name: tile_leftRight_32
+    outer:
+      serializedVersion: 2
+      x: 643
+      y: 88
+      width: 30
+      height: 26
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 643
+      y: 88
+      width: 30
+      height: 26
+    inner:
+      serializedVersion: 2
+      x: 643
+      y: 88
+      width: 30
+      height: 26
+    paddingLeft: 0.2
+    paddingRight: 0.23333333
+    paddingTop: 0.1923077
+    paddingBottom: 0.15384616
+  - name: tile_leftRight_18
+    outer:
+      serializedVersion: 2
+      x: 787
+      y: 90
+      width: 35
+      height: 21
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 787
+      y: 90
+      width: 35
+      height: 21
+    inner:
+      serializedVersion: 2
+      x: 787
+      y: 90
+      width: 35
+      height: 21
+    paddingLeft: 0.114285715
+    paddingRight: 0.114285715
+    paddingTop: 0.2857143
+    paddingBottom: 0.3809524
+  - name: tile_leftRight_36
+    outer:
+      serializedVersion: 2
+      x: 833
+      y: 456
+      width: 30
+      height: 30
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 833
+      y: 456
+      width: 30
+      height: 30
+    inner:
+      serializedVersion: 2
+      x: 833
+      y: 456
+      width: 30
+      height: 30
+    paddingLeft: 0.23333333
+    paddingRight: 0.2
+    paddingTop: 0.1
+    paddingBottom: 0.06666667
+  - name: tile_me_43
+    outer:
+      serializedVersion: 2
+      x: 832
+      y: 338
+      width: 49
+      height: 64
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 832
+      y: 338
+      width: 49
+      height: 64
+    inner:
+      serializedVersion: 2
+      x: 832
+      y: 338
+      width: 49
+      height: 64
+    paddingLeft: 0.2244898
+    paddingRight: 0.26530612
+    paddingTop: 0.09375
+    paddingBottom: 0.1875
+  mCoordinates: 0
+  mReplacement: {fileID: 0}
+  mPixelSize: 1
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 112904}
+  m_IsPrefabParent: 1

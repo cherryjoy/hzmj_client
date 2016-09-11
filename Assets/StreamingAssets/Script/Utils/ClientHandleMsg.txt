@@ -115,4 +115,11 @@ HandleFuncs[enumMSGID_MODULE_05.ID_GAME_ROOM_ENTER_RES] = function(data,dataLeng
 
     local ref = LuaUIViewCtr.OpenUIHasBg("MJTable/MJTable")
     ref.Init(ref, data.passwd, data.amount, data.horse, 1, data.used)
+
+    ClientSendMsg.SendReadyRoom()
+end
+
+HandleFuncs[enumMSGID_MODULE_05.ID_GAME_READY_RES] = function(data,dataLength)
+    local data = LuaProto.deserialize(PBMsgReadyRes, data, dataLength)
+    
 end
