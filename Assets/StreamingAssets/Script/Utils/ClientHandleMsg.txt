@@ -44,7 +44,9 @@ HandleFuncs[enumMSGID_MODULE_05.ID_ROLE_RES] = function(data, dataLength)
     Client.RoleInfo.RoleID = pbMsg.RoleID
 
     local ref = LuaUIViewCtr.OpenUIHasBg("Home/MainUI")
-    ref.Init(ref, pbMsg.RoleName, pbMsg.RoleID, 99)
+    ref.Init(ref, pbMsg.RoleName, pbMsg.RoleID, pbMsg.room_pass)
+
+    Client.LoginSuccess:Do()
 end
 
 HandleFuncs[NetOpcodes_S2C.S2C_SESSION_CREATED] = function (data,dataLength)
@@ -113,13 +115,32 @@ end
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_ROOM_ENTER_RES] = function(data,dataLength)
     local data = LuaProto.deserialize(PBMsgEnterRoomRes, data, dataLength)
 
-    local ref = LuaUIViewCtr.OpenUIHasBg("MJTable/MJTable")
-    ref.Init(ref, data.passwd, data.amount, data.horse, 1, data.used)
+    if LuaUIViewCtr.UIPanel["MJTableUI"] == nil then
+        local ref = LuaUIViewCtr.OpenUIHasBg("MJTable/MJTable")
+        ref.Init(ref, data.passwd, data.amount, data.horse, 5, data.used, data.rolelist)
+        LuaUIViewCtr.UIPanel["MJTableUI"] = ref
+    end
 
     ClientSendMsg.SendReadyRoom()
 end
 
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_READY_RES] = function(data,dataLength)
     local data = LuaProto.deserialize(PBMsgReadyRes, data, dataLength)
-    
+
+end
+
+HandleFuncs[enumMSGID_MODULE_05.ID_GAME_ROOM_CARD_SYNC] = function(data, dataLength)
+    local data = LuaProto.deserialize(PBRoomCardInfoSync, data, dataLength)
+
+    --LuaDebug.Log("card num: "..#(data.owncards.handcard));
+    LuaUIViewCtr.UIPanel["MJTableUI"].CardInfoSync(LuaUIViewCtr.UIPanel["MJTableUI"], data)
+end
+
+HandleFuncs[enumMSGID_MODULE_05.ID_GAME_DELETE_ROOM_RES] = function(data, dataLength)
+    local data = LuaProto.deserialize(PBMsgGameDeleteRoomRes, data, dataLength)
+
+    LuaDebug.Log("result: "..data.result)
+
+    LuaUIViewCtr.UIPanel["MJTableUI"].gameObject:Destroy1()
+    LuaUIViewCtr.UIPanel["MJTableUI"] = nil
 end

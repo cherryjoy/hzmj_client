@@ -5,17 +5,38 @@ function MJTableCtrl:Start( )
     self.Texture:set_material(mt)
 end
 
-function MJTableCtrl:Init(passwd, amount, horse, beishu, used)
+function MJTableCtrl:Init(passwd, amount, horse, beishu, used, rolelist)
+    self.roomId = passwd
     self.ID:set_text(string.format(Text.TableName, passwd))
     self.MaShu:set_text(string.format(Text.MaShuName, beishu, horse))
     self.JuShu:set_text(string.format(Text.JuShuName, used, amount, 112))
+end
+
+function MJTableCtrl:CardInfoSync(cardInfo)
+    LuaDebug.Log("card num: "..#(cardInfo.owncards.handcard));
+
+    for i = 1, #(cardInfo.owncards.handcard) do
+        card = cardInfo.owncards.handcard[i]
+        LuaDebug.Log("card.type_id: "..card.type_id..", card.code_id: "..card.code_id)
+        if card.type_id == enumCARD_TYPE.CARD_TIAO_TYPE then
+            self["Card ("..(i - 1)..")"]:set_spriteName("tile_me_1"..card.code_id)
+        elseif card.type_id == enumCARD_TYPE.CARD_TONG_TYPE then
+            self["Card ("..(i - 1)..")"]:set_spriteName("tile_me_2"..card.code_id)
+        elseif card.type_id == enumCARD_TYPE.CARD_WANG_TYPE then
+            self["Card ("..(i - 1)..")"]:set_spriteName("tile_me_"..card.code_id)
+        elseif card.type_id == enumCARD_TYPE.CARD_HONG_TYPE then
+            self["Card ("..(i - 1)..")"]:set_spriteName("tile_me_35")
+        end
+    end
 end
 
 function MJTableCtrl:OnDestroy( )
 
 end
 
-
+function MJTableCtrl:DeleteRoom_OnClick()
+    ClientSendMsg.SendDeleteRoom(self.roomId)
+end
 
 
 --Bottom -460,-240

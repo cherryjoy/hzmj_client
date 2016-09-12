@@ -55,7 +55,7 @@ function LuaUIViewCtr:OnDestroy ()
     Client.SinewBuySuccess = Client.SinewBuySuccess - {self,LuaUIViewCtr.OnBuySinewSuccess}
     LuaUIViewCtr.UIParent = nil
     if Client.RoleInfo then
-        Client.RoleInfo.TaskMgr.autoLbl = nil
+        --Client.RoleInfo.TaskMgr.autoLbl = nil
     end
 end
 

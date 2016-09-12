@@ -112,7 +112,7 @@ namespace GEM_NET_LIB
             }*/
 
 			long nowStreamLength = activedStream.Length;
-            Debug.Log("nowStreamLength: " + nowStreamLength);
+            //Debug.Log("nowStreamLength: " + nowStreamLength);
 			while (true) {
 				try {
 					if (m_nProgress != 4) 
@@ -135,7 +135,7 @@ namespace GEM_NET_LIB
                                         m_nStreamSize = BitConverter.ToInt16(nowData, 0);
                                         m_nStreamSize = IPAddress.NetworkToHostOrder(m_nStreamSize);
                                         nowStreamLength -= sizeof(short);
-                                        Debug.Log("size: " + m_nStreamSize);
+                                        //Debug.Log("size: " + m_nStreamSize);
                                         break;
                                     }
                                 case 1:
@@ -144,7 +144,7 @@ namespace GEM_NET_LIB
                                         tmpvalue = IPAddress.NetworkToHostOrder(tmpvalue);
                                         m_nMsgID = tmpvalue;
                                         nowStreamLength -= sizeof(int);
-                                        Debug.Log("m_nMsgID: " + m_nMsgID);
+                                        //Debug.Log("m_nMsgID: " + m_nMsgID);
                                         break;
                                     }
                                 case 2:
@@ -153,7 +153,7 @@ namespace GEM_NET_LIB
                                         tmpvalue = IPAddress.NetworkToHostOrder(tmpvalue);
                                         m_nDataType = tmpvalue;
                                         nowStreamLength -= sizeof(int);
-                                        Debug.Log("m_nDataType: " + m_nDataType);
+                                        //Debug.Log("m_nDataType: " + m_nDataType);
                                         break;
                                     }
 							}
@@ -174,7 +174,7 @@ namespace GEM_NET_LIB
 					//ClearData
 					if (nDataSize > 0) 
                     {
-                        Debug.Log("nowStreamLength: " + nowStreamLength + ", nDataSize: " + nDataSize);
+                        //Debug.Log("nowStreamLength: " + nowStreamLength + ", nDataSize: " + nDataSize);
 						if (nowStreamLength >= nDataSize) 
                         {
 							m_MsgDataBody.Write (nowData, (int)(activedStream.Length - nowStreamLength), nDataSize);
@@ -197,10 +197,10 @@ namespace GEM_NET_LIB
 							}
 							else
 							{
-                                for (int i = 0; i < m_MsgDataBody.Length; ++i)
+                                /*for (int i = 0; i < m_MsgDataBody.Length; ++i)
                                 {
                                     Debug.Log("msgData " + i + " : " + (int)(m_MsgDataBody.GetBuffer()[i]));
-                                }
+                                }*/
 
 								lua_.RawGetI(LuaAPI.LUA_REGISTRYINDEX, func_handle_ref_);
 								lua_.PushInteger(m_nMsgID);

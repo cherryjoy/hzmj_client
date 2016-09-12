@@ -385,9 +385,11 @@ function LoginController:StartGameBtn_OnClick()
 end
 
 function LoginController:LoginSuccess()
-    self.userName=PlayerPrefsEx.GetString("userName")
-    self.password=PlayerPrefsEx.GetString("password")
-    ClientSendMsg.SendRoleSummary()
+    --self.userName=PlayerPrefsEx.GetString("userName")
+    --self.password=PlayerPrefsEx.GetString("password")
+    --ClientSendMsg.SendRoleSummary()
+
+    self.LoginUI:SetActive(false)
 end
 
 function LoginController:RoleSummarySuccess()
@@ -607,8 +609,8 @@ function LoginController:isHasAllMaintain()
     end
     NoticeList = LoginController:NoticeDataScreen(NoticeList)
     if self.prefab == nil and #NoticeList ~= 0 then
-        self.prefab = LuaUIViewCtr.AddChildNotLose("AnnouncementUI/AnnouncementUI",self.LoginUI)   --弹出公告
-        self.prefab:setData(NoticeList,self)
+        --self.prefab = LuaUIViewCtr.AddChildNotLose("AnnouncementUI/AnnouncementUI",self.LoginUI)   --弹出公告
+        --self.prefab:setData(NoticeList,self)
     end
 end
 

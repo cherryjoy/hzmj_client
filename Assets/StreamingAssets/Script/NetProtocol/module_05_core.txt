@@ -23,31 +23,101 @@ enumMSGID_MODULE_05 = {
 	ID_GAME_RESULT_RES = 1302,
 	ID_GAME_GET_CARD_REQ = 1303,
 	ID_GAME_GET_CARD_RES = 1304,
+	ID_GAME_DELETE_ROOM_REQ = 1305,
+	ID_GAME_DELETE_ROOM_RES = 1306,
 	ID_MODULE_05_END = 1535,
 }
 
--- MSGID_MODULE_05
-MSGID_MODULE_05 = {}
-MSGID_MODULE_05.__index = MSGID_MODULE_05
-function MSGID_MODULE_05.Create()
-	local obj = setmetatable({},MSGID_MODULE_05)
+enumCARD_TYPE = {
+	CARD_TIAO_TYPE = 1,
+	CARD_TONG_TYPE = 2,
+	CARD_WANG_TYPE = 4,
+	CARD_HONG_TYPE = 8,
+}
+
+enumDIRECTION_TYPE = {
+	DIRECTION_EAST = 1,
+	DIRECTION_WEST = 3,
+	DIRECTION_SOUTH = 2,
+	DIRECTION_NORTH = 4,
+}
+
+-- PB_MSGID_MODULE_05
+PB_MSGID_MODULE_05 = {}
+PB_MSGID_MODULE_05.__index = PB_MSGID_MODULE_05
+function PB_MSGID_MODULE_05.Create()
+	local obj = setmetatable({},PB_MSGID_MODULE_05)
 	return obj
 end
 
-function MSGID_MODULE_05.DeSerialize(obj)
+function PB_MSGID_MODULE_05.DeSerialize(obj)
 	local fieldCount = deserialize_int32()
 	local option,optionLength = deserialize_optional()
 	return obj
 end
 
-function MSGID_MODULE_05.Serialize(obj)
+function PB_MSGID_MODULE_05.Serialize(obj)
 	local fieldCount = 0
 	serialize_int32(fieldCount)
 	local flag = {}
 	serialize_optional(flag)
 end
 
-function MSGID_MODULE_05.GetSize(obj)
+function PB_MSGID_MODULE_05.GetSize(obj)
+	local size = 0
+	size = size + 5
+	return size
+end
+
+-- PB_CARD_TYPE
+PB_CARD_TYPE = {}
+PB_CARD_TYPE.__index = PB_CARD_TYPE
+function PB_CARD_TYPE.Create()
+	local obj = setmetatable({},PB_CARD_TYPE)
+	return obj
+end
+
+function PB_CARD_TYPE.DeSerialize(obj)
+	local fieldCount = deserialize_int32()
+	local option,optionLength = deserialize_optional()
+	return obj
+end
+
+function PB_CARD_TYPE.Serialize(obj)
+	local fieldCount = 0
+	serialize_int32(fieldCount)
+	local flag = {}
+	serialize_optional(flag)
+end
+
+function PB_CARD_TYPE.GetSize(obj)
+	local size = 0
+	size = size + 5
+	return size
+end
+
+-- PB_DIRECTION_TYPE
+PB_DIRECTION_TYPE = {}
+PB_DIRECTION_TYPE.__index = PB_DIRECTION_TYPE
+function PB_DIRECTION_TYPE.Create()
+	local obj = setmetatable({},PB_DIRECTION_TYPE)
+	return obj
+end
+
+function PB_DIRECTION_TYPE.DeSerialize(obj)
+	local fieldCount = deserialize_int32()
+	local option,optionLength = deserialize_optional()
+	return obj
+end
+
+function PB_DIRECTION_TYPE.Serialize(obj)
+	local fieldCount = 0
+	serialize_int32(fieldCount)
+	local flag = {}
+	serialize_optional(flag)
+end
+
+function PB_DIRECTION_TYPE.GetSize(obj)
 	local size = 0
 	size = size + 5
 	return size
@@ -88,11 +158,14 @@ function RoleBaseInfo.DeSerialize(obj)
 	if(has_optional_flag(7,optionLength,option)) then
 		obj.status = deserialize_int32()
 	end
+	if(has_optional_flag(8,optionLength,option)) then
+		obj.direct = deserialize_int32()
+	end
 	return obj
 end
 
 function RoleBaseInfo.Serialize(obj)
-	local fieldCount = 8
+	local fieldCount = 9
 	serialize_int32(fieldCount)
 	local flag = {}
 	if(obj.rolename ~= nil) then
@@ -135,6 +208,11 @@ function RoleBaseInfo.Serialize(obj)
 	else
 		flag[8] = false
 	end
+	if(obj.direct ~= nil) then
+		flag[9] = true
+	else
+		flag[9] = false
+	end
 	serialize_optional(flag)
 	if(obj.rolename ~= nil) then
 		serialize_string(obj.rolename)
@@ -159,6 +237,9 @@ function RoleBaseInfo.Serialize(obj)
 	end
 	if(obj.status ~= nil) then
 		serialize_int32(obj.status)
+	end
+	if(obj.direct ~= nil) then
+		serialize_int32(obj.direct)
 	end
 end
 
@@ -188,6 +269,9 @@ function RoleBaseInfo.GetSize(obj)
 		size = size + 4
 	end
 	if (obj.status ~= nil) then
+		size = size + 4
+	end
+	if (obj.direct ~= nil) then
 		size = size + 4
 	end
 	size = size + 7
@@ -1052,8 +1136,11 @@ function PBMsgEnterRoomRes.DeSerialize(obj)
 	if(has_optional_flag(3,optionLength,option)) then
 		obj.used = deserialize_int32()
 	end
+	if(has_optional_flag(4,optionLength,option)) then
+		obj.addition = deserialize_int32()
+	end
 
-	if (fieldCount >= 5) then
+	if (fieldCount >= 6) then
 		obj.rolelist = {}
 		local len = deserialize_int32()
 		if (len > 0) then
@@ -1070,7 +1157,7 @@ function PBMsgEnterRoomRes.DeSerialize(obj)
 end
 
 function PBMsgEnterRoomRes.Serialize(obj)
-	local fieldCount = 5
+	local fieldCount = 6
 	serialize_int32(fieldCount)
 	local flag = {}
 	if(obj.passwd ~= nil) then
@@ -1093,6 +1180,11 @@ function PBMsgEnterRoomRes.Serialize(obj)
 	else
 		flag[4] = false
 	end
+	if(obj.addition ~= nil) then
+		flag[5] = true
+	else
+		flag[5] = false
+	end
 	serialize_optional(flag)
 	if(obj.passwd ~= nil) then
 		serialize_int32(obj.passwd)
@@ -1105,6 +1197,9 @@ function PBMsgEnterRoomRes.Serialize(obj)
 	end
 	if(obj.used ~= nil) then
 		serialize_int32(obj.used)
+	end
+	if(obj.addition ~= nil) then
+		serialize_int32(obj.addition)
 	end
 	if (obj.rolelist ~= nil) then
 		serialize_int32(#(obj.rolelist))
@@ -1135,6 +1230,9 @@ function PBMsgEnterRoomRes.GetSize(obj)
 		size = size + 4
 	end
 	if (obj.used ~= nil) then
+		size = size + 4
+	end
+	if (obj.addition ~= nil) then
 		size = size + 4
 	end
 	if (obj.rolelist ~= nil) then
@@ -2003,15 +2101,15 @@ function PBMsgPengCardReq.GetSize(obj)
 	return size
 end
 
--- PBMsgPengCardReq
-PBMsgPengCardReq = {}
-PBMsgPengCardReq.__index = PBMsgPengCardReq
-function PBMsgPengCardReq.Create()
-	local obj = setmetatable({},PBMsgPengCardReq)
+-- PBMsgPengCardRes
+PBMsgPengCardRes = {}
+PBMsgPengCardRes.__index = PBMsgPengCardRes
+function PBMsgPengCardRes.Create()
+	local obj = setmetatable({},PBMsgPengCardRes)
 	return obj
 end
 
-function PBMsgPengCardReq.DeSerialize(obj)
+function PBMsgPengCardRes.DeSerialize(obj)
 	local fieldCount = deserialize_int32()
 	local option,optionLength = deserialize_optional()
 	if(has_optional_flag(0,optionLength,option)) then
@@ -2027,7 +2125,7 @@ function PBMsgPengCardReq.DeSerialize(obj)
 	return obj
 end
 
-function PBMsgPengCardReq.Serialize(obj)
+function PBMsgPengCardRes.Serialize(obj)
 	local fieldCount = 2
 	serialize_int32(fieldCount)
 	local flag = {}
@@ -2057,7 +2155,7 @@ function PBMsgPengCardReq.Serialize(obj)
 	end
 end
 
-function PBMsgPengCardReq.GetSize(obj)
+function PBMsgPengCardRes.GetSize(obj)
 	local size = 0
 	if (obj.roleid ~= nil) then
 		size = size + 4
@@ -2538,6 +2636,88 @@ function PBMsgGameGetCardRes.GetSize(obj)
 		size = size + obj.card:GetSize()
 	end
 	size = size + 11
+	return size
+end
+
+-- PBMsgGameDeleteRoomReq
+PBMsgGameDeleteRoomReq = {}
+PBMsgGameDeleteRoomReq.__index = PBMsgGameDeleteRoomReq
+function PBMsgGameDeleteRoomReq.Create()
+	local obj = setmetatable({},PBMsgGameDeleteRoomReq)
+	return obj
+end
+
+function PBMsgGameDeleteRoomReq.DeSerialize(obj)
+	local fieldCount = deserialize_int32()
+	local option,optionLength = deserialize_optional()
+	if(has_optional_flag(0,optionLength,option)) then
+		obj.room_pass = deserialize_int32()
+	end
+	return obj
+end
+
+function PBMsgGameDeleteRoomReq.Serialize(obj)
+	local fieldCount = 1
+	serialize_int32(fieldCount)
+	local flag = {}
+	if(obj.room_pass ~= nil) then
+		flag[1] = true
+	else
+		flag[1] = false
+	end
+	serialize_optional(flag)
+	if(obj.room_pass ~= nil) then
+		serialize_int32(obj.room_pass)
+	end
+end
+
+function PBMsgGameDeleteRoomReq.GetSize(obj)
+	local size = 0
+	if (obj.room_pass ~= nil) then
+		size = size + 4
+	end
+	size = size + 6
+	return size
+end
+
+-- PBMsgGameDeleteRoomRes
+PBMsgGameDeleteRoomRes = {}
+PBMsgGameDeleteRoomRes.__index = PBMsgGameDeleteRoomRes
+function PBMsgGameDeleteRoomRes.Create()
+	local obj = setmetatable({},PBMsgGameDeleteRoomRes)
+	return obj
+end
+
+function PBMsgGameDeleteRoomRes.DeSerialize(obj)
+	local fieldCount = deserialize_int32()
+	local option,optionLength = deserialize_optional()
+	if(has_optional_flag(0,optionLength,option)) then
+		obj.result = deserialize_int32()
+	end
+	return obj
+end
+
+function PBMsgGameDeleteRoomRes.Serialize(obj)
+	local fieldCount = 1
+	serialize_int32(fieldCount)
+	local flag = {}
+	if(obj.result ~= nil) then
+		flag[1] = true
+	else
+		flag[1] = false
+	end
+	serialize_optional(flag)
+	if(obj.result ~= nil) then
+		serialize_int32(obj.result)
+	end
+end
+
+function PBMsgGameDeleteRoomRes.GetSize(obj)
+	local size = 0
+	if (obj.result ~= nil) then
+		size = size + 4
+	end
+	size = size + 6
 	return size
 end
 

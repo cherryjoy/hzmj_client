@@ -26,7 +26,7 @@ namespace GEM_NET_LIB
                 m_SessionByte[i] = (byte)(PingManager.Instance.sessionId >> (8 * (7 - i)));
             }
 
-            Debug.Log("sessionId: " + PingManager.Instance.sessionId);
+            //Debug.Log("sessionId: " + PingManager.Instance.sessionId);
 
 			m_NotUseByte[0] = mCounter;
 			m_Buffer.Clear();

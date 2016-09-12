@@ -395,10 +395,10 @@ namespace GEM_NET_LIB
                         {
                             mAsyncArgs.SetBuffer(mByteToSend.ToArray(), 0, mByteToSend.Count);
                             mByteToSend.Clear();
-                            for (int i = 0; i < mAsyncArgs.Buffer.Length; ++i)
+                            /*for (int i = 0; i < mAsyncArgs.Buffer.Length; ++i)
                             {
                                 Debug.Log("byte " + i + " = " + (int)mAsyncArgs.Buffer[i]);
-                            }
+                            }*/
 
                             if (m_ClientSocket.SendAsync(mAsyncArgs))
                             {
