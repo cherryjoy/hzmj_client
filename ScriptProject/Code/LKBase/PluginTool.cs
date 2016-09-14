@@ -189,17 +189,6 @@ public class PluginTool {
 #endif
     }
 
-    public void LKCustomer(string json)
-    {
-#if UNITY_ANDROID
-        AndroidJavaObject androidObj = new AndroidJavaObject("com.lk.service.CustomerService");
-        androidObj.Call("UnityCallService", json);
-        androidObj.Dispose();
-#elif UNITY_IPHONE
-        lkCustomer(json);
-#endif
-    }
-
     public string GetVersionName()
     {
 #if UNITY_ANDROID
