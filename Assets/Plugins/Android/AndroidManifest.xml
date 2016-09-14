@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cm.X1"
     android:installLocation="preferExternal"
@@ -25,21 +25,11 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-	<!-- 访问权限 -->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     
-    <!-- 融云权限 -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-	<uses-permission android:name="android.permission.RECORD_AUDIO" />
-	<uses-permission android:name="android.permission.GET_TASKS" />
-	<uses-permission android:name="android.permission.WAKE_LOCK" />
-	<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-	<uses-permission android:name="android.permission.VIBRATE" />
-	<uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-	<uses-permission android:name="android.permission.CAMERA" />
-	<uses-permission android:name="android.permission.RECORD_AUDIO" />
+	  <uses-permission android:name="android.permission.GET_TASKS" />
+	  <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+	  <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+	  <uses-permission android:name="android.permission.CAMERA" />
     <application
         android:hardwareAccelerated="false"
         android:icon="@drawable/app_icon"
@@ -51,17 +41,12 @@
                 <category android:name="android.intent.category.LEANBACK_LAUNCHER"/>
             </intent-filter>
             <meta-data android:name="unityplayer.UnityActivity" android:value="true"/>
-		</activity>
-        
+		</activity>   
     </application>
 	
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="18" />
-
+    
     <uses-feature android:glEsVersion="0x00020000" />
-
-    
-    
-
 </manifest>

@@ -1,7 +1,7 @@
 <resources>
 
-    <string name="cm_app_name">王者2</string>
-    <string name="cm_title_activity_update">王者2</string>
+    <string name="cm_app_name">樱桃红中麻将</string>
+    <string name="cm_title_activity_update">樱桃红中麻将</string>
     <string name="cm_update_lable">正在下载资源，请稍候... (约%.1fM)</string>
     <string name="cm_extractor_data">正在解压资源(不消耗流量)...</string>
     <string name="cm_init_lable">准备下载资源</string>
@@ -20,126 +20,6 @@
     <string name="cm_apk_need_update">新版本已经发布，需要更新至最新版本才能运行，是否更新?</string>
     <string name="cm_apk_auto_jump_error">无法成功跳转应用商店，请前行商店下载最新版本</string>
     
-    <string name="sobot_app_name">智齿sdk-Demo</string>
-    <string name="sobot_hello_world">Hello world!</string>
-    <string name="please_input_appkey">请输入AppKey</string>
-    <string name="sobot_action_settings">Settings</string>
-
-    <!-- 聊天界面字符串 -->
-    <string name="sobot_restart_talk">开始新会话</string>
-    <string name="sobot_not_read">条未读消息</string>
-    <string name="sobot_rl_not_read">以下为未读消息</string>
-    <string name="sobot_choice_test">选择咨询内容</string>
-    <string name="sobot_custom_please">客服邀请您对本次</string>
-    <string name="sobot_custom_please1">服务进行评价</string>
-    <string name="sobot_button_send">发送</string>
-    <string name="sobot_attach_smile">表情</string>
-    <string name="sobot_attach_picture">图片</string>
-    <string name="sobot_attach_take_pic">拍照</string>
-    <string name="sobot_btn_submit_text">提交评价</string>
-    <string name="sobot_attach_location">位置</string>
-    <string name="sobot_attach_file">文件</string>
-    <string name="sobot_attach_voice_call">语音电话</string>
-    <string name="sobot_please">SOBOT SDK  1.4.2</string>
-    <string name="sobot_value">24a9d616ec424fc1b54dd46718ef0d2a</string>
-    <string name="sobot_user_card">名片</string>
-    <string name="sobot_move_up_to_cancel">手指上滑，取消发送</string>
-    <string name="sobot_release_to_cancel">松开手指，取消发送</string>
-    <string name="sobot_send_fail">发送消息失败,</string>
-    <string name="sobot_delete_message">删除消息</string>
-    <string name="sobot_copy_message">复制消息</string>
-    <string name="sobot_delete_voice">删除语音</string>
-    <string name="sobot_delete_video">删除视频</string>
-    <string name="sobot_delete">删除</string>
-    <string name="sobot_end">结束本次对话?</string>
-    <string name="sobot_upload">图片</string>
-    <string name="sobot_resend">点击重新发送</string>
-    <string name="sobot_confirm_resend">确认重发该信息？</string>
-    <string name="sobot_connect_failuer_toast">请检查网络或稍候重试</string>
-    <string name="sobot_network_unavailable">当前网络不可用，请检查您的网络设置</string>
-    <string name="sobot_init_loading_wrong">加载错误</string>
-    <string name="sobot_copy">复制</string>
-    <string name="sobot_forward">转发</string>
-    <string name="sobot_button_logout">退出登录</string>
-    <string name="sobot_button_uploadlog">上传运行日志</string>
-    <string name="sobot_ok">确定</string>
-    <string name="sobot_cancel">取消</string>
-    <string name="sobot_prompt">提示</string>
-    <string name="sobot_clear_records">清空记录</string>
-    <string name="sobot_clear_all_records">是否清空所有聊天记录？</string>
-    <string name="sobot_location_recv">[%1$s的位置]</string>
-    <string name="sobot_location_message">位置信息</string>
-    <string name="sobot_recording_video">录制视频</string>
-    <string name="sobot_location_prefix">[我的位置]</string>
-    <string name="sobot_voice">[语音]</string>
-    <string name="sobot_picture">[图片]</string>
-    <string name="sobot_video">[视频]</string>
-    <string name="sobot_file">[文件]</string>
-    <string name="sobot_voice_call">[语音通话]</string>
-    <string name="sobot_button_cancel">取消</string>
-    <string name="sobot_button_cancel1">立即结束</string>
-    <string name="sobot_button_save">保存</string>
-    <string name="sobot_button_search">查找</string>
-    <string name="sobot_button_add">添加</string>
-    <string name="sobot_search_header">搜</string>
-    <string name="sobot_network_isnot_available">网络不可用</string>
-    <string name="sobot_recoding_fail">录音失败，请重试！</string>
-    <string name="sobot_select_contacts">选择联系人</string>
-    <string name="sobot_confirm_forward_to">确定转发到：%1$s ?</string>
-    <string name="sobot_logout">退出登录</string>
-    <string name="sobot_logout_hint">退出后不会删除任何历史数据，下次登录依然可以使用本账号</string>
-    <string name="sobot_exit_group_hint">退出后，将不再接收此群聊信息</string>
-    <string name="sobot_dissolution_group_hint">退出后，此群将被解散</string>
-    <string name="sobot_exit_group">退出</string>
-    <string name="sobot_connect_conflict">同一帐号已在其他设备登录</string>
-    <string name="sobot_em_user_remove">此用户已被移除</string>
-    <string name="sobot_welcome">loading\.\.\.</string>
-    <string name="sobot_robot">机械人乐乐</string>
-    <string name="sobot_submit">提交</string>
-    <string name="sobot_question">是否解决了您的问题？</string>
-    <string name="sobot_questionone">是否有以下情况？</string>
-    <string name="sobot_edittext_hint">欢迎给我们的服务提建议</string>
-    <string name="sobot_chat_content">聊天内容</string>
-    <string name="sobot_voiceTooShort">语音时长不能少于一秒钟</string>
-    <string name="sobot_voiceTooLong">录音时间过长</string>
-    <string name="sobot_dcrc">评价客服</string>
-    <string name="sobot_questiontwo">请监督客服是否有以下问题</string>
-    <string name="sobot_nomore">已无更多</string>
-    <string name="sobot_rengongservice">人工服务</string>
-    <string name="sobot_xlistview_header_hint_normal">查看更多历史纪录</string>
-    <string name="sobot_xlistview_header_hint_ready">松开刷新数据</string>
-    <string name="sobot_xlistview_header_hint_loading">正在加载</string>
-    <string name="sobot_xlistview_header_last_time">上次查看时间：</string>
-    <string name="sobot_xlistview_footer_hint_normal">查看更多</string>
-    <string name="sobot_xlistview_footer_hint_ready">松开载入更多</string>
-    <string name="sobot_str_bottom_message">留言</string>
-    <string name="sobot_str_bottom_satisfaction">满意度</string>
-    <string name="sobot_yes">是</string>
-    <string name="sobot_no">否</string>
-
-    <!-- 下线通知内容 -->
-    <string name="sobot_outline_managerOutLine">有事离开</string>
-    <!-- XX 有事离开 重新接入 -->
-    <string name="sobot_outline_leverByManager"> 结束了本次会话 </string>
-    <!-- XX 结束了本次会话  重新接入 -->
-    <string name="sobot_outline_JoinBlacklistByManager"> 结束了本次会话</string>
-    <string name="sobot_outline_LongTimeNoSay">由于您长时间未说话，会话已结束</string>
-    <string name="sobot_outline_openNewWindows">打开新窗口</string>
-    <string name="sobot_current_network">当前网络不可用,请检查网络设置</string>
-    <string name="sobot_reunicon">点击重新连接</string>
-    <string name="sobot_btn_start">启动</string>
-    <string name="sobot_read_all">阅读全文>></string>
-    <string name="sobot_appkey">请输入您的AppKey</string>
-    <string name="sobot_userID">请输入用户ID</string>
-    <string name="sobot_resendmsg">重新发送消息？</string>
-    <string name="sobot_colse">关闭</string>
-    <string name="sobot_back">返回</string>
-
-    <!-- 留言 -->
-    <string name="sobot_post_msg_top">您好，很抱歉我们的在线客服暂时无法为您提供服务</string>
-    <string name="sobot_post_msg_top1">如需帮助，请留言，我们将尽快联系您~</string>
-    <string name="sobot_post_msg_hint_email">邮箱</string>
-    <string name="sobot_post_msg_hint_content">您好，为了更好地解决您的问题，请告诉我们以下内容:\n1.您的姓名\n2.问题描述</string>
     <string name="title_activity_dcrc">DCRCActivity</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
