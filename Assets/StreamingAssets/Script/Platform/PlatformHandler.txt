@@ -17,7 +17,7 @@ function PlatformHandler.OnDestroy()
 	Client.ConnectSuccess = Client.ConnectSuccess - {PlatformHandler,PlatformHandler.ConnectSuccess}
 	Client.ChooseRoleExitBtn = Client.ChooseRoleExitBtn- {PlatformHandler,PlatformHandler.ChooseRoleExitBtn}
 end
-
+--[[
 function PlatformHandler.onSdkInit()
 	LuaDebug.Log('onSdkInit')
 	PlatformHandler.EnterChooseRoleUI=false
@@ -29,7 +29,7 @@ function PlatformHandler.onSdkInit()
 		PlatformHandler.state:OKSDKInit(PlatformHandler.gameName,param)
 	end
 end
-
+]]
 
 function PlatformHandler.CallLogin()
 	if PlatformHandler.InitFinish then

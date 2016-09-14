@@ -10624,11 +10624,6 @@ ParamType:     System.String   System.String
 
 
 Class:   PluginTool
-FuncName:   LKCustomer
-ParamType:     System.String
-
-
-Class:   PluginTool
 FuncName:   GetVersionName
 ParamType:  NULL
 
@@ -26140,582 +26135,6 @@ ParamType:     System.Object   System.Object
 
 
 ================================
-PlatformSDKController
-
-Class:   PlatformSDKController
-FuncName:   Start
-ParamType:  NULL
-
-
-Class:   PlatformSDKController
-FuncName:   InitSdk
-ParamType:  NULL
-
-
-Class:   PlatformSDKController
-FuncName:   Invoke
-ParamType:     System.String   System.Single
-
-
-Class:   PlatformSDKController
-FuncName:   InvokeRepeating
-ParamType:     System.String   System.Single   System.Single
-
-
-Class:   PlatformSDKController
-FuncName:   CancelInvoke
-ParamType:  NULL
-
-
-Class:   PlatformSDKController
-FuncName:   CancelInvoke1
-ParamType:     System.String
-
-
-Class:   PlatformSDKController
-FuncName:   IsInvoking
-ParamType:     System.String
-
-
-Class:   PlatformSDKController
-FuncName:   IsInvoking1
-ParamType:  NULL
-
-
-Class:   PlatformSDKController
-FuncName:   StartCoroutine
-ParamType:     System.Collections.IEnumerator
-
-
-Class:   PlatformSDKController
-FuncName:   StartCoroutine_Auto
-ParamType:     System.Collections.IEnumerator
-
-
-Class:   PlatformSDKController
-FuncName:   StartCoroutine1
-ParamType:     System.String   System.Object
-
-
-Class:   PlatformSDKController
-FuncName:   StartCoroutine2
-ParamType:     System.String
-
-
-Class:   PlatformSDKController
-FuncName:   StopCoroutine
-ParamType:     System.String
-
-
-Class:   PlatformSDKController
-FuncName:   StopCoroutine1
-ParamType:     System.Collections.IEnumerator
-
-
-Class:   PlatformSDKController
-FuncName:   StopCoroutine2
-ParamType:     UnityEngine.Coroutine
-
-
-Class:   PlatformSDKController
-FuncName:   StopAllCoroutines
-ParamType:  NULL
-
-
-Class:   PlatformSDKController
-FuncName:  Static  print
-ParamType:     System.Object
-
-
-Class:   PlatformSDKController
-FuncName:   get_useGUILayout
-ParamType:  NULL
-
-
-Class:   PlatformSDKController
-FuncName:   set_useGUILayout
-ParamType:     System.Boolean
-
-
-Class:   PlatformSDKController
-FuncName:   get_enabled
-ParamType:  NULL
-
-
-Class:   PlatformSDKController
-FuncName:   set_enabled
-ParamType:     System.Boolean
-
-
-Class:   PlatformSDKController
-FuncName:   get_isActiveAndEnabled
-ParamType:  NULL
-
-
-Class:   PlatformSDKController
-FuncName:   get_transform
-ParamType:  NULL
-
-
-Class:   PlatformSDKController
-FuncName:   get_gameObject
-ParamType:  NULL
-
-
-Class:   PlatformSDKController
-FuncName:   GetComponent
-ParamType:     System.Type
-
-
-Class:   PlatformSDKController
-FuncName:   GetComponent1
-ParamType:     System.String
-
-
-Class:   PlatformSDKController
-FuncName:   GetComponentInChildren
-ParamType:     System.Type   System.Boolean
-
-
-Class:   PlatformSDKController
-FuncName:   GetComponentInChildren1
-ParamType:     System.Type
-
-
-Class:   PlatformSDKController
-FuncName:   GetComponentsInChildren
-ParamType:     System.Type
-
-
-Class:   PlatformSDKController
-FuncName:   GetComponentsInChildren1
-ParamType:     System.Type   System.Boolean
-
-
-Class:   PlatformSDKController
-FuncName:   GetComponentInParent
-ParamType:     System.Type
-
-
-Class:   PlatformSDKController
-FuncName:   GetComponentsInParent
-ParamType:     System.Type
-
-
-Class:   PlatformSDKController
-FuncName:   GetComponentsInParent1
-ParamType:     System.Type   System.Boolean
-
-
-Class:   PlatformSDKController
-FuncName:   GetComponents
-ParamType:     System.Type
-
-
-Class:   PlatformSDKController
-FuncName:   GetComponents1
-ParamType:     System.Type   System.Collections.Generic.List`1[UnityEngine.Component]
-
-
-Class:   PlatformSDKController
-FuncName:   get_tag
-ParamType:  NULL
-
-
-Class:   PlatformSDKController
-FuncName:   set_tag
-ParamType:     System.String
-
-
-Class:   PlatformSDKController
-FuncName:   CompareTag
-ParamType:     System.String
-
-
-Class:   PlatformSDKController
-FuncName:   SendMessageUpwards
-ParamType:     System.String   System.Object   UnityEngine.SendMessageOptions
-
-
-Class:   PlatformSDKController
-FuncName:   SendMessageUpwards1
-ParamType:     System.String   System.Object
-
-
-Class:   PlatformSDKController
-FuncName:   SendMessageUpwards2
-ParamType:     System.String
-
-
-Class:   PlatformSDKController
-FuncName:   SendMessageUpwards3
-ParamType:     System.String   UnityEngine.SendMessageOptions
-
-
-Class:   PlatformSDKController
-FuncName:   SendMessage
-ParamType:     System.String   System.Object   UnityEngine.SendMessageOptions
-
-
-Class:   PlatformSDKController
-FuncName:   SendMessage1
-ParamType:     System.String   System.Object
-
-
-Class:   PlatformSDKController
-FuncName:   SendMessage2
-ParamType:     System.String
-
-
-Class:   PlatformSDKController
-FuncName:   SendMessage3
-ParamType:     System.String   UnityEngine.SendMessageOptions
-
-
-Class:   PlatformSDKController
-FuncName:   BroadcastMessage
-ParamType:     System.String   System.Object   UnityEngine.SendMessageOptions
-
-
-Class:   PlatformSDKController
-FuncName:   BroadcastMessage1
-ParamType:     System.String   System.Object
-
-
-Class:   PlatformSDKController
-FuncName:   BroadcastMessage2
-ParamType:     System.String
-
-
-Class:   PlatformSDKController
-FuncName:   BroadcastMessage3
-ParamType:     System.String   UnityEngine.SendMessageOptions
-
-
-Class:   PlatformSDKController
-FuncName:   get_rigidbody
-ParamType:  NULL
-
-
-Class:   PlatformSDKController
-FuncName:   get_rigidbody2D
-ParamType:  NULL
-
-
-Class:   PlatformSDKController
-FuncName:   get_camera
-ParamType:  NULL
-
-
-Class:   PlatformSDKController
-FuncName:   get_light
-ParamType:  NULL
-
-
-Class:   PlatformSDKController
-FuncName:   get_animation
-ParamType:  NULL
-
-
-Class:   PlatformSDKController
-FuncName:   get_constantForce
-ParamType:  NULL
-
-
-Class:   PlatformSDKController
-FuncName:   get_renderer
-ParamType:  NULL
-
-
-Class:   PlatformSDKController
-FuncName:   get_audio
-ParamType:  NULL
-
-
-Class:   PlatformSDKController
-FuncName:   get_guiText
-ParamType:  NULL
-
-
-Class:   PlatformSDKController
-FuncName:   get_networkView
-ParamType:  NULL
-
-
-Class:   PlatformSDKController
-FuncName:   get_guiElement
-ParamType:  NULL
-
-
-Class:   PlatformSDKController
-FuncName:   get_guiTexture
-ParamType:  NULL
-
-
-Class:   PlatformSDKController
-FuncName:   get_collider
-ParamType:  NULL
-
-
-Class:   PlatformSDKController
-FuncName:   get_collider2D
-ParamType:  NULL
-
-
-Class:   PlatformSDKController
-FuncName:   get_hingeJoint
-ParamType:  NULL
-
-
-Class:   PlatformSDKController
-FuncName:   get_particleEmitter
-ParamType:  NULL
-
-
-Class:   PlatformSDKController
-FuncName:   get_particleSystem
-ParamType:  NULL
-
-
-Class:   PlatformSDKController
-FuncName:  Static  Destroy
-ParamType:     UnityEngine.Object   System.Single
-
-
-Class:   PlatformSDKController
-FuncName:  Static  Destroy1
-ParamType:     UnityEngine.Object
-
-
-Class:   PlatformSDKController
-FuncName:  Static  DestroyImmediate
-ParamType:     UnityEngine.Object   System.Boolean
-
-
-Class:   PlatformSDKController
-FuncName:  Static  DestroyImmediate1
-ParamType:     UnityEngine.Object
-
-
-Class:   PlatformSDKController
-FuncName:  Static  FindObjectsOfType
-ParamType:     System.Type
-
-
-Class:   PlatformSDKController
-FuncName:   get_name
-ParamType:  NULL
-
-
-Class:   PlatformSDKController
-FuncName:   set_name
-ParamType:     System.String
-
-
-Class:   PlatformSDKController
-FuncName:  Static  DontDestroyOnLoad
-ParamType:     UnityEngine.Object
-
-
-Class:   PlatformSDKController
-FuncName:   get_hideFlags
-ParamType:  NULL
-
-
-Class:   PlatformSDKController
-FuncName:   set_hideFlags
-ParamType:     UnityEngine.HideFlags
-
-
-Class:   PlatformSDKController
-FuncName:  Static  DestroyObject
-ParamType:     UnityEngine.Object   System.Single
-
-
-Class:   PlatformSDKController
-FuncName:  Static  DestroyObject1
-ParamType:     UnityEngine.Object
-
-
-Class:   PlatformSDKController
-FuncName:  Static  FindSceneObjectsOfType
-ParamType:     System.Type
-
-
-Class:   PlatformSDKController
-FuncName:  Static  FindObjectsOfTypeIncludingAssets
-ParamType:     System.Type
-
-
-Class:   PlatformSDKController
-FuncName:  Static  FindObjectsOfTypeAll
-ParamType:     System.Type
-
-
-Class:   PlatformSDKController
-FuncName:   ToString
-ParamType:  NULL
-
-
-Class:   PlatformSDKController
-FuncName:   Equals
-ParamType:     System.Object
-
-
-Class:   PlatformSDKController
-FuncName:   GetHashCode
-ParamType:  NULL
-
-
-Class:   PlatformSDKController
-FuncName:   GetInstanceID
-ParamType:  NULL
-
-
-Class:   PlatformSDKController
-FuncName:  Static  Instantiate
-ParamType:     UnityEngine.Object   UnityEngine.Vector3   UnityEngine.Quaternion
-
-
-Class:   PlatformSDKController
-FuncName:  Static  Instantiate1
-ParamType:     UnityEngine.Object
-
-
-Class:   PlatformSDKController
-FuncName:  Static  FindObjectOfType
-ParamType:     System.Type
-
-
-Class:   PlatformSDKController
-FuncName:  Static  op_Implicit
-ParamType:     UnityEngine.Object
-
-
-Class:   PlatformSDKController
-FuncName:  Static  op_Equality
-ParamType:     UnityEngine.Object   UnityEngine.Object
-
-
-Class:   PlatformSDKController
-FuncName:  Static  op_Inequality
-ParamType:     UnityEngine.Object   UnityEngine.Object
-
-
-Class:   PlatformSDKController
-FuncName:  Static  Equals1
-ParamType:     System.Object   System.Object
-
-
-Class:   PlatformSDKController
-FuncName:   GetType
-ParamType:  NULL
-
-
-Class:   PlatformSDKController
-FuncName:  Static  ReferenceEquals
-ParamType:     System.Object   System.Object
-
-
-================================
-PlatformState
-
-Class:   PlatformState
-FuncName:  Static  get_Instance
-ParamType:  NULL
-
-
-Class:   PlatformState
-FuncName:   OKSDKInit
-ParamType:     System.String   System.String
-
-
-Class:   PlatformState
-FuncName:   OKSDKLogin
-ParamType:     System.String   System.String
-
-
-Class:   PlatformState
-FuncName:   OKSDKCreateRole
-ParamType:     System.String
-
-
-Class:   PlatformState
-FuncName:   OKSDKEnterGame
-ParamType:     System.String
-
-
-Class:   PlatformState
-FuncName:   OKSDKLogout
-ParamType:     System.String   System.String
-
-
-Class:   PlatformState
-FuncName:   OKSDKUserCenter
-ParamType:     System.String
-
-
-Class:   PlatformState
-FuncName:   OKSDKPay
-ParamType:     System.String   System.String   System.String   System.String   System.String   System.String
-
-
-Class:   PlatformState
-FuncName:   OKSDKEnterBBS
-ParamType:     System.String
-
-
-Class:   PlatformState
-FuncName:   OKSDKLevelUp
-ParamType:     System.String
-
-
-Class:   PlatformState
-FuncName:   OKSDKExit
-ParamType:     System.String
-
-
-Class:   PlatformState
-FuncName:   log
-ParamType:     System.String   System.String
-
-
-Class:   PlatformState
-FuncName:   OKLog
-ParamType:     System.String
-
-
-Class:   PlatformState
-FuncName:   Equals
-ParamType:     System.Object
-
-
-Class:   PlatformState
-FuncName:  Static  Equals1
-ParamType:     System.Object   System.Object
-
-
-Class:   PlatformState
-FuncName:   GetHashCode
-ParamType:  NULL
-
-
-Class:   PlatformState
-FuncName:   GetType
-ParamType:  NULL
-
-
-Class:   PlatformState
-FuncName:   ToString
-ParamType:  NULL
-
-
-Class:   PlatformState
-FuncName:  Static  ReferenceEquals
-ParamType:     System.Object   System.Object
-
-
-================================
 ClientInitController
 
 Class:   ClientInitController
@@ -29102,6 +28521,571 @@ ParamType:  NULL
 
 Class:   CenterMultiWidget
 FuncName:  Static  Instantiate
+ParamType:     UnityEngine.Object   UnityEngine.Vector3   UnityEngine.Quaternion
+
+
+Class:   CenterMultiWidget
+FuncName:  Static  Instantiate1
+ParamType:     UnityEngine.Object
+
+
+Class:   CenterMultiWidget
+FuncName:  Static  FindObjectOfType
+ParamType:     System.Type
+
+
+Class:   CenterMultiWidget
+FuncName:  Static  op_Implicit
+ParamType:     UnityEngine.Object
+
+
+Class:   CenterMultiWidget
+FuncName:  Static  op_Equality
+ParamType:     UnityEngine.Object   UnityEngine.Object
+
+
+Class:   CenterMultiWidget
+FuncName:  Static  op_Inequality
+ParamType:     UnityEngine.Object   UnityEngine.Object
+
+
+Class:   CenterMultiWidget
+FuncName:  Static  Equals1
+ParamType:     System.Object   System.Object
+
+
+Class:   CenterMultiWidget
+FuncName:   GetType
+ParamType:  NULL
+
+
+Class:   CenterMultiWidget
+FuncName:  Static  ReferenceEquals
+ParamType:     System.Object   System.Object
+
+
+================================
+UnityEngine.BoxCollider
+
+Class:   UnityEngine.BoxCollider
+FuncName:   get_center
+ParamType:  NULL
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   set_center
+ParamType:     UnityEngine.Vector3
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   get_size
+ParamType:  NULL
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   set_size
+ParamType:     UnityEngine.Vector3
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   get_extents
+ParamType:  NULL
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   set_extents
+ParamType:     UnityEngine.Vector3
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   get_enabled
+ParamType:  NULL
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   set_enabled
+ParamType:     System.Boolean
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   get_attachedRigidbody
+ParamType:  NULL
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   get_isTrigger
+ParamType:  NULL
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   set_isTrigger
+ParamType:     System.Boolean
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   get_contactOffset
+ParamType:  NULL
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   set_contactOffset
+ParamType:     System.Single
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   get_material
+ParamType:  NULL
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   set_material
+ParamType:     UnityEngine.PhysicMaterial
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   ClosestPointOnBounds
+ParamType:     UnityEngine.Vector3
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   get_sharedMaterial
+ParamType:  NULL
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   set_sharedMaterial
+ParamType:     UnityEngine.PhysicMaterial
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   get_bounds
+ParamType:  NULL
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   Raycast
+ParamType:     UnityEngine.Ray   UnityEngine.RaycastHit&   System.Single
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   get_transform
+ParamType:  NULL
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   get_gameObject
+ParamType:  NULL
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   GetComponent
+ParamType:     System.Type
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   GetComponent1
+ParamType:     System.String
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   GetComponentInChildren
+ParamType:     System.Type   System.Boolean
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   GetComponentInChildren1
+ParamType:     System.Type
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   GetComponentsInChildren
+ParamType:     System.Type
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   GetComponentsInChildren1
+ParamType:     System.Type   System.Boolean
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   GetComponentInParent
+ParamType:     System.Type
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   GetComponentsInParent
+ParamType:     System.Type
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   GetComponentsInParent1
+ParamType:     System.Type   System.Boolean
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   GetComponents
+ParamType:     System.Type
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   GetComponents1
+ParamType:     System.Type   System.Collections.Generic.List`1[UnityEngine.Component]
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   get_tag
+ParamType:  NULL
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   set_tag
+ParamType:     System.String
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   CompareTag
+ParamType:     System.String
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   SendMessageUpwards
+ParamType:     System.String   System.Object   UnityEngine.SendMessageOptions
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   SendMessageUpwards1
+ParamType:     System.String   System.Object
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   SendMessageUpwards2
+ParamType:     System.String
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   SendMessageUpwards3
+ParamType:     System.String   UnityEngine.SendMessageOptions
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   SendMessage
+ParamType:     System.String   System.Object   UnityEngine.SendMessageOptions
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   SendMessage1
+ParamType:     System.String   System.Object
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   SendMessage2
+ParamType:     System.String
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   SendMessage3
+ParamType:     System.String   UnityEngine.SendMessageOptions
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   BroadcastMessage
+ParamType:     System.String   System.Object   UnityEngine.SendMessageOptions
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   BroadcastMessage1
+ParamType:     System.String   System.Object
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   BroadcastMessage2
+ParamType:     System.String
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   BroadcastMessage3
+ParamType:     System.String   UnityEngine.SendMessageOptions
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   get_rigidbody
+ParamType:  NULL
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   get_rigidbody2D
+ParamType:  NULL
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   get_camera
+ParamType:  NULL
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   get_light
+ParamType:  NULL
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   get_animation
+ParamType:  NULL
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   get_constantForce
+ParamType:  NULL
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   get_renderer
+ParamType:  NULL
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   get_audio
+ParamType:  NULL
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   get_guiText
+ParamType:  NULL
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   get_networkView
+ParamType:  NULL
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   get_guiElement
+ParamType:  NULL
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   get_guiTexture
+ParamType:  NULL
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   get_collider
+ParamType:  NULL
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   get_collider2D
+ParamType:  NULL
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   get_hingeJoint
+ParamType:  NULL
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   get_particleEmitter
+ParamType:  NULL
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   get_particleSystem
+ParamType:  NULL
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:  Static  Destroy
+ParamType:     UnityEngine.Object   System.Single
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:  Static  Destroy1
+ParamType:     UnityEngine.Object
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:  Static  DestroyImmediate
+ParamType:     UnityEngine.Object   System.Boolean
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:  Static  DestroyImmediate1
+ParamType:     UnityEngine.Object
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:  Static  FindObjectsOfType
+ParamType:     System.Type
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   get_name
+ParamType:  NULL
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   set_name
+ParamType:     System.String
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:  Static  DontDestroyOnLoad
+ParamType:     UnityEngine.Object
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   get_hideFlags
+ParamType:  NULL
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   set_hideFlags
+ParamType:     UnityEngine.HideFlags
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:  Static  DestroyObject
+ParamType:     UnityEngine.Object   System.Single
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:  Static  DestroyObject1
+ParamType:     UnityEngine.Object
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:  Static  FindSceneObjectsOfType
+ParamType:     System.Type
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:  Static  FindObjectsOfTypeIncludingAssets
+ParamType:     System.Type
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:  Static  FindObjectsOfTypeAll
+ParamType:     System.Type
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   ToString
+ParamType:  NULL
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   Equals
+ParamType:     System.Object
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   GetHashCode
+ParamType:  NULL
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   GetInstanceID
+ParamType:  NULL
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:  Static  Instantiate
+ParamType:     UnityEngine.Object   UnityEngine.Vector3   UnityEngine.Quaternion
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:  Static  Instantiate1
+ParamType:     UnityEngine.Object
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:  Static  FindObjectOfType
+ParamType:     System.Type
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:  Static  op_Implicit
+ParamType:     UnityEngine.Object
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:  Static  op_Equality
+ParamType:     UnityEngine.Object   UnityEngine.Object
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:  Static  op_Inequality
+ParamType:     UnityEngine.Object   UnityEngine.Object
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:  Static  Equals1
+ParamType:     System.Object   System.Object
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:   GetType
+ParamType:  NULL
+
+
+Class:   UnityEngine.BoxCollider
+FuncName:  Static  ReferenceEquals
+ParamType:     System.Object   System.Object
+
+
+================================
+GameQualityChecker
+
+Class:   GameQualityChecker
+FuncName:   EstimateGameQualityLevel
+ParamType:  NULL
+
+
+Class:   GameQualityChecker
+FuncName:   SetGameQuality
+ParamType:     GameQualityChecker+GameQualityLevel
+
+
+Class:   GameQualityChecker
+FuncName:   GetQualityLevel
+ParamType:  NULL
+
+
+Class:   GameQualityChecker
+FuncName:  Static  get_Instance
+ParamType:  NULL
+
+
+Class:   GameQualityChecker
+FuncName:   Equals
+ParamType:     System.Object
+
+
+Class:   GameQualityChecker
+FuncName:  Static  Equals1
+ParamType:     System.Object   System.Object
+
+
+Class:   GameQualityChecker
+FuncName:   GetHashCode
+ParamType:  NULL
+
+
+Class:   GameQualityChecker
+FuncName:   GetType
+ParamType:  NULL
+
+
+Class:   GameQualityChecker
+FuncName:   ToString
+ParamType:  NULL
+
+
+Class:   GameQualityChecker
+FuncName:  Static  ReferenceEquals
+ParamType:     System.Object   System.Object
+
+
+cName:  Static  Instantiate
 ParamType:     UnityEngine.Object   UnityEngine.Vector3   UnityEngine.Quaternion
 
 

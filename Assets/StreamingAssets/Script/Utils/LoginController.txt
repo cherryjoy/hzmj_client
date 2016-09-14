@@ -591,8 +591,8 @@ function LoginController:RefreshNoticeList()
         LoginController.isHasAllMaintain(self)
         NoticeList = LoginController:NoticeDataScreen(self.NoticeList,false)
         if self.prefab == nil and #NoticeList ~= 0 then
-            self.prefab = LuaUIViewCtr.AddChildNotLose("AnnouncementUI/AnnouncementUI",self.LoginUI)   --弹出公告
-            self.prefab:setData(NoticeList,self)
+            --self.prefab = LuaUIViewCtr.AddChildNotLose("AnnouncementUI/AnnouncementUI",self.LoginUI)   --弹出公告
+            --self.prefab:setData(NoticeList,self)
         end
     end
 end

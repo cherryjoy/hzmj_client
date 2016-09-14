@@ -87,7 +87,7 @@ public class PluginTool {
 #elif UNITY_EDITOR
         persistentDataPath = Application.persistentDataPath+"/";
 #endif
-        PlatformState.Instance.OKLog(persistentDataPath);
+        Debug.Log(persistentDataPath);
         return true;
     }
 
