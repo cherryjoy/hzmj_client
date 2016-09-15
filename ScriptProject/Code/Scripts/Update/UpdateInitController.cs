@@ -370,6 +370,7 @@ class UpdateInitController : MonoBehaviour
         LuaInstance.instance.Reset();
         LuaState lua = LuaInstance.instance.Get();
         lua.L_DoString(platformCfg);
+        Debug.Log("IsInit: " + IsInit + ", existsUpdateLua: " + existsUpdateLua);
         if (IsInit && !existsUpdateLua)
         {
             LuaInstance.instance.DoFile("Utils/Util.txt");

@@ -1,9 +1,9 @@
-GameDefine_version = "1.0.5"
+GameDefine_version = "1.0.0"
 GameDefine_gameID = 78
 GameDefine_platformCode = 5
-GameDefine_windows_cache_path = "d:/HeroRes/assetbundles/"
-GameDefine_inside_serverlist_url = "http://10.10.41.19/serverlist/lk_auther2.xml"
-GameDefine_outside_serverlist_url = "http://10.10.41.19/serverlist/lk_auther2.xml"
+GameDefine_windows_cache_path = "F:/MaJiang/hzmj_client/assetbundles"
+GameDefine_inside_serverlist_url = "http://www.cherryjoy.com/hzmj/cj_hzmj.xml"
+GameDefine_outside_serverlist_url = "http://www.cherryjoy.com/hzmj/cj_hzmj.xml"
 GameDefine_AppHashCode = 123456
 GameDefine_GetRoleInfoURL = ""
 GameDefine_IsNeedAddPlatformSDKObj = false

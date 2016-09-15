@@ -75,7 +75,8 @@ function UpdateController:ExtractAssetFromPackageToSD()
 	if Application.get_platform()==ERuntimePlatform.Android then
 		PluginTool.SharedInstance():CopyAssetFromPackageToSdcard("index",PERSISTENTDATAPATH)
 		PluginTool.SharedInstance():CopyAssetFromPackageToSdcard("fragment",PERSISTENTDATAPATH)
-		PluginTool.SharedInstance():ThreadCopyAssetFromPackageToSdcard(UpdateController.UpdateCtr:get_gameObject():get_name(),"data",PERSISTENTDATAPATH);
+		--PluginTool.SharedInstance():ThreadCopyAssetFromPackageToSdcard(UpdateController.UpdateCtr:get_gameObject():get_name(),"data",PERSISTENTDATAPATH);
+		UpdateController.AndroidCopayEnd()
 	else
 		 UpdateController.UpdateCtr:ThreadCopyFile(STREAMINGASSETSPATH.."data",PERSISTENTDATAPATH,"UnzipStreamingAssetSuccess","UnzipProgress","PackageError")
 		 UpdateController.UpdateCtr:CopyFile(STREAMINGASSETSPATH.."fragment",PERSISTENTDATAPATH.."fragment")
@@ -106,6 +107,7 @@ function UpdateController.DownloadServerlist()
 	UpdateController.ProgressLabel:set_text(Text.CheckUpdate)
 	local clientVersion = UpdateConfig.ReadClientVersionFromSdcard()
 	UpdateController.UpdateCtrSelf.VersionLbl:set_text("V"..clientVersion)
+	LuaDebug.Log("serverList url: "..GameDefine_outside_serverlist_url)
 	UpdateController.UpdateCtr:HttpDownLoadXml(GameDefine_outside_serverlist_url,"DownloadServerlistCallback","DownLoadErrorCallback")
 end
 
