@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 public class BuildAssetBundle : EditorWindow
 {
     BuildTarget platform_ = EditorUserBuildSettings.activeBuildTarget;
-	[MenuItem("LK-TOOL/BuildAssetBundle")]
+	[MenuItem("CJ-TOOL/BuildAssetBundle")]
     static void OpenWindow()
     {
         BuildAssetBundle window = GetWindow<BuildAssetBundle>();

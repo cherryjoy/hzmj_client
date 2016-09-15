@@ -19,7 +19,7 @@ class ColorInfo{
 public class ModifyColor : EditorWindow {
     //static public ModifyColor instance;
 
-	[MenuItem("LK-TOOL/Modify Color")]
+	[MenuItem("CJ-TOOL/Modify Color")]
 	static void Init()
 	{
 		EditorWindow win = EditorWindow.GetWindow(typeof(ModifyColor), false, "Modify Color");

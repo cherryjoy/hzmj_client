@@ -25,7 +25,7 @@ public class GameObjectRefFinder : EditorWindow
 	private const int MaxRecursionCount = 200;
 	private static int mCurRecursionCount = 0;
 
-	[MenuItem("LK-TOOL/对象引用查找器")]
+	[MenuItem("CJ-TOOL/对象引用查找器")]
 	static void Init()
 	{
 		EditorWindow win = EditorWindow.GetWindow(typeof(GameObjectRefFinder), false, title);

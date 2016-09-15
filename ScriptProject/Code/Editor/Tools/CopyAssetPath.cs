@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class CopyAssetPath
 {
-	[MenuItem("LK-TOOL/Copy Asset Path")]
+	[MenuItem("CJ-TOOL/Copy Asset Path")]
 	static void CopyPath()
 	{
 		if (Selection.activeObject != null)
@@ -29,7 +29,7 @@ public class CopyAssetPath
 		}
 	}
 	
-    [MenuItem("LK-TOOL/Show Selections")]
+    [MenuItem("CJ-TOOL/Show Selections")]
     static void ShowObject()
     {
         Debug.Log("Select GameOBject: " + Selection.gameObjects.Length);

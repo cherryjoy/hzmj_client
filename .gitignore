@@ -1,4 +1,8 @@
 /Library
+/assetbundles
+/Dest
+/Export
+/Assets\Plugins\Android\assets
 *.pidb
 *.csproj
 *.unityproj

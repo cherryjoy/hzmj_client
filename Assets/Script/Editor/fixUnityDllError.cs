@@ -6,7 +6,7 @@ using System.Text;
 
 public class ReimportUnityEngineUI : EditorWindow
 {
-    [MenuItem("LK-TOOL/Reimport UI Assemblies")]
+    [MenuItem("CJ-TOOL/Reimport UI Assemblies")]
     public static void ReimportUI()
     {
         string engineDll = string.Format( EditorApplication.applicationContentsPath + "/UnityExtensions/Unity/GUISystem/{1}", string.Empty, "UnityEngine.UI.dll");

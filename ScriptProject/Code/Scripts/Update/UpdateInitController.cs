@@ -6,6 +6,7 @@ using System.Collections;
 using System.Threading;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using System.Text;
 
 class UpdateInitController : MonoBehaviour
 {
@@ -142,19 +143,66 @@ class UpdateInitController : MonoBehaviour
     {
         string persisitentDataPath = PluginTool.SharedInstance().PersisitentDataPath;
         if (!Directory.Exists(persisitentDataPath))
+        {
             if (!Directory.Exists(persisitentDataPath))
             {
                 Directory.CreateDirectory(persisitentDataPath);
             }
+        }
+
+        
 #if  UNITY_ANDROID
-        PluginTool.SharedInstance().CopyAssetFromPackageToSdcard("temp/data", persisitentDataPath);
-        PluginTool.SharedInstance().CopyAssetFromPackageToSdcard("temp/index", persisitentDataPath);
-        PluginTool.SharedInstance().CopyAssetFromPackageToSdcard("temp/fragment", persisitentDataPath);
+        string path = "jar:file://" + Application.dataPath + "!/assets/" + "StreamingFile.txt";
+        StartCoroutine(EasyDownload(path, (www) =>
+        {
+            string text = www.text;
+            www.Dispose();
+            CopyAssetToSdcard(text, persisitentDataPath);
+        }));
+        /*
+        TextAsset textAsset = Resources.Load("StreamingFile") as TextAsset;
+        string[] lines = textAsset.text.Split(new char[] { '\n' });
+        for (int i = 0; i < lines.Length; ++i)
+        {
+            string line = lines[i];
+            line = line.Replace("\n", "");
+            line = line.Trim();
+            if (!string.IsNullOrEmpty(line))
+            {
+                Debug.Log("file: " + line);
+                PluginTool.SharedInstance().CopyAssetFromPackageToSdcard(line, persisitentDataPath);
+            }
+        }*/
+
+        //PluginTool.SharedInstance().CopyAssetFromPackageToSdcard("temp/data", persisitentDataPath);
+        //PluginTool.SharedInstance().CopyAssetFromPackageToSdcard("temp/index", persisitentDataPath);
+        //PluginTool.SharedInstance().CopyAssetFromPackageToSdcard("temp/fragment", persisitentDataPath);
+
+        //StartLua(true);
+#else
+        StartLua(true);
 #endif
-        //StartLua()
+    }
+
+    void CopyAssetToSdcard(string text, string destPath)
+    {
+        string[] lines = text.Split(new char[] { '\n' });
+        for (int i = 0; i < lines.Length; ++i)
+        {
+            string line = lines[i];
+            line = line.Replace("\n", "");
+            line = line.Trim();
+            if (!string.IsNullOrEmpty(line))
+            {
+                PluginTool.SharedInstance().CopyAssetFromPackageToSdcard(line, destPath);
+            }
+        }
+
+        PluginTool.SharedInstance().CopyAssetFromPackageToSdcard("temp/data", destPath);
+        PluginTool.SharedInstance().CopyAssetFromPackageToSdcard("temp/index", destPath);
+        PluginTool.SharedInstance().CopyAssetFromPackageToSdcard("temp/fragment", destPath);
 
         StartLua(true);
-
     }
 
     void StartLua(bool onlyRead)

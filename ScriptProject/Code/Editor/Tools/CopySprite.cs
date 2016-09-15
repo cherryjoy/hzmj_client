@@ -4,7 +4,7 @@ using UnityEditor;
 
 public class CopySprite : EditorWindow
 {
-	[MenuItem("LK-TOOL/Copy Sprite")]
+	[MenuItem("CJ-TOOL/Copy Sprite")]
 	static void Init()
 	{
 		EditorWindow win = EditorWindow.GetWindow(typeof(CopySprite), false, "Copy Sprite");

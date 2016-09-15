@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 public class DataViewer : EditorWindow {
 
-	[MenuItem("LK-TOOL/DataViewer")]
+	[MenuItem("CJ-TOOL/DataViewer")]
 	public static void Create()
 	{
 		DataViewer window = GetWindow(typeof(DataViewer)) as DataViewer;

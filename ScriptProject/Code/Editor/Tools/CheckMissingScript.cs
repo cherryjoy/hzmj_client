@@ -5,7 +5,7 @@ using System.IO;
 
 public class CheckMissingScript : EditorWindow
 {
-	[MenuItem("LK-TOOL/CheckMissingScript")]
+	[MenuItem("CJ-TOOL/CheckMissingScript")]
 	static void Init()
 	{
 		EditorWindow.GetWindow(typeof(CheckMissingScript));

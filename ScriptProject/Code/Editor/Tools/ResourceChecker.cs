@@ -80,7 +80,7 @@ public class ResourceChecker : EditorWindow {
 	
 	static int MinWidth=455;
     
-    [MenuItem ("LK-TOOL/Resource Checker")]
+    [MenuItem ("CJ-TOOL/Resource Checker")]
     static void Init ()
 	{  
         ResourceChecker window = (ResourceChecker) EditorWindow.GetWindow (typeof (ResourceChecker));

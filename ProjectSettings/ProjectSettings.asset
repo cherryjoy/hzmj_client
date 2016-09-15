@@ -9,12 +9,13 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: LineKong
-  productName: "\u738B\u80052"
-  defaultCursor: {fileID: 0}
+  companyName: CherryJoy
+  productName: "\u6A31\u6843\u7EA2\u4E2D\u9EBB\u5C06"
+  defaultCursor: {fileID: 2800000, guid: a5f53ec1f47aae74db13d4d20d8205f6, type: 3}
   cursorHotspot: {x: 0, y: 0}
   m_ShowUnitySplashScreen: 0
-  m_VirtualRealitySplashScreen: {fileID: 0}
+  m_VirtualRealitySplashScreen: {fileID: 2800000, guid: 4190054c4d15411419a913a47d1d1dcf,
+    type: 3}
   defaultScreenWidth: 960
   defaultScreenHeight: 640
   defaultScreenWidthWeb: 960
@@ -91,7 +92,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleIdentifier: com.cm.X1
+  bundleIdentifier: com.cherryjoy.hzmj
   bundleVersion: 1.0.0
   preloadedAssets: []
   metroEnableIndependentInputSource: 0
@@ -166,7 +167,7 @@ PlayerSettings:
   iOSDeviceRequirements: []
   AndroidTargetDevice: 3
   AndroidSplashScreenScale: 2
-  androidSplashScreen: {fileID: 0}
+  androidSplashScreen: {fileID: 2800000, guid: 4190054c4d15411419a913a47d1d1dcf, type: 3}
   AndroidKeystoreName: 
   AndroidKeyaliasName: 
   AndroidTVCompatibility: 1
@@ -175,7 +176,7 @@ PlayerSettings:
   m_AndroidBanners:
   - width: 320
     height: 180
-    banner: {fileID: 0}
+    banner: {fileID: 2800000, guid: a5f53ec1f47aae74db13d4d20d8205f6, type: 3}
   androidGamepadSupportLevel: 0
   resolutionDialogBanner: {fileID: 2800000, guid: 601ee3011ce521448a697dd25ccc59b2,
     type: 3}
@@ -183,7 +184,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 2ad8779db219a494da156c2ece08afa3, type: 3}
+      m_Icon: {fileID: 2800000, guid: a5f53ec1f47aae74db13d4d20d8205f6, type: 3}
       m_Width: 128
       m_Height: 128
   m_BuildTargetBatching:

@@ -213,7 +213,7 @@ public class CommandBuild
         }
     }
 
-    [MenuItem("LK-TOOL/Show All Components")]
+    [MenuItem("CJ-TOOL/Show All Components")]
     public static void ShowAllComponentsInGameObject()
     {
         HashSet<string> collects = new HashSet<string>();

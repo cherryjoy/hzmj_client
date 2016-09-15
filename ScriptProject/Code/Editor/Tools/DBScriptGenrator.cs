@@ -19,7 +19,7 @@ public class DBScriptGenratorEditor : EditorWindow
     private string[] options = { "Lua", "C#" };
     private int index = 0;
 
-	[MenuItem("LK-TOOL/db script auto genrator")]
+	[MenuItem("CJ-TOOL/db script auto genrator")]
 	public static void Init()
 	{
 		DBScriptGenratorEditor window = EditorWindow.GetWindow<DBScriptGenratorEditor>();

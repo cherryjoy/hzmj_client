@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEditor;
 public class SetGameobjectActive : EditorWindow{
 
-	[MenuItem("LK-TOOL/GameObjManager")]
+	[MenuItem("CJ-TOOL/GameObjManager")]
 	static void Init()
 	{
 		EditorWindow win = EditorWindow.GetWindow(typeof(SetGameobjectActive), false, "GameObject Controller");

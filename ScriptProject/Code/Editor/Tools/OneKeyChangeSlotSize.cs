@@ -9,7 +9,7 @@ using System.Linq;
 
 public class OneKeyChangeSlotSize:EditorWindow
 {
-    [MenuItem("LK-TOOL/一键更换Slot尺寸",
+    [MenuItem("CJ-TOOL/一键更换Slot尺寸",
 	          false,
 	          1)]
 

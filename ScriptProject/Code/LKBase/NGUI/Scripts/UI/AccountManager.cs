@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 //public class AccountManager : EditorWindow
 public class AccountManager : MonoBehaviour
 {
-    //[MenuItem("LK-TOOL/AccountManager")]
+    //[MenuItem("CJ-TOOL/AccountManager")]
     //static void Init()
     //{
     //    EditorWindow win = EditorWindow.GetWindow(typeof(AccountManager), false, "AccountManager");

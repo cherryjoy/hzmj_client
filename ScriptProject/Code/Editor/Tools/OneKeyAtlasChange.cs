@@ -8,7 +8,7 @@ using System.Linq;
 [InitializeOnLoad]
 public class OneKeyAtlasChange:EditorWindow {
 
-	[MenuItem("LK-TOOL/一键切换图集",
+	[MenuItem("CJ-TOOL/一键切换图集",
 	          false,
 	          1)]
 	static void OpenSceneOpener(){

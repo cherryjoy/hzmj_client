@@ -12,14 +12,14 @@ function UpdateController:Start()
 	self.Texture:set_material(bgMat)
 	self.Texture:get_gameObject():SetActive(true)
 	self.gameObject:SetActive(true)
-	if GameDefine_WZZS then
-		self.wzzslogo:get_gameObject():SetActive(true)
-	else
-		self.wzzj2:SetMainTextureByPath("UI/Texture/logo3")
-		self.wzzj2:get_gameObject():SetActive(true)
+	--if GameDefine_WZZS then
+	--	self.wzzslogo:get_gameObject():SetActive(true)
+	--else
+	--	self.wzzj2:SetMainTextureByPath("UI/Texture/logo3")
+	--	self.wzzj2:get_gameObject():SetActive(true)
 		-- self.jian:SetMainTextureByPath("UI/Texture/logo2")
 		-- self.jian:get_gameObject():SetActive(true)
-	end
+	--end
 	UpdateController.ProgressBar = self.ProgressBar
 	UpdateController.ProgressLabel = self.ProgressLabel
 	UpdateController.UpdateCtr = self.UpdateCtr
@@ -234,11 +234,11 @@ function UpdateController:UnzipSuccess(existsUpdateLua)
 	UpdateController.updateZipName=nil
 	UpdateController.UpdateCtr:DeleteFile(PERSISTENTDATAPATH.."index1")
 	UpdateConfig.SetClientVersion(UpdateConfig.xmlVersion)
-	if existsUpdateLua then 
+	if existsUpdateLua then
 		GameObject.Destroy(UpdateController.UpdateCtrSelf.gameObject)
 		GameObject.Destroy(UpdateController.UpdateCtr:get_gameObject())
 		TextureMgr.get_Instance():ReleaseAll()
-		SceneManager.LoadScene("Update")		
+		SceneManager.LoadScene("Update")
 	else
 		UpdateController.LoadLoginScene()
 	end
