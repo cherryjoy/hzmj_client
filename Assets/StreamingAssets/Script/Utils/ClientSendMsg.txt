@@ -167,3 +167,16 @@ function ClientSendMsg.SendDeleteRoom(roomId)
 	local buffer, length = LuaProto.serialize(data)
 	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_DELETE_ROOM_REQ, buffer, length)
 end
+
+function ClientSendMsg.SendPlayCard(typeId, codeId)
+	local data = PBMsgPlayCardReq.Create()
+
+	local card = PBCard.Create()
+	card.type_id = typeId
+	card.code_id = codeId
+
+	data.card = card
+
+	local buffer, length = LuaProto.serialize(data)
+	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_PLAY_CARD_REQ, buffer, length)
+end

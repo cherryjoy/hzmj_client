@@ -3,6 +3,7 @@ MJTableCtrl = {}
 function MJTableCtrl:Start( )
     local mt=TextureMgr.get_Instance():LoadTexture("MJTable/MJTable", true)
     self.Texture:set_material(mt)
+
 end
 
 function MJTableCtrl:Init(passwd, amount, horse, beishu, used, rolelist)
@@ -14,19 +15,29 @@ end
 
 function MJTableCtrl:CardInfoSync(cardInfo)
     LuaDebug.Log("card num: "..#(cardInfo.owncards.handcard));
+    if #(cardInfo.owncards.handcard) ~= 14 then
+        return
+    end
 
     for i = 1, #(cardInfo.owncards.handcard) do
         card = cardInfo.owncards.handcard[i]
         LuaDebug.Log("card.type_id: "..card.type_id..", card.code_id: "..card.code_id)
+        local spriteName = nil
         if card.type_id == enumCARD_TYPE.CARD_TIAO_TYPE then
-            self["Card ("..(i - 1)..")"]:set_spriteName("tile_me_1"..card.code_id)
+            spriteName = "tile_me_1"..card.code_id
         elseif card.type_id == enumCARD_TYPE.CARD_TONG_TYPE then
-            self["Card ("..(i - 1)..")"]:set_spriteName("tile_me_2"..card.code_id)
+            spriteName = "tile_me_2"..card.code_id
         elseif card.type_id == enumCARD_TYPE.CARD_WANG_TYPE then
-            self["Card ("..(i - 1)..")"]:set_spriteName("tile_me_"..card.code_id)
+            spriteName = "tile_me_"..card.code_id
         elseif card.type_id == enumCARD_TYPE.CARD_HONG_TYPE then
-            self["Card ("..(i - 1)..")"]:set_spriteName("tile_me_35")
+            spriteName = "tile_me_35"
         end
+
+        self["Card"..(i - 1)]:set_spriteName(spriteName)
+        self["Card"..(i - 1)]:MakePixelPerfectWithSizeInAtlas()
+        self["Card"..(i - 1).."Value"] = {}
+        self["Card"..(i - 1).."Value"].typeId = card.type_id
+        self["Card"..(i - 1).."Value"].codeId = card.code_id
     end
 end
 
@@ -38,5 +49,22 @@ function MJTableCtrl:DeleteRoom_OnClick()
     ClientSendMsg.SendDeleteRoom(self.roomId)
 end
 
+function MJTableCtrl:Card13_OnClick()
+    if self.lastChooseCard ~= nil and self.lastChooseCard ~= self.Card13 then
+        -- 回归原位
+        local pos = self.lastChooseCard:get_transform():get_localPosition()
+        self.lastChooseCard:get_transform():set_localPosition(LuaVector3.Create(pos:x(), pos:y() - 15, pos:z()))
+        self.lastChooseCard = nil
+    end
 
---Bottom -460,-240
+    if self.lastChooseCard == self.Card13 then
+        LuaDebug.Log("out card, type: "..self.Card13Value.typeId..", id: "..self.Card13Value.codeId)
+        ClientSendMsg.SendPlayCard(self.Card13Value.typeId, self.Card13Value.codeId)
+        self.lastChooseCard:get_gameObject():SetActive(false)
+    else
+        self.lastChooseCard = self.Card13
+
+        local pos = self.lastChooseCard:get_transform():get_localPosition()
+        self.lastChooseCard:get_transform():set_localPosition(LuaVector3.Create(pos:x(), pos:y() + 15, pos:z()))
+    end
+end
