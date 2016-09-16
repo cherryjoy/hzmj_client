@@ -1,0 +1,133 @@
+TableBottom = {}
+
+function TableBottom:Start( )
+    self.IsInit = false
+    self.PlayNum = 0
+
+    Client.TableChooseCard = Client.TableChooseCard + {self, TableBottom.ChooseCard}
+    Client.TablePlayCardEnd = Client.TablePlayCardEnd + {self, TableBottom.PlayCardEnd}
+end
+
+function TableBottom:OnDestroy( )
+    Client.TableChooseCard = Client.TableChooseCard - {self,TableBottom.ChooseCard}
+    Client.TablePlayCardEnd = Client.TablePlayCardEnd - {self, TableBottom.PlayCardEnd}
+end
+
+-- 最后一张为所发的牌
+function TableBottom:CardInfoSync(handcard)
+    self.HandCardNum = #handcard
+    for i = 1, self.HandCardNum do
+        local card = handcard[i]
+        LuaDebug.Log("card.type_id: "..card.type_id..", card.code_id: "..card.code_id)
+        local ref = nil
+        if not self.IsInit then
+            if i == #handcard then
+                ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCard",self.CardNew)
+                ref.gameObject:set_name("MyCard")
+                ref.Message:target(ref.gameObject)
+            else
+                ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCard",self.Cards)
+                ref.gameObject:set_name("MyCard")
+                ref.Message:target(ref.gameObject)
+            end
+            self["Card"..i] = ref
+        else
+            ref = self["Card"..i]
+        end
+
+        ref.Init(ref, card, i)
+
+        if i == self.HandCardNum then
+            ref.Shinning:set_enabled(true)
+            ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(768, 0, 0))
+        end
+    end
+
+    if not self.IsInit then
+        self.IsInit = true
+    end
+
+    self.Grid:Reposition()
+end
+
+function TableBottom:ChooseCard(i)
+    if self.lastIndex ~= nil and self.lastIndex ~= i then
+        -- 回归原位
+        self["Card"..self.lastIndex].ResetPos(self["Card"..self.lastIndex])
+        self.lastIndex = nil
+    end
+
+    if i == self.lastIndex then
+        ClientSendMsg.SendPlayCard(self["Card"..i].typeId, self["Card"..i].codeId)
+        --self["Card"..i].gameObject:SetActive(false)
+        self["Card"..i].Animation(self["Card"..i])
+        self.lastIndex = nil
+    else
+        self.lastIndex = i
+
+        self["Card"..i].SetPosUp(self["Card"..i])
+    end
+end
+
+function TableBottom:PlayCardEnd(i)
+    local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/BottomCard",self.PlayedCards)
+    if self.PlayNum > 7 then
+        TableBottom.SetBottomCardDepth(self, ref)
+    end
+
+    self.PlayedCardsGrid:Reposition()
+
+    -- 整理手牌
+    if i ~= self.HandCardNum then
+        self["Card"..i].Init(self["Card"..i], self["Card"..self.HandCardNum].card, i)
+        self.Grid:Reposition()
+    end
+
+    self["Card"..self.HandCardNum].gameObject:SetActive(false)
+    self.PlayNum = self.PlayNum + 1
+end
+
+function TableBottom:SetBottomCardDepth(ref)
+    ref.Card:set_depth(5)
+    ref.Back:set_depth(4)
+end
+
+function TableBottom:LeftCardSync(owncards)
+    if owncards.pengcard ~= nil then
+        for i = 1, #(owncards.pengcard) do
+            local card = owncards.pengcard[i]
+            for num = 1, 3 do
+                TableBottom.SetLeftCard(self, card)
+            end
+        end
+    end
+
+    --gangcardm gangcarda
+    if owncards.gangcardm ~= nil then
+        for i = 1, #(owncards.gangcardm) do
+            local card = owncards.gangcardm[i]
+            for num = 1, 4 do
+                TableBottom.SetLeftCard(self, card)
+            end
+        end
+    end
+
+    if owncards.gangcarda ~= nil then
+        for i = 1, #(owncards.gangcarda) do
+            local card = owncards.gangcarda[i]
+            for num = 1, 4 do
+                TableBottom.SetLeftCard(self, card)
+            end
+        end
+    end
+
+    self.LeftCardGrid:Reposition()
+end
+
+function TableBottom:SetLeftCard(card)
+    LuaDebug.Log("left card, type: "..card.type_id..", id: "..card.code_id)
+    local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/LeftCard",self.LeftCardGrid:get_gameObject())
+    local spriteName = MJTableCtrl.GetLeftCardSprite(card)
+    ref.Card:set_spriteName(spriteName)
+    ref.Card:MakePixelPerfectWithSizeInAtlas()
+end

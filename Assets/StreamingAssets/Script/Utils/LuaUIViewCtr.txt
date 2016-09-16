@@ -14,16 +14,16 @@ function LuaUIViewCtr:Start ()
     Client.EnterBattle = Client.EnterBattle + {self, LuaUIViewCtr.EnterBattle}
     Client.FinishBattle = Client.FinishBattle + {self, LuaUIViewCtr.FinishBattle}
     Client.TaskStateUpdate = Client.TaskStateUpdate + {self,LuaUIViewCtr.TaskStateUpdate}
-    Client.ScenePassSuccess = Client.ScenePassSuccess + {self,LuaUIViewCtr.ScenePassSuccess}
+    --Client.ScenePassSuccess = Client.ScenePassSuccess + {self,LuaUIViewCtr.ScenePassSuccess}
     Client.UIOpen=Client.UIOpen + {self,LuaUIViewCtr.UIOpen}
     Client.UIDestroy = Client.UIDestroy + {self,LuaUIViewCtr.UIDestroy}
     Client.ServerMsgGet=Client.ServerMsgGet + {self,LuaUIViewCtr.ServerMsgGet}
-    Client.StartGuide = Client.StartGuide + {self,LuaUIViewCtr.ContinueGuide}
-    Client.PromptStateChanged = Client.PromptStateChanged + {self,LuaUIViewCtr.OnCheckPromptStateChanged}
+    --Client.StartGuide = Client.StartGuide + {self,LuaUIViewCtr.ContinueGuide}
+    --Client.PromptStateChanged = Client.PromptStateChanged + {self,LuaUIViewCtr.OnCheckPromptStateChanged}
     Client.AnnounceHandle = Client.AnnounceHandle + {self, LuaUIViewCtr.HandleAnnounce}
     Client.ShowOrHideAnnounce = Client.ShowOrHideAnnounce + {self, LuaUIViewCtr.ShowOrHideAnnounce}
     Client.ApplicationPause = Client.ApplicationPause + {self,LuaUIViewCtr.ApplicationPause}
-    Client.SinewBuySuccess = Client.SinewBuySuccess + {self,LuaUIViewCtr.OnBuySinewSuccess}
+    --Client.SinewBuySuccess = Client.SinewBuySuccess + {self,LuaUIViewCtr.OnBuySinewSuccess}
 
     if LuaUIViewCtr.UIPanel ~= nil then
         LuaUIViewCtr.UIPanel = {}
@@ -43,16 +43,16 @@ function LuaUIViewCtr:OnDestroy ()
     Client.EnterBattle = Client.EnterBattle - {self, LuaUIViewCtr.EnterBattle}
     Client.FinishBattle = Client.FinishBattle - {self, LuaUIViewCtr.FinishBattle}
     Client.TaskStateUpdate = Client.TaskStateUpdate - {self,LuaUIViewCtr.TaskStateUpdate}
-    Client.ScenePassSuccess = Client.ScenePassSuccess - {self,LuaUIViewCtr.ScenePassSuccess}
+    --Client.ScenePassSuccess = Client.ScenePassSuccess - {self,LuaUIViewCtr.ScenePassSuccess}
     Client.UIOpen=Client.UIOpen - {self,LuaUIViewCtr.UIOpen}
     Client.UIDestroy = Client.UIDestroy - {self,LuaUIViewCtr.UIDestroy}
     Client.ServerMsgGet=Client.ServerMsgGet - {self,LuaUIViewCtr.ServerMsgGet}
-    Client.StartGuide = Client.StartGuide - {self,LuaUIViewCtr.ContinueGuide}
-    Client.PromptStateChanged = Client.PromptStateChanged - {self,LuaUIViewCtr.OnCheckPromptStateChanged}
+    --Client.StartGuide = Client.StartGuide - {self,LuaUIViewCtr.ContinueGuide}
+    --Client.PromptStateChanged = Client.PromptStateChanged - {self,LuaUIViewCtr.OnCheckPromptStateChanged}
     Client.AnnounceHandle = Client.AnnounceHandle - {self, LuaUIViewCtr.HandleAnnounce}
     Client.ShowOrHideAnnounce = Client.ShowOrHideAnnounce - {self, LuaUIViewCtr.ShowOrHideAnnounce}
     Client.ApplicationPause = Client.ApplicationPause - {self,LuaUIViewCtr.ApplicationPause}
-    Client.SinewBuySuccess = Client.SinewBuySuccess - {self,LuaUIViewCtr.OnBuySinewSuccess}
+    --Client.SinewBuySuccess = Client.SinewBuySuccess - {self,LuaUIViewCtr.OnBuySinewSuccess}
     LuaUIViewCtr.UIParent = nil
     if Client.RoleInfo then
         --Client.RoleInfo.TaskMgr.autoLbl = nil

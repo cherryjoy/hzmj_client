@@ -14,31 +14,38 @@ function MJTableCtrl:Init(passwd, amount, horse, beishu, used, rolelist)
 end
 
 function MJTableCtrl:CardInfoSync(cardInfo)
-    LuaDebug.Log("card num: "..#(cardInfo.owncards.handcard));
     if #(cardInfo.owncards.handcard) ~= 14 then
         return
     end
 
-    for i = 1, #(cardInfo.owncards.handcard) do
-        card = cardInfo.owncards.handcard[i]
-        LuaDebug.Log("card.type_id: "..card.type_id..", card.code_id: "..card.code_id)
-        local spriteName = nil
-        if card.type_id == enumCARD_TYPE.CARD_TIAO_TYPE then
-            spriteName = "tile_me_1"..card.code_id
-        elseif card.type_id == enumCARD_TYPE.CARD_TONG_TYPE then
-            spriteName = "tile_me_2"..card.code_id
-        elseif card.type_id == enumCARD_TYPE.CARD_WANG_TYPE then
-            spriteName = "tile_me_"..card.code_id
-        elseif card.type_id == enumCARD_TYPE.CARD_HONG_TYPE then
-            spriteName = "tile_me_35"
-        end
-
-        self["Card"..(i - 1)]:set_spriteName(spriteName)
-        self["Card"..(i - 1)]:MakePixelPerfectWithSizeInAtlas()
-        self["Card"..(i - 1).."Value"] = {}
-        self["Card"..(i - 1).."Value"].typeId = card.type_id
-        self["Card"..(i - 1).."Value"].codeId = card.code_id
+    -- 同步自己的牌
+    if cardInfo.owncards ~= nil then
+        LuaDebug.Log("card num: "..#(cardInfo.owncards.handcard))
+        self.Bottom.CardInfoSync(self.Bottom, cardInfo.owncards.handcard)
     end
+
+    -- 左边的碰牌、明杠牌、暗杠牌
+    --[[
+    cardInfo.owncards.pengcard = {}
+    cardInfo.owncards.gangcardm = {}
+    cardInfo.owncards.gangcarda = {}
+    local card = {}
+    card.type_id = 1
+    card.code_id = 5
+    table.insert(cardInfo.owncards.pengcard, card)
+    local cardm = {}
+    cardm.type_id = 1
+    cardm.code_id = 9
+    table.insert(cardInfo.owncards.gangcardm, cardm)
+    local carda = {}
+    carda.type_id = 4
+    carda.code_id = 7
+    table.insert(cardInfo.owncards.gangcarda, carda)
+    ]]
+    self.Bottom.LeftCardSync(self.Bottom, cardInfo.owncards)
+
+    -- 同步其他人的牌
+
 end
 
 function MJTableCtrl:OnDestroy( )
@@ -49,22 +56,32 @@ function MJTableCtrl:DeleteRoom_OnClick()
     ClientSendMsg.SendDeleteRoom(self.roomId)
 end
 
-function MJTableCtrl:Card13_OnClick()
-    if self.lastChooseCard ~= nil and self.lastChooseCard ~= self.Card13 then
-        -- 回归原位
-        local pos = self.lastChooseCard:get_transform():get_localPosition()
-        self.lastChooseCard:get_transform():set_localPosition(LuaVector3.Create(pos:x(), pos:y() - 15, pos:z()))
-        self.lastChooseCard = nil
+function MJTableCtrl.GetCardSprite(card)
+    local spriteName = nil
+    if card.type_id == enumCARD_TYPE.CARD_TIAO_TYPE then
+        spriteName = "tile_me_1"..card.code_id
+    elseif card.type_id == enumCARD_TYPE.CARD_TONG_TYPE then
+        spriteName = "tile_me_2"..card.code_id
+    elseif card.type_id == enumCARD_TYPE.CARD_WANG_TYPE then
+        spriteName = "tile_me_"..card.code_id
+    elseif card.type_id == enumCARD_TYPE.CARD_HONG_TYPE then
+        spriteName = "tile_me_35"
     end
 
-    if self.lastChooseCard == self.Card13 then
-        LuaDebug.Log("out card, type: "..self.Card13Value.typeId..", id: "..self.Card13Value.codeId)
-        ClientSendMsg.SendPlayCard(self.Card13Value.typeId, self.Card13Value.codeId)
-        self.lastChooseCard:get_gameObject():SetActive(false)
-    else
-        self.lastChooseCard = self.Card13
+    return spriteName
+end
 
-        local pos = self.lastChooseCard:get_transform():get_localPosition()
-        self.lastChooseCard:get_transform():set_localPosition(LuaVector3.Create(pos:x(), pos:y() + 15, pos:z()))
+function MJTableCtrl.GetLeftCardSprite(card)
+    local spriteName = nil
+    if card.type_id == enumCARD_TYPE.CARD_TIAO_TYPE then
+        spriteName = "tile_meUp_1"..card.code_id
+    elseif card.type_id == enumCARD_TYPE.CARD_TONG_TYPE then
+        spriteName = "tile_meUp_2"..card.code_id
+    elseif card.type_id == enumCARD_TYPE.CARD_WANG_TYPE then
+        spriteName = "tile_meUp_"..card.code_id
+    elseif card.type_id == enumCARD_TYPE.CARD_HONG_TYPE then
+        spriteName = "tile_meUp_35"
     end
+
+    return spriteName
 end

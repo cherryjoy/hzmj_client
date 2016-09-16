@@ -1,0 +1,45 @@
+MyCard = {}
+
+function MyCard:Start( )
+
+end
+
+function MyCard:OnDestroy( )
+
+end
+
+function MyCard:Init(card, index)
+    self.index = index
+
+    local spriteName = MJTableCtrl.GetCardSprite(card)
+    self.Sprite:set_spriteName(spriteName)
+    self.Sprite:MakePixelPerfectWithSizeInAtlas()
+    self.card = card
+end
+
+function MyCard:SetPosUp()
+    local pos = self.gameObject:get_transform():get_localPosition()
+    self.gameObject:get_transform():set_localPosition(LuaVector3.Create(pos:x(), pos:y() + 15, pos:z()))
+end
+
+function MyCard:ResetPos()
+    local pos = self.gameObject:get_transform():get_localPosition()
+    self.gameObject:get_transform():set_localPosition(LuaVector3.Create(pos:x(), pos:y() - 15, pos:z()))
+end
+
+function MyCard:Card_OnClick()
+    LuaDebug.Log("out card, type: "..self.card.type_id..", id: "..self.card.code_id)
+    Client.TableChooseCard:Do(self.index)
+end
+
+function MyCard:Animation()
+    local pos = self.gameObject:get_transform():get_localPosition()
+    self.TweenPos:from(LuaVector3.Create(pos:x(), pos:y(), pos:z()))
+    self.TweenPos:to(LuaVector3.Create(348, 150, 0))
+    self.TweenPos:set_enabled(true)
+end
+
+function MyCard:MyCard_TweenEnd()
+    LuaDebug.Log("MyCard_TweenEnd card, type: "..self.card.type_id..", id: "..self.card.code_id)
+    Client.TablePlayCardEnd:Do(self.index)
+end
