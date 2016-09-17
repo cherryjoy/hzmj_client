@@ -37,9 +37,10 @@ enumCARD_TYPE = {
 
 enumDIRECTION_TYPE = {
 	DIRECTION_EAST = 1,
+	DIRECTION_NORTH = 2,
 	DIRECTION_WEST = 3,
-	DIRECTION_SOUTH = 2,
-	DIRECTION_NORTH = 4,
+	DIRECTION_SOUTH = 4,
+
 }
 
 -- PB_MSGID_MODULE_05
@@ -2720,4 +2721,3 @@ function PBMsgGameDeleteRoomRes.GetSize(obj)
 	size = size + 6
 	return size
 end
-

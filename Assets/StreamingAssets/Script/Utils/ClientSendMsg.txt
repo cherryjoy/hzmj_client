@@ -176,7 +176,7 @@ function ClientSendMsg.SendPlayCard(typeId, codeId)
 	card.code_id = codeId
 
 	data.card = card
-
+	LuaDebug.Log("data.card.type_id: "..data.card.type_id..", data.card.code_id"..data.card.code_id)
 	local buffer, length = LuaProto.serialize(data)
 	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_PLAY_CARD_REQ, buffer, length)
 end

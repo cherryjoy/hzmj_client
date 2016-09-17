@@ -151,12 +151,25 @@ function JoinGameCtrl:AddIndex()
     end
 
     self.index = self.index + 1
+    if JoinGameCtrl.IsFull(self) then
+        JoinGameCtrl.EnterRoom(self)
+    end
 end
 
 function JoinGameCtrl:IsFull()
-    if self.index == 8 then
+    if self.index > 6 then
         return true
     end
 
     return false
+end
+
+function JoinGameCtrl:EnterRoom()
+    LuaDebug.Log("enter num: "..self.index)
+    local passwd = ""
+    for i = 1, #self.number do
+        passwd = passwd..self.number[i]
+    end
+    LuaDebug.Log("passwd: "..passwd)
+    ClientSendMsg.SendEnterRoom(Client.RoleInfo.RoleID, tonumber(passwd))
 end

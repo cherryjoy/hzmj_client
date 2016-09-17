@@ -47,6 +47,9 @@ HandleFuncs[enumMSGID_MODULE_05.ID_ROLE_RES] = function(data, dataLength)
     ref.Init(ref, pbMsg.RoleName, pbMsg.RoleID, pbMsg.room_pass)
 
     Client.LoginSuccess:Do()
+
+    -- 如果上次是在房间中退出的，则加入房间
+    ClientSendMsg.SendEnterRoom(Client.RoleInfo.RoleID, pbMsg.room_pass)
 end
 
 HandleFuncs[NetOpcodes_S2C.S2C_SESSION_CREATED] = function (data,dataLength)
@@ -92,6 +95,10 @@ HandleFuncs[enumMSGID_MODULE_05.ID_ERROR_CODE_NOTICE] = function(data, dataLengt
     local data = LuaProto.deserialize(PBMsgErrorCodeNotice, data, dataLength)
 
     LuaDebug.Log("errcode: "..data.err_code)
+    LuaDebug.Log("err_type: "..data.err_type)
+    for i = 1, #data.err_para do
+        LuaDebug.Log("err_para "..i.." : "..data.err_para[i])
+    end
 end
 
 HandleFuncs[enumMSGID_MODULE_05.ID_ROLE_SESSION_ID_NOTICE] = function(data, dataLength)
@@ -106,17 +113,30 @@ HandleFuncs[enumMSGID_MODULE_05.ID_GAME_ROOM_CREATE_RES] = function(data, dataLe
     local data = LuaProto.deserialize(PBMsgCreateRoomRes, data, dataLength)
 
     LuaDebug.Log("passwd: "..data.passwd..", amount: "..data.amount..", horse: "..data.horse..", add: "..data.addition)
-    --local ref = LuaUIViewCtr.OpenUIHasBg("MJTable/MJTable")
-    --ref.Init(ref, data.passwd, data.amount, data.horse, 1, 0)
-
+    --[[
+    if LuaUIViewCtr.UIPanel["MJTableUI"] == nil then
+        local ref = LuaUIViewCtr.OpenUIHasBg("MJTable/MJTable")
+        --data.addition
+        local roleList = {}
+        local info = {}
+        info.rolename = "111111"
+        info.integral = 0
+        info.host = 1
+        info.makers = 1
+        table.insert(roleList, info)
+        ref.Init(ref, data.passwd, data.amount, data.horse, 5, 0, roleList)
+        LuaUIViewCtr.UIPanel["MJTableUI"] = ref
+    end
+    --]]
     ClientSendMsg.SendEnterRoom(Client.RoleInfo.RoleID, data.passwd)
 end
 
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_ROOM_ENTER_RES] = function(data,dataLength)
     local data = LuaProto.deserialize(PBMsgEnterRoomRes, data, dataLength)
-
+    LuaDebug.Log("enter room: "..data.passwd)
     if LuaUIViewCtr.UIPanel["MJTableUI"] == nil then
         local ref = LuaUIViewCtr.OpenUIHasBg("MJTable/MJTable")
+        --data.addition
         ref.Init(ref, data.passwd, data.amount, data.horse, 5, data.used, data.rolelist)
         LuaUIViewCtr.UIPanel["MJTableUI"] = ref
     end
@@ -143,4 +163,10 @@ HandleFuncs[enumMSGID_MODULE_05.ID_GAME_DELETE_ROOM_RES] = function(data, dataLe
 
     LuaUIViewCtr.UIPanel["MJTableUI"].gameObject:Destroy1()
     LuaUIViewCtr.UIPanel["MJTableUI"] = nil
+end
+
+HandleFuncs[enumMSGID_MODULE_05.ID_GAME_PLAY_CARD_RES] = function(data, dataLength)
+    local data = LuaProto.deserialize(PBMsgPlayCardRes, data, dataLength)
+
+    LuaUIViewCtr.UIPanel["MJTableUI"].PlayCard(LuaUIViewCtr.UIPanel["MJTableUI"], data.roleid, 1, data.card)
 end

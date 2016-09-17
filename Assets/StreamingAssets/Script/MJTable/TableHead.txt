@@ -1,0 +1,23 @@
+TableHead = {}
+
+function TableHead:Start( )
+
+end
+
+function TableHead:OnDestroy( )
+
+end
+
+function TableHead:Init(info)
+    local mt = TextureMgr.get_Instance():LoadTexture("Home/homeHeadCusPic", true)
+    self.Icon:set_material(mt)
+    self.Name:set_text(info.rolename)
+    self.Score:set_text(tostring(info.integral))
+    if info.host ~= 0 then
+        self.FangZhu:SetActive(true)
+    end
+
+    if info.makers ~= 0 then
+        self.Zhuang:SetActive(true)
+    end
+end

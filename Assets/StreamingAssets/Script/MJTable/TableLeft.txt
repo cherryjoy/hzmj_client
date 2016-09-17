@@ -1,0 +1,98 @@
+TableLeft = {}
+
+function TableLeft:Start( )
+    self.IsInit = false
+    self.PlayNum = 0
+    self.LeftNum = 0
+end
+
+function TableLeft:OnDestroy( )
+
+end
+
+function TableLeft:CardInfoSync(handnum)
+    for i = 1, handnum do
+        local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/LeftCard",self.Grid:get_gameObject())
+        ref.Back:set_depth(i + 2)
+    end
+
+    self.Grid:Reposition()
+end
+
+function TableLeft:LeftCardSync(owncards)
+    if owncards.pengcard ~= nil then
+        for i = 1, #(owncards.pengcard) do
+            local card = owncards.pengcard[i]
+            for num = 1, 3 do
+                TableBottom.SetLeftCard(self, card)
+            end
+        end
+    end
+
+    --gangcardm gangcarda
+    if owncards.gangcardm ~= nil then
+        for i = 1, #(owncards.gangcardm) do
+            local card = owncards.gangcardm[i]
+            for num = 1, 4 do
+                TableBottom.SetLeftCard(self, card)
+            end
+        end
+    end
+
+    if owncards.gangcarda ~= nil then
+        for i = 1, #(owncards.gangcarda) do
+            local card = owncards.gangcarda[i]
+            for num = 1, 4 do
+                TableBottom.SetLeftCard(self, card)
+            end
+        end
+    end
+
+    local pos = self.LeftCardGrid:get_transform():get_localPosition()
+    local posY = pos:y() + self.LeftCardGrid:cellHeight()*self.LeftNum
+    self.LeftCardGrid:get_transform():set_localPosition(LuaVector3.Create(pos:x(), posY, pos:z()))
+    self.LeftCardGrid:Reposition()
+end
+
+function TableLeft:SetLeftCard(card)
+    LuaDebug.Log("left card, type: "..card.type_id..", id: "..card.code_id)
+    local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/LeftPengCard",self.LeftCardGrid:get_gameObject())
+    local spriteName = MJTableCtrl.GetLeftRightCardSprite(card)
+    ref.Card:set_spriteName(spriteName)
+    ref.Card:MakePixelPerfectWithSizeInAtlas()
+
+    ref.Card:set_depth(3 + self.LeftNum)
+    ref.Back:set_depth(2 + self.LeftNum)
+
+    self.LeftNum = self.LeftNum + 1
+end
+
+function TableLeft:PlayCard(i, card)
+    --LuaDebug.Log("play card, type: "..card.type_id..", id: "..card.code_id)
+    local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/LeftPlayCard",self.PlayedCardsGrid:get_gameObject())
+    local spriteName = MJTableCtrl.GetLeftRightCardSprite(card)
+    ref.Card:set_spriteName(spriteName)
+    ref.Card:MakePixelPerfectWithSizeInAtlas()
+
+    local row = math.floor(self.PlayNum / 6)
+    local colum = self.PlayNum % 6
+
+    local pos = ref.Card:get_transform():get_localPosition()
+    ref.Card:get_transform():set_localPosition(LuaVector3.Create(pos:x()-row*50, pos:y()-colum*31, pos:z()))
+
+    ref.Card:set_depth(ref.Card:get_depth() + colum*2)
+    ref.Back:set_depth(ref.Card:get_depth() + colum*2)
+
+    self.PlayNum = self.PlayNum + 1
+end
+
+function TableLeft:PlayCardEnd()
+
+end
+
+function TableLeft:SetHeadInfo(info)
+    self.roleId = info.roleid
+    local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/TableHead",self.HeadInfo)
+    ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(-420, 50, 0))
+    ref.Init(ref, info)
+end

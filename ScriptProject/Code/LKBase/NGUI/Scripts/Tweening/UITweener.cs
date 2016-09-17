@@ -66,12 +66,12 @@ public abstract class UITweener : IgnoreTimeScale
 	/// Name of the function to call when the tween finishes.
 	/// </summary>
 
-	public string callWhenFinished;
+    public string callWhenFinished = "OnEventWithMessage";
     public bool isSenderToMessage = true;
 
     public float delayTime = 0f;
 	public float waitTime;
-	public string callWhenWait;
+    public string callWhenWait = "OnEventWithMessage";
 
 	float mDuration = 0f;
 	float mAmountPerDelta = 1f;

@@ -11,6 +11,16 @@ function MJTableCtrl:Init(passwd, amount, horse, beishu, used, rolelist)
     self.ID:set_text(string.format(Text.TableName, passwd))
     self.MaShu:set_text(string.format(Text.MaShuName, beishu, horse))
     self.JuShu:set_text(string.format(Text.JuShuName, used, amount, 112))
+
+    -- 确定方位
+    LuaDebug.Log("rolelist: "..#rolelist)
+    local spriteName, myDirect = MJTableCtrl.GetMyDirectSprite(Client.RoleInfo.RoleID, rolelist)
+    self.Direction:set_spriteName(spriteName)
+    self.TimerBack:set_spriteName(spriteName)
+    --self.TimerBack:get_gameObject():SetActive(true)
+
+    LuaDebug.Log("my direction: "..myDirect)
+    MJTableCtrl.InitRoleList(self, myDirect, rolelist)
 end
 
 function MJTableCtrl:CardInfoSync(cardInfo)
@@ -21,7 +31,7 @@ function MJTableCtrl:CardInfoSync(cardInfo)
     -- 同步自己的牌
     if cardInfo.owncards ~= nil then
         LuaDebug.Log("card num: "..#(cardInfo.owncards.handcard))
-        self.Bottom.CardInfoSync(self.Bottom, cardInfo.owncards.handcard)
+        self.Drect1.CardInfoSync(self.Drect1, cardInfo.owncards.handcard)
     end
 
     -- 左边的碰牌、明杠牌、暗杠牌
@@ -42,10 +52,12 @@ function MJTableCtrl:CardInfoSync(cardInfo)
     carda.code_id = 7
     table.insert(cardInfo.owncards.gangcarda, carda)
     ]]
-    self.Bottom.LeftCardSync(self.Bottom, cardInfo.owncards)
+    self.Drect1.LeftCardSync(self.Drect1, cardInfo.owncards)
 
     -- 同步其他人的牌
-
+    self.Drect2.CardInfoSync(self.Drect2, 13)
+    self.Drect3.CardInfoSync(self.Drect3, 13)
+    self.Drect4.CardInfoSync(self.Drect4, 13)
 end
 
 function MJTableCtrl:OnDestroy( )
@@ -84,4 +96,65 @@ function MJTableCtrl.GetLeftCardSprite(card)
     end
 
     return spriteName
+end
+
+function MJTableCtrl.GetLeftRightCardSprite(card)
+    local spriteName = nil
+    if card.type_id == enumCARD_TYPE.CARD_TIAO_TYPE then
+        spriteName = "tile_leftRight_1"..card.code_id
+    elseif card.type_id == enumCARD_TYPE.CARD_TONG_TYPE then
+        spriteName = "tile_leftRight_2"..card.code_id
+    elseif card.type_id == enumCARD_TYPE.CARD_WANG_TYPE then
+        spriteName = "tile_leftRight_"..card.code_id
+    elseif card.type_id == enumCARD_TYPE.CARD_HONG_TYPE then
+        spriteName = "tile_leftRight_35"
+    end
+
+    return spriteName
+end
+
+function MJTableCtrl.GetMyDirectSprite(roleId, roleList)
+    for i = 1, #roleList do
+        LuaDebug.Log("roleList[i].roleid: "..roleList[i].roleid)
+        LuaDebug.Log("roleList[i].direct: "..roleList[i].direct)
+        if roleId == roleList[i].roleid then
+            if roleList[i].direct == enumDIRECTION_TYPE.DIRECTION_EAST then
+                return "compassdong", roleList[i].direct
+            elseif roleList[i].direct == enumDIRECTION_TYPE.DIRECTION_NORTH then
+                return "compassbei", roleList[i].direct
+            elseif roleList[i].direct == enumDIRECTION_TYPE.DIRECTION_WEST then
+                return "compassxi", roleList[i].direct
+            elseif roleList[i].direct == enumDIRECTION_TYPE.DIRECTION_SOUTH then
+                return "compassnan", roleList[i].direct
+            end
+        end
+    end
+end
+
+function MJTableCtrl:InitRoleList(myDirect, roleList)
+    local idx = 1
+    for i = myDirect, (myDirect + 3) do
+        local index = i % 4
+        if index == 0 then
+            index = 4
+        end
+
+        local roleInfo = roleList[index]
+        if roleInfo ~= nil then
+            self["Drect"..idx].SetHeadInfo(self["Drect"..i], roleInfo)
+            self["Drect"..idx].Ready:SetActive(true)
+        end
+
+        idx = idx + 1
+    end
+end
+
+function MJTableCtrl:PlayCard(roleId, index, card)
+    self.Drect4.PlayCard(self.Drect4, index, card)
+    for i = 1, 4 do
+        if self["Drect"..i].roleId == roleId then
+            LuaDebug.Log("play card, type: "..card.type_id..", id: "..card.code_id)
+            --self["Drect"..i].PlayCard(self["Drect"..i], index, card)
+        end
+    end
 end
