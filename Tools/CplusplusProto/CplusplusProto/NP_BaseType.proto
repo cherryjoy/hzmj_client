@@ -1,0 +1,45 @@
+﻿// 注释 还需要解析文件包含
+
+enum ChatMessageType 
+{
+    System = 1;
+    WORLD = 2;
+    GANG = 3;
+    PRIVATE = 4;
+    TOGM = 5;
+    FROMGM = 6;
+}
+
+message PBTest
+{
+  required int32 intv = 1;
+  required int64 longv = 2;
+  required float floatv = 3;
+  required string stringv = 4;
+  required bool boolv = 5;
+  required PBVector3 vectorv = 6;
+  required ChatMessageType enumv = 7;
+
+  optional ChatMessageType enumvop = 8;
+  optional int32 intvop = 9;
+  optional int64 longvop = 10;
+  optional float floatvop = 11;
+  optional string stringvop = 12;
+  optional bool boolvop = 13;
+  optional PBVector3 vectorvop = 14;
+
+  repeated int32 intvre = 15;
+  repeated int64 longvre = 16;
+  repeated float floatvre = 17;
+  repeated string stringvre = 18;
+  repeated bool boolvre = 19;
+  repeated PBVector3 vectorvre = 20;
+  repeated ChatMessageType enumvre = 21;
+}
+
+message PBVector3
+{
+  required float x = 1;
+  required float y = 2;
+  required float z = 3;
+}
