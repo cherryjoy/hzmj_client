@@ -46,6 +46,7 @@ public:
 	{
 		buffer = new byte[size];
 		bufferSize = size;
+		memset(buffer, 0, bufferSize);
 		type = type | SERIALIZE;
 	}
 
@@ -85,6 +86,8 @@ public:
 	// 
 	int SerializeOptional()
 	{
+		int startPos = position;
+
 		for (int i = flagSize - 1; i >= 0; i--)
 		{
 			if ((flag[i] | 0x00) != 0)
@@ -98,6 +101,33 @@ public:
 				}
 				break;
 			}
+		}
+		
+		if (startPos == position)
+		{
+			buffer[position++] = 0x00;
+		}
+
+		return 0;
+	}
+
+	// 
+	int DeSerializeOptional()
+	{
+		int offset = 0;
+		int startPos = position;
+		while ((buffer[position] & 0x80) != 0)
+		{
+			position++;
+			offset++;
+		}
+
+		offset++;
+		position++;
+		if (flag != NULL)
+		{
+			memcpy(flag, buffer + startPos, offset);
+			flagSize = offset;
 		}
 
 		return 0;
@@ -269,25 +299,6 @@ public:
 	}
 
 	// DeSerialize
-	// 
-	int DeSerializeOptional()
-	{
-		int offset = 0;
-		int startPos = position;
-		while ((buffer[position] & 0x80) != 0)
-		{
-			position++;
-			offset++;
-		}
-
-		offset++;
-		position++;
-		memcpy(flag, buffer + startPos, offset);
-		flagSize = offset;
-		
-		return 0;
-	}
-
 	// deserialize value type
 	int DeSerializeInt32()
 	{

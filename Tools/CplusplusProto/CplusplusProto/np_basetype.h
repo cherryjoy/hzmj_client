@@ -25,6 +25,7 @@ private:
 	float	x_;
 	float	y_;
 	float	z_;
+	long long count_; //option
 
 public:
 // 构造、析构函数
@@ -32,10 +33,12 @@ public:
 	{
 		flag = new byte[1];
 		flagSize = 1;
+		memset(flag, 0, flagSize);
 
 		x_ = 0;
 		y_ = 0;
 		z_ = 0;
+		count_ = 0;
 	}
 
 	~PBVector3()
@@ -78,6 +81,19 @@ public:
 		z_ = value;
 	}
 
+	long long count()
+	{
+		return count_;
+	}
+
+	void set_count(long long value)
+	{
+		count_ = value;
+		byte b = flag[0];
+		b |= 0x01 << 0;
+		flag[0] = b;
+	}
+
 // 序列化、反序列化
 	void Serialize()
 	{
@@ -89,6 +105,10 @@ public:
 		SerializeFloat(x_);
 		SerializeFloat(y_);
 		SerializeFloat(z_);
+		if (HasOptionalFlag(0))
+		{
+			SerializeInt64(count_);
+		}
 	}
 
 	void DeSerialize(byte* buffer,int length)
@@ -100,13 +120,17 @@ public:
 		x_ = DeSerializeFloat();
 		y_ = DeSerializeFloat();
 		z_ = DeSerializeFloat();
+		if (HasOptionalFlag(0))
+		{
+			count_ = DeSerializeInt64();
+		}
 	}
 
 // 计算大小
 	int GetSize()
 	{
 		int size = 0;
-		size += 20;
+		size += 28;
 		return size;
 	}
 
@@ -142,6 +166,7 @@ public:
 	{
 		flag = new byte[1];
 		flagSize = 1;
+		memset(flag, 0, flagSize);
 
 		intv_ = 0;
 		longv_ = 0;
@@ -528,7 +553,7 @@ public:
 			int vectorvSize = DeSerializeDataLength();
 			int vectorvStartPos = position;
 			vectorv_.DeSerialize(buffer + position, vectorvSize);
-			position += vectorvSize + vectorvStartPos;
+			position = vectorvSize + vectorvStartPos;
 		}
 		enumv_ = (ChatMessageType)DeSerializeInt32();
 		if (HasOptionalFlag(0))
@@ -567,7 +592,7 @@ public:
 				int vectorvSize = DeSerializeDataLength();
 				int vectorvStartPos = position;
 				vectorvop_.DeSerialize(buffer + position, vectorvSize);
-				position += vectorvSize + vectorvStartPos;
+				position = vectorvSize + vectorvStartPos;
 			}
 		}
 
@@ -586,7 +611,7 @@ public:
 					int vectorvSize = DeSerializeDataLength();
 					int vectorvStartPos = position;
 					vectorvre_[i].DeSerialize(buffer + position, vectorvSize);
-					position += vectorvSize + vectorvStartPos;
+					position = vectorvSize + vectorvStartPos;
 				}
 			}
 		}
