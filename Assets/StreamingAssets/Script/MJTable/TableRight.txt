@@ -73,12 +73,15 @@ function TableRight:PlayCard(i, card)
     local spriteName = MJTableCtrl.GetLeftRightCardSprite(card)
     ref.Card:set_spriteName(spriteName)
     ref.Card:MakePixelPerfectWithSizeInAtlas()
+    if card.type_id == enumCARD_TYPE.CARD_WANG_TYPE or card.type_id == enumCARD_TYPE.CARD_HONG_TYPE then
+        ref.Card:get_transform():set_localScale(LuaVector3.Create(1, -1, 1))
+    end
 
     local row = math.floor(self.PlayNum / 6)
     local colum = self.PlayNum % 6
 
-    local pos = ref.Card:get_transform():get_localPosition()
-    ref.Card:get_transform():set_localPosition(LuaVector3.Create(pos:x()+row*50, pos:y()+colum*31, pos:z()))
+    local pos = ref.RightPlayCard:get_transform():get_localPosition()
+    ref.RightPlayCard:get_transform():set_localPosition(LuaVector3.Create(pos:x()+row*50, pos:y()+colum*31, pos:z()))
 
     ref.Card:set_depth(ref.Card:get_depth() - colum*2)
     ref.Back:set_depth(ref.Back:get_depth() - colum*2)

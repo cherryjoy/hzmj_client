@@ -16,6 +16,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &144454
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 448686}
+  - 114: {fileID: 11445112}
+  m_Layer: 8
+  m_Name: Card
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &190682
 GameObject:
   m_ObjectHideFlags: 0
@@ -24,7 +40,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 448540}
-  - 114: {fileID: 11413750}
   - 114: {fileID: 11435882}
   m_Layer: 8
   m_Name: TopPlayCard
@@ -53,35 +68,27 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 190682}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 252, y: -43, z: 0}
+  m_LocalPosition: {x: 252.5, y: -43.499992, z: 0}
   m_LocalScale: {x: 1, y: -1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 409568}
+  - {fileID: 448686}
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11413750
-MonoBehaviour:
+--- !u!4 &448686
+Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 190682}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 345385021, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  changeFlag: -1
-  mMat: {fileID: 2100000, guid: b632e0289e700ad41a4592b9b77a03bf, type: 2}
-  mColor: {r: 1, g: 1, b: 1, a: 1}
-  mPivot: 4
-  mWidth: 25
-  mHeight: 37
-  mDepth: 5
-  mIsHidePanel: 0
-  mAtlas: {fileID: 11410790, guid: 05dc6a2920cf0464d9fadc29033bf794, type: 2}
-  mSpriteName: tile_meUp_2
-  IsKeepOriSize: 0
+  m_GameObject: {fileID: 144454}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 448540}
+  m_RootOrder: 1
 --- !u!114 &11435054
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -99,7 +106,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 39
   mHeight: 59
-  mDepth: 4
+  mDepth: 9
   mIsHidePanel: 0
   mAtlas: {fileID: 11410790, guid: 05dc6a2920cf0464d9fadc29033bf794, type: 2}
   mSpriteName: tileBase_meUp_0
@@ -119,19 +126,45 @@ MonoBehaviour:
   scriptShortPath: 
   ScriptName: 
   lua_params:
-  - Obj: {fileID: 190682}
-    regObj: {fileID: 11413750}
+  - Obj: {fileID: 144454}
+    regObj: {fileID: 11445112}
     Name: Card
     TypeIndex: 1
   - Obj: {fileID: 127892}
     regObj: {fileID: 11435054}
     Name: 
     TypeIndex: 1
+  - Obj: {fileID: 190682}
+    regObj: {fileID: 190682}
+    Name: TopPlayCard
+    TypeIndex: 2
   LuaBehavArray: []
   IsOnClickPassGameObject: 0
   isArray: 0
   isBehavArray: 0
   Luaclass_ref: -1
+--- !u!114 &11445112
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 144454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 345385021, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  changeFlag: -1
+  mMat: {fileID: 2100000, guid: b632e0289e700ad41a4592b9b77a03bf, type: 2}
+  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mPivot: 4
+  mWidth: 25
+  mHeight: 37
+  mDepth: 10
+  mIsHidePanel: 0
+  mAtlas: {fileID: 11410790, guid: 05dc6a2920cf0464d9fadc29033bf794, type: 2}
+  mSpriteName: tile_meUp_2
+  IsKeepOriSize: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

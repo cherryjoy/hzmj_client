@@ -81,7 +81,7 @@ function TableLeft:PlayCard(i, card)
     ref.Card:get_transform():set_localPosition(LuaVector3.Create(pos:x()-row*50, pos:y()-colum*31, pos:z()))
 
     ref.Card:set_depth(ref.Card:get_depth() + colum*2)
-    ref.Back:set_depth(ref.Card:get_depth() + colum*2)
+    ref.Back:set_depth(ref.Back:get_depth() + colum*2)
 
     self.PlayNum = self.PlayNum + 1
 end

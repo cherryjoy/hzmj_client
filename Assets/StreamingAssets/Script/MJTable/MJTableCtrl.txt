@@ -150,7 +150,7 @@ function MJTableCtrl:InitRoleList(myDirect, roleList)
 end
 
 function MJTableCtrl:PlayCard(roleId, index, card)
-    self.Drect4.PlayCard(self.Drect4, index, card)
+    self.Drect3.PlayCard(self.Drect3, index, card)
     for i = 1, 4 do
         if self["Drect"..i].roleId == roleId then
             LuaDebug.Log("play card, type: "..card.type_id..", id: "..card.code_id)

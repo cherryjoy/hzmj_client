@@ -24,8 +24,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 482080}
-  - 114: {fileID: 11407282}
   - 114: {fileID: 11438268}
+  - 114: {fileID: 11436434}
   m_Layer: 8
   m_Name: PlayCard
   m_TagString: Untagged
@@ -60,28 +60,6 @@ Transform:
   - {fileID: 401228}
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11407282
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 166284}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 345385021, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  changeFlag: -1
-  mMat: {fileID: 2100000, guid: b632e0289e700ad41a4592b9b77a03bf, type: 2}
-  mColor: {r: 1, g: 1, b: 1, a: 1}
-  mPivot: 4
-  mWidth: 25
-  mHeight: 37
-  mDepth: 3
-  mIsHidePanel: 0
-  mAtlas: {fileID: 11410790, guid: 05dc6a2920cf0464d9fadc29033bf794, type: 2}
-  mSpriteName: tile_meUp_2
-  IsKeepOriSize: 0
 --- !u!114 &11425790
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -104,6 +82,28 @@ MonoBehaviour:
   mAtlas: {fileID: 11410790, guid: 05dc6a2920cf0464d9fadc29033bf794, type: 2}
   mSpriteName: tileBase_meUp_0
   IsKeepOriSize: 0
+--- !u!114 &11436434
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 166284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 345385021, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  changeFlag: -1
+  mMat: {fileID: 2100000, guid: b632e0289e700ad41a4592b9b77a03bf, type: 2}
+  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mPivot: 4
+  mWidth: 25
+  mHeight: 37
+  mDepth: 3
+  mIsHidePanel: 0
+  mAtlas: {fileID: 11410790, guid: 05dc6a2920cf0464d9fadc29033bf794, type: 2}
+  mSpriteName: tile_meUp_2
+  IsKeepOriSize: 0
 --- !u!114 &11438268
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -120,9 +120,9 @@ MonoBehaviour:
   ScriptName: 
   lua_params:
   - Obj: {fileID: 166284}
-    regObj: {fileID: 11407282}
+    regObj: {fileID: 11436434}
     Name: Card
-    TypeIndex: 1
+    TypeIndex: 2
   - Obj: {fileID: 102846}
     regObj: {fileID: 11425790}
     Name: 

@@ -116,13 +116,15 @@ function TableBottom:PlayCard(i, card)
 end
 
 function TableBottom:PlayCardEnd(i)
+    local card = self["Card"..i].card
+
     local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/PlayCard",self.PlayedCardsGrid:get_gameObject())
     if self.PlayNum > 7 then
         ref.Card:set_depth(5)
         ref.Back:set_depth(4)
     end
 
-    local spriteName = MJTableCtrl.GetLeftCardSprite(self["Card"..i].card)
+    local spriteName = MJTableCtrl.GetLeftCardSprite(card)
     ref.Card:set_spriteName(spriteName)
     ref.Card:MakePixelPerfectWithSizeInAtlas()
 
