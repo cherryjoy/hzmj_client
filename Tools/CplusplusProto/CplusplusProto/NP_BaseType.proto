@@ -22,7 +22,7 @@ message PBTest
 
   optional ChatMessageType enumvop = 8;
   optional int32 intvop = 9;
-  optional int64 longvop = 10;
+  optional longid longvop = 10;
   optional float floatvop = 11;
   optional string stringvop = 12;
   optional bool boolvop = 13;

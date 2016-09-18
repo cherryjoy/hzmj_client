@@ -134,7 +134,7 @@ public:
 	}
 
 	//serialize value type
-	int SerializeInt32(int val)
+	int SerializeInt32(const int& val)
 	{
 		long long  v = (long long)val;
 		v = (v << 1) ^ (v >> 63);
@@ -156,8 +156,9 @@ public:
 		return 0;
 	}
 
-	int SerializeInt64(long long v)
+	int SerializeInt64(const long long& val)
 	{
+		long long  v = (long long)val;
 		v = (v << 1) ^ (v >> 63);
 		if (v > 0)
 		{
@@ -177,7 +178,7 @@ public:
 		return 0;
 	}
 
-	int SerializeFloat(float v)
+	int SerializeFloat(const float& v)
 	{
 		int* val = (int*)&v;
 		int i;
@@ -189,7 +190,7 @@ public:
 		return 0;
 	}
 
-	int SerializeString(std::string v)
+	int SerializeString(const std::string& v)
 	{
 		int len = strlen(v.c_str());
 		SerializeInt32(len);
@@ -204,7 +205,7 @@ public:
 		return 0;
 	}
 
-	int SerializeBool(bool v)
+	int SerializeBool(const bool& v)
 	{
 		buffer[position++] = v ? 1 : 0;
 
@@ -212,7 +213,7 @@ public:
 	}
 
 	// array value type
-	int SerializeInt32Array(std::vector<int> v)
+	int SerializeInt32Array(const std::vector<int>& v)
 	{
 		int length = v.size();
 		SerializeInt32(length);
@@ -224,7 +225,7 @@ public:
 		return 0;
 	}
 
-	int SerializeInt64Array(std::vector<long long> v)
+	int SerializeInt64Array(const std::vector<long long>& v)
 	{
 		int length = v.size();
 		SerializeInt32(length);
@@ -236,7 +237,7 @@ public:
 		return 0;
 	}
 
-	int SerializeFloatArray(std::vector<float> v)
+	int SerializeFloatArray(const std::vector<float>& v)
 	{
 		int length = v.size();
 		SerializeInt32(length);
@@ -248,7 +249,7 @@ public:
 		return 0;
 	}
 
-	int SerializeBoolArray(std::vector<bool> v)
+	int SerializeBoolArray(const std::vector<bool>& v)
 	{
 		int length = v.size();
 		SerializeInt32(length);
@@ -260,7 +261,7 @@ public:
 		return 0;
 	}
 
-	int SerializeStringArray(std::vector<std::string> v)
+	int SerializeStringArray(const std::vector<std::string>& v)
 	{
 		int length = v.size();
 		SerializeInt32(length);
