@@ -60,3 +60,11 @@ legacy.animation
 /ScriptProject/Properties
 /ScriptProject/Service References
 /ScriptProject/Script.v12.suo
+.DS_Store
+Assets/.DS_Store
+Assets/Plugins/.DS_Store
+Assets/Plugins/iOS/.DS_Store
+Assets/StreamingAssets/.DS_Store
+ScriptProject/.DS_Store
+ScriptProject/Code/.DS_Store
+ScriptProject/Code/LKBase/.DS_Store
