@@ -25,14 +25,16 @@ enumMSGID_MODULE_05 = {
 	ID_GAME_GET_CARD_RES = 1304,
 	ID_GAME_DELETE_ROOM_REQ = 1305,
 	ID_GAME_DELETE_ROOM_RES = 1306,
+	ID_GAME_QUIT_ROOM_REQ = 1307,
+	ID_GAME_QUIT_ROOM_RES = 1308,
 	ID_MODULE_05_END = 1535,
 }
 
 enumCARD_TYPE = {
-	CARD_TIAO_TYPE = 1,
-	CARD_TONG_TYPE = 2,
-	CARD_WANG_TYPE = 4,
-	CARD_HONG_TYPE = 8,
+	CARD_WANG_TYPE = 0,
+	CARD_TONG_TYPE = 1,
+	CARD_TIAO_TYPE = 2,
+	CARD_HONG_TYPE = 3,
 }
 
 enumDIRECTION_TYPE = {
@@ -40,7 +42,6 @@ enumDIRECTION_TYPE = {
 	DIRECTION_NORTH = 2,
 	DIRECTION_WEST = 3,
 	DIRECTION_SOUTH = 4,
-
 }
 
 -- PB_MSGID_MODULE_05
@@ -1514,10 +1515,13 @@ function PBOtherCardInfo.DeSerialize(obj)
 	local fieldCount = deserialize_int32()
 	local option,optionLength = deserialize_optional()
 	if(has_optional_flag(0,optionLength,option)) then
+		obj.roleid = deserialize_int32()
+	end
+	if(has_optional_flag(1,optionLength,option)) then
 		obj.handnum = deserialize_int32()
 	end
 
-	if (fieldCount >= 2) then
+	if (fieldCount >= 3) then
 		obj.pengcard = {}
 		local len = deserialize_int32()
 		if (len > 0) then
@@ -1531,7 +1535,7 @@ function PBOtherCardInfo.DeSerialize(obj)
 		end
 	end
 
-	if (fieldCount >= 3) then
+	if (fieldCount >= 4) then
 		obj.gangcardm = {}
 		local len = deserialize_int32()
 		if (len > 0) then
@@ -1544,19 +1548,41 @@ function PBOtherCardInfo.DeSerialize(obj)
 			end
 		end
 	end
+
+	if (fieldCount >= 5) then
+		obj.gangcarda = {}
+		local len = deserialize_int32()
+		if (len > 0) then
+			for i=1,len do
+				local gangcardaSize = deserialize_data_length()
+				local gangcardaStartPos = get_position()
+				obj.gangcarda[i] = PBCard.Create()
+				obj.gangcarda[i] = (obj.gangcarda[i]):DeSerialize()
+				set_position(gangcardaSize+gangcardaStartPos )
+			end
+		end
+	end
 	return obj
 end
 
 function PBOtherCardInfo.Serialize(obj)
-	local fieldCount = 3
+	local fieldCount = 5
 	serialize_int32(fieldCount)
 	local flag = {}
-	if(obj.handnum ~= nil) then
+	if(obj.roleid ~= nil) then
 		flag[1] = true
 	else
 		flag[1] = false
 	end
+	if(obj.handnum ~= nil) then
+		flag[2] = true
+	else
+		flag[2] = false
+	end
 	serialize_optional(flag)
+	if(obj.roleid ~= nil) then
+		serialize_int32(obj.roleid)
+	end
 	if(obj.handnum ~= nil) then
 		serialize_int32(obj.handnum)
 	end
@@ -1590,10 +1616,28 @@ function PBOtherCardInfo.Serialize(obj)
 	else
 		serialize_int32(0)
 	end
+	if (obj.gangcarda ~= nil) then
+		serialize_int32(#(obj.gangcarda))
+		for i=1, #(obj.gangcarda) do
+			local WaitPos = get_position()
+			set_position(WaitPos+4)
+			obj.gangcarda[i]:Serialize()
+			local MaxPosNow = get_position()
+			local RealSize = MaxPosNow-(WaitPos+4)
+			set_position(WaitPos)
+			serialize_data_length(RealSize)
+			set_position(MaxPosNow)
+		end
+	else
+		serialize_int32(0)
+	end
 end
 
 function PBOtherCardInfo.GetSize(obj)
 	local size = 0
+	if (obj.roleid ~= nil) then
+		size = size + 4
+	end
 	if (obj.handnum ~= nil) then
 		size = size + 4
 	end
@@ -1609,7 +1653,13 @@ function PBOtherCardInfo.GetSize(obj)
 			size = size + (obj.gangcardm[i]):GetSize()
 		end
 	end
-	size = size + 16
+	if (obj.gangcarda ~= nil) then
+		for i=1,#(obj.gangcarda) do
+			size = size + 5
+			size = size + (obj.gangcarda[i]):GetSize()
+		end
+	end
+	size = size + 21
 	return size
 end
 
@@ -1769,19 +1819,33 @@ function PBRoomCardInfoSync.DeSerialize(obj)
 		obj.owncards = obj.owncards:DeSerialize()
 		set_position(owncardsSize+owncardsStartPos )
 	end
-	if(has_optional_flag(1,optionLength,option)) then
-		local othercardsSize = deserialize_data_length()
-		local othercardsStartPos = get_position()
-		obj.othercards = PBOtherCardInfo.Create()
-		obj.othercards = obj.othercards:DeSerialize()
-		set_position(othercardsSize+othercardsStartPos )
+
+	if (fieldCount >= 2) then
+		obj.othercards = {}
+		local len = deserialize_int32()
+		if (len > 0) then
+			for i=1,len do
+				local othercardsSize = deserialize_data_length()
+				local othercardsStartPos = get_position()
+				obj.othercards[i] = PBOtherCardInfo.Create()
+				obj.othercards[i] = (obj.othercards[i]):DeSerialize()
+				set_position(othercardsSize+othercardsStartPos )
+			end
+		end
 	end
-	if(has_optional_flag(2,optionLength,option)) then
-		local tablecardsSize = deserialize_data_length()
-		local tablecardsStartPos = get_position()
-		obj.tablecards = PBTableCardInfo.Create()
-		obj.tablecards = obj.tablecards:DeSerialize()
-		set_position(tablecardsSize+tablecardsStartPos )
+
+	if (fieldCount >= 3) then
+		obj.tablecards = {}
+		local len = deserialize_int32()
+		if (len > 0) then
+			for i=1,len do
+				local tablecardsSize = deserialize_data_length()
+				local tablecardsStartPos = get_position()
+				obj.tablecards[i] = PBPlayCardInfo.Create()
+				obj.tablecards[i] = (obj.tablecards[i]):DeSerialize()
+				set_position(tablecardsSize+tablecardsStartPos )
+			end
+		end
 	end
 	return obj
 end
@@ -1795,16 +1859,6 @@ function PBRoomCardInfoSync.Serialize(obj)
 	else
 		flag[1] = false
 	end
-	if(obj.othercards ~= nil) then
-		flag[2] = true
-	else
-		flag[2] = false
-	end
-	if(obj.tablecards ~= nil) then
-		flag[3] = true
-	else
-		flag[3] = false
-	end
 	serialize_optional(flag)
 	if(obj.owncards ~= nil) then
 		local WaitPos = get_position()
@@ -1816,25 +1870,35 @@ function PBRoomCardInfoSync.Serialize(obj)
 	serialize_data_length(RealSize)
 	set_position(MaxPosNow)
 	end
-	if(obj.othercards ~= nil) then
-		local WaitPos = get_position()
-	set_position(WaitPos+4)
-	obj.othercards:Serialize()
-	local MaxPosNow = get_position()
-	local RealSize = MaxPosNow-(WaitPos+4)
-	set_position(WaitPos)
-	serialize_data_length(RealSize)
-	set_position(MaxPosNow)
+	if (obj.othercards ~= nil) then
+		serialize_int32(#(obj.othercards))
+		for i=1, #(obj.othercards) do
+			local WaitPos = get_position()
+			set_position(WaitPos+4)
+			obj.othercards[i]:Serialize()
+			local MaxPosNow = get_position()
+			local RealSize = MaxPosNow-(WaitPos+4)
+			set_position(WaitPos)
+			serialize_data_length(RealSize)
+			set_position(MaxPosNow)
+		end
+	else
+		serialize_int32(0)
 	end
-	if(obj.tablecards ~= nil) then
-		local WaitPos = get_position()
-	set_position(WaitPos+4)
-	obj.tablecards:Serialize()
-	local MaxPosNow = get_position()
-	local RealSize = MaxPosNow-(WaitPos+4)
-	set_position(WaitPos)
-	serialize_data_length(RealSize)
-	set_position(MaxPosNow)
+	if (obj.tablecards ~= nil) then
+		serialize_int32(#(obj.tablecards))
+		for i=1, #(obj.tablecards) do
+			local WaitPos = get_position()
+			set_position(WaitPos+4)
+			obj.tablecards[i]:Serialize()
+			local MaxPosNow = get_position()
+			local RealSize = MaxPosNow-(WaitPos+4)
+			set_position(WaitPos)
+			serialize_data_length(RealSize)
+			set_position(MaxPosNow)
+		end
+	else
+		serialize_int32(0)
 	end
 end
 
@@ -1844,10 +1908,16 @@ function PBRoomCardInfoSync.GetSize(obj)
 		size = size + obj.owncards:GetSize()
 	end
 	if (obj.othercards ~= nil) then
-		size = size + obj.othercards:GetSize()
+		for i=1,#(obj.othercards) do
+			size = size + 5
+			size = size + (obj.othercards[i]):GetSize()
+		end
 	end
 	if (obj.tablecards ~= nil) then
-		size = size + obj.tablecards:GetSize()
+		for i=1,#(obj.tablecards) do
+			size = size + 5
+			size = size + (obj.tablecards[i]):GetSize()
+		end
 	end
 	size = size + 21
 	return size
@@ -1936,17 +2006,25 @@ function PBMsgPlayCardReq.DeSerialize(obj)
 		obj.card = obj.card:DeSerialize()
 		set_position(cardSize+cardStartPos )
 	end
+	if(has_optional_flag(1,optionLength,option)) then
+		obj.index = deserialize_int32()
+	end
 	return obj
 end
 
 function PBMsgPlayCardReq.Serialize(obj)
-	local fieldCount = 1
+	local fieldCount = 2
 	serialize_int32(fieldCount)
 	local flag = {}
 	if(obj.card ~= nil) then
 		flag[1] = true
 	else
 		flag[1] = false
+	end
+	if(obj.index ~= nil) then
+		flag[2] = true
+	else
+		flag[2] = false
 	end
 	serialize_optional(flag)
 	if(obj.card ~= nil) then
@@ -1959,12 +2037,18 @@ function PBMsgPlayCardReq.Serialize(obj)
 	serialize_data_length(RealSize)
 	set_position(MaxPosNow)
 	end
+	if(obj.index ~= nil) then
+		serialize_int32(obj.index)
+	end
 end
 
 function PBMsgPlayCardReq.GetSize(obj)
 	local size = 0
 	if (obj.card ~= nil) then
 		size = size + obj.card:GetSize()
+	end
+	if (obj.index ~= nil) then
+		size = size + 4
 	end
 	size = size + 11
 	return size
@@ -1988,6 +2072,9 @@ function PBMsgPlayCardRes.DeSerialize(obj)
 		obj.roleid = deserialize_int32()
 	end
 	if(has_optional_flag(2,optionLength,option)) then
+		obj.index = deserialize_int32()
+	end
+	if(has_optional_flag(3,optionLength,option)) then
 		local cardSize = deserialize_data_length()
 		local cardStartPos = get_position()
 		obj.card = PBCard.Create()
@@ -1998,7 +2085,7 @@ function PBMsgPlayCardRes.DeSerialize(obj)
 end
 
 function PBMsgPlayCardRes.Serialize(obj)
-	local fieldCount = 3
+	local fieldCount = 4
 	serialize_int32(fieldCount)
 	local flag = {}
 	if(obj.result ~= nil) then
@@ -2011,10 +2098,15 @@ function PBMsgPlayCardRes.Serialize(obj)
 	else
 		flag[2] = false
 	end
-	if(obj.card ~= nil) then
+	if(obj.index ~= nil) then
 		flag[3] = true
 	else
 		flag[3] = false
+	end
+	if(obj.card ~= nil) then
+		flag[4] = true
+	else
+		flag[4] = false
 	end
 	serialize_optional(flag)
 	if(obj.result ~= nil) then
@@ -2022,6 +2114,9 @@ function PBMsgPlayCardRes.Serialize(obj)
 	end
 	if(obj.roleid ~= nil) then
 		serialize_int32(obj.roleid)
+	end
+	if(obj.index ~= nil) then
+		serialize_int32(obj.index)
 	end
 	if(obj.card ~= nil) then
 		local WaitPos = get_position()
@@ -2043,6 +2138,9 @@ function PBMsgPlayCardRes.GetSize(obj)
 	if (obj.roleid ~= nil) then
 		size = size + 4
 	end
+	if (obj.index ~= nil) then
+		size = size + 4
+	end
 	if (obj.card ~= nil) then
 		size = size + obj.card:GetSize()
 	end
@@ -2062,6 +2160,9 @@ function PBMsgPengCardReq.DeSerialize(obj)
 	local fieldCount = deserialize_int32()
 	local option,optionLength = deserialize_optional()
 	if(has_optional_flag(0,optionLength,option)) then
+		obj.index = deserialize_int32()
+	end
+	if(has_optional_flag(1,optionLength,option)) then
 		local cardSize = deserialize_data_length()
 		local cardStartPos = get_position()
 		obj.card = PBCard.Create()
@@ -2072,15 +2173,23 @@ function PBMsgPengCardReq.DeSerialize(obj)
 end
 
 function PBMsgPengCardReq.Serialize(obj)
-	local fieldCount = 1
+	local fieldCount = 2
 	serialize_int32(fieldCount)
 	local flag = {}
-	if(obj.card ~= nil) then
+	if(obj.index ~= nil) then
 		flag[1] = true
 	else
 		flag[1] = false
 	end
+	if(obj.card ~= nil) then
+		flag[2] = true
+	else
+		flag[2] = false
+	end
 	serialize_optional(flag)
+	if(obj.index ~= nil) then
+		serialize_int32(obj.index)
+	end
 	if(obj.card ~= nil) then
 		local WaitPos = get_position()
 	set_position(WaitPos+4)
@@ -2095,6 +2204,9 @@ end
 
 function PBMsgPengCardReq.GetSize(obj)
 	local size = 0
+	if (obj.index ~= nil) then
+		size = size + 4
+	end
 	if (obj.card ~= nil) then
 		size = size + obj.card:GetSize()
 	end
@@ -2117,6 +2229,9 @@ function PBMsgPengCardRes.DeSerialize(obj)
 		obj.roleid = deserialize_int32()
 	end
 	if(has_optional_flag(1,optionLength,option)) then
+		obj.index = deserialize_int32()
+	end
+	if(has_optional_flag(2,optionLength,option)) then
 		local cardSize = deserialize_data_length()
 		local cardStartPos = get_position()
 		obj.card = PBCard.Create()
@@ -2127,7 +2242,7 @@ function PBMsgPengCardRes.DeSerialize(obj)
 end
 
 function PBMsgPengCardRes.Serialize(obj)
-	local fieldCount = 2
+	local fieldCount = 3
 	serialize_int32(fieldCount)
 	local flag = {}
 	if(obj.roleid ~= nil) then
@@ -2135,14 +2250,22 @@ function PBMsgPengCardRes.Serialize(obj)
 	else
 		flag[1] = false
 	end
-	if(obj.card ~= nil) then
+	if(obj.index ~= nil) then
 		flag[2] = true
 	else
 		flag[2] = false
 	end
+	if(obj.card ~= nil) then
+		flag[3] = true
+	else
+		flag[3] = false
+	end
 	serialize_optional(flag)
 	if(obj.roleid ~= nil) then
 		serialize_int32(obj.roleid)
+	end
+	if(obj.index ~= nil) then
+		serialize_int32(obj.index)
 	end
 	if(obj.card ~= nil) then
 		local WaitPos = get_position()
@@ -2159,6 +2282,9 @@ end
 function PBMsgPengCardRes.GetSize(obj)
 	local size = 0
 	if (obj.roleid ~= nil) then
+		size = size + 4
+	end
+	if (obj.index ~= nil) then
 		size = size + 4
 	end
 	if (obj.card ~= nil) then
@@ -2180,6 +2306,9 @@ function PBMsgGangCardReq.DeSerialize(obj)
 	local fieldCount = deserialize_int32()
 	local option,optionLength = deserialize_optional()
 	if(has_optional_flag(0,optionLength,option)) then
+		obj.index = deserialize_int32()
+	end
+	if(has_optional_flag(1,optionLength,option)) then
 		local cardSize = deserialize_data_length()
 		local cardStartPos = get_position()
 		obj.card = PBCard.Create()
@@ -2190,15 +2319,23 @@ function PBMsgGangCardReq.DeSerialize(obj)
 end
 
 function PBMsgGangCardReq.Serialize(obj)
-	local fieldCount = 1
+	local fieldCount = 2
 	serialize_int32(fieldCount)
 	local flag = {}
-	if(obj.card ~= nil) then
+	if(obj.index ~= nil) then
 		flag[1] = true
 	else
 		flag[1] = false
 	end
+	if(obj.card ~= nil) then
+		flag[2] = true
+	else
+		flag[2] = false
+	end
 	serialize_optional(flag)
+	if(obj.index ~= nil) then
+		serialize_int32(obj.index)
+	end
 	if(obj.card ~= nil) then
 		local WaitPos = get_position()
 	set_position(WaitPos+4)
@@ -2213,6 +2350,9 @@ end
 
 function PBMsgGangCardReq.GetSize(obj)
 	local size = 0
+	if (obj.index ~= nil) then
+		size = size + 4
+	end
 	if (obj.card ~= nil) then
 		size = size + obj.card:GetSize()
 	end
@@ -2238,6 +2378,9 @@ function PBMsgGangCardRes.DeSerialize(obj)
 		obj.state = deserialize_int32()
 	end
 	if(has_optional_flag(2,optionLength,option)) then
+		obj.index = deserialize_int32()
+	end
+	if(has_optional_flag(3,optionLength,option)) then
 		local cardSize = deserialize_data_length()
 		local cardStartPos = get_position()
 		obj.card = PBCard.Create()
@@ -2248,7 +2391,7 @@ function PBMsgGangCardRes.DeSerialize(obj)
 end
 
 function PBMsgGangCardRes.Serialize(obj)
-	local fieldCount = 3
+	local fieldCount = 4
 	serialize_int32(fieldCount)
 	local flag = {}
 	if(obj.roleid ~= nil) then
@@ -2261,10 +2404,15 @@ function PBMsgGangCardRes.Serialize(obj)
 	else
 		flag[2] = false
 	end
-	if(obj.card ~= nil) then
+	if(obj.index ~= nil) then
 		flag[3] = true
 	else
 		flag[3] = false
+	end
+	if(obj.card ~= nil) then
+		flag[4] = true
+	else
+		flag[4] = false
 	end
 	serialize_optional(flag)
 	if(obj.roleid ~= nil) then
@@ -2272,6 +2420,9 @@ function PBMsgGangCardRes.Serialize(obj)
 	end
 	if(obj.state ~= nil) then
 		serialize_int32(obj.state)
+	end
+	if(obj.index ~= nil) then
+		serialize_int32(obj.index)
 	end
 	if(obj.card ~= nil) then
 		local WaitPos = get_position()
@@ -2291,6 +2442,9 @@ function PBMsgGangCardRes.GetSize(obj)
 		size = size + 4
 	end
 	if (obj.state ~= nil) then
+		size = size + 4
+	end
+	if (obj.index ~= nil) then
 		size = size + 4
 	end
 	if (obj.card ~= nil) then
@@ -2721,3 +2875,86 @@ function PBMsgGameDeleteRoomRes.GetSize(obj)
 	size = size + 6
 	return size
 end
+
+-- PBMsgGameQuitRoomReq
+PBMsgGameQuitRoomReq = {}
+PBMsgGameQuitRoomReq.__index = PBMsgGameQuitRoomReq
+function PBMsgGameQuitRoomReq.Create()
+	local obj = setmetatable({},PBMsgGameQuitRoomReq)
+	return obj
+end
+
+function PBMsgGameQuitRoomReq.DeSerialize(obj)
+	local fieldCount = deserialize_int32()
+	local option,optionLength = deserialize_optional()
+	if(has_optional_flag(0,optionLength,option)) then
+		obj.room_pass = deserialize_int32()
+	end
+	return obj
+end
+
+function PBMsgGameQuitRoomReq.Serialize(obj)
+	local fieldCount = 1
+	serialize_int32(fieldCount)
+	local flag = {}
+	if(obj.room_pass ~= nil) then
+		flag[1] = true
+	else
+		flag[1] = false
+	end
+	serialize_optional(flag)
+	if(obj.room_pass ~= nil) then
+		serialize_int32(obj.room_pass)
+	end
+end
+
+function PBMsgGameQuitRoomReq.GetSize(obj)
+	local size = 0
+	if (obj.room_pass ~= nil) then
+		size = size + 4
+	end
+	size = size + 6
+	return size
+end
+
+-- PBMsgGameQuitRoomRes
+PBMsgGameQuitRoomRes = {}
+PBMsgGameQuitRoomRes.__index = PBMsgGameQuitRoomRes
+function PBMsgGameQuitRoomRes.Create()
+	local obj = setmetatable({},PBMsgGameQuitRoomRes)
+	return obj
+end
+
+function PBMsgGameQuitRoomRes.DeSerialize(obj)
+	local fieldCount = deserialize_int32()
+	local option,optionLength = deserialize_optional()
+	if(has_optional_flag(0,optionLength,option)) then
+		obj.result = deserialize_int32()
+	end
+	return obj
+end
+
+function PBMsgGameQuitRoomRes.Serialize(obj)
+	local fieldCount = 1
+	serialize_int32(fieldCount)
+	local flag = {}
+	if(obj.result ~= nil) then
+		flag[1] = true
+	else
+		flag[1] = false
+	end
+	serialize_optional(flag)
+	if(obj.result ~= nil) then
+		serialize_int32(obj.result)
+	end
+end
+
+function PBMsgGameQuitRoomRes.GetSize(obj)
+	local size = 0
+	if (obj.result ~= nil) then
+		size = size + 4
+	end
+	size = size + 6
+	return size
+end
+
