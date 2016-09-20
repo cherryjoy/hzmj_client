@@ -111,7 +111,8 @@ public abstract class UITweener : IgnoreTimeScale
 			UIWidget[] selfWidgets = GetComponents<UIWidget>();
 			chidrenWidgets = NGUITools.CombieArray<UIWidget>(widgets, selfWidgets);
 		}
-		Update(); 
+		Update();
+        gameObject.transform.SetParent();
 	}
 
 	/// <summary>

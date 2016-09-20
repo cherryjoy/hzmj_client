@@ -101,9 +101,10 @@ function TableBottom:ChooseCard(i)
     end
 
     if i == self.lastIndex then
-        ClientSendMsg.SendPlayCard(self["Card"..i].card.type_id, self["Card"..i].card.code_id)
+        ClientSendMsg.SendPlayCard(i, self["Card"..i].card.type_id, self["Card"..i].card.code_id)
         --self["Card"..i].gameObject:SetActive(false)
-        self["Card"..i].Animation(self["Card"..i])
+        Client.BottomPlayCard:Do(self.roleId, i, self["Card"..i].card, 0)
+
         self.lastIndex = nil
     else
         self.lastIndex = i
@@ -112,7 +113,10 @@ function TableBottom:ChooseCard(i)
     end
 end
 
-function TableBottom:PlayCard(i, card)
+function TableBottom:PlayCard(i, card, toward)
+    if i ~= nil then
+        self["Card"..i].Animation(self["Card"..i])
+    end
 end
 
 function TableBottom:PlayCardEnd(i)
@@ -138,6 +142,8 @@ function TableBottom:PlayCardEnd(i)
 
     self["Card"..self.HandCardNum].gameObject:SetActive(false)
     self.PlayNum = self.PlayNum + 1
+
+    LuaUIViewCtr.UIPanel["MJTableUI"].GetCard(LuaUIViewCtr.UIPanel["MJTableUI"], card)
 end
 
 function TableBottom:SetHeadInfo(info)
@@ -145,4 +151,16 @@ function TableBottom:SetHeadInfo(info)
     local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/TableHead",self.HeadInfo)
     ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(0, 0, 0))
     ref.Init(ref, info)
+end
+
+function TableBottom:GetCard(card)
+    ref = self["Card"..self.HandCardNum]
+    ref.gameObject:SetActive(true)
+    --ref.gameObject:set_name("MyCard")
+    --ref.Message:target(ref.gameObject)
+
+    ref.Init(ref, card, self.HandCardNum)
+
+    ref.Shinning:set_enabled(true)
+    ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(768, 0, 0))
 end

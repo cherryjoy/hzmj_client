@@ -4,6 +4,11 @@ function MJTableCtrl:Start( )
     local mt=TextureMgr.get_Instance():LoadTexture("MJTable/MJTable", true)
     self.Texture:set_material(mt)
 
+    Client.BottomPlayCard = Client.BottomPlayCard + {self, MJTableCtrl.PlayCard}
+end
+
+function MJTableCtrl:OnDestroy( )
+    Client.BottomPlayCard = Client.BottomPlayCard - {self, MJTableCtrl.PlayCard}
 end
 
 function MJTableCtrl:Init(passwd, amount, horse, beishu, used, rolelist)
@@ -55,13 +60,14 @@ function MJTableCtrl:CardInfoSync(cardInfo)
     self.Drect1.LeftCardSync(self.Drect1, cardInfo.owncards)
 
     -- 同步其他人的牌
-    self.Drect2.CardInfoSync(self.Drect2, 13)
-    self.Drect3.CardInfoSync(self.Drect3, 13)
-    self.Drect4.CardInfoSync(self.Drect4, 13)
-end
-
-function MJTableCtrl:OnDestroy( )
-
+    for i = 1, #(cardInfo.othercards) do
+        for j = 1, 4 do
+            if self["Drect"..j].roleId == cardInfo.othercards[i] then
+                LuaDebug.Log("drect "..j.." : "..cardInfo.othercards[i].handnum)
+                self["Drect"..j].CardInfoSync(self["Drect"..j], cardInfo.othercards[i].handnum)
+            end
+        end
+    end
 end
 
 function MJTableCtrl:DeleteRoom_OnClick()
@@ -149,12 +155,46 @@ function MJTableCtrl:InitRoleList(myDirect, roleList)
     end
 end
 
-function MJTableCtrl:PlayCard(roleId, index, card)
-    self.Drect3.PlayCard(self.Drect3, index, card)
+function MJTableCtrl:PlayCard(roleId, index, card, result)
+    self.TowardCard:SetActive(true)
+    -- 判断当前的牌是否能碰、杠
+    if result ~= 0 then
+
+    end
+
+    --self.Drect3.PlayCard(self.Drect3, index, card)
     for i = 1, 4 do
         if self["Drect"..i].roleId == roleId then
             LuaDebug.Log("play card, type: "..card.type_id..", id: "..card.code_id)
-            --self["Drect"..i].PlayCard(self["Drect"..i], index, card)
+            self["Drect"..i].PlayCard(self["Drect"..i], index, card, self.TowardCard)
         end
     end
+end
+
+function MJTableCtrl:GetCard(card)
+    LuaDebug.Log("get card, type: "..card.type_id..", id: "..card.code_id)
+    -- 倒计时
+    self.CD = 15
+    self.CountDown:set_text(tostring(self.CD))
+    self.CountDown:set_enabled(true)
+
+    if self.timer == nil then
+        self.timer = Timer.NewEvent(self,10,150,MJTableCtrl.DoCountDown, false, MJTableCtrl.DoCountDownFinish)
+    end
+
+    self.Drect1.GetCard(self.Drect1, card)
+end
+
+function MJTableCtrl:DoCountDown()
+    self.CD = self.CD - 1
+    self.CountDown:set_text(tostring(self.CD))
+end
+
+function MJTableCtrl:DoCountDownFinish()
+    if self.timer ~= nil then
+        self.timer = nil
+    end
+
+    self.CountDown:set_enabled(false)
+    LuaDebug.Log("DoCountDownFinish")
 end

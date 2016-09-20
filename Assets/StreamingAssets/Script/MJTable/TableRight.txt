@@ -67,7 +67,7 @@ function TableRight:SetLeftCard(card)
     self.LeftNum = self.LeftNum + 1
 end
 
-function TableRight:PlayCard(i, card)
+function TableRight:PlayCard(i, card, toward)
     --LuaDebug.Log("play card, type: "..card.type_id..", id: "..card.code_id)
     local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/RightPlayCard",self.PlayedCardsGrid:get_gameObject())
     local spriteName = MJTableCtrl.GetLeftRightCardSprite(card)
@@ -85,6 +85,9 @@ function TableRight:PlayCard(i, card)
 
     ref.Card:set_depth(ref.Card:get_depth() - colum*2)
     ref.Back:set_depth(ref.Back:get_depth() - colum*2)
+
+    toward:get_transform():SetParent(ref.RightPlayCard:get_transform())
+    toward:get_transform():set_localPosition(LuaVector3.Create(0, 0, 0))
 
     self.PlayNum = self.PlayNum + 1
 end

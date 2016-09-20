@@ -20,7 +20,7 @@ ClientHandleMsg = {}
 --msgNameTable =  Util.TableInvert(NetOpcodes_S2C)
 function ClientHandleMsg.Handle(msgId,data,dataLength)
     -- if NetOpcodes_S2C.S2C_CHEAT_CHECK ~= msgId then
-         LuaDebug.Log("msgID: " .. msgId)
+         LuaDebug.Log("recv msgID: " .. msgId)
     -- end
     local handleFunc = HandleFuncs[msgId]
     if handleFunc then
@@ -168,5 +168,11 @@ end
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_PLAY_CARD_RES] = function(data, dataLength)
     local data = LuaProto.deserialize(PBMsgPlayCardRes, data, dataLength)
 
-    LuaUIViewCtr.UIPanel["MJTableUI"].PlayCard(LuaUIViewCtr.UIPanel["MJTableUI"], data.roleid, 1, data.card)
+    LuaUIViewCtr.UIPanel["MJTableUI"].PlayCard(LuaUIViewCtr.UIPanel["MJTableUI"], data.roleid, data.index, data.card, data.result)
+end
+
+HandleFuncs[enumMSGID_MODULE_05.ID_GAME_GET_CARD_RES] = function(data, dataLength)
+    local data = LuaProto.deserialize(PBMsgGameGetCardRes, data, dataLength)
+
+    LuaUIViewCtr.UIPanel["MJTableUI"].GetCard(LuaUIViewCtr.UIPanel["MJTableUI"], data.card)
 end

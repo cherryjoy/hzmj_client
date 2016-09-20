@@ -377,3 +377,4 @@ Client.ShowOrHideAnnounce = Event.Create()
 -- majiang logic Event
 Client.TableChooseCard = Event.Create()
 Client.TablePlayCardEnd = Event.Create()
+Client.BottomPlayCard = Event.Create()
