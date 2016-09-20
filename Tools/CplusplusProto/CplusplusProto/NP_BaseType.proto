@@ -18,11 +18,12 @@ message PBTest
   required string stringv = 4;
   required bool boolv = 5;
   required PBVector3 vectorv = 6;
+
   required ChatMessageType enumv = 7;
 
   optional ChatMessageType enumvop = 8;
   optional int32 intvop = 9;
-  optional longid longvop = 10;
+  optional int64 longvop = 10;
   optional float floatvop = 11;
   optional string stringvop = 12;
   optional bool boolvop = 13;
@@ -34,7 +35,7 @@ message PBTest
   repeated string stringvre = 18;
   repeated bool boolvre = 19;
   repeated PBVector3 vectorvre = 20;
-  repeated ChatMessageType enumvre = 21;
+  repeated ChatMessageType enumvre = 21; 
 }
 
 message PBVector3
@@ -42,5 +43,7 @@ message PBVector3
   required float x = 1;
   required float y = 2;
   required float z = 3;
+  optional longid count = 4; 
 }
+
 

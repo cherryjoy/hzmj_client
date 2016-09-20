@@ -29,5 +29,8 @@
     <ClCompile Include="SimpleProtobuf.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="np_basetype.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
