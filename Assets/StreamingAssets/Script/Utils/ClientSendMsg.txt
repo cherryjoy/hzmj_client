@@ -158,6 +158,8 @@ function ClientSendMsg.SendReadyRoom()
 
 	local buffer,length = LuaProto.serialize(data)
 	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_READY_REQ, buffer, length)
+
+	local id = PingManager.get_Instance():sessionId()
 end
 
 function ClientSendMsg.SendDeleteRoom(roomId)

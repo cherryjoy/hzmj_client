@@ -24,6 +24,12 @@ Script/LoginUI/ServerCell.txt
 Script/LoginUI/ServerListController.txt
 Script/LoginUI/ServerPanelCell.txt
 Script/MJTable/MJTableCtrl.txt
+Script/MJTable/MyCard.txt
+Script/MJTable/TableBottom.txt
+Script/MJTable/TableHead.txt
+Script/MJTable/TableLeft.txt
+Script/MJTable/TableRight.txt
+Script/MJTable/TableTop.txt
 Script/NetOpcodes/NetOpcodes_C2S.txt
 Script/NetOpcodes/NetOpcodes_S2C.txt
 Script/NetProtocol/LuaProto.txt

@@ -136,12 +136,12 @@ HandleFuncs[enumMSGID_MODULE_05.ID_GAME_ROOM_ENTER_RES] = function(data,dataLeng
     LuaDebug.Log("enter room: "..data.passwd)
     if LuaUIViewCtr.UIPanel["MJTableUI"] == nil then
         local ref = LuaUIViewCtr.OpenUIHasBg("MJTable/MJTable")
-        --data.addition
-        ref.Init(ref, data.passwd, data.amount, data.horse, 5, data.used, data.rolelist)
         LuaUIViewCtr.UIPanel["MJTableUI"] = ref
+        ClientSendMsg.SendReadyRoom()
     end
 
-    ClientSendMsg.SendReadyRoom()
+    --data.addition
+    LuaUIViewCtr.UIPanel["MJTableUI"].Init(LuaUIViewCtr.UIPanel["MJTableUI"], data.passwd, data.amount, data.horse, 5, data.used, data.rolelist)
 end
 
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_READY_RES] = function(data,dataLength)

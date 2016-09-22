@@ -20,11 +20,13 @@ function MJTableCtrl:Init(passwd, amount, horse, beishu, used, rolelist)
     -- 确定方位
     LuaDebug.Log("rolelist: "..#rolelist)
     local spriteName, myDirect = MJTableCtrl.GetMyDirectSprite(Client.RoleInfo.RoleID, rolelist)
-    self.Direction:set_spriteName(spriteName)
+    LuaDebug.Log("my direction: "..myDirect)
+
+    local angle = self.Direction:get_transform():get_localEulerAngles():z() - (myDirect - 1)*90
+    self.Direction:get_transform():set_localEulerAngles(LuaVector3.Create(0, 0, angle))
     self.TimerBack:set_spriteName(spriteName)
     --self.TimerBack:get_gameObject():SetActive(true)
 
-    LuaDebug.Log("my direction: "..myDirect)
     MJTableCtrl.InitRoleList(self, myDirect, rolelist)
 end
 
@@ -67,6 +69,11 @@ function MJTableCtrl:CardInfoSync(cardInfo)
                 self["Drect"..j].CardInfoSync(self["Drect"..j], cardInfo.othercards[i].handnum)
             end
         end
+    end
+
+    -- 准备手消失
+    for i = 1, 4 do
+        self["Drect"..i].Ready:SetActive(false)
     end
 end
 
@@ -123,6 +130,8 @@ function MJTableCtrl.GetMyDirectSprite(roleId, roleList)
     for i = 1, #roleList do
         LuaDebug.Log("roleList[i].roleid: "..roleList[i].roleid)
         LuaDebug.Log("roleList[i].direct: "..roleList[i].direct)
+        LuaDebug.Log("roleList[i].rolename: "..roleList[i].rolename)
+        LuaDebug.Log("roleList[i].integral: "..roleList[i].integral)
         if roleId == roleList[i].roleid then
             if roleList[i].direct == enumDIRECTION_TYPE.DIRECTION_EAST then
                 return "compassdong", roleList[i].direct
@@ -147,7 +156,7 @@ function MJTableCtrl:InitRoleList(myDirect, roleList)
 
         local roleInfo = roleList[index]
         if roleInfo ~= nil then
-            self["Drect"..idx].SetHeadInfo(self["Drect"..i], roleInfo)
+            self["Drect"..idx].SetHeadInfo(self["Drect"..idx], roleInfo, self.TowardCard)
             self["Drect"..idx].Ready:SetActive(true)
         end
 
@@ -162,17 +171,18 @@ function MJTableCtrl:PlayCard(roleId, index, card, result)
 
     end
 
-    --self.Drect3.PlayCard(self.Drect3, index, card)
+    self.Drect1.PlayCard(self.Drect1, index, card)
     for i = 1, 4 do
         if self["Drect"..i].roleId == roleId then
             LuaDebug.Log("play card, type: "..card.type_id..", id: "..card.code_id)
-            self["Drect"..i].PlayCard(self["Drect"..i], index, card, self.TowardCard)
+            --self["Drect"..i].PlayCard(self["Drect"..i], index, card)
         end
     end
 end
 
 function MJTableCtrl:GetCard(card)
     LuaDebug.Log("get card, type: "..card.type_id..", id: "..card.code_id)
+    self.TimerBack:get_gameObject():SetActive(true)
     -- 倒计时
     self.CD = 15
     self.CountDown:set_text(tostring(self.CD))
@@ -195,6 +205,6 @@ function MJTableCtrl:DoCountDownFinish()
         self.timer = nil
     end
 
-    self.CountDown:set_enabled(false)
+    --self.CountDown:set_enabled(false)
     LuaDebug.Log("DoCountDownFinish")
 end

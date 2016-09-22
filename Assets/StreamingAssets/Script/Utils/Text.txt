@@ -61,7 +61,8 @@ Text = {
     DelRole="删除角色",
     LoginName="登录账号:",
     Maintain = "(维护中)",
-    ServerList = "服务器列表",
+    --ServerList = "服务器列表",
+    ServerList = "取消",
     SwitchServerOnClick = "点击换区",
     ------------------------------serverList---------------------
     --NewServer = "["..ColorFilter.Color_51BF53.."] (新区)[-]",
