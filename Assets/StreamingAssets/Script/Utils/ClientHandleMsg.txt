@@ -138,10 +138,11 @@ HandleFuncs[enumMSGID_MODULE_05.ID_GAME_ROOM_ENTER_RES] = function(data,dataLeng
         local ref = LuaUIViewCtr.OpenUIHasBg("MJTable/MJTable")
         LuaUIViewCtr.UIPanel["MJTableUI"] = ref
         ClientSendMsg.SendReadyRoom()
+        LuaUIViewCtr.UIPanel["MJTableUI"].Init(LuaUIViewCtr.UIPanel["MJTableUI"], data.passwd, data.amount, data.horse, 5, data.used, data.rolelist)
     end
 
     --data.addition
-    LuaUIViewCtr.UIPanel["MJTableUI"].Init(LuaUIViewCtr.UIPanel["MJTableUI"], data.passwd, data.amount, data.horse, 5, data.used, data.rolelist)
+    LuaUIViewCtr.UIPanel["MJTableUI"].EnterRoomSync(LuaUIViewCtr.UIPanel["MJTableUI"], data.rolelist)
 end
 
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_READY_RES] = function(data,dataLength)

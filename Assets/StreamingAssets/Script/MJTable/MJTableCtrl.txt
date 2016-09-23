@@ -17,17 +17,25 @@ function MJTableCtrl:Init(passwd, amount, horse, beishu, used, rolelist)
     self.MaShu:set_text(string.format(Text.MaShuName, beishu, horse))
     self.JuShu:set_text(string.format(Text.JuShuName, used, amount, 112))
 
-    -- 确定方位
-    LuaDebug.Log("rolelist: "..#rolelist)
     local spriteName, myDirect = MJTableCtrl.GetMyDirectSprite(Client.RoleInfo.RoleID, rolelist)
     LuaDebug.Log("my direction: "..myDirect)
+    self.myDirect = myDirect
 
     local angle = self.Direction:get_transform():get_localEulerAngles():z() - (myDirect - 1)*90
     self.Direction:get_transform():set_localEulerAngles(LuaVector3.Create(0, 0, angle))
     self.TimerBack:set_spriteName(spriteName)
-    --self.TimerBack:get_gameObject():SetActive(true)
+end
 
-    MJTableCtrl.InitRoleList(self, myDirect, rolelist)
+function MJTableCtrl:EnterRoomSync(rolelist)
+    LuaDebug.Log("rolelist: "..#rolelist)
+    for i = 1, #rolelist do
+        LuaDebug.Log("roleList[i].roleid: "..rolelist[i].roleid)
+        LuaDebug.Log("roleList[i].direct: "..rolelist[i].direct)
+        LuaDebug.Log("roleList[i].rolename: "..rolelist[i].rolename)
+        LuaDebug.Log("roleList[i].integral: "..rolelist[i].integral)
+    end
+
+    MJTableCtrl.InitRoleList(self, self.myDirect, rolelist)
 end
 
 function MJTableCtrl:CardInfoSync(cardInfo)
@@ -128,10 +136,6 @@ end
 
 function MJTableCtrl.GetMyDirectSprite(roleId, roleList)
     for i = 1, #roleList do
-        LuaDebug.Log("roleList[i].roleid: "..roleList[i].roleid)
-        LuaDebug.Log("roleList[i].direct: "..roleList[i].direct)
-        LuaDebug.Log("roleList[i].rolename: "..roleList[i].rolename)
-        LuaDebug.Log("roleList[i].integral: "..roleList[i].integral)
         if roleId == roleList[i].roleid then
             if roleList[i].direct == enumDIRECTION_TYPE.DIRECTION_EAST then
                 return "compassdong", roleList[i].direct

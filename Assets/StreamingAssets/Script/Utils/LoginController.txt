@@ -10,7 +10,7 @@ require "Utils/LuaCDataMgr"
 LoginController = {}
 LoginPanel = {}
 function LoginController:Start()
-    -- PlayerPrefs.DeleteAll()
+    PlayerPrefs.DeleteAll()
     Client.Quality = GameQualityChecker:get_Instance():EstimateGameQualityLevel()
     if Client.Quality == 0 then
         local lightObj = GameObject.Find("Directional light (1)")
