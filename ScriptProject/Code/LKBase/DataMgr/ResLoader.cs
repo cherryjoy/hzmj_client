@@ -419,8 +419,8 @@ public class ResLoader
         data_path_ = PluginTool.SharedInstance().PersisitentDataPath;
         assetbundles_path_ = data_path_ + "AssetBundles/";
 #endif
-        //Debug.Log("data_path:" + data_path_);
-        //Debug.Log("assetbundles_path:" + assetbundles_path_);
+        Debug.Log("data_path:" + data_path_);
+        Debug.Log("assetbundles_path:" + assetbundles_path_);
     }
 
     private static void LoadDefault()

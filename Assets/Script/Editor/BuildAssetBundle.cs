@@ -19,6 +19,12 @@ public class BuildAssetBundle : EditorWindow
         window.Show();
     }
 
+    [MenuItem("CJ-TOOL/BuildAll")]
+    static void BuildAll()
+    {
+        CommandBuild.Build();
+    }
+
     bool lua_debug_ = false;
 
     // export the bundle path
@@ -66,84 +72,7 @@ public class BuildAssetBundle : EditorWindow
 
     bool[] select_build_combine_ = new bool[0];
     readonly BundleCombineNode[] combine_bunldes_ = new BundleCombineNode[]
-    {
-        //character
-        new BundleCombineNode("Character/Boss", "*.tga", bundle_combine_type.single_dir_unload),
-        new BundleCombineNode("Character/Drop", "*.tga", bundle_combine_type.all_in_one_unload),
-
-        new BundleCombineNode("Character/Fairy", "*.tga", bundle_combine_type.all_in_one_unload),
-        new BundleCombineNode("Character/Monster", "*.tga", bundle_combine_type.single_dir_unload),
-        new BundleCombineNode("Character/Npc", "*.tga", bundle_combine_type.all_in_one_unload),
-        new BundleCombineNode("Character/Player/model", "*.tga", bundle_combine_type.top_dir_unload),
-        new BundleCombineNode("Character/SceneModel", "*.tga", bundle_combine_type.all_in_one_unload),
-        new BundleCombineNode("Character/Navigation", "*.tga", bundle_combine_type.all_in_one_unload),
-        //new BundleCombineNode("Character/Materials/lightmap", "*.png", bundle_combine_type.all_in_one_unload),
-         
-        //mat
-        new BundleCombineNode("Character/Drop", "*.mat", bundle_combine_type.all_in_one_unload),
-        new BundleCombineNode("Character/Player/model", "*.mat", bundle_combine_type.top_dir_unload),
-        new BundleCombineNode("Character/Boss/model", "*.mat", bundle_combine_type.top_dir_unload),
-        new BundleCombineNode("Character/Monster/model/", "*.mat", bundle_combine_type.top_dir_unload),
-        new BundleCombineNode("Character/Npc", "*.mat", bundle_combine_type.all_in_one_unload),
-        new BundleCombineNode("Character/SceneModel", "*.mat", bundle_combine_type.all_in_one_unload),
-        new BundleCombineNode("Character/Navigation", "*.mat", bundle_combine_type.all_in_one_unload),
-        new BundleCombineNode("Character/Fairy", "*.mat", bundle_combine_type.all_in_one_unload),
-
-        //fbx
-        new BundleCombineNode("Character/Drop", "*.fbx", bundle_combine_type.single_dir_unload),
-        new BundleCombineNode("Character/Player", "*.fbx", bundle_combine_type.single_dir_unload),
-        new BundleCombineNode("Character/Boss", "*.fbx", bundle_combine_type.single_dir_unload),
-        new BundleCombineNode("Character/Monster", "*.fbx", bundle_combine_type.single_dir_unload),
-        new BundleCombineNode("Character/Npc", "*.fbx", bundle_combine_type.single_dir_unload),
-        new BundleCombineNode("Character/SceneModel", "*.fbx", bundle_combine_type.single_dir_unload),
-        new BundleCombineNode("Character/Fairy", "*.fbx", bundle_combine_type.single_dir_unload),
-        new BundleCombineNode("Character/Navigation", "*.fbx", bundle_combine_type.single_dir_unload),
-
-        //anim
-        new BundleCombineNode("Character/Drop", "*.anim", bundle_combine_type.single_dir_load),
-        new BundleCombineNode("Character/Player", "*.anim", bundle_combine_type.single_dir_load),
-        new BundleCombineNode("Character/Boss", "*.anim", bundle_combine_type.single_dir_load),
-        new BundleCombineNode("Character/Monster", "*.anim", bundle_combine_type.single_dir_load),
-        new BundleCombineNode("Character/Npc", "*.anim", bundle_combine_type.single_dir_load),
-        new BundleCombineNode("Character/SceneModel", "*.anim", bundle_combine_type.single_dir_load),
-        new BundleCombineNode("Character/Fairy", "*.anim", bundle_combine_type.single_dir_load),
-        new BundleCombineNode("Character/Navigation", "*.anim", bundle_combine_type.single_dir_load),
-
-        //prefab
-        new BundleCombineNode("Character/Drop", "*.prefab", bundle_combine_type.single_load),
-        new BundleCombineNode("Character/Player", "*.prefab", bundle_combine_type.single_load),
-        new BundleCombineNode("Character/Boss", "*.prefab", bundle_combine_type.single_load),
-        new BundleCombineNode("Character/Monster", "*.prefab", bundle_combine_type.single_load),
-        new BundleCombineNode("Character/Npc", "*.prefab", bundle_combine_type.single_load),
-        new BundleCombineNode("Character/SceneModel", "*.prefab", bundle_combine_type.single_load),
-        new BundleCombineNode("Character/Fairy", "*.prefab", bundle_combine_type.single_load),
-        new BundleCombineNode("Character/Navigation", "*.prefab", bundle_combine_type.single_load),
-
-        //asset
-        new BundleCombineNode("Character/Drop", "*.asset", bundle_combine_type.all_in_one_load),
-        new BundleCombineNode("Character/Player/action;Character/Player/prefab", "*.asset", bundle_combine_type.all_in_one_unload),
-        new BundleCombineNode("Character/Boss/action;Character/Boss/prefab", "*.asset", bundle_combine_type.all_in_one_unload),
-        new BundleCombineNode("Character/Monster/action;Character/Monster/model;Character/Monster/prefab", "*.asset", bundle_combine_type.all_in_one_unload),
-        new BundleCombineNode("Character/Npc/action;Character/Npc/prefab", "*.asset", bundle_combine_type.all_in_one_unload),
-        new BundleCombineNode("Character/SceneModel/action", "*.asset", bundle_combine_type.all_in_one_unload),
-        new BundleCombineNode("Character/Fairy/action;Character/Fairy/prefab", "*.asset", bundle_combine_type.all_in_one_unload),
-        new BundleCombineNode("Character/Navigation/action", "*.asset", bundle_combine_type.all_in_one_unload),
-
-        new BundleCombineNode("Character/Player/modelAsset", "*.asset", bundle_combine_type.top_dir_load),
-
-         //Effect
-        new BundleCombineNode("Effect/particle", "*.prefab", bundle_combine_type.single_load),
-
-        new BundleCombineNode("Effect", "*.mat", bundle_combine_type.single_dir_unload),
-        new BundleCombineNode("Effect", "*.fbx;*.obj", bundle_combine_type.single_dir_unload),
-
-        new BundleCombineNode("Effect", "*.asset", bundle_combine_type.all_in_one_load),
-        new BundleCombineNode("Effect/warning", "*.prefab", bundle_combine_type.single_dir_load),
-        new BundleCombineNode("Effect/texture;Effect/FlowLight;Effect/model", "*.tga;*.png", bundle_combine_type.all_in_one_unload),
-        new BundleCombineNode("Effect/animation", "*.anim;*.controller", bundle_combine_type.all_in_one_unload),
-        //new BundleCombineNode("Effect/model", "*.fbx;*.obj", bundle_combine_type.all_in_one_unload),
-        new BundleCombineNode("Effect/clothes;Effect/texture", "*.prefab", bundle_combine_type.all_in_one_load),
-       
+    {    
         //UI
         new BundleCombineNode("UI/Prefab", "*.prefab", bundle_combine_type.single_dir_load),
         new BundleCombineNode("UI/Prefab", "*.mat", bundle_combine_type.single_dir_unload),
@@ -159,50 +88,21 @@ public class BuildAssetBundle : EditorWindow
 
         new BundleCombineNode("UI/Fonts", "*.ttf", bundle_combine_type.single_load),
 
-        //scene
-        new BundleCombineNode("Scene/CameraPass", "*.prefab", bundle_combine_type.single_load),
-        
-        new BundleCombineNode("Scene/UI_Model", "*.prefab;*.tga;*.exr", bundle_combine_type.single_load),
-        new BundleCombineNode("Scene/UI_Model", "*.fbx;", bundle_combine_type.all_in_one_unload),
-        new BundleCombineNode("Scene/UI_Model", "*.mat;", bundle_combine_type.all_in_one_unload),
-
-        new BundleCombineNode("Scene/grass", "*.tga;*.mat", bundle_combine_type.single_load),
-        new BundleCombineNode("Scene/grass", "*.prefab", bundle_combine_type.all_in_one_load),
-        new BundleCombineNode("Scene/level", "*.asset;*.unity;!*_shadow.asset;!*_ld.asset", bundle_combine_type.single_load),
-        
-        new BundleCombineNode("Scene/public", "*.fbx;", bundle_combine_type.single_unload),
-        new BundleCombineNode("Scene/public", "*.tga;", bundle_combine_type.single_unload),
-        new BundleCombineNode("Scene/public", "*.mat;", bundle_combine_type.all_in_one_unload),
-        new BundleCombineNode("Scene/Rain;Scene/SunShine", "*.mat;", bundle_combine_type.all_in_one_unload),
-        new BundleCombineNode("Scene/Rain;Scene/SunShine", "*.png;*.bmp", bundle_combine_type.all_in_one_unload),
-
-        //Data
-        new BundleCombineNode("Data", "*.asset", bundle_combine_type.all_in_one_load),
-
         //Music
         new BundleCombineNode("Music", "*.wav;*.mp3", bundle_combine_type.single_load),
 
         //Material
-        new BundleCombineNode("Material;Character/Materials", "*.mat", bundle_combine_type.all_in_one_load),
-        new BundleCombineNode("Material;Character/Materials", "*.tga;*.png", bundle_combine_type.all_in_one_load),
-        new BundleCombineNode("Character/Materials", "*.asset", bundle_combine_type.all_in_one_load),
+        new BundleCombineNode("Material", "*.mat", bundle_combine_type.all_in_one_load),
+        new BundleCombineNode("Material", "*.tga;*.png", bundle_combine_type.all_in_one_load),
 
         //shader
-        new BundleCombineNode("", "*.shader;*.cginc", bundle_combine_type.all_in_one_unload, 1, "shader"),
-       
-        //"Login_interface"
-        new BundleCombineNode("Login_interface", "*.png;*.prefab", bundle_combine_type.single_load),
-        new BundleCombineNode("Login_interface", "*.asset", bundle_combine_type.all_in_one_unload),
-        new BundleCombineNode("Login_interface", "*.mat", bundle_combine_type.all_in_one_unload),
-        new BundleCombineNode("Login_interface", "*.controller", bundle_combine_type.all_in_one_unload),
-        new BundleCombineNode("Login_interface", "*.anim", bundle_combine_type.all_in_one_unload),
+        new BundleCombineNode("Shader", "*.shader;*.cginc", bundle_combine_type.all_in_one_unload, 1, "shader"),
     };
 
     //需要单独加载的文件
     Dictionary<string, string> single_bundles_ = new Dictionary<string, string>
     {
         //<src_file, dest_file>
-        {"UI/Atlas/Bit32/JoyStickAtlas.prefab|UI/Atlas/JoyStickAtlas.prefab", "UI/Atlas/JoyStickAtlas"},
         {"UI/Prefab/ToolsUI/MessageBox.prefab|UI/Prefab/ToolsUI/MessageBox.prefab", "UI/Prefab/ToolsUI/MessageBox"},
     };
 
@@ -320,23 +220,6 @@ public class BuildAssetBundle : EditorWindow
     string check_depends_ = string.Empty;
     void DrawTools()
     {
-        if (GUILayout.Button("Check Env Data name"))
-        {
-            List<string> files = GetAllResourceString("Scene/level", "*.exr");
-            foreach (var f in files)
-            {
-                string s = f;
-                s = Path.Combine(resource_path_, s);
-                string pf = Path.GetFileNameWithoutExtension(s) + ".prefab";
-                if (File.Exists(Path.GetDirectoryName(s) + "/" + pf))
-                {
-                    NamePair np = new NamePair();
-                    np.ext = ".exr";
-                    np.path = s;
-                    ChangeFileName(np, ".exr", "_t");
-                }
-            }
-        }
         check_depends_ = GUILayout.TextField(check_depends_);
 
         if (GUILayout.Button("Check Dependency"))
@@ -469,35 +352,11 @@ public class BuildAssetBundle : EditorWindow
         {
             CollectComponent();
         }
-        if (GUILayout.Button("Test load"))
-        {
-            LoadAssetBundle(@"F:\new_arthur2\arthur2\Exports\csharp_script");
-            LoadAssetBundle(@"F:\new_arthur2\arthur2\Exports\shader");
-            AssetBundle ab = LoadAssetBundle(@"F:\new_arthur2\arthur2\Exports\Character_Player_model_Dajian_Weapon_Weapon_Dajian_t");
-            AssetBundle ab1 = LoadAssetBundle(@"F:\new_arthur2\arthur2\Exports\Character_Materials_lightmap_Light04");
-            ab_ = LoadAssetBundle(@"F:\new_arthur2\arthur2\Exports\Character_Player_model_Dajian_Weapon_Weapon_Dajian");
-            GameObject.Instantiate(ab_.mainAsset);
-            ab.Unload(false);
-            ab1.Unload(false);
-        }
-        if (GUILayout.Button("Test load 1"))
-        {
-            AssetBundle ab = LoadAssetBundle(@"E:\workspace\arthur2\build\client\windows\arthur2\assetbundles\character\scenemodel\prefab\scene_guangzudang");
-            //AssetBundle ab1 = LoadBundleFromFile(@"F:\new_arthur2\arthur2\Exports\Character_Materials_lightmap_Light04");
-            //GameObject.Instantiate(ab.LoadAsset(ab.GetAllAssetNames()[0]));
 
-            string[] names = ab.GetAllAssetNames();
-            for (int i = 0; i < names.Length; i++)
-            {
-                UnityEngine.Debug.Log(i + " " + names[i]);
-            }
-
-            ab.Unload(true);
-        }
-        if (GUILayout.Button("Build scene"))
-        {
-            BuildScene();
-        }
+        //if (GUILayout.Button("Build scene"))
+        //{
+        //    BuildScene();
+        //}
 
         if (GUILayout.Button("Build ScriptBundle"))
         {
@@ -505,10 +364,10 @@ public class BuildAssetBundle : EditorWindow
         }
     }
 
-    void BuildScene()
-    {
-        BuildPipeline.BuildStreamedSceneAssetBundle(scene_path_, export_path_ + "/level.unity3d", platform_);
-    }
+    //void BuildScene()
+    //{
+    //    BuildPipeline.BuildStreamedSceneAssetBundle(scene_path_, export_path_ + "/level.unity3d", platform_);
+    //}
 
     void BuildBundles()
     {
@@ -1112,6 +971,8 @@ public class BuildAssetBundle : EditorWindow
         SaveAssetHashFile(asset_hash_name_, asset_hash_dict_);
 
         AutherFile.LKFile_UnInit();
+
+        UnityEngine.Debug.Log("Pak All Finish");
     }
     
     void SaveAssetHashFile(string fileName, Dictionary<int, string> hashValue)
@@ -1169,13 +1030,10 @@ public class BuildAssetBundle : EditorWindow
     FileInfo[] GetSmallAssetBundles()
     {
         string[] assetbundlesBuffer ={"/music/ui/buttonclick_13",
-                                     "/ui/atlas/bit16/ghost",
+                                     "/ui/atlas/bit16/Emotion",
                                      "/ui/atlas/bit32/baseui",
-                                     "/ui/atlas/bit32/battleui32",
-                                     "/ui/atlas/bit32/fx_addtive_02",
                                      "/ui/atlas/bit32/login",
                                      "/ui/fonts/msyh",
-                                     "/ui/prefab/update_prefab",
                                      "/ui/prefab/toolsui/messagebox",
                                      "/assetbundles","/shader"};
 
@@ -1191,16 +1049,6 @@ public class BuildAssetBundle : EditorWindow
                     assetbundles.Add(fi);
                 }
             }
-//             FileInfo[] files = di.GetFiles("*.*", SearchOption.AllDirectories);
-// 
-// 
-//             for (int i = 0; i < files.Length; i++)
-//             {
-//                 if (files[i].Name.EndsWith(".manifest"))
-//                     continue;
-// 
-//                 assetbundles.Add(files[i]);
-//             }
         }
         return assetbundles.ToArray();
     }
@@ -1287,32 +1135,7 @@ public class BuildAssetBundle : EditorWindow
     }
 
     Dictionary<string, BundleNode> clip_bundles_ = new Dictionary<string, BundleNode>();
-    /*
-    void CombineCharacterBundles(BundleCombineNode combineNode)
-    {
-        List<string> files = GetAllAssetsString("Resources/" + combineNode.path_, combineNode.ext_, true);
-        foreach (string filename in files)
-        {
-            string assetPath = ToAssetPath(filename);
-            
-            List<string> clipPathFilenameArray = GetClipPathFileNameArray(assetPath);
-            if (clipPathFilenameArray == null || clipPathFilenameArray.Count == 0)
-            {
-                continue;
-            }
-
-            BundleNode bundle_node = BuildBundleNode(assetPath, clipPathFilenameArray);
-            int count = bundle_node.asset_list_.Count;
-            for(int i = 0; i < count; i++)
-            {
-                EditorUtility.DisplayProgressBar("Combine Character", combineNode.path_, (float)i / (float)count);
-                SetBundleName(bundle_node.asset_list_[i], bundle_node.name_, true);
-            }
-
-            EditorUtility.ClearProgressBar();
-        }
-    }
-    */
+ 
     BundleNode BuildBundleNode(string assetPath, List<string> clipPathFilenameArray)
     {
         BundleNode bundle_node = new BundleNode();
@@ -1349,36 +1172,7 @@ public class BuildAssetBundle : EditorWindow
 
         return bundle_node;
     }
-    /*
-    List<string> GetClipPathFileNameArray(string assetPath)
-    {
-        List<string> clipPathFileNameArray = new List<string>();
-        GameObject prefab = AssetDatabase.LoadAssetAtPath(assetPath, typeof(GameObject)) as GameObject;
-        AnimationCallback animation = prefab.GetComponent<AnimationCallback>();
-        if (animation != null)
-        {
-           if (animation.stateMachineData != null)
-            {
-                SimpleStateMachineData.SimpleStateData[] simpleStateData = animation.stateMachineData.statesData;
-                foreach (SimpleStateMachineData.SimpleStateData data in simpleStateData)
-                {
-                    clipPathFileNameArray.AddRange(data.clipPathFilenameArray);
-                }
-            }
-            else if (animation.overrideStateMachineData != null)
-            {
-                clipPathFileNameArray = new List<string>(animation.overrideStateMachineData.overrideClipPathFilenameArray);
-            }
-        }
-
-        clipPathFileNameArray.RemoveAll(str =>
-            {
-                return str.Length == 0;
-            });
-
-        return clipPathFileNameArray;
-    }
-    */
+  
     void CombineAtlas(BundleCombineNode combineNode)
     {
         int bitsset = (int)combineNode.combine_type_ & LOAD_BITSIT;
@@ -1656,9 +1450,6 @@ public class BuildAssetBundle : EditorWindow
                 continue;
 
             string assetPath = ToAssetPath(filepath);
-            if (assetPath.StartsWith("Assets/Resources/Scene/scene_") || assetPath.StartsWith("Assets/Resources/Scene/level/"))  //scene files.
-                continue;
-
             EditorUtility.DisplayProgressBar("CheckAssetWithNoneAssetBundleName", assetPath, (float)i / count);
 
             AssetImporter assetImporter = AssetImporter.GetAtPath(assetPath);

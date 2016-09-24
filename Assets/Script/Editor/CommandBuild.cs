@@ -131,6 +131,7 @@ public class CommandBuild
 
     static void CopyDir(string src, string dest, List<string> exclude_files)
     {
+        UnityEngine.Debug.Log("src: " + src + ", dest: " + dest);
         if (Directory.Exists(dest))
             Directory.Delete(dest, true);
 
