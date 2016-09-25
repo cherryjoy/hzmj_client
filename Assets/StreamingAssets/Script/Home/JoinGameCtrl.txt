@@ -172,4 +172,6 @@ function JoinGameCtrl:EnterRoom()
     end
     LuaDebug.Log("passwd: "..passwd)
     ClientSendMsg.SendEnterRoom(Client.RoleInfo.RoleID, tonumber(passwd))
+
+    self.gameObject:Destroy1()
 end

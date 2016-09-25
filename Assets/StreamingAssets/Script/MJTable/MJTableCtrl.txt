@@ -39,9 +39,9 @@ function MJTableCtrl:EnterRoomSync(rolelist)
 end
 
 function MJTableCtrl:CardInfoSync(cardInfo)
-    if #(cardInfo.owncards.handcard) ~= 14 then
-        return
-    end
+    --if #(cardInfo.owncards.handcard) ~= 14 then
+    --    return
+    --end
 
     -- 同步自己的牌
     if cardInfo.owncards ~= nil then
@@ -71,8 +71,9 @@ function MJTableCtrl:CardInfoSync(cardInfo)
 
     -- 同步其他人的牌
     for i = 1, #(cardInfo.othercards) do
+        LuaDebug.Log("othercards roleid: "..cardInfo.othercards[i].roleid..", handnum: "..cardInfo.othercards[i].handnum)
         for j = 1, 4 do
-            if self["Drect"..j].roleId == cardInfo.othercards[i] then
+            if self["Drect"..j].roleId == cardInfo.othercards[i].roleid then
                 LuaDebug.Log("drect "..j.." : "..cardInfo.othercards[i].handnum)
                 self["Drect"..j].CardInfoSync(self["Drect"..j], cardInfo.othercards[i].handnum)
             end

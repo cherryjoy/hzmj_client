@@ -23,7 +23,7 @@ function TableBottom:CardInfoSync(handcard)
         LuaDebug.Log("card.type_id: "..card.type_id..", card.code_id: "..card.code_id)
         local ref = nil
         if not self.IsInit then
-            if i == #handcard then
+            if i == 14 then
                 ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCard",self.CardNew)
                 ref.gameObject:set_name("MyCard")
                 ref.Message:target(ref.gameObject)
@@ -39,7 +39,7 @@ function TableBottom:CardInfoSync(handcard)
 
         ref.Init(ref, card, i)
 
-        if i == self.HandCardNum then
+        if i == 14 then
             ref.Shinning:set_enabled(true)
             ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(768, 0, 0))
         end
