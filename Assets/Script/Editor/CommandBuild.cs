@@ -23,7 +23,7 @@ public class CommandBuild
 
     public static void OneKeyBuildWindows()
     {
-        OneKeyBuild("F:\\MaJiang\\hzmj_client", BuildTarget.StandaloneWindows, false, true, false, true, true, true, true);
+        OneKeyBuild("F:\\MaJiang\\hzmj_client\\Traget", BuildTarget.StandaloneWindows, false, true, false, true, true, true, true);
     }
 
     static void OneKeyBuild(string target_path, BuildTarget platform, bool lua_debug, bool assetbundle, 
