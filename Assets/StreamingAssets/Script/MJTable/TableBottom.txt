@@ -4,6 +4,7 @@ function TableBottom:Start( )
     self.IsInit = false
     self.PlayNum = 0
     self.LeftNum = 0
+    self.CanPlayCard = false
 
     Client.TableChooseCard = Client.TableChooseCard + {self, TableBottom.ChooseCard}
     Client.TablePlayCardEnd = Client.TablePlayCardEnd + {self, TableBottom.PlayCardEnd}
@@ -43,6 +44,8 @@ function TableBottom:CardInfoSync(handcard)
         if i == 14 then
             ref.Shinning:set_enabled(true)
             ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(768, 0, 0))
+
+            self.CanPlayCard = true
         end
     end
 
@@ -96,6 +99,10 @@ function TableBottom:SetLeftCard(card)
 end
 
 function TableBottom:ChooseCard(i)
+    if not self.CanPlayCard then
+        return
+    end
+
     if self.lastIndex ~= nil and self.lastIndex ~= i then
         -- 回归原位
         self["Card"..self.lastIndex].ResetPos(self["Card"..self.lastIndex])
@@ -105,6 +112,7 @@ function TableBottom:ChooseCard(i)
     if i == self.lastIndex then
         ClientSendMsg.SendPlayCard(i, self["Card"..i].card.type_id, self["Card"..i].card.code_id)
         --self["Card"..i].gameObject:SetActive(false)
+        self.CanPlayCard = false
         Client.BottomPlayCard:Do(self.roleId, i, self["Card"..i].card, 0)
 
         self.lastIndex = nil
@@ -176,6 +184,8 @@ function TableBottom:GetCard(card)
 
     self.ShineCard.Shinning:set_enabled(true)
     self.ShineCard.gameObject:get_transform():set_localPosition(LuaVector3.Create(768, 0, 0))
+
+    self.CanPlayCard = true
 end
 
 function TableBottom:IsPengCard(card)

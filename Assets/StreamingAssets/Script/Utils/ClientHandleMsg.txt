@@ -43,8 +43,8 @@ HandleFuncs[enumMSGID_MODULE_05.ID_ROLE_RES] = function(data, dataLength)
     Client.RoleInfo = {}
     Client.RoleInfo.RoleID = pbMsg.RoleID
 
-    local ref = LuaUIViewCtr.OpenUIHasBg("Home/MainUI")
-    ref.Init(ref, pbMsg.RoleName, pbMsg.RoleID, pbMsg.room_pass)
+    LuaUIViewCtr.UIPanel["MainUI"] = LuaUIViewCtr.OpenUIHasBg("Home/MainUI")
+    LuaUIViewCtr.UIPanel["MainUI"].Init(LuaUIViewCtr.UIPanel["MainUI"], pbMsg.RoleName, pbMsg.RoleID, pbMsg.room_pass)
 
     Client.LoginSuccess:Do()
 
@@ -139,6 +139,9 @@ HandleFuncs[enumMSGID_MODULE_05.ID_GAME_ROOM_ENTER_RES] = function(data,dataLeng
         LuaUIViewCtr.UIPanel["MJTableUI"] = ref
         ClientSendMsg.SendReadyRoom()
         LuaUIViewCtr.UIPanel["MJTableUI"].Init(LuaUIViewCtr.UIPanel["MJTableUI"], data.passwd, data.amount, data.horse, 5, data.used, data.rolelist)
+
+        -- 关闭主界面
+        LuaUIViewCtr.UIPanel["MainUI"].gameObject:SetActive(false)
     end
 
     --data.addition
@@ -161,6 +164,8 @@ HandleFuncs[enumMSGID_MODULE_05.ID_GAME_DELETE_ROOM_RES] = function(data, dataLe
     local data = LuaProto.deserialize(PBMsgGameDeleteRoomRes, data, dataLength)
 
     LuaDebug.Log("result: "..data.result)
+
+    LuaUIViewCtr.UIPanel["MainUI"].gameObject:SetActive(true)
 
     LuaUIViewCtr.UIPanel["MJTableUI"].gameObject:Destroy1()
     LuaUIViewCtr.UIPanel["MJTableUI"] = nil
