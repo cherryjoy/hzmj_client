@@ -9,9 +9,9 @@ EditorBuildSettings:
     path: Assets/Update.unity
   - enabled: 1
     path: Assets/Login.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/scene.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/GameHall.unity
   - enabled: 0
     path: Assets/Resources/Scene/level/scene_barracksover.unity

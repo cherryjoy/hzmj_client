@@ -1,7 +1,7 @@
 CreateRoomCtrl = {}
 
 function CreateRoomCtrl:Start( )
-    local mt=TextureMgr.get_Instance():LoadTexture("Home/Z_jiaruyouxitangchuang", true)
+    local mt=TextureMgr.get_Instance():LoadTexture("Home/chuangjianfangjian", true)
     self.Texture:set_material(mt)
 
     self.jushu = 8

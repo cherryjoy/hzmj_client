@@ -152,6 +152,13 @@ class UpdateInitController : MonoBehaviour
 
         
 #if  UNITY_ANDROID
+#if  ASSETBUNDLE
+        //PluginTool.SharedInstance().CopyAssetFromPackageToSdcard("temp/data", persisitentDataPath); // ? 在lua中以及有拷贝了，为啥这儿还有?
+        //PluginTool.SharedInstance().CopyAssetFromPackageToSdcard("temp/index", persisitentDataPath);
+        //PluginTool.SharedInstance().CopyAssetFromPackageToSdcard("temp/fragment", persisitentDataPath);
+         
+        StartLua(true);
+#else
         string path = "jar:file://" + Application.dataPath + "!/assets/" + "StreamingFile.txt";
         StartCoroutine(EasyDownload(path, (www) =>
         {
@@ -159,26 +166,7 @@ class UpdateInitController : MonoBehaviour
             www.Dispose();
             CopyAssetToSdcard(text, persisitentDataPath);
         }));
-        /*
-        TextAsset textAsset = Resources.Load("StreamingFile") as TextAsset;
-        string[] lines = textAsset.text.Split(new char[] { '\n' });
-        for (int i = 0; i < lines.Length; ++i)
-        {
-            string line = lines[i];
-            line = line.Replace("\n", "");
-            line = line.Trim();
-            if (!string.IsNullOrEmpty(line))
-            {
-                Debug.Log("file: " + line);
-                PluginTool.SharedInstance().CopyAssetFromPackageToSdcard(line, persisitentDataPath);
-            }
-        }*/
-
-        //PluginTool.SharedInstance().CopyAssetFromPackageToSdcard("temp/data", persisitentDataPath);
-        //PluginTool.SharedInstance().CopyAssetFromPackageToSdcard("temp/index", persisitentDataPath);
-        //PluginTool.SharedInstance().CopyAssetFromPackageToSdcard("temp/fragment", persisitentDataPath);
-
-        //StartLua(true);
+#endif
 #else
         StartLua(true);
 #endif
@@ -197,10 +185,6 @@ class UpdateInitController : MonoBehaviour
                 PluginTool.SharedInstance().CopyAssetFromPackageToSdcard(line, destPath);
             }
         }
-
-        PluginTool.SharedInstance().CopyAssetFromPackageToSdcard("temp/data", destPath);
-        PluginTool.SharedInstance().CopyAssetFromPackageToSdcard("temp/index", destPath);
-        PluginTool.SharedInstance().CopyAssetFromPackageToSdcard("temp/fragment", destPath);
 
         StartLua(true);
     }
@@ -357,11 +341,11 @@ class UpdateInitController : MonoBehaviour
             Destroy(PlatformSDKObj);
 
         }
-        GameObject HeadPortraitController = GameObject.Find("HeadPortraitController");
+        /*GameObject HeadPortraitController = GameObject.Find("HeadPortraitController");
         if (HeadPortraitController != null)
         {
             Destroy(HeadPortraitController);
-        }
+        }*/
 
         ResLoader.Close();
         CDataMgr.Instance.Clear();

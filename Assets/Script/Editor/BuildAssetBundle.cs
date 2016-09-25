@@ -19,10 +19,22 @@ public class BuildAssetBundle : EditorWindow
         window.Show();
     }
 
-    [MenuItem("CJ-TOOL/一键导出资源")]
+    [MenuItem("CJ-TOOL/一键导出Win资源")]
     static void OneKeyBuildWin()
     {
-        CommandBuild.OneKeyBuildWindows();
+        CommandBuild.OneKeyBuild("F:\\MaJiang\\hzmj_client\\TragetWin", BuildTarget.StandaloneWindows, false, true, false, true, true, true, true);
+    }
+
+    [MenuItem("CJ-TOOL/一键导出Android资源")]
+    static void OneKeyBuildAndroid()
+    {
+        CommandBuild.OneKeyBuild("F:\\MaJiang\\hzmj_client\\TragetAndroid", BuildTarget.Android, false, true, false, true, true, true, true);
+    }
+
+    [MenuItem("CJ-TOOL/一键导出IOS资源")]
+    static void OneKeyBuildIOS()
+    {
+        CommandBuild.OneKeyBuild("F:\\MaJiang\\hzmj_client\\TragetIOS", BuildTarget.iOS, false, true, false, true, true, true, true);
     }
 
     bool lua_debug_ = false;

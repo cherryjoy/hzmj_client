@@ -1,7 +1,7 @@
 JoinGameCtrl = {}
 
 function JoinGameCtrl:Start( )
-    local mt=TextureMgr.get_Instance():LoadTexture("Home/Z_jiaruyouxitangchuang", true)
+    local mt=TextureMgr.get_Instance():LoadTexture("Home/jiaruyouxi", true)
     self.Texture:set_material(mt)
     self.index = 1
     self.number = {}

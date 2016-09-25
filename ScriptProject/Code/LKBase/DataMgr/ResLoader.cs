@@ -91,8 +91,8 @@ public class ResLoader
     }
 
     static string data_path_ = string.Empty;
-    static string assetbundles_path_ = string.Empty;
-    static string asset_path_prefix_ = "assets/resources/";
+    static string assetbundles_path_ = string.Empty; //目前没有用到
+    static string asset_path_prefix_ = "assets/resources/"; 
 
     class AssetNameNode
     {
@@ -420,7 +420,7 @@ public class ResLoader
         assetbundles_path_ = data_path_ + "AssetBundles/";
 #endif
         Debug.Log("data_path:" + data_path_);
-        Debug.Log("assetbundles_path:" + assetbundles_path_);
+        //Debug.Log("assetbundles_path:" + assetbundles_path_);
     }
 
     private static void LoadDefault()

@@ -21,12 +21,7 @@ public class CommandBuild
         OneKeyBuild(target_path, platform, lua_debug, assetbundle, clean, build_lua, export_data, csharp_script, set_bundlename);    
     }
 
-    public static void OneKeyBuildWindows()
-    {
-        OneKeyBuild("F:\\MaJiang\\hzmj_client\\Traget", BuildTarget.StandaloneWindows, false, true, false, true, true, true, true);
-    }
-
-    static void OneKeyBuild(string target_path, BuildTarget platform, bool lua_debug, bool assetbundle, 
+    public static void OneKeyBuild(string target_path, BuildTarget platform, bool lua_debug, bool assetbundle, 
         bool clean, bool build_lua, bool export_data, bool csharp_script, bool set_bundlename)
     {
         Debug.Log("BuildTarget-" + platform.ToString() + "\n" +
