@@ -28,7 +28,7 @@ function MyCard:ResetPos()
 end
 
 function MyCard:Card_OnClick()
-    LuaDebug.Log("out card, type: "..self.card.type_id..", id: "..self.card.code_id)
+    LuaDebug.Log("out card, type: "..self.card.type_id..", id: "..self.card.code_id..", index: "..self.index)
     Client.TableChooseCard:Do(self.index)
 end
 

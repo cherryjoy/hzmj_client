@@ -36,6 +36,8 @@ function MJTableCtrl:EnterRoomSync(rolelist)
     end
 
     MJTableCtrl.InitRoleList(self, self.myDirect, rolelist)
+
+    self.roleList = rolelist
 end
 
 function MJTableCtrl:CardInfoSync(cardInfo)
@@ -171,8 +173,10 @@ function MJTableCtrl:InitRoleList(myDirect, roleList)
 end
 
 function MJTableCtrl:PlayCard(roleId, index, card, result)
-    LuaDebug.Log("roleId: "..roleId..", index: "..index..", play card, type: "..card.type_id..", id: "..card.code_id..", result: "..result)
+    LuaDebug.Log("roleId: "..roleId..", play card, type: "..card.type_id..", id: "..card.code_id)
     self.TowardCard:SetActive(true)
+
+    MJTableCtrl.DoCountDownFinish(self)
     -- 判断当前的牌是否能碰、杠
     if result ~= 0 then
         local peng = self.Drect1.IsPengCard(self.Drect1, card)
@@ -188,8 +192,15 @@ function MJTableCtrl:PlayCard(roleId, index, card, result)
     end
 end
 
-function MJTableCtrl:GetCard(card)
-    LuaDebug.Log("get card, type: "..card.type_id..", id: "..card.code_id)
+function MJTableCtrl:GetCard(roleId, card)
+    LuaDebug.Log("roleid: "..roleId)
+    if card ~= nil then
+        LuaDebug.Log("get card, type: "..card.type_id..", id: "..card.code_id)
+    end
+
+    local spriteName, myDirect = MJTableCtrl.GetMyDirectSprite(roleId, self.roleList)
+    LuaDebug.Log("my direction: "..myDirect)
+    self.TimerBack:set_spriteName(spriteName)
     self.TimerBack:get_gameObject():SetActive(true)
     -- 倒计时
     self.CD = 15
@@ -200,7 +211,12 @@ function MJTableCtrl:GetCard(card)
         self.timer = Timer.NewEvent(self,10,150,MJTableCtrl.DoCountDown, false, MJTableCtrl.DoCountDownFinish)
     end
 
-    self.Drect1.GetCard(self.Drect1, card)
+    -- 判断是哪方摸牌
+    for i = 1, 4 do
+        if self["Drect"..i].roleId == roleId then
+            self["Drect"..i].GetCard(self["Drect"..i], card)
+        end
+    end
 end
 
 function MJTableCtrl:DoCountDown()
@@ -210,6 +226,7 @@ end
 
 function MJTableCtrl:DoCountDownFinish()
     if self.timer ~= nil then
+        Timer.RemoveEvent(self,self.timer)
         self.timer = nil
     end
 

@@ -27,6 +27,7 @@ function TableBottom:CardInfoSync(handcard)
                 ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCard",self.CardNew)
                 ref.gameObject:set_name("MyCard")
                 ref.Message:target(ref.gameObject)
+                self.ShineCard = ref
             else
                 ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCard",self.Grid:get_gameObject())
                 ref.gameObject:set_name("MyCard")
@@ -147,7 +148,8 @@ function TableBottom:PlayCardEnd(i)
     self["Card"..self.HandCardNum].gameObject:SetActive(false)
     self.PlayNum = self.PlayNum + 1
 
-    LuaUIViewCtr.UIPanel["MJTableUI"].GetCard(LuaUIViewCtr.UIPanel["MJTableUI"], card)
+    --LuaUIViewCtr.UIPanel["MJTableUI"].GetCard(LuaUIViewCtr.UIPanel["MJTableUI"], card)
+    self.HandCardNum = self.HandCardNum - 1
 end
 
 function TableBottom:SetHeadInfo(info, toward)
@@ -159,15 +161,21 @@ function TableBottom:SetHeadInfo(info, toward)
 end
 
 function TableBottom:GetCard(card)
-    ref = self["Card"..self.HandCardNum]
-    ref.gameObject:SetActive(true)
-    --ref.gameObject:set_name("MyCard")
-    --ref.Message:target(ref.gameObject)
+    self.HandCardNum = self.HandCardNum + 1
+    if self.ShineCard == nil then
+        ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCard",self.CardNew)
+        ref.gameObject:set_name("MyCard")
+        ref.Message:target(ref.gameObject)
+        self["Card"..self.HandCardNum] = ref
+        self.ShineCard = ref
+    else
+        self.ShineCard.gameObject:SetActive(true)
+    end
 
-    ref.Init(ref, card, self.HandCardNum)
+    self.ShineCard.Init(self.ShineCard, card, self.HandCardNum)
 
-    ref.Shinning:set_enabled(true)
-    ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(768, 0, 0))
+    self.ShineCard.Shinning:set_enabled(true)
+    self.ShineCard.gameObject:get_transform():set_localPosition(LuaVector3.Create(768, 0, 0))
 end
 
 function TableBottom:IsPengCard(card)

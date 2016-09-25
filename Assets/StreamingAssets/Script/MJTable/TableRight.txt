@@ -104,3 +104,7 @@ function TableRight:SetHeadInfo(info, toward)
     ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(420, 50, 0))
     ref.Init(ref, info)
 end
+
+function TableRight:GetCard(card)
+
+end
