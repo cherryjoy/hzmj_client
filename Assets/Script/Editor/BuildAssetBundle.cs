@@ -79,10 +79,10 @@ public class BuildAssetBundle : EditorWindow
         new BundleCombineNode("UI/Atlas/Bit32", "*.prefab", bundle_combine_type.atlas),
         new BundleCombineNode("UI/Atlas/Bit16", "*.prefab", bundle_combine_type.atlas),
 
-        new BundleCombineNode("UI/Icon", "*.png;*.jpg", bundle_combine_type.single_dir_load),
-        new BundleCombineNode("UI/Icon/ItemIcon", "*.png;*.jpg", bundle_combine_type.single_load),
+        //new BundleCombineNode("UI/Icon", "*.png;*.jpg", bundle_combine_type.single_dir_load),
+        //new BundleCombineNode("UI/Icon/ItemIcon", "*.png;*.jpg", bundle_combine_type.single_load),
 
-        new BundleCombineNode("UI/Res", "*.asset", bundle_combine_type.all_in_one_load),
+        //new BundleCombineNode("UI/Res", "*.asset", bundle_combine_type.all_in_one_load),
         new BundleCombineNode("UI/Texture", "*.tga;*.jpg;*.png", bundle_combine_type.all_in_one_load),
         new BundleCombineNode("UI/Texture", "*.mat", bundle_combine_type.all_in_one_unload),
 
