@@ -70,8 +70,9 @@ function MJTableCtrl:CardInfoSync(cardInfo)
     self.Drect1.LeftCardSync(self.Drect1, cardInfo.owncards)
 
     -- 同步其他人的牌
+    LuaDebug.Log("#(cardInfo.othercards): "..#(cardInfo.othercards))
     for i = 1, #(cardInfo.othercards) do
-        LuaDebug.Log("othercards roleid: "..cardInfo.othercards[i].roleid..", handnum: "..cardInfo.othercards[i].handnum)
+        --LuaDebug.Log("othercards roleid: "..cardInfo.othercards[i].roleid..", handnum: "..cardInfo.othercards[i].handnum)
         for j = 1, 4 do
             if self["Drect"..j].roleId == cardInfo.othercards[i].roleid then
                 LuaDebug.Log("drect "..j.." : "..cardInfo.othercards[i].handnum)
@@ -170,17 +171,19 @@ function MJTableCtrl:InitRoleList(myDirect, roleList)
 end
 
 function MJTableCtrl:PlayCard(roleId, index, card, result)
+    LuaDebug.Log("roleId: "..roleId..", index: "..index..", play card, type: "..card.type_id..", id: "..card.code_id..", result: "..result)
     self.TowardCard:SetActive(true)
     -- 判断当前的牌是否能碰、杠
     if result ~= 0 then
-
+        local peng = self.Drect1.IsPengCard(self.Drect1, card)
+        local gang = self.Drect1.IsGangGard(self.Drect1, card)
+        LuaDebug.Log("peng: "..peng..", gang: "..gang)
     end
 
-    self.Drect1.PlayCard(self.Drect1, index, card)
+    --self.Drect1.PlayCard(self.Drect1, index, card)
     for i = 1, 4 do
         if self["Drect"..i].roleId == roleId then
-            LuaDebug.Log("play card, type: "..card.type_id..", id: "..card.code_id)
-            --self["Drect"..i].PlayCard(self["Drect"..i], index, card)
+            self["Drect"..i].PlayCard(self["Drect"..i], index, card)
         end
     end
 end

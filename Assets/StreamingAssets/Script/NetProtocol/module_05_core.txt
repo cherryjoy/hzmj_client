@@ -2754,6 +2754,9 @@ function PBMsgGameGetCardRes.DeSerialize(obj)
 	local fieldCount = deserialize_int32()
 	local option,optionLength = deserialize_optional()
 	if(has_optional_flag(0,optionLength,option)) then
+		obj.roleid = deserialize_int32()
+	end
+	if(has_optional_flag(1,optionLength,option)) then
 		local cardSize = deserialize_data_length()
 		local cardStartPos = get_position()
 		obj.card = PBCard.Create()
@@ -2764,15 +2767,23 @@ function PBMsgGameGetCardRes.DeSerialize(obj)
 end
 
 function PBMsgGameGetCardRes.Serialize(obj)
-	local fieldCount = 1
+	local fieldCount = 2
 	serialize_int32(fieldCount)
 	local flag = {}
-	if(obj.card ~= nil) then
+	if(obj.roleid ~= nil) then
 		flag[1] = true
 	else
 		flag[1] = false
 	end
+	if(obj.card ~= nil) then
+		flag[2] = true
+	else
+		flag[2] = false
+	end
 	serialize_optional(flag)
+	if(obj.roleid ~= nil) then
+		serialize_int32(obj.roleid)
+	end
 	if(obj.card ~= nil) then
 		local WaitPos = get_position()
 	set_position(WaitPos+4)
@@ -2787,6 +2798,9 @@ end
 
 function PBMsgGameGetCardRes.GetSize(obj)
 	local size = 0
+	if (obj.roleid ~= nil) then
+		size = size + 4
+	end
 	if (obj.card ~= nil) then
 		size = size + obj.card:GetSize()
 	end
