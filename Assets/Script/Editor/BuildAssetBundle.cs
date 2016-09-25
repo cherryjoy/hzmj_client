@@ -19,10 +19,10 @@ public class BuildAssetBundle : EditorWindow
         window.Show();
     }
 
-    [MenuItem("CJ-TOOL/BuildAll")]
-    static void BuildAll()
+    [MenuItem("CJ-TOOL/一键导出资源")]
+    static void OneKeyBuildWin()
     {
-        CommandBuild.Build();
+        CommandBuild.OneKeyBuildWindows();
     }
 
     bool lua_debug_ = false;

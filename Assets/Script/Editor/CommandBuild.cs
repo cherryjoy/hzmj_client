@@ -18,8 +18,19 @@ public class CommandBuild
         bool csharp_script = stringToBool(getParam("csharp_script"));
         bool set_bundlename = stringToBool(getParam("set_bundlename"));
 
-        Debug.Log("BuildTarget-" + platform.ToString() + "\n" + 
-                "target_path-" + target_path);
+        OneKeyBuild(target_path, platform, lua_debug, assetbundle, clean, build_lua, export_data, csharp_script, set_bundlename);    
+    }
+
+    public static void OneKeyBuildWindows()
+    {
+        OneKeyBuild("F:\\MaJiang\\hzmj_client", BuildTarget.StandaloneWindows, false, true, false, true, true, true, true);
+    }
+
+    static void OneKeyBuild(string target_path, BuildTarget platform, bool lua_debug, bool assetbundle, 
+        bool clean, bool build_lua, bool export_data, bool csharp_script, bool set_bundlename)
+    {
+        Debug.Log("BuildTarget-" + platform.ToString() + "\n" +
+               "target_path-" + target_path);
 
         BuildAssetBundle window = EditorWindow.GetWindow<BuildAssetBundle>();
         window.InitPath();
@@ -35,7 +46,7 @@ public class CommandBuild
                 FileUtil.DeleteFileOrDirectory(window.assetbundles_path);
                 CreateFolder(window.assetbundles_path);
             }
-        
+
             //0.export dependency.
             if (csharp_script)
             {
