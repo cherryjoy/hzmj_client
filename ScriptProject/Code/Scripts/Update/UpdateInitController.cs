@@ -153,9 +153,10 @@ class UpdateInitController : MonoBehaviour
         
 #if  UNITY_ANDROID
 #if  ASSETBUNDLE
-        //PluginTool.SharedInstance().CopyAssetFromPackageToSdcard("temp/data", persisitentDataPath); // ? 在lua中以及有拷贝了，为啥这儿还有?
-        //PluginTool.SharedInstance().CopyAssetFromPackageToSdcard("temp/index", persisitentDataPath);
-        //PluginTool.SharedInstance().CopyAssetFromPackageToSdcard("temp/fragment", persisitentDataPath);
+        // 这儿本意是想要拷贝一份small资源出来放在assets/temp目录下
+        PluginTool.SharedInstance().CopyAssetFromPackageToSdcard("temp/data", persisitentDataPath);
+        PluginTool.SharedInstance().CopyAssetFromPackageToSdcard("temp/index", persisitentDataPath);
+        PluginTool.SharedInstance().CopyAssetFromPackageToSdcard("temp/fragment", persisitentDataPath);
          
         StartLua(true);
 #else
