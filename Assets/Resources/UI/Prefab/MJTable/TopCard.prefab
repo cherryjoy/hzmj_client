@@ -76,7 +76,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 40
   mHeight: 59
-  mDepth: 2
+  mDepth: 6
   mIsHidePanel: 0
   mAtlas: {fileID: 11410790, guid: 05dc6a2920cf0464d9fadc29033bf794, type: 2}
   mSpriteName: tileBack_up_0
