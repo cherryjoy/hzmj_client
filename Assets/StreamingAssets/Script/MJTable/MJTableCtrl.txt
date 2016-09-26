@@ -233,3 +233,19 @@ function MJTableCtrl:DoCountDownFinish()
     --self.CountDown:set_enabled(false)
     LuaDebug.Log("DoCountDownFinish")
 end
+
+function MJTableCtrl:Peng_OnClick()
+
+end
+
+function MJTableCtrl:Gang_OnClick()
+
+end
+
+function MJTableCtrl:Hu_OnClick()
+
+end
+
+function MJTableCtrl:Guo_OnClick()
+
+end
