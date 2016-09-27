@@ -5,6 +5,10 @@ function TableBottom:Start( )
     self.PlayNum = 0
     self.LeftNum = 0
     self.CanPlayCard = false
+    self.handCard = {}
+    self.pengCard = {}
+    self.gangCardM = {}
+    self.gangCardA = {}
 
     Client.TableChooseCard = Client.TableChooseCard + {self, TableBottom.ChooseCard}
     Client.TablePlayCardEnd = Client.TablePlayCardEnd + {self, TableBottom.PlayCardEnd}
@@ -19,6 +23,10 @@ end
 function TableBottom:CardInfoSync(handcard)
     self.HandCardNum = #handcard
     self.handCard = handcard
+    for i = 1, self.HandCardNum do
+        table.insert(self.handCard, handcard[i])
+    end
+
     for i = 1, self.HandCardNum do
         local card = handcard[i]
         LuaDebug.Log("card.type_id: "..card.type_id..", card.code_id: "..card.code_id)
@@ -60,6 +68,7 @@ function TableBottom:LeftCardSync(owncards)
     if owncards.pengcard ~= nil then
         for i = 1, #(owncards.pengcard) do
             local card = owncards.pengcard[i]
+            table.insert(self.pengCard, card)
             for num = 1, 3 do
                 TableBottom.SetLeftCard(self, card)
             end
@@ -70,6 +79,7 @@ function TableBottom:LeftCardSync(owncards)
     if owncards.gangcardm ~= nil then
         for i = 1, #(owncards.gangcardm) do
             local card = owncards.gangcardm[i]
+            table.insert(self.gangCardM, card)
             for num = 1, 4 do
                 TableBottom.SetLeftCard(self, card)
             end
@@ -79,6 +89,7 @@ function TableBottom:LeftCardSync(owncards)
     if owncards.gangcarda ~= nil then
         for i = 1, #(owncards.gangcarda) do
             local card = owncards.gangcarda[i]
+            table.insert(self.gangCardA, card)
             for num = 1, 4 do
                 TableBottom.SetLeftCard(self, card)
             end
@@ -197,10 +208,30 @@ function TableBottom:IsPengCard(card)
     return false
 end
 
-function TableBottom:IsGangGard(card)
+function TableBottom:IsGangACard(card)
     local num = TableBottom.GetSameCardNum(self, card)
     if num >= 3 then
         return true
+    end
+
+    return false
+end
+
+function TableBottom:IsGangMCard(card)
+    local have = false
+    for i = 1, #(self.pengCard) do
+        local tmp = self.pengCard[i]
+        if card.type_id == tmp.type_id and card.code_id == tmp.code_id then
+            have = true
+            break
+        end
+    end
+
+    if have then
+        local num = TableBottom.GetSameCardNum(self, card)
+        if num >= 1 then
+            return true
+        end
     end
 
     return false
@@ -216,4 +247,44 @@ function TableBottom:GetSameCardNum(card)
     end
 
     return num
+end
+
+function TableBottom:PengCard(card)
+    -- 显示左边的碰牌
+    table.insert(self.pengCard, card)
+    for num = 1, 3 do
+        TableBottom.SetLeftCard(self, card)
+    end
+
+    -- 消掉打牌方打在桌上的牌
+
+    -- 消掉手里碰出的牌
+    local num = 0
+    local index = 1
+    for i,v in ipairs(self.handCard) do
+        if v.type_id == card.type_id and v.code_id == card.code_id then
+            table.remove(self.handCard, i)
+            num = num + 1
+        end
+
+        if num == 1 then
+            index = i
+        elseif num == 2 then
+            break
+        end
+    end
+
+    -- 重新组牌
+
+
+    return index
+end
+
+function TableBottom:GangCard(card)
+    local index = 1
+    local gangA = self.IsGangACard(self, card)
+    local gangM = self.IsGangMCard(self, card)
+
+
+    return index
 end

@@ -182,3 +182,27 @@ HandleFuncs[enumMSGID_MODULE_05.ID_GAME_GET_CARD_RES] = function(data, dataLengt
 
     LuaUIViewCtr.UIPanel["MJTableUI"].GetCard(LuaUIViewCtr.UIPanel["MJTableUI"], data.roleid, data.card)
 end
+
+HandleFuncs[enumMSGID_MODULE_05.ID_GAME_PENG_CARD_RES] = function(data, dataLength)
+    local data = LuaProto.deserialize(PBMsgPengCardRes, data, dataLength)
+
+    LuaUIViewCtr.UIPanel["MJTableUI"].PengCard(LuaUIViewCtr.UIPanel["MJTableUI"], data.roleid, data.index, data.card)
+end
+
+HandleFuncs[enumMSGID_MODULE_05.ID_GAME_GANG_CARD_RES] = function(data, dataLength)
+    local data = LuaProto.deserialize(PBMsgGangCardRes, data, dataLength)
+
+    LuaUIViewCtr.UIPanel["MJTableUI"].GangCard(LuaUIViewCtr.UIPanel["MJTableUI"], data.roleid, data.index, data.card, data.state)
+end
+
+HandleFuncs[enumMSGID_MODULE_05.ID_GAME_PASS_CARD_RES] = function(data, dataLength)
+    local data = LuaProto.deserialize(PBMsgGamePassCardRes, data, dataLength)
+
+    LuaUIViewCtr.UIPanel["MJTableUI"].GuoCard(LuaUIViewCtr.UIPanel["MJTableUI"])
+end
+
+HandleFuncs[enumMSGID_MODULE_05.ID_GAME_WIN_GAME_RES] = function(data, dataLength)
+    local data = LuaProto.deserialize(PBMsgWinGameRes, data, dataLength)
+
+    LuaUIViewCtr.UIPanel["MJTableUI"].WinCard(LuaUIViewCtr.UIPanel["MJTableUI"], data.roleid)
+end

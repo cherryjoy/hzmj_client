@@ -183,3 +183,45 @@ function ClientSendMsg.SendPlayCard(index, typeId, codeId)
 	local buffer, length = LuaProto.serialize(data)
 	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_PLAY_CARD_REQ, buffer, length)
 end
+
+function ClientSendMsg.SendPengCard(index, typeId, codeId)
+	local data = PBMsgPengCardReq.Create()
+	data.index = index
+
+	local card = PBCard.Create()
+	card.type_id = typeId
+	card.code_id = codeId
+
+	data.card = card
+	LuaDebug.Log("index: "..data.index.."data.card.type_id: "..data.card.type_id..", data.card.code_id"..data.card.code_id)
+	local buffer, length = LuaProto.serialize(data)
+	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_PENG_CARD_REQ, buffer, length)
+end
+
+function ClientSendMsg.SendGangCard(index, typeId, codeId)
+	local data = PBMsgGangCardReq.Create()
+	data.index = index
+
+	local card = PBCard.Create()
+	card.type_id = typeId
+	card.code_id = codeId
+
+	data.card = card
+	LuaDebug.Log("index: "..data.index.."data.card.type_id: "..data.card.type_id..", data.card.code_id"..data.card.code_id)
+	local buffer, length = LuaProto.serialize(data)
+	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_GANG_CARD_REQ, buffer, length)
+end
+
+function ClientSendMsg.SendGuoCard()
+	local data = PBMsgGamePassCardReq.Create()
+
+	local buffer, length = LuaProto.serialize(data)
+	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_PASS_CARD_REQ, buffer, length)
+end
+
+function ClientSendMsg.SendWinCard()
+	local data = PBMsgWinGameReq.Create()
+
+	local buffer, length = LuaProto.serialize(data)
+	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_WIN_GAME_REQ, buffer, length)
+end

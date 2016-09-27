@@ -27,6 +27,8 @@ enumMSGID_MODULE_05 = {
 	ID_GAME_DELETE_ROOM_RES = 1306,
 	ID_GAME_QUIT_ROOM_REQ = 1307,
 	ID_GAME_QUIT_ROOM_RES = 1308,
+	ID_GAME_PASS_CARD_REQ = 1309,
+	ID_GAME_PASS_CARD_RES = 1310,
 	ID_MODULE_05_END = 1535,
 }
 
@@ -2969,6 +2971,60 @@ function PBMsgGameQuitRoomRes.GetSize(obj)
 		size = size + 4
 	end
 	size = size + 6
+	return size
+end
+
+-- PBMsgGamePassCardReq
+PBMsgGamePassCardReq = {}
+PBMsgGamePassCardReq.__index = PBMsgGamePassCardReq
+function PBMsgGamePassCardReq.Create()
+	local obj = setmetatable({},PBMsgGamePassCardReq)
+	return obj
+end
+
+function PBMsgGamePassCardReq.DeSerialize(obj)
+	local fieldCount = deserialize_int32()
+	local option,optionLength = deserialize_optional()
+	return obj
+end
+
+function PBMsgGamePassCardReq.Serialize(obj)
+	local fieldCount = 0
+	serialize_int32(fieldCount)
+	local flag = {}
+	serialize_optional(flag)
+end
+
+function PBMsgGamePassCardReq.GetSize(obj)
+	local size = 0
+	size = size + 5
+	return size
+end
+
+-- PBMsgGamePassCardRes
+PBMsgGamePassCardRes = {}
+PBMsgGamePassCardRes.__index = PBMsgGamePassCardRes
+function PBMsgGamePassCardRes.Create()
+	local obj = setmetatable({},PBMsgGamePassCardRes)
+	return obj
+end
+
+function PBMsgGamePassCardRes.DeSerialize(obj)
+	local fieldCount = deserialize_int32()
+	local option,optionLength = deserialize_optional()
+	return obj
+end
+
+function PBMsgGamePassCardRes.Serialize(obj)
+	local fieldCount = 0
+	serialize_int32(fieldCount)
+	local flag = {}
+	serialize_optional(flag)
+end
+
+function PBMsgGamePassCardRes.GetSize(obj)
+	local size = 0
+	size = size + 5
 	return size
 end
 

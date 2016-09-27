@@ -180,8 +180,13 @@ function MJTableCtrl:PlayCard(roleId, index, card, result)
     -- 判断当前的牌是否能碰、杠
     if result ~= 0 then
         local peng = self.Drect1.IsPengCard(self.Drect1, card)
-        local gang = self.Drect1.IsGangGard(self.Drect1, card)
-        LuaDebug.Log("peng: "..peng..", gang: "..gang)
+        local gangA = self.Drect1.IsGangACard(self.Drect1, card)
+        local gangM = self.Drect1.IsGangMCard(self.Drect1, card)
+        LuaDebug.Log("peng: "..peng..", gangA: "..gang.."gangM: "..gangM)
+        if peng or gangA or gangM then
+            self.ResultCard:SetActive(true)
+            self.tempCard = card
+        end
     end
 
     --self.Drect1.PlayCard(self.Drect1, index, card)
@@ -235,17 +240,39 @@ function MJTableCtrl:DoCountDownFinish()
 end
 
 function MJTableCtrl:Peng_OnClick()
+    local index = self.Drect1.PengCard(self.Drect1, self.tempCard)
+    ClientSendMsg.SendPengCard(index, self.tempCard.typeId, self.tempCard.codeId)
 
+    self.ResultCard:SetActive(false)
 end
 
 function MJTableCtrl:Gang_OnClick()
+    local index = self.Drect1.GangCard(self.Drect1, self.tempCard)
+    ClientSendMsg.SendGangCard(index, self.tempCard.typeId, self.tempCard.codeId)
 
-end
-
-function MJTableCtrl:Hu_OnClick()
-
+    self.ResultCard:SetActive(false)
 end
 
 function MJTableCtrl:Guo_OnClick()
+    ClientSendMsg.SendGuoCard()
+
+    self.ResultCard:SetActive(false)
+end
+
+function MJTableCtrl:Win_OnClick()
+    ClientSendMsg.SendWinCard()
+
+    self.ResultCard:SetActive(false)
+end
+
+function MJTableCtrl:PengCard(roleid, index, card)
+
+end
+
+function MJTableCtrl:GangCard(roleid, index, card, state)
+
+end
+
+function MJTableCtrl:WinCard()
 
 end
