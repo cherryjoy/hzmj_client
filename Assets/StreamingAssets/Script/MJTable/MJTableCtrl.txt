@@ -5,10 +5,12 @@ function MJTableCtrl:Start( )
     self.Texture:set_material(mt)
 
     Client.BottomPlayCard = Client.BottomPlayCard + {self, MJTableCtrl.PlayCard}
+    Client.ResetToward = Client.ResetToward + {self, MJTableCtrl.ResetToward}
 end
 
 function MJTableCtrl:OnDestroy( )
     Client.BottomPlayCard = Client.BottomPlayCard - {self, MJTableCtrl.PlayCard}
+    Client.ResetToward = Client.ResetToward - {self, MJTableCtrl.ResetToward}
 end
 
 function MJTableCtrl:Init(passwd, amount, horse, beishu, used, rolelist)
@@ -173,23 +175,27 @@ function MJTableCtrl:InitRoleList(myDirect, roleList)
 end
 
 function MJTableCtrl:PlayCard(roleId, index, card, result)
+    if roleId == self.Drect1.roleId and result ~= nil then
+        return
+    end
+
     LuaDebug.Log("roleId: "..roleId..", play card, type: "..card.type_id..", id: "..card.code_id)
     self.TowardCard:SetActive(true)
 
     MJTableCtrl.DoCountDownFinish(self)
     -- 判断当前的牌是否能碰、杠
-    if result ~= 0 then
+    if result ~= nil and result ~= 0 then
         local peng = self.Drect1.IsPengCard(self.Drect1, card)
         local gangA = self.Drect1.IsGangACard(self.Drect1, card)
         local gangM = self.Drect1.IsGangMCard(self.Drect1, card)
-        LuaDebug.Log("peng: "..peng..", gangA: "..gang.."gangM: "..gangM)
+        LuaDebug.Log("peng: "..tostring(peng)..", gangA: "..tostring(gangA)..", gangM: "..tostring(gangM))
         if peng or gangA or gangM then
             self.ResultCard:SetActive(true)
             self.tempCard = card
+            self.tempRoleId = roleId
         end
     end
 
-    --self.Drect1.PlayCard(self.Drect1, index, card)
     for i = 1, 4 do
         if self["Drect"..i].roleId == roleId then
             self["Drect"..i].PlayCard(self["Drect"..i], index, card)
@@ -203,6 +209,17 @@ function MJTableCtrl:GetCard(roleId, card)
         LuaDebug.Log("get card, type: "..card.type_id..", id: "..card.code_id)
     end
 
+    MJTableCtrl.CountDownStart(self, roleId)
+
+    -- 判断是哪方摸牌
+    for i = 1, 4 do
+        if self["Drect"..i].roleId == roleId then
+            self["Drect"..i].GetCard(self["Drect"..i], card)
+        end
+    end
+end
+
+function MJTableCtrl:CountDownStart(roleId)
     local spriteName, myDirect = MJTableCtrl.GetMyDirectSprite(roleId, self.roleList)
     LuaDebug.Log("my direction: "..myDirect)
     self.TimerBack:set_spriteName(spriteName)
@@ -214,13 +231,6 @@ function MJTableCtrl:GetCard(roleId, card)
 
     if self.timer == nil then
         self.timer = Timer.NewEvent(self,10,150,MJTableCtrl.DoCountDown, false, MJTableCtrl.DoCountDownFinish)
-    end
-
-    -- 判断是哪方摸牌
-    for i = 1, 4 do
-        if self["Drect"..i].roleId == roleId then
-            self["Drect"..i].GetCard(self["Drect"..i], card)
-        end
     end
 end
 
@@ -235,20 +245,20 @@ function MJTableCtrl:DoCountDownFinish()
         self.timer = nil
     end
 
-    --self.CountDown:set_enabled(false)
+    self.CountDown:set_enabled(false)
     LuaDebug.Log("DoCountDownFinish")
 end
 
 function MJTableCtrl:Peng_OnClick()
-    local index = self.Drect1.PengCard(self.Drect1, self.tempCard)
-    ClientSendMsg.SendPengCard(index, self.tempCard.typeId, self.tempCard.codeId)
+    local index = self.Drect1.PengCard(self.Drect1, self.tempCard, self.tempRoleId)
+    ClientSendMsg.SendPengCard(index, self.tempCard.type_id, self.tempCard.code_id, self.tempRoleId)
 
     self.ResultCard:SetActive(false)
 end
 
 function MJTableCtrl:Gang_OnClick()
-    local index = self.Drect1.GangCard(self.Drect1, self.tempCard)
-    ClientSendMsg.SendGangCard(index, self.tempCard.typeId, self.tempCard.codeId)
+    local index = self.Drect1.GangCard(self.Drect1, self.tempCard, self.tempRoleId)
+    ClientSendMsg.SendGangCard(index, self.tempCard.type_id, self.tempCard.code_id, self.tempRoleId)
 
     self.ResultCard:SetActive(false)
 end
@@ -265,14 +275,38 @@ function MJTableCtrl:Win_OnClick()
     self.ResultCard:SetActive(false)
 end
 
-function MJTableCtrl:PengCard(roleid, index, card)
+function MJTableCtrl:PengCard(roleId, index, card, srcRoleId)
+    -- 重置
+    Client.ResetToward:Do()
+    --消掉打牌方的牌
+    Client.DeleteCard:Do(srcRoleId)
 
+    --计时
+    MJTableCtrl.CountDownStart(self, roleId)
+
+    -- 判断是哪方碰牌
+    for i = 2, 4 do
+        if self["Drect"..i].roleId == roleId then
+            self["Drect"..i].PengCard(self["Drect"..i], card)
+        end
+    end
+
+    -- 自己可以打牌了
+    if roleId == self.Drect1.roleId then
+        self.Drect1.CanPlayCard = true
+    end
 end
 
-function MJTableCtrl:GangCard(roleid, index, card, state)
+function MJTableCtrl:GangCard(roleid, index, card, state, srcRoleId)
 
 end
 
 function MJTableCtrl:WinCard()
 
+end
+
+function MJTableCtrl:ResetToward()
+    self.TowardCard:get_transform():SetParent(self.Direction:get_transform())
+    self.TowardCard:get_transform():set_localPosition(LuaVector3.Create(0, 0, 0))
+    self.TowardCard:SetActive(false)
 end

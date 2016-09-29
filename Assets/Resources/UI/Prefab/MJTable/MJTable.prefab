@@ -806,13 +806,14 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 425682}
+  - 114: {fileID: 11482532}
   m_Layer: 8
   m_Name: ResultCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &175942
 GameObject:
   m_ObjectHideFlags: 1
@@ -1103,7 +1104,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 137866}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -340, y: -14, z: 0}
+  m_LocalPosition: {x: -340, y: -160, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -1194,7 +1195,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 174422}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -100, z: 0}
+  m_LocalPosition: {x: 0, y: -100, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -1439,7 +1440,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 120138}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 340, y: -154, z: 0}
+  m_LocalPosition: {x: 340, y: -160, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -2734,7 +2735,7 @@ MonoBehaviour:
   - Obj: {fileID: 174422}
     regObj: {fileID: 174422}
     Name: 
-    TypeIndex: 1
+    TypeIndex: 2
   LuaBehavArray:
   - Behav: {fileID: 11419594}
     Name: Drect1
@@ -3523,6 +3524,43 @@ MonoBehaviour:
   repositionNow: 0
   sorted: 0
   hideInactive: 1
+--- !u!114 &11482532
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1267949273, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showProgress: 1
+  showInPanelTool: 1
+  depthPass: 0
+  mDebugInfo: 0
+  mClipping: 0
+  mClipRange: {x: 0, y: 0, z: 0, w: 0}
+  mClipSoftness: {x: 1, y: 1}
+  mDepthFlag: 0
+  mWorldToLocal:
+    e00: 320
+    e01: 0
+    e02: 0
+    e03: 0.49999237
+    e10: 0
+    e11: 320
+    e12: 0
+    e13: 99.50001
+    e20: 0
+    e21: 0
+    e22: 320
+    e23: 6
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 1
+  ChangeMtl: 0
 --- !u!114 &11486102
 MonoBehaviour:
   m_ObjectHideFlags: 1

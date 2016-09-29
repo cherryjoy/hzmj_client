@@ -71,13 +71,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LuaBehavType: -1
-  scriptShortPath: 
-  ScriptName: 
+  scriptShortPath: MJTable/RightCard.txt
+  ScriptName: RightCard
   lua_params:
   - Obj: {fileID: 131460}
     regObj: {fileID: 11498274}
     Name: 
     TypeIndex: 1
+  - Obj: {fileID: 139728}
+    regObj: {fileID: 139728}
+    Name: RightCard
+    TypeIndex: 2
   LuaBehavArray: []
   IsOnClickPassGameObject: 0
   isArray: 0

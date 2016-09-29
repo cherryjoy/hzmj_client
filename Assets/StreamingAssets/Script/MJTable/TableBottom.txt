@@ -1,7 +1,6 @@
 TableBottom = {}
 
 function TableBottom:Start( )
-    self.IsInit = false
     self.PlayNum = 0
     self.LeftNum = 0
     self.CanPlayCard = false
@@ -12,40 +11,33 @@ function TableBottom:Start( )
 
     Client.TableChooseCard = Client.TableChooseCard + {self, TableBottom.ChooseCard}
     Client.TablePlayCardEnd = Client.TablePlayCardEnd + {self, TableBottom.PlayCardEnd}
+    Client.DeleteCard = Client.DeleteCard + {self, TableBottom.DeleteCard}
 end
 
 function TableBottom:OnDestroy( )
     Client.TableChooseCard = Client.TableChooseCard - {self,TableBottom.ChooseCard}
     Client.TablePlayCardEnd = Client.TablePlayCardEnd - {self, TableBottom.PlayCardEnd}
+    Client.DeleteCard = Client.DeleteCard - {self, TableBottom.DeleteCard}
 end
 
 -- 最后一张为所发的牌
 function TableBottom:CardInfoSync(handcard)
-    self.HandCardNum = #handcard
-    self.handCard = handcard
-    for i = 1, self.HandCardNum do
-        table.insert(self.handCard, handcard[i])
-    end
-
-    for i = 1, self.HandCardNum do
+    local handCardNum = #handcard
+    for i = 1, handCardNum do
         local card = handcard[i]
         LuaDebug.Log("card.type_id: "..card.type_id..", card.code_id: "..card.code_id)
         local ref = nil
-        if not self.IsInit then
-            if i == 14 then
-                ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCard",self.CardNew)
-                ref.gameObject:set_name("MyCard")
-                ref.Message:target(ref.gameObject)
-                self.ShineCard = ref
-            else
-                ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCard",self.Grid:get_gameObject())
-                ref.gameObject:set_name("MyCard")
-                ref.Message:target(ref.gameObject)
-            end
-            self["Card"..i] = ref
+        if i == 14 then
+            ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCard",self.CardNew)
+            ref.gameObject:set_name("MyCard")
+            ref.Message:target(ref.gameObject)
         else
-            ref = self["Card"..i]
+            ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCard",self.Grid:get_gameObject())
+            ref.gameObject:set_name("MyCard")
+            ref.Message:target(ref.gameObject)
         end
+
+        self.handCard[i] = ref
 
         ref.Init(ref, card, i)
 
@@ -55,10 +47,6 @@ function TableBottom:CardInfoSync(handcard)
 
             self.CanPlayCard = true
         end
-    end
-
-    if not self.IsInit then
-        self.IsInit = true
     end
 
     self.Grid:Reposition()
@@ -116,32 +104,31 @@ function TableBottom:ChooseCard(i)
 
     if self.lastIndex ~= nil and self.lastIndex ~= i then
         -- 回归原位
-        self["Card"..self.lastIndex].ResetPos(self["Card"..self.lastIndex])
+        self.handCard[self.lastIndex].ResetPos(self.handCard[self.lastIndex])
         self.lastIndex = nil
     end
 
     if i == self.lastIndex then
-        ClientSendMsg.SendPlayCard(i, self["Card"..i].card.type_id, self["Card"..i].card.code_id)
-        --self["Card"..i].gameObject:SetActive(false)
+        ClientSendMsg.SendPlayCard(i, self.handCard[i].card.type_id, self.handCard[i].card.code_id)
         self.CanPlayCard = false
-        Client.BottomPlayCard:Do(self.roleId, i, self["Card"..i].card, 0)
+        Client.BottomPlayCard:Do(self.roleId, i, self.handCard[i].card)
 
         self.lastIndex = nil
     else
         self.lastIndex = i
 
-        self["Card"..i].SetPosUp(self["Card"..i])
+        self.handCard[i].SetPosUp(self.handCard[i])
     end
 end
 
 function TableBottom:PlayCard(i, card)
     if i ~= nil then
-        self["Card"..i].Animation(self["Card"..i])
+        self.handCard[i].Animation(self.handCard[i])
     end
 end
 
 function TableBottom:PlayCardEnd(i)
-    local card = self["Card"..i].card
+    local card = self.handCard[i].card
 
     local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/PlayCard",self.PlayedCardsGrid:get_gameObject())
     if self.PlayNum > 7 then
@@ -159,16 +146,16 @@ function TableBottom:PlayCardEnd(i)
     self.toward:get_transform():set_localPosition(LuaVector3.Create(0, 0, 0))
 
     -- 整理手牌
-    if i ~= self.HandCardNum then
-        self["Card"..i].Init(self["Card"..i], self["Card"..self.HandCardNum].card, i)
+    local handCardNum = #(self.handCard)
+    if i ~= handCardNum then
+        self.handCard[i].Init(self.handCard[i], self.handCard[handCardNum].card, i)
         self.Grid:Reposition()
     end
 
-    self["Card"..self.HandCardNum].gameObject:SetActive(false)
+    self.handCard[handCardNum].gameObject:Destroy1()
+    self.handCard[handCardNum] = nil
     self.PlayNum = self.PlayNum + 1
-
-    --LuaUIViewCtr.UIPanel["MJTableUI"].GetCard(LuaUIViewCtr.UIPanel["MJTableUI"], card)
-    self.HandCardNum = self.HandCardNum - 1
+    self.lastCard = ref
 end
 
 function TableBottom:SetHeadInfo(info, toward)
@@ -180,26 +167,28 @@ function TableBottom:SetHeadInfo(info, toward)
 end
 
 function TableBottom:GetCard(card)
-    self.HandCardNum = self.HandCardNum + 1
-    if self.ShineCard == nil then
-        ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCard",self.CardNew)
-        ref.gameObject:set_name("MyCard")
-        ref.Message:target(ref.gameObject)
-        self["Card"..self.HandCardNum] = ref
-        self.ShineCard = ref
-    else
-        self.ShineCard.gameObject:SetActive(true)
-    end
+    local handCardNum = #(self.handCard)
+    local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCard",self.CardNew)
+    ref.gameObject:set_name("MyCard")
+    ref.Message:target(ref.gameObject)
+    self.handCard[handCardNum + 1] = ref
 
-    self.ShineCard.Init(self.ShineCard, card, self.HandCardNum)
-
-    self.ShineCard.Shinning:set_enabled(true)
-    self.ShineCard.gameObject:get_transform():set_localPosition(LuaVector3.Create(768, 0, 0))
+    ref.Init(ref, card, handCardNum + 1)
+    ref.Shinning:set_enabled(true)
+    ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(768, 0, 0))
 
     self.CanPlayCard = true
 end
 
+function TableBottom:DeleteCard(srcRoleId)
+    if self.roleId == srcRoleId then
+        self.lastCard.Card:get_gameObject():Destroy1()
+        self.PlayNum = self.PlayNum - 1
+    end
+end
+
 function TableBottom:IsPengCard(card)
+    LuaDebug.Log("IsPengCard")
     local num = TableBottom.GetSameCardNum(self, card)
     if num >= 2 then
         return true
@@ -209,6 +198,7 @@ function TableBottom:IsPengCard(card)
 end
 
 function TableBottom:IsGangACard(card)
+    LuaDebug.Log("IsGangACard")
     local num = TableBottom.GetSameCardNum(self, card)
     if num >= 3 then
         return true
@@ -218,6 +208,7 @@ function TableBottom:IsGangACard(card)
 end
 
 function TableBottom:IsGangMCard(card)
+    LuaDebug.Log("IsGangMCard")
     local have = false
     for i = 1, #(self.pengCard) do
         local tmp = self.pengCard[i]
@@ -240,47 +231,57 @@ end
 function TableBottom:GetSameCardNum(card)
     local num = 0
     for i = 1, #(self.handCard) do
-        local tmp = self.handCard[i]
+        local tmp = self.handCard[i].card
         if card.type_id == tmp.type_id and card.code_id == tmp.code_id then
             num = num + 1
+            LuaDebug.Log("same card index: "..i)
         end
     end
 
     return num
 end
 
-function TableBottom:PengCard(card)
+function TableBottom:PengCard(card, srcRoleId)
     -- 显示左边的碰牌
     table.insert(self.pengCard, card)
     for num = 1, 3 do
         TableBottom.SetLeftCard(self, card)
     end
 
-    -- 消掉打牌方打在桌上的牌
+    self.LeftCardGrid:Reposition()
 
     -- 消掉手里碰出的牌
-    local num = 0
     local index = 1
     for i,v in ipairs(self.handCard) do
-        if v.type_id == card.type_id and v.code_id == card.code_id then
+        if v.card.type_id == card.type_id and v.card.code_id == card.code_id then
+            v.gameObject:SetActive(false)
+            v.gameObject:Destroy1()
             table.remove(self.handCard, i)
-            num = num + 1
         end
 
-        if num == 1 then
-            index = i
-        elseif num == 2 then
-            break
+        index = i
+    end
+
+    for i,v in ipairs(self.handCard) do
+        if v.card.type_id == card.type_id and v.card.code_id == card.code_id then
+            v.gameObject:SetActive(false)
+            v.gameObject:Destroy1()
+            table.remove(self.handCard, i)
         end
     end
 
-    -- 重新组牌
-
+    -- 设置位置，重新组牌
+    local num = #(self.handCard)
+    LuaDebug.Log("PengCard handCard num: "..num)
+    local oldPos = self.Grid:get_transform():get_localPosition()
+    local posX = (13 - num)*45 + oldPos:x()
+    self.Grid:get_transform():set_localPosition(LuaVector3.Create(posX, oldPos:y(), oldPos:z()))
+    self.Grid:Reposition()
 
     return index
 end
 
-function TableBottom:GangCard(card)
+function TableBottom:GangCard(card, srcRoleId)
     local index = 1
     local gangA = self.IsGangACard(self, card)
     local gangM = self.IsGangMCard(self, card)

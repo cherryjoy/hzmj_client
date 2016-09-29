@@ -1,0 +1,9 @@
+LeftCard = {}
+
+function LeftCard:Start( )
+
+end
+
+function LeftCard:OnDestroy( )
+
+end

@@ -1,0 +1,9 @@
+TopCard = {}
+
+function TopCard:Start( )
+
+end
+
+function TopCard:OnDestroy( )
+
+end

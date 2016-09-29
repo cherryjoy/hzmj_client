@@ -184,9 +184,10 @@ function ClientSendMsg.SendPlayCard(index, typeId, codeId)
 	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_PLAY_CARD_REQ, buffer, length)
 end
 
-function ClientSendMsg.SendPengCard(index, typeId, codeId)
+function ClientSendMsg.SendPengCard(index, typeId, codeId, srcRoleId)
 	local data = PBMsgPengCardReq.Create()
 	data.index = index
+	data.roleid = srcRoleId
 
 	local card = PBCard.Create()
 	card.type_id = typeId
@@ -198,9 +199,10 @@ function ClientSendMsg.SendPengCard(index, typeId, codeId)
 	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_PENG_CARD_REQ, buffer, length)
 end
 
-function ClientSendMsg.SendGangCard(index, typeId, codeId)
+function ClientSendMsg.SendGangCard(index, typeId, codeId, srcRoleId)
 	local data = PBMsgGangCardReq.Create()
 	data.index = index
+	data.roleid = srcRoleId
 
 	local card = PBCard.Create()
 	card.type_id = typeId

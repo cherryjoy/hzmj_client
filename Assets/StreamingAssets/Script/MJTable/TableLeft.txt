@@ -4,16 +4,22 @@ function TableLeft:Start( )
     self.IsInit = false
     self.PlayNum = 0
     self.LeftNum = 0
+    self.handCard = {}
+
+    Client.DeleteCard = Client.DeleteCard + {self, TableLeft.DeleteCard}
 end
 
 function TableLeft:OnDestroy( )
-
+    Client.DeleteCard = Client.DeleteCard - {self, TableLeft.DeleteCard}
 end
 
 function TableLeft:CardInfoSync(handnum)
     for i = 1, handnum do
         local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/LeftCard",self.Grid:get_gameObject())
+        ref.gameObject:set_name("LeftCard")
         ref.Back:set_depth(i + 2)
+
+        self.handCard[i] = ref
     end
 
     self.Grid:Reposition()
@@ -24,7 +30,7 @@ function TableLeft:LeftCardSync(owncards)
         for i = 1, #(owncards.pengcard) do
             local card = owncards.pengcard[i]
             for num = 1, 3 do
-                TableBottom.SetLeftCard(self, card)
+                TableLeft.SetLeftCard(self, card)
             end
         end
     end
@@ -34,7 +40,7 @@ function TableLeft:LeftCardSync(owncards)
         for i = 1, #(owncards.gangcardm) do
             local card = owncards.gangcardm[i]
             for num = 1, 4 do
-                TableBottom.SetLeftCard(self, card)
+                TableLeft.SetLeftCard(self, card)
             end
         end
     end
@@ -43,15 +49,12 @@ function TableLeft:LeftCardSync(owncards)
         for i = 1, #(owncards.gangcarda) do
             local card = owncards.gangcarda[i]
             for num = 1, 4 do
-                TableBottom.SetLeftCard(self, card)
+                TableLeft.SetLeftCard(self, card)
             end
         end
     end
 
-    local pos = self.LeftCardGrid:get_transform():get_localPosition()
-    local posY = pos:y() + self.LeftCardGrid:cellHeight()*self.LeftNum
-    self.LeftCardGrid:get_transform():set_localPosition(LuaVector3.Create(pos:x(), posY, pos:z()))
-    self.LeftCardGrid:Reposition()
+    TableLeft.LeftCardReposition(self)
 end
 
 function TableLeft:SetLeftCard(card)
@@ -65,6 +68,13 @@ function TableLeft:SetLeftCard(card)
     ref.Back:set_depth(2 + self.LeftNum)
 
     self.LeftNum = self.LeftNum + 1
+end
+
+function TableLeft:LeftCardReposition()
+    local pos = self.LeftCardGrid:get_transform():get_localPosition()
+    local posY = pos:y() + self.LeftCardGrid:cellHeight()*(self.LeftNum -1)
+    self.LeftCardGrid:get_transform():set_localPosition(LuaVector3.Create(pos:x(), posY, pos:z()))
+    self.LeftCardGrid:Reposition()
 end
 
 function TableLeft:PlayCard(i, card)
@@ -87,6 +97,7 @@ function TableLeft:PlayCard(i, card)
     self.toward:get_transform():set_localPosition(LuaVector3.Create(0, 0, 0))
 
     self.PlayNum = self.PlayNum + 1
+    self.lastCard = ref
 end
 
 function TableLeft:PlayCardEnd()
@@ -103,4 +114,28 @@ end
 
 function TableLeft:GetCard(card)
 
+end
+
+function TableLeft:DeleteCard(srcRoleId)
+    if self.roleId == srcRoleId then
+        self.lastCard.Card:get_gameObject():Destroy1()
+        self.PlayNum = self.PlayNum - 1
+    end
+end
+
+function TableLeft:PengCard(card)
+    -- 添加碰牌
+    for num = 1, 3 do
+        TableLeft.SetLeftCard(self, card)
+    end
+
+    TableLeft.LeftCardReposition(self)
+
+    --减少手牌
+    local num = #(self.handCard)
+    LuaDebug.Log("num: "..num)
+    self.handCard[num -1].LeftCard:Destroy1()
+    self.handCard[num].LeftCard:Destroy1()
+    self.handCard[num -1] = nil
+    self.handCard[num] = nil
 end

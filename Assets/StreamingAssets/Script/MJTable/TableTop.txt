@@ -4,16 +4,21 @@ function TableTop:Start( )
     self.IsInit = false
     self.PlayNum = 0
     self.LeftNum = 0
+    self.handCard = {}
+
+    Client.DeleteCard = Client.DeleteCard + {self, TableTop.DeleteCard}
 end
 
 function TableTop:OnDestroy( )
-
+    Client.DeleteCard = Client.DeleteCard - {self, TableTop.DeleteCard}
 end
 
 function TableTop:CardInfoSync(handnum)
     for i = 1, handnum do
-        LuaUIViewCtr.OpenUINotLoseNest("MJTable/TopCard",self.Grid:get_gameObject())
+        local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/TopCard",self.Grid:get_gameObject())
         --ref.Back:set_depth(i + 2)
+        ref.gameObject:set_name("TopCard")
+        self.handCard[i] = ref
     end
 
     self.Grid:Reposition()
@@ -24,7 +29,7 @@ function TableTop:LeftCardSync(owncards)
         for i = 1, #(owncards.pengcard) do
             local card = owncards.pengcard[i]
             for num = 1, 3 do
-                TableBottom.SetLeftCard(self, card)
+                TableTop.SetLeftCard(self, card)
             end
         end
     end
@@ -34,7 +39,7 @@ function TableTop:LeftCardSync(owncards)
         for i = 1, #(owncards.gangcardm) do
             local card = owncards.gangcardm[i]
             for num = 1, 4 do
-                TableBottom.SetLeftCard(self, card)
+                TableTop.SetLeftCard(self, card)
             end
         end
     end
@@ -43,15 +48,12 @@ function TableTop:LeftCardSync(owncards)
         for i = 1, #(owncards.gangcarda) do
             local card = owncards.gangcarda[i]
             for num = 1, 4 do
-                TableBottom.SetLeftCard(self, card)
+                TableTop.SetLeftCard(self, card)
             end
         end
     end
 
-    local pos = self.LeftCardGrid:get_transform():get_localPosition()
-    local posY = pos:y() + self.LeftCardGrid:cellHeight()*self.LeftNum
-    self.LeftCardGrid:get_transform():set_localPosition(LuaVector3.Create(pos:x(), posY, pos:z()))
-    self.LeftCardGrid:Reposition()
+    TableTop.LeftCardReposition(self)
 end
 
 function TableTop:SetLeftCard(card)
@@ -62,6 +64,13 @@ function TableTop:SetLeftCard(card)
     ref.Card:MakePixelPerfectWithSizeInAtlas()
 
     self.LeftNum = self.LeftNum + 1
+end
+
+function TableTop:LeftCardReposition()
+    --local pos = self.LeftCardGrid:get_transform():get_localPosition()
+    --local posX = pos:X() + self.LeftCardGrid:cellWidth()*self.LeftNum
+    --self.LeftCardGrid:get_transform():set_localPosition(LuaVector3.Create(posX, pos:y(), pos:z()))
+    self.LeftCardGrid:Reposition()
 end
 
 function TableTop:PlayCard(i, card, toward)
@@ -87,6 +96,7 @@ function TableTop:PlayCard(i, card, toward)
     self.toward:get_transform():set_localPosition(LuaVector3.Create(0, 0, 0))
 
     self.PlayNum = self.PlayNum + 1
+    self.lastCard = ref
 end
 
 function TableTop:PlayCardEnd()
@@ -103,4 +113,30 @@ end
 
 function TableTop:GetCard(card)
 
+end
+
+function TableTop:DeleteCard(srcRoleId)
+    if self.roleId == srcRoleId then
+        self.lastCard.TopPlayCard:Destroy1()
+        self.PlayNum = self.PlayNum - 1
+    end
+end
+
+function TableTop:PengCard(card)
+    -- 添加碰牌
+    for num = 1, 3 do
+        TableTop.SetLeftCard(self, card)
+    end
+
+    TableTop.LeftCardReposition(self)
+
+    --减少手牌
+    local num = #(self.handCard)
+    LuaDebug.Log("num: "..num)
+    local ref1 = self.handCard[1]
+    local ref2 = self.handCard[2]
+    table.remove(self.handCard, 1)
+    table.remove(self.handCard, 1)
+    ref1.TopCard:Destroy1()
+    ref2.TopCard:Destroy1()
 end

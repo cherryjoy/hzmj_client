@@ -1,0 +1,9 @@
+RightCard = {}
+
+function RightCard:Start( )
+
+end
+
+function RightCard:OnDestroy( )
+
+end
