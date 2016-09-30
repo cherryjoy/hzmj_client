@@ -97,6 +97,14 @@ function TableTop:PlayCard(i, card, toward)
 
     self.PlayNum = self.PlayNum + 1
     self.lastCard = ref
+
+    if self.GetCard:get_activeSelf() then
+        self.GetCard:SetActive(false)
+    else
+        local ref = self.handCard[1]
+        table.remove(self.handCard, 1)
+        ref.TopCard:Destroy1()
+    end
 end
 
 function TableTop:PlayCardEnd()
@@ -111,8 +119,8 @@ function TableTop:SetHeadInfo(info, toward)
     ref.Init(ref, info)
 end
 
-function TableTop:GetCard(card)
-
+function TableTop:HandleGetCard(card)
+    self.GetCard:SetActive(true)
 end
 
 function TableTop:DeleteCard(srcRoleId)

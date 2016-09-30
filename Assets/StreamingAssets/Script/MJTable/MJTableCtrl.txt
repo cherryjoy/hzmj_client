@@ -203,8 +203,9 @@ function MJTableCtrl:PlayCard(roleId, index, card, result)
     end
 end
 
-function MJTableCtrl:GetCard(roleId, card)
+function MJTableCtrl:HandleGetCard(roleId, card)
     LuaDebug.Log("roleid: "..roleId)
+    -- 摸牌只对自己广播牌，其他方只广播roleId
     if card ~= nil then
         LuaDebug.Log("get card, type: "..card.type_id..", id: "..card.code_id)
     end
@@ -214,7 +215,7 @@ function MJTableCtrl:GetCard(roleId, card)
     -- 判断是哪方摸牌
     for i = 1, 4 do
         if self["Drect"..i].roleId == roleId then
-            self["Drect"..i].GetCard(self["Drect"..i], card)
+            self["Drect"..i].HandleGetCard(self["Drect"..i], card)
         end
     end
 end

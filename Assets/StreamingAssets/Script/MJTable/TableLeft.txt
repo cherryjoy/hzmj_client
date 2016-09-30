@@ -98,6 +98,14 @@ function TableLeft:PlayCard(i, card)
 
     self.PlayNum = self.PlayNum + 1
     self.lastCard = ref
+
+    if self.GetCard:get_activeSelf() then
+        self.GetCard:SetActive(false)
+    else
+        local ref = self.handCard[#(self.handCard)]
+        table.remove(self.handCard)
+        ref.LeftCard:Destroy1()
+    end
 end
 
 function TableLeft:PlayCardEnd()
@@ -112,8 +120,8 @@ function TableLeft:SetHeadInfo(info, toward)
     ref.Init(ref, info)
 end
 
-function TableLeft:GetCard(card)
-
+function TableLeft:HandleGetCard(card)
+    self.GetCard:SetActive(true)
 end
 
 function TableLeft:DeleteCard(srcRoleId)
@@ -134,8 +142,11 @@ function TableLeft:PengCard(card)
     --减少手牌
     local num = #(self.handCard)
     LuaDebug.Log("num: "..num)
-    self.handCard[num -1].LeftCard:Destroy1()
-    self.handCard[num].LeftCard:Destroy1()
-    self.handCard[num -1] = nil
-    self.handCard[num] = nil
+    local ref = self.handCard[#(self.handCard)]
+    table.remove(self.handCard)
+    ref.LeftCard:Destroy1()
+
+    local ref = self.handCard[#(self.handCard)]
+    table.remove(self.handCard)
+    ref.LeftCard:Destroy1()
 end

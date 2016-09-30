@@ -148,7 +148,8 @@ function TableBottom:PlayCardEnd(i)
     -- 整理手牌
     local handCardNum = #(self.handCard)
     if i ~= handCardNum then
-        self.handCard[i].Init(self.handCard[i], self.handCard[handCardNum].card, i)
+        TableBottom.SortCard(self)
+
         self.Grid:Reposition()
     end
 
@@ -166,7 +167,7 @@ function TableBottom:SetHeadInfo(info, toward)
     ref.Init(ref, info)
 end
 
-function TableBottom:GetCard(card)
+function TableBottom:HandleGetCard(card)
     local handCardNum = #(self.handCard)
     local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCard",self.CardNew)
     ref.gameObject:set_name("MyCard")
@@ -270,6 +271,8 @@ function TableBottom:PengCard(card, srcRoleId)
         end
     end
 
+    TableBottom.SortCard(self)
+
     -- 设置位置，重新组牌
     local num = #(self.handCard)
     LuaDebug.Log("PengCard handCard num: "..num)
@@ -288,4 +291,59 @@ function TableBottom:GangCard(card, srcRoleId)
 
 
     return index
+end
+
+function TableBottom:SortCard()
+    --先分组，再排序
+    local wanList = {}
+    local tongList = {}
+    local tiaoList = {}
+    local zhongList = {}
+
+    local num = #(self.handCard)
+    for i = 1, num do
+        local card = self.handCard[i].card
+        if card.type_id == enumCARD_TYPE.CARD_TIAO_TYPE then
+            table.insert(tiaoList, card)
+        elseif card.type_id == enumCARD_TYPE.CARD_TONG_TYPE then
+            table.insert(tongList, card)
+        elseif card.type_id == enumCARD_TYPE.CARD_WANG_TYPE then
+            table.insert(wanList, card)
+        elseif card.type_id == enumCARD_TYPE.CARD_HONG_TYPE then
+            table.insert(zhongList, card)
+        end
+    end
+
+    table.sort(wanList, function(a, b)
+            return a.code_id < b.code_id
+    end)
+
+    table.sort(tongList, function(a, b)
+            return a.code_id < b.code_id
+    end)
+
+    table.sort(tiaoList, function(a, b)
+            return a.code_id < b.code_id
+    end)
+
+    local index = 1
+    for i = 1, #wanList do
+        self.handCard[index].Init(self.handCard[index], wanList[i], index)
+        index = index + 1
+    end
+
+    for i = 1, #tongList do
+        self.handCard[index].Init(self.handCard[index], tongList[i], index)
+        index = index + 1
+    end
+
+    for i = 1, #tiaoList do
+        self.handCard[index].Init(self.handCard[index], tiaoList[i], index)
+        index = index + 1
+    end
+
+    for i = 1, #zhongList do
+        self.handCard[index].Init(self.handCard[index], zhongList[i], index)
+        index = index + 1
+    end
 end
