@@ -145,16 +145,18 @@ function TableBottom:PlayCardEnd(i)
     self.toward:get_transform():SetParent(ref.Card:get_transform())
     self.toward:get_transform():set_localPosition(LuaVector3.Create(0, 0, 0))
 
-    -- 整理手牌
     local handCardNum = #(self.handCard)
+    -- 整理手牌
     if i ~= handCardNum then
+        self.handCard[i].Init(self.handCard[i], self.handCard[handCardNum].card, i)
+        self.handCard[handCardNum].gameObject:Destroy1()
+        self.handCard[handCardNum] = nil
         TableBottom.SortCard(self)
-
         self.Grid:Reposition()
+    else
+        self.handCard[handCardNum].gameObject:Destroy1()
+        self.handCard[handCardNum] = nil
     end
-
-    self.handCard[handCardNum].gameObject:Destroy1()
-    self.handCard[handCardNum] = nil
     self.PlayNum = self.PlayNum + 1
     self.lastCard = ref
 end
@@ -277,7 +279,7 @@ function TableBottom:PengCard(card, srcRoleId)
     local num = #(self.handCard)
     LuaDebug.Log("PengCard handCard num: "..num)
     local oldPos = self.Grid:get_transform():get_localPosition()
-    local posX = (13 - num)*45 + oldPos:x()
+    local posX = (13 - num)*58 -348
     self.Grid:get_transform():set_localPosition(LuaVector3.Create(posX, oldPos:y(), oldPos:z()))
     self.Grid:Reposition()
 

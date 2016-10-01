@@ -273,6 +273,7 @@ end
 function MJTableCtrl:Win_OnClick()
     ClientSendMsg.SendWinCard()
 
+    --MJTableCtrl.WinCard(self, Client.RoleInfo.RoleID)
     self.ResultCard:SetActive(false)
 end
 
@@ -298,16 +299,32 @@ function MJTableCtrl:PengCard(roleId, index, card, srcRoleId)
     end
 end
 
-function MJTableCtrl:GangCard(roleid, index, card, state, srcRoleId)
+function MJTableCtrl:GangCard(roleId, index, card, state, srcRoleId)
 
 end
 
-function MJTableCtrl:WinCard()
+function MJTableCtrl:WinCard(roleId)
+    local name = nil
+    local roleList = self.roleList
+    for i = 1, #roleList do
+        if roleId == roleList[i].roleid then
+            name = roleList[i].rolename
+        end
+    end
 
+    local str = string.format(Text.WinCard, name)
+    local box = LuaMessageBox.ShowSingle(str, MJTableCtrl.CloseTable, Text.Confirm, self)
+    box.gameObject:get_transform():set_localPosition(LuaVector3.Create(0,30,-1))
 end
 
 function MJTableCtrl:ResetToward()
     self.TowardCard:get_transform():SetParent(self.Direction:get_transform())
     self.TowardCard:get_transform():set_localPosition(LuaVector3.Create(0, 0, 0))
     self.TowardCard:SetActive(false)
+end
+
+function MJTableCtrl:CloseTable()
+    ClientSendMsg.SendDeleteRoom(self.roomId)
+    ClientSendMsg.SendDeleteRoom(self.roomId)
+    --self.gameObject:Destroy1()
 end

@@ -81,6 +81,7 @@ Text = {
     TableName = "房号:%d",
     MaShuName = "%d倍 %d个码",
     JuShuName = "%d/%d局 剩%d张",
+    WinCard = "玩家：【%s】赢牌了",
 }
 
 TextSever = {
