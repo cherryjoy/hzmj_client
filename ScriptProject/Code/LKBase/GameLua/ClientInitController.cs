@@ -25,7 +25,7 @@ public class ClientInitController : MonoBehaviour
             GlobalUpdate.Instance.gameObject.AddComponent<LogSystem>();
             LogSystem.ReInit(PluginTool.SharedInstance().GetClientVersion());
         }
-        //GeneratSDKObj();
+        GeneratSDKObj();
         GameObject loginUI = NGUITools.AddChildByPath("Login/LoginUIRoot", UIParent);
         mLoginLuaBehav = loginUI.GetComponent<LuaBehaviour>();
         LuaState lua = LuaInstance.instance.Get();
@@ -47,29 +47,29 @@ public class ClientInitController : MonoBehaviour
         }
     }
 
-    //void GeneratSDKObj() 
-    //{
-    //    LuaState lua = LuaInstance.instance.Get();
-    //    lua.GetGlobal("GameDefine_IsNeedAddPlatformSDKObj");
-    //    bool IsNeedAddPlatformSDKObj = lua.ToBoolean(-1);
-    //    lua.Pop(1);
-    //    if (IsNeedAddPlatformSDKObj)
-    //    {
-    //        GameObject PlatformSDKObj = GameObject.Find("PlatformSDKObj");
-    //        if (PlatformSDKObj == null)
-    //        {
-    //            PlatformSDKObj = new GameObject("PlatformSDKObj");
-    //            PlatformSDKObj.AddComponent<PlatformSDKController>();
-    //            DontDestroyOnLoad(PlatformSDKObj);
-    //        }
-    //        else if (PlatformSDKObj.GetComponent<PlatformSDKController>() == null)
-    //        {
-    //            PlatformSDKObj.AddComponent<PlatformSDKController>();
-    //        }
-    //        PlatformSDKController controller = PlatformSDKObj.GetComponent<PlatformSDKController>();
-    //        controller.InitSdk();
-    //    }
-    //}
+    void GeneratSDKObj()
+    {
+        LuaState lua = LuaInstance.instance.Get();
+        lua.GetGlobal("GameDefine_IsNeedAddPlatformSDKObj");
+        bool IsNeedAddPlatformSDKObj = lua.ToBoolean(-1);
+        lua.Pop(1);
+        if (IsNeedAddPlatformSDKObj)
+        {
+            GameObject PlatformSDKObj = GameObject.Find("PlatformSDKObj");
+            if (PlatformSDKObj == null)
+            {
+                PlatformSDKObj = new GameObject("PlatformSDKObj");
+                PlatformSDKObj.AddComponent<PlatformSDKController>();
+                DontDestroyOnLoad(PlatformSDKObj);
+            }
+            else if (PlatformSDKObj.GetComponent<PlatformSDKController>() == null)
+            {
+                PlatformSDKObj.AddComponent<PlatformSDKController>();
+            }
+            PlatformSDKController controller = PlatformSDKObj.GetComponent<PlatformSDKController>();
+            controller.InitSdk();
+        }
+    }
 
     void InitGameLogic() {
        

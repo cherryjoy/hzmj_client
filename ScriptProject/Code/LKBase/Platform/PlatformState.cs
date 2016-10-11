@@ -1,25 +1,25 @@
-﻿//using UnityEngine;
-//using System.Collections;
-//using System.Runtime.InteropServices;
-///**
-// *  该文件包含常用的接口定义实现，对于一些特殊的，不太常见的接口，我们会定义在PlatformStateExtension.cs中
-// */
+﻿using UnityEngine;
+using System.Collections;
+using System.Runtime.InteropServices;
+/**
+ *  该文件包含常用的接口定义实现，对于一些特殊的，不太常见的接口，我们会定义在PlatformStateExtension.cs中
+ */
 
-//public partial class PlatformState 
-//{
-//    private static PlatformState instance;
-//    public static PlatformState Instance
-//    {
-//        get 
-//        {
-//            if (instance == null) instance = new PlatformState();
-//            return instance;
-//        }
-//    }
+public partial class PlatformState
+{
+    private static PlatformState instance;
+    public static PlatformState Instance
+    {
+        get
+        {
+            if (instance == null) instance = new PlatformState();
+            return instance;
+        }
+    }
 
-//#if UNITY_ANDROID
-//    private AndroidJavaObject mAndroidObj;
-//#endif
+#if UNITY_ANDROID
+    private AndroidJavaObject mAndroidObj;
+#endif
 
 //#if UNITY_IPHONE
 //    [DllImport("__Internal")]
@@ -56,71 +56,71 @@
 //    private static extern void okLog(string str);
 //#endif
 
-//                                        /**
-//     *  初始化平台
-//     *  ext:
-//     *      json字符串，具体格式为，不能为空
-//     */
-//    public void OKSDKInit(string objName, string ext)
-//    {
-//        Debug.Log("objname : " + objName + " ext : " + ext);
-//#if UNITY_ANDROID
-//        if (mAndroidObj == null)
-//        {
+/**
+*  初始化平台
+*  ext:
+*      json字符串，具体格式为，不能为空
+*/
+    public void CJSDKInit(string objName, string ext)
+    {
+        Debug.Log("objname : " + objName + " ext : " + ext);
+#if UNITY_ANDROID
+        if (mAndroidObj == null)
+        {
+            try
+            {
+                AndroidJavaClass jc = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+                mAndroidObj = jc.GetStatic<AndroidJavaObject>("currentActivity");
+            }
+            catch (System.Exception ex)
+            {
+                log("new AndroidJavaObject", ex.ToString());
+            }
+        }
 
-//            try
-//            {
-//                mAndroidObj = new AndroidJavaObject("com.oksdk.helper.UnityPluginInterface");
-//            } 
-//            catch (System.Exception ex) 
-//            {
-//                log("new AndroidJavaObject", ex.ToString());
-           
-//            }
-//        }
-
-//        if (mAndroidObj != null)
-//        {
-//            log("init", "ext is " + ext);
-//           try
-//           {
-//               mAndroidObj.Call("OKSDKInit", objName, ext);
-//           }
-//           catch(System.Exception e)
-//           {
-//               log("OKSDKInit", e.ToString());
-//           }
-//        }
-//#elif UNITY_IPHONE
-//        oksdkSetMessageObjName(objName);
-//        oksdkInit(ext);
-//#endif
-//    }      
+        if (mAndroidObj != null)
+        {
+            log("init", "ext is " + ext);
+            try
+            {
+                mAndroidObj.Call("CJSDKInit", objName, ext);
+            }
+            catch (System.Exception e)
+            {
+                log("CJSDKInit", e.ToString());
+            }
+        }
+#elif UNITY_IPHONE
+        oksdkSetMessageObjName(objName);
+        oksdkInit(ext);
+#endif
+    }
 
 
-//    /**
-//     *  启动登录页面
-//     *  ext:
-//     *      json格式字符串
-//     */
-//    public void OKSDKLogin(string objName, string ext){
-//#if UNITY_ANDROID
-//        if (mAndroidObj != null)
-//        {
-//            log("login", "ext is " + ext);
-//            try
-//            {
-//                mAndroidObj.Call("OKSDKLogin", objName, ext);
-//            }
-//            catch(System.Exception ex)
-//            {
-//                log("OKSDKLogin", ex.ToString());
-//            }
-//        }
-//#elif UNITY_IPHONE
-//        oksdkLogin(ext);
-//#endif
-//    }
+    /**
+     *  启动登录页面
+     *  ext:
+     *      json格式字符串
+     */
+    public void CJSDKLogin(string objName, string ext)
+    {
+#if UNITY_ANDROID
+        if (mAndroidObj != null)
+        {
+            log("login", "ext is " + ext);
+            try
+            {
+                mAndroidObj.Call("CJSDKLogin", objName, ext);
+            }
+            catch (System.Exception ex)
+            {
+                log("CJSDKLogin", ex.ToString());
+            }
+        }
+#elif UNITY_IPHONE
+        oksdkLogin(ext);
+#endif
+    }
 
 //    /**
 //     *  创建角色
@@ -307,10 +307,10 @@
 //#endif
 
 //    }
-//    public void log(string tag, string msg)
-//    {
-//        Debug.Log(tag + "  " + msg);
-//    }
+    public void log(string tag, string msg)
+    {
+        Debug.Log(tag + "  " + msg);
+    }
 //    public void OKLog(string msg)
 //    {
 //#if UNITY_ANDROID
@@ -321,4 +321,4 @@
 //    }
 
 
-//}
+}
