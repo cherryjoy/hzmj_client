@@ -17,24 +17,24 @@ function PlatformHandler.OnDestroy()
 	Client.ConnectSuccess = Client.ConnectSuccess - {PlatformHandler,PlatformHandler.ConnectSuccess}
 	Client.ChooseRoleExitBtn = Client.ChooseRoleExitBtn- {PlatformHandler,PlatformHandler.ChooseRoleExitBtn}
 end
---[[
+
 function PlatformHandler.onSdkInit()
 	LuaDebug.Log('onSdkInit')
 	PlatformHandler.EnterChooseRoleUI=false
 	PlatformHandler.state = PlatformSDKController.mSelf():SDKState()
-	if not  GameDefine_IsDefaultAuth and not PlatformHandler.InitFinish then
-		param = string.format("{%s,\"gameId\":\"%s\",\"serverId\":\"%s\"}",GameDefine_InitConfig,
+	--if not GameDefine_IsDefaultAuth and not PlatformHandler.InitFinish then
+	if not PlatformHandler.InitFinish then
+		local param = string.format("{%s,\"gameId\":\"%s\",\"serverId\":\"%s\"}",GameDefine_InitConfig,
 			GameDefine_gameID,PlayerPrefsEx.GetString("lastServerID"))
 		PlatformHandler.gameName=PlatformSDKController.mSelf():get_gameObject():get_name()
-		PlatformHandler.state:OKSDKInit(PlatformHandler.gameName,param)
+		PlatformHandler.state:CJSDKInit(PlatformHandler.gameName,param)
 	end
 end
-]]
 
 function PlatformHandler.CallLogin()
 	if PlatformHandler.InitFinish then
 		if not PlatformHandler.Logining then
-			PlatformHandler.state:OKSDKLogin(PlatformHandler.gameName,"")
+			PlatformHandler.state:CJSDKLogin(PlatformHandler.gameName,"wechat_sdk_demo")
 			PlatformHandler.Logining=true
 		end
 	end
@@ -142,32 +142,34 @@ end
 -------SDK CallBack
 --------------------------------------------------------------------------------------
 function PlatformHandler.onInitFinish (msg)
-	--LuaDebug.Log(msg)
+	LuaDebug.Log(msg)
 	local json = JSON:decode(msg)
 	if json['code']~=1 then
 		LuaDebug.Log("init false")
 		return
 	end
-	--LuaDebug.Log("InitFinish")
+	LuaDebug.Log("InitFinish")
+	PlatformHandler.InitFinish=true
+	
 	if json['isMusic']=='false' or json['isMusic']==false then
 		PlatformHandler.SetMuteWithMessage()
 	end
-	PlatformHandler.InitFinish=true
+
 	if json['hasLogoutUI']=='true' or json['hasLogoutUI']==true then
 		PlatformHandler.hasLogoutUI=true
 	end
 end
 
 function  PlatformHandler.onLoginFinish(msg)
-	--LuaDebug.Log('onLoginFinish')
+	LuaDebug.Log('onLoginFinish: '..msg)
 	local json = JSON:decode(msg)
-	if json["code"]==1 then
+	if json["access_token"] ~= nil then --server login
 		local platformInfo = Client.PlatformInfo
-		platformInfo.userId = json['userId']
-		platformInfo.token = json['token']
-		platformInfo.ext = json['ext']
-		ClientSendMsg.SendRawAuth(platformInfo.userId,platformInfo.token,platformInfo.ext)
-
+		platformInfo.userId = json['openid']
+		platformInfo.token = json['access_token']
+		ClientSendMsg.SendRawAuth(platformInfo.userId,platformInfo.token)
+	elseif json["nickname"] ~= nil then -- client login
+		ClientSendMsg.SendAuth(json['openid'], json['openid'])
 	else
 		LuaDebug.Log('onLoginFinish false')
 		PlatformHandler.Logining=false

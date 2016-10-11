@@ -62,7 +62,7 @@ end
 function LuaUIViewCtr:SessionCreated()
     local clientState = Client.m_CurrentState
     if Client.NetState ~= EClientNetWorkState.NORMAL and clientState~=EClientState.E_CS_Login and clientState ~= EClientState.E_CS_ChooseRole and clientState ~= EClientState.E_CS_Reconect then
-       if not GameDefine_isLoginForLK then
+       if not GameDefine_isLoginDebug then
            local platformInfo = Client.PlatformInfo
            local userId=platformInfo.userId
            if not userId then

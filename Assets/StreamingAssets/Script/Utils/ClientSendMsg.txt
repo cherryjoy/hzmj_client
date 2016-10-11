@@ -93,28 +93,31 @@ end
 
 
 --normally roleId is nil
-function  ClientSendMsg.SendRawAuth(name,password,ext,roleId)
-	local data = C2SAuth.Create()
-	data.userName = name
-	data.password = password
-	data.userType = GameDefine_platformCode
-	data.extended = ext
-	data.mac = ClientSendMsg.GetIDFA()
-	if Application.get_platform()==ERuntimePlatform.IPhonePlayer then
-		data.device = 'ios'
-	elseif Application.get_platform()==ERuntimePlatform.Android then
-		data.device = 'android'
-	else
-		data.device = 'windows'
-	end
-
+function  ClientSendMsg.SendRawAuth(name,password,roleId)
+	--data.userType = GameDefine_platformCode
 	--if roleId is not null, we reconnect and log direct to gamehall
-	if roleId then
-		data.roleId = roleId
+	--if roleId then
+	--	data.roleId = roleId
+	--end
+	local data = PBMsgRoleInfoReq.Create()
+	data.UserName = name
+	data.uid = name
+	data.openid = name
+	data.ServerID = 584002
+	data.GameID = 584
+	data.EratingID = 584002
+	data.Mac = ClientSendMsg.GetIDFA()
+	data.token = passwd
+	if Application.get_platform()==ERuntimePlatform.IPhonePlayer then
+		data.client_type = 'ios'
+	elseif Application.get_platform()==ERuntimePlatform.Android then
+		data.client_type = 'android'
+	else
+		data.client_type = 'windows'
 	end
-	data.version = Client.ClientVersion
+	data.CodeVersion = Client.ClientVersion
 	local buffer,length = LuaProto.serialize(data)
-	ClientSendMsg.SendNetMsg(NetOpcodes_C2S.C2S_AUTH,buffer,length)
+	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_ROLE_REQ,buffer,length)
 end
 
 --我们的游戏在appstore上就要求ios6以上，所以没有必要判断系统

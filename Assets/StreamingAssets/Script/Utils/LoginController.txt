@@ -348,7 +348,7 @@ function LoginController:ServerName_OnClick()
 end
 --账号
 function LoginController:LoginGameBtn_OnClick()
-    if not GameDefine_isLoginForLK then
+    if not GameDefine_isLoginDebug then
         PlatformHandler.CallLogout()
     else
         LoginController.OpenLoginInputUI(self,true)
@@ -363,19 +363,18 @@ end
 
 --开始游戏
 function LoginController:StartGameBtn_OnClick()
-    if not GameDefine_isLoginForLK then
+    if not GameDefine_isLoginDebug then
         if self.IsConnect then
             PlatformHandler.CallLogin()
         else
             LoginController.DefaultServerLogic(self)
         end
-        LuaDebug.Log("not GameDefine_isLoginForLK")
+        LuaDebug.Log("not GameDefine_isLoginDebug")
     else
         if self.IsConnect then
             if self.userName ~= "" then
-                LuaDebug.Log("ClientSendMsg.SendRawAuth")
-                --ClientSendMsg.SendRawAuth(self.userName,self.password)
-                 ClientSendMsg.SendAuth(self.userName,self.password)
+                LuaDebug.Log("ClientSendMsg.SendAuth")
+                ClientSendMsg.SendAuth(self.userName,self.password)
             else
                 LuaDebug.Log("OpenLoginInputUI")
                 LoginController.OpenLoginInputUI(self,false)
@@ -423,15 +422,11 @@ function LoginController:RoleSummarySuccess()
 end
 
 function LoginController:OpenLoginInputUI(state)
-    if Application.get_platform()==ERuntimePlatform.Android then
-        PluginTool.SharedInstance():WXLogin()
-    else
-        if self.doc ~=nil then
-            local ref = LuaUIViewCtr.OpenUIHasBg("Login/LoginInput")
-            if ref ~= nil then
-                ref.FirstShow = state
-                LoginPanel["LoginInput"] = ref
-            end
+    if self.doc ~=nil then
+        local ref = LuaUIViewCtr.OpenUIHasBg("Login/LoginInput")
+        if ref ~= nil then
+            ref.FirstShow = state
+            LoginPanel["LoginInput"] = ref
         end
     end
 end
