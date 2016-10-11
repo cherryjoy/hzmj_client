@@ -219,4 +219,11 @@ public class PluginTool {
 #endif
         return macaddr;
     }
+
+    public void WXLogin()
+    {
+        AndroidJavaClass jc = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+        AndroidJavaObject jo = jc.GetStatic<AndroidJavaObject>("currentActivity");
+        jo.Call("WXLogin", "name");
+    }
 }
