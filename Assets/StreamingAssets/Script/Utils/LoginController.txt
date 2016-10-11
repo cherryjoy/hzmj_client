@@ -423,11 +423,15 @@ function LoginController:RoleSummarySuccess()
 end
 
 function LoginController:OpenLoginInputUI(state)
-    if self.doc ~=nil then
-        local ref = LuaUIViewCtr.OpenUIHasBg("Login/LoginInput")
-        if ref ~= nil then
-            ref.FirstShow = state
-            LoginPanel["LoginInput"] = ref
+    if Application.get_platform()==ERuntimePlatform.Android then
+        PluginTool.SharedInstance():WXLogin()
+    else
+        if self.doc ~=nil then
+            local ref = LuaUIViewCtr.OpenUIHasBg("Login/LoginInput")
+            if ref ~= nil then
+                ref.FirstShow = state
+                LoginPanel["LoginInput"] = ref
+            end
         end
     end
 end
