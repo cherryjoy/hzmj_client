@@ -941,7 +941,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &175896
 GameObject:
   m_ObjectHideFlags: 1
@@ -3164,6 +3164,14 @@ MonoBehaviour:
     regObj: {fileID: 174422}
     Name: 
     TypeIndex: 2
+  - Obj: {fileID: 101464}
+    regObj: {fileID: 101464}
+    Name: 
+    TypeIndex: 5
+  - Obj: {fileID: 147836}
+    regObj: {fileID: 147836}
+    Name: 
+    TypeIndex: 5
   LuaBehavArray:
   - Behav: {fileID: 11419594}
     Name: Drect1

@@ -173,7 +173,7 @@ end
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_PLAY_CARD_RES] = function(data, dataLength)
     local data = LuaProto.deserialize(PBMsgPlayCardRes, data, dataLength)
 
-    LuaUIViewCtr.UIPanel["MJTableUI"].PlayCard(LuaUIViewCtr.UIPanel["MJTableUI"], data.roleid, data.index, data.card, data.result)
+    LuaUIViewCtr.UIPanel["MJTableUI"].HandlePlayCard(LuaUIViewCtr.UIPanel["MJTableUI"], data.roleid, data.index, data.card, data.result)
 end
 
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_GET_CARD_RES] = function(data, dataLength)
@@ -185,23 +185,23 @@ end
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_PENG_CARD_RES] = function(data, dataLength)
     local data = LuaProto.deserialize(PBMsgPengCardRes, data, dataLength)
 
-    LuaUIViewCtr.UIPanel["MJTableUI"].PengCard(LuaUIViewCtr.UIPanel["MJTableUI"], data.roleid, data.index, data.card, data.srcid)
+    LuaUIViewCtr.UIPanel["MJTableUI"].HandlePengCard(LuaUIViewCtr.UIPanel["MJTableUI"], data.roleid, data.index, data.card, data.srcid)
 end
 
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_GANG_CARD_RES] = function(data, dataLength)
     local data = LuaProto.deserialize(PBMsgGangCardRes, data, dataLength)
 
-    LuaUIViewCtr.UIPanel["MJTableUI"].GangCard(LuaUIViewCtr.UIPanel["MJTableUI"], data.roleid, data.index, data.card, data.state, data.srcid)
+    LuaUIViewCtr.UIPanel["MJTableUI"].HandleGangCard(LuaUIViewCtr.UIPanel["MJTableUI"], data.roleid, data.index, data.card, data.state, data.srcid)
 end
 
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_PASS_CARD_RES] = function(data, dataLength)
     local data = LuaProto.deserialize(PBMsgGamePassCardRes, data, dataLength)
 
-    LuaUIViewCtr.UIPanel["MJTableUI"].GuoCard(LuaUIViewCtr.UIPanel["MJTableUI"])
+    LuaUIViewCtr.UIPanel["MJTableUI"].HandleGuoCard(LuaUIViewCtr.UIPanel["MJTableUI"])
 end
 
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_WIN_GAME_RES] = function(data, dataLength)
     local data = LuaProto.deserialize(PBMsgWinGameRes, data, dataLength)
 
-    LuaUIViewCtr.UIPanel["MJTableUI"].WinCard(LuaUIViewCtr.UIPanel["MJTableUI"], data.roleid)
+    LuaUIViewCtr.UIPanel["MJTableUI"].HandleWinCard(LuaUIViewCtr.UIPanel["MJTableUI"], data.roleid)
 end

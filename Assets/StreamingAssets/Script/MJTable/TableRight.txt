@@ -134,7 +134,7 @@ function TableRight:DeleteCard(srcRoleId)
     end
 end
 
-function TableRight:PengCard(card)
+function TableRight:HandlePengCard(card)
     -- 添加碰牌
     for num = 1, 3 do
         TableRight.SetLeftCard(self, card)

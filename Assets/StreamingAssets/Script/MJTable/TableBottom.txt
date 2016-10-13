@@ -203,15 +203,25 @@ end
 function TableBottom:IsGangACard(card)
     LuaDebug.Log("IsGangACard")
     local num = TableBottom.GetSameCardNum(self, card)
-    if num >= 3 then
+    if num == 4 then
         return true
     end
 
     return false
 end
 
-function TableBottom:IsGangMCard(card)
-    LuaDebug.Log("IsGangMCard")
+function TableBottom:IsGangMPlayCard(card)
+    LuaDebug.Log("IsGangMGetCard")
+    local num = TableBottom.GetSameCardNum(self, card)
+    if num == 3 then
+        return true
+    end
+
+    return false
+end
+
+function TableBottom:IsGangMGetCard(card)
+    LuaDebug.Log("IsGangMPlayCard")
     local have = false
     for i = 1, #(self.pengCard) do
         local tmp = self.pengCard[i]
@@ -244,7 +254,7 @@ function TableBottom:GetSameCardNum(card)
     return num
 end
 
-function TableBottom:PengCard(card, srcRoleId)
+function TableBottom:HandlePengCard(card, srcRoleId)
     -- 显示左边的碰牌
     table.insert(self.pengCard, card)
     for num = 1, 3 do
@@ -286,10 +296,10 @@ function TableBottom:PengCard(card, srcRoleId)
     return index
 end
 
-function TableBottom:GangCard(card, srcRoleId)
+function TableBottom:HandleGangCard(card, srcRoleId)
     local index = 1
-    local gangA = self.IsGangACard(self, card)
-    local gangM = self.IsGangMCard(self, card)
+    local gangA = TableBottom.IsGangACard(self, card)
+    local gangM = TableBottom.IsGangMPlayCard(self, card)
 
 
     return index
