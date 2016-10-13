@@ -1,6 +1,20 @@
 --require "Utils/ColorFilter"
 --require "Utils/GlobalEnum"
 Text = {
+    SDCardNotFound = "未检测到SD卡，请插入SD卡后重试",
+    FreeStorage="存储空间不足，请准备至少200MB可用空间",
+    CopyData =  "构建您的麻将世界，不消耗流量",
+    UnzipData = "正在解压文件，请不要关闭游戏",
+    ConnectError2 = "网络无法连接，请检查后再开始游戏",
+    DownloadingData = "正在玩命更新%s/%sMB数据，请稍后",
+    DownloadingSize = "%s/%sMB",
+    PackageError = "安装包不完整，请重新下载安装",
+    CheckUpdate="正在检查更新",
+    DownloadAPK ="有新的客户端需要更新，请下载安装",
+    NeedUpdate="有新的版本更新",
+    ReadUpdate="有%sMB资源需要更新",
+    ReadUpdateAPK="有新的版本更新，安装包大小%sMB,下载后请安装",
+
     Confirm = "确定",
     Cancel = "取消",
     ExitGame = "退出游戏",

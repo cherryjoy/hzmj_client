@@ -6,7 +6,7 @@ function PlatformHandler.Start()
 	Client.PlayerLevelUp = Client.PlayerLevelUp + {PlatformHandler,PlatformHandler.CallPlayerLevelUp}
 	Client.RoleSummarySuccess = Client.RoleSummarySuccess + {PlatformHandler,PlatformHandler.RoleSummarySuccess}
 	Client.ConnectSuccess = Client.ConnectSuccess + {PlatformHandler,PlatformHandler.ConnectSuccess}
-	Client.ChooseRoleExitBtn = Client.ChooseRoleExitBtn+{PlatformHandler,PlatformHandler.ChooseRoleExitBtn}
+	--Client.ChooseRoleExitBtn = Client.ChooseRoleExitBtn+{PlatformHandler,PlatformHandler.ChooseRoleExitBtn}
 end
 
 function PlatformHandler.OnDestroy()
@@ -15,7 +15,7 @@ function PlatformHandler.OnDestroy()
 	Client.PlayerLevelUp = Client.PlayerLevelUp - {PlatformHandler,PlatformHandler.CallPlayerLevelUp}
 	Client.RoleSummarySuccess = Client.RoleSummarySuccess - {PlatformHandler,PlatformHandler.RoleSummarySuccess}
 	Client.ConnectSuccess = Client.ConnectSuccess - {PlatformHandler,PlatformHandler.ConnectSuccess}
-	Client.ChooseRoleExitBtn = Client.ChooseRoleExitBtn- {PlatformHandler,PlatformHandler.ChooseRoleExitBtn}
+	--Client.ChooseRoleExitBtn = Client.ChooseRoleExitBtn- {PlatformHandler,PlatformHandler.ChooseRoleExitBtn}
 end
 
 function PlatformHandler.onSdkInit()
@@ -34,7 +34,8 @@ end
 function PlatformHandler.CallLogin()
 	if PlatformHandler.InitFinish then
 		if not PlatformHandler.Logining then
-			PlatformHandler.state:CJSDKLogin(PlatformHandler.gameName,"wechat_sdk_demo")
+			local loginExt = PlayerPrefsEx.GetString("loginExt")
+			PlatformHandler.state:CJSDKLogin(PlatformHandler.gameName,loginExt)
 			PlatformHandler.Logining=true
 		end
 	end
@@ -144,13 +145,13 @@ end
 function PlatformHandler.onInitFinish (msg)
 	LuaDebug.Log(msg)
 	local json = JSON:decode(msg)
-	if json['code']~=1 then
+	if json['code']~="1" then
 		LuaDebug.Log("init false")
 		return
 	end
 	LuaDebug.Log("InitFinish")
 	PlatformHandler.InitFinish=true
-	
+
 	if json['isMusic']=='false' or json['isMusic']==false then
 		PlatformHandler.SetMuteWithMessage()
 	end
@@ -162,6 +163,7 @@ end
 
 function  PlatformHandler.onLoginFinish(msg)
 	LuaDebug.Log('onLoginFinish: '..msg)
+	PlayerPrefsEx.SetString("loginExt",msg)
 	local json = JSON:decode(msg)
 	if json["access_token"] ~= nil then --server login
 		local platformInfo = Client.PlatformInfo

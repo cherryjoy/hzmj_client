@@ -100,8 +100,8 @@ Register.RegisterClass("UILineFlowLayout")
 
 Register.RegisterClass("MusicManager")
 Register.RegisterClass("TimerManager")
---Register.RegisterClass("PlatformSDKController")
---Register.RegisterClass("PlatformState")
+Register.RegisterClass("PlatformSDKController")
+Register.RegisterClass("PlatformState")
 
 --------------------login
 Register.RegisterClass("ClientInitController")

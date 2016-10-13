@@ -93,7 +93,7 @@ end
 
 
 --normally roleId is nil
-function  ClientSendMsg.SendRawAuth(name,password,roleId)
+function  ClientSendMsg.SendRawAuth(name,passwd,roleId)
 	--data.userType = GameDefine_platformCode
 	--if roleId is not null, we reconnect and log direct to gamehall
 	--if roleId then
