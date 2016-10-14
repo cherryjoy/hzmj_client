@@ -46,6 +46,12 @@ enumDIRECTION_TYPE = {
 	DIRECTION_SOUTH = 4,
 }
 
+enumCARD_GANG_TYPE = {
+	CARD_GANG_M_TYPE = 0,
+	CARD_GANG_A_TYPE = 1,
+	CARD_GANG_G_TYPE = 2,
+}
+
 -- PB_MSGID_MODULE_05
 PB_MSGID_MODULE_05 = {}
 PB_MSGID_MODULE_05.__index = PB_MSGID_MODULE_05
@@ -122,6 +128,33 @@ function PB_DIRECTION_TYPE.Serialize(obj)
 end
 
 function PB_DIRECTION_TYPE.GetSize(obj)
+	local size = 0
+	size = size + 5
+	return size
+end
+
+-- PB_CARD_GANG_TYPE
+PB_CARD_GANG_TYPE = {}
+PB_CARD_GANG_TYPE.__index = PB_CARD_GANG_TYPE
+function PB_CARD_GANG_TYPE.Create()
+	local obj = setmetatable({},PB_CARD_GANG_TYPE)
+	return obj
+end
+
+function PB_CARD_GANG_TYPE.DeSerialize(obj)
+	local fieldCount = deserialize_int32()
+	local option,optionLength = deserialize_optional()
+	return obj
+end
+
+function PB_CARD_GANG_TYPE.Serialize(obj)
+	local fieldCount = 0
+	serialize_int32(fieldCount)
+	local flag = {}
+	serialize_optional(flag)
+end
+
+function PB_CARD_GANG_TYPE.GetSize(obj)
 	local size = 0
 	size = size + 5
 	return size
@@ -1551,11 +1584,25 @@ function PBRoleCardInfo.DeSerialize(obj)
 			end
 		end
 	end
+
+	if (fieldCount >= 5) then
+		obj.gangcardg = {}
+		local len = deserialize_int32()
+		if (len > 0) then
+			for i=1,len do
+				local gangcardgSize = deserialize_data_length()
+				local gangcardgStartPos = get_position()
+				obj.gangcardg[i] = PBCard.Create()
+				obj.gangcardg[i] = (obj.gangcardg[i]):DeSerialize()
+				set_position(gangcardgSize+gangcardgStartPos )
+			end
+		end
+	end
 	return obj
 end
 
 function PBRoleCardInfo.Serialize(obj)
-	local fieldCount = 4
+	local fieldCount = 5
 	serialize_int32(fieldCount)
 	local flag = {}
 	serialize_optional(flag)
@@ -1619,6 +1666,21 @@ function PBRoleCardInfo.Serialize(obj)
 	else
 		serialize_int32(0)
 	end
+	if (obj.gangcardg ~= nil) then
+		serialize_int32(#(obj.gangcardg))
+		for i=1, #(obj.gangcardg) do
+			local WaitPos = get_position()
+			set_position(WaitPos+4)
+			obj.gangcardg[i]:Serialize()
+			local MaxPosNow = get_position()
+			local RealSize = MaxPosNow-(WaitPos+4)
+			set_position(WaitPos)
+			serialize_data_length(RealSize)
+			set_position(MaxPosNow)
+		end
+	else
+		serialize_int32(0)
+	end
 end
 
 function PBRoleCardInfo.GetSize(obj)
@@ -1647,7 +1709,13 @@ function PBRoleCardInfo.GetSize(obj)
 			size = size + (obj.gangcarda[i]):GetSize()
 		end
 	end
-	size = size + 25
+	if (obj.gangcardg ~= nil) then
+		for i=1,#(obj.gangcardg) do
+			size = size + 5
+			size = size + (obj.gangcardg[i]):GetSize()
+		end
+	end
+	size = size + 30
 	return size
 end
 
@@ -1710,11 +1778,25 @@ function PBOtherCardInfo.DeSerialize(obj)
 			end
 		end
 	end
+
+	if (fieldCount >= 6) then
+		obj.gangcardg = {}
+		local len = deserialize_int32()
+		if (len > 0) then
+			for i=1,len do
+				local gangcardgSize = deserialize_data_length()
+				local gangcardgStartPos = get_position()
+				obj.gangcardg[i] = PBCard.Create()
+				obj.gangcardg[i] = (obj.gangcardg[i]):DeSerialize()
+				set_position(gangcardgSize+gangcardgStartPos )
+			end
+		end
+	end
 	return obj
 end
 
 function PBOtherCardInfo.Serialize(obj)
-	local fieldCount = 5
+	local fieldCount = 6
 	serialize_int32(fieldCount)
 	local flag = {}
 	if(obj.roleid ~= nil) then
@@ -1779,6 +1861,21 @@ function PBOtherCardInfo.Serialize(obj)
 	else
 		serialize_int32(0)
 	end
+	if (obj.gangcardg ~= nil) then
+		serialize_int32(#(obj.gangcardg))
+		for i=1, #(obj.gangcardg) do
+			local WaitPos = get_position()
+			set_position(WaitPos+4)
+			obj.gangcardg[i]:Serialize()
+			local MaxPosNow = get_position()
+			local RealSize = MaxPosNow-(WaitPos+4)
+			set_position(WaitPos)
+			serialize_data_length(RealSize)
+			set_position(MaxPosNow)
+		end
+	else
+		serialize_int32(0)
+	end
 end
 
 function PBOtherCardInfo.GetSize(obj)
@@ -1807,7 +1904,13 @@ function PBOtherCardInfo.GetSize(obj)
 			size = size + (obj.gangcarda[i]):GetSize()
 		end
 	end
-	size = size + 21
+	if (obj.gangcardg ~= nil) then
+		for i=1,#(obj.gangcardg) do
+			size = size + 5
+			size = size + (obj.gangcardg[i]):GetSize()
+		end
+	end
+	size = size + 26
 	return size
 end
 

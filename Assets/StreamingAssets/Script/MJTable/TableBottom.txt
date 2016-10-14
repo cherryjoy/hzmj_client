@@ -204,20 +204,20 @@ function TableBottom:IsGangACard(card)
     LuaDebug.Log("IsGangACard")
     local num = TableBottom.GetSameCardNum(self, card)
     if num == 4 then
-        return true
+        return enumCARD_GANG_TYPE.CARD_GANG_A_TYPE
     end
 
-    return false
+    return nil
 end
 
 function TableBottom:IsGangMPlayCard(card)
     LuaDebug.Log("IsGangMGetCard")
     local num = TableBottom.GetSameCardNum(self, card)
     if num == 3 then
-        return true
+        return enumCARD_GANG_TYPE.CARD_GANG_M_TYPE
     end
 
-    return false
+    return nil
 end
 
 function TableBottom:IsGangMGetCard(card)
@@ -234,11 +234,11 @@ function TableBottom:IsGangMGetCard(card)
     if have then
         local num = TableBottom.GetSameCardNum(self, card)
         if num >= 1 then
-            return true
+            return enumCARD_GANG_TYPE.CARD_GANG_G_TYPE
         end
     end
 
-    return false
+    return nil
 end
 
 function TableBottom:GetSameCardNum(card)

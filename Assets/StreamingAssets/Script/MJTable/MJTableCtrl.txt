@@ -186,11 +186,11 @@ function MJTableCtrl:HandlePlayCard(roleId, index, card, result)
     -- 判断当前的牌是否能碰、杠
     if result ~= nil and result ~= 0 then
         local peng = self.Drect1.IsPengCard(self.Drect1, card)
-        local gangM = self.Drect1.IsGangMPlayCard(self.Drect1, card)
-        LuaDebug.Log("peng: "..tostring(peng)..", gangA: "..tostring(gangA)..", gangM: "..tostring(gangM))
-        if peng or gangM then
+        local gangType = self.Drect1.IsGangMPlayCard(self.Drect1, card)
+        LuaDebug.Log("peng: "..tostring(peng)..", gangType: "..tostring(gangType))
+        if peng or gangType then
             self.ResultCard:SetActive(true)
-            if gangA or gangM then
+            if gangType then
                 self.Gang:SetActive(true)
             end
 
@@ -257,7 +257,7 @@ function MJTableCtrl:DoCountDownFinish()
         self.timer = nil
     end
 
-    self.CountDown:set_enabled(false)
+    --self.CountDown:set_enabled(false)
     LuaDebug.Log("DoCountDownFinish")
 end
 
