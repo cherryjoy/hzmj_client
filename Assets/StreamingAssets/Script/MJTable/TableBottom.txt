@@ -8,6 +8,7 @@ function TableBottom:Start( )
     self.pengCard = {}
     self.gangCardM = {}
     self.gangCardA = {}
+    self.gangCardG = {} --碰牌 杠
 
     Client.TableChooseCard = Client.TableChooseCard + {self, TableBottom.ChooseCard}
     Client.TablePlayCardEnd = Client.TablePlayCardEnd + {self, TableBottom.PlayCardEnd}
@@ -63,7 +64,6 @@ function TableBottom:LeftCardSync(owncards)
         end
     end
 
-    --gangcardm gangcarda
     if owncards.gangcardm ~= nil then
         for i = 1, #(owncards.gangcardm) do
             local card = owncards.gangcardm[i]
@@ -78,6 +78,16 @@ function TableBottom:LeftCardSync(owncards)
         for i = 1, #(owncards.gangcarda) do
             local card = owncards.gangcarda[i]
             table.insert(self.gangCardA, card)
+            for num = 1, 4 do
+                TableBottom.SetLeftCard(self, card)
+            end
+        end
+    end
+
+    if owncards.gangcardg ~= nil then
+        for i = 1, #(owncards.gangcardg) do
+            local card = owncards.gangcardg[i]
+            table.insert(self.gangCardG, card)
             for num = 1, 4 do
                 TableBottom.SetLeftCard(self, card)
             end
@@ -296,13 +306,13 @@ function TableBottom:HandlePengCard(card, srcRoleId)
     return index
 end
 
-function TableBottom:HandleGangCard(card, srcRoleId)
-    local index = 1
-    local gangA = TableBottom.IsGangACard(self, card)
-    local gangM = TableBottom.IsGangMPlayCard(self, card)
+function TableBottom:HandleGangCard(card, srcRoleId, gangType)
+    -- 显示左边的杠牌
 
+    -- 消掉手里杠出的牌
 
-    return index
+    -- 设置位置，重新组牌
+
 end
 
 function TableBottom:SortCard()

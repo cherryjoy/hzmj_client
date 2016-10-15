@@ -53,6 +53,15 @@ function TableRight:LeftCardSync(owncards)
         end
     end
 
+    if owncards.gangcardg ~= nil then
+        for i = 1, #(owncards.gangcardg) do
+            local card = owncards.gangcardg[i]
+            for num = 1, 4 do
+                TableLeft.SetLeftCard(self, card)
+            end
+        end
+    end
+
     TableRight.LeftCardReposition(self)
 end
 

@@ -52,25 +52,7 @@ function MJTableCtrl:CardInfoSync(cardInfo)
         LuaDebug.Log("card num: "..#(cardInfo.owncards.handcard))
         self.Drect1.CardInfoSync(self.Drect1, cardInfo.owncards.handcard)
     end
-
-    -- 左边的碰牌、明杠牌、暗杠牌
-    --[[
-    cardInfo.owncards.pengcard = {}
-    cardInfo.owncards.gangcardm = {}
-    cardInfo.owncards.gangcarda = {}
-    local card = {}
-    card.type_id = 1
-    card.code_id = 5
-    table.insert(cardInfo.owncards.pengcard, card)
-    local cardm = {}
-    cardm.type_id = 1
-    cardm.code_id = 9
-    table.insert(cardInfo.owncards.gangcardm, cardm)
-    local carda = {}
-    carda.type_id = 4
-    carda.code_id = 7
-    table.insert(cardInfo.owncards.gangcarda, carda)
-    ]]
+    
     self.Drect1.LeftCardSync(self.Drect1, cardInfo.owncards)
 
     -- 同步其他人的牌
@@ -192,6 +174,7 @@ function MJTableCtrl:HandlePlayCard(roleId, index, card, result)
             self.ResultCard:SetActive(true)
             if gangType then
                 self.Gang:SetActive(true)
+                self.tempGandType = gangType
             end
 
             self.tempCard = card
@@ -269,7 +252,7 @@ function MJTableCtrl:Peng_OnClick()
 end
 
 function MJTableCtrl:Gang_OnClick()
-    local index = self.Drect1.GangCard(self.Drect1, self.tempCard, self.tempRoleId)
+    local index = self.Drect1.HandleGangCard(self.Drect1, self.tempCard, self.tempRoleId, self.tempGandType)
     ClientSendMsg.SendGangCard(index, self.tempCard.type_id, self.tempCard.code_id, self.tempRoleId)
 
     self.ResultCard:SetActive(false)
