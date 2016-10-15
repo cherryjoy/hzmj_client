@@ -52,7 +52,7 @@ function MJTableCtrl:CardInfoSync(cardInfo)
         LuaDebug.Log("card num: "..#(cardInfo.owncards.handcard))
         self.Drect1.CardInfoSync(self.Drect1, cardInfo.owncards.handcard)
     end
-    
+
     self.Drect1.LeftCardSync(self.Drect1, cardInfo.owncards)
 
     -- 同步其他人的牌
@@ -194,18 +194,22 @@ function MJTableCtrl:HandleGetCard(roleId, card)
     -- 摸牌只对自己广播牌，其他方只广播roleId
     if card ~= nil then
         LuaDebug.Log("get card, type: "..card.type_id..", id: "..card.code_id)
+        -- 判断是否杠牌
+        local gangType = nil
+        gangType = self.Drect1.IsGangACard(self.Drect1, card)
+        if not gangType then
+            gangType = self.Drect1.IsGangMGetCard(self.Drect1, card)
+        end
+        if gangType then
+            self.ResultCard:SetActive(true)
+            self.Gang:SetActive(true)
+            self.tempGandType = gangType
+            self.tempCard = card
+            self.tempRoleId = roleId
+        end
     end
 
     MJTableCtrl.CountDownStart(self, roleId)
-
-    -- 判断是否杠牌
-    local gangA = self.Drect1.IsGangACard(self.Drect1, card)
-    local gangM = self.Drect1.IsGangMGetCard(self.Drect1, card)
-    if gangA or gangM then
-        self.ResultCard:SetActive(true)
-        self.Gang:SetActive(true)
-    end
-
     -- 判断是哪方摸牌
     for i = 1, 4 do
         if self["Drect"..i].roleId == roleId then

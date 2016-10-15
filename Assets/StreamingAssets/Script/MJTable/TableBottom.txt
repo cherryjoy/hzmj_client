@@ -274,25 +274,7 @@ function TableBottom:HandlePengCard(card, srcRoleId)
     self.LeftCardGrid:Reposition()
 
     -- 消掉手里碰出的牌
-    local index = 1
-    for i,v in ipairs(self.handCard) do
-        if v.card.type_id == card.type_id and v.card.code_id == card.code_id then
-            v.gameObject:SetActive(false)
-            v.gameObject:Destroy1()
-            table.remove(self.handCard, i)
-        end
-
-        index = i
-    end
-
-    for i,v in ipairs(self.handCard) do
-        if v.card.type_id == card.type_id and v.card.code_id == card.code_id then
-            v.gameObject:SetActive(false)
-            v.gameObject:Destroy1()
-            table.remove(self.handCard, i)
-        end
-    end
-
+    local index = TableBottom.RemoveHandCard(self, 2)
     TableBottom.SortCard(self)
 
     -- 设置位置，重新组牌
@@ -307,12 +289,47 @@ function TableBottom:HandlePengCard(card, srcRoleId)
 end
 
 function TableBottom:HandleGangCard(card, srcRoleId, gangType)
-    -- 显示左边的杠牌
+    local index = nil
+    if gangType == enumCARD_GANG_TYPE.CARD_GANG_M_TYPE then --明杠
+        -- 显示左边的杠牌
+        table.insert(self.gangCardM, card)
+        for num = 1, 4 do
+            TableBottom.SetLeftCard(self, card)
+        end
 
-    -- 消掉手里杠出的牌
+        self.LeftCardGrid:Reposition()
+
+        -- 消掉手里杠出的牌，三张牌
+        index = TableBottom.RemoveHandCard(self, 3)
+        TableBottom.SortCard(self)
+    elseif gangType == enumCARD_GANG_TYPE.CARD_GANG_A_TYPE then --暗杠
+        table.insert(self.gangCardA, card)
+        for num = 1, 4 do
+            TableBottom.SetLeftCard(self, card)
+        end
+
+        self.LeftCardGrid:Reposition()
+
+        index = TableBottom.RemoveHandCard(self, 4)
+        TableBottom.SortCard(self)
+    elseif gangType == enumCARD_GANG_TYPE.CARD_GANG_G_TYPE then --碰杠
+        table.insert(self.gangCardG, card)
+        TableBottom.SetLeftCard(self, card)
+
+        self.LeftCardGrid:Reposition()
+
+        index = TableBottom.RemoveHandCard(self, 1)
+        TableBottom.SortCard(self)
+    end
 
     -- 设置位置，重新组牌
-
+    local num = #(self.handCard)
+    LuaDebug.Log("GangCard handCard num: "..num)
+    local oldPos = self.Grid.get_transform():get_localPosition()
+    local posX = (13 - num)*58 - 348
+    self.Grid:get_transform():set_localPosition(LuaVector3.Create(posX, oldPos:y(), oldPos:z()))
+    self.Grid:Reposition()
+    return index
 end
 
 function TableBottom:SortCard()
@@ -368,4 +385,23 @@ function TableBottom:SortCard()
         self.handCard[index].Init(self.handCard[index], zhongList[i], index)
         index = index + 1
     end
+end
+
+function TableBottom:RemoveHandCard(numTotal)
+    local index = nil
+    for num = 1, numTotal do
+        for i,v in ipairs(self.handCard) do
+            if v.card.type_id == card.type_id and v.card.code_id == card.code_id then
+                v.gameObject:SetActive(false)
+                v.gameObject:Destroy1()
+                table.remove(self.handCard, i)
+                if index == nil then
+                    index = i
+                end
+                break
+            end
+        end
+    end
+
+    return index
 end
