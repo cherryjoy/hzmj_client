@@ -82,7 +82,7 @@ function TableTop:LeftCardReposition()
     self.LeftCardGrid:Reposition()
 end
 
-function TableTop:PlayCard(i, card, toward)
+function TableTop:HandlePlayCard(i, card, toward)
     --LuaDebug.Log("play card, type: "..card.type_id..", id: "..card.code_id)
     local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/TopPlayCard",self.PlayedCardsGrid:get_gameObject())
     local spriteName = MJTableCtrl.GetLeftCardSprite(card)

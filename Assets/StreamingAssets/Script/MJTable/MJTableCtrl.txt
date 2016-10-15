@@ -4,12 +4,12 @@ function MJTableCtrl:Start( )
     local mt=TextureMgr.get_Instance():LoadTexture("MJTable/MJTable", true)
     self.Texture:set_material(mt)
 
-    Client.BottomPlayCard = Client.BottomPlayCard + {self, MJTableCtrl.PlayCard}
+    Client.BottomPlayCard = Client.BottomPlayCard + {self, MJTableCtrl.HandlePlayCard}
     Client.ResetToward = Client.ResetToward + {self, MJTableCtrl.ResetToward}
 end
 
 function MJTableCtrl:OnDestroy( )
-    Client.BottomPlayCard = Client.BottomPlayCard - {self, MJTableCtrl.PlayCard}
+    Client.BottomPlayCard = Client.BottomPlayCard - {self, MJTableCtrl.HandlePlayCard}
     Client.ResetToward = Client.ResetToward - {self, MJTableCtrl.ResetToward}
 end
 
@@ -184,7 +184,7 @@ function MJTableCtrl:HandlePlayCard(roleId, index, card, result)
 
     for i = 1, 4 do
         if self["Drect"..i].roleId == roleId then
-            self["Drect"..i].PlayCard(self["Drect"..i], index, card)
+            self["Drect"..i].HandlePlayCard(self["Drect"..i], index, card)
         end
     end
 end
@@ -297,7 +297,31 @@ function MJTableCtrl:HandlePengCard(roleId, index, card, srcRoleId)
 end
 
 function MJTableCtrl:HandleGangCard(roleId, index, card, state, srcRoleId)
+    -- 重置
+    Client.ResetToward:Do()
 
+    if state == enumCARD_GANG_TYPE.CARD_GANG_M_TYPE then
+        Client.DeleteCard:Do(srcRoleId)
+    elseif state == enumCARD_GANG_TYPE.CARD_GANG_A_TYPE then
+
+    elseif state == enumCARD_GANG_TYPE.CARD_GANG_G_TYPE then
+
+    end
+
+    --计时
+    MJTableCtrl.CountDownStart(self, roleId)
+
+    -- 判断是哪方杠牌
+    for i = 2, 4 do
+        if self["Drect"..i].roleId == roleId then
+            self["Drect"..i].HandleGangCard(self["Drect"..i], card)
+        end
+    end
+
+    -- 自己可以打牌了
+    if roleId == self.Drect1.roleId then
+        self.Drect1.CanPlayCard = true
+    end
 end
 
 function MJTableCtrl:HandleWinCard(roleId)

@@ -131,7 +131,7 @@ function TableBottom:ChooseCard(i)
     end
 end
 
-function TableBottom:PlayCard(i, card)
+function TableBottom:HandlePlayCard(i, card)
     if i ~= nil then
         self.handCard[i].Animation(self.handCard[i])
     end
@@ -274,7 +274,7 @@ function TableBottom:HandlePengCard(card, srcRoleId)
     self.LeftCardGrid:Reposition()
 
     -- 消掉手里碰出的牌
-    local index = TableBottom.RemoveHandCard(self, 2)
+    local index = TableBottom.RemoveHandCard(self, card, 2)
     TableBottom.SortCard(self)
 
     -- 设置位置，重新组牌
@@ -300,7 +300,7 @@ function TableBottom:HandleGangCard(card, srcRoleId, gangType)
         self.LeftCardGrid:Reposition()
 
         -- 消掉手里杠出的牌，三张牌
-        index = TableBottom.RemoveHandCard(self, 3)
+        index = TableBottom.RemoveHandCard(self, card, 3)
         TableBottom.SortCard(self)
     elseif gangType == enumCARD_GANG_TYPE.CARD_GANG_A_TYPE then --暗杠
         table.insert(self.gangCardA, card)
@@ -310,7 +310,7 @@ function TableBottom:HandleGangCard(card, srcRoleId, gangType)
 
         self.LeftCardGrid:Reposition()
 
-        index = TableBottom.RemoveHandCard(self, 4)
+        index = TableBottom.RemoveHandCard(self, card, 4)
         TableBottom.SortCard(self)
     elseif gangType == enumCARD_GANG_TYPE.CARD_GANG_G_TYPE then --碰杠
         table.insert(self.gangCardG, card)
@@ -318,14 +318,14 @@ function TableBottom:HandleGangCard(card, srcRoleId, gangType)
 
         self.LeftCardGrid:Reposition()
 
-        index = TableBottom.RemoveHandCard(self, 1)
+        index = TableBottom.RemoveHandCard(self, card, 1)
         TableBottom.SortCard(self)
     end
 
     -- 设置位置，重新组牌
     local num = #(self.handCard)
     LuaDebug.Log("GangCard handCard num: "..num)
-    local oldPos = self.Grid.get_transform():get_localPosition()
+    local oldPos = self.Grid:get_transform():get_localPosition()
     local posX = (13 - num)*58 - 348
     self.Grid:get_transform():set_localPosition(LuaVector3.Create(posX, oldPos:y(), oldPos:z()))
     self.Grid:Reposition()
@@ -387,7 +387,7 @@ function TableBottom:SortCard()
     end
 end
 
-function TableBottom:RemoveHandCard(numTotal)
+function TableBottom:RemoveHandCard(card, numTotal)
     local index = nil
     for num = 1, numTotal do
         for i,v in ipairs(self.handCard) do
