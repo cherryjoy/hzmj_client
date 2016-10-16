@@ -314,7 +314,7 @@ function MJTableCtrl:HandleGangCard(roleId, index, card, state, srcRoleId)
     -- 判断是哪方杠牌
     for i = 2, 4 do
         if self["Drect"..i].roleId == roleId then
-            self["Drect"..i].HandleGangCard(self["Drect"..i], card)
+            self["Drect"..i].HandleGangCard(self["Drect"..i], card, state)
         end
     end
 

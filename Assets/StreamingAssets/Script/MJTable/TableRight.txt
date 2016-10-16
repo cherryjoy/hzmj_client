@@ -113,9 +113,7 @@ function TableRight:HandlePlayCard(i, card)
     if self.GetCard:get_activeSelf() then
         self.GetCard:SetActive(false)
     else
-        local ref = self.handCard[#(self.handCard)]
-        table.remove(self.handCard)
-        ref.RightCard:Destroy1()
+        TableRight.RemoveHandCard(self, 1)
     end
 end
 
@@ -155,11 +153,37 @@ function TableRight:HandlePengCard(card)
     local num = #(self.handCard)
     LuaDebug.Log("num: "..num)
 
-    local ref = self.handCard[#(self.handCard)]
-    table.remove(self.handCard)
-    ref.RightCard:Destroy1()
+    TableRight.RemoveHandCard(self, 2)
+end
 
-    local ref = self.handCard[#(self.handCard)]
-    table.remove(self.handCard)
-    ref.RightCard:Destroy1()
+function TableRight:HandleGangCard(card, gangType)
+    -- 添加杠牌
+    local total = 0
+    local numTotal = 0
+    if gangType == enumCARD_GANG_TYPE.CARD_GANG_M_TYPE then
+        total = 4
+        numTotal = 3
+    elseif gangType == enumCARD_GANG_TYPE.CARD_GANG_A_TYPE then
+        total = 4
+        numTotal = 4
+    elseif gangType == enumCARD_GANG_TYPE.CARD_GANG_G_TYPE then
+        total = 1
+        numTotal = 1
+    end
+    for num = 1, total do
+        TableRight.SetLeftCard(self, card)
+    end
+
+    TableRight.LeftCardReposition(self)
+
+    -- 减少手牌
+    TableRight.RemoveHandCard(self, numTotal)
+end
+
+function TableRight:RemoveHandCard(numTotal)
+    for num = 1, numTotal do
+        local ref = self.handCard[#(self.handCard)]
+        table.remove(self.handCard)
+        ref.RightCard:Destroy1()
+    end
 end
