@@ -21,40 +21,16 @@ public partial class PlatformState
     private AndroidJavaObject mAndroidObj;
 #endif
 
-//#if UNITY_IPHONE
-//    [DllImport("__Internal")]
-//    private static extern void oksdkSetMessageObjName(string objName);
-	
-//    [DllImport("__Internal")]
-//    private static extern  void oksdkInit(string customInfo);
-	
-//    [DllImport("__Internal")]
-//    private static extern void oksdkLogin(string customInfo);
+#if UNITY_IPHONE
+    [DllImport("__Internal")]
+    private static extern void cjsdkInit(string objName, string customInfo);
 
-//    [DllImport("__Internal")]
-//    private static extern void oksdkCreateRole(string customInfo);
-	
-//    [DllImport("__Internal")]
-//    private static extern void oksdkEnterGame(string customInfo);
-	
-//    [DllImport("__Internal")]
-//    private static extern void oksdkUserCenter(string customInfo);
-    
-//    [DllImport("__Internal")]
-//    private static extern void oksdkEnterBBS(string customInfo);
-	
-//    [DllImport("__Internal")]
-//    private static extern void oksdkLogout(string customInfo);
-	
-//    [DllImport("__Internal")]
-//    private static extern void oksdkLeavePlatform();
-	
-//    [DllImport("__Internal")]
-//    private static extern void oksdkPayment(string pid,string amount,string productName,string customInfo,string ext);
+    [DllImport("__Internal")]
+    private static extern void cjsdkLogin(string objName, string customInfo);
 
-//    [DllImport("__Internal")]
-//    private static extern void okLog(string str);
-//#endif
+    //[DllImport("__Internal")]
+    //private static extern void cjsdkPayment(string pid, string amount, string productName, string customInfo, string ext);
+#endif
 
 /**
 *  初始化平台
@@ -91,8 +67,7 @@ public partial class PlatformState
             }
         }
 #elif UNITY_IPHONE
-        oksdkSetMessageObjName(objName);
-        oksdkInit(ext);
+        cjsdkInit(objName, ext);
 #endif
     }
 
@@ -118,7 +93,7 @@ public partial class PlatformState
             }
         }
 #elif UNITY_IPHONE
-        oksdkLogin(ext);
+        cjsdkLogin(objName, ext);
 #endif
     }
 
@@ -311,14 +286,4 @@ public partial class PlatformState
     {
         Debug.Log(tag + "  " + msg);
     }
-//    public void OKLog(string msg)
-//    {
-//#if UNITY_ANDROID
-//        UnityEngine.Debug.Log(msg);
-//#elif UNITY_IPHONE
-//        okLog(msg);
-//#endif
-//    }
-
-
 }
