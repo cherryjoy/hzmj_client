@@ -174,7 +174,7 @@ function MJTableCtrl:HandlePlayCard(roleId, index, card, result)
             self.ResultCard:SetActive(true)
             if gangType then
                 self.Gang:SetActive(true)
-                self.tempGandType = gangType
+                self.tempGangType = gangType
             end
 
             self.tempCard = card
@@ -203,7 +203,7 @@ function MJTableCtrl:HandleGetCard(roleId, card)
         if gangType then
             self.ResultCard:SetActive(true)
             self.Gang:SetActive(true)
-            self.tempGandType = gangType
+            self.tempGangType = gangType
             self.tempCard = card
             self.tempRoleId = roleId
         end
@@ -256,8 +256,8 @@ function MJTableCtrl:Peng_OnClick()
 end
 
 function MJTableCtrl:Gang_OnClick()
-    local index = self.Drect1.HandleGangCard(self.Drect1, self.tempCard, self.tempRoleId, self.tempGandType)
-    ClientSendMsg.SendGangCard(index, self.tempCard.type_id, self.tempCard.code_id, self.tempRoleId)
+    local index = self.Drect1.HandleGangCard(self.Drect1, self.tempCard, self.tempRoleId, self.tempGangType)
+    ClientSendMsg.SendGangCard(index, self.tempCard.type_id, self.tempCard.code_id, self.tempRoleId, self.tempGangType)
 
     self.ResultCard:SetActive(false)
 end

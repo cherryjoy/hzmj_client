@@ -182,7 +182,7 @@ function ClientSendMsg.SendPlayCard(index, typeId, codeId)
 	card.code_id = codeId
 
 	data.card = card
-	LuaDebug.Log("index: "..data.index.."data.card.type_id: "..data.card.type_id..", data.card.code_id"..data.card.code_id)
+	LuaDebug.Log("index: "..data.index.."data.card.type_id: "..data.card.type_id..", data.card.code_id: "..data.card.code_id)
 	local buffer, length = LuaProto.serialize(data)
 	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_PLAY_CARD_REQ, buffer, length)
 end
@@ -197,22 +197,23 @@ function ClientSendMsg.SendPengCard(index, typeId, codeId, srcRoleId)
 	card.code_id = codeId
 
 	data.card = card
-	LuaDebug.Log("index: "..data.index.."data.card.type_id: "..data.card.type_id..", data.card.code_id"..data.card.code_id)
+	LuaDebug.Log("index: "..data.index.."data.card.type_id: "..data.card.type_id..", data.card.code_id: "..data.card.code_id)
 	local buffer, length = LuaProto.serialize(data)
 	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_PENG_CARD_REQ, buffer, length)
 end
 
-function ClientSendMsg.SendGangCard(index, typeId, codeId, srcRoleId)
+function ClientSendMsg.SendGangCard(index, typeId, codeId, srcRoleId, gangType)
 	local data = PBMsgGangCardReq.Create()
 	data.index = index
 	data.roleid = srcRoleId
+	data.state = gangType
 
 	local card = PBCard.Create()
 	card.type_id = typeId
 	card.code_id = codeId
 
 	data.card = card
-	LuaDebug.Log("index: "..data.index.."data.card.type_id: "..data.card.type_id..", data.card.code_id"..data.card.code_id)
+	LuaDebug.Log("index: "..data.index.."data.card.type_id: "..data.card.type_id..", data.card.code_id: "..data.card.code_id..", state: "..gangType)
 	local buffer, length = LuaProto.serialize(data)
 	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_GANG_CARD_REQ, buffer, length)
 end
