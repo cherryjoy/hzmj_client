@@ -347,3 +347,7 @@ end
 function MJTableCtrl:CloseTable()
     self.gameObject:Destroy1()
 end
+
+function MJTableCtrl:HandleTingCard(cards)
+    self.Drect1.HandleTingCard(self.Drect1, cards)
+end
