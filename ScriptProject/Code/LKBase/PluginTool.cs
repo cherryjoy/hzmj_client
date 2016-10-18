@@ -24,8 +24,6 @@ public class PluginTool {
     [DllImport("__Internal")]
     private static extern int getClientFreeStorage();
     [DllImport("__Internal")]
-    private static extern void lkCustomer(string json);
-    [DllImport("__Internal")]
     private static extern string  getVersionName();
     [DllImport("__Internal")]
     static extern string GetMacAddressiOS();
