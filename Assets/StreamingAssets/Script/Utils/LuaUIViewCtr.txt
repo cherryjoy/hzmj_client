@@ -495,11 +495,12 @@ function LuaUIViewCtr:OnBuySinewSuccess()
   Client.ShowBuyMessageBox()
 end
 
-function LuaUIViewCtr.ShowNewSecretFairy()
-    if Client.RoleInfo.openFairyId then
-        require "WDB/WDB_Fairy"
-        local fairyName = LuaCDataMgr.Fairy():GetData2(Client.RoleInfo.openFairyId,WDB_Fairy.Name)
-        TishiCentre.DisPlayText(string.format(Text.ActiveSecretFairy,fairyName))
-        Client.RoleInfo.openFairyId = nil
+function LuaUIViewCtr.FlushPortraitInfo(defaultIconPath, imageUrl, iconTex)
+    if imageUrl ~= nil then
+        LuaDebug.Log("imageUrl: "..imageUrl)
+        WWWPortraitLoader.LoadOnLinePhoto(imageUrl, "DownloadTextureSuccss", "DownloadTextureFail", iconTex, "Shader/NGUI/Shaders/Unlit - Transparent Colored", defaultIconPath)
+    else
+        local mat = TextureMgr.get_Instance():LoadTexture(defaultIconPath, true)
+        iconTex:set_material(mat)
     end
 end

@@ -102,6 +102,7 @@ Register.RegisterClass("MusicManager")
 Register.RegisterClass("TimerManager")
 Register.RegisterClass("PlatformSDKController")
 Register.RegisterClass("PlatformState")
+Register.RegisterClass("WWWPortraitLoader")
 
 --------------------login
 Register.RegisterClass("ClientInitController")

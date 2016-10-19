@@ -215,3 +215,27 @@ end
 function PlatformHandler.onSwitchAccountFinish(msg)
 
 end
+
+function PlatformHandler:DownloadTextureSuccss(refTexture, mat)
+    LuaDebug.Log("DownloadTextureSuccss")
+    if refTexture == nil or mat == nil then
+        return
+    end
+
+    if not refTexture:Equals(nil) then
+        refTexture:set_material(mat)
+    end
+end
+
+function PlatformHandler:DownloadTextureFail(refTexture, defaultIconPath)
+    LuaDebug.Log("DownloadTextureFail")
+    if refTexture == nil then
+        --LuaDebug.Log("refTexture is nil")
+        return
+    end
+
+    if not refTexture:Equals(nil) then
+		local mat = TextureMgr.get_Instance():LoadTexture(defaultIconPath, true)
+	    refTexture:set_material(mat)
+    end
+end
