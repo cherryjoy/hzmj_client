@@ -402,13 +402,14 @@ function TableBottom:HandleTingCard(cards)
     self.TingCard:SetActive(true)
     local num = #cards
     -- 计算长度
-    self.TingBG:set_width(112 + (num - 1)*33)
+    self.TingBG:set_width(109 + (num - 1)*28)
 
     -- 生成牌
     for i = 1, num do
         local ref = self.tingCard[i]
         if ref == nil then
             ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCard",self.TingCardGird:get_gameObject())
+            ref.gameObject:get_transform():set_localScale(LuaVector3.Create(0.46, 0.46, 1))
         end
         self.tingCard[i] = ref
         ref.Init(ref, cards[i], i)

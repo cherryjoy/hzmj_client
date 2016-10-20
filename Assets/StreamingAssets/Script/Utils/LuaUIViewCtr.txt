@@ -496,8 +496,8 @@ function LuaUIViewCtr:OnBuySinewSuccess()
 end
 
 function LuaUIViewCtr.FlushPortraitInfo(defaultIconPath, imageUrl, iconTex)
-    if imageUrl ~= nil then
-        LuaDebug.Log("imageUrl: "..imageUrl)
+    LuaDebug.Log("imageUrl: "..tostring(imageUrl))
+    if imageUrl ~= nil and imageUrl ~= "" then
         WWWPortraitLoader.LoadOnLinePhoto(imageUrl, "DownloadTextureSuccss", "DownloadTextureFail", iconTex, "Shader/NGUI/Shaders/Unlit - Transparent Colored", defaultIconPath)
     else
         local mat = TextureMgr.get_Instance():LoadTexture(defaultIconPath, true)

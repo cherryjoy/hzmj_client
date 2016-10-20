@@ -28,6 +28,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 416314}
   - 114: {fileID: 11494776}
+  - 114: {fileID: 11496384}
   m_Layer: 8
   m_Name: TingCard
   m_TagString: Untagged
@@ -1410,7 +1411,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 101426}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -320, z: 0}
+  m_LocalPosition: {x: -568, y: -320, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -1452,7 +1453,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 179592}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -400, y: 40, z: 0}
+  m_LocalPosition: {x: -80, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -1793,7 +1794,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 121938}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -365, y: 40, z: 0}
+  m_LocalPosition: {x: -45, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -2092,7 +2093,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 146406}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -320, y: 40, z: 0}
+  m_LocalPosition: {x: 0, y: -2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -2969,7 +2970,7 @@ MonoBehaviour:
   - Obj: {fileID: 101426}
     regObj: {fileID: 101426}
     Name: 
-    TypeIndex: 2
+    TypeIndex: 3
   - Obj: {fileID: 179592}
     regObj: {fileID: 11405196}
     Name: 
@@ -3181,7 +3182,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arrangement: 0
   maxPerLine: 0
-  cellWidth: 33
+  cellWidth: 28
   cellHeight: 200
   repositionNow: 0
   sorted: 0
@@ -4481,11 +4482,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiCamera: {fileID: 0}
-  side: 7
+  side: 0
   halfPixelOffset: 1
   stretchToFill: 0
   depthOffset: 0
-  ExtraOffset: {x: 0, y: 0, z: 0}
+  ExtraOffset: {x: 160, y: 40, z: 0}
   ViewportOffset: {x: 0, y: 0, z: 0}
   updateAllTheTime: 0
   direction: 2
@@ -4511,6 +4512,43 @@ MonoBehaviour:
   mAtlas: {fileID: 11459290, guid: 632c39260d01bae4eba76e8074fb5b27, type: 2}
   mSpriteName: btn_win
   IsKeepOriSize: 0
+--- !u!114 &11496384
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 101426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1267949273, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showProgress: 1
+  showInPanelTool: 1
+  depthPass: 0
+  mDebugInfo: 0
+  mClipping: 0
+  mClipRange: {x: 0, y: 0, z: 0, w: 0}
+  mClipSoftness: {x: 1, y: 1}
+  mDepthFlag: 0
+  mWorldToLocal:
+    e00: 320
+    e01: 0
+    e02: 0
+    e03: 568.5
+    e10: 0
+    e11: 320
+    e12: 0
+    e13: 319.5
+    e20: 0
+    e21: 0
+    e22: 320
+    e23: 15
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 1
+  ChangeMtl: 0
 --- !u!114 &11496426
 MonoBehaviour:
   m_ObjectHideFlags: 1

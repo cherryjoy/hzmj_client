@@ -203,8 +203,9 @@ end
 
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_WIN_GAME_RES] = function(data, dataLength)
     local data = LuaProto.deserialize(PBMsgWinGameRes, data, dataLength)
-
-    LuaUIViewCtr.UIPanel["MJTableUI"].HandleWinGame(LuaUIViewCtr.UIPanel["MJTableUI"], data.roleid)
+    LuaDebug.Log("data.count: "..data.count)
+    LuaDebug.Log("data.card: "..#(data.card))
+    LuaUIViewCtr.UIPanel["MJTableUI"].HandleWinGame(LuaUIViewCtr.UIPanel["MJTableUI"], data.roleid, data.count, data.card)
 end
 
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_WIN_CARD_RES] = function(data, dataLength)
