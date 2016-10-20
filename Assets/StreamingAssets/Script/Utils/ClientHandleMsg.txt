@@ -42,9 +42,10 @@ HandleFuncs[enumMSGID_MODULE_05.ID_ROLE_RES] = function(data, dataLength)
     --PlayerPrefsEx.SetString("userId",data.userId .. "")
     Client.RoleInfo = {}
     Client.RoleInfo.RoleID = pbMsg.RoleID
+    Client.RoleInfo.imageurl = pbMsg.imageurl
 
     LuaUIViewCtr.UIPanel["MainUI"] = LuaUIViewCtr.OpenUIHasBg("Home/MainUI")
-    LuaUIViewCtr.UIPanel["MainUI"].Init(LuaUIViewCtr.UIPanel["MainUI"], pbMsg.RoleName, pbMsg.RoleID, pbMsg.room_pass)
+    LuaUIViewCtr.UIPanel["MainUI"].Init(LuaUIViewCtr.UIPanel["MainUI"], pbMsg.RoleName, pbMsg.RoleID, pbMsg.room_pass, pbMsg.imageurl)
 
     Client.LoginSuccess:Do()
 
@@ -203,7 +204,7 @@ end
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_WIN_GAME_RES] = function(data, dataLength)
     local data = LuaProto.deserialize(PBMsgWinGameRes, data, dataLength)
 
-    LuaUIViewCtr.UIPanel["MJTableUI"].HandleWinCard(LuaUIViewCtr.UIPanel["MJTableUI"], data.roleid)
+    LuaUIViewCtr.UIPanel["MJTableUI"].HandleWinGame(LuaUIViewCtr.UIPanel["MJTableUI"], data.roleid)
 end
 
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_WIN_CARD_RES] = function(data, dataLength)

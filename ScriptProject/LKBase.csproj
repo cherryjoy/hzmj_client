@@ -278,6 +278,7 @@
     <Compile Include="Code\LKBase\NGUI\Scripts\UI\UIWidgetScaleDependOnOther.cs" />
     <Compile Include="Code\LKBase\Platform\PlatformSDKController.cs" />
     <Compile Include="Code\LKBase\Platform\PlatformState.cs" />
+    <Compile Include="Code\LKBase\Platform\WWWPortraitLoader.cs" />
     <Compile Include="Code\LKBase\PlayerPrefsEx.cs" />
     <Compile Include="Code\LKBase\PluginTool.cs" />
     <Compile Include="Code\LKBase\TextureMgr.cs" />

@@ -8,7 +8,7 @@ public class PlatformSDKController : MonoBehaviour
 {
     public static PlatformSDKController mSelf = null;
     public PlatformState SDKState = null;
-    int luaPlatformHanderRef;
+    public int luaPlatformHanderRef;
 
     void Awake()
     {

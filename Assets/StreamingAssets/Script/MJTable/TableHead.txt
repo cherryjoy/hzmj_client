@@ -9,8 +9,8 @@ function TableHead:OnDestroy( )
 end
 
 function TableHead:Init(info)
-    local mt = TextureMgr.get_Instance():LoadTexture("Home/homeHeadCusPic", true)
-    self.Icon:set_material(mt)
+    LuaUIViewCtr.FlushPortraitInfo("Home/homeHeadCusPic", info.imageurl, self.Icon)
+
     self.Name:set_text(info.rolename)
     self.Score:set_text(tostring(info.integral))
     if info.host ~= 0 then
