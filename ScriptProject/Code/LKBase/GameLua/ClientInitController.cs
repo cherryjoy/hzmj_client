@@ -32,6 +32,7 @@ public class ClientInitController : MonoBehaviour
         lua.RawGetI(LuaAPI.LUA_REGISTRYINDEX, mLoginLuaBehav.Object_ref);
         lua.NewClassUserData(this);
         lua.SetField(-2, "ClientInitCtr");
+		lua.Pop(1);
         GameObject GameCoreUpdatePrefab = (GameObject)ResLoader.Load("UI/Prefab/NewSceneMustHave/GameCoreUpdate", typeof(GameObject));
         Instantiate(GameCoreUpdatePrefab);
 
