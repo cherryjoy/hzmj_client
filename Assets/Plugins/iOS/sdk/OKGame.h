@@ -1,9 +1,9 @@
 
 //游戏端实现OKSDKDelegate接口，OKSDK回调时，会调用OKSDKDelegate
 
-#import "LKSobotPluginManger.h"
-#import "oksdk/OKSDK.h"
+//@protocol OKSDKDelegate
+//-(void)buyIphone:(NSString *)iphoneType money:(NSString *)money;
 
-@interface OKGame : NSObject <OKSDKDelegate>
+//@interface OKGame : NSObject <OKSDKDelegate>
 
-@end
+//@end
