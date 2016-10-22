@@ -68,49 +68,6 @@ void SendMessage2Unity(NSString* func, NSString* result);
     }
 
 @end
-/*
- public void InitSdk()
- {
- SDKState.OKLog("c initsdk");
- lua.LuaFuncCall(luaPlatformHanderRef, "onSdkInit");
- }
- 
- //第三方sdk初始化完成的消息
-	void onSdkInitFinish(string msg)
-	{
- SDKState.OKLog("c onSdkInitFinish "+msg);
- lua.LuaStaticFuncCall(luaPlatformHanderRef, "onInitFinish", msg);
- 
- }
- 
- void onLoginFinish(string msg)
- {
- SDKState.OKLog("c onLoginFinish "+msg);
- lua.LuaStaticFuncCall(luaPlatformHanderRef, "onLoginFinish", msg);
- }
- 
- void onLogoutFinish(string msg)
- {
- lua.LuaStaticFuncCall(luaPlatformHanderRef, "onLogoutFinish", msg);
- }
- void onSdkExit(string msg)
- {
- lua.LuaStaticFuncCall(luaPlatformHanderRef, "onSdkExit", msg);
- }
- void OnPayFinish(string msg)
- {
- lua.LuaStaticFuncCall(luaPlatformHanderRef, "OnPayFinish", msg);
- }
- 
- void onSwitchAccountFinish(string msg)
- {
- lua.LuaStaticFuncCall(luaPlatformHanderRef, "onSwitchAccountFinish", msg);
- }
- 
- void OnDestroy()
- {
- lua.LuaFuncCall(luaPlatformHanderRef, "OnDestroy");
- } */
 
 
 #if defined(__cplusplus)
@@ -137,54 +94,27 @@ void SendMessage2Unity(NSString* func, NSString* result);
      return [NSString stringWithUTF8String:""];
     }
 
-    void oksdkSetMessageObjName(const char* objName){
-        gameObject = [CreateString(objName) mutableCopy];
-        NSLog(@"game object name is : %@", gameObject);
-    }
-     void okLog(const char *msg)
-     {
-         NSLog(@"untiy---%@",CreateString(msg));
-     }
     //===================================================================================
 
-    void oksdkInit(const char *params){
-       OKGame *okGame = [[OKGame alloc]init];
+    void cjsdkInit(const char* objName, const char *params){
+        gameObject = [CreateString(objName) mutableCopy];
+        NSLog(@"game object name is : %@", gameObject);
+        
+       //OKGame *okGame = [[OKGame alloc]init];
 	   NSString* str =  CreateString(params);
 	   str = [str stringByReplacingOccurrencesOfString:@"gameid" withString:@"gameId"];
 	   str = [str stringByReplacingOccurrencesOfString:@"appkey" withString:@"appKey"];
 	   str = [str stringByReplacingOccurrencesOfString:@"serverid" withString:@"serverId"];
 	   NSLog(@"--------------%@",str);
-        [[OKSDK defaultSDK] OKSDKInitWithParams:str withDelegate:okGame];
+        //[[OKSDK defaultSDK] OKSDKInitWithParams:str withDelegate:okGame];
     }
 
-    void oksdkLogin(const char* ext){
-	
+    void cjsdkLogin(const char* objName, const char* ext){
+        gameObject = [CreateString(objName) mutableCopy];
+        NSLog(@"game object name is : %@", gameObject);
+        
 		NSLog(@"oksdklogin %s",ext);
-        [[OKSDK defaultSDK] OKSDKLoginWithExt:CreateString(ext)];
-    }
-
-    void oksdkCreateRole(const char *params){
-        [[OKSDK defaultSDK] OKSDKEnterGameWithParams:CreateString(params)];
-    }
-
-    void oksdkEnterGame(const char *params){
-        [[OKSDK defaultSDK] OKSDKEnterGameWithParams:CreateString(params)];
-    }
-
-    void oksdkUserCenter(const char* params){
-        [[OKSDK defaultSDK]OKSDKUserCenterWithParams:CreateString(params)];
-    }//
-
-    void oksdkEnterBBS(const char* params){
-        [[OKSDK defaultSDK]OKSDKEnterBBSWithParams:CreateString(params)];
-    }
-
-    void oksdkLogout(const char* customInfo){
-        [[OKSDK defaultSDK]OKSDKLogout];
-    }
-
-    void oksdkLeavePlatform(){
-         SendMessage2Unity(@"onLeavePlatform", @"");
+        //[[OKSDK defaultSDK] OKSDKLoginWithExt:CreateString(ext)];
     }
 
     void oksdkPayment(const char *productuid, const char *amount,const char *productname, const char *custominfo,const char *ext)
@@ -194,48 +124,9 @@ void SendMessage2Unity(NSString* func, NSString* result);
 		NSLog(@"productname  %@", CreateString(productname) );
 		NSLog(@"custominfo  %@", CreateString(custominfo) );
 		NSLog(@"ext  %@", CreateString(ext) );
-		[[OKSDK defaultSDK] OKSDKPayWithAmount:CreateString(amount) AndCustomInfo:CreateString(custominfo) AndProductName:CreateString(productname) AndProductId:CreateString(productuid) AndExt:CreateString(ext)];
+		//[[OKSDK defaultSDK] OKSDKPayWithAmount:CreateString(amount) AndCustomInfo:CreateString(custominfo) AndProductName:CreateString(productname) AndProductId:CreateString(productuid) AndExt:CreateString(ext)];
     }
 
-    //===================================================================================
-
-   /* void C_OKSDKInit(const char *params){
-        OKGame *okGame = [[OKGame alloc]init];
-        [[OKSDK defaultSDK] OKSDKInitWithParams:CreateString(params) withDelegate:okGame];
-    }
-     
-    void C_OKSDKLogin(const char* ext){
-        [[OKSDK defaultSDK] OKSDKLoginWithExt:CreateString(ext)];
-    }
-
-    void C_OKSDKCreateRole(const char *params){
-        //[[OKSDK defaultSDK] OKSDKEnterGameWithParams:CreateString(params)];
-    }
-
-    void  C_OKSDKEnterGame(const char *params){
-        [[OKSDK defaultSDK] OKSDKEnterGameWithParams:CreateString(params)];
-    }
-
-    void C_OKSDKUserCenter(const char* params){
-        [[OKSDK defaultSDK]OKSDKUserCenterWithParams:CreateString(params)];
-    }
-     
-    void C_OKSDKEnterBBS(const char* params){
-        [[OKSDK defaultSDK]OKSDKEnterBBSWithParams:CreateString(params)];
-    }
-
-    void C_OKSDKLogout(const char* customInfo){
-        [[OKSDK defaultSDK]OKSDKLogout];
-    }
-     
-    void C_OKSDKPay(const char *amount,const char *custominfo,const char *productname, const char *productuid, const char *ext){
-        [[OKSDK defaultSDK] OKSDKPayWithAmount:CreateString(amount) AndCustomInfo:CreateString(custominfo) AndProductName:CreateString(productname) AndProductId:CreateString(productuid) AndExt:CreateString(ext)];
-    }
-
-    void C_OKSDKLeavePlatform(){
-        SendMessage2Unity(@"onLeavePlatform", @"");
-    }
-	*/
 	   const char * getGameDefineContent()
     {
 		NSLog(@"getGameDefineContent");
@@ -279,14 +170,6 @@ void SendMessage2Unity(NSString* func, NSString* result);
 		NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleVersionKey];
 		NSLog(version);
 		return makeStringCopy([version UTF8String]);
-	}
-	void lkCustomer(const char * json)
-	{
-		NSString * str = CreateString(json);
-		str =[str stringByReplacingOccurrencesOfString:@"appKey" withString:@"enterpriseId"];
-		str =[str stringByReplacingOccurrencesOfString:@"nickname" withString:@"nickName"];
-		NSLog(@"---lkcustomer %@",str );
-		[LKSobotPluginManger addSobotPluginToAppWithJson:str];
 	}
 	
 	const char* getVersionName()
@@ -444,9 +327,9 @@ const char* GetMacAddressiOS()
         //[[PhotoHelper shareInstance]  deleteImage:QCreateString(fileId)];
     }
 	
-	
+	*/
 	void IsLowDeviceByFlag(){}
-	void Log(){}*/
+	void Log(){}
 #if defined(__cplusplus)
  extern "C"}
 #endif
