@@ -213,3 +213,9 @@ HandleFuncs[enumMSGID_MODULE_05.ID_GAME_WIN_CARD_RES] = function(data, dataLengt
 
     LuaUIViewCtr.UIPanel["MJTableUI"].HandleTingCard(LuaUIViewCtr.UIPanel["MJTableUI"], data.card)
 end
+
+HandleFuncs[enumMSGID_MODULE_05.ID_GAME_RESULT_RES] = function(data, dataLength)
+    local data = LuaProto.deserialize(PBMsgGameResultRes, data, dataLength)
+
+    LuaUIViewCtr.UIPanel["MJTableUI"].HandleGameResult(LuaUIViewCtr.UIPanel["MJTableUI"], data)
+end

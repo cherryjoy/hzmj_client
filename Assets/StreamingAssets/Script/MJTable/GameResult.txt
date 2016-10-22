@@ -1,0 +1,65 @@
+GameResult = {}
+
+function GameResult:Start( )
+
+end
+
+function GameResult:OnDestroy( )
+
+end
+
+function GameResult:Init(data, roleList)
+    for i = 1, #(data.role_cards) do
+        if data.role_cards[i].roleid == Client.RoleInfo.RoleID then
+            local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/RoleResult",self.Center)
+            ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(-400, 250, 0))
+            local info = GameResult.GetRoleInfo(self, data.role_cards[i].roleid, roleList)
+            ref.Init(ref, data.role_cards[i], info)
+            if data.role_cards[i].roleid == data.roleid then
+                ref.SetCodeCards(ref, data.code_cards)
+            end
+            break
+        end
+    end
+
+     local num = 0
+     for i = 1, #(data.role_cards) do
+         if data.role_cards[i].roleid ~= Client.RoleInfo.RoleID then
+             num = num + 1
+
+             local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/RoleResult",self.Center)
+             ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(-400, 250 - num*90, 0))
+             local info = GameResult.GetRoleInfo(self, data.role_cards[i].roleid, roleList)
+             ref.Init(ref, data.role_cards[i], info)
+             if data.role_cards[i].roleid == data.roleid then
+                 ref.SetCodeCards(ref, data.code_cards)
+             end
+         end
+     end
+
+     if data.rest_cards ~= nil then
+         for i = 1, #(data.rest_cards) do
+             local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCard", self.RestCardsGrid:get_gameObject())
+             ref.gameObject:get_transform():set_localScale(LuaVector3.Create(0.6, 0.6, 1))
+             ref.Init(ref, data.rest_cards[i], i)
+         end
+
+         self.RestCardsGrid:Reposition()
+     end
+end
+
+function GameResult:GetRoleInfo(roleId, roleList)
+    for i = 1, #roleList do
+        if roleId == roleList[i].roleid then
+            return roleList[i]
+        end
+    end
+
+    return nil
+end
+
+function GameResult:Ready_OnClick()
+    --发送进入协议 还是 准备协议
+
+    self.gameObject:Destroy1()
+end

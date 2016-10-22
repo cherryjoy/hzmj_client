@@ -10,6 +10,8 @@ GameObject:
   - 4: {fileID: 461078}
   - 114: {fileID: 11479926}
   - 114: {fileID: 11498914}
+  - 65: {fileID: 6571558}
+  - 114: {fileID: 11421302}
   m_Layer: 8
   m_Name: WinGame
   m_TagString: Untagged
@@ -101,7 +103,7 @@ Transform:
   m_GameObject: {fileID: 148252}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -100}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 149.49222, y: 149.49222, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 428082}
@@ -120,6 +122,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 428082}
   m_RootOrder: 0
+--- !u!65 &6571558
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 148252}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &11421302
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 148252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1143446969, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiRoot: {fileID: 0}
+  uiCamera: {fileID: 0}
+  direcion: 2
+  scaleRate: {x: 1, y: 1}
+  offset: {x: 0, y: 0}
+  WhatToScale: 1
+  keepRate: 0
 --- !u!114 &11454914
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -184,14 +216,14 @@ MonoBehaviour:
   mClipSoftness: {x: 1, y: 1}
   mDepthFlag: 0
   mWorldToLocal:
-    e00: 320
+    e00: 2.1405797
     e01: 0
     e02: 0
-    e03: 0.49999237
+    e03: 0.0031525386
     e10: 0
-    e11: 320
+    e11: 2.1405797
     e12: 0
-    e13: -0.49999237
+    e13: -0.0031524564
     e20: 0
     e21: 0
     e22: 320

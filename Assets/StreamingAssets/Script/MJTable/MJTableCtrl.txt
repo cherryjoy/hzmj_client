@@ -272,6 +272,77 @@ function MJTableCtrl:Win_OnClick()
     ClientSendMsg.SendWinCard()
 
     self.ResultCard:SetActive(false)
+    --[[
+    local data = {}
+    data.roleid = 1000006
+    local card = {}
+    card.type_id = 2
+    card.code_id = 8
+    data.win_card = card
+
+    local roleCard = {}
+    roleCard.roleid = 1000006
+    roleCard.score = 99
+    roleCard.hand_cards = {}
+    roleCard.hand_cards[1] = card
+    roleCard.hand_cards[2] = card
+    roleCard.hand_cards[3] = card
+    roleCard.hand_cards[4] = card
+    roleCard.hand_cards[5] = card
+    roleCard.peng_cards = {}
+    roleCard.peng_cards[1] = card
+    roleCard.gangm_cards = {}
+    roleCard.gangm_cards[1] = card
+
+    local roleCard = {}
+    roleCard.roleid = 1000006
+    roleCard.score = 99
+    roleCard.hand_cards = {}
+    roleCard.hand_cards[1] = card
+    roleCard.hand_cards[2] = card
+    roleCard.hand_cards[3] = card
+    roleCard.hand_cards[4] = card
+    roleCard.hand_cards[5] = card
+    roleCard.peng_cards = {}
+    roleCard.peng_cards[1] = card
+    roleCard.gangm_cards = {}
+    roleCard.gangm_cards[1] = card
+
+    local roleCard2 = {}
+    roleCard2.roleid = 1
+    roleCard2.score = 99
+    roleCard2.hand_cards = {}
+    roleCard2.hand_cards[1] = card
+    roleCard2.hand_cards[2] = card
+    roleCard2.hand_cards[3] = card
+    roleCard2.hand_cards[4] = card
+    roleCard2.hand_cards[5] = card
+    roleCard2.peng_cards = {}
+    roleCard2.peng_cards[1] = card
+    roleCard2.gangm_cards = {}
+    roleCard2.gangm_cards[1] = card
+
+    data.role_cards = {}
+    data.role_cards[1] = roleCard
+    data.role_cards[2] = roleCard2
+    data.role_cards[3] = roleCard2
+    data.role_cards[4] = roleCard2
+
+    data.rest_cards = {}
+    data.rest_cards[1] = card
+    data.rest_cards[2] = card
+    data.rest_cards[3] = card
+    data.rest_cards[4] = card
+
+    data.code_cards = {}
+    data.code_cards[1] = card
+    data.code_cards[2] = card
+    data.code_cards[3] = card
+    data.code_cards[4] = card
+
+    local ref = LuaUIViewCtr.OpenUINotLose("MJTable/GameResult")
+    ref.Init(ref, data, self.roleList)
+    --]]
 end
 
 function MJTableCtrl:HandlePengCard(roleId, index, card, srcRoleId)
@@ -355,4 +426,9 @@ end
 
 function MJTableCtrl:HandleTingCard(cards)
     self.Drect1.HandleTingCard(self.Drect1, cards)
+end
+
+function MJTableCtrl:HandleGameResult(data)
+    local ref = LuaUIViewCtr.OpenUINotLose("MJTable/GameResult")
+    ref.Init(ref, data, self.roleList)
 end

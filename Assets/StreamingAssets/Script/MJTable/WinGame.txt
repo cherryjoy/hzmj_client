@@ -23,4 +23,11 @@ function WinGame:Init(roleId, count, cards)
 
     self.Grid:get_transform():set_localPosition(LuaVector3.Create(-30*(num - 1), 0, 0))
     self.Grid:Reposition()
+
+    -- 等待请求单局结算
+    Timer.NewEvent(self,40,40,WinGame.GetResult, false, nil)
+end
+
+function WinGame:GetResult()
+    ClientSendMsg.SendGameResult()
 end
