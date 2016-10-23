@@ -15,6 +15,7 @@ function GameResult:Init(data, roleList)
             ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(-400, 250, 0))
             local info = GameResult.GetRoleInfo(self, data.role_cards[i].roleid, roleList)
             ref.Init(ref, data.role_cards[i], info)
+            ref.Background:set_enabled(true)
             if data.role_cards[i].roleid == data.roleid then
                 ref.SetCodeCards(ref, data.code_cards)
             end
@@ -59,7 +60,9 @@ function GameResult:GetRoleInfo(roleId, roleList)
 end
 
 function GameResult:Ready_OnClick()
-    --发送进入协议 还是 准备协议
+    --发送准备协议
+    Client.RoleInfo.Used = Client.RoleInfo.Used + 1
+    ClientSendMsg.SendReadyRoom()
 
-    self.gameObject:Destroy1()
+    --self.gameObject:Destroy1()
 end

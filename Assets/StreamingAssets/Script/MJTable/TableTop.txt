@@ -1,16 +1,19 @@
 TableTop = {}
 
 function TableTop:Start( )
-    self.IsInit = false
-    self.PlayNum = 0
-    self.LeftNum = 0
-    self.handCard = {}
+    TableTop.Clear(self)
 
     Client.DeleteCard = Client.DeleteCard + {self, TableTop.DeleteCard}
 end
 
 function TableTop:OnDestroy( )
     Client.DeleteCard = Client.DeleteCard - {self, TableTop.DeleteCard}
+end
+
+function TableTop:Clear()
+    self.PlayNum = 0
+    self.LeftNum = 0
+    self.handCard = {}
 end
 
 function TableTop:CardInfoSync(handnum)
@@ -181,4 +184,8 @@ function TableTop:RemoveHandCard(numTotal)
         table.remove(self.handCard, 1)
         ref.TopCard:Destroy1()
     end
+end
+
+function TableTop:TableClear(roleId)
+    TableTop.Clear(self)
 end

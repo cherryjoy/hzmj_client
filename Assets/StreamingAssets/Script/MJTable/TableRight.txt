@@ -1,16 +1,19 @@
 TableRight = {}
 
 function TableRight:Start( )
-    self.IsInit = false
-    self.PlayNum = 0
-    self.LeftNum = 0
-    self.handCard = {}
+    TableRight.Clear(self)
 
     Client.DeleteCard = Client.DeleteCard + {self, TableRight.DeleteCard}
 end
 
 function TableRight:OnDestroy( )
     Client.DeleteCard = Client.DeleteCard - {self, TableRight.DeleteCard}
+end
+
+function TableRight:Clear()
+    self.PlayNum = 0
+    self.LeftNum = 0
+    self.handCard = {}
 end
 
 function TableRight:CardInfoSync(handnum)
@@ -186,4 +189,8 @@ function TableRight:RemoveHandCard(numTotal)
         table.remove(self.handCard)
         ref.RightCard:Destroy1()
     end
+end
+
+function TableRight:TableClear(roleId)
+    TableRight.Clear(self)
 end

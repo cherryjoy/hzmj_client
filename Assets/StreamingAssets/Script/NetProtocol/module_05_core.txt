@@ -1443,19 +1443,33 @@ end
 function PBMsgReadyReq.DeSerialize(obj)
 	local fieldCount = deserialize_int32()
 	local option,optionLength = deserialize_optional()
+	if(has_optional_flag(0,optionLength,option)) then
+		obj.used = deserialize_int32()
+	end
 	return obj
 end
 
 function PBMsgReadyReq.Serialize(obj)
-	local fieldCount = 0
+	local fieldCount = 1
 	serialize_int32(fieldCount)
 	local flag = {}
+	if(obj.used ~= nil) then
+		flag[1] = true
+	else
+		flag[1] = false
+	end
 	serialize_optional(flag)
+	if(obj.used ~= nil) then
+		serialize_int32(obj.used)
+	end
 end
 
 function PBMsgReadyReq.GetSize(obj)
 	local size = 0
-	size = size + 5
+	if (obj.used ~= nil) then
+		size = size + 4
+	end
+	size = size + 6
 	return size
 end
 
@@ -1470,8 +1484,14 @@ end
 function PBMsgReadyRes.DeSerialize(obj)
 	local fieldCount = deserialize_int32()
 	local option,optionLength = deserialize_optional()
+	if(has_optional_flag(0,optionLength,option)) then
+		obj.used = deserialize_int32()
+	end
+	if(has_optional_flag(1,optionLength,option)) then
+		obj.roleid = deserialize_int32()
+	end
 
-	if (fieldCount >= 1) then
+	if (fieldCount >= 3) then
 		obj.rolestate = {}
 		local len = deserialize_int32()
 		if (len > 0) then
@@ -1488,10 +1508,26 @@ function PBMsgReadyRes.DeSerialize(obj)
 end
 
 function PBMsgReadyRes.Serialize(obj)
-	local fieldCount = 1
+	local fieldCount = 3
 	serialize_int32(fieldCount)
 	local flag = {}
+	if(obj.used ~= nil) then
+		flag[1] = true
+	else
+		flag[1] = false
+	end
+	if(obj.roleid ~= nil) then
+		flag[2] = true
+	else
+		flag[2] = false
+	end
 	serialize_optional(flag)
+	if(obj.used ~= nil) then
+		serialize_int32(obj.used)
+	end
+	if(obj.roleid ~= nil) then
+		serialize_int32(obj.roleid)
+	end
 	if (obj.rolestate ~= nil) then
 		serialize_int32(#(obj.rolestate))
 		for i=1, #(obj.rolestate) do
@@ -1511,13 +1547,19 @@ end
 
 function PBMsgReadyRes.GetSize(obj)
 	local size = 0
+	if (obj.used ~= nil) then
+		size = size + 4
+	end
+	if (obj.roleid ~= nil) then
+		size = size + 4
+	end
 	if (obj.rolestate ~= nil) then
 		for i=1,#(obj.rolestate) do
 			size = size + 5
 			size = size + (obj.rolestate[i]):GetSize()
 		end
 	end
-	size = size + 10
+	size = size + 11
 	return size
 end
 

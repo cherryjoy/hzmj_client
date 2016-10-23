@@ -138,8 +138,12 @@ HandleFuncs[enumMSGID_MODULE_05.ID_GAME_ROOM_ENTER_RES] = function(data,dataLeng
     if LuaUIViewCtr.UIPanel["MJTableUI"] == nil then
         local ref = LuaUIViewCtr.OpenUIHasBg("MJTable/MJTable")
         LuaUIViewCtr.UIPanel["MJTableUI"] = ref
+        Client.RoleInfo.Used = data.used
+        Client.RoleInfo.Amount = data.amount
+        Client.RoleInfo.RestCard = 112
         ClientSendMsg.SendReadyRoom()
-        LuaUIViewCtr.UIPanel["MJTableUI"].Init(LuaUIViewCtr.UIPanel["MJTableUI"], data.passwd, data.amount, data.horse, data.addition, data.used, data.rolelist)
+        LuaUIViewCtr.UIPanel["MJTableUI"].Init(LuaUIViewCtr.UIPanel["MJTableUI"], data.passwd, data.horse, data.addition, data.rolelist)
+        LuaUIViewCtr.UIPanel["MJTableUI"].SetJuShuPaiShu(LuaUIViewCtr.UIPanel["MJTableUI"])
 
         -- 关闭主界面
         LuaUIViewCtr.UIPanel["MainUI"].gameObject:SetActive(false)
@@ -151,6 +155,16 @@ end
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_READY_RES] = function(data,dataLength)
     local data = LuaProto.deserialize(PBMsgReadyRes, data, dataLength)
 
+    Client.RoleInfo.Used = data.used
+    Client.RoleInfo.RestCard = 112
+
+    if data.roleid == Client.RoleInfo.RoleID then
+        Client.ResetToward:Do()
+        Client.TableClear:Do(data.roleid)
+    end
+
+    LuaUIViewCtr.UIPanel["MJTableUI"].SetJuShuPaiShu(LuaUIViewCtr.UIPanel["MJTableUI"])
+    LuaUIViewCtr.UIPanel["MJTableUI"].GameReady(LuaUIViewCtr.UIPanel["MJTableUI"], data.rolestate)
 end
 
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_ROOM_CARD_SYNC] = function(data, dataLength)

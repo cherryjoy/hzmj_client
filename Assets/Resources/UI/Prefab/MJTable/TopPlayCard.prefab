@@ -123,8 +123,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LuaBehavType: -1
-  scriptShortPath: 
-  ScriptName: 
+  scriptShortPath: MJTable/PlayCard.txt
+  ScriptName: PlayCard
   lua_params:
   - Obj: {fileID: 144454}
     regObj: {fileID: 11445112}

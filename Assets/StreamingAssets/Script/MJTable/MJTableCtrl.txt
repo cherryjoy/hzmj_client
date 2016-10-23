@@ -6,18 +6,20 @@ function MJTableCtrl:Start( )
 
     Client.BottomPlayCard = Client.BottomPlayCard + {self, MJTableCtrl.HandlePlayCard}
     Client.ResetToward = Client.ResetToward + {self, MJTableCtrl.ResetToward}
+    Client.TableClear = Client.TableClear + {self, MJTableCtrl.TableClear}
 end
 
 function MJTableCtrl:OnDestroy( )
     Client.BottomPlayCard = Client.BottomPlayCard - {self, MJTableCtrl.HandlePlayCard}
     Client.ResetToward = Client.ResetToward - {self, MJTableCtrl.ResetToward}
+    Client.TableClear = Client.TableClear - {self, MJTableCtrl.TableClear}
 end
 
-function MJTableCtrl:Init(passwd, amount, horse, beishu, used, rolelist)
+function MJTableCtrl:Init(passwd, horse, beishu, rolelist)
     self.roomId = passwd
     self.ID:set_text(string.format(Text.TableName, passwd))
     self.MaShu:set_text(string.format(Text.MaShuName, beishu, horse))
-    self.JuShu:set_text(string.format(Text.JuShuName, used, amount, 112))
+    MJTableCtrl.SetJuShuPaiShu(self)
 
     local spriteName, myDirect = MJTableCtrl.GetMyDirectSprite(Client.RoleInfo.RoleID, rolelist)
     LuaDebug.Log("my direction: "..myDirect)
@@ -26,6 +28,10 @@ function MJTableCtrl:Init(passwd, amount, horse, beishu, used, rolelist)
     local angle = self.Direction:get_transform():get_localEulerAngles():z() - (myDirect - 1)*90
     self.Direction:get_transform():set_localEulerAngles(LuaVector3.Create(0, 0, angle))
     self.TimerBack:set_spriteName(spriteName)
+end
+
+function MJTableCtrl:SetJuShuPaiShu()
+    self.JuShu:set_text(string.format(Text.JuShuName, Client.RoleInfo.Used + 1, Client.RoleInfo.Amount, Client.RoleInfo.RestCard))
 end
 
 function MJTableCtrl:EnterRoomSync(rolelist)
@@ -50,6 +56,7 @@ function MJTableCtrl:CardInfoSync(cardInfo)
     -- 同步自己的牌
     if cardInfo.owncards ~= nil then
         LuaDebug.Log("card num: "..#(cardInfo.owncards.handcard))
+        Client.RoleInfo.RestCard = Client.RoleInfo.RestCard - #(cardInfo.owncards.handcard)
         self.Drect1.CardInfoSync(self.Drect1, cardInfo.owncards.handcard)
     end
 
@@ -62,6 +69,7 @@ function MJTableCtrl:CardInfoSync(cardInfo)
         for j = 1, 4 do
             if self["Drect"..j].roleId == cardInfo.othercards[i].roleid then
                 LuaDebug.Log("drect "..j.." : "..cardInfo.othercards[i].handnum)
+                Client.RoleInfo.RestCard = Client.RoleInfo.RestCard - cardInfo.othercards[i].handnum
                 self["Drect"..j].CardInfoSync(self["Drect"..j], cardInfo.othercards[i].handnum)
             end
         end
@@ -71,6 +79,8 @@ function MJTableCtrl:CardInfoSync(cardInfo)
     for i = 1, 4 do
         self["Drect"..i].Ready:SetActive(false)
     end
+
+    MJTableCtrl.SetJuShuPaiShu(self)
 end
 
 function MJTableCtrl:DeleteRoom_OnClick()
@@ -149,10 +159,24 @@ function MJTableCtrl:InitRoleList(myDirect, roleList)
         local roleInfo = roleList[index]
         if roleInfo ~= nil then
             self["Drect"..idx].SetHeadInfo(self["Drect"..idx], roleInfo, self.TowardCard)
-            self["Drect"..idx].Ready:SetActive(true)
+            --self["Drect"..idx].Ready:SetActive(true)
         end
 
         idx = idx + 1
+    end
+end
+
+function MJTableCtrl:GameReady(roleStateList)
+    LuaDebug.Log("roleStateList num: "..#roleStateList)
+    for i = 1, #roleStateList do
+        LuaDebug.Log("roleId : "..tostring(roleStateList[i].roleid)..", state : "..tostring(roleStateList[i].state))
+        for j = 1, 4 do
+            if self["Drect"..j].roleId == roleStateList[i].roleid then
+                if roleStateList[i].state ~= 0 then
+                    self["Drect"..j].Ready:SetActive(true)
+                end
+            end
+        end
     end
 end
 
@@ -191,6 +215,9 @@ end
 
 function MJTableCtrl:HandleGetCard(roleId, card)
     LuaDebug.Log("roleid: "..roleId)
+
+    Client.RoleInfo.RestCard = Client.RoleInfo.RestCard - 1
+    MJTableCtrl.SetJuShuPaiShu(self)
     -- 摸牌只对自己广播牌，其他方只广播roleId
     if card ~= nil then
         LuaDebug.Log("get card, type: "..card.type_id..", id: "..card.code_id)
@@ -431,4 +458,20 @@ end
 function MJTableCtrl:HandleGameResult(data)
     local ref = LuaUIViewCtr.OpenUINotLose("MJTable/GameResult")
     ref.Init(ref, data, self.roleList)
+    self.GameResult = ref
+end
+
+function MJTableCtrl:TableClear(roleId)
+    if self.GameResult ~= nil then
+        self.GameResult.gameObject:Destroy1()
+    end
+
+    for i = 1, 4 do
+        self["Drect"..i].TableClear(self["Drect"..i])
+        self["Drect"..i].Ready:SetActive(false)
+    end
+
+    -- 方向不再闪烁
+    self.CountDown:set_enabled(false)
+    self.TimerBack:get_gameObject():SetActive(false)
 end

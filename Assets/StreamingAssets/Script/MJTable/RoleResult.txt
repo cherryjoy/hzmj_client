@@ -54,7 +54,11 @@ function RoleResult:Init(result, info)
     self.LeftCardsGrid:Reposition()
 
     -- 手牌
-    self.HandCardsGrid:get_transform():set_localPosition(LuaVector3.Create(80 + 20 + 31*self.LeftNum, -28, 0))
+    local posX = 80
+    if self.LeftNum > 0 then
+        posX = posX + 20 + 31*self.LeftNum
+    end
+    self.HandCardsGrid:get_transform():set_localPosition(LuaVector3.Create(posX, -28, 0))
     for i = 1, #(result.hand_cards) do
         local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCard", self.HandCardsGrid:get_gameObject())
         ref.gameObject:get_transform():set_localScale(LuaVector3.Create(0.53, 0.53, 1))
@@ -79,7 +83,6 @@ function RoleResult:SetLeftCard(card)
 end
 
 function RoleResult:SetCodeCards(cards)
-    self.Background:set_enabled(true)
     for i = 1, #cards do
         local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCard", self.CodeCardsGrid:get_gameObject())
         ref.gameObject:get_transform():set_localScale(LuaVector3.Create(0.53, 0.53, 1))

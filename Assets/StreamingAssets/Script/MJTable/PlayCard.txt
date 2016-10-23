@@ -1,0 +1,13 @@
+PlayCard = {}
+
+function PlayCard:Start( )
+    Client.TableClear = Client.TableClear + {self, PlayCard.TableClear}
+end
+
+function PlayCard:OnDestroy( )
+    Client.TableClear = Client.TableClear - {self, PlayCard.TableClear}
+end
+
+function PlayCard:TableClear(roleId)
+    self.gameObject:Destroy1()
+end

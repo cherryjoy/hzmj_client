@@ -1,0 +1,13 @@
+PengCard = {}
+
+function PengCard:Start( )
+    Client.TableClear = Client.TableClear + {self, MyCard.TableClear}
+end
+
+function PengCard:OnDestroy( )
+    Client.TableClear = Client.TableClear - {self, MyCard.TableClear}
+end
+
+function PengCard:TableClear(roleId)
+    self.gameObject:Destroy1()
+end
