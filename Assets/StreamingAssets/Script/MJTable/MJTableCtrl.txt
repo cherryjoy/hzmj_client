@@ -300,6 +300,24 @@ function MJTableCtrl:Win_OnClick()
 
     self.ResultCard:SetActive(false)
     --[[
+    local info = {}
+    info.roleid = 1000006
+    info.win_count = 3
+    info.score = 88
+    info.gangm = 2
+    info.ganga = 5
+    info.gangg = 8
+    info.code_count = 9
+
+    local balances = {}
+    balances[1] = info
+    balances[2] = info
+    balances[3] = info
+    balances[4] = info
+
+    local ref = LuaUIViewCtr.OpenUINotLose("MJTable/GameBalance")
+    ref.Init(ref, balances, self.roleList, self)
+    
     local data = {}
     data.roleid = 1000006
     local card = {}
@@ -474,4 +492,19 @@ function MJTableCtrl:TableClear(roleId)
     -- 方向不再闪烁
     self.CountDown:set_enabled(false)
     self.TimerBack:get_gameObject():SetActive(false)
+end
+
+function MJTableCtrl:HandleGameBalance(balances)
+    local ref = LuaUIViewCtr.OpenUINotLose("MJTable/GameBalance")
+    ref.Init(ref, balances, self.roleList, self)
+end
+
+function MJTableCtrl.GetRoleInfo(roleId, roleList)
+    for i = 1, #roleList do
+        if roleId == roleList[i].roleid then
+            return roleList[i]
+        end
+    end
+
+    return nil
 end

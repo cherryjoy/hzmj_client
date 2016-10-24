@@ -13,7 +13,7 @@ function GameResult:Init(data, roleList)
         if data.role_cards[i].roleid == Client.RoleInfo.RoleID then
             local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/RoleResult",self.Center)
             ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(-400, 250, 0))
-            local info = GameResult.GetRoleInfo(self, data.role_cards[i].roleid, roleList)
+            local info = MJTableCtrl.GetRoleInfo(data.role_cards[i].roleid, roleList)
             ref.Init(ref, data.role_cards[i], info)
             ref.Background:set_enabled(true)
             if data.role_cards[i].roleid == data.roleid then
@@ -30,7 +30,7 @@ function GameResult:Init(data, roleList)
 
              local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/RoleResult",self.Center)
              ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(-400, 250 - num*90, 0))
-             local info = GameResult.GetRoleInfo(self, data.role_cards[i].roleid, roleList)
+             local info = MJTableCtrl.GetRoleInfo(data.role_cards[i].roleid, roleList)
              ref.Init(ref, data.role_cards[i], info)
              if data.role_cards[i].roleid == data.roleid then
                  ref.SetCodeCards(ref, data.code_cards)
@@ -47,16 +47,15 @@ function GameResult:Init(data, roleList)
 
          self.RestCardsGrid:Reposition()
      end
-end
 
-function GameResult:GetRoleInfo(roleId, roleList)
-    for i = 1, #roleList do
-        if roleId == roleList[i].roleid then
-            return roleList[i]
-        end
-    end
+     if Client.RoleInfo.Used + 1 == Client.RoleInfo.Amount then
+         self.Ready:SetActive(false)
+         Timer.NewEvent(self,40,40,GameResult.GetResult, false, nil)
+     end
+ end
 
-    return nil
+function GameResult:GetResult()
+    ClientSendMsg.SendGameBalance()
 end
 
 function GameResult:Ready_OnClick()

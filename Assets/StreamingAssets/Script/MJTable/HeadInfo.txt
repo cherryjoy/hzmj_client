@@ -1,0 +1,25 @@
+HeadInfo = {}
+
+function HeadInfo:Start( )
+
+end
+
+function HeadInfo:OnDestroy( )
+
+end
+
+function HeadInfo:Init(info)
+    LuaUIViewCtr.FlushPortraitInfo("Home/homeHeadCusPic", info.imageurl, self.Icon)
+
+    self.Name:set_text(info.rolename)
+    self.ID:set_text(string.format(Text.BalanceRoleId, info.roleid))
+    --[[
+    if info.host ~= 0 then
+        self.FangZhu:SetActive(true)
+    end
+
+    if info.makers ~= 0 then
+        self.Zhuang:SetActive(true)
+    end
+    --]]
+end

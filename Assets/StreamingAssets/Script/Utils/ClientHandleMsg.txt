@@ -233,3 +233,9 @@ HandleFuncs[enumMSGID_MODULE_05.ID_GAME_RESULT_RES] = function(data, dataLength)
 
     LuaUIViewCtr.UIPanel["MJTableUI"].HandleGameResult(LuaUIViewCtr.UIPanel["MJTableUI"], data)
 end
+
+HandleFuncs[enumMSGID_MODULE_05.ID_GAME_BALANCE_RES] = function(data, dataLength)
+    local data = LuaProto.deserialize(PBMsgGameBalanceRes, data, dataLength)
+
+    LuaUIViewCtr.UIPanel["MJTableUI"].HandleGameBalance(LuaUIViewCtr.UIPanel["MJTableUI"], data.balances)
+end

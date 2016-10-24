@@ -23,7 +23,7 @@ function WinGame:Init(roleId, count, cards)
     self.Grid:Reposition()
 
     -- 等待请求单局结算
-    Timer.NewEvent(self,50,50,WinGame.GetResult, false, nil)
+    Timer.NewEvent(self,40,40,WinGame.GetResult, false, nil)
 end
 
 function WinGame:GetResult()

@@ -237,3 +237,10 @@ function ClientSendMsg.SendGameResult()
 	local buffer, length = LuaProto.serialize(data)
 	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_RESULT_REQ, buffer, length)
 end
+
+function ClientSendMsg.SendGameBalance()
+	local data = PBMsgGameBalanceReq.Create()
+
+	local buffer, length = LuaProto.serialize(data)
+	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_BALANCE_REQ, buffer, length)
+end
