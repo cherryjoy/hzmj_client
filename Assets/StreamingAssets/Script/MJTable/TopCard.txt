@@ -1,9 +1,13 @@
 TopCard = {}
 
 function TopCard:Start( )
-
+    Client.TableClear = Client.TableClear + {self, TopCard.TableClear}
 end
 
 function TopCard:OnDestroy( )
+    Client.TableClear = Client.TableClear - {self, TopCard.TableClear}
+end
 
+function TopCard:TableClear(roleId)
+    self.gameObject:Destroy1()
 end

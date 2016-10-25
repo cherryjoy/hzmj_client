@@ -1,11 +1,11 @@
 MyCard = {}
 
 function MyCard:Start( )
-
+    Client.TableClear = Client.TableClear + {self, MyCard.TableClear}
 end
 
 function MyCard:OnDestroy( )
-
+    Client.TableClear = Client.TableClear - {self, MyCard.TableClear}
 end
 
 function MyCard:Init(card, index)
@@ -42,4 +42,8 @@ end
 function MyCard:MyCard_TweenEnd()
     LuaDebug.Log("MyCard_TweenEnd card, type: "..self.card.type_id..", id: "..self.card.code_id)
     Client.TablePlayCardEnd:Do(self.index)
+end
+
+function MyCard:TableClear(roleId)
+    self.gameObject:Destroy1()
 end

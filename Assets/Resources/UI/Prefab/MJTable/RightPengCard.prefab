@@ -8,8 +8,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 403870}
-  - 114: {fileID: 11474948}
   - 114: {fileID: 11401114}
+  - 114: {fileID: 11474948}
   m_Layer: 8
   m_Name: RightPengCard
   m_TagString: Untagged
@@ -72,13 +72,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LuaBehavType: -1
-  scriptShortPath: 
-  ScriptName: 
+  scriptShortPath: MJTable/PengCard.txt
+  ScriptName: PengCard
   lua_params:
   - Obj: {fileID: 178522}
     regObj: {fileID: 11474948}
     Name: Card
-    TypeIndex: 1
+    TypeIndex: 2
   - Obj: {fileID: 193606}
     regObj: {fileID: 11436130}
     Name: 

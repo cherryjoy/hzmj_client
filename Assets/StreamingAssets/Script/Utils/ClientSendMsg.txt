@@ -158,11 +158,10 @@ end
 
 function ClientSendMsg.SendReadyRoom()
 	local data = PBMsgReadyReq.Create()
+	data.used = Client.RoleInfo.Used
 
 	local buffer,length = LuaProto.serialize(data)
 	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_READY_REQ, buffer, length)
-
-	local id = PingManager.get_Instance():sessionId()
 end
 
 function ClientSendMsg.SendDeleteRoom(roomId)
@@ -230,4 +229,18 @@ function ClientSendMsg.SendWinCard()
 
 	local buffer, length = LuaProto.serialize(data)
 	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_WIN_GAME_REQ, buffer, length)
+end
+
+function ClientSendMsg.SendGameResult()
+	local data = PBMsgGameResultReq.Create()
+
+	local buffer, length = LuaProto.serialize(data)
+	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_RESULT_REQ, buffer, length)
+end
+
+function ClientSendMsg.SendGameBalance()
+	local data = PBMsgGameBalanceReq.Create()
+
+	local buffer, length = LuaProto.serialize(data)
+	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_BALANCE_REQ, buffer, length)
 end

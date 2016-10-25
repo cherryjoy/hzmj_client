@@ -1,0 +1,93 @@
+RoleResult = {}
+
+function RoleResult:Start( )
+
+end
+
+function RoleResult:OnDestroy( )
+
+end
+
+function RoleResult:Init(result, info)
+    self.LeftNum = 0
+
+    --头像
+    local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/TableHead",self.gameObject)
+    ref.gameObject:get_transform():set_localScale(LuaVector3.Create(0.8, 0.8, 1))
+    ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(0, 0, 0))
+    ref.Init(ref, info)
+    ref.Score:set_enabled(false)
+
+    -- 碰杠牌
+    if result.gangm_cards ~= nil then
+        for i = 1, #(result.gangm_cards) do
+            for num = 1, 4 do
+                RoleResult.SetLeftCard(self, result.gangm_cards[i])
+            end
+        end
+    end
+
+    if result.ganga_cards ~= nil then
+        for i = 1, #(result.ganga_cards) do
+            for num = 1, 4 do
+                RoleResult.SetLeftCard(self, result.ganga_cards[i])
+            end
+        end
+    end
+
+    if result.gangg_cards ~= nil then
+        for i = 1, #(result.gangg_cards) do
+            for num = 1, 4 do
+                RoleResult.SetLeftCard(self, result.gangg_cards[i])
+            end
+        end
+    end
+
+    if result.peng_cards ~= nil then
+        for i = 1, #(result.peng_cards) do
+            for num = 1, 3 do
+                RoleResult.SetLeftCard(self, result.peng_cards[i])
+            end
+        end
+    end
+
+    self.LeftCardsGrid:Reposition()
+
+    -- 手牌
+    local posX = 80
+    if self.LeftNum > 0 then
+        posX = posX + 20 + 31*self.LeftNum
+    end
+    self.HandCardsGrid:get_transform():set_localPosition(LuaVector3.Create(posX, -28, 0))
+    for i = 1, #(result.hand_cards) do
+        local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCard", self.HandCardsGrid:get_gameObject())
+        ref.gameObject:get_transform():set_localScale(LuaVector3.Create(0.53, 0.53, 1))
+        ref.Init(ref, result.hand_cards[i], i)
+    end
+
+    self.HandCardsGrid:Reposition()
+
+    -- 分数
+    self.Score:set_text(tostring(result.score))
+end
+
+function RoleResult:SetLeftCard(card)
+    LuaDebug.Log("left card, type: "..card.type_id..", id: "..card.code_id)
+    local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/PengCard",self.LeftCardsGrid:get_gameObject())
+    ref.Card:get_transform():set_localScale(LuaVector3.Create(0.8, 0.8, 1))
+    local spriteName = MJTableCtrl.GetLeftCardSprite(card)
+    ref.Card:set_spriteName(spriteName)
+    ref.Card:MakePixelPerfectWithSizeInAtlas()
+
+    self.LeftNum = self.LeftNum + 1
+end
+
+function RoleResult:SetCodeCards(cards)
+    for i = 1, #cards do
+        local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCard", self.CodeCardsGrid:get_gameObject())
+        ref.gameObject:get_transform():set_localScale(LuaVector3.Create(0.53, 0.53, 1))
+        ref.Init(ref, cards[i], i)
+    end
+
+    self.CodeCardsGrid:Reposition()
+end

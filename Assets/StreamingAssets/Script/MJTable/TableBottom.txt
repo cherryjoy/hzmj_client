@@ -1,15 +1,7 @@
 TableBottom = {}
 
 function TableBottom:Start( )
-    self.PlayNum = 0
-    self.LeftNum = 0
-    self.CanPlayCard = false
-    self.handCard = {}
-    self.pengCard = {}
-    self.gangCardM = {}
-    self.gangCardA = {}
-    self.gangCardG = {} --碰牌 杠
-    self.tingCard = {}
+    TableBottom.Clear(self)
 
     Client.TableChooseCard = Client.TableChooseCard + {self, TableBottom.ChooseCard}
     Client.TablePlayCardEnd = Client.TablePlayCardEnd + {self, TableBottom.PlayCardEnd}
@@ -20,6 +12,18 @@ function TableBottom:OnDestroy( )
     Client.TableChooseCard = Client.TableChooseCard - {self,TableBottom.ChooseCard}
     Client.TablePlayCardEnd = Client.TablePlayCardEnd - {self, TableBottom.PlayCardEnd}
     Client.DeleteCard = Client.DeleteCard - {self, TableBottom.DeleteCard}
+end
+
+function TableBottom:Clear()
+    self.PlayNum = 0
+    self.LeftNum = 0
+    self.CanPlayCard = false
+    self.handCard = {}
+    self.pengCard = {}
+    self.gangCardM = {}
+    self.gangCardA = {}
+    self.gangCardG = {} --碰牌 杠
+    self.tingCard = {}
 end
 
 -- 最后一张为所发的牌
@@ -422,4 +426,8 @@ function TableBottom:HandleTingCard(cards)
             self.tingCard[i].gameObject:SetActive(false)
         end
     end
+end
+
+function TableBottom:TableClear(roleId)
+    TableBottom.Clear(self)
 end

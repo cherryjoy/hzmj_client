@@ -1,0 +1,24 @@
+GameBalance = {}
+
+function GameBalance:Start( )
+
+end
+
+function GameBalance:OnDestroy( )
+
+end
+
+function GameBalance:Init(balances, roleList, tableCtrl)
+    for i = 1, #balances do
+        local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/RoleBalance",self.ScoreListGrid:get_gameObject())
+        local roleInfo = MJTableCtrl.GetRoleInfo(balances[i].roleid, roleList)
+        ref.Init(ref, balances[i], roleInfo)
+    end
+
+    self.tableCtrl = tableCtrl
+end
+
+function GameBalance:ReturnHall_OnClick()
+    tableCtrl.CloseTable(tableCtrl)
+    self.gameObject:Destroy1()
+end

@@ -15,12 +15,19 @@ function WinGame:Init(roleId, count, cards)
     for i = 1, num do
         local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCard", self.Grid:get_gameObject())
         local card = cards[i]
-        card.type_id = 1
-        card.code_id = i
         LuaDebug.Log("type: "..card.type_id..", code: "..card.code_id)
         ref.Init(ref, cards[i], i)
     end
 
     self.Grid:get_transform():set_localPosition(LuaVector3.Create(-30*(num - 1), 0, 0))
     self.Grid:Reposition()
+
+    -- 等待请求单局结算
+    Timer.NewEvent(self,40,40,WinGame.GetResult, false, nil)
+end
+
+function WinGame:GetResult()
+    ClientSendMsg.SendGameResult()
+
+    self.gameObject:Destroy1()
 end

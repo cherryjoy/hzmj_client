@@ -1,9 +1,13 @@
 RightCard = {}
 
 function RightCard:Start( )
-
+    Client.TableClear = Client.TableClear + {self, RightCard.TableClear}
 end
 
 function RightCard:OnDestroy( )
+    Client.TableClear = Client.TableClear - {self, RightCard.TableClear}
+end
 
+function RightCard:TableClear(roleId)
+    self.gameObject:Destroy1()
 end

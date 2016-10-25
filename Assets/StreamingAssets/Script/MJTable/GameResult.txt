@@ -1,0 +1,67 @@
+GameResult = {}
+
+function GameResult:Start( )
+
+end
+
+function GameResult:OnDestroy( )
+
+end
+
+function GameResult:Init(data, roleList)
+    for i = 1, #(data.role_cards) do
+        if data.role_cards[i].roleid == Client.RoleInfo.RoleID then
+            local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/RoleResult",self.Center)
+            ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(-400, 250, 0))
+            local info = MJTableCtrl.GetRoleInfo(data.role_cards[i].roleid, roleList)
+            ref.Init(ref, data.role_cards[i], info)
+            ref.Background:set_enabled(true)
+            if data.role_cards[i].roleid == data.roleid then
+                ref.SetCodeCards(ref, data.code_cards)
+            end
+            break
+        end
+    end
+
+     local num = 0
+     for i = 1, #(data.role_cards) do
+         if data.role_cards[i].roleid ~= Client.RoleInfo.RoleID then
+             num = num + 1
+
+             local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/RoleResult",self.Center)
+             ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(-400, 250 - num*90, 0))
+             local info = MJTableCtrl.GetRoleInfo(data.role_cards[i].roleid, roleList)
+             ref.Init(ref, data.role_cards[i], info)
+             if data.role_cards[i].roleid == data.roleid then
+                 ref.SetCodeCards(ref, data.code_cards)
+             end
+         end
+     end
+
+     if data.rest_cards ~= nil then
+         for i = 1, #(data.rest_cards) do
+             local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCard", self.RestCardsGrid:get_gameObject())
+             ref.gameObject:get_transform():set_localScale(LuaVector3.Create(0.6, 0.6, 1))
+             ref.Init(ref, data.rest_cards[i], i)
+         end
+
+         self.RestCardsGrid:Reposition()
+     end
+
+     if Client.RoleInfo.Used + 1 == Client.RoleInfo.Amount then
+         self.Ready:SetActive(false)
+         Timer.NewEvent(self,40,40,GameResult.GetResult, false, nil)
+     end
+ end
+
+function GameResult:GetResult()
+    ClientSendMsg.SendGameBalance()
+end
+
+function GameResult:Ready_OnClick()
+    --发送准备协议
+    Client.RoleInfo.Used = Client.RoleInfo.Used + 1
+    ClientSendMsg.SendReadyRoom()
+
+    --self.gameObject:Destroy1()
+end
