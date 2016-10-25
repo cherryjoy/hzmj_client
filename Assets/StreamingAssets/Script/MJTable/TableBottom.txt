@@ -133,6 +133,8 @@ function TableBottom:ChooseCard(i)
         self.lastIndex = i
 
         self.handCard[i].SetPosUp(self.handCard[i])
+
+        ClientSendMsg.SendWinCard(self.handCard[i].card.type_id, self.handCard[i].card.code_id)
     end
 end
 
@@ -403,6 +405,10 @@ function TableBottom:RemoveHandCard(card, numTotal)
 end
 
 function TableBottom:HandleTingCard(cards)
+    if cards == nil then
+        self.TingCard:SetActive(false)
+    end
+
     self.TingCard:SetActive(true)
     local num = #cards
     -- 计算长度
@@ -430,4 +436,17 @@ end
 
 function TableBottom:TableClear(roleId)
     TableBottom.Clear(self)
+end
+
+function TableBottom:IsHuPai(card)
+    for i = 1, #(self.tingCard) do
+        local ref = self.tingCard[i]
+        if ref.gameObject:get_activeSelf() then
+            if ref.card.type_id == card.type_id and ref.card.code_id == card.code_id then
+                return true
+            end
+        end
+    end
+
+    return false
 end

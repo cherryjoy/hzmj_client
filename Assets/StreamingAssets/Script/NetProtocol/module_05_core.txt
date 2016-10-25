@@ -3752,19 +3752,44 @@ end
 function PBMsgGameWinCardReq.DeSerialize(obj)
 	local fieldCount = deserialize_int32()
 	local option,optionLength = deserialize_optional()
+	if(has_optional_flag(0,optionLength,option)) then
+		local cardSize = deserialize_data_length()
+		local cardStartPos = get_position()
+		obj.card = PBCard.Create()
+		obj.card = obj.card:DeSerialize()
+		set_position(cardSize+cardStartPos )
+	end
 	return obj
 end
 
 function PBMsgGameWinCardReq.Serialize(obj)
-	local fieldCount = 0
+	local fieldCount = 1
 	serialize_int32(fieldCount)
 	local flag = {}
+	if(obj.card ~= nil) then
+		flag[1] = true
+	else
+		flag[1] = false
+	end
 	serialize_optional(flag)
+	if(obj.card ~= nil) then
+		local WaitPos = get_position()
+	set_position(WaitPos+4)
+	obj.card:Serialize()
+	local MaxPosNow = get_position()
+	local RealSize = MaxPosNow-(WaitPos+4)
+	set_position(WaitPos)
+	serialize_data_length(RealSize)
+	set_position(MaxPosNow)
+	end
 end
 
 function PBMsgGameWinCardReq.GetSize(obj)
 	local size = 0
-	size = size + 5
+	if (obj.card ~= nil) then
+		size = size + obj.card:GetSize()
+	end
+	size = size + 11
 	return size
 end
 

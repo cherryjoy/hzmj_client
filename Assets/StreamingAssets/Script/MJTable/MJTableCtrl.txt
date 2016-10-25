@@ -234,6 +234,14 @@ function MJTableCtrl:HandleGetCard(roleId, card)
             self.tempCard = card
             self.tempRoleId = roleId
         end
+
+        -- 判断是否胡牌
+        local huPai = self.Drect1.IsHuPai(self.Drect1, card)
+        if huPai then
+            self.ResultCard:SetActive(true)
+            self.Win:SetActive(true)
+            self.Peng:SetActive(false)
+        end
     end
 
     MJTableCtrl.CountDownStart(self, roleId)
@@ -296,7 +304,7 @@ function MJTableCtrl:Guo_OnClick()
 end
 
 function MJTableCtrl:Win_OnClick()
-    ClientSendMsg.SendWinCard()
+    ClientSendMsg.SendWinGame()
 
     self.ResultCard:SetActive(false)
     --[[
@@ -317,7 +325,8 @@ function MJTableCtrl:Win_OnClick()
 
     local ref = LuaUIViewCtr.OpenUINotLose("MJTable/GameBalance")
     ref.Init(ref, balances, self.roleList, self)
-    
+    --]]
+    --[[
     local data = {}
     data.roleid = 1000006
     local card = {}

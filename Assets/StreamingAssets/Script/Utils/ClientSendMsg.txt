@@ -224,7 +224,18 @@ function ClientSendMsg.SendGuoCard()
 	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_PASS_CARD_REQ, buffer, length)
 end
 
-function ClientSendMsg.SendWinCard()
+function ClientSendMsg.SendWinCard(typeId, codeId)
+	local data = PBMsgGameWinCardReq.Create()
+	local card = PBCard.Create()
+	card.type_id = typeId
+	card.code_id = codeId
+	data.card = card
+
+	local buffer, length = LuaProto.serialize(data)
+	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_WIN_CARD_REQ, buffer, length)
+end
+
+function ClientSendMsg.SendWinGame()
 	local data = PBMsgWinGameReq.Create()
 
 	local buffer, length = LuaProto.serialize(data)
