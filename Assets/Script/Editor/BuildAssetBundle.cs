@@ -34,7 +34,7 @@ public class BuildAssetBundle : EditorWindow
     [MenuItem("CJ-TOOL/一键导出IOS资源")]
     static void OneKeyBuildIOS()
     {
-        CommandBuild.OneKeyBuild("F:\\MaJiang\\hzmj_client\\TragetIOS", BuildTarget.iOS, false, true, false, true, true, true, true);
+		CommandBuild.OneKeyBuild("/Users/smartlean/Documents/majiang/hzmj_client/TragetIOS", BuildTarget.iOS, false, true, false, true, true, true, true);
     }
 
     bool lua_debug_ = false;
