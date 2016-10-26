@@ -132,9 +132,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>Copy $(TargetDir)\Main.dll ..\..\..\Assets\Plugins
-Copy $(TargetDir)\Main.pdb ..\..\..\Assets\Plugins
-</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>
