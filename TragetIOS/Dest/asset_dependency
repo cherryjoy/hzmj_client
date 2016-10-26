@@ -28,6 +28,9 @@ ui/prefab/login_prefab
 	ui/prefab/login/serverlistcenter|.prefab
 	ui/prefab/login/serverpanel|.prefab
 ui/prefab/mjtable_prefab
+	ui/prefab/mjtable/gamebalance|.prefab
+	ui/prefab/mjtable/gameresult|.prefab
+	ui/prefab/mjtable/headinfo|.prefab
 	ui/prefab/mjtable/leftcard|.prefab
 	ui/prefab/mjtable/leftpengcard|.prefab
 	ui/prefab/mjtable/leftplaycard|.prefab
@@ -38,6 +41,8 @@ ui/prefab/mjtable_prefab
 	ui/prefab/mjtable/rightcard|.prefab
 	ui/prefab/mjtable/rightpengcard|.prefab
 	ui/prefab/mjtable/rightplaycard|.prefab
+	ui/prefab/mjtable/rolebalance|.prefab
+	ui/prefab/mjtable/roleresult|.prefab
 	ui/prefab/mjtable/tablehead|.prefab
 	ui/prefab/mjtable/topcard|.prefab
 	ui/prefab/mjtable/toppengcard|.prefab

@@ -21,10 +21,17 @@ LoginUI/ServerBtnCell.txt:1129419121
 LoginUI/ServerCell.txt:-1195073559
 LoginUI/ServerListController.txt:175775549
 LoginUI/ServerPanelCell.txt:-633537745
+MJTable/GameBalance.txt:733239104
+MJTable/GameResult.txt:-1068887829
+MJTable/HeadInfo.txt:-141834260
 MJTable/LeftCard.txt:-1253061997
 MJTable/MJTableCtrl.txt:1230039518
 MJTable/MyCard.txt:-1413505978
+MJTable/PengCard.txt:-1368675756
+MJTable/PlayCard.txt:-1075874690
 MJTable/RightCard.txt:1492869366
+MJTable/RoleBalance.txt:-86497702
+MJTable/RoleResult.txt:-1381267
 MJTable/TableBottom.txt:-134489111
 MJTable/TableHead.txt:656912132
 MJTable/TableLeft.txt:-718841627
