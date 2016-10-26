@@ -10,16 +10,18 @@ require "Utils/LuaCDataMgr"
 LoginController = {}
 LoginPanel = {}
 function LoginController:Start()
+    LuaDebug.Log("00000000000000000000")
     if Application.get_platform()==ERuntimePlatform.WindowsPlayer then
         PlayerPrefs.DeleteAll()
     end
 
-    Client.Quality = GameQualityChecker:get_Instance():EstimateGameQualityLevel()
-    if Client.Quality == 0 then
+    --Client.Quality = GameQualityChecker:get_Instance():EstimateGameQualityLevel()
+    --if Client.Quality == 0 then
         --local lightObj = GameObject.Find("Directional light (1)")
         --local light = lightObj:GetComponent1("Light")
         --light:set_shadows(0)
-    end
+    --end
+    LuaDebug.Log("000000000000.555555555")
     if not PlayerPrefs.HasKey("bgmValue") then
         PlayerPrefsEx.SetFloat("bgmValue",1)
     end
