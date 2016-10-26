@@ -45,7 +45,7 @@ HandleFuncs[enumMSGID_MODULE_05.ID_ROLE_RES] = function(data, dataLength)
     Client.RoleInfo.imageurl = pbMsg.imageurl
 
     LuaUIViewCtr.UIPanel["MainUI"] = LuaUIViewCtr.OpenUIHasBg("Home/MainUI")
-    LuaUIViewCtr.UIPanel["MainUI"].Init(LuaUIViewCtr.UIPanel["MainUI"], pbMsg.RoleName, pbMsg.RoleID, pbMsg.room_pass, pbMsg.imageurl)
+    LuaUIViewCtr.UIPanel["MainUI"].Init(LuaUIViewCtr.UIPanel["MainUI"], pbMsg.RoleName, pbMsg.RoleID, pbMsg.integral, pbMsg.imageurl)
 
     Client.LoginSuccess:Do()
 

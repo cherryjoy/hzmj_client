@@ -1304,7 +1304,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 108520}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 390, y: -280, z: 0}
+  m_LocalPosition: {x: 477.99994, y: -280, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -1411,7 +1411,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 101426}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -568, y: -320, z: -10}
+  m_LocalPosition: {x: -408.00006, y: -280, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -1589,7 +1589,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 154976}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 395, y: 280.00003, z: 0}
+  m_LocalPosition: {x: 482.99994, y: 280.00006, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -1887,7 +1887,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 143334}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 230.00003, z: 0}
+  m_LocalPosition: {x: 0, y: 230.00006, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -2106,7 +2106,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 180566}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -340, y: -223, z: 0}
+  m_LocalPosition: {x: -428.00006, y: -223, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -2204,7 +2204,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 129224}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -420, y: -200, z: 0}
+  m_LocalPosition: {x: -508.00006, y: -200, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -2217,7 +2217,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 123132}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -379, y: 280.00003, z: 0}
+  m_LocalPosition: {x: -467.00006, y: 280.00006, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -2554,7 +2554,7 @@ MonoBehaviour:
   mDepth: 1
   mIsHidePanel: 0
   mAtlas: {fileID: 11459290, guid: 632c39260d01bae4eba76e8074fb5b27, type: 2}
-  mSpriteName: money_frame
+  mSpriteName: wj_wujiangdk
   IsKeepOriSize: 0
   mFillCenter: 1
 --- !u!114 &11407112
@@ -3967,9 +3967,9 @@ MonoBehaviour:
   mPassword: 0
   mShowLastChar: 0
   mEffectStyle: 1
-  mEffectColor: {r: 0.5294118, g: 0.40873706, b: 0.40873706, a: 1}
-  mTopColor: {r: 0.86666673, g: 0.16078432, b: 0.16862746, a: 1}
-  mBottomColor: {r: 0.74264705, g: 0.74264705, b: 0.74264705, a: 1}
+  mEffectColor: {r: 0, g: 0, b: 0, a: 1}
+  mTopColor: {r: 0.96862745, g: 0.76862746, b: 0.3647059, a: 1}
+  mBottomColor: {r: 0.8352941, g: 0.24313726, b: 0.32156864, a: 1}
   mSpaceingY: 0
   mSpaceingX: 0
   mFontSize: 24
@@ -4460,11 +4460,11 @@ MonoBehaviour:
     e00: 320
     e01: 0
     e02: 0
-    e03: 0.49999237
+    e03: 0.5333247
     e10: 0
     e11: 320
     e12: 0
-    e13: -0.49999237
+    e13: -0.5333328
     e20: 0
     e21: 0
     e22: 320
@@ -4539,11 +4539,11 @@ MonoBehaviour:
     e00: 320
     e01: 0
     e02: 0
-    e03: 568.5
+    e03: 408.5334
     e10: 0
     e11: 320
     e12: 0
-    e13: 319.5
+    e13: 279.46667
     e20: 0
     e21: 0
     e22: 320

@@ -8,7 +8,7 @@ end
 function MainUICtrl:Init(name, id, cardNum, imageUrl)
     self.Name:set_text(string.format(Text.RoleName, name))
     self.Id:set_text(string.format(Text.RoleId, id))
-    self.Card:set_text(string.format(Text.RoleCardNum, cardNum))
+    self.Card:set_text(string.format(Text.RoleCardNum, tostring(cardNum)))
 
     LuaUIViewCtr.FlushPortraitInfo("Home/homeHeadCusPic", imageUrl, self.Icon)
 end

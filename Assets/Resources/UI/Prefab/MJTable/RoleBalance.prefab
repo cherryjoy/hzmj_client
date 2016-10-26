@@ -333,7 +333,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   changeFlag: -1
   mMat: {fileID: 0}
-  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mColor: {r: 0.83137256, g: 0.89411765, b: 0.93333334, a: 1}
   mPivot: 3
   mWidth: 22
   mHeight: 22
@@ -369,7 +369,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   changeFlag: -1
   mMat: {fileID: 0}
-  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mColor: {r: 0.83137256, g: 0.89411765, b: 0.93333334, a: 1}
   mPivot: 3
   mWidth: 22
   mHeight: 22
@@ -405,7 +405,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   changeFlag: -1
   mMat: {fileID: 0}
-  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mColor: {r: 0.9529412, g: 0.93333334, b: 0.4117647, a: 1}
   mPivot: 3
   mWidth: 30
   mHeight: 30
@@ -441,7 +441,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   changeFlag: -1
   mMat: {fileID: 0}
-  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mColor: {r: 0.83137256, g: 0.89411765, b: 0.93333334, a: 1}
   mPivot: 3
   mWidth: 22
   mHeight: 22
@@ -477,7 +477,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   changeFlag: -1
   mMat: {fileID: 0}
-  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mColor: {r: 0.83137256, g: 0.89411765, b: 0.93333334, a: 1}
   mPivot: 3
   mWidth: 22
   mHeight: 22

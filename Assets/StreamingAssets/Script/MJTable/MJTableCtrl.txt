@@ -158,6 +158,7 @@ function MJTableCtrl:InitRoleList(myDirect, roleList)
 
         local roleInfo = roleList[index]
         if roleInfo ~= nil then
+            roleInfo.integral = 0
             self["Drect"..idx].SetHeadInfo(self["Drect"..idx], roleInfo, self.TowardCard)
             --self["Drect"..idx].Ready:SetActive(true)
         end
@@ -198,7 +199,16 @@ function MJTableCtrl:HandlePlayCard(roleId, index, card, result)
             self.ResultCard:SetActive(true)
             if gangType then
                 self.Gang:SetActive(true)
+                self.Peng:SetActive(true)
+                self.Win:SetActive(false)
                 self.tempGangType = gangType
+            else
+                self.Gang:SetActive(false)
+            end
+
+            if peng then
+                self.Peng:SetActive(true)
+                self.Win:SetActive(false)
             end
 
             self.tempCard = card
@@ -230,9 +240,12 @@ function MJTableCtrl:HandleGetCard(roleId, card)
         if gangType then
             self.ResultCard:SetActive(true)
             self.Gang:SetActive(true)
+            self.Peng:SetActive(false)
             self.tempGangType = gangType
             self.tempCard = card
             self.tempRoleId = roleId
+        else
+            self.Gang:SetActive(false)
         end
 
         -- 判断是否胡牌
@@ -307,6 +320,16 @@ function MJTableCtrl:Win_OnClick()
     ClientSendMsg.SendWinGame()
 
     self.ResultCard:SetActive(false)
+    --[[
+    local card = {}
+    card.type_id = 0
+    card.code_id = 8
+    local cards = {}
+    for i = 1, 5 do
+        cards[i] = card
+    end
+    self.Drect1.HandleTingCard(self.Drect1, cards)
+    --]]
     --[[
     local info = {}
     info.roleid = 1000006
@@ -486,6 +509,24 @@ function MJTableCtrl:HandleGameResult(data)
     local ref = LuaUIViewCtr.OpenUINotLose("MJTable/GameResult")
     ref.Init(ref, data, self.roleList)
     self.GameResult = ref
+
+    -- 更新积累分数
+    for i = 1, #(self.roleList) do
+        for j = 1, #(data.role_cards) do
+            if self.roleList[i].roleid == data.role_cards[j].roleid then
+                self.roleList[i].integral = self.roleList[i].integral + data.role_cards[j].score
+                break
+            end
+        end
+    end
+
+    for i = 1, 4 do
+        for j = 1, #(self.roleList) do
+            if self["Drect"..i].roleId == self.roleList[j].roleid then
+                self["Drect"..i].TableHead.Score:set_text(tostring(self.roleList[j].integral))
+            end
+        end
+    end
 end
 
 function MJTableCtrl:TableClear(roleId)

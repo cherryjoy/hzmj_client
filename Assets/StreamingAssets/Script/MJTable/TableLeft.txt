@@ -128,6 +128,7 @@ function TableLeft:SetHeadInfo(info, toward)
     local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/TableHead",self.HeadInfo)
     ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(-420, 50, 0))
     ref.Init(ref, info)
+    self.TableHead = ref
 end
 
 function TableLeft:HandleGetCard(card)

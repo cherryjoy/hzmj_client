@@ -89,7 +89,7 @@ Text = {
     -------------------home---------------------
     RoleName = "名字: %s",
     RoleId = "编号: %d",
-    RoleCardNum = "房卡: %d",
+    RoleCardNum = "房卡: %s",
 
     -------------------Table--------------------
     TableName = "房号:%d",

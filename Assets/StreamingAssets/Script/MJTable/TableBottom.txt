@@ -184,6 +184,7 @@ function TableBottom:SetHeadInfo(info, toward)
     local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/TableHead",self.HeadInfo)
     ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(0, 0, 0))
     ref.Init(ref, info)
+    self.TableHead = ref
 end
 
 function TableBottom:HandleGetCard(card)
@@ -407,10 +408,17 @@ end
 function TableBottom:HandleTingCard(cards)
     if cards == nil then
         self.TingCard:SetActive(false)
+        return
     end
 
-    self.TingCard:SetActive(true)
     local num = #cards
+    if num == 0 then
+        self.TingCard:SetActive(false)
+        return
+    end
+
+    LuaDebug.Log("TingCard num: "..num)
+    self.TingCard:SetActive(true)
     -- 计算长度
     self.TingBG:set_width(109 + (num - 1)*28)
 
@@ -432,10 +440,14 @@ function TableBottom:HandleTingCard(cards)
             self.tingCard[i].gameObject:SetActive(false)
         end
     end
+
+    self.TingCardGird:Reposition()
 end
 
 function TableBottom:TableClear(roleId)
     TableBottom.Clear(self)
+
+    self.Grid:get_transform():set_localPosition(LuaVector3.Create(-348, -230, 0))
 end
 
 function TableBottom:IsHuPai(card)

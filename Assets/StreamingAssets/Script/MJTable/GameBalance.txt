@@ -19,7 +19,7 @@ function GameBalance:Init(balances, roleList, tableCtrl)
         end
 
         if balances[i].roleid == Client.RoleInfo.RoleID then
-            ref.Background:set_color(LuaColor.Get(1,1,1,1))
+            ref.Background:set_color(LuaColor.Get(1,0,0,1))
         end
     end
 
