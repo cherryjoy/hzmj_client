@@ -4,9 +4,9 @@ require "Utils/LuaMessageBox"
 UpdateController = {}
 UpdateController.BGPath="Update/UpdateBG"
 function UpdateController:Start()
-	if Application.get_platform()==ERuntimePlatform.IPhonePlayer then
-		NotificationServices.RegisterForNotifications(7)
-	end
+	--if Application.get_platform()==ERuntimePlatform.IPhonePlayer then
+	--	NotificationServices.RegisterForNotifications(7)
+	--end
 	self.gameObject:SetActive(false)
 	local bgMat = TextureMgr.get_Instance():LoadTexture(UpdateController.BGPath)
 	self.Texture:set_material(bgMat)
