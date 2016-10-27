@@ -1,0 +1,262 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &165404
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 409180}
+  - 114: {fileID: 11450336}
+  m_Layer: 0
+  m_Name: Base
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &409180
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 165404}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11450336
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 165404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1582492658, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaterialPath: Assets/Resources/UI/Atlas/Bit32/Base.mat
+  material: {fileID: 2100000, guid: 241c457ed1d7bb34da265e04ba211dd5, type: 2}
+  sprites:
+  - name: tck_dikuang
+    outer:
+      serializedVersion: 2
+      x: 352
+      y: 420
+      width: 94
+      height: 92
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 352
+      y: 420
+      width: 94
+      height: 92
+    inner:
+      serializedVersion: 2
+      x: 372
+      y: 440
+      width: 54
+      height: 52
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: anniudikuang2
+    outer:
+      serializedVersion: 2
+      x: 176
+      y: 321
+      width: 182
+      height: 98
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 176
+      y: 321
+      width: 182
+      height: 98
+    inner:
+      serializedVersion: 2
+      x: 176
+      y: 321
+      width: 182
+      height: 98
+    paddingLeft: 0
+    paddingRight: 0.027472528
+    paddingTop: 0
+    paddingBottom: 0.020408163
+  - name: anniudikuang
+    outer:
+      serializedVersion: 2
+      x: 0
+      y: 222
+      width: 185
+      height: 98
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 0
+      y: 222
+      width: 185
+      height: 98
+    inner:
+      serializedVersion: 2
+      x: 0
+      y: 222
+      width: 185
+      height: 98
+    paddingLeft: 0.0054054055
+    paddingRight: 0.0054054055
+    paddingTop: 0
+    paddingBottom: 0.020408163
+  - name: loading
+    outer:
+      serializedVersion: 2
+      x: 359
+      y: 329
+      width: 89
+      height: 90
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 359
+      y: 329
+      width: 89
+      height: 90
+    inner:
+      serializedVersion: 2
+      x: 359
+      y: 329
+      width: 89
+      height: 90
+    paddingLeft: 0.056179777
+    paddingRight: 0.06741573
+    paddingTop: 0.044444446
+    paddingBottom: 0.06666667
+  - name: an_anniuclose
+    outer:
+      serializedVersion: 2
+      x: 0
+      y: 427
+      width: 175
+      height: 85
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 0
+      y: 427
+      width: 175
+      height: 85
+    inner:
+      serializedVersion: 2
+      x: 0
+      y: 427
+      width: 175
+      height: 85
+    paddingLeft: 0.022857143
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0.023529412
+  - name: an_anniu
+    outer:
+      serializedVersion: 2
+      x: 176
+      y: 427
+      width: 175
+      height: 85
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 176
+      y: 427
+      width: 175
+      height: 85
+    inner:
+      serializedVersion: 2
+      x: 176
+      y: 427
+      width: 175
+      height: 85
+    paddingLeft: 0.022857143
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0.023529412
+  - name: an_anniucommon
+    outer:
+      serializedVersion: 2
+      x: 0
+      y: 341
+      width: 175
+      height: 85
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 0
+      y: 341
+      width: 175
+      height: 85
+    inner:
+      serializedVersion: 2
+      x: 0
+      y: 341
+      width: 175
+      height: 85
+    paddingLeft: 0.022857143
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0.023529412
+  mCoordinates: 0
+  mReplacement: {fileID: 0}
+  mPixelSize: 1
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 165404}
+  m_IsPrefabParent: 1
