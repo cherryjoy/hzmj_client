@@ -22,7 +22,7 @@ function MainUICtrl:Score_OnClick()
 end
 
 function MainUICtrl:Help_OnClick()
-
+    
 end
 
 function MainUICtrl:Setting_OnClick()
