@@ -159,8 +159,9 @@ function MJTableCtrl:InitRoleList(myDirect, roleList)
         local roleInfo = roleList[index]
         if roleInfo ~= nil then
             roleInfo.integral = 0
-            self["Drect"..idx].SetHeadInfo(self["Drect"..idx], roleInfo, self.TowardCard)
-            --self["Drect"..idx].Ready:SetActive(true)
+            if self["Drect"..idx].TableHead == nil then
+                self["Drect"..idx].SetHeadInfo(self["Drect"..idx], roleInfo, self.TowardCard)
+            end
         end
 
         idx = idx + 1
@@ -503,6 +504,10 @@ function MJTableCtrl:HandleGameResult(data)
     local ref = LuaUIViewCtr.OpenUINotLose("MJTable/GameResult")
     ref.Init(ref, data, self.roleList)
     self.GameResult = ref
+
+    for i = 1, #(data.role_cards) do
+        LuaDebug.Log("HandleGameResult roleid: "..data.role_cards[i].roleid..", score: "..data.role_cards[i].score)
+    end
 
     -- 更新积累分数
     for i = 1, #(self.roleList) do
