@@ -187,6 +187,10 @@ function MJTableCtrl:HandlePlayCard(roleId, index, card, result)
     end
 
     LuaDebug.Log("roleId: "..roleId..", play card, type: "..card.type_id..", id: "..card.code_id)
+
+    -- 播放出牌
+    NGUITools.PlaySoundByPath("Music/Card/"..Client.RoleInfo.sex..card.type_id..card.code_id)
+
     self.TowardCard:SetActive(true)
 
     MJTableCtrl.DoCountDownFinish(self)
@@ -423,6 +427,7 @@ function MJTableCtrl:Win_OnClick()
 end
 
 function MJTableCtrl:HandlePengCard(roleId, index, card, srcRoleId)
+    NGUITools.PlaySoundByPath("Music/Common/"..Client.RoleInfo.sex.."peng")
     -- 重置
     Client.ResetToward:Do()
     --消掉打牌方的牌
@@ -445,6 +450,7 @@ function MJTableCtrl:HandlePengCard(roleId, index, card, srcRoleId)
 end
 
 function MJTableCtrl:HandleGangCard(roleId, index, card, state, srcRoleId)
+    NGUITools.PlaySoundByPath("Music/Common/"..Client.RoleInfo.sex.."gang")
     -- 重置
     Client.ResetToward:Do()
 
@@ -473,19 +479,7 @@ function MJTableCtrl:HandleGangCard(roleId, index, card, state, srcRoleId)
 end
 
 function MJTableCtrl:HandleWinGame(roleId, count, cards)
-    --[[
-    local name = nil
-    local roleList = self.roleList
-    for i = 1, #roleList do
-        if roleId == roleList[i].roleid then
-            name = roleList[i].rolename
-        end
-    end
-
-    local str = string.format(Text.WinCard, name)
-    local box = LuaMessageBox.ShowSingle(str, MJTableCtrl.CloseTable, Text.Confirm, self)
-    box.gameObject:get_transform():set_localPosition(LuaVector3.Create(0,30,0))
-    --]]
+    NGUITools.PlaySoundByPath("Music/Common/"..Client.RoleInfo.sex.."hu")
 
     local ref = LuaUIViewCtr.OpenUIHasBg("MJTable/WinGame")
     ref.Init(ref, roleId, count, cards)

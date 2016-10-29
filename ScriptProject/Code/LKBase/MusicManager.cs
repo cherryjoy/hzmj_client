@@ -24,7 +24,6 @@ public class MusicManager : Singleton<MusicManager>
 
 	private GameObject music_go_;
 	private AudioSource audio_comp_;
-    private const string win_music_path_ = "Music/Common/Win";
 	public AudioSource AudioComp 
 	{ 
 		get 
@@ -65,10 +64,6 @@ public class MusicManager : Singleton<MusicManager>
         AudioComp.loop = false;
         AudioComp.volume = music_volume_;
         AudioComp.Play();
-    }
-    public void PlayerWinMusic()
-    {
-        PlayMusicOnce(win_music_path_);
     }
 
 	private AudioClip GetClip(string path)

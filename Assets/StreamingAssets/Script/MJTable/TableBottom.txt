@@ -221,7 +221,7 @@ end
 function TableBottom:IsGangACard(card)
     LuaDebug.Log("IsGangACard")
     local num = TableBottom.GetSameCardNum(self, card)
-    if num == 4 then
+    if num == 3 then
         return enumCARD_GANG_TYPE.CARD_GANG_A_TYPE
     end
 
@@ -408,12 +408,18 @@ end
 function TableBottom:HandleTingCard(cards)
     if cards == nil then
         self.TingCard:SetActive(false)
+        for i = 1, #(self.tingCard) do
+            self.tingCard[i].gameObject:SetActive(false)
+        end
         return
     end
 
     local num = #cards
     if num == 0 then
         self.TingCard:SetActive(false)
+        for i = 1, #(self.tingCard) do
+            self.tingCard[i].gameObject:SetActive(false)
+        end
         return
     end
 

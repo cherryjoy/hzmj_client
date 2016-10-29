@@ -40,9 +40,10 @@ HandleFuncs[enumMSGID_MODULE_05.ID_ROLE_RES] = function(data, dataLength)
     PlayerPrefsEx.SetString("userName", pbMsg.RoleName)
     --PlayerPrefsEx.SetString("password",data.password)
     --PlayerPrefsEx.SetString("userId",data.userId .. "")
-    Client.RoleInfo = {}
-    Client.RoleInfo.RoleID = pbMsg.RoleID
-    Client.RoleInfo.imageurl = pbMsg.imageurl
+    Client.RoleInfo = pbMsg
+    if Client.RoleInfo.sex == nil then   -- 1 为男性    2为女性
+        Client.RoleInfo.sex = 2
+    end
 
     LuaUIViewCtr.UIPanel["MainUI"] = LuaUIViewCtr.OpenUIHasBg("Home/MainUI")
     LuaUIViewCtr.UIPanel["MainUI"].Init(LuaUIViewCtr.UIPanel["MainUI"], pbMsg.RoleName, pbMsg.RoleID, pbMsg.integral, pbMsg.imageurl)
