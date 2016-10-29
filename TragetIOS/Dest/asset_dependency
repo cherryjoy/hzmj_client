@@ -67,6 +67,8 @@ ui/prefab/uitools_prefab
 	ui/prefab/uitools/fasttools|.prefab
 ui/prefab/update_prefab
 	ui/prefab/update/updatecontrol|.prefab
+ui/atlas/bit32/base
+	ui/atlas/bit32/base|.prefab
 ui/atlas/bit32/baseui
 	ui/atlas/bit32/baseui|.prefab
 ui/atlas/bit32/compass
