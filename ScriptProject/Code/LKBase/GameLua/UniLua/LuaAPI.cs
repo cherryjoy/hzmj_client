@@ -141,18 +141,20 @@
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void luaclose_RLdb(IntPtr L);
 
-#if UNITY_ANDROID 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void lua_pushinteger(IntPtr L, int n);
-#elif UNITY_IPHONE || UNITY_STANDALONE_WIN
+//#if UNITY_ANDROID 
+//        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+//        public static extern void lua_pushinteger(IntPtr L, int n);
+//#elif UNITY_IPHONE || UNITY_STANDALONE_WIN
         [DllImport(DllName, CallingConvention=CallingConvention.Cdecl)]
-        public static extern void lua_pushinteger(IntPtr L, long n);
-#endif
+        //public static extern void lua_pushinteger(IntPtr L, long n);
+		public static extern void luaL_pushinteger32(IntPtr L, int n);
+//#endif
        
         [DllImport(DllName, CallingConvention=CallingConvention.Cdecl)]
         public static extern void lua_pushlightuserdata(IntPtr L, IntPtr p);
         [DllImport(DllName, CallingConvention=CallingConvention.Cdecl)]
-        public static extern void lua_pushlstring(IntPtr L, IntPtr s, int l);
+        //public static extern void lua_pushlstring(IntPtr L, IntPtr s, int l);
+		public static extern void luaL_pushlstring32(IntPtr L, IntPtr s, int l);
         [DllImport(DllName, CallingConvention=CallingConvention.Cdecl)]
         public static extern void lua_pushnil(IntPtr L);
         [DllImport(DllName, CallingConvention=CallingConvention.Cdecl)]
@@ -203,7 +205,8 @@
         [DllImport(DllName, CallingConvention=CallingConvention.Cdecl)]
         public static extern long lua_tointeger(IntPtr L, int idx);
         [DllImport(DllName, CallingConvention=CallingConvention.Cdecl)]
-        public static extern IntPtr lua_tolstring(IntPtr L, int idx, ref int len);
+        //public static extern IntPtr lua_tolstring(IntPtr L, int idx, ref int len);
+		public static extern IntPtr luaL_tolstring32(IntPtr L, int idx, ref int len);
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static extern long lua_toID(IntPtr L, int idx);
         [DllImport(DllName, CallingConvention=CallingConvention.Cdecl)]

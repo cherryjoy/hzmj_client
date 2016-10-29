@@ -76,6 +76,7 @@ public class LuaBehaviour : MonoBehaviour
 
         lua_.RawGetI(LuaAPI.LUA_REGISTRYINDEX, Object_ref);
         if (!string.IsNullOrEmpty(ScriptName)) {
+			//Debug.Log("Awake ScriptName: " + ScriptName + ", " + gameObject.name + ", " + Object_ref);
             // save lua script
             lua_.GetGlobal(ScriptName);
             lua_.PushValue(-1);
@@ -210,7 +211,7 @@ public class LuaBehaviour : MonoBehaviour
         }
         lua_.RawGetI(LuaAPI.LUA_REGISTRYINDEX, func_start_ref_);
         lua_.RawGetI(LuaAPI.LUA_REGISTRYINDEX, Object_ref);
-
+		//Debug.Log("start ScriptName: " + ScriptName + ", " + gameObject.name + ", " + Object_ref);
         lua_.PCall(1, 0, 0);
 
         //call Started Func

@@ -12,6 +12,7 @@ class Register
 {
     public static void RegisterClass(string className)
     {
+		Debug.Log("className: " + className);
         Type type = GetGameClassType(className);
 
         LuaInstance.instance.Get().Pop(1);
@@ -58,6 +59,7 @@ class Register
 
     public static void RegisterWrapper(bool isUpdate)
     {
+		Debug.Log("RegisterWrapper begin");
         LuaState lua_ = LuaInstance.instance.Get();
 
         if (isUpdate)
@@ -76,7 +78,8 @@ class Register
             LuaUtil.RegisterToLua(lua_, typeof(LuaUtil));
             LuaClassFactory.RegisterToLua(lua_, typeof(LuaClassFactory));
         }
-       
+     	
+		Debug.Log("RegisterWrapper end");
     }
 
     public static void AddFuncInfo(Type type,string name = " kong")

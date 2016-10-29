@@ -106,11 +106,11 @@ public class LuaInstance
 #if UNITY_ANDROID || UNITY_IPHONE
         lua.PushBoolean(false);
         lua.SetGlobal("IS_PLATFORM_DEBUG");
-#elif UNITY_EDITOR||UNITY_STANDALONE
+#elif UNITY_EDITOR || UNITY_STANDALONE
         lua.PushBoolean(true);
         lua.SetGlobal("IS_PLATFORM_DEBUG");
 #endif
-
+		Debug.Log("Init 11111111111111111");
         if (isUpdate)
         {
             instance_.DoFile("UpdateUI/UpdateRegisterClass.txt");
@@ -119,6 +119,8 @@ public class LuaInstance
         {
             instance_.DoFile("Utils/RegisterClass.txt");
         }
+
+		Debug.Log("Init 22222222222222222");
 #if UNITY_EDITOR||UNITY_STANDALONE
         Register.PrintLuaClassList();
 #endif

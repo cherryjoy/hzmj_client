@@ -255,7 +255,7 @@ namespace UniLua
 		private static int Lua_Panic(IntPtr lua)
         {
             int len = 0;
-            IntPtr ptr = LuaAPI.lua_tolstring(lua, -1, ref len);
+            IntPtr ptr = LuaAPI.luaL_tolstring32(lua, -1, ref len);
             if (ptr != IntPtr.Zero)
             {
                 Debug.LogError(string.Format("Lua Panic {0}", LuaAPI.StringFromNativeUtf8(ptr, len)));
@@ -447,12 +447,13 @@ namespace UniLua
 
         public void PushInteger(int n)
         {
-#if UNITY_ANDROID 
-             LuaAPI.lua_pushinteger(this.m_lua, n);
-#elif UNITY_IPHONE || UNITY_STANDALONE_WIN
-            long longN = n;
-            LuaAPI.lua_pushinteger(this.m_lua, longN);
-#endif
+//#if UNITY_ANDROID 
+//             LuaAPI.lua_pushinteger(this.m_lua, n);
+//#elif UNITY_IPHONE || UNITY_STANDALONE_WIN
+//            long longN = n;
+//            LuaAPI.lua_pushinteger(this.m_lua, longN);
+//#endif
+			LuaAPI.luaL_pushinteger32(this.m_lua, n);
         }
 
         public GCHandle PushLightUserData(object o)
@@ -737,7 +738,7 @@ namespace UniLua
         public string ToString(int index)
         {
             int len = 0;
-            IntPtr ptr = LuaAPI.lua_tolstring(this.m_lua, index, ref len);
+            IntPtr ptr = LuaAPI.luaL_tolstring32(this.m_lua, index, ref len);
             if (ptr == IntPtr.Zero)
             {
                 return string.Empty;
