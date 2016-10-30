@@ -277,12 +277,12 @@ function MJTableCtrl:CountDownStart(roleId)
     self.TimerBack:set_spriteName(spriteName)
     self.TimerBack:get_gameObject():SetActive(true)
     -- 倒计时
-    self.CD = 15
+    self.CD = 10
     self.CountDown:set_text(tostring(self.CD))
     self.CountDown:set_enabled(true)
 
     if self.timer == nil then
-        self.timer = Timer.NewEvent(self,10,150,MJTableCtrl.DoCountDown, false, MJTableCtrl.DoCountDownFinish)
+        self.timer = Timer.NewEvent(self,10,100,MJTableCtrl.DoCountDown, false, MJTableCtrl.DoCountDownFinish)
     end
 end
 
@@ -528,7 +528,7 @@ function MJTableCtrl:HandleGameResult(data)
     end
 end
 
-function MJTableCtrl:TableClear(roleId)
+function MJTableCtrl:TableClear()
     if self.GameResult ~= nil then
         self.GameResult.gameObject:Destroy1()
     end

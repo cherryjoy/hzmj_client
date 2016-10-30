@@ -134,7 +134,13 @@ function TableBottom:ChooseCard(i)
 
         self.handCard[i].SetPosUp(self.handCard[i])
 
-        ClientSendMsg.SendWinCard(self.handCard[i].card.type_id, self.handCard[i].card.code_id)
+        -- 已经听牌，并且选择的是最后一张牌则不请求听牌
+        local handCardNum = #(self.handCard)
+        if i == handCardNum and self.TingCard:get_activeSelf() then
+            -- 不发
+        else
+            ClientSendMsg.SendWinCard(self.handCard[i].card.type_id, self.handCard[i].card.code_id)
+        end
     end
 end
 
@@ -450,8 +456,10 @@ function TableBottom:HandleTingCard(cards)
     self.TingCardGird:Reposition()
 end
 
-function TableBottom:TableClear(roleId)
+function TableBottom:TableClear()
     TableBottom.Clear(self)
+
+    self.TingCard:SetActive(false)
 
     self.Grid:get_transform():set_localPosition(LuaVector3.Create(-348, -230, 0))
 end

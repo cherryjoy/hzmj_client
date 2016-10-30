@@ -8,6 +8,7 @@ function PlayCard:OnDestroy( )
     Client.TableClear = Client.TableClear - {self, PlayCard.TableClear}
 end
 
-function PlayCard:TableClear(roleId)
+function PlayCard:TableClear()
+    self.gameObject:SetActive(false)
     self.gameObject:Destroy1()
 end

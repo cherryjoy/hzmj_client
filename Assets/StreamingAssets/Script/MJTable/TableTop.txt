@@ -187,6 +187,6 @@ function TableTop:RemoveHandCard(numTotal)
     end
 end
 
-function TableTop:TableClear(roleId)
+function TableTop:TableClear()
     TableTop.Clear(self)
 end

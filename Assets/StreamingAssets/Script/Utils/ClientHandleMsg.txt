@@ -161,7 +161,7 @@ HandleFuncs[enumMSGID_MODULE_05.ID_GAME_READY_RES] = function(data,dataLength)
 
     if data.roleid == Client.RoleInfo.RoleID then
         Client.ResetToward:Do()
-        Client.TableClear:Do(data.roleid)
+        Client.TableClear:Do()
     end
 
     LuaUIViewCtr.UIPanel["MJTableUI"].SetJuShuPaiShu(LuaUIViewCtr.UIPanel["MJTableUI"])

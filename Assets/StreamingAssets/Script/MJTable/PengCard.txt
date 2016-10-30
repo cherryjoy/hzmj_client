@@ -8,6 +8,7 @@ function PengCard:OnDestroy( )
     Client.TableClear = Client.TableClear - {self, MyCard.TableClear}
 end
 
-function PengCard:TableClear(roleId)
+function PengCard:TableClear()
+    self.gameObject:SetActive(false)
     self.gameObject:Destroy1()
 end

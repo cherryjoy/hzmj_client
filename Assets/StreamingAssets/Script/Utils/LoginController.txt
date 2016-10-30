@@ -10,7 +10,7 @@ require "Utils/LuaCDataMgr"
 LoginController = {}
 LoginPanel = {}
 function LoginController:Start()
-    LuaDebug.Log("00000000000000000000")
+    LuaDebug.Log("LoginController:Start")
     if Application.get_platform()==ERuntimePlatform.WindowsPlayer then
         PlayerPrefs.DeleteAll()
     end
@@ -21,7 +21,7 @@ function LoginController:Start()
         --local light = lightObj:GetComponent1("Light")
         --light:set_shadows(0)
     --end
-    LuaDebug.Log("000000000000.555555555")
+
     if not PlayerPrefs.HasKey("bgmValue") then
         PlayerPrefsEx.SetFloat("bgmValue",1)
     end
@@ -29,7 +29,7 @@ function LoginController:Start()
     if not PlayerPrefs.HasKey("ggmValue") then
         PlayerPrefsEx.SetFloat("ggmValue",1)
     end
-    LuaDebug.Log("111111111111111")
+
     -- add back animation
     --if not self.loginAniObj then
        --self.loginAniObj = LuaNTools.AddChildByResourcesPathNoBehaviour(self.LoginBackCam, "Login_interface/Sprite_interface_login_anim_002")
@@ -48,7 +48,7 @@ function LoginController:Start()
         self.loginLogo:get_transform():set_localPosition(LuaVector3.Create(183,-136,0))
     end
     --]]
-    LuaDebug.Log("2222222222222222")
+
     Client.ConnectSuccess = Client.ConnectSuccess + {self,LoginController.ConnectSuccess}
     Client.ExitGameSuccess=Client.ExitGameSuccess+{self,LoginController.ExitGameSuccess}
     Client.LoginSuccess = Client.LoginSuccess + {self,LoginController.LoginSuccess}
@@ -63,17 +63,17 @@ function LoginController:Start()
     end
     --self.AccountMusicPath = LuaCDataMgr.GameConfig():GetData2(90, WDB_GameConfig.Param2)
     --self.ChooseRoleMusicPath = LuaCDataMgr.GameConfig():GetData2(91, WDB_GameConfig.Param2)
-    LuaDebug.Log("22222222.555555555555")
+
     MusicManager.get_Instance():PlayBackMusic("Music/Scene/bgm")
     local musicMgr=MusicManager.get_Instance()
     musicMgr:set_MusicVolume(PlayerPrefsEx.GetFloat("bgmValue"))
     musicMgr:set_AudioVolume(PlayerPrefsEx.GetFloat("ggmValue"))
 
     self.HeadUpParent:SetActive(false)
-    LuaDebug.Log("333333333333333333")
+
     --MapControl.get_Instance():LoadMap("Scene/level/scene_login_dawn","Scene/level/scene_login_dawn_env",false)
     LoginController.SendServerListRequest(self)
-    LuaDebug.Log("444444444444444444")
+
     LoginController.Init(self)
 end
 

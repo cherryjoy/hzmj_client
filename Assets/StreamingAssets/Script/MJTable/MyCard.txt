@@ -44,6 +44,7 @@ function MyCard:MyCard_TweenEnd()
     Client.TablePlayCardEnd:Do(self.index)
 end
 
-function MyCard:TableClear(roleId)
+function MyCard:TableClear()
+    self.gameObject:SetActive(false)
     self.gameObject:Destroy1()
 end
