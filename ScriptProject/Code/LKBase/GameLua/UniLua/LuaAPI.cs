@@ -141,20 +141,39 @@
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void luaclose_RLdb(IntPtr L);
 
-//#if UNITY_ANDROID 
-//        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-//        public static extern void lua_pushinteger(IntPtr L, int n);
-//#elif UNITY_IPHONE || UNITY_STANDALONE_WIN
+#if UNITY_ANDROID 
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern void lua_pushinteger(IntPtr L, int n);
+#elif UNITY_IPHONE || UNITY_STANDALONE_WIN
         [DllImport(DllName, CallingConvention=CallingConvention.Cdecl)]
-        //public static extern void lua_pushinteger(IntPtr L, long n);
 		public static extern void luaL_pushinteger32(IntPtr L, int n);
-//#endif
+#endif
+        public static void luaL_pushinteger(IntPtr L, int n)
+        { 
+#if UNITY_ANDROID 
+            lua_pushinteger(L, n);
+#elif UNITY_IPHONE || UNITY_STANDALONE_WIN
+            luaL_pushinteger32(L, n);
+#endif
+        }
        
         [DllImport(DllName, CallingConvention=CallingConvention.Cdecl)]
         public static extern void lua_pushlightuserdata(IntPtr L, IntPtr p);
         [DllImport(DllName, CallingConvention=CallingConvention.Cdecl)]
-        //public static extern void lua_pushlstring(IntPtr L, IntPtr s, int l);
+#if UNITY_ANDROID
+        public static extern void lua_pushlstring(IntPtr L, IntPtr s, int l);
+#elif UNITY_IPHONE || UNITY_STANDALONE_WIN
 		public static extern void luaL_pushlstring32(IntPtr L, IntPtr s, int l);
+#endif
+        public static void luaL_pushlstring(IntPtr L, IntPtr s, int l)
+        {
+#if UNITY_ANDROID
+            lua_pushlstring(L, s, l);
+#elif UNITY_IPHONE || UNITY_STANDALONE_WIN
+            luaL_pushlstring32(L, s, l);
+#endif
+        }
+
         [DllImport(DllName, CallingConvention=CallingConvention.Cdecl)]
         public static extern void lua_pushnil(IntPtr L);
         [DllImport(DllName, CallingConvention=CallingConvention.Cdecl)]
@@ -205,8 +224,19 @@
         [DllImport(DllName, CallingConvention=CallingConvention.Cdecl)]
         public static extern long lua_tointeger(IntPtr L, int idx);
         [DllImport(DllName, CallingConvention=CallingConvention.Cdecl)]
-        //public static extern IntPtr lua_tolstring(IntPtr L, int idx, ref int len);
+#if UNITY_ANDROID
+        public static extern IntPtr lua_tolstring(IntPtr L, int idx, ref int len);
+#elif UNITY_IPHONE || UNITY_STANDALONE_WIN
 		public static extern IntPtr luaL_tolstring32(IntPtr L, int idx, ref int len);
+#endif
+        public static IntPtr luaL_tolstring(IntPtr L, int idx, ref int len)
+        {
+#if UNITY_ANDROID
+            return lua_tolstring(L, idx, ref len);
+#elif UNITY_IPHONE || UNITY_STANDALONE_WIN
+            return luaL_tolstring32(L, idx, ref len);
+#endif
+        }
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static extern long lua_toID(IntPtr L, int idx);
         [DllImport(DllName, CallingConvention=CallingConvention.Cdecl)]

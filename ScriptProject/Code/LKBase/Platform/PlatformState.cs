@@ -28,6 +28,9 @@ public partial class PlatformState
     [DllImport("__Internal")]
     private static extern void cjsdkLogin(string objName, string customInfo);
 
+    [DllImport("__Internal")]
+    private static extern void cjsdkShare(string objName, string title, string description, string contextUrl, string imageUrl);
+
     //[DllImport("__Internal")]
     //private static extern void cjsdkPayment(string pid, string amount, string productName, string customInfo, string ext);
 #endif
@@ -94,6 +97,33 @@ public partial class PlatformState
         }
 #elif UNITY_IPHONE
         cjsdkLogin(objName, ext);
+#endif
+    }
+
+    /**
+     *  分享
+     *  title 标题
+     *  description 描述
+     *  contextUrl 跳转链接
+     *  imageUrl 显示图片，为空则默认显示应用图标
+     */
+    public void CJSDKShare(string objName, string title, string description, string contextUrl, string imageUrl)
+    {
+#if UNITY_ANDROID
+        if (mAndroidObj != null)
+        {
+            log("share", "title: " + title + ", description: " + description + ", contextUrl" + contextUrl + ", imageUrl" + imageUrl);
+            try
+            {
+                mAndroidObj.Call("CJSDKShare", objName, title, description, contextUrl, imageUrl);
+            }
+            catch (System.Exception ex)
+            {
+                log("CJSDKLogin", ex.ToString());
+            }
+        }
+#elif UNITY_IPHONE
+        cjsdkShare(objName, title, description, contextUrl, imageUrl);
 #endif
     }
 

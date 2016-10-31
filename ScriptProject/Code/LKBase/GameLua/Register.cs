@@ -12,7 +12,7 @@ class Register
 {
     public static void RegisterClass(string className)
     {
-		Debug.Log("className: " + className);
+		//Debug.Log("className: " + className);
         Type type = GetGameClassType(className);
 
         LuaInstance.instance.Get().Pop(1);
