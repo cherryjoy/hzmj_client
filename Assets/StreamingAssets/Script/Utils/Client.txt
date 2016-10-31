@@ -94,17 +94,41 @@ function Client.NetConnectFail()
     local prefab = LuaUIViewCtr.OpenUIHasBg("ToolsUI/MessageBox")
     LuaMessageBox.SetDataTable(prefab, {Message = Text.ConnectError,
                                         ConfirmName = Text.RetryText ,ConfirmFunc = Client.RetryConnect,
-                                        CancelName = Text.ServerList ,CancelFunc = Client.ShowServerListFunc,
+                                        --CancelName = Text.ServerList ,CancelFunc = Client.ShowServerListFunc,
+                                        CancelName = Text.Cancel ,CancelFunc = Client.ShowServerListFunc,
                                         ref=self})
 end
 
 function Client.RetryConnect()
     LuaNetwork.DisConnect()
-     LuaNetwork.Connect(Client.lastIP,Client.lastPort)
+    LuaNetwork.Connect(Client.lastIP,Client.lastPort)
 end
 
 function Client.ShowServerListFunc()
-    Client.ShowServerList:Do()
+    --Client.ShowServerList:Do()
+end
+
+function Client.RetryConnectByLastIp()
+    local lastIpStr = PlayerPrefsEx.GetString("LastIp")
+    local lastPortStr = PlayerPrefsEx.GetString("LastPort")
+    LuaNetwork.DisConnect()
+    LuaNetwork.Connect(lastIpStr, lastPortStr)
+end
+
+function Client.NetCloseSocket(reason)
+    -- EMCJ_LEAVE_REPEAT_LOGIN 3，帐号在其他设备登录，只能杀进程了
+    if reason == enumEMCJLogInOutReason.EMCJ_LEAVE_REPEAT_LOGIN then
+        local ref = LuaMessageBox.ShowSingle(Text.RepeatLogin, nil, Text.Confirm, self)
+        ref.button_Single:SetActive(false)
+        return
+    end
+
+    -- reason.EMCJ_LEAVE_REPEAT_LOGIN
+    local prefab = LuaUIViewCtr.OpenUIHasBg("ToolsUI/MessageBox")
+    LuaMessageBox.SetDataTable(prefab, {Message = Text.ConnectError.."，代码："..reason,
+                                        ConfirmName = Text.RetryText ,ConfirmFunc = Client.RetryConnectByLastIp,
+                                        CancelName = Text.Cancel ,CancelFunc = Client.ShowServerListFunc,
+                                        ref=self})
 end
 
 Client.PingThreshold = 3000

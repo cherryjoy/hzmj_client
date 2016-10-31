@@ -33,6 +33,8 @@ enumMSGID_MODULE_05 = {
 	ID_GAME_WIN_CARD_RES = 1312,
 	ID_GAME_BALANCE_REQ = 1313,
 	ID_GAME_BALANCE_RES = 1314,
+	ID_CLIENT_AUTO_CLOSE_SOCKET_NOTICE = 1315,
+	ID_SERVER_AUTO_CLOSE_SOCKET_NOTICE = 1316,
 	ID_MODULE_05_END = 1535,
 }
 
@@ -54,6 +56,20 @@ enumCARD_GANG_TYPE = {
 	CARD_GANG_M_TYPE = 0,
 	CARD_GANG_A_TYPE = 1,
 	CARD_GANG_G_TYPE = 2,
+}
+
+enumEMCJLogInOutReason = {
+	EMCJ_LOGIN_GAME = 1,
+	EMCJ_LEAVE_LEAVEGAME = 2,
+	EMCJ_LEAVE_REPEAT_LOGIN = 3,
+	EMCJ_LEAVE_KICKOUT = 4,
+	EMCJ_LEAVE_ABNORMAL = 5,
+	EMCJ_LEAVE_SIGUSR2 = 6,
+	EMCJ_LEAVE_PING_ERROR = 7,
+	EMCJ_LEAVE_CHENMI = 8,
+	EMCJ_LEAVE_COMM_STATE = 9,
+	EMCJ_LEAVE_LOAD_ERROR = 10,
+	EMCJ_LEAVE_SELF = 11,
 }
 
 -- PB_MSGID_MODULE_05
@@ -159,6 +175,33 @@ function PB_CARD_GANG_TYPE.Serialize(obj)
 end
 
 function PB_CARD_GANG_TYPE.GetSize(obj)
+	local size = 0
+	size = size + 5
+	return size
+end
+
+-- PB_LOGIN_OUT_REASON
+PB_LOGIN_OUT_REASON = {}
+PB_LOGIN_OUT_REASON.__index = PB_LOGIN_OUT_REASON
+function PB_LOGIN_OUT_REASON.Create()
+	local obj = setmetatable({},PB_LOGIN_OUT_REASON)
+	return obj
+end
+
+function PB_LOGIN_OUT_REASON.DeSerialize(obj)
+	local fieldCount = deserialize_int32()
+	local option,optionLength = deserialize_optional()
+	return obj
+end
+
+function PB_LOGIN_OUT_REASON.Serialize(obj)
+	local fieldCount = 0
+	serialize_int32(fieldCount)
+	local flag = {}
+	serialize_optional(flag)
+end
+
+function PB_LOGIN_OUT_REASON.GetSize(obj)
 	local size = 0
 	size = size + 5
 	return size
@@ -4095,6 +4138,102 @@ function PBMsgGameBalanceRes.GetSize(obj)
 		end
 	end
 	size = size + 10
+	return size
+end
+
+-- PBMsgClientAutoCloseSocketNotice
+PBMsgClientAutoCloseSocketNotice = {}
+PBMsgClientAutoCloseSocketNotice.__index = PBMsgClientAutoCloseSocketNotice
+function PBMsgClientAutoCloseSocketNotice.Create()
+	local obj = setmetatable({},PBMsgClientAutoCloseSocketNotice)
+	return obj
+end
+
+function PBMsgClientAutoCloseSocketNotice.DeSerialize(obj)
+	local fieldCount = deserialize_int32()
+	local option,optionLength = deserialize_optional()
+	if(has_optional_flag(0,optionLength,option)) then
+		obj.SockIndex = deserialize_int32()
+	end
+	if(has_optional_flag(1,optionLength,option)) then
+		obj.DestIP = deserialize_int32()
+	end
+	return obj
+end
+
+function PBMsgClientAutoCloseSocketNotice.Serialize(obj)
+	local fieldCount = 2
+	serialize_int32(fieldCount)
+	local flag = {}
+	if(obj.SockIndex ~= nil) then
+		flag[1] = true
+	else
+		flag[1] = false
+	end
+	if(obj.DestIP ~= nil) then
+		flag[2] = true
+	else
+		flag[2] = false
+	end
+	serialize_optional(flag)
+	if(obj.SockIndex ~= nil) then
+		serialize_int32(obj.SockIndex)
+	end
+	if(obj.DestIP ~= nil) then
+		serialize_int32(obj.DestIP)
+	end
+end
+
+function PBMsgClientAutoCloseSocketNotice.GetSize(obj)
+	local size = 0
+	if (obj.SockIndex ~= nil) then
+		size = size + 4
+	end
+	if (obj.DestIP ~= nil) then
+		size = size + 4
+	end
+	size = size + 6
+	return size
+end
+
+-- PBMsgServerAutoCloseSocketNotice
+PBMsgServerAutoCloseSocketNotice = {}
+PBMsgServerAutoCloseSocketNotice.__index = PBMsgServerAutoCloseSocketNotice
+function PBMsgServerAutoCloseSocketNotice.Create()
+	local obj = setmetatable({},PBMsgServerAutoCloseSocketNotice)
+	return obj
+end
+
+function PBMsgServerAutoCloseSocketNotice.DeSerialize(obj)
+	local fieldCount = deserialize_int32()
+	local option,optionLength = deserialize_optional()
+	if(has_optional_flag(0,optionLength,option)) then
+		obj.reason = deserialize_int32()
+	end
+	return obj
+end
+
+function PBMsgServerAutoCloseSocketNotice.Serialize(obj)
+	local fieldCount = 1
+	serialize_int32(fieldCount)
+	local flag = {}
+	if(obj.reason ~= nil) then
+		flag[1] = true
+	else
+		flag[1] = false
+	end
+	serialize_optional(flag)
+	if(obj.reason ~= nil) then
+		serialize_int32(obj.reason)
+	end
+end
+
+function PBMsgServerAutoCloseSocketNotice.GetSize(obj)
+	local size = 0
+	if (obj.reason ~= nil) then
+		size = size + 4
+	end
+	size = size + 6
 	return size
 end
 

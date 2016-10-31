@@ -39,6 +39,7 @@ Text = {
     LevelUp = "升级",
     Reset = "重置",
     Announcement = "公告",
+    RepeatLogin = "用户在其他设备登录",
 
 -----------------------------Login登录验证-------------------------------------------
     ServerListError="服务器列表下载失败,请重试",
@@ -75,8 +76,7 @@ Text = {
     DelRole="删除角色",
     LoginName="登录账号:",
     Maintain = "(维护中)",
-    --ServerList = "服务器列表",
-    ServerList = "取消",
+    ServerList = "服务器列表",
     SwitchServerOnClick = "点击换区",
     ------------------------------serverList---------------------
     --NewServer = "["..ColorFilter.Color_51BF53.."] (新区)[-]",

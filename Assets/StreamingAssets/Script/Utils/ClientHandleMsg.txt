@@ -51,7 +51,9 @@ HandleFuncs[enumMSGID_MODULE_05.ID_ROLE_RES] = function(data, dataLength)
     Client.LoginSuccess:Do()
 
     -- 如果上次是在房间中退出的，则加入房间
-    ClientSendMsg.SendEnterRoom(Client.RoleInfo.RoleID, pbMsg.room_pass)
+    if pbMsg.room_pass ~= nil then
+        ClientSendMsg.SendEnterRoom(Client.RoleInfo.RoleID, pbMsg.room_pass)
+    end
 end
 
 HandleFuncs[NetOpcodes_S2C.S2C_SESSION_CREATED] = function (data,dataLength)
@@ -93,13 +95,28 @@ HandleFuncs[NetOpcodes_S2C.S2C_AUTH] = function (data,dataLength)
     Client.LoginSuccess:Do()
 end
 
+HandleFuncs[enumMSGID_MODULE_05.ID_SERVER_AUTO_CLOSE_SOCKET_NOTICE] = function(data, dataLength)
+    local data = LuaProto.deserialize(PBMsgServerAutoCloseSocketNotice, data, dataLength)
+
+    LuaDebug.LogError("cloes socket, reasion: "..data.reason)
+
+    Client.NetCloseSocket(data.reason)
+end
+
 HandleFuncs[enumMSGID_MODULE_05.ID_ERROR_CODE_NOTICE] = function(data, dataLength)
     local data = LuaProto.deserialize(PBMsgErrorCodeNotice, data, dataLength)
 
     LuaDebug.Log("errcode: "..data.err_code)
     LuaDebug.Log("err_type: "..data.err_type)
+    -- ERR_PLAYER_SESSION_FAIL -10000，需要重新登录
+
     for i = 1, #data.err_para do
         LuaDebug.Log("err_para "..i.." : "..data.err_para[i])
+    end
+
+    if data.err_code == -10000 then
+        local ref = LuaMessageBox.ShowSingle(Text.Disconnected, nil, Text.Confirm, self)
+        ref.button_Single:SetActive(false)
     end
 end
 

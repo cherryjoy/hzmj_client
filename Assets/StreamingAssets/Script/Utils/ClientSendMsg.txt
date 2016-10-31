@@ -149,6 +149,7 @@ function  ClientSendMsg.SendCreateRoom(amount, horse, addition)
 end
 
 function ClientSendMsg.SendEnterRoom(roleid, passwd)
+	LuaDebug.Log("roleId: "..roleid..", passwd: "..tostring(passwd))
 	local data = PBMsgEnterRoomReq.Create()
 	data.roleid = roleid
 	data.passwd = passwd
