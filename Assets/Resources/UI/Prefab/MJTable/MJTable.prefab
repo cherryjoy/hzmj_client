@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &101426
 GameObject:
   m_ObjectHideFlags: 1
@@ -1304,7 +1304,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 108520}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 477.99994, y: -280, z: 0}
+  m_LocalPosition: {x: 390, y: -280, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -1589,7 +1589,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 154976}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 482.99994, y: 280.00006, z: 0}
+  m_LocalPosition: {x: 395, y: 280.00003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -1887,7 +1887,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 143334}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 230.00006, z: 0}
+  m_LocalPosition: {x: 0, y: 230.00003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -2106,7 +2106,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 180566}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -428.00006, y: -223, z: 0}
+  m_LocalPosition: {x: -340, y: -223, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -2204,7 +2204,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 129224}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -508.00006, y: -200, z: 0}
+  m_LocalPosition: {x: -420, y: -200, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -2217,7 +2217,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 123132}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -467.00006, y: 280.00006, z: 0}
+  m_LocalPosition: {x: -379, y: 280.00003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -2462,7 +2462,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 205, y: 54, z: 1}
+  m_Size: {x: 250, y: 80, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6549700
 BoxCollider:
@@ -3348,6 +3348,10 @@ MonoBehaviour:
     TypeIndex: 5
   - Obj: {fileID: 187110}
     regObj: {fileID: 187110}
+    Name: 
+    TypeIndex: 5
+  - Obj: {fileID: 101200}
+    regObj: {fileID: 101200}
     Name: 
     TypeIndex: 5
   LuaBehavArray:
@@ -4460,11 +4464,11 @@ MonoBehaviour:
     e00: 320
     e01: 0
     e02: 0
-    e03: 0.5333247
+    e03: 0.49999237
     e10: 0
     e11: 320
     e12: 0
-    e13: -0.5333328
+    e13: -0.49999237
     e20: 0
     e21: 0
     e22: 320

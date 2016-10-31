@@ -41,6 +41,10 @@ function PlatformHandler.CallLogin()
 	end
 end
 
+function PlatformHandler.CallShare(title, desc, contextUrl, imageUrl)
+	PlatformHandler.state:CJSDKShare(PlatformHandler.gameName, title, desc, contextUrl, imageUrl)
+end
+
 function  PlatformHandler.CallLogout()
 	PlatformHandler.state:OKSDKLogout(PlatformHandler.gameName,"")
 end
@@ -145,7 +149,7 @@ end
 function PlatformHandler.onInitFinish (msg)
 	LuaDebug.Log(msg)
 	local json = JSON:decode(msg)
-	if json['code']~="1" then
+	if json['code']~=1 then
 		LuaDebug.Log("init false")
 		return
 	end
@@ -176,6 +180,14 @@ function  PlatformHandler.onLoginFinish(msg)
 		LuaDebug.Log('onLoginFinish false')
 		PlatformHandler.Logining=false
 	end
+
+end
+
+function  PlatformHandler.onShareFinish(msg)
+	LuaDebug.Log('onShareFinish: '..msg)
+end
+
+function PlatformHandler.onShareFinish(msg)
 
 end
 

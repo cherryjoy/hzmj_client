@@ -17,6 +17,8 @@ end
 
 function MJTableCtrl:Init(passwd, horse, beishu, rolelist)
     self.roomId = passwd
+    self.horse = horse
+    self.beishu = beishu
     self.ID:set_text(string.format(Text.TableName, passwd))
     self.MaShu:set_text(string.format(Text.MaShuName, beishu, horse))
     MJTableCtrl.SetJuShuPaiShu(self)
@@ -49,9 +51,8 @@ function MJTableCtrl:EnterRoomSync(rolelist)
 end
 
 function MJTableCtrl:CardInfoSync(cardInfo)
-    --if #(cardInfo.owncards.handcard) ~= 14 then
-    --    return
-    --end
+    -- 关闭 邀请
+    self.Invite:SetActive(false)
 
     -- 同步自己的牌
     if cardInfo.owncards ~= nil then
@@ -556,4 +557,10 @@ function MJTableCtrl.GetRoleInfo(roleId, roleList)
     end
 
     return nil
+end
+
+function MJTableCtrl:Invite_OnClick()
+    local title = string.format(Text.InviteTitle, self.roomId)
+    local desc = string.format(Text.InviteContext, Client.RoleInfo.Amount, self.horse, self.beishu)
+    PlatformHandler.CallShare(title, desc, GameDefine_InvitewebPage, "")
 end

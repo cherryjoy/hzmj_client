@@ -22,7 +22,7 @@ function MainUICtrl:Score_OnClick()
 end
 
 function MainUICtrl:Help_OnClick()
-    
+    PlatformHandler.CallShare("", "", "", "http://www.cherryjoy.com/hzmj/test.png")
 end
 
 function MainUICtrl:Setting_OnClick()

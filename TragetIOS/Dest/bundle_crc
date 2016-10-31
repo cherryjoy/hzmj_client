@@ -1,4 +1,4 @@
-assetbundles:2215979424
+assetbundles:684704695
 material_mat:3486227220
 material_tga:3138788352
 shader:340253071
@@ -70,7 +70,7 @@ music/ui/buttonclick_13:2944854431
 ui/texture_mat:242921949
 ui/texture_tga:2380025240
 ui/atlas/bit16/emotion:2351665809
-ui/atlas/bit32/base:2452694631
+ui/atlas/bit32/base:205980714
 ui/atlas/bit32/baseui:480762511
 ui/atlas/bit32/compass:2890851835
 ui/atlas/bit32/home:3959515907
@@ -83,11 +83,11 @@ ui/prefab/announcementui_prefab:3181192711
 ui/prefab/commonui_prefab:1376950451
 ui/prefab/home_prefab:125777383
 ui/prefab/login_prefab:2052930780
-ui/prefab/mjtable_prefab:4160676642
+ui/prefab/mjtable_prefab:475385389
 ui/prefab/newscenemusthave_prefab:2545927519
 ui/prefab/syssetting_prefab:3718759070
 ui/prefab/toolsui_prefab:1022845590
 ui/prefab/tooltips_prefab:1309114729
-ui/prefab/uitools_prefab:2263273548
+ui/prefab/uitools_prefab:2944567644
 ui/prefab/update_prefab:3568009834
-ui/prefab/toolsui/messagebox:2542901770
+ui/prefab/toolsui/messagebox:3758090184

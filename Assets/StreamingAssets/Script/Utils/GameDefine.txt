@@ -1,7 +1,7 @@
---SteamingAsets 目录下的platformconfig中的值会覆盖此文件中的值
+--SteamingAssets 目录下的platformconfig中的值会覆盖此文件中的值
 GameDefine_version = "0.1.0"
 GameDefine_versioncode = 23
-GameDefine_gameID = 584   
+GameDefine_gameID = 584
 GameDefine_AppHashCode = "ae2dbe456c09d76852beca29e146aedc"
 GameDefine_platformCode = 5
 GameDefine_windows_cache_path = "F:/MaJiang/hzmj_client/assetbundles"
@@ -17,3 +17,4 @@ GameDefine_IsDefaultAuth = true
 GameDefine_isLoginDebug = true
 GameDefine_InitConfig = '"appkey":"appkey"'
 GameDefine_ProductName = "red"
+GameDefine_InvitewebPage = "http://www.cherryjoy.com"
