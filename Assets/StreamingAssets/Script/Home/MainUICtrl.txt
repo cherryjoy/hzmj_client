@@ -22,6 +22,7 @@ function MainUICtrl:Score_OnClick()
 end
 
 function MainUICtrl:Help_OnClick()
+	-- Application.CaptureScreenshot("截取全屏.png", 0);
     PlatformHandler.CallShare("", "", "", "http://www.cherryjoy.com/hzmj/test.png")
 end
 
