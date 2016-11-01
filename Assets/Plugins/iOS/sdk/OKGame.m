@@ -1,5 +1,3 @@
-
-
 #import "OKGame.h"
 #include <sys/socket.h>
 #include <netdb.h>
@@ -12,6 +10,7 @@
 #import <AdSupport/AdSupport.h>
 static NSString* gameObject;
 #define MakeStringCopy( _x_ ) ( _x_ != NULL && [_x_ isKindOfClass:[NSString class]] ) ? strdup( [_x_ UTF8String] ) : NULL
+
 NSString* CreateString(const char* str);
 
 #if defined(__cplusplus)
@@ -95,27 +94,26 @@ void SendMessage2Unity(NSString* func, NSString* result);
     }
 
     //===================================================================================
-
-    void cjsdkInit(const char* objName, const char *params){
-        gameObject = [CreateString(objName) mutableCopy];
-        NSLog(@"game object name is : %@", gameObject);
-        
-       //OKGame *okGame = [[OKGame alloc]init];
-	   NSString* str =  CreateString(params);
-	   str = [str stringByReplacingOccurrencesOfString:@"gameid" withString:@"gameId"];
-	   str = [str stringByReplacingOccurrencesOfString:@"appkey" withString:@"appKey"];
-	   str = [str stringByReplacingOccurrencesOfString:@"serverid" withString:@"serverId"];
-	   NSLog(@"--------------%@",str);
-        //[[OKSDK defaultSDK] OKSDKInitWithParams:str withDelegate:okGame];
-    }
-
-    void cjsdkLogin(const char* objName, const char* ext){
-        gameObject = [CreateString(objName) mutableCopy];
-        NSLog(@"game object name is : %@", gameObject);
-        
-		NSLog(@"oksdklogin %s",ext);
-        //[[OKSDK defaultSDK] OKSDKLoginWithExt:CreateString(ext)];
-    }
+     /*void cjsdkInit(const char* objName, const char *params){
+         gameObject = [CreateString(objName) mutableCopy];
+         NSLog(@"game object name is : %@", gameObject);
+         
+         //OKGame *okGame = [[OKGame alloc]init];
+         NSString* str =  CreateString(params);
+         str = [str stringByReplacingOccurrencesOfString:@"gameid" withString:@"gameId"];
+         str = [str stringByReplacingOccurrencesOfString:@"appkey" withString:@"appKey"];
+         str = [str stringByReplacingOccurrencesOfString:@"serverid" withString:@"serverId"];
+         NSLog(@"--------------%@",str);
+         //[[OKSDK defaultSDK] OKSDKInitWithParams:str withDelegate:okGame];
+     }*/
+     
+     /*void cjsdkLogin(const char* objName, const char* ext){
+         gameObject = [CreateString(objName) mutableCopy];
+         NSLog(@"game object name is : %@", gameObject);
+         
+         NSLog(@"oksdklogin %s",ext);
+         //[[OKSDK defaultSDK] OKSDKLoginWithExt:CreateString(ext)];
+     }*/
 
     void oksdkPayment(const char *productuid, const char *amount,const char *productname, const char *custominfo,const char *ext)
 	{
@@ -296,40 +294,10 @@ const char* GetMacAddressiOS()
         }
         return MakeStringCopy(outString);//[outString UTF8String];
 }
-	
-/*	NSString* QCreateString(const char* str){
-        if (str)
-            return [NSString stringWithUTF8String:str];
-        else
-            return [NSString stringWithUTF8String:""];
-    }
-    
-    void QCloudInit(const char * objName)
-    {
-        //[[PhotoHelper shareInstance] QCloudInit:QCreateString(objName)];
-    }//
-    
-    void StartUploadHeadImage(bool bParam, const char* fileId)
-    {
-        if (bParam) {
-           // // 使用相机
-            //[[PhotoHelper shareInstance] useCamera:QCreateString(fileId)];
-        }
-        else
-        {
-            // 使用相册
-           // [[PhotoHelper shareInstance] usePhoto:QCreateString(fileId)];
-        }
-    }
-    
-    void DeleteHeadImage(const char* fileId)
-    {
-        //[[PhotoHelper shareInstance]  deleteImage:QCreateString(fileId)];
-    }
-	
-	*/
+
 	void IsLowDeviceByFlag(){}
 	void Log(){}
 #if defined(__cplusplus)
- extern "C"}
+ extern "C"
+ }
 #endif
