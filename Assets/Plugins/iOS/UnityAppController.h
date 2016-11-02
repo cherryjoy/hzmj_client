@@ -3,7 +3,7 @@
 #import <QuartzCore/CADisplayLink.h>
 
 #include "PluginBase/RenderPluginDelegate.h"
-#import "WeiXin/WXApi.h"
+#import "WXApi.h"
 
 @class UnityView;
 @class DisplayConnection;

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Runtime.InteropServices;
+using System.IO;
 /**
  *  该文件包含常用的接口定义实现，对于一些特殊的，不太常见的接口，我们会定义在PlatformStateExtension.cs中
  */
@@ -109,7 +110,21 @@ public partial class PlatformState
      */
     public void CJSDKShare(string objName, string title, string description, string contextUrl, string imageUrl)
     {
-#if UNITY_ANDROID
+		if (string.IsNullOrEmpty(imageUrl))
+		{ 
+			SDKShareCallBack(objName, title, description, contextUrl, imageUrl);
+		}
+		else
+		{
+			imageUrl = "screenshot.png";
+			//Application.CaptureScreenshot(imageUrl, 100);
+			PlatformSDKController.mSelf.ShareScreenShot(objName, title, description, contextUrl, imageUrl);
+		}
+    }
+
+	public void SDKShareCallBack(string objName, string title, string description, string contextUrl, string imageUrl)
+	{ 
+		#if UNITY_ANDROID
         if (mAndroidObj != null)
         {
             log("share", "title: " + title + ", description: " + description + ", contextUrl" + contextUrl + ", imageUrl" + imageUrl);
@@ -125,7 +140,7 @@ public partial class PlatformState
 #elif UNITY_IPHONE
         cjsdkShare(objName, title, description, contextUrl, imageUrl);
 #endif
-    }
+	}
 
 //    /**
 //     *  创建角色

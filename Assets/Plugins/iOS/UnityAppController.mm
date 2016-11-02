@@ -39,7 +39,7 @@
 #define WeiXinName @"樱桃红中麻将"
 #define ksendAuthRequestNotification @"ksendAuthRequestNotification"
 #define InitMethod "onInitFinish"
-#define InitCode "{\"code\":\"1\"}"
+#define InitCode "{\"code\":1}"
 #define LoginMethod "onLoginFinish"
 #define ShareMethod "onShareFinish"
 static NSString* myGameObject;
@@ -402,8 +402,8 @@ extern "C"
     void cjsdkInit(const char* objName, const char *ext)
     {
         myGameObject = [myCreateString(objName) mutableCopy];
-        NSLog(@"game object name is : %@", myGameObject);
-        NSLog(@"cjsdkInit params is : %s", ext);
+        //NSLog(@"game object name is : %@", myGameObject);
+        //NSLog(@"cjsdkInit params is : %s", ext);
         
         NSString* jsonString =  myCreateString(ext);
         NSData *data = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
@@ -446,7 +446,7 @@ extern "C"
                      NSLog(@"#####refreshAccessToken = %@",responseData);
                      
                      int errCode = [[responseData valueForKey:@"errcode"] intValue];
-                     NSLog(@"errCode: %d", errCode);
+                     //NSLog(@"errCode: %d", errCode);
                      
                      if (type == 1)
                      {
@@ -467,7 +467,7 @@ extern "C"
     
     void cjsdkLogin(const char* objName, const char* ext){
         myGameObject = [myCreateString(objName) mutableCopy];
-        NSLog(@"game object name is : %@", myGameObject);
+        //NSLog(@"game object name is : %@", myGameObject);
         NSLog(@"cjsdkLogin params is : %s", ext);
         
         NSString* jsonString =  myCreateString(ext);
@@ -510,11 +510,11 @@ extern "C"
                          }
                          
                          int errCode = [[responseData valueForKey:@"errcode"] intValue];
-                         NSLog(@"errCode: %d", errCode);
+                         //NSLog(@"errCode: %d", errCode);
                          if (errCode == 0)
                          {
                              NSString *jsonData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                             NSLog(@"#####JsonData = %@",jsonData);
+                             //NSLog(@"#####JsonData = %@",jsonData);
                              UnitySendMessage([myGameObject UTF8String], LoginMethod, [jsonData cStringUsingEncoding:NSUTF8StringEncoding]);
                              
                              // refresh token
@@ -530,33 +530,64 @@ extern "C"
         }
     }
     
-    void cjsdkShare(const char* title,const char*desc,const char*contextUrl, const char* imageUrl)
+    void cjsdkShare(const char* objName, const char* title,const char*desc,const char*contextUrl, const char* imageUrl)
     {
+        myGameObject = [myCreateString(objName) mutableCopy];
+        //NSLog(@"game object name is : %@", myGameObject);
         NSString *titleStr=[NSString stringWithUTF8String:title];
         NSString *descStr=[NSString stringWithUTF8String:desc];
         NSString *urlStr=[NSString stringWithUTF8String:contextUrl];
         NSString *imageStr=[NSString stringWithUTF8String:imageUrl];
-        NSLog(@"cjsdkShare titleStr:%@",titleStr);
-        NSLog(@"cjsdkShare descStr:%@",descStr);
-        NSLog(@"cjsdkShare urlStr:%@",urlStr);
-        //UIImage *img=[UIImage imageNamed:@"AppIcon72x72"];
+        //imageStr = @"screenshot.png";
+        //NSLog(@"cjsdkShare titleStr:%@",titleStr);
+        //NSLog(@"cjsdkShare descStr:%@",descStr);
+        //NSLog(@"cjsdkShare urlStr:%@",urlStr);
         NSLog(@"cjsdkShare imageUrl:%@",imageStr);
+        
         // 分享
-        WXMediaMessage *message = [WXMediaMessage message];
-        message.title = titleStr;
-        message.description = descStr;
-        [message setThumbImage:[UIImage imageNamed:@"AppIcon72x72"]];
-        
-        WXWebpageObject *ext = [WXWebpageObject object];
-        ext.webpageUrl = urlStr;
-        message.mediaObject = ext;
-        message.mediaTagName = @"WECHAT_TAG_SHARE";
-        
-        SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
-        req.bText = NO;
-        req.message = message;
-        req.scene = WXSceneSession;
-        [WXApi sendReq:req];
+        if (nil == imageStr || 0 == imageStr.length)
+        {
+            WXMediaMessage *message = [WXMediaMessage message];
+            message.title = titleStr;
+            message.description = descStr;
+            UIImage *img=[UIImage imageNamed:@"AppIcon60x60@2x"];
+            [message setThumbImage:img];
+            WXWebpageObject *ext = [WXWebpageObject object];
+            ext.webpageUrl = urlStr;
+            message.mediaObject = ext;
+            message.mediaTagName = @"WECHAT_TAG_SHARE";
+            
+            SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
+            req.bText = NO;
+            req.message = message;
+            req.scene = WXSceneSession;
+            [WXApi sendReq:req];
+        }
+        else
+        {
+            WXMediaMessage *message = [WXMediaMessage message];
+            NSString *path=[NSString stringWithFormat:@"%@/Documents/%@",NSHomeDirectory(),imageStr];
+            //NSLog(@"image path: %@", path);
+            WXImageObject *imageObject = [WXImageObject object];
+            imageObject.imageData = [NSData dataWithContentsOfFile:path];
+            message.mediaObject = imageObject;
+            UIImage *img=[[UIImage alloc]initWithContentsOfFile:path];
+            CGSize size = img.size;
+            CGFloat width = size.width;
+            CGFloat height = size.height;
+            CGFloat scaledWidth = 800;//width*0.05;
+            CGFloat scaledHeight = 800*(height/width);
+            UIGraphicsBeginImageContext(size);//thiswillcrop
+            [img drawInRect:CGRectMake(0,0,scaledWidth,scaledHeight)];
+            UIImage* newImage=UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            [message setThumbImage:newImage];
+            SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
+            req.bText = NO;
+            req.message = message;
+            req.scene = WXSceneSession;
+            [WXApi sendReq:req];
+        }
     }
 }
 

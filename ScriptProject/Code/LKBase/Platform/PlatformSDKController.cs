@@ -41,6 +41,29 @@ public class PlatformSDKController : MonoBehaviour
 
     }
 
+	public void ShareScreenShot(string objName, string title, string description, string contextUrl, string picName)
+	{
+		StartCoroutine(DoScreenShot(objName, title, description, contextUrl, picName));
+	}
+
+	IEnumerator DoScreenShot(string objName, string title, string description, string contextUrl, string picName)
+	{
+		yield return new WaitForEndOfFrame();
+		Rect rect = new Rect(Screen.width*0f, Screen.height*0f, Screen.width*1f, Screen.height*1f);
+		Texture2D tex = new Texture2D((int)rect.width, (int)rect.height, TextureFormat.RGB24, false);
+		tex.ReadPixels(rect, 0, 0);
+		tex.Apply();
+
+		byte[] bytes = tex.EncodeToPNG();
+		string fileName = Application.persistentDataPath + "/" + picName;
+		System.IO.File.WriteAllBytes(fileName, bytes);
+		PlatformState.Instance.SDKShareCallBack(objName, title, description, contextUrl, picName);
+	}
+
+	/// <summary>
+	/// SDK返回
+	/// </summary>
+
     public void InitSdk()
     {
         LuaState lua = LuaInstance.instance.Get();
