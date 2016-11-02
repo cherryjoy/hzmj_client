@@ -31,6 +31,10 @@ function GameBalance:ReturnHall_OnClick()
     self.gameObject:Destroy1()
 end
 
+function GameBalance:Share_OnClick()
+    PlatformHandler.CallShare("", "", "", "screenshot.png")
+end
+
 function GameBalance.GetRoleIdOfMaxNum(balances)
     local index = 1
     local maxNum = 0

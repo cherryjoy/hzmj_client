@@ -1,5 +1,24 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &102702
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 427822}
+  - 114: {fileID: 11489932}
+  - 114: {fileID: 11478576}
+  - 114: {fileID: 11483260}
+  - 65: {fileID: 6563020}
+  m_Layer: 8
+  m_Name: Ready
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &130478
 GameObject:
   m_ObjectHideFlags: 0
@@ -61,7 +80,7 @@ GameObject:
   - 114: {fileID: 11496570}
   - 65: {fileID: 6501300}
   m_Layer: 8
-  m_Name: Ready
+  m_Name: Share
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -133,6 +152,35 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &182214
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 406192}
+  - 114: {fileID: 11442146}
+  m_Layer: 8
+  m_Name: Sprite
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &406192
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 182214}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 427822}
+  m_RootOrder: 0
 --- !u!4 &410198
 Transform:
   m_ObjectHideFlags: 1
@@ -164,6 +212,20 @@ Transform:
   - {fileID: 429442}
   m_Father: {fileID: 410198}
   m_RootOrder: 3
+--- !u!4 &427822
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 102702}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 150, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children:
+  - {fileID: 406192}
+  m_Father: {fileID: 450744}
+  m_RootOrder: 0
 --- !u!4 &429442
 Transform:
   m_ObjectHideFlags: 1
@@ -201,6 +263,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 427822}
   - {fileID: 482110}
   m_Father: {fileID: 410198}
   m_RootOrder: 2
@@ -237,19 +300,31 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 144420}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -150, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 472258}
   m_Father: {fileID: 450744}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!65 &6501300
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 144420}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 200, y: 80, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &6563020
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 102702}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
@@ -290,10 +365,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targets:
   - {fileID: 11452944}
-  normalSprite: Z_zhunbei2dianji
-  hoverSprite: Z_zhunbei2dianji
-  pressedSprite: Z_zhunbei2
-  disableSprite: Z_zhunbei2dianji
+  normalSprite: Z_fenxiangdianji
+  hoverSprite: Z_fenxiangdianji
+  pressedSprite: Z_fenxiang
+  disableSprite: Z_fenxiangdianji
+--- !u!114 &11442146
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 182214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 345385021, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  changeFlag: -1
+  mMat: {fileID: 2100000, guid: 34f56bbc1680ae64a83524fe52a79874, type: 2}
+  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mPivot: 4
+  mWidth: 177
+  mHeight: 52
+  mDepth: 4
+  mIsHidePanel: 0
+  mAtlas: {fileID: 11459290, guid: 632c39260d01bae4eba76e8074fb5b27, type: 2}
+  mSpriteName: Z_zhunbei2dianji
+  IsKeepOriSize: 0
 --- !u!114 &11445718
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -361,7 +458,7 @@ MonoBehaviour:
   mDepth: 4
   mIsHidePanel: 0
   mAtlas: {fileID: 11459290, guid: 632c39260d01bae4eba76e8074fb5b27, type: 2}
-  mSpriteName: Z_zhunbei2dianji
+  mSpriteName: Z_fenxiangdianji
   IsKeepOriSize: 0
 --- !u!114 &11455186
 MonoBehaviour:
@@ -423,6 +520,10 @@ MonoBehaviour:
     regObj: {fileID: 138154}
     Name: 
     TypeIndex: 1
+  - Obj: {fileID: 102702}
+    regObj: {fileID: 102702}
+    Name: 
+    TypeIndex: 5
   - Obj: {fileID: 144420}
     regObj: {fileID: 144420}
     Name: 
@@ -469,6 +570,20 @@ MonoBehaviour:
   mSpriteName: tck_dikuang
   IsKeepOriSize: 0
   mFillCenter: 1
+--- !u!114 &11478576
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 102702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1892511743, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: b0e713473f4d48b4a87c07c6a8a3fbe3, type: 3}
+  trigger: 0
+  volume: 1
 --- !u!114 &11478894
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -489,6 +604,38 @@ MonoBehaviour:
   ViewportOffset: {x: 0, y: 0, z: 0}
   updateAllTheTime: 0
   direction: 2
+--- !u!114 &11483260
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 102702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1646491362, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 144754}
+  functionName: OnClick
+  trigger: 0
+  includeChildren: 0
+--- !u!114 &11489932
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 102702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -2023587677, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targets:
+  - {fileID: 11442146}
+  normalSprite: Z_zhunbei2dianji
+  hoverSprite: Z_zhunbei2dianji
+  pressedSprite: Z_zhunbei2
+  disableSprite: Z_zhunbei2dianji
 --- !u!114 &11496570
 MonoBehaviour:
   m_ObjectHideFlags: 1

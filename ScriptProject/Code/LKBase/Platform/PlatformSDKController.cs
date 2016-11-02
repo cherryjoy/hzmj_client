@@ -55,7 +55,7 @@ public class PlatformSDKController : MonoBehaviour
 		tex.Apply();
 
 		byte[] bytes = tex.EncodeToPNG();
-		string fileName = Application.persistentDataPath + "/" + picName;
+        string fileName = Application.persistentDataPath + "/" + picName;
 		System.IO.File.WriteAllBytes(fileName, bytes);
 		PlatformState.Instance.SDKShareCallBack(objName, title, description, contextUrl, picName);
 	}

@@ -75,7 +75,8 @@ function Client.ListenNetwork( state,ip,port )
             Client.m_CurrentState = EClientState.E_CS_Reconect
             Client.lastIP = ip
             Client.lastPort = port
-            Client.NetConnectFail()
+            ClientInfo.isFirstLogin = false
+            --Client.NetConnectFail()
         else
             Client.NetDisconnect()
         end
@@ -101,7 +102,11 @@ end
 
 function Client.RetryConnect()
     LuaNetwork.DisConnect()
-    LuaNetwork.Connect(Client.lastIP,Client.lastPort)
+    local ret = LuaNetwork.Connect(Client.lastIP,Client.lastPort)
+    if ret then
+        Client.NetState = EClientNetWorkState.NORMAL
+        Client.ConnectSuccess:Do()
+    end
 end
 
 function Client.ShowServerListFunc()
@@ -111,8 +116,13 @@ end
 function Client.RetryConnectByLastIp()
     local lastIpStr = PlayerPrefsEx.GetString("LastIp")
     local lastPortStr = PlayerPrefsEx.GetString("LastPort")
+    LuaDebug.Log("ip: "..lastIpStr..", prot: "..lastPortStr)
     LuaNetwork.DisConnect()
     LuaNetwork.Connect(lastIpStr, lastPortStr)
+end
+
+function Client.LogicCloseSocket()
+    Client.NetState = EClientNetWorkState.DISCONNECTED
 end
 
 function Client.NetCloseSocket(reason)
@@ -123,12 +133,14 @@ function Client.NetCloseSocket(reason)
         return
     end
 
-    -- reason.EMCJ_LEAVE_REPEAT_LOGIN
+    Client.LogicCloseSocket()
+    --[[
     local prefab = LuaUIViewCtr.OpenUIHasBg("ToolsUI/MessageBox")
     LuaMessageBox.SetDataTable(prefab, {Message = Text.ConnectError.."，代码："..reason,
                                         ConfirmName = Text.RetryText ,ConfirmFunc = Client.RetryConnectByLastIp,
                                         CancelName = Text.Cancel ,CancelFunc = Client.ShowServerListFunc,
                                         ref=self})
+    --]]
 end
 
 Client.PingThreshold = 3000

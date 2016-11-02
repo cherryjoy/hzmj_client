@@ -23,7 +23,8 @@ end
 
 function MainUICtrl:Help_OnClick()
 	-- Application.CaptureScreenshot("截取全屏.png", 0);
-    PlatformHandler.CallShare("", "", "", "http://www.cherryjoy.com/hzmj/test.png")
+    LuaDebug.Log("Help_OnClick")
+    PlatformHandler.CallShare("", "", "", "screenshot.png")
 end
 
 function MainUICtrl:Setting_OnClick()

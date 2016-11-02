@@ -98,8 +98,7 @@ end
 HandleFuncs[enumMSGID_MODULE_05.ID_SERVER_AUTO_CLOSE_SOCKET_NOTICE] = function(data, dataLength)
     local data = LuaProto.deserialize(PBMsgServerAutoCloseSocketNotice, data, dataLength)
 
-    LuaDebug.LogError("cloes socket, reasion: "..data.reason)
-
+    LuaDebug.Log("cloes socket, reasion: "..data.reason)
     Client.NetCloseSocket(data.reason)
 end
 

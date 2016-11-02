@@ -116,15 +116,29 @@ public partial class PlatformState
 		}
 		else
 		{
-			imageUrl = "screenshot.png";
+			//imageUrl = "screenshot.png";
 			//Application.CaptureScreenshot(imageUrl, 100);
 			PlatformSDKController.mSelf.ShareScreenShot(objName, title, description, contextUrl, imageUrl);
 		}
     }
 
 	public void SDKShareCallBack(string objName, string title, string description, string contextUrl, string imageUrl)
-	{ 
+	{
 		#if UNITY_ANDROID
+        if (mAndroidObj == null)
+        {
+            //Debug.Log("mAndroidObj == null");
+            try
+            {
+                AndroidJavaClass jc = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+                mAndroidObj = jc.GetStatic<AndroidJavaObject>("currentActivity");
+            }
+            catch (System.Exception ex)
+            {
+                log("new AndroidJavaObject", ex.ToString());
+            }
+        }
+
         if (mAndroidObj != null)
         {
             log("share", "title: " + title + ", description: " + description + ", contextUrl" + contextUrl + ", imageUrl" + imageUrl);
@@ -134,7 +148,7 @@ public partial class PlatformState
             }
             catch (System.Exception ex)
             {
-                log("CJSDKLogin", ex.ToString());
+                log("CJSDKShare", ex.ToString());
             }
         }
 #elif UNITY_IPHONE

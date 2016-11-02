@@ -50,6 +50,7 @@ function GameResult:Init(data, roleList)
 
      if Client.RoleInfo.Used + 1 == Client.RoleInfo.Amount then
          self.Ready:SetActive(false)
+         self.Share:SetActive(false)
          Timer.NewEvent(self,40,40,GameResult.GetResult, false, nil)
      end
  end
@@ -66,4 +67,8 @@ function GameResult:Ready_OnClick()
     ClientSendMsg.SendReadyRoom()
 
     --self.gameObject:Destroy1()
+end
+
+function GameResult:Share_OnClick()
+    PlatformHandler.CallShare("", "", "", "screenshot.png")
 end
