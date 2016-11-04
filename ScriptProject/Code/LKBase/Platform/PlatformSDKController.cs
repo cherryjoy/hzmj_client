@@ -54,9 +54,32 @@ public class PlatformSDKController : MonoBehaviour
 		tex.ReadPixels(rect, 0, 0);
 		tex.Apply();
 
-		byte[] bytes = tex.EncodeToPNG();
-        string fileName = Application.persistentDataPath + "/" + picName;
-		System.IO.File.WriteAllBytes(fileName, bytes);
+		int width = 1334;
+		if (rect.width <= width)
+		{
+			byte[] bytes = tex.EncodeToPNG();
+			string fileName = Application.persistentDataPath + "/" + picName;
+			System.IO.File.WriteAllBytes(fileName, bytes);
+		}
+		else
+		{
+			int height = (int)(width * (rect.height / rect.width));
+			Texture2D result = new Texture2D(width, height, tex.format, false);
+			for (int i = 0; i < result.height; ++i)
+			{
+				for (int j = 0; j < result.width; ++j)
+				{
+					Color newColor = tex.GetPixelBilinear((float)j / result.width, (float)i / result.height);
+					result.SetPixel(j, i, newColor);
+				}
+			}
+
+			result.Apply();
+			byte[] bytes = result.EncodeToPNG();
+			string fileName = Application.persistentDataPath + "/" + picName;
+			System.IO.File.WriteAllBytes(fileName, bytes);
+		}
+
 		PlatformState.Instance.SDKShareCallBack(objName, title, description, contextUrl, picName);
 	}
 
