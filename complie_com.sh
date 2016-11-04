@@ -4,3 +4,4 @@
 /usr/bin/xcrun -sdk iphoneos PackageApplication -v /Users/smartlean/Documents/majiang/xcode/build/Release-iphoneos/hzmj.app -o /Users/smartlean/Documents/majiang/xcode/build/hzmj.ipa
 var=`date +%Y%m%d%H%M`
 mv /Users/smartlean/Documents/majiang/xcode/build/hzmj.ipa /Users/smartlean/Documents/majiang/xcode/build/hzmj_com_$var.ipa
+echo hzmj_com_$var.ipa
