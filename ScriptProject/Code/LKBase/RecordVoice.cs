@@ -1,40 +1,58 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.IO;
 using System.Text;
 using UnityEngine;
 
-public class RecordVoice : MonoBehaviour
+public class RecordVoice : Singleton<RecordVoice>
 {
 	private List<float> data2 = new List<float>();
 	private const int HEADER_SIZE = 44;
 	private AudioClip voice;
 	public string mfilename;
-	public static RecordVoice instance;
 	private float[] data;
-
-	private void Start()
-	{
-		RecordVoice.instance = this;
-	}
+	private int audioLength;//录音的长度，单位为秒，ui上可能需要显示 
+							//通常的无损音质的采样率是44100，即每秒音频用44100个float数据表示，但是语音只需8000（通常移动电话是8000）就够了  
+							//不然音频数据太大，不利于传输和存储  
+	public const int SamplingRate = 10000;
 
 	public void StartRecord()
 	{
-		this.voice = Microphone.Start(Microphone.devices[0], false, 20, 10000);
-	}
+		if (Microphone.devices.Length == 0)
+		{
+			UnityEngine.Debug.LogError("Microphone.devices is null");
+			return;
+		}
 
-	public void Stop()
-	{
 		Microphone.End(Microphone.devices[0]);
+		audioLength = 20;
+		this.voice = Microphone.Start(Microphone.devices[0], false, audioLength, SamplingRate);
 	}
 
-	public void EndRecord(int roomId)
+	public void EndRecord(int roomId, int roleId)
 	{
+		if (Microphone.devices.Length == 0)
+		{
+			UnityEngine.Debug.LogError("Microphone.devices is null");
+			return;
+		}
+
+		int lastPos = Microphone.GetPosition(Microphone.devices[0]);
+		if (Microphone.IsRecording(Microphone.devices[0])) //录音小于20秒 
+		{
+			audioLength = lastPos / SamplingRate;//录音时长  
+		}
+
+		Microphone.End(Microphone.devices[0]);
+		if (audioLength < 1.0f) //录音小于1秒就不处理了
+		{
+			return;
+		}
+
 		DateTime now = DateTime.Now;
-		this.mfilename = now.Year.ToString() + string.Empty + (object)now.Month + string.Empty + (object)now.Day + string.Empty + (object)now.Hour + string.Empty + (object)now.Minute + string.Empty + (object)now.Second + string.Empty + (object)now.Millisecond + roomId;
-		Microphone.End(Microphone.devices[0]);
+		this.mfilename = roomId + "_" + roleId + "_" + now.Year.ToString() + string.Empty + now.Month + string.Empty + now.Day + string.Empty +
+			now.Hour + string.Empty + now.Minute + string.Empty + now.Second + string.Empty + now.Millisecond;
 		this.voice.name = this.mfilename;
 		this.data = new float[200000];
 		this.voice.GetData(this.data, 0);
@@ -44,31 +62,29 @@ public class RecordVoice : MonoBehaviour
 			if ((double)this.data[index] != 0.0)
 				this.data2.Add(this.data[index]);
 		}
+		UnityEngine.Debug.Log("count: " + data2.Count + ", length: " + audioLength + ", cliplength: " + voice.length);
 		AudioClip clip = AudioClip.Create(this.mfilename, this.data2.Count, 1, 10000, false);
 		clip.SetData(this.data2.ToArray(), 0);
-		if (RecordVoice.Save(this.mfilename + ".wav", clip))
-			StartCoroutine(this.UpLoad(File.ReadAllBytes(Application.persistentDataPath + "/" + this.mfilename + ".wav"), this.mfilename + ".wav"));
-		//Voice.Add(clip, MJPlayers.desk.yourSeat);
+		if (RecordVoice.instance.Save(this.mfilename + ".wav", clip))
+		{
+			//StartCoroutine(this.UpLoad(File.ReadAllBytes(Application.persistentDataPath + "/" + this.mfilename + ".wav"), this.mfilename + ".wav"));
+		}
 	}
 
-	private void Update()
-	{
-	}
-
-	public static bool Save(string filename, AudioClip clip)
+	public bool Save(string filename, AudioClip clip)
 	{
 		string str = Path.Combine(Application.persistentDataPath, filename);
-		Debug.Log("voice filename: " + str);
+		UnityEngine.Debug.Log("voice filename: " + str);
 		Directory.CreateDirectory(Path.GetDirectoryName(str));
-		using (FileStream empty = RecordVoice.CreateEmpty(str))
+		using (FileStream empty = RecordVoice.instance.CreateEmpty(str))
 		{
-			RecordVoice.ConvertAndWrite(empty, clip);
-			RecordVoice.WriteHeader(empty, clip);
+			RecordVoice.instance.ConvertAndWrite(empty, clip);
+			RecordVoice.instance.WriteHeader(empty, clip);
 		}
 		return true;
 	}
 
-	private static void WriteHeader(FileStream fileStream, AudioClip clip)
+	private void WriteHeader(FileStream fileStream, AudioClip clip)
 	{
 		int frequency = clip.frequency;
 		int channels = clip.channels;
@@ -102,7 +118,7 @@ public class RecordVoice : MonoBehaviour
 		fileStream.Write(bytes12, 0, 4);
 	}
 
-	private static FileStream CreateEmpty(string filepath)
+	private FileStream CreateEmpty(string filepath)
 	{
 		if (File.Exists(filepath))
 			File.Delete(filepath);
@@ -113,7 +129,7 @@ public class RecordVoice : MonoBehaviour
 		return fileStream;
 	}
 
-	private static void ConvertAndWrite(FileStream fileStream, AudioClip clip)
+	private void ConvertAndWrite(FileStream fileStream, AudioClip clip)
 	{
 		float[] data = new float[clip.samples];
 		clip.GetData(data, 0);
@@ -136,14 +152,14 @@ public class RecordVoice : MonoBehaviour
 		yield return null;
 	}
 
-	public static void DownLoad(string url, int seat)
+	public void DownLoad(string url, int seat)
 	{
-		RecordVoice.instance.StartCoroutine(RecordVoice.instance.DownloadVoice(url, seat));
+		//RecordVoice.instance.StartCoroutine(RecordVoice.instance.DownloadVoice(url, seat));
 	}
 
 
 	public IEnumerator DownloadVoice(string url, int seat)
 	{
-		yield return null;	
+		yield return null;
 	}
 }
