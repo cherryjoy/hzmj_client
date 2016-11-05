@@ -284,6 +284,7 @@
     <Compile Include="Code\LKBase\TextureMgr.cs" />
     <Compile Include="Code\LKBase\Timer.cs" />
     <Compile Include="Code\LKBase\NGUI\Scripts\UI\UILineFlowLayout .cs" />
+    <Compile Include="Code\LKBase\RecordVoice.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
