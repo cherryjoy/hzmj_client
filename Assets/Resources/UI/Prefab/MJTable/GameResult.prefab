@@ -112,9 +112,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 481934}
-  - 114: {fileID: 11412020}
+  - 65: {fileID: 6542904}
+  - 114: {fileID: 11462866}
   m_Layer: 8
-  m_Name: test
+  m_Name: Mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -319,6 +320,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 200, y: 80, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &6542904
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 148712}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 1}
 --- !u!65 &6563020
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -331,27 +344,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 200, y: 80, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &11412020
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 148712}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1019752268, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  changeFlag: 1
-  mMat: {fileID: 0}
-  mColor: {r: 1, g: 1, b: 1, a: 1}
-  mPivot: 4
-  mWidth: 1136
-  mHeight: 640
-  mDepth: -1
-  mIsHidePanel: 0
-  UVOffset: {x: 0, y: 0, z: 0, w: 0}
-  MaterialPath: 
 --- !u!114 &11424354
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -497,6 +489,24 @@ MonoBehaviour:
     e32: 0
     e33: 1
   ChangeMtl: 0
+--- !u!114 &11462866
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 148712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1143446969, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiRoot: {fileID: 0}
+  uiCamera: {fileID: 0}
+  direcion: 2
+  scaleRate: {x: 1, y: 1}
+  offset: {x: 0, y: 0}
+  WhatToScale: 1
+  keepRate: 0
 --- !u!114 &11472206
 MonoBehaviour:
   m_ObjectHideFlags: 1
