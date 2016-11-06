@@ -117,6 +117,7 @@ function LoginController:Init()
         serverList = GameDefine_outside_serverlist_url
     end
     serverList = serverList .. "?id=" .. LuaLong.ToString(LuaDateTime.Ticks_Now())
+    LuaDebug.Log("serverList: "..serverList)
     if serverList ~= nil or serverList ~="" then
         self.ClientInitCtr:StartDownload(serverList,"SeverListDownloadSuccss","SeverListDownloadFail")
         self.downloadTimer = Timer.NewEvent(self,50,50,LoginController.DownLoadOverTime)
