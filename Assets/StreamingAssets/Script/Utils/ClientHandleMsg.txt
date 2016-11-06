@@ -51,8 +51,8 @@ HandleFuncs[enumMSGID_MODULE_05.ID_ROLE_RES] = function(data, dataLength)
     Client.LoginSuccess:Do()
 
     -- 如果上次是在房间中退出的，则加入房间
-    if pbMsg.room_pass ~= nil then
-        ClientSendMsg.SendEnterRoom(Client.RoleInfo.RoleID, pbMsg.room_pass)
+    if Client.RoleInfo.room_pass ~= nil then
+        ClientSendMsg.SendEnterRoom(Client.RoleInfo.RoleID, Client.RoleInfo.room_pass)
     end
 end
 
@@ -131,21 +131,6 @@ HandleFuncs[enumMSGID_MODULE_05.ID_GAME_ROOM_CREATE_RES] = function(data, dataLe
     local data = LuaProto.deserialize(PBMsgCreateRoomRes, data, dataLength)
 
     LuaDebug.Log("passwd: "..data.passwd..", amount: "..data.amount..", horse: "..data.horse..", add: "..data.addition)
-    --[[
-    if LuaUIViewCtr.UIPanel["MJTableUI"] == nil then
-        local ref = LuaUIViewCtr.OpenUIHasBg("MJTable/MJTable")
-        --data.addition
-        local roleList = {}
-        local info = {}
-        info.rolename = "111111"
-        info.integral = 0
-        info.host = 1
-        info.makers = 1
-        table.insert(roleList, info)
-        ref.Init(ref, data.passwd, data.amount, data.horse, 5, 0, roleList)
-        LuaUIViewCtr.UIPanel["MJTableUI"] = ref
-    end
-    --]]
     ClientSendMsg.SendEnterRoom(Client.RoleInfo.RoleID, data.passwd)
 end
 
@@ -197,9 +182,8 @@ HandleFuncs[enumMSGID_MODULE_05.ID_GAME_DELETE_ROOM_RES] = function(data, dataLe
     LuaDebug.Log("result: "..data.result)
 
     LuaUIViewCtr.UIPanel["MainUI"].gameObject:SetActive(true)
-
-    LuaUIViewCtr.UIPanel["MJTableUI"].gameObject:Destroy1()
-    LuaUIViewCtr.UIPanel["MJTableUI"] = nil
+    LuaUIViewCtr.UIPanel["MJTableUI"].DeleteTable(LuaUIViewCtr.UIPanel["MJTableUI"], data.roleid)
+    Client.TableClose:Do()
 end
 
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_PLAY_CARD_RES] = function(data, dataLength)
@@ -255,4 +239,10 @@ HandleFuncs[enumMSGID_MODULE_05.ID_GAME_BALANCE_RES] = function(data, dataLength
     local data = LuaProto.deserialize(PBMsgGameBalanceRes, data, dataLength)
 
     LuaUIViewCtr.UIPanel["MJTableUI"].HandleGameBalance(LuaUIViewCtr.UIPanel["MJTableUI"], data.balances)
+end
+
+HandleFuncs[enumMSGID_MODULE_05.ID_GAME_REENTER_STATE_SYNC] = function(data, dataLength)
+    local data = LuaProto.deserialize(PBMsgGameReenterStateSync, data, dataLength)
+
+    LuaUIViewCtr.UIPanel["MJTableUI"].HandleGameReenterStateSync(LuaUIViewCtr.UIPanel["MJTableUI"], data)
 end

@@ -3,6 +3,8 @@ MainUICtrl = {}
 function MainUICtrl:Start()
     local mt=TextureMgr.get_Instance():LoadTexture("Home/hallBg")
     self.Texture:set_material(mt)
+
+    Client.TableClose = Client.TableClose + {self, MainUICtrl.TableClose}
 end
 
 function MainUICtrl:Init(name, id, cardNum, imageUrl)
@@ -11,6 +13,8 @@ function MainUICtrl:Init(name, id, cardNum, imageUrl)
     self.Card:set_text(string.format(Text.RoleCardNum, tostring(cardNum)))
 
     LuaUIViewCtr.FlushPortraitInfo("Home/homeHeadCusPic", imageUrl, self.Icon)
+
+    Client.TableClose = Client.TableClose - {self, MainUICtrl.TableClose}
 end
 
 function MainUICtrl:OnDestroy()
@@ -37,4 +41,8 @@ end
 
 function MainUICtrl:CreateRoom_OnClick()
     local ref = LuaUIViewCtr.OpenUIHasBg("Home/CreateRoom")
+end
+
+function MainUICtrl:TableClose()
+    self.gameObject:SetActive(true)
 end

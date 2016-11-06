@@ -1,4 +1,4 @@
---require "Utils/ColorFilter"
+require "Utils/ColorFilter"
 --require "Utils/GlobalEnum"
 Text = {
     SDCardNotFound = "未检测到SD卡，请插入SD卡后重试",
@@ -105,6 +105,7 @@ Text = {
     BalanceRoleId = "ID:%d",
     InviteTitle = "红中麻将房间号【%d】",
     InviteContext = "我在[樱桃红中麻将]开了%d局，%d个码，%d倍的房间，快来一起玩吧",
+    TableDelete = "["..ColorFilter.Color_51BF53.."]房间【%d】[-]被["..ColorFilter.Color_51BF53.."]【%s】[-]删除了",
 }
 
 TextSever = {

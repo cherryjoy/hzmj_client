@@ -31,31 +31,20 @@ function TableBottom:CardInfoSync(handcard)
     local handCardNum = #handcard
     for i = 1, handCardNum do
         local card = handcard[i]
-        LuaDebug.Log("card.type_id: "..card.type_id..", card.code_id: "..card.code_id)
+        --LuaDebug.Log("card.type_id: "..card.type_id..", card.code_id: "..card.code_id)
         local ref = nil
         if i == 14 then
-            ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCard",self.CardNew)
-            ref.gameObject:set_name("MyCard")
-            ref.Message:target(ref.gameObject)
+            MJTableCtrl.HandleGetCard(LuaUIViewCtr.UIPanel["MJTableUI"], self.roleId, card)
         else
             ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCard",self.Grid:get_gameObject())
             ref.gameObject:set_name("MyCard")
             ref.Message:target(ref.gameObject)
-        end
-
-        self.handCard[i] = ref
-
-        ref.Init(ref, card, i)
-
-        if i == 14 then
-            ref.Shinning:set_enabled(true)
-            ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(768, 0, 0))
-
-            self.CanPlayCard = true
+            self.handCard[i] = ref
+            ref.Init(ref, card, i)
         end
     end
 
-    self.Grid:Reposition()
+    TableBottom.SetHeadCardPosition(self)
 end
 
 function TableBottom:LeftCardSync(owncards)
@@ -100,6 +89,14 @@ function TableBottom:LeftCardSync(owncards)
     end
 
     self.LeftCardGrid:Reposition()
+end
+
+function TableBottom:PlayCardSync(cards)
+    for i = 1, #cards do
+        TableBottom.SetPlayCard(self, cards[i])
+    end
+
+    self.PlayedCardsGrid:Reposition()
 end
 
 function TableBottom:SetLeftCard(card)
@@ -150,9 +147,7 @@ function TableBottom:HandlePlayCard(i, card)
     end
 end
 
-function TableBottom:PlayCardEnd(i)
-    local card = self.handCard[i].card
-
+function TableBottom:SetPlayCard(card)
     local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/PlayCard",self.PlayedCardsGrid:get_gameObject())
     if self.PlayNum > 7 then
         ref.Card:set_depth(5)
@@ -162,9 +157,16 @@ function TableBottom:PlayCardEnd(i)
     local spriteName = MJTableCtrl.GetLeftCardSprite(card)
     ref.Card:set_spriteName(spriteName)
     ref.Card:MakePixelPerfectWithSizeInAtlas()
+    self.PlayNum = self.PlayNum + 1
+
+    return ref
+end
+
+function TableBottom:PlayCardEnd(i)
+    local card = self.handCard[i].card
+    local ref = TableBottom.SetPlayCard(self, card)
 
     self.PlayedCardsGrid:Reposition()
-
     self.toward:get_transform():SetParent(ref.Card:get_transform())
     self.toward:get_transform():set_localPosition(LuaVector3.Create(0, 0, 0))
 
@@ -180,7 +182,7 @@ function TableBottom:PlayCardEnd(i)
         self.handCard[handCardNum].gameObject:Destroy1()
         self.handCard[handCardNum] = nil
     end
-    self.PlayNum = self.PlayNum + 1
+
     self.lastCard = ref
 end
 
@@ -283,14 +285,21 @@ function TableBottom:HandlePengCard(card, srcRoleId)
     TableBottom.SortCard(self)
 
     -- 设置位置，重新组牌
-    local num = #(self.handCard)
-    LuaDebug.Log("PengCard handCard num: "..num)
-    local oldPos = self.Grid:get_transform():get_localPosition()
-    local posX = (13 - num)*58 -348
-    self.Grid:get_transform():set_localPosition(LuaVector3.Create(posX, oldPos:y(), oldPos:z()))
-    self.Grid:Reposition()
+    TableBottom.SetHeadCardPosition(self)
 
     return index
+end
+
+function TableBottom:SetHeadCardPosition()
+    local num = #(self.handCard)
+    LuaDebug.Log("handCard num: "..num)
+    local oldPos = self.Grid:get_transform():get_localPosition()
+    local posX = (13 - num)*58 -348
+    if posX < -348 then
+        posX = -348
+    end
+    self.Grid:get_transform():set_localPosition(LuaVector3.Create(posX, oldPos:y(), oldPos:z()))
+    self.Grid:Reposition()
 end
 
 function TableBottom:HandleGangCard(card, srcRoleId, gangType)
@@ -461,7 +470,7 @@ function TableBottom:TableClear()
 
     self.TingCard:SetActive(false)
 
-    self.Grid:get_transform():set_localPosition(LuaVector3.Create(-348, -230, 0))
+    --self.Grid:get_transform():set_localPosition(LuaVector3.Create(-348, -230, 0))
 end
 
 function TableBottom:IsHuPai(card)

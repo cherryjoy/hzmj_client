@@ -4,15 +4,23 @@ function MJTableCtrl:Start( )
     local mt=TextureMgr.get_Instance():LoadTexture("MJTable/MJTable", true)
     self.Texture:set_material(mt)
 
+    if Application.get_platform()==ERuntimePlatform.WindowsPlayer or Application.get_platform()==ERuntimePlatform.WindowsEditor then
+        if self.DebugWin ~= nil then
+            self.DebugWin:SetActive(true)
+        end
+    end
+
     Client.BottomPlayCard = Client.BottomPlayCard + {self, MJTableCtrl.HandlePlayCard}
     Client.ResetToward = Client.ResetToward + {self, MJTableCtrl.ResetToward}
     Client.TableClear = Client.TableClear + {self, MJTableCtrl.TableClear}
+    Client.TableClose = Client.TableClose + {self, MJTableCtrl.TableClose}
 end
 
 function MJTableCtrl:OnDestroy( )
     Client.BottomPlayCard = Client.BottomPlayCard - {self, MJTableCtrl.HandlePlayCard}
     Client.ResetToward = Client.ResetToward - {self, MJTableCtrl.ResetToward}
     Client.TableClear = Client.TableClear - {self, MJTableCtrl.TableClear}
+    Client.TableClose = Client.TableClose - {self, MJTableCtrl.TableClose}
 end
 
 function MJTableCtrl:Init(passwd, horse, beishu, rolelist)
@@ -39,10 +47,10 @@ end
 function MJTableCtrl:EnterRoomSync(rolelist)
     LuaDebug.Log("rolelist: "..#rolelist)
     for i = 1, #rolelist do
-        LuaDebug.Log("roleList[i].roleid: "..rolelist[i].roleid)
-        LuaDebug.Log("roleList[i].direct: "..rolelist[i].direct)
-        LuaDebug.Log("roleList[i].rolename: "..rolelist[i].rolename)
-        LuaDebug.Log("roleList[i].integral: "..rolelist[i].integral)
+        --LuaDebug.Log("roleList[i].roleid: "..rolelist[i].roleid)
+        --LuaDebug.Log("roleList[i].direct: "..rolelist[i].direct)
+        --LuaDebug.Log("roleList[i].rolename: "..rolelist[i].rolename)
+        --LuaDebug.Log("roleList[i].integral: "..rolelist[i].integral)
     end
 
     MJTableCtrl.InitRoleList(self, self.myDirect, rolelist)
@@ -72,6 +80,20 @@ function MJTableCtrl:CardInfoSync(cardInfo)
                 LuaDebug.Log("drect "..j.." : "..cardInfo.othercards[i].handnum)
                 Client.RoleInfo.RestCard = Client.RoleInfo.RestCard - cardInfo.othercards[i].handnum
                 self["Drect"..j].CardInfoSync(self["Drect"..j], cardInfo.othercards[i].handnum)
+                self["Drect"..j].LeftCardSync(self["Drect"..j], cardInfo.othercards[i])
+            end
+        end
+    end
+
+    -- 同步桌上的牌
+    if cardInfo.tablecards ~= nil then
+        LuaDebug.Log("#(cardInfo.tablecards): "..#(cardInfo.tablecards))
+        for i = 1, #(cardInfo.tablecards) do
+            for j = 1, 4 do
+                if self["Drect"..j].roleId == cardInfo.tablecards[i].roleid then
+                    LuaDebug.Log("drect "..j.." : "..#(cardInfo.tablecards[i].cards))
+                    self["Drect"..j].PlayCardSync(self["Drect"..j], cardInfo.tablecards[i].cards)
+                end
             end
         end
     end
@@ -183,43 +205,45 @@ function MJTableCtrl:GameReady(roleStateList)
     end
 end
 
+function MJTableCtrl:IsPengGang(roleId, card)
+    local peng = self.Drect1.IsPengCard(self.Drect1, card)
+    local gangType = self.Drect1.IsGangMPlayCard(self.Drect1, card)
+    LuaDebug.Log("peng: "..tostring(peng)..", gangType: "..tostring(gangType))
+    if peng or gangType then
+        self.ResultCard:SetActive(true)
+        if gangType then
+            self.Gang:SetActive(true)
+            self.Peng:SetActive(true)
+            self.Win:SetActive(false)
+            self.tempGangType = gangType
+        else
+            self.Gang:SetActive(false)
+        end
+
+        if peng then
+            self.Peng:SetActive(true)
+            self.Win:SetActive(false)
+        end
+
+        self.tempCard = card
+        self.tempRoleId = roleId
+    end
+end
+
 function MJTableCtrl:HandlePlayCard(roleId, index, card, result)
     if roleId == self.Drect1.roleId and result ~= nil then
         return
     end
 
     LuaDebug.Log("roleId: "..roleId..", play card, type: "..card.type_id..", id: "..card.code_id)
-
     -- 播放出牌
     NGUITools.PlaySoundByPath("Music/Card/"..Client.RoleInfo.sex..card.type_id..card.code_id)
 
     self.TowardCard:SetActive(true)
-
     MJTableCtrl.DoCountDownFinish(self)
     -- 判断当前的牌是否能碰、杠
     if result ~= nil and result ~= 0 then
-        local peng = self.Drect1.IsPengCard(self.Drect1, card)
-        local gangType = self.Drect1.IsGangMPlayCard(self.Drect1, card)
-        LuaDebug.Log("peng: "..tostring(peng)..", gangType: "..tostring(gangType))
-        if peng or gangType then
-            self.ResultCard:SetActive(true)
-            if gangType then
-                self.Gang:SetActive(true)
-                self.Peng:SetActive(true)
-                self.Win:SetActive(false)
-                self.tempGangType = gangType
-            else
-                self.Gang:SetActive(false)
-            end
-
-            if peng then
-                self.Peng:SetActive(true)
-                self.Win:SetActive(false)
-            end
-
-            self.tempCard = card
-            self.tempRoleId = roleId
-        end
+        MJTableCtrl.IsPengGang(roleId, card)
     end
 
     for i = 1, 4 do
@@ -336,96 +360,6 @@ function MJTableCtrl:Win_OnClick()
     end
     self.Drect1.HandleTingCard(self.Drect1, cards)
     --]]
-    --[[
-    local info = {}
-    info.roleid = 1000006
-    info.win_count = 3
-    info.score = 88
-    info.gangm = 2
-    info.ganga = 5
-    info.gangg = 8
-    info.code_count = 9
-
-    local balances = {}
-    balances[1] = info
-    balances[2] = info
-    balances[3] = info
-    balances[4] = info
-
-    local ref = LuaUIViewCtr.OpenUINotLose("MJTable/GameBalance")
-    ref.Init(ref, balances, self.roleList, self)
-    --]]
-    --[[
-    local data = {}
-    data.roleid = 1000006
-    local card = {}
-    card.type_id = 2
-    card.code_id = 8
-    data.win_card = card
-
-    local roleCard = {}
-    roleCard.roleid = 1000006
-    roleCard.score = 99
-    roleCard.hand_cards = {}
-    roleCard.hand_cards[1] = card
-    roleCard.hand_cards[2] = card
-    roleCard.hand_cards[3] = card
-    roleCard.hand_cards[4] = card
-    roleCard.hand_cards[5] = card
-    roleCard.peng_cards = {}
-    roleCard.peng_cards[1] = card
-    roleCard.gangm_cards = {}
-    roleCard.gangm_cards[1] = card
-
-    local roleCard = {}
-    roleCard.roleid = 1000006
-    roleCard.score = 99
-    roleCard.hand_cards = {}
-    roleCard.hand_cards[1] = card
-    roleCard.hand_cards[2] = card
-    roleCard.hand_cards[3] = card
-    roleCard.hand_cards[4] = card
-    roleCard.hand_cards[5] = card
-    roleCard.peng_cards = {}
-    roleCard.peng_cards[1] = card
-    roleCard.gangm_cards = {}
-    roleCard.gangm_cards[1] = card
-
-    local roleCard2 = {}
-    roleCard2.roleid = 1
-    roleCard2.score = 99
-    roleCard2.hand_cards = {}
-    roleCard2.hand_cards[1] = card
-    roleCard2.hand_cards[2] = card
-    roleCard2.hand_cards[3] = card
-    roleCard2.hand_cards[4] = card
-    roleCard2.hand_cards[5] = card
-    roleCard2.peng_cards = {}
-    roleCard2.peng_cards[1] = card
-    roleCard2.gangm_cards = {}
-    roleCard2.gangm_cards[1] = card
-
-    data.role_cards = {}
-    data.role_cards[1] = roleCard
-    data.role_cards[2] = roleCard2
-    data.role_cards[3] = roleCard2
-    data.role_cards[4] = roleCard2
-
-    data.rest_cards = {}
-    data.rest_cards[1] = card
-    data.rest_cards[2] = card
-    data.rest_cards[3] = card
-    data.rest_cards[4] = card
-
-    data.code_cards = {}
-    data.code_cards[1] = card
-    data.code_cards[2] = card
-    data.code_cards[3] = card
-    data.code_cards[4] = card
-
-    local ref = LuaUIViewCtr.OpenUINotLose("MJTable/GameResult")
-    ref.Init(ref, data, self.roleList)
-    --]]
 end
 
 function MJTableCtrl:HandlePengCard(roleId, index, card, srcRoleId)
@@ -493,8 +427,9 @@ function MJTableCtrl:ResetToward()
     self.TowardCard:SetActive(false)
 end
 
-function MJTableCtrl:CloseTable()
+function MJTableCtrl:TableClose()
     self.gameObject:Destroy1()
+    LuaUIViewCtr.UIPanel["MJTableUI"] = nil
 end
 
 function MJTableCtrl:HandleTingCard(cards)
@@ -546,7 +481,7 @@ end
 
 function MJTableCtrl:HandleGameBalance(balances)
     local ref = LuaUIViewCtr.OpenUINotLose("MJTable/GameBalance")
-    ref.Init(ref, balances, self.roleList, self)
+    ref.Init(ref, balances, self.roleList)
 end
 
 function MJTableCtrl.GetRoleInfo(roleId, roleList)
@@ -563,4 +498,29 @@ function MJTableCtrl:Invite_OnClick()
     local title = string.format(Text.InviteTitle, self.roomId)
     local desc = string.format(Text.InviteContext, Client.RoleInfo.Amount, self.horse, self.beishu)
     PlatformHandler.CallShare(title, desc, GameDefine_InvitewebPage, "")
+end
+
+function MJTableCtrl:HandleGameReenterStateSync(data)
+    LuaDebug.Log("state: "..data.state..", type_id: "..data.card.type_id..", code_id"..data.card.code_id..", roleId: "..tostring(data.roleid))
+    if data.state == 0 then --0: 最后一次发给我的牌，1: 最后一次打的牌
+        MJTableCtrl.HandleGetCard(self, Client.RoleInfo.RoleID, data.card)
+    else
+        --MJTableCtrl.HandlePlayCard(self, data.roleid, 1, data.card, 1)
+        -- 判断当前的牌是否能碰、杠
+        MJTableCtrl.IsPengGang(data.roleid, data.card)
+    end
+end
+
+function MJTableCtrl:DeleteTable(roleId)
+    local roleName  = ""
+    for i = 1, #(self.roleList) do
+        if self.roleList[i].roleid == roleId then
+            roleName = self.roleList[i].rolename
+            break
+        end
+    end
+
+    -- 删除房间的提示信息
+    local str = string.format(Text.TableDelete, self.roomId, roleName)
+    local ref = LuaMessageBox.ShowSingle(str, nil, Text.Confirm, self)
 end

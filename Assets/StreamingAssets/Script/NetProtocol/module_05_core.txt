@@ -35,6 +35,7 @@ enumMSGID_MODULE_05 = {
 	ID_GAME_BALANCE_RES = 1314,
 	ID_CLIENT_AUTO_CLOSE_SOCKET_NOTICE = 1315,
 	ID_SERVER_AUTO_CLOSE_SOCKET_NOTICE = 1316,
+	ID_GAME_REENTER_STATE_SYNC = 1318,
 	ID_MODULE_05_END = 1535,
 }
 
@@ -3621,11 +3622,14 @@ function PBMsgGameDeleteRoomRes.DeSerialize(obj)
 	if(has_optional_flag(0,optionLength,option)) then
 		obj.result = deserialize_int32()
 	end
+	if(has_optional_flag(1,optionLength,option)) then
+		obj.roleid = deserialize_int32()
+	end
 	return obj
 end
 
 function PBMsgGameDeleteRoomRes.Serialize(obj)
-	local fieldCount = 1
+	local fieldCount = 2
 	serialize_int32(fieldCount)
 	local flag = {}
 	if(obj.result ~= nil) then
@@ -3633,15 +3637,26 @@ function PBMsgGameDeleteRoomRes.Serialize(obj)
 	else
 		flag[1] = false
 	end
+	if(obj.roleid ~= nil) then
+		flag[2] = true
+	else
+		flag[2] = false
+	end
 	serialize_optional(flag)
 	if(obj.result ~= nil) then
 		serialize_int32(obj.result)
+	end
+	if(obj.roleid ~= nil) then
+		serialize_int32(obj.roleid)
 	end
 end
 
 function PBMsgGameDeleteRoomRes.GetSize(obj)
 	local size = 0
 	if (obj.result ~= nil) then
+		size = size + 4
+	end
+	if (obj.roleid ~= nil) then
 		size = size + 4
 	end
 	size = size + 6
@@ -4234,6 +4249,86 @@ function PBMsgServerAutoCloseSocketNotice.GetSize(obj)
 		size = size + 4
 	end
 	size = size + 6
+	return size
+end
+
+-- PBMsgGameReenterStateSync
+PBMsgGameReenterStateSync = {}
+PBMsgGameReenterStateSync.__index = PBMsgGameReenterStateSync
+function PBMsgGameReenterStateSync.Create()
+	local obj = setmetatable({},PBMsgGameReenterStateSync)
+	return obj
+end
+
+function PBMsgGameReenterStateSync.DeSerialize(obj)
+	local fieldCount = deserialize_int32()
+	local option,optionLength = deserialize_optional()
+	if(has_optional_flag(0,optionLength,option)) then
+		obj.state = deserialize_int32()
+	end
+	if(has_optional_flag(1,optionLength,option)) then
+		obj.roleid = deserialize_int32()
+	end
+	if(has_optional_flag(2,optionLength,option)) then
+		local cardSize = deserialize_data_length()
+		local cardStartPos = get_position()
+		obj.card = PBCard.Create()
+		obj.card = obj.card:DeSerialize()
+		set_position(cardSize+cardStartPos )
+	end
+	return obj
+end
+
+function PBMsgGameReenterStateSync.Serialize(obj)
+	local fieldCount = 3
+	serialize_int32(fieldCount)
+	local flag = {}
+	if(obj.state ~= nil) then
+		flag[1] = true
+	else
+		flag[1] = false
+	end
+	if(obj.roleid ~= nil) then
+		flag[2] = true
+	else
+		flag[2] = false
+	end
+	if(obj.card ~= nil) then
+		flag[3] = true
+	else
+		flag[3] = false
+	end
+	serialize_optional(flag)
+	if(obj.state ~= nil) then
+		serialize_int32(obj.state)
+	end
+	if(obj.roleid ~= nil) then
+		serialize_int32(obj.roleid)
+	end
+	if(obj.card ~= nil) then
+		local WaitPos = get_position()
+	set_position(WaitPos+4)
+	obj.card:Serialize()
+	local MaxPosNow = get_position()
+	local RealSize = MaxPosNow-(WaitPos+4)
+	set_position(WaitPos)
+	serialize_data_length(RealSize)
+	set_position(MaxPosNow)
+	end
+end
+
+function PBMsgGameReenterStateSync.GetSize(obj)
+	local size = 0
+	if (obj.state ~= nil) then
+		size = size + 4
+	end
+	if (obj.roleid ~= nil) then
+		size = size + 4
+	end
+	if (obj.card ~= nil) then
+		size = size + obj.card:GetSize()
+	end
+	size = size + 11
 	return size
 end
 

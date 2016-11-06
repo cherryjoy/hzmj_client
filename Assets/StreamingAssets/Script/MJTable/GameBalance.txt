@@ -1,14 +1,14 @@
 GameBalance = {}
 
 function GameBalance:Start( )
-
+    Client.TableClose = Client.TableClose + {self, GameBalance.TableClose}
 end
 
 function GameBalance:OnDestroy( )
-
+    Client.TableClose = Client.TableClose - {self, GameBalance.TableClose}
 end
 
-function GameBalance:Init(balances, roleList, tableCtrl)
+function GameBalance:Init(balances, roleList)
     for i = 1, #balances do
         local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/RoleBalance",self.ScoreListGrid:get_gameObject())
         local roleInfo = MJTableCtrl.GetRoleInfo(balances[i].roleid, roleList)
@@ -22,13 +22,10 @@ function GameBalance:Init(balances, roleList, tableCtrl)
             ref.Background:set_color(LuaColor.Get(1,0,0,1))
         end
     end
-
-    self.tableCtrl = tableCtrl
 end
 
 function GameBalance:ReturnHall_OnClick()
-    tableCtrl.CloseTable(tableCtrl)
-    self.gameObject:Destroy1()
+    Client.TableClose:Do()
 end
 
 function GameBalance:Share_OnClick()
@@ -45,4 +42,8 @@ function GameBalance.GetRoleIdOfMaxNum(balances)
     end
 
     return balances[index].roleid
+end
+
+function GameBalance:TableClose()
+    self.gameObject:Destroy1()
 end

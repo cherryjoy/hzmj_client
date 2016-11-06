@@ -1,11 +1,11 @@
 GameResult = {}
 
 function GameResult:Start( )
-
+    Client.TableClose = Client.TableClose + {self, GameResult.TableClose}
 end
 
 function GameResult:OnDestroy( )
-
+    Client.TableClose = Client.TableClose - {self, GameResult.TableClose}
 end
 
 function GameResult:Init(data, roleList)
@@ -71,4 +71,8 @@ end
 
 function GameResult:Share_OnClick()
     PlatformHandler.CallShare("", "", "", "screenshot.png")
+end
+
+function GameResult:TableClose()
+    self.gameObject:Destroy1()
 end

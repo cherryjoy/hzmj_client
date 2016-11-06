@@ -18,10 +18,14 @@ end
 
 function TableTop:CardInfoSync(handnum)
     for i = 1, handnum do
-        local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/TopCard",self.Grid:get_gameObject())
-        --ref.Back:set_depth(i + 2)
-        ref.gameObject:set_name("TopCard")
-        self.handCard[i] = ref
+        if i == 14 then
+            MJTableCtrl.HandleGetCard(LuaUIViewCtr.UIPanel["MJTableUI"], self.roleId, nil)
+        else
+            local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/TopCard",self.Grid:get_gameObject())
+            --ref.Back:set_depth(i + 2)
+            ref.gameObject:set_name("TopCard")
+            self.handCard[i] = ref
+        end
     end
 
     self.Grid:Reposition()
@@ -68,6 +72,12 @@ function TableTop:LeftCardSync(owncards)
     TableTop.LeftCardReposition(self)
 end
 
+function TableTop:PlayCardSync(cards)
+    for i = 1, #cards do
+        TableTop.SetPlayCard(self, cards[i])
+    end
+end
+
 function TableTop:SetLeftCard(card)
     LuaDebug.Log("left card, type: "..card.type_id..", id: "..card.code_id)
     local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/TopPengCard",self.LeftCardGrid:get_gameObject())
@@ -85,8 +95,7 @@ function TableTop:LeftCardReposition()
     self.LeftCardGrid:Reposition()
 end
 
-function TableTop:HandlePlayCard(i, card, toward)
-    --LuaDebug.Log("play card, type: "..card.type_id..", id: "..card.code_id)
+function TableTop:SetPlayCard(card)
     local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/TopPlayCard",self.PlayedCardsGrid:get_gameObject())
     local spriteName = MJTableCtrl.GetLeftCardSprite(card)
     ref.Card:set_spriteName(spriteName)
@@ -103,11 +112,18 @@ function TableTop:HandlePlayCard(i, card, toward)
 
     ref.Card:set_depth(ref.Card:get_depth() - row*2)
     ref.Back:set_depth(ref.Back:get_depth() - row*2)
+    self.PlayNum = self.PlayNum + 1
+
+    return ref
+end
+
+function TableTop:HandlePlayCard(i, card, toward)
+    --LuaDebug.Log("play card, type: "..card.type_id..", id: "..card.code_id)
+    local ref = TableTop.SetPlayCard(self, card)
 
     self.toward:get_transform():SetParent(ref.TopPlayCard:get_transform())
     self.toward:get_transform():set_localPosition(LuaVector3.Create(0, 0, 0))
 
-    self.PlayNum = self.PlayNum + 1
     self.lastCard = ref
 
     if self.GetCard:get_activeSelf() then
