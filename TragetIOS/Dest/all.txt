@@ -10,12 +10,9 @@ LuaBehaviour
 LuaBehaviourUpdate
 LuaMessageReceiver
 TableViewController
-TweenColor
 TweenColorAlpha
 TweenPosition
 TweenScale
-TweenTransform
-TweenWorldPosition
 UIAnchor
 UIAtlas
 UIButtonColor

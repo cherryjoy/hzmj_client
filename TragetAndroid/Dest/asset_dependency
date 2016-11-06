@@ -55,11 +55,6 @@ ui/prefab/syssetting_prefab
 	ui/prefab/syssetting/syssettingui|.prefab
 ui/prefab/toolsui/messagebox
 	ui/prefab/toolsui/messagebox|.prefab
-ui/prefab/toolsui_prefab
-	ui/prefab/toolsui/tishicentre|.prefab
-	ui/prefab/toolsui/tooltips|.prefab
-	ui/prefab/toolsui/tooltipsbutton|.prefab
-	ui/prefab/toolsui/upinfoprompt|.prefab
 ui/prefab/tooltips_prefab
 	ui/prefab/tooltips/tooltipblueactionbtn|.prefab
 	ui/prefab/tooltips/tooltiporangeactionbtn|.prefab
