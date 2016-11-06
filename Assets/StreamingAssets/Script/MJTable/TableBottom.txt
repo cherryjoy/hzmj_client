@@ -44,6 +44,7 @@ function TableBottom:CardInfoSync(handcard)
         end
     end
 
+    TableBottom.SortCard(self)
     TableBottom.SetHeadCardPosition(self)
 end
 

@@ -243,7 +243,7 @@ function MJTableCtrl:HandlePlayCard(roleId, index, card, result)
     MJTableCtrl.DoCountDownFinish(self)
     -- 判断当前的牌是否能碰、杠
     if result ~= nil and result ~= 0 then
-        MJTableCtrl.IsPengGang(roleId, card)
+        MJTableCtrl.IsPengGang(self, roleId, card)
     end
 
     for i = 1, 4 do
@@ -507,7 +507,7 @@ function MJTableCtrl:HandleGameReenterStateSync(data)
     else
         --MJTableCtrl.HandlePlayCard(self, data.roleid, 1, data.card, 1)
         -- 判断当前的牌是否能碰、杠
-        MJTableCtrl.IsPengGang(data.roleid, data.card)
+        MJTableCtrl.IsPengGang(self, data.roleid, data.card)
     end
 end
 

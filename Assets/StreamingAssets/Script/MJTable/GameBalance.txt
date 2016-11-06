@@ -38,6 +38,7 @@ function GameBalance.GetRoleIdOfMaxNum(balances)
     for i = 1, #balances do
         if balances[i].score > maxNum then
             index = i
+            maxNum = balances[i].score
         end
     end
 
