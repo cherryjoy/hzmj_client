@@ -6,7 +6,7 @@ using System.IO;
 using UniLua;
 
 
-/// 头像列表下载器;
+/// 头像列表下载器，声音上传下载
 public class WWWPortraitLoader : MonoBehaviour
 {
     public static string generateLocalPath(string wwwUrl)
@@ -97,5 +97,61 @@ public class WWWPortraitLoader : MonoBehaviour
         {
             File.Delete(imagePath);
         }
+    }
+
+    public static void UploadVoice(string strURL, string fileName, byte[] data, string successFuncName, string failFuncName)
+    {
+        GameObject go = new GameObject("WWWPortraitLoader");
+        WWWPortraitLoader loader = go.AddComponent<WWWPortraitLoader>();
+        loader.StartCoroutine(loader.UploadVoicePlus(strURL, fileName, data, successFuncName, failFuncName));
+    }
+
+    private IEnumerator UploadVoicePlus(string url, string fileName, byte[] data, string successFuncName, string failFuncName)
+	{
+        // 向HTTP服务器提交Post数据
+        url = url + "?fileid=" + fileName;
+        WWW www = new WWW(url, data);
+		yield return www;
+        LuaState lua = LuaInstance.instance.Get();
+        if (www.error != null)
+        {
+            Debug.LogWarning("UploadVoice error : " + url);
+            Debug.LogWarning(www.error);
+
+            lua.LuaFuncCall(PlatformSDKController.mSelf.luaPlatformHanderRef, failFuncName, fileName);
+        }
+        else
+        {
+            lua.LuaFuncCall(PlatformSDKController.mSelf.luaPlatformHanderRef, successFuncName, fileName);
+        }
+
+        www.Dispose();
+        Destroy(gameObject);
+	}
+
+    public void DownLoadVoice(string url)
+    {
+        GameObject go = new GameObject("WWWPortraitLoader");
+        WWWPortraitLoader loader = go.AddComponent<WWWPortraitLoader>();
+        loader.StartCoroutine(loader.DownloadVoicePlus(url));
+    }
+
+    private IEnumerator DownloadVoicePlus(string url)
+    {
+        WWW www = new WWW(url);
+        yield return www;
+        if (www.error != null)
+        {
+            Debug.LogWarning("DownLoadVoice error : " + url);
+            Debug.LogWarning(www.error);
+        }
+        else
+        {
+            AudioClip clip = www.GetAudioClip(false, true, AudioType.WAV);
+            NGUITools.PlaySound(clip);
+        }
+        
+        www.Dispose();
+        Destroy(gameObject);
     }
 }

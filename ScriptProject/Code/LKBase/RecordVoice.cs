@@ -30,7 +30,7 @@ public class RecordVoice : Singleton<RecordVoice>
 		this.voice = Microphone.Start(Microphone.devices[0], false, audioLength, SamplingRate);
 	}
 
-	public void EndRecord(int roomId, int roleId)
+	public void EndRecord(int roomId, int roleId, string url, string successFuncName, string failFuncName)
 	{
 		if (Microphone.devices.Length == 0)
 		{
@@ -65,9 +65,11 @@ public class RecordVoice : Singleton<RecordVoice>
 		UnityEngine.Debug.Log("count: " + data2.Count + ", length: " + audioLength + ", cliplength: " + voice.length);
 		AudioClip clip = AudioClip.Create(this.mfilename, this.data2.Count, 1, 10000, false);
 		clip.SetData(this.data2.ToArray(), 0);
-		if (RecordVoice.instance.Save(this.mfilename + ".wav", clip))
+        string fileName = mfilename + ".wav";
+		if (RecordVoice.instance.Save(fileName, clip))
 		{
-			//StartCoroutine(this.UpLoad(File.ReadAllBytes(Application.persistentDataPath + "/" + this.mfilename + ".wav"), this.mfilename + ".wav"));
+            byte[] data = File.ReadAllBytes(Application.persistentDataPath + "/" + fileName);
+            WWWPortraitLoader.UploadVoice(url, fileName, data, successFuncName, failFuncName);
 		}
 	}
 
@@ -142,24 +144,5 @@ public class RecordVoice : Singleton<RecordVoice>
 			BitConverter.GetBytes(numArray1[index]).CopyTo((Array)array, index * 2);
 		}
 		fileStream.Write(array, 0, array.Length);
-	}
-
-
-	public IEnumerator UpLoad(byte[] data, string filename)
-	{
-		//WWW = new WWW("");
-		//yield return WWW;
-		yield return null;
-	}
-
-	public void DownLoad(string url, int seat)
-	{
-		//RecordVoice.instance.StartCoroutine(RecordVoice.instance.DownloadVoice(url, seat));
-	}
-
-
-	public IEnumerator DownloadVoice(string url, int seat)
-	{
-		yield return null;
 	}
 }
