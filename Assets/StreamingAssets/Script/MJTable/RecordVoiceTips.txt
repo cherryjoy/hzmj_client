@@ -1,0 +1,9 @@
+RecordVoiceTips = {}
+
+function RecordVoiceTips:Start( )
+
+end
+
+function RecordVoiceTips:OnDestroy( )
+
+end

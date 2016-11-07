@@ -4970,11 +4970,6 @@ ParamType:     UIWidget   UIWidget
 
 
 Class:   UILabel
-FuncName:   get_pivotOffsetOnGizmos
-ParamType:  NULL
-
-
-Class:   UILabel
 FuncName:   UpdateGeometry
 ParamType:     UnityEngine.Matrix4x4&   System.Boolean
 
@@ -6206,11 +6201,6 @@ ParamType:  NULL
 
 
 Class:   UISprite
-FuncName:   get_pivotOffsetOnGizmos
-ParamType:  NULL
-
-
-Class:   UISprite
 FuncName:   UpdateGeometry
 ParamType:     UnityEngine.Matrix4x4&   System.Boolean
 
@@ -6984,11 +6974,6 @@ ParamType:  NULL
 
 
 Class:   UISlicedSprite
-FuncName:   get_pivotOffsetOnGizmos
-ParamType:  NULL
-
-
-Class:   UISlicedSprite
 FuncName:   UpdateGeometry
 ParamType:     UnityEngine.Matrix4x4&   System.Boolean
 
@@ -7688,11 +7673,6 @@ ParamType:     UIWidget   UIWidget
 
 Class:   UITexture
 FuncName:   MarkAsChanged
-ParamType:  NULL
-
-
-Class:   UITexture
-FuncName:   get_pivotOffsetOnGizmos
 ParamType:  NULL
 
 
@@ -25537,11 +25517,6 @@ ParamType:     System.Boolean
 
 
 Class:   UILineFlowLayout
-FuncName:   get_IsNeedRefresh
-ParamType:  NULL
-
-
-Class:   UILineFlowLayout
 FuncName:   RefreshNow
 ParamType:  NULL
 
@@ -25573,11 +25548,6 @@ ParamType:     UnityEngine.Transform
 
 Class:   UILineFlowLayout
 FuncName:   RemoveAll
-ParamType:  NULL
-
-
-Class:   UILineFlowLayout
-FuncName:   IsChildrenWithSameParent
 ParamType:  NULL
 
 
@@ -26090,11 +26060,6 @@ ParamType:     System.String
 
 
 Class:   MusicManager
-FuncName:   PlayerWinMusic
-ParamType:  NULL
-
-
-Class:   MusicManager
 FuncName:  Static  LoadClip
 ParamType:     System.String
 
@@ -26140,6 +26105,11 @@ PlatformSDKController
 Class:   PlatformSDKController
 FuncName:   Start
 ParamType:  NULL
+
+
+Class:   PlatformSDKController
+FuncName:   ShareScreenShot
+ParamType:     System.String   System.String   System.String   System.String   System.String
 
 
 Class:   PlatformSDKController
@@ -26628,6 +26598,16 @@ ParamType:     System.String   System.String
 Class:   PlatformState
 FuncName:   CJSDKLogin
 ParamType:     System.String   System.String
+
+
+Class:   PlatformState
+FuncName:   CJSDKShare
+ParamType:     System.String   System.String   System.String   System.String   System.String
+
+
+Class:   PlatformState
+FuncName:   SDKShareCallBack
+ParamType:     System.String   System.String   System.String   System.String   System.String
 
 
 Class:   PlatformState
@@ -30100,6 +30080,11 @@ ParamType:  NULL
 
 
 Class:   GameQualityChecker
+FuncName:  Static  ReferenceEquals
+ParamType:     System.Object   System.Object
+
+
+ualityChecker
 FuncName:  Static  ReferenceEquals
 ParamType:     System.Object   System.Object
 
