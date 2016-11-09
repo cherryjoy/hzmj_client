@@ -45,6 +45,7 @@ function MJTableCtrl:SetJuShuPaiShu()
 end
 
 function MJTableCtrl:EnterRoomSync(rolelist)
+    Client.m_CurrentState = EClientState.E_CS_Table
     LuaDebug.Log("rolelist: "..#rolelist)
     for i = 1, #rolelist do
         --LuaDebug.Log("roleList[i].roleid: "..rolelist[i].roleid)
@@ -428,6 +429,7 @@ function MJTableCtrl:ResetToward()
 end
 
 function MJTableCtrl:TableClose()
+    Client.m_CurrentState = EClientState.E_CS_Hall
     self.gameObject:Destroy1()
     LuaUIViewCtr.UIPanel["MJTableUI"] = nil
 end
@@ -523,4 +525,18 @@ function MJTableCtrl:DeleteTable(roleId)
     -- 删除房间的提示信息
     local str = string.format(Text.TableDelete, self.roomId, roleName)
     local ref = LuaMessageBox.ShowSingle(str, nil, Text.Confirm, self)
+end
+
+function MJTableCtrl:Voice_OnPress(isPressed)
+    if isPressed then
+        RecordVoice.get_Instance():StartRecord()
+    else
+        local url = "http://www.cherryjoy.com:9999/upload/?"
+        RecordVoice.get_Instance():EndRecord(self.roomId, self.Drect1.roleId, url, "VoiceRecordSuccess", "VoiceRecordFail")
+    end
+end
+
+function MJTableCtrl:HandleGameRoomChat(typeId, context, roleId)
+    local url = "http://www.cherryjoy.com:9999/download/?"
+	WWWPortraitLoader.DownLoadVoice(url, context, roleId, "DownLoadVoiceSuccess", "DownLoadVoiceFail")
 end

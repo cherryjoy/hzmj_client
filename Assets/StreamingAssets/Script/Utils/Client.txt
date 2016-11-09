@@ -55,6 +55,7 @@ EClientState={
     E_CS_Reconect = -1,
     E_CS_Login = 0,
     E_CS_Hall=1,
+    E_CS_Table=2,
 }
 
 
@@ -79,6 +80,10 @@ function Client.ListenNetwork( state,ip,port )
             --Client.NetConnectFail()
         else
             Client.NetDisconnect()
+            if Client.m_CurrentState == EClientState.E_CS_Table then
+                local ref = LuaMessageBox.ShowSingle(Text.Disconnected, nil, Text.Confirm, self)
+                ref.button_Single:SetActive(false)
+            end
         end
         Client.ConnectGoWrong:Do()
     end
@@ -87,8 +92,8 @@ function Client.ListenNetwork( state,ip,port )
 end
 
 function Client.NetDisconnect()
-    require "BattleSceneUI/GameBase"
-	GameBase.GameExit()
+    --require "BattleSceneUI/GameBase"
+	--GameBase.GameExit()
 end
 
 function Client.NetConnectFail()

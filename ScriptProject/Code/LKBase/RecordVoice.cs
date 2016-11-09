@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using UniLua;
 using UnityEngine;
 
 public class RecordVoice : Singleton<RecordVoice>
@@ -47,6 +48,8 @@ public class RecordVoice : Singleton<RecordVoice>
 		Microphone.End(Microphone.devices[0]);
 		if (audioLength < 1.0f) //录音小于1秒就不处理了
 		{
+            LuaState lua = LuaInstance.instance.Get();
+            lua.LuaFuncCall(PlatformSDKController.mSelf.luaPlatformHanderRef, failFuncName, "");
 			return;
 		}
 

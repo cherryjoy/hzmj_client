@@ -9,6 +9,7 @@ LocalizationLabelText
 LuaBehaviour
 LuaBehaviourUpdate
 LuaMessageReceiver
+LuaPressMessageReceiver
 TableViewController
 TweenColorAlpha
 TweenPosition

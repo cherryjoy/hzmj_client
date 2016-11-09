@@ -32,7 +32,10 @@ function MainUICtrl:Help_OnClick()
 end
 
 function MainUICtrl:Setting_OnClick()
-
+    local url = "http://www.cherryjoy.com:9999/download/?"
+    local context = "987695_1000013_20161191759164.wav"
+    local roleId = 1000013
+	WWWPortraitLoader.DownLoadVoice(url, context, roleId, "DownLoadVoiceSuccess", "DownLoadVoiceFail")
 end
 
 function MainUICtrl:JoinGame_OnClick()

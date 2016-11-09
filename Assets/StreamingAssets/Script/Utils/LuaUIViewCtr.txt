@@ -219,19 +219,19 @@ end
 
 function LuaUIViewCtr:UIOpen (uirefTable)
     if Client.m_CurrentState~=EClientState.E_CS_Login and Client.m_CurrentState~=EClientState.E_CS_Reconect and Client.m_CurrentState ~= EClientState.E_CS_ChooseRole then
-        Client.RoleInfo.GuideMgr:ListenGuideEnd(GuideEndType.UIOpen,uirefTable.uiName)
+        --Client.RoleInfo.GuideMgr:ListenGuideEnd(GuideEndType.UIOpen,uirefTable.uiName)
     end
 end
 
 function LuaUIViewCtr:UIDestroy (uirefTable)
     if Client.m_CurrentState~=EClientState.E_CS_Login and Client.m_CurrentState~=EClientState.E_CS_Reconect and Client.m_CurrentState ~= EClientState.E_CS_ChooseRole then
-        Client.RoleInfo.GuideMgr:ListenGuideEnd(GuideEndType.UIDestroy,uirefTable.uiName)
+        --Client.RoleInfo.GuideMgr:ListenGuideEnd(GuideEndType.UIDestroy,uirefTable.uiName)
     end
 end
 
 function LuaUIViewCtr:ServerMsgGet (msgId)
     if Client.m_CurrentState~=EClientState.E_CS_Login and Client.m_CurrentState~=EClientState.E_CS_Reconect and Client.m_CurrentState ~= EClientState.E_CS_ChooseRole then
-        Client.RoleInfo.GuideMgr:ListenGuideEnd(GuideEndType.ServerReturn,msgId)
+        --Client.RoleInfo.GuideMgr:ListenGuideEnd(GuideEndType.ServerReturn,msgId)
     end
 end
 

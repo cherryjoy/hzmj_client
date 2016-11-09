@@ -109,7 +109,8 @@ public class WWWPortraitLoader : MonoBehaviour
     private IEnumerator UploadVoicePlus(string url, string fileName, byte[] data, string successFuncName, string failFuncName)
 	{
         // 向HTTP服务器提交Post数据
-        url = url + "?fileid=" + fileName;
+        url = url + "filename=" + fileName;
+	    Debug.Log("upload url: " + url);
         WWW www = new WWW(url, data);
 		yield return www;
         LuaState lua = LuaInstance.instance.Get();
@@ -129,26 +130,32 @@ public class WWWPortraitLoader : MonoBehaviour
         Destroy(gameObject);
 	}
 
-    public void DownLoadVoice(string url)
+    public static void DownLoadVoice(string url, string fileName, int roleId, string successFuncName, string failFuncName)
     {
         GameObject go = new GameObject("WWWPortraitLoader");
         WWWPortraitLoader loader = go.AddComponent<WWWPortraitLoader>();
-        loader.StartCoroutine(loader.DownloadVoicePlus(url));
+        loader.StartCoroutine(loader.DownloadVoicePlus(url, fileName, roleId, successFuncName, failFuncName));
     }
 
-    private IEnumerator DownloadVoicePlus(string url)
+    private IEnumerator DownloadVoicePlus(string url, string fileName, int roleId, string successFuncName, string failFuncName)
     {
+        url = url + "filename=" + fileName;
+        Debug.Log("download url: " + url);
         WWW www = new WWW(url);
         yield return www;
+        LuaState lua = LuaInstance.instance.Get();
         if (www.error != null)
         {
             Debug.LogWarning("DownLoadVoice error : " + url);
             Debug.LogWarning(www.error);
+
+            lua.LuaFuncCall(PlatformSDKController.mSelf.luaPlatformHanderRef, failFuncName, fileName, roleId);
         }
         else
         {
             AudioClip clip = www.GetAudioClip(false, true, AudioType.WAV);
-            NGUITools.PlaySound(clip);
+            lua.LuaFuncCall(PlatformSDKController.mSelf.luaPlatformHanderRef, successFuncName, clip, roleId);
+            //NGUITools.PlaySound(clip);
         }
         
         www.Dispose();

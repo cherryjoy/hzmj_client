@@ -266,3 +266,12 @@ function ClientSendMsg.SendGameBalance()
 	local buffer, length = LuaProto.serialize(data)
 	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_BALANCE_REQ, buffer, length)
 end
+
+function ClientSendMsg.SendGameRoomChat(typeId, context)
+	local data = PBMsgGameRoomChatReq.Create()
+	data.type_id = typeId
+	data.chat = context
+
+	local buffer, length = LuaProto.serialize(data)
+	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_ROOM_CHAT_REQ, buffer, length)
+end

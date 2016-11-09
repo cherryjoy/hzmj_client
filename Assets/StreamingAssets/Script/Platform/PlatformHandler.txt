@@ -251,3 +251,27 @@ function PlatformHandler:DownloadTextureFail(refTexture, defaultIconPath)
 	    refTexture:set_material(mat)
     end
 end
+
+function PlatformHandler:VoiceRecordSuccess(fileName)
+	LuaDebug.Log("VoiceRecordSuccess: "..fileName)
+
+	ClientSendMsg.SendGameRoomChat(enumROOM_CHAT_TYPE.EM_CHAT_VOIC_TYPE, fileName)
+end
+
+function PlatformHandler:VoiceRecordFail(fileName)
+	LuaDebug.Log("VoiceRecordFail: "..fileName)
+	if fileName == "" then -- 时间过短，取消录音
+		LuaDebug.Log("VoiceRecordFail: timeshort")
+	else
+		LuaDebug.Log("VoiceRecordFail: upload fail")
+	end
+end
+
+function PlatformHandler:DownLoadVoiceSuccess(clip, roleId)
+	LuaDebug.Log("DownLoadVoiceSuccess roleId: "..roleId..", name: "..clip:get_name()..", length: "..clip:get_length())
+	NGUITools.PlaySound(clip)
+end
+
+function PlatformHandler:DownLoadVoiceFail(fileName, roleId)
+	LuaDebug.Log("DownLoadVoiceFail: "..fileName..", roleId: "..roleId)
+end

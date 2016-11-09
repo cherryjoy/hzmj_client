@@ -38,6 +38,7 @@ ui/prefab/mjtable_prefab
 	ui/prefab/mjtable/mycard|.prefab
 	ui/prefab/mjtable/pengcard|.prefab
 	ui/prefab/mjtable/playcard|.prefab
+	ui/prefab/mjtable/recordvoice|.prefab
 	ui/prefab/mjtable/rightcard|.prefab
 	ui/prefab/mjtable/rightpengcard|.prefab
 	ui/prefab/mjtable/rightplaycard|.prefab

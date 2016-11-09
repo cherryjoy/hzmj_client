@@ -1,4 +1,4 @@
-assetbundles:177191023
+assetbundles:996038450
 material_mat:1971796873
 material_tga:112992083
 shader:3046567655
@@ -76,14 +76,14 @@ ui/atlas/bit32/compass:211793591
 ui/atlas/bit32/home:2233482193
 ui/atlas/bit32/login:691956292
 ui/atlas/bit32/mahjong:3820033027
-ui/atlas/bit32/mjtable:169591457
+ui/atlas/bit32/mjtable:1121345816
 ui/fonts/hzgb:2466351567
 ui/fonts/msyh:4133582701
 ui/prefab/announcementui_prefab:2035825866
 ui/prefab/commonui_prefab:2291125430
 ui/prefab/home_prefab:1246839608
 ui/prefab/login_prefab:3413583588
-ui/prefab/mjtable_prefab:2805700515
+ui/prefab/mjtable_prefab:3898225563
 ui/prefab/newscenemusthave_prefab:1766436413
 ui/prefab/syssetting_prefab:1331211804
 ui/prefab/toolsui_prefab:1022845590
