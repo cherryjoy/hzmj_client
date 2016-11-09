@@ -531,12 +531,12 @@ function MJTableCtrl:Voice_OnPress(isPressed)
     if isPressed then
         RecordVoice.get_Instance():StartRecord()
     else
-        local url = "http://www.cherryjoy.com:9999/upload/?"
+        local url = Client.voiceUrl.."upload/?"
         RecordVoice.get_Instance():EndRecord(self.roomId, self.Drect1.roleId, url, "VoiceRecordSuccess", "VoiceRecordFail")
     end
 end
 
 function MJTableCtrl:HandleGameRoomChat(typeId, context, roleId)
-    local url = "http://www.cherryjoy.com:9999/download/?"
+    local url = Client.voiceUrl.."download/?"
 	WWWPortraitLoader.DownLoadVoice(url, context, roleId, "DownLoadVoiceSuccess", "DownLoadVoiceFail")
 end

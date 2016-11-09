@@ -172,6 +172,8 @@ function LoginController:SeverListDownloadSuccss(xmlString)
     local SLAXML = require "Utils/slaxdom"
     self.doc = SLAXML:dom(xmlString)
     if self.doc ~= nil then
+        Client.voiceUrl = self.doc.kids[2].el[1].attr.voiceurl
+        LuaDebug.Log("voiceUrl: "..Client.voiceUrl)
        LoginController.InitServerList(self)
     end
     LoginController.ClearTimer(self)
