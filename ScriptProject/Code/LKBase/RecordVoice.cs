@@ -11,12 +11,12 @@ public class RecordVoice : Singleton<RecordVoice>
 	private List<float> data2 = new List<float>();
 	private const int HEADER_SIZE = 44;
 	private AudioClip voice;
-	public string mfilename;
+	private string mfilename;
 	private float[] data;
-	private int audioLength;//录音的长度，单位为秒，ui上可能需要显示 
+	public int audioLength = 20;//录音的长度，单位为秒，ui上可能需要显示 
 							//通常的无损音质的采样率是44100，即每秒音频用44100个float数据表示，但是语音只需8000（通常移动电话是8000）就够了  
 							//不然音频数据太大，不利于传输和存储  
-	public const int SamplingRate = 10000;
+	public int SamplingRate = 10000;
 
 	public void StartRecord()
 	{
@@ -27,7 +27,6 @@ public class RecordVoice : Singleton<RecordVoice>
 		}
 
 		Microphone.End(Microphone.devices[0]);
-		audioLength = 20;
 		this.voice = Microphone.Start(Microphone.devices[0], false, audioLength, SamplingRate);
 	}
 
@@ -40,13 +39,14 @@ public class RecordVoice : Singleton<RecordVoice>
 		}
 
 		int lastPos = Microphone.GetPosition(Microphone.devices[0]);
+		int length = audioLength;
 		if (Microphone.IsRecording(Microphone.devices[0])) //录音小于20秒 
 		{
-			audioLength = lastPos / SamplingRate;//录音时长  
+			length = lastPos / SamplingRate;//录音时长  
 		}
 
 		Microphone.End(Microphone.devices[0]);
-		if (audioLength < 1.0f) //录音小于1秒就不处理了
+		if (length < 1.0f) //录音小于1秒就不处理了
 		{
             LuaState lua = LuaInstance.instance.Get();
             lua.LuaFuncCall(PlatformSDKController.mSelf.luaPlatformHanderRef, failFuncName, "");
@@ -65,7 +65,7 @@ public class RecordVoice : Singleton<RecordVoice>
 			if ((double)this.data[index] != 0.0)
 				this.data2.Add(this.data[index]);
 		}
-		UnityEngine.Debug.Log("count: " + data2.Count + ", length: " + audioLength + ", cliplength: " + voice.length);
+		UnityEngine.Debug.Log("count: " + data2.Count + ", length: " + length + ", cliplength: " + voice.length);
 		AudioClip clip = AudioClip.Create(this.mfilename, this.data2.Count, 1, 10000, false);
 		clip.SetData(this.data2.ToArray(), 0);
         string fileName = mfilename + ".wav";
