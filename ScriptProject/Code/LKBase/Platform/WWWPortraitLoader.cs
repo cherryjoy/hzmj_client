@@ -110,7 +110,7 @@ public class WWWPortraitLoader : MonoBehaviour
 	{
         // 向HTTP服务器提交Post数据
         url = url + "filename=" + fileName;
-	    Debug.Log("upload url: " + url);
+	    //Debug.Log("upload url: " + url);
         WWW www = new WWW(url, data);
 		yield return www;
         LuaState lua = LuaInstance.instance.Get();
@@ -123,7 +123,7 @@ public class WWWPortraitLoader : MonoBehaviour
         }
         else
         {
-            lua.LuaFuncCall(PlatformSDKController.mSelf.luaPlatformHanderRef, successFuncName, fileName);
+            lua.LuaFuncCall(PlatformSDKController.mSelf.luaPlatformHanderRef, successFuncName, fileName, 0);
         }
 
         www.Dispose();
@@ -140,7 +140,7 @@ public class WWWPortraitLoader : MonoBehaviour
     private IEnumerator DownloadVoicePlus(string url, string fileName, int roleId, string successFuncName, string failFuncName)
     {
         url = url + "filename=" + fileName;
-        Debug.Log("download url: " + url);
+        //Debug.Log("download url: " + url);
         WWW www = new WWW(url);
         yield return www;
         LuaState lua = LuaInstance.instance.Get();

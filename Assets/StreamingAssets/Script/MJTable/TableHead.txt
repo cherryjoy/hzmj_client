@@ -21,3 +21,26 @@ function TableHead:Init(info)
         self.Zhuang:SetActive(true)
     end
 end
+
+function TableHead:PlayRecordVoice(length)
+    self.Speak:set_spriteName("speak0")
+    self.Speak:set_enabled(true)
+    self.PlayNum = 0
+    if self.PlayTimer == nil then
+        self.PlayTimer = Timer.NewEvent(self,2,length*10,TableHead.PlayingVoice, false, TableHead.PlayVoiceFinish)
+    end
+end
+
+function TableHead:PlayingVoice()
+    self.PlayNum = self.PlayNum + 1
+    self.Speak:set_spriteName("speak"..(self.PlayNum%4))
+end
+
+
+function TableHead:PlayVoiceFinish()
+    if self.PlayTimer ~= nil then
+        Timer.RemoveEvent(self,self.PlayTimer)
+        self.PlayTimer = nil
+    end
+    self.Speak:set_enabled(false)
+end

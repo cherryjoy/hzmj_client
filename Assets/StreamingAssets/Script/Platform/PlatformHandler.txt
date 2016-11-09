@@ -252,26 +252,32 @@ function PlatformHandler:DownloadTextureFail(refTexture, defaultIconPath)
     end
 end
 
-function PlatformHandler:VoiceRecordSuccess(fileName)
-	LuaDebug.Log("VoiceRecordSuccess: "..fileName)
-
-	ClientSendMsg.SendGameRoomChat(enumROOM_CHAT_TYPE.EM_CHAT_VOIC_TYPE, fileName)
+function PlatformHandler:VoiceRecordSuccess(fileName, length)
+	--LuaDebug.Log("VoiceRecordSuccess: "..fileName)
+	Client.RecordVoiceEnd:Do(true)
+	if length == 0 then
+		ClientSendMsg.SendGameRoomChat(enumROOM_CHAT_TYPE.EM_CHAT_VOIC_TYPE, fileName)
+	else
+		Client.PlayRecordVoice:Do(Client.RoleInfo.RoleID, length)
+	end
 end
 
 function PlatformHandler:VoiceRecordFail(fileName)
-	LuaDebug.Log("VoiceRecordFail: "..fileName)
+	--LuaDebug.Log("VoiceRecordFail: "..fileName)
 	if fileName == "" then -- 时间过短，取消录音
-		LuaDebug.Log("VoiceRecordFail: timeshort")
+		--LuaDebug.Log("VoiceRecordFail: timeshort")
+		Client.RecordVoiceEnd:Do(false)
 	else
-		LuaDebug.Log("VoiceRecordFail: upload fail")
+		--LuaDebug.Log("VoiceRecordFail: upload fail")
 	end
 end
 
 function PlatformHandler:DownLoadVoiceSuccess(clip, roleId)
-	LuaDebug.Log("DownLoadVoiceSuccess roleId: "..roleId..", name: "..clip:get_name()..", length: "..clip:get_length())
+	--LuaDebug.Log("DownLoadVoiceSuccess roleId: "..roleId..", name: "..clip:get_name()..", length: "..clip:get_length())
+	Client.PlayRecordVoice:Do(roleId, clip:get_length())
 	NGUITools.PlaySound(clip)
 end
 
 function PlatformHandler:DownLoadVoiceFail(fileName, roleId)
-	LuaDebug.Log("DownLoadVoiceFail: "..fileName..", roleId: "..roleId)
+	--LuaDebug.Log("DownLoadVoiceFail: "..fileName..", roleId: "..roleId)
 end

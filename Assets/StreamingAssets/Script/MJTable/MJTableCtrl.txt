@@ -14,6 +14,7 @@ function MJTableCtrl:Start( )
     Client.ResetToward = Client.ResetToward + {self, MJTableCtrl.ResetToward}
     Client.TableClear = Client.TableClear + {self, MJTableCtrl.TableClear}
     Client.TableClose = Client.TableClose + {self, MJTableCtrl.TableClose}
+    Client.PlayRecordVoice = Client.PlayRecordVoice + {self, MJTableCtrl.PlayRecordVoice}
 end
 
 function MJTableCtrl:OnDestroy( )
@@ -21,6 +22,7 @@ function MJTableCtrl:OnDestroy( )
     Client.ResetToward = Client.ResetToward - {self, MJTableCtrl.ResetToward}
     Client.TableClear = Client.TableClear - {self, MJTableCtrl.TableClear}
     Client.TableClose = Client.TableClose - {self, MJTableCtrl.TableClose}
+    Client.PlayRecordVoice = Client.PlayRecordVoice - {self, MJTableCtrl.PlayRecordVoice}
 end
 
 function MJTableCtrl:Init(passwd, horse, beishu, rolelist)
@@ -529,14 +531,28 @@ end
 
 function MJTableCtrl:Voice_OnPress(isPressed)
     if isPressed then
+        self.RecordVoice.StartRecord(self.RecordVoice)
         RecordVoice.get_Instance():StartRecord()
     else
+        self.RecordVoice.EndRecord(self.RecordVoice)
         local url = Client.voiceUrl.."upload/?"
         RecordVoice.get_Instance():EndRecord(self.roomId, self.Drect1.roleId, url, "VoiceRecordSuccess", "VoiceRecordFail")
     end
 end
 
 function MJTableCtrl:HandleGameRoomChat(typeId, context, roleId)
+    if roleId == Client.RoleInfo.RoleID then
+        return
+    end
+    
     local url = Client.voiceUrl.."download/?"
 	WWWPortraitLoader.DownLoadVoice(url, context, roleId, "DownLoadVoiceSuccess", "DownLoadVoiceFail")
+end
+
+function MJTableCtrl:PlayRecordVoice(roleId, length)
+    for i = 1, 4 do
+        if self["Drect"..i].roleId == roleId then
+            self["Drect"..i].TableHead.PlayRecordVoice(self["Drect"..i].TableHead, length)
+        end
+    end
 end

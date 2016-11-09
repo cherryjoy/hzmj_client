@@ -1,9 +1,52 @@
 RecordVoiceTips = {}
 
 function RecordVoiceTips:Start( )
-
+    Client.RecordVoiceEnd = Client.RecordVoiceEnd + {self, RecordVoiceTips.RecordVoiceEnd}
 end
 
 function RecordVoiceTips:OnDestroy( )
+    Client.RecordVoiceEnd = Client.RecordVoiceEnd - {self, RecordVoiceTips.RecordVoiceEnd}
+end
 
+function RecordVoiceTips:StartRecord()
+    self.Sound:set_enabled(true)
+    self.Voice:set_enabled(true)
+    self.TimeShort:set_enabled(false)
+
+    self.Sound:set_spriteName("voice0")
+    self.Recording:SetActive(true)
+    self.Tips:set_text(Text.RecordVoiceSend)
+    self.RecordNum = 0
+    if self.RecordTimer == nil then
+        self.RecordTimer = Timer.NewEvent(self,1,1000,RecordVoiceTips.RecordingVoice, false, nil)
+    end
+end
+
+function RecordVoiceTips:EndRecord()
+    if self.RecordTimer ~= nil then
+        Timer.RemoveEvent(self,self.RecordTimer)
+        self.RecordTimer = nil
+    end
+end
+
+function RecordVoiceTips:RecordingVoice()
+    self.Recording:SetActive(true)
+    self.RecordNum = self.RecordNum + 1
+    self.Sound:set_spriteName("voice"..(self.RecordNum%7))
+end
+
+function RecordVoiceTips:RecordVoiceEnd(state)
+    if state then
+        self.Recording:SetActive(false)
+    else
+        self.Sound:set_enabled(false)
+        self.Voice:set_enabled(false)
+        self.TimeShort:set_enabled(true)
+        self.Tips:set_text(Text.RecordVoiceTimeShort)
+        Timer.NewEvent(self,5,5,RecordVoiceTips.RecordVoiceFail, false, nil)
+    end
+end
+
+function RecordVoiceTips:RecordVoiceFail()
+    self.Recording:SetActive(false)
 end

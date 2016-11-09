@@ -59,7 +59,7 @@ class Register
 
     public static void RegisterWrapper(bool isUpdate)
     {
-		Debug.Log("RegisterWrapper begin");
+		//Debug.Log("RegisterWrapper begin");
         LuaState lua_ = LuaInstance.instance.Get();
 
         if (isUpdate)
@@ -79,7 +79,7 @@ class Register
             LuaClassFactory.RegisterToLua(lua_, typeof(LuaClassFactory));
         }
      	
-		Debug.Log("RegisterWrapper end");
+		//Debug.Log("RegisterWrapper end");
     }
 
     public static void AddFuncInfo(Type type,string name = " kong")

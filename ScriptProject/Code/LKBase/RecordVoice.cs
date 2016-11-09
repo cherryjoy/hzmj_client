@@ -17,6 +17,7 @@ public class RecordVoice : Singleton<RecordVoice>
 							//通常的无损音质的采样率是44100，即每秒音频用44100个float数据表示，但是语音只需8000（通常移动电话是8000）就够了  
 							//不然音频数据太大，不利于传输和存储  
 	public int SamplingRate = 10000;
+    public bool isPlay = true;
 
 	public void StartRecord()
 	{
@@ -39,16 +40,16 @@ public class RecordVoice : Singleton<RecordVoice>
 		}
 
 		int lastPos = Microphone.GetPosition(Microphone.devices[0]);
-		int length = audioLength;
+		float length = audioLength;
 		if (Microphone.IsRecording(Microphone.devices[0])) //录音小于20秒 
 		{
 			length = lastPos / SamplingRate;//录音时长  
 		}
 
 		Microphone.End(Microphone.devices[0]);
+        LuaState lua = LuaInstance.instance.Get();
 		if (length < 1.0f) //录音小于1秒就不处理了
 		{
-            LuaState lua = LuaInstance.instance.Get();
             lua.LuaFuncCall(PlatformSDKController.mSelf.luaPlatformHanderRef, failFuncName, "");
 			return;
 		}
@@ -65,7 +66,7 @@ public class RecordVoice : Singleton<RecordVoice>
 			if ((double)this.data[index] != 0.0)
 				this.data2.Add(this.data[index]);
 		}
-		UnityEngine.Debug.Log("count: " + data2.Count + ", length: " + length + ", cliplength: " + voice.length);
+		//UnityEngine.Debug.Log("count: " + data2.Count + ", length: " + length + ", cliplength: " + voice.length);
 		AudioClip clip = AudioClip.Create(this.mfilename, this.data2.Count, 1, 10000, false);
 		clip.SetData(this.data2.ToArray(), 0);
         string fileName = mfilename + ".wav";
@@ -74,12 +75,18 @@ public class RecordVoice : Singleton<RecordVoice>
             byte[] data = File.ReadAllBytes(Application.persistentDataPath + "/" + fileName);
             WWWPortraitLoader.UploadVoice(url, fileName, data, successFuncName, failFuncName);
 		}
+
+        lua.LuaFuncCall(PlatformSDKController.mSelf.luaPlatformHanderRef, successFuncName, fileName, length);
+        if (isPlay)
+        {
+            NGUITools.PlaySound(clip);
+        }
 	}
 
 	public bool Save(string filename, AudioClip clip)
 	{
 		string str = Path.Combine(Application.persistentDataPath, filename);
-		UnityEngine.Debug.Log("voice filename: " + str);
+		//UnityEngine.Debug.Log("voice filename: " + str);
 		Directory.CreateDirectory(Path.GetDirectoryName(str));
 		using (FileStream empty = RecordVoice.instance.CreateEmpty(str))
 		{
