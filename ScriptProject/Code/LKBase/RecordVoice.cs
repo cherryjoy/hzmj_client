@@ -55,8 +55,11 @@ public class RecordVoice : Singleton<RecordVoice>
 		}
 
 		DateTime now = DateTime.Now;
-		this.mfilename = roomId + "_" + roleId + "_" + now.Year.ToString() + string.Empty + now.Month + string.Empty + now.Day + string.Empty +
-			now.Hour + string.Empty + now.Minute + string.Empty + now.Second + string.Empty + now.Millisecond;
+		string str = now.ToString("s");
+		str = str.Replace("-", "");
+		str = str.Replace(":", "");
+		str = str.Replace("T", "");
+		this.mfilename = str + "_" + roleId + "_" + roomId;
 		this.voice.name = this.mfilename;
 		this.data = new float[200000];
 		this.voice.GetData(this.data, 0);
