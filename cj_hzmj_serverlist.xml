@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<updateFile>
+<serverlist updateserver="http://www.cherryjoy.com/hzmj/update/" noticeurl="http://www.cherryjoy.com/notice.xml" lancherurl="https://www.cherryjoy.com/xxx" voiceurl="http://120.77.22.109:9999/" activecode="true" lancherversion="1.0.0" lancherMode = "1" version="1.0.0">
+	<server name="麻将1-10区">
+			   <subserver server_name="测试服" number="1" server_ID="584002" recommend="0" new="1" game="120.77.22.109:11400" />
+    </server>
+</serverlist>
+</updateFile>
