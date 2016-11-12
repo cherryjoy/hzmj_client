@@ -19,6 +19,7 @@ function ClientSendMsg.SendNetMsg(netCode,buffer,bufferLength )
 		end
 	end
 	LuaNetwork.SendNetMessage(netCode,buffer,bufferLength)
+	Client.OpenLoadingUI()
 end
 --[[
 function ClientSendMsg.SendEmptyMsg(netCode)

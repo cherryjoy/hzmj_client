@@ -27,6 +27,9 @@ function ClientHandleMsg.Handle(msgId,data,dataLength)
       handleFunc(data,dataLength)
     end
     Client.ServerMsgGet:Do(msgId)
+    if msgId ~= enumMSGID_MODULE_05.ID_ROLE_SESSION_ID_NOTICE then
+        Client.CloseLoadingUI()
+    end
 end
 --------------------------------------
 

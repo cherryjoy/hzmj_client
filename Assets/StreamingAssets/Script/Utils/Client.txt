@@ -148,6 +148,19 @@ function Client.NetCloseSocket(reason)
     --]]
 end
 
+function Client.OpenLoadingUI()
+    if Client.loadingRef == nil then
+		Client.loadingRef = LuaUIViewCtr.OpenUINotLose("CommonUI/LoadingUI")
+	end
+end
+
+function Client.CloseLoadingUI()
+    if Client.loadingRef ~= nil then
+        Client.loadingRef.gameObject:Destroy1()
+        Client.loadingRef = nil
+    end
+end
+
 Client.PingThreshold = 3000
 Client.PvpPingInterval = 1
 Client.NormalPingInterval = 5

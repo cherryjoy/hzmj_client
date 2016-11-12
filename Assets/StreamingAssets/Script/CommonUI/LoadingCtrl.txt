@@ -1,0 +1,31 @@
+LoadingCtrl = {}
+
+function LoadingCtrl:Start( )
+    --self.num = 0
+    Timer.NewEvent(self,10,10,LoadingCtrl.ShowUI, false, nil)
+    Timer.NewEvent(self,50,50,LoadingCtrl.TimeOut, false, nil)
+end
+
+function LoadingCtrl:Update()
+    --self.num = self.num + 1
+    --if self.num % 5 == 0 then
+        LoadingCtrl.Rotatoin(self)
+    --end
+end
+
+function LoadingCtrl:OnDestroy( )
+
+end
+
+function LoadingCtrl:Rotatoin()
+    self.Sprite:get_transform():Rotate(LuaVector3.Create(0, 0, -3))
+end
+
+function LoadingCtrl:ShowUI()
+    self.Sprite:set_enabled(true)
+end
+
+function LoadingCtrl:TimeOut()
+    local ref = LuaMessageBox.ShowSingle(Text.Disconnected, nil, Text.Confirm, self)
+    ref.button_Single:SetActive(false)
+end
