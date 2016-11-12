@@ -124,7 +124,7 @@ namespace GEM_NET_LIB
                 m_eNetWorkState = EClientNetWorkState.E_CNWS_NORMAL;
                 connect_timeout = 0;
 
-                mByteToSend.Clear();
+                //mByteToSend.Clear();
                 isSending = false;
 
                 IPAddress ip = IPAddress.Parse(a_strRomoteIP);
