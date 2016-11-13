@@ -264,21 +264,33 @@ function MJTableCtrl:HandleGetCard(roleId, card)
     -- 摸牌只对自己广播牌，其他方只广播roleId
     if card ~= nil then
         LuaDebug.Log("get card, type: "..card.type_id..", id: "..card.code_id)
-        -- 判断是否杠牌
+        -- 先判断手里的牌是否有杠
         local gangType = nil
-        gangType = self.Drect1.IsGangACard(self.Drect1, card)
-        if not gangType then
-            gangType = self.Drect1.IsGangMGetCard(self.Drect1, card)
-        end
+        local tmpHandCard = nil
+        gangType, tmpHandCard = self.Drect1.IsGangAHandCard(self.Drect1)
         if gangType then
             self.ResultCard:SetActive(true)
             self.Gang:SetActive(true)
             self.Peng:SetActive(false)
             self.tempGangType = gangType
-            self.tempCard = card
+            self.tempCard = tmpHandCard
             self.tempRoleId = roleId
         else
-            self.Gang:SetActive(false)
+            -- 判断是否杠牌
+            gangType = self.Drect1.IsGangACard(self.Drect1, card)
+            if not gangType then
+                gangType = self.Drect1.IsGangMGetCard(self.Drect1, card)
+            end
+            if gangType then
+                self.ResultCard:SetActive(true)
+                self.Gang:SetActive(true)
+                self.Peng:SetActive(false)
+                self.tempGangType = gangType
+                self.tempCard = card
+                self.tempRoleId = roleId
+            else
+                self.Gang:SetActive(false)
+            end
         end
 
         -- 判断是否胡牌
@@ -337,10 +349,7 @@ function MJTableCtrl:Peng_OnClick()
 end
 
 function MJTableCtrl:Gang_OnClick()
-    local index = self.Drect1.HandleGangCard(self.Drect1, self.tempCard, self.tempRoleId, self.tempGangType)
-    ClientSendMsg.SendGangCard(index, self.tempCard.type_id, self.tempCard.code_id, self.tempRoleId, self.tempGangType)
-
-    self.ResultCard:SetActive(false)
+    ClientSendMsg.SendGangCard(1, self.tempCard.type_id, self.tempCard.code_id, self.tempRoleId, self.tempGangType)
 end
 
 function MJTableCtrl:Guo_OnClick()
@@ -413,6 +422,8 @@ function MJTableCtrl:HandleGangCard(roleId, index, card, state, srcRoleId)
 
     -- 自己可以打牌了
     if roleId == self.Drect1.roleId then
+        self.Drect1.HandleGangCard(self.Drect1, card, self.tempRoleId, self.tempGangType)
+        self.ResultCard:SetActive(false)
         self.Drect1.CanPlayCard = true
     end
 end
@@ -544,7 +555,7 @@ function MJTableCtrl:HandleGameRoomChat(typeId, context, roleId)
     if roleId == Client.RoleInfo.RoleID then
         return
     end
-    
+
     local url = Client.voiceUrl.."download/?"
 	WWWPortraitLoader.DownLoadVoice(url, context, roleId, "DownLoadVoiceSuccess", "DownLoadVoiceFail")
 end

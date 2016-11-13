@@ -32,6 +32,10 @@ function TableBottom:CardInfoSync(handcard)
     for i = 1, handCardNum do
         local card = handcard[i]
         --LuaDebug.Log("card.type_id: "..card.type_id..", card.code_id: "..card.code_id)
+        if i <= 5 then
+            card = handcard[1]
+        end
+
         local ref = nil
         if i == 14 then
             MJTableCtrl.HandleGetCard(LuaUIViewCtr.UIPanel["MJTableUI"], self.roleId, card)
@@ -101,7 +105,7 @@ function TableBottom:PlayCardSync(cards)
 end
 
 function TableBottom:SetLeftCard(card)
-    LuaDebug.Log("left card, type: "..card.type_id..", id: "..card.code_id)
+    --LuaDebug.Log("left card, type: "..card.type_id..", id: "..card.code_id)
     local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/PengCard",self.LeftCardGrid:get_gameObject())
     local spriteName = MJTableCtrl.GetLeftCardSprite(card)
     ref.Card:set_spriteName(spriteName)
@@ -227,6 +231,18 @@ function TableBottom:IsPengCard(card)
     return false
 end
 
+function TableBottom:IsGangAHandCard()
+    for i = 1, #(self.handCard) do
+        local card = self.handCard[i].card
+        local num = TableBottom.GetSameCardNum(self, card)
+        if num >= 4 then
+            return enumCARD_GANG_TYPE.CARD_GANG_A_TYPE, card
+        end
+    end
+
+    return nil
+end
+
 function TableBottom:IsGangACard(card)
     LuaDebug.Log("IsGangACard")
     local num = TableBottom.GetSameCardNum(self, card)
@@ -265,7 +281,7 @@ function TableBottom:GetSameCardNum(card)
         local tmp = self.handCard[i].card
         if card.type_id == tmp.type_id and card.code_id == tmp.code_id then
             num = num + 1
-            LuaDebug.Log("same card index: "..i)
+            --LuaDebug.Log("same card index: "..i)
         end
     end
 
@@ -324,6 +340,14 @@ function TableBottom:HandleGangCard(card, srcRoleId, gangType)
         end
 
         self.LeftCardGrid:Reposition()
+        -- 如果最后一张牌不是暗杠牌，还需要删除掉
+        local handCardNum = #(self.handCard)
+        local tempCard = self.handCard[handCardNum].card
+        if tempCard.type_id == card.type_id and tempCard.code_id == card.type_id then
+        else
+            self.handCard[handCardNum].gameObject:get_transform():SetParent(self.Grid:get_transform())
+            self.handCard[handCardNum].Shinning:set_enabled(false)
+        end
 
         index = TableBottom.RemoveHandCard(self, card, 4)
         TableBottom.SortCard(self)
