@@ -191,6 +191,7 @@ end
 
 function LoginController:ShowStartGameBtn()
     Client.CloseLoadingUI()
+    LoginController.StartGameBtn_OnClick(self)
     self.loginBtn:SetActive(true)
 end
 
