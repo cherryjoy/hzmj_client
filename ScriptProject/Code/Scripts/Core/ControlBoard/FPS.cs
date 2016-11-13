@@ -38,11 +38,7 @@ public class FPS : MonoBehaviour
         if (Time.realtimeSinceStartup - time > 1f)
         {
             time = Time.realtimeSinceStartup;
-			string text = "FPS:" + c + " | PING:" + PingManager.Instance.netPing
-#if OPEN_BROAD_PING
-				+ " | BPING:" + PingManager.Instance.mBroadPingTime
-#endif
-;
+			string text = "FPS:" + c + " | PING:" + PingManager.Instance.netPing;
             c = 0;
             fps_label_.text = text;
         }

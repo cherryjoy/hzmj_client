@@ -16,10 +16,6 @@ public class PingManager : Singleton<PingManager>
 
     public long sessionId = 0;
 
-#if OPEN_BROAD_PING
-	public float mBroadPingTime;
-#endif
-
 	public int netPing
 	{
 		get
@@ -63,11 +59,7 @@ public class PingManager : Singleton<PingManager>
 	void SendPing()
 	{
 		CClientSendMessage.SendPing(netPing);
-#if OPEN_BROAD_PING
-		//测试副本广播环境
-		CClientSendMessage.SendBMSG_PingTime1();
-#endif
-		mTimeCount = 0;
+        mTimeCount = 0;
 		mStartCount = false;
         LuaState lua = LuaInstance.instance.Get();
         if (isCallBackLua)

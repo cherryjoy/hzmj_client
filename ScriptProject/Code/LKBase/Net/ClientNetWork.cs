@@ -74,7 +74,7 @@ namespace GEM_NET_LIB
 
         private object sendLockObj = new object();
         private bool isSending = false;
-        List<byte> mByteToSend = new List<byte>();
+        public List<byte> mByteToSend = new List<byte>();
 
         public CClientNetworkCtrl()
         {
@@ -121,7 +121,7 @@ namespace GEM_NET_LIB
                 }
                 m_strRomoteIP = a_strRomoteIP;
                 m_uRemotePort = a_uPort;
-                m_eNetWorkState = EClientNetWorkState.E_CNWS_NORMAL;
+                //m_eNetWorkState = EClientNetWorkState.E_CNWS_NORMAL;
                 connect_timeout = 0;
 
                 //mByteToSend.Clear();
@@ -221,7 +221,7 @@ namespace GEM_NET_LIB
             ReleaseSocket();
         }
 
-        public bool ReConnect()
+        private bool ReConnect()
         {
             if (m_strRomoteIP != null)
             {
@@ -387,6 +387,12 @@ namespace GEM_NET_LIB
         {
             if (mByteToSend.Count > 0)
             {
+                if (!IsConnected())
+                {
+                    ReConnect();
+                    return false;
+                }
+
                 try
                 {
                     lock (sendLockObj)
@@ -399,7 +405,6 @@ namespace GEM_NET_LIB
                             {
                                 Debug.Log("byte " + i + " = " + (int)mAsyncArgs.Buffer[i]);
                             }*/
-
                             if (m_ClientSocket.SendAsync(mAsyncArgs))
                             {
 

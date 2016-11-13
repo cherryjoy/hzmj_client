@@ -14,7 +14,6 @@ namespace GEM_NET_LIB
 		private MemoryStreamEx m_Buffer = new MemoryStreamEx ();
 		private byte[] m_NotUseByte = new byte[4]{0,0,0,0};
 		private byte[] m_SessionByte = new byte[8]{0, 0, 0, 0, 0, 0, 0, 0};
-		//private long sessionId = 0;
 		
 		private byte mCounter = 0;
 		//-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=

@@ -17,8 +17,6 @@ public class LuaNetwork
             "Connect",
             "DisConnect",
             "SendNetMessage",
-            "SendCastNetMessage",
-            "SendNetEmptyMessage",
             "Update",
 			"SetSocketSendNoDeley",
         };
@@ -29,8 +27,6 @@ public class LuaNetwork
              Connect,
              DisConnect,
              SendNetMessage,
-             SendCastNetMessage,
-             SendNetEmptyMessage,
              Update,
 			 SetSocketSendNoDeley,
         };
@@ -51,10 +47,6 @@ public class LuaNetwork
         int port = lua_.ToInteger(-1);
         bool isConnect = Net.Connect(ip, (ushort)port);
         lua_.PushBoolean(isConnect);
-#if UNITY_STANDALONE_WIN
-        if (isConnect)
-            Debug.Log("Net Connect success.");
-#endif
         return 1;
     }
     
@@ -73,27 +65,6 @@ public class LuaNetwork
         byte[] data = lua_.CopyBytesFromUnManaged(-2, length);
 
         lua_.PushBoolean(Net.SendNetMessage(msgId, data));
-        return 1;
-    }
-
-    [MonoPInvokeCallback(typeof(LuaAPI.lua_CFunction))]
-    public static int SendCastNetMessage(IntPtr l)
-    {
-        int msgId = lua_.ToInteger(-4);
-        int dataTypeId = lua_.ToInteger(-3);
-        int length = lua_.ToInteger(-1);
-        byte[] data = lua_.CopyBytesFromUnManaged(-2, length);
-
-        lua_.PushBoolean(Net.SendCastNetMessage(msgId, dataTypeId, data));
-        return 1;
-    }
-    
-    [MonoPInvokeCallback(typeof(LuaAPI.lua_CFunction))]
-    public static int SendNetEmptyMessage(IntPtr l)
-    {
-        int msgId = lua_.ToInteger(-1);
-
-        lua_.PushBoolean(Net.SendNetEmptyMessage(msgId));
         return 1;
     }
     

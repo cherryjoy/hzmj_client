@@ -37,53 +37,27 @@ public class CNetWorkGlobal
 
 	public bool SendNetMessage (int msgID,byte[]  data)
 	{
-		if (IsConnected() == true)
+		//if (IsConnected() == true)
 		{
             return m_Ctrl.SendMessage(msgID, data);
 		}
 		return false;
 	}
-    public bool SendCastNetMessage(int msgID, int dataTypeId, byte[] bytes)
-    {
-		if (IsConnected() == true)
-		{
-	        return m_Ctrl.SendMessage(msgID, dataTypeId, bytes);
-		}
-        return false;
-    }
-	public bool SendNetEmptyMessage (int msgID)
-	{
-		if (IsConnected() == true)
-		{
-			return m_Ctrl.SendMessage (msgID, null);
-		}
-		return false;
-	}
 
-    public bool SendByteThisFrame() { 
-        if (IsConnected() == true)
-		{
-			return m_Ctrl.SendByteThisFrame ();
-		}
-		return false;
+    public bool SendByteThisFrame() {
+        //if (IsConnected() == true)
+        {
+            return m_Ctrl.SendByteThisFrame();
+        }
+
+		//return false;
     }
 
 	public void Update ()
 	{
 		m_Ctrl.Update ();
 	}
-	//public static string GetAdapterMAC()
-	//{
-	//    return CClientNetworkCtrl.GetAdapterMAC(); 
-	//}
-	//public static string GetAdapterMACIOS()
-	//{
-	//    return CClientNetworkCtrl.GetAdapterMacIOS();
-	//}
-	//public static List<string> GetAllMacAddress()
-	//{
-	//    return CClientNetworkCtrl.GetAllMacAddress();
-	//}
+
 	public void SetSocketSendNoDeley (bool nodelay)
 	{
 		m_Ctrl.SetSocketSendNoDeley(nodelay);
