@@ -59,16 +59,75 @@ function RoleResult:Init(result, info)
         posX = posX + 20 + 31*self.LeftNum
     end
     self.HandCardsGrid:get_transform():set_localPosition(LuaVector3.Create(posX, -28, 0))
-    for i = 1, #(result.hand_cards) do
+    local sortedCards = RoleResult.SortCard(result.hand_cards)
+    for i = 1, #sortedCards do
         local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCard", self.HandCardsGrid:get_gameObject())
         ref.gameObject:get_transform():set_localScale(LuaVector3.Create(0.53, 0.53, 1))
-        ref.Init(ref, result.hand_cards[i], i)
+        ref.Init(ref, sortedCards[i], i)
     end
 
     self.HandCardsGrid:Reposition()
 
     -- 分数
     self.Score:set_text(tostring(result.score))
+end
+
+function RoleResult.SortCard(cards)
+    --先分组，再排序
+    local wanList = {}
+    local tongList = {}
+    local tiaoList = {}
+    local zhongList = {}
+
+    local num = #cards
+    for i = 1, num do
+        local card = cards[i]
+        if card.type_id == enumCARD_TYPE.CARD_TIAO_TYPE then
+            table.insert(tiaoList, card)
+        elseif card.type_id == enumCARD_TYPE.CARD_TONG_TYPE then
+            table.insert(tongList, card)
+        elseif card.type_id == enumCARD_TYPE.CARD_WANG_TYPE then
+            table.insert(wanList, card)
+        elseif card.type_id == enumCARD_TYPE.CARD_HONG_TYPE then
+            table.insert(zhongList, card)
+        end
+    end
+
+    table.sort(wanList, function(a, b)
+            return a.code_id < b.code_id
+    end)
+
+    table.sort(tongList, function(a, b)
+            return a.code_id < b.code_id
+    end)
+
+    table.sort(tiaoList, function(a, b)
+            return a.code_id < b.code_id
+    end)
+
+    local sortedCards = {}
+    local index = 1
+    for i = 1, #wanList do
+        sortedCards[index] = wanList[i]
+        index = index + 1
+    end
+
+    for i = 1, #tongList do
+        sortedCards[index] = tongList[i]
+        index = index + 1
+    end
+
+    for i = 1, #tiaoList do
+        sortedCards[index] = tiaoList[i]
+        index = index + 1
+    end
+
+    for i = 1, #zhongList do
+        sortedCards[index] = zhongList[i]
+        index = index + 1
+    end
+
+    return sortedCards
 end
 
 function RoleResult:SetLeftCard(card)
