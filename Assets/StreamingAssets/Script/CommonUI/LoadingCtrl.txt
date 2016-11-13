@@ -28,4 +28,5 @@ end
 function LoadingCtrl:TimeOut()
     local ref = LuaMessageBox.ShowSingle(Text.Disconnected, nil, Text.Confirm, self)
     --ref.button_Single:SetActive(false)
+    Client.CloseLoadingUI()
 end
