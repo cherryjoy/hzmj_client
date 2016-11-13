@@ -517,12 +517,14 @@ end
 
 function MJTableCtrl:HandleGameReenterStateSync(data)
     LuaDebug.Log("state: "..data.state..", type_id: "..data.card.type_id..", code_id"..data.card.code_id..", roleId: "..tostring(data.roleid))
-    if data.state == 0 then --0: 最后一次发给我的牌，1: 最后一次打的牌
+    if data.state == 0 then --0: 最后一次发给我的牌，1: 最后一次打的牌, 2: 碰了该我打牌
         MJTableCtrl.HandleGetCard(self, Client.RoleInfo.RoleID, data.card)
-    else
+    elseif data.state == 1 then
         --MJTableCtrl.HandlePlayCard(self, data.roleid, 1, data.card, 1)
         -- 判断当前的牌是否能碰、杠
         MJTableCtrl.IsPengGang(self, data.roleid, data.card)
+    else
+        self.Drect1.CanPlayCard = true
     end
 end
 
