@@ -3,7 +3,7 @@ LoadingCtrl = {}
 function LoadingCtrl:Start( )
     --self.num = 0
     Timer.NewEvent(self,10,10,LoadingCtrl.ShowUI, false, nil)
-    Timer.NewEvent(self,50,50,LoadingCtrl.TimeOut, false, nil)
+    Timer.NewEvent(self,80,80,LoadingCtrl.TimeOut, false, nil)
 end
 
 function LoadingCtrl:Update()
@@ -27,5 +27,5 @@ end
 
 function LoadingCtrl:TimeOut()
     local ref = LuaMessageBox.ShowSingle(Text.Disconnected, nil, Text.Confirm, self)
-    ref.button_Single:SetActive(false)
+    --ref.button_Single:SetActive(false)
 end

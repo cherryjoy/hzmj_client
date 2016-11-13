@@ -1,47 +1,18 @@
 require "Utils/LuaHelpTips"
 require "Utils/ClientInfo"
 require "Utils/RoleInfo"
-----require "Bag/BagMgr"
---require "GameBattleSelect/GameBattleMapMgr"
---require "FairyUI/FairyMgr"
---require "FashionUI/FashionMgr"
---require "Task/TaskMgr"
---require "Task/SearchMgr"
---require "Guide/GuideManager"
---require "Utils/NewPromptMgr"
 require "Utils/TishiTimeMgr"
---require "GhostUI/GhostManager"
---require "GameBattleSelect/GameBattleNDBMgr"
---require "Friend/FriendMgr"
---require "Message/MessageMgr"
---require "FairySecret/FairySecretMgr"
---require "City/LuaHeadUpMgr"
---require "KingTower/KingTowerMgr"
---require "WDB/WDB_Vip"
---require "HelpUI/HelpTips"
---require "FlowerAndEgg/FlowerRedDotMgr"
---require "City/CitySceneIdMgr"
---require "GVG/GVGMgr"
---require "PushMessage/PushMessageMgr"
---require "BattleSceneUI/SettlementMgr"
---require "GamePlayConfig/Scene/DamageAniConfig"
 
 Client = {}
 
 ---------------------Variables------------------------
---PVP,PVE...net players
 Client.NetPlayers = {}
 Client.LoginPlayers = {}
 Client.ClientInfo = ClientInfo
 Client.RoleInfo = nil
 Client.WipeInfo = {}
---Client.ItemToolTip = nil
---Client.AwardItemTip = nil
---Client.GameBattleNDBMgr = GameBattleNDBMgr.Init()
 Client.PlatformInfo = {}
 Client.OpenUIWithType = {}
---Client.TotalFightObjCount = 0
--- Client.FriendMgr = FriendMgr
 
 EClientNetWorkState ={
     NOT_UNABLE = 0,
@@ -58,13 +29,8 @@ EClientState={
     E_CS_Table=2,
 }
 
-
-----------------FightPowerDelay---------------------
-Client.fightPowerDelay=false
-Client.lastFightPower=nil
 ----------------City init var-----------------------
 Client.m_CurrentState=EClientState.E_CS_Login
-Client.NetState = EClientNetWorkState.NORMAL
 Client.CurrentCityId = 0
 ---------------------Network------------------------
 
@@ -76,7 +42,7 @@ function Client.ListenNetwork( state,ip,port )
             Client.m_CurrentState = EClientState.E_CS_Reconect
             Client.lastIP = ip
             Client.lastPort = port
-            ClientInfo.isFirstLogin = false
+            --ClientInfo.isFirstLogin = false
             --Client.NetConnectFail()
         else
             Client.NetDisconnect()
@@ -87,8 +53,6 @@ function Client.ListenNetwork( state,ip,port )
         end
         Client.ConnectGoWrong:Do()
     end
-
-    Client.NetState = state
 end
 
 function Client.NetDisconnect()
@@ -108,10 +72,6 @@ end
 function Client.RetryConnect()
     LuaNetwork.DisConnect()
     local ret = LuaNetwork.Connect(Client.lastIP,Client.lastPort)
-    if ret then
-        Client.NetState = EClientNetWorkState.NORMAL
-        Client.ConnectSuccess:Do()
-    end
 end
 
 function Client.ShowServerListFunc()
@@ -127,7 +87,7 @@ function Client.RetryConnectByLastIp()
 end
 
 function Client.LogicCloseSocket()
-    Client.NetState = EClientNetWorkState.DISCONNECTED
+    LuaNetwork.DisConnect()
 end
 
 function Client.NetCloseSocket(reason)
@@ -176,93 +136,11 @@ function Client.PingCallBack(ping)
     end
 end
 
-function Client.GetEffectivePing(ping)
-    local pingsT = Client.RoleInfo.PingsT
-    table.sort(pingsT,function(data1,data2) return data1 > data2 end)
-    local effectDataSum = 0
-    local dataCount = #(pingsT)
-    local startIndex = 1
-    local endIndex = dataCount
-    local effectDataCount = dataCount
-
-    if dataCount >2 then
-        startIndex = 2
-        endIndex = dataCount-1
-        effectDataCount = dataCount - 2
-    end
-    for i = startIndex,endIndex do
-        effectDataSum = effectDataSum + pingsT[i]
-    end
-    local effectData = effectDataSum/effectDataCount
-
-    return effectData
-end
-
 function Client.PingReachThreshold()
     LuaNetwork.DisConnect()
     LuaMessageBox.ShowSingle(Text.PingTooHigh, function ()
         GameBase.DoGameExit()
     end)
-end
-
-function  Client.UpdateGVGTime()
-  if Client.updateGVGTimeEvent then
-      Client.RemoveGVGTimeUpdate()
-  end
-  if Client.RoleInfo.GVGMgr.battlefield == nil then
-      return
-  end
-  local leftTime = Client.RoleInfo.GVGMgr.battlefield.leftTime
-  if leftTime ~= nil and leftTime ~= 0 then
-      Client.updateGVGTimeEvent = Timer.NewGlobalEvent(10,leftTime*10,Client.UpdateGVGTimeHandle,false,nil)
-  end
-end
-
-function Client.UpdateGVGTimeHandle()
-    if Client.RoleInfo.GVGMgr.battlefield == nil then
-        return
-    end
-    Client.RoleInfo.GVGMgr.battlefield.leftTime = Client.RoleInfo.GVGMgr.battlefield.leftTime - 1
-    if Client.RoleInfo.GVGMgr.battlefield.leftTime == 0 then
-        Client.RemoveGVGTimeUpdate()
-    end
-end
-
-function Client.RemoveGVGTimeUpdate()
-    if Client.updateGVGTimeEvent then
-        Timer.RemoveGlobalEvent(Client.updateGVGTimeEvent)
-        Client.updateGVGTimeEvent = nil
-    end
-end
-
-function Client.UpdateGVGProgressStateTime()
-    if Client.updateGVGProgressEvent then
-        Client.RemoveGVGProgressStateTimeUpdate()
-    end
-    if Client.RoleInfo.CorpsMgr.GVGProgressTimeHint.countdown == 0 then
-        return
-    end
-    local leftTime = Client.RoleInfo.CorpsMgr.GVGProgressTimeHint.countdown
-    if leftTime ~= nil and leftTime ~= 0 then
-        Client.updateGVGProgressEvent = Timer.NewGlobalEvent(10,leftTime*10,Client.UpdateGVGProgressStateTimeHandle,false,nil)
-    end
-end
-
-function Client.UpdateGVGProgressStateTimeHandle()
-    if Client.RoleInfo.CorpsMgr.GVGProgressTimeHint.countdown == 0 then
-        return
-    end
-    Client.RoleInfo.CorpsMgr.GVGProgressTimeHint.countdown = Client.RoleInfo.CorpsMgr.GVGProgressTimeHint.countdown - 1
-    if Client.RoleInfo.CorpsMgr.GVGProgressTimeHint.countdown == 0 then
-        Client.RemoveGVGProgressStateTimeUpdate()
-    end
-end
-
-function Client.RemoveGVGProgressStateTimeUpdate()
-    if Client.updateGVGProgressEvent then
-        Timer.RemoveGlobalEvent(Client.updateGVGProgressEvent)
-        Client.updateGVGProgressEvent = nil
-    end
 end
 
 ------------------------ExitGame--------------------
@@ -301,20 +179,6 @@ end
 
 function Client.FuncApplicationPause(isPause)
     Client.ApplicationPause:Do(isPause)
-end
-
-function Client.EscapeBtnOnClick()
-    --LuaDebug.Log("escape")
-end
-
-function Client.GotoGodCity()
-    if not InOutBtnMoveCtr.IsActiveForSmallBtn("OpenFairy") then
-        TishiCentre.DisPlayText(Text.FairySystemTips)
-        return
-    end
-    Client.RoleInfo.FairyMgr:GotoGodCity(function ()
-        TishiCentre.DisPlayText(Text.FairyTrainTips)
-    end)
 end
 
 -----------------------------Events------------------------------

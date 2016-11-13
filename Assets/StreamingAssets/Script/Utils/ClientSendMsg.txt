@@ -8,29 +8,9 @@ ClientSendMsg = {}
 sendMsgNameTable =  Util.TableInvert(NetOpcodes_C2S)
 function ClientSendMsg.SendNetMsg(netCode,buffer,bufferLength )
 	LuaDebug.Log("sendId:"..netCode)
-	if Client.NetState == EClientNetWorkState.DISCONNECTED then
-		local lastIpStr = PlayerPrefsEx.GetString("LastIp")
-	    local lastPortStr = PlayerPrefsEx.GetString("LastPort")
-	    LuaDebug.Log("ip: "..lastIpStr..", prot: "..lastPortStr)
-	    LuaNetwork.DisConnect()
-	    local ret = LuaNetwork.Connect(lastIpStr, lastPortStr)
-		if ret then
-			Client.NetState = EClientNetWorkState.NORMAL
-		end
-	end
 	LuaNetwork.SendNetMessage(netCode,buffer,bufferLength)
 	Client.OpenLoadingUI()
 end
---[[
-function ClientSendMsg.SendEmptyMsg(netCode)
-		--LuaDebug.Log("sendId:"..netCode .. " " .. sendMsgNameTable[netCode])
-	LuaNetwork.SendNetEmptyMessage(netCode)
-end
-
-function ClientSendMsg.SendCastMsg(netCode,dataTypeId,buffer,bufferLength)
-	LuaNetwork.SendCastNetMessage(netCode,dataTypeId,buffer,bufferLength)
-end
---]]
 
 --Base type msg send
 function ClientSendMsg.SendIntMsg(netCode,intValue)

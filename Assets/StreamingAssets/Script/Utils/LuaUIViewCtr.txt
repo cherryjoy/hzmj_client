@@ -61,7 +61,7 @@ end
 
 function LuaUIViewCtr:SessionCreated()
     local clientState = Client.m_CurrentState
-    if Client.NetState ~= EClientNetWorkState.NORMAL and clientState~=EClientState.E_CS_Login and clientState ~= EClientState.E_CS_ChooseRole and clientState ~= EClientState.E_CS_Reconect then
+    if clientState~=EClientState.E_CS_Login and clientState ~= EClientState.E_CS_ChooseRole and clientState ~= EClientState.E_CS_Reconect then
        if not GameDefine_isLoginDebug then
            local platformInfo = Client.PlatformInfo
            local userId=platformInfo.userId
@@ -136,15 +136,6 @@ end
 
 --Listen event
 function LuaUIViewCtr:ApplicationPause(isPause)
-    if Client.m_CurrentState==EClientState.E_CS_PVEOne then
-        if isPause then
-            --pause only when fighting is going on
-            if SceneControl.self_():GameState() == 1  then
-                require "BattleSceneUI/GameBase"
-                GameBase.DoGamePause()
-            end
-        end
-    end
     if Application.get_platform()==ERuntimePlatform.IPhonePlayer then
         LuaUIViewCtr.LocalNotification(isPause)
     end

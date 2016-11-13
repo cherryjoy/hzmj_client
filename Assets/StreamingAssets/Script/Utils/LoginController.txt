@@ -11,6 +11,8 @@ LoginController = {}
 LoginPanel = {}
 function LoginController:Start()
     LuaDebug.Log("LoginController:Start")
+    Client.OpenLoadingUI()
+
     if Application.get_platform()==ERuntimePlatform.WindowsPlayer then
         PlayerPrefs.DeleteAll()
     end
@@ -72,7 +74,7 @@ function LoginController:Start()
     self.HeadUpParent:SetActive(false)
 
     --MapControl.get_Instance():LoadMap("Scene/level/scene_login_dawn","Scene/level/scene_login_dawn_env",false)
-    LoginController.SendServerListRequest(self)
+    --LoginController.SendServerListRequest(self)
 
     LoginController.Init(self)
 end
@@ -177,10 +179,19 @@ function LoginController:SeverListDownloadSuccss(xmlString)
        LoginController.InitServerList(self)
     end
     LoginController.ClearTimer(self)
-    LoginController.StartDownloadNoticeList(self)    --开始下载公告
-    LoginController.StartDownloadChargeList(self)    --开始下载充值配置
+    --LoginController.StartDownloadNoticeList(self)    --开始下载公告
+    --LoginController.StartDownloadChargeList(self)    --开始下载充值配置
     LoginController.CheakUpdate(self)
 
+    LuaDebug.Log("serverlist download success")
+    LoginController.DefaultServerLogic(self)          --连接服务器
+
+    Timer.NewEvent(self,20,20,LoginController.ShowStartGameBtn)
+end
+
+function LoginController:ShowStartGameBtn()
+    Client.CloseLoadingUI()
+    self.loginBtn:SetActive(true)
 end
 
 function LoginController:InitServerList()
@@ -322,10 +333,10 @@ function LoginController:DefaultServerLogic()
     end
 
     if ret then
-        if not ClientInfo.isFirstLogin then
+        --if not ClientInfo.isFirstLogin then
             Client.ConnectSuccess:Do()
-            ClientInfo.isFirstLogin = true
-        end
+        --    ClientInfo.isFirstLogin = true
+        --end
     end
 end
 

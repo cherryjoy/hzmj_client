@@ -63,10 +63,9 @@ end
 HandleFuncs[NetOpcodes_S2C.S2C_SESSION_CREATED] = function (data,dataLength)
     Client.ClientInfo.SessionID = LuaProto.deserializeLong(data,dataLength)
     -- Client.ConnectSuccess:Do()
-    ClientInfo.isFirstLogin = false
+    --ClientInfo.isFirstLogin = false
     ClientInfo.ServerTime.SetTimer()
     Client.SessionCreated:Do()
-    Client.NetState = EClientNetWorkState.NORMAL
 end
 
 HandleFuncs[NetOpcodes_S2C.S2C_SERVER_TIME] = function (data,dataLength)
@@ -75,10 +74,10 @@ HandleFuncs[NetOpcodes_S2C.S2C_SERVER_TIME] = function (data,dataLength)
         return
     end
     ClientInfo.ServerTime.TestNetWorkDelta(ServerTime)
-    if not ClientInfo.isFirstLogin then
+    --if not ClientInfo.isFirstLogin then
         Client.ConnectSuccess:Do()
-        ClientInfo.isFirstLogin = true
-    end
+    --    ClientInfo.isFirstLogin = true
+    --end
 end
 
 HandleFuncs[NetOpcodes_S2C.S2C_ERROR_CODE] = function (data,dataLength)
