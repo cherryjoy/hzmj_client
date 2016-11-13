@@ -108,6 +108,7 @@ Text = {
     TableDelete = "["..ColorFilter.Color_51BF53.."]房间【%d】[-]被["..ColorFilter.Color_51BF53.."]【%s】[-]删除了",
     RecordVoiceTimeShort = "录音时间太短",
     RecordVoiceSend = "手指松开发送",
+    AdminRoleName = "系统",
 }
 
 TextSever = {

@@ -32,9 +32,9 @@ function TableBottom:CardInfoSync(handcard)
     for i = 1, handCardNum do
         local card = handcard[i]
         --LuaDebug.Log("card.type_id: "..card.type_id..", card.code_id: "..card.code_id)
-        if i <= 5 then
-            card = handcard[1]
-        end
+        ---if i <= 5 then
+        ---    card = handcard[1]
+        ---end
 
         local ref = nil
         if i == 14 then
@@ -467,6 +467,7 @@ function TableBottom:HandleTingCard(cards)
     self.TingCard:SetActive(true)
     -- 计算长度
     self.TingBG:set_width(109 + (num - 1)*28)
+    self.TingBG:MarkAsChanged()
 
     -- 生成牌
     for i = 1, num do

@@ -4,11 +4,11 @@ function MJTableCtrl:Start( )
     local mt=TextureMgr.get_Instance():LoadTexture("MJTable/MJTable", true)
     self.Texture:set_material(mt)
 
-    if Application.get_platform()==ERuntimePlatform.WindowsPlayer or Application.get_platform()==ERuntimePlatform.WindowsEditor then
+    --if Application.get_platform()==ERuntimePlatform.WindowsPlayer or Application.get_platform()==ERuntimePlatform.WindowsEditor then
         if self.DebugWin ~= nil then
             self.DebugWin:SetActive(true)
         end
-    end
+    --end
 
     Client.BottomPlayCard = Client.BottomPlayCard + {self, MJTableCtrl.HandlePlayCard}
     Client.ResetToward = Client.ResetToward + {self, MJTableCtrl.ResetToward}
@@ -361,6 +361,8 @@ end
 function MJTableCtrl:Win_OnClick()
     ClientSendMsg.SendWinGame()
 
+    PlatformHandler.CallShare("", "", "", "screenshot.png")
+
     self.ResultCard:SetActive(false)
     --[[
     local card = {}
@@ -530,10 +532,14 @@ end
 
 function MJTableCtrl:DeleteTable(roleId)
     local roleName  = ""
-    for i = 1, #(self.roleList) do
-        if self.roleList[i].roleid == roleId then
-            roleName = self.roleList[i].rolename
-            break
+    if roleId == 0 then
+        roleName = Text.AdminRoleName
+    else
+        for i = 1, #(self.roleList) do
+            if self.roleList[i].roleid == roleId then
+                roleName = self.roleList[i].rolename
+                break
+            end
         end
     end
 
