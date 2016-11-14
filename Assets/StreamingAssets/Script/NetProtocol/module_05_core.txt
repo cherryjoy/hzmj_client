@@ -415,11 +415,14 @@ function RoleStateInfo.DeSerialize(obj)
 	if(has_optional_flag(1,optionLength,option)) then
 		obj.state = deserialize_int32()
 	end
+	if(has_optional_flag(2,optionLength,option)) then
+		obj.makers = deserialize_int32()
+	end
 	return obj
 end
 
 function RoleStateInfo.Serialize(obj)
-	local fieldCount = 2
+	local fieldCount = 3
 	serialize_int32(fieldCount)
 	local flag = {}
 	if(obj.roleid ~= nil) then
@@ -432,12 +435,20 @@ function RoleStateInfo.Serialize(obj)
 	else
 		flag[2] = false
 	end
+	if(obj.makers ~= nil) then
+		flag[3] = true
+	else
+		flag[3] = false
+	end
 	serialize_optional(flag)
 	if(obj.roleid ~= nil) then
 		serialize_int32(obj.roleid)
 	end
 	if(obj.state ~= nil) then
 		serialize_int32(obj.state)
+	end
+	if(obj.makers ~= nil) then
+		serialize_int32(obj.makers)
 	end
 end
 
@@ -447,6 +458,9 @@ function RoleStateInfo.GetSize(obj)
 		size = size + 4
 	end
 	if (obj.state ~= nil) then
+		size = size + 4
+	end
+	if (obj.makers ~= nil) then
 		size = size + 4
 	end
 	size = size + 6

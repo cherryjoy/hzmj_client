@@ -4,11 +4,11 @@ function MJTableCtrl:Start( )
     local mt=TextureMgr.get_Instance():LoadTexture("MJTable/MJTable", true)
     self.Texture:set_material(mt)
 
-    --if Application.get_platform()==ERuntimePlatform.WindowsPlayer or Application.get_platform()==ERuntimePlatform.WindowsEditor then
+    if Application.get_platform()==ERuntimePlatform.WindowsPlayer or Application.get_platform()==ERuntimePlatform.WindowsEditor then
         if self.DebugWin ~= nil then
             self.DebugWin:SetActive(true)
         end
-    --end
+    end
 
     Client.BottomPlayCard = Client.BottomPlayCard + {self, MJTableCtrl.HandlePlayCard}
     Client.ResetToward = Client.ResetToward + {self, MJTableCtrl.ResetToward}
@@ -201,6 +201,13 @@ function MJTableCtrl:GameReady(roleStateList)
             if self["Drect"..j].roleId == roleStateList[i].roleid then
                 if roleStateList[i].state ~= 0 then
                     self["Drect"..j].Ready:SetActive(true)
+                end
+
+                -- 刷新庄主信息
+                if roleStateList[i].makers == 0 then
+                    self["Drect"..j].TableHead.Zhuang:SetActive(false)
+                else
+                    self["Drect"..j].TableHead.Zhuang:SetActive(true)
                 end
             end
         end

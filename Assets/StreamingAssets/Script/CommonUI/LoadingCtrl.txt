@@ -2,7 +2,7 @@ LoadingCtrl = {}
 
 function LoadingCtrl:Start( )
     --self.num = 0
-    Timer.NewEvent(self,10,10,LoadingCtrl.ShowUI, false, nil)
+    Timer.NewEvent(self,20,20,LoadingCtrl.ShowUI, false, nil)
     Timer.NewEvent(self,80,80,LoadingCtrl.TimeOut, false, nil)
 end
 
