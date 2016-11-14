@@ -184,7 +184,6 @@ function MJTableCtrl:InitRoleList(myDirect, roleList)
 
         local roleInfo = roleList[index]
         if roleInfo ~= nil then
-            roleInfo.integral = 0
             if self["Drect"..idx].TableHead == nil then
                 self["Drect"..idx].SetHeadInfo(self["Drect"..idx], roleInfo, self.TowardCard)
             end
