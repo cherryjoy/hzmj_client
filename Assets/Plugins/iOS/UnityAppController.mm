@@ -575,8 +575,8 @@ extern "C"
             CGSize size = img.size;
             CGFloat width = size.width;
             CGFloat height = size.height;
-            CGFloat scaledWidth = 800;//width*0.05;
-            CGFloat scaledHeight = 800*(height/width);
+            CGFloat scaledWidth = 400;//width*0.05;
+            CGFloat scaledHeight = 400*(height/width);
             UIGraphicsBeginImageContext(size);//thiswillcrop
             [img drawInRect:CGRectMake(0,0,scaledWidth,scaledHeight)];
             UIImage* newImage=UIGraphicsGetImageFromCurrentImageContext();
