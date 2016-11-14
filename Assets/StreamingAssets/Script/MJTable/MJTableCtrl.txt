@@ -234,6 +234,7 @@ end
 
 function MJTableCtrl:HandlePlayCard(roleId, index, card, result)
     if roleId == self.Drect1.roleId and result ~= nil then
+        Client.BottomPlayCard:Do(roleId, index, card)
         return
     end
 
@@ -341,10 +342,7 @@ function MJTableCtrl:DoCountDownFinish()
 end
 
 function MJTableCtrl:Peng_OnClick()
-    local index = self.Drect1.HandlePengCard(self.Drect1, self.tempCard, self.tempRoleId)
-    ClientSendMsg.SendPengCard(index, self.tempCard.type_id, self.tempCard.code_id, self.tempRoleId)
-
-    self.ResultCard:SetActive(false)
+    ClientSendMsg.SendPengCard(1, self.tempCard.type_id, self.tempCard.code_id, self.tempRoleId)
 end
 
 function MJTableCtrl:Gang_OnClick()
@@ -362,7 +360,6 @@ function MJTableCtrl:Win_OnClick()
 
     PlatformHandler.CallShare("", "", "", "screenshot.png")
 
-    self.ResultCard:SetActive(false)
     --[[
     local card = {}
     card.type_id = 0
@@ -394,6 +391,8 @@ function MJTableCtrl:HandlePengCard(roleId, index, card, srcRoleId)
 
     -- 自己可以打牌了
     if roleId == self.Drect1.roleId then
+        self.Drect1.HandlePengCard(self.Drect1, card, self.tempRoleId)
+        self.ResultCard:SetActive(false)
         self.Drect1.CanPlayCard = true
     end
 end
@@ -434,6 +433,8 @@ function MJTableCtrl:HandleWinGame(roleId, count, cards)
 
     local ref = LuaUIViewCtr.OpenUIHasBg("MJTable/WinGame")
     ref.Init(ref, roleId, count, cards)
+
+    self.ResultCard:SetActive(false)
 end
 
 function MJTableCtrl:ResetToward()
