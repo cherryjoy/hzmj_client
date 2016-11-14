@@ -69,7 +69,7 @@ Transform:
   m_GameObject: {fileID: 118380}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: -1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 449652}
@@ -131,7 +131,7 @@ MonoBehaviour:
   mDepth: 19
   mIsHidePanel: 0
   mAtlas: {fileID: 11410790, guid: 05dc6a2920cf0464d9fadc29033bf794, type: 2}
-  mSpriteName: tile_leftRight_9
+  mSpriteName: tile_leftRight_7
   IsKeepOriSize: 0
 --- !u!114 &11479110
 MonoBehaviour:

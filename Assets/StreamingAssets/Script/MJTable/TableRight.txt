@@ -103,9 +103,6 @@ function TableRight:SetPlayCard(card)
     local spriteName = MJTableCtrl.GetLeftRightCardSprite(card)
     ref.Card:set_spriteName(spriteName)
     ref.Card:MakePixelPerfectWithSizeInAtlas()
-    if card.type_id == enumCARD_TYPE.CARD_WANG_TYPE or card.type_id == enumCARD_TYPE.CARD_HONG_TYPE then
-        ref.Card:get_transform():set_localScale(LuaVector3.Create(1, -1, 1))
-    end
 
     local row = math.floor(self.PlayNum / 6)
     local colum = self.PlayNum % 6
