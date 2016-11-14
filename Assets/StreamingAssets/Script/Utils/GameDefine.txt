@@ -17,4 +17,3 @@ GameDefine_IsDefaultAuth = true
 GameDefine_isLoginDebug = true
 GameDefine_InitConfig = '"appkey":"appkey"'
 GameDefine_ProductName = "red"
-GameDefine_InvitewebPage = "http://www.cherryjoy.com"

@@ -176,7 +176,9 @@ function LoginController:SeverListDownloadSuccss(xmlString)
     if self.doc ~= nil then
         Client.voiceUrl = self.doc.kids[2].el[1].attr.voiceurl
         LuaDebug.Log("voiceUrl: "..Client.voiceUrl)
+        Client.inviteUrl = self.doc.kids[2].el[1].attr.inviteurl
        LoginController.InitServerList(self)
+       LuaDebug.Log("inviteUrl: "..Client.inviteUrl)
     end
     LoginController.ClearTimer(self)
     --LoginController.StartDownloadNoticeList(self)    --开始下载公告

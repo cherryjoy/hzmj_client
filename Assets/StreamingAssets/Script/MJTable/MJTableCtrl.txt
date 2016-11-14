@@ -514,7 +514,7 @@ end
 function MJTableCtrl:Invite_OnClick()
     local title = string.format(Text.InviteTitle, self.roomId)
     local desc = string.format(Text.InviteContext, Client.RoleInfo.Amount, self.horse, self.beishu)
-    PlatformHandler.CallShare(title, desc, GameDefine_InvitewebPage, "")
+    PlatformHandler.CallShare(title, desc, Client.inviteUrl, "")
 end
 
 function MJTableCtrl:HandleGameReenterStateSync(data)
