@@ -205,4 +205,5 @@ end
 
 function TableLeft:TableClear()
     TableLeft.Clear(self)
+    self.GetCard:SetActive(false)
 end

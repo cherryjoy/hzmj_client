@@ -207,4 +207,5 @@ end
 
 function TableRight:TableClear()
     TableRight.Clear(self)
+    self.GetCard:SetActive(false)
 end

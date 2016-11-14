@@ -201,8 +201,9 @@ function TableTop:RemoveHandCard(numTotal)
         table.remove(self.handCard, 1)
         ref.TopCard:Destroy1()
     end
-end
+endClear
 
 function TableTop:TableClear()
     TableTop.Clear(self)
+    self.GetCard:SetActive(false)
 end
