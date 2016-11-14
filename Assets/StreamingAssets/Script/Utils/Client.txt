@@ -45,7 +45,6 @@ function Client.ListenNetwork( state,ip,port )
             --ClientInfo.isFirstLogin = false
             --Client.NetConnectFail()
         else
-            Client.NetDisconnect()
             if Client.m_CurrentState == EClientState.E_CS_Table then
                 local ref = LuaMessageBox.ShowSingle(Text.Disconnected, nil, Text.Confirm, self)
                 ref.button_Single:SetActive(false)
@@ -53,11 +52,6 @@ function Client.ListenNetwork( state,ip,port )
         end
         Client.ConnectGoWrong:Do()
     end
-end
-
-function Client.NetDisconnect()
-    --require "BattleSceneUI/GameBase"
-	--GameBase.GameExit()
 end
 
 function Client.NetConnectFail()
@@ -86,10 +80,6 @@ function Client.RetryConnectByLastIp()
     LuaNetwork.Connect(lastIpStr, lastPortStr)
 end
 
-function Client.LogicCloseSocket()
-    LuaNetwork.DisConnect()
-end
-
 function Client.NetCloseSocket(reason)
     -- EMCJ_LEAVE_REPEAT_LOGIN 3，帐号在其他设备登录，只能杀进程了
     if reason == enumEMCJLogInOutReason.EMCJ_LEAVE_REPEAT_LOGIN then
@@ -98,7 +88,7 @@ function Client.NetCloseSocket(reason)
         return
     end
 
-    Client.LogicCloseSocket()
+    LuaNetwork.DisConnect()
     --[[
     local prefab = LuaUIViewCtr.OpenUIHasBg("ToolsUI/MessageBox")
     LuaMessageBox.SetDataTable(prefab, {Message = Text.ConnectError.."，代码："..reason,
@@ -121,26 +111,32 @@ function Client.CloseLoadingUI()
     end
 end
 
-Client.PingThreshold = 3000
-Client.PvpPingInterval = 1
-Client.NormalPingInterval = 5
-function Client.PingCallBack(ping)
-    if not Client.RoleInfo.PingsT then
-        Client.RoleInfo.PingsT = {}
-    end
-    local pingsT = Client.RoleInfo.PingsT
-    table.insert(pingsT,ping)
-    local effectPing = Client.GetEffectivePing(ping)
-    if effectPing > Client.PingThreshold then
+Client.PingThreshold = 2*60*10000000
+Client.SendPingThreshold = 1*60*10000000
+
+-- ticks 100纳秒   100 毫微秒
+function Client.CheckPing()
+    -- 如果差值大于2分钟，则提示玩家网络异常
+    if LuaDateTime.LongLess(LuaDateTime.LongAdd(Client.PingTime, long_get(Client.PingThreshold)), LuaDateTime.Ticks_Now()) then
         Client.PingReachThreshold()
+        return
+    end
+
+    -- 如果这个差值大于1分钟，则向服务器发送心跳消息
+    --LuaDebug.Log("Client.PingTime: "..long_to_id(Client.PingTime))
+    --LuaDebug.Log("Ticks_Now: "..long_to_id(LuaDateTime.Ticks_Now()))
+    if LuaDateTime.LongLess(LuaDateTime.LongAdd(Client.PingTime, long_get(Client.SendPingThreshold)), LuaDateTime.Ticks_Now()) then
+        ClientSendMsg.SendGameHeartBeat()
     end
 end
 
 function Client.PingReachThreshold()
     LuaNetwork.DisConnect()
-    LuaMessageBox.ShowSingle(Text.PingTooHigh, function ()
-        GameBase.DoGameExit()
-    end)
+    local ref = LuaMessageBox.ShowSingle(Text.Disconnected, nil, Text.Confirm, self)
+    ref.button_Single:SetActive(false)
+
+    Timer.RemoveGlobalEvent(Client.PingGlobalTimer)
+    Client.PingGlobalTimer = nil
 end
 
 ------------------------ExitGame--------------------
@@ -149,8 +145,6 @@ function Client.SuccessExitGame()
     if Application.get_loadedLevelName() ~= 'Login' then
         UnityLevelMgr.LoadLevel("Login")
     end
-    Client.RemoveGVGTimeUpdate()
-    Client.RemoveGVGProgressStateTimeUpdate()
 end
 
 -------------------------Event Function Called From C#-----------------
@@ -197,7 +191,6 @@ Client.LoginSuccess = Event.Create()
 Client.ConnectSuccess = Event.Create()
 Client.ConnectGoWrong = Event.Create()
 Client.NeedUpdateGame = Event.Create()
---Client.NetDisconnect = Event.Create()
 Client.LoginBeReplaced = Event.Create()
 Client.ShowServerList = Event.Create()
 Client.LoginAccountExit = Event.Create()

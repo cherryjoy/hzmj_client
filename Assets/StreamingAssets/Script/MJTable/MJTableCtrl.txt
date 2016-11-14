@@ -40,6 +40,10 @@ function MJTableCtrl:Init(passwd, horse, beishu, rolelist)
     local angle = self.Direction:get_transform():get_localEulerAngles():z() - (myDirect - 1)*90
     self.Direction:get_transform():set_localEulerAngles(LuaVector3.Create(0, 0, angle))
     self.TimerBack:set_spriteName(spriteName)
+
+    Client.m_CurrentState = EClientState.E_CS_Table
+    Client.PingTime = LuaDateTime.Ticks_Now()
+    Client.PingGlobalTimer = Timer.NewGlobalEvent(60,10*60*60*24,Client.CheckPing,false,nil)
 end
 
 function MJTableCtrl:SetJuShuPaiShu()
@@ -47,7 +51,6 @@ function MJTableCtrl:SetJuShuPaiShu()
 end
 
 function MJTableCtrl:EnterRoomSync(rolelist)
-    Client.m_CurrentState = EClientState.E_CS_Table
     LuaDebug.Log("rolelist: "..#rolelist)
     for i = 1, #rolelist do
         --LuaDebug.Log("roleList[i].roleid: "..rolelist[i].roleid)
@@ -452,6 +455,8 @@ end
 
 function MJTableCtrl:TableClose()
     Client.m_CurrentState = EClientState.E_CS_Hall
+    Timer.RemoveGlobalEvent(Client.PingGlobalTimer)
+    Client.PingGlobalTimer = nil
     self.gameObject:Destroy1()
     LuaUIViewCtr.UIPanel["MJTableUI"] = nil
 end

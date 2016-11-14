@@ -18,6 +18,7 @@ enumMSGID_MODULE_05 = {
 	ID_GAME_GANG_CARD_RES = 1296,
 	ID_GAME_WIN_GAME_REQ = 1297,
 	ID_GAME_WIN_GAME_RES = 1298,
+	ID_GAME_ROOM_CARD_REQ = 1299,
 	ID_GAME_ROOM_CARD_SYNC = 1300,
 	ID_GAME_RESULT_REQ = 1301,
 	ID_GAME_RESULT_RES = 1302,
@@ -38,6 +39,8 @@ enumMSGID_MODULE_05 = {
 	ID_GAME_REENTER_STATE_SYNC = 1318,
 	ID_GAME_ROOM_CHAT_REQ = 1319,
 	ID_GAME_ROOM_CHAT_RES = 1320,
+	ID_GAME_HEARTBEAT_REQ = 1321,
+	ID_GAME_HEARTBEAT_RES = 1322,
 	ID_MODULE_05_END = 1535,
 }
 
@@ -2191,6 +2194,33 @@ function PBTableCardInfo.GetSize(obj)
 	return size
 end
 
+-- PBRoomCardInfoReq
+PBRoomCardInfoReq = {}
+PBRoomCardInfoReq.__index = PBRoomCardInfoReq
+function PBRoomCardInfoReq.Create()
+	local obj = setmetatable({},PBRoomCardInfoReq)
+	return obj
+end
+
+function PBRoomCardInfoReq.DeSerialize(obj)
+	local fieldCount = deserialize_int32()
+	local option,optionLength = deserialize_optional()
+	return obj
+end
+
+function PBRoomCardInfoReq.Serialize(obj)
+	local fieldCount = 0
+	serialize_int32(fieldCount)
+	local flag = {}
+	serialize_optional(flag)
+end
+
+function PBRoomCardInfoReq.GetSize(obj)
+	local size = 0
+	size = size + 5
+	return size
+end
+
 -- PBRoomCardInfoSync
 PBRoomCardInfoSync = {}
 PBRoomCardInfoSync.__index = PBRoomCardInfoSync
@@ -3394,11 +3424,15 @@ function PBMsgGameResultRes.DeSerialize(obj)
 			end
 		end
 	end
+
+	if (fieldCount >= 7) then
+		obj.role_list = deserialize_int32_array()
+	end
 	return obj
 end
 
 function PBMsgGameResultRes.Serialize(obj)
-	local fieldCount = 6
+	local fieldCount = 7
 	serialize_int32(fieldCount)
 	local flag = {}
 	if(obj.roleid ~= nil) then
@@ -3485,6 +3519,7 @@ function PBMsgGameResultRes.Serialize(obj)
 	else
 		serialize_int32(0)
 	end
+	serialize_int32_array(obj.role_list)
 end
 
 function PBMsgGameResultRes.GetSize(obj)
@@ -3519,7 +3554,12 @@ function PBMsgGameResultRes.GetSize(obj)
 			size = size + (obj.code_cards[i]):GetSize()
 		end
 	end
-	size = size + 31
+	if (obj.role_list ~= nil) then
+		for i=1,#(obj.role_list) do
+			size = size + 4
+		end
+	end
+	size = size + 36
 	return size
 end
 
@@ -4504,6 +4544,60 @@ function PBMsgGameRoomChatRes.GetSize(obj)
 		size = size + 4
 	end
 	size = size + 6
+	return size
+end
+
+-- PBMsgGameHeartbeatReq
+PBMsgGameHeartbeatReq = {}
+PBMsgGameHeartbeatReq.__index = PBMsgGameHeartbeatReq
+function PBMsgGameHeartbeatReq.Create()
+	local obj = setmetatable({},PBMsgGameHeartbeatReq)
+	return obj
+end
+
+function PBMsgGameHeartbeatReq.DeSerialize(obj)
+	local fieldCount = deserialize_int32()
+	local option,optionLength = deserialize_optional()
+	return obj
+end
+
+function PBMsgGameHeartbeatReq.Serialize(obj)
+	local fieldCount = 0
+	serialize_int32(fieldCount)
+	local flag = {}
+	serialize_optional(flag)
+end
+
+function PBMsgGameHeartbeatReq.GetSize(obj)
+	local size = 0
+	size = size + 5
+	return size
+end
+
+-- PBMsgGameHeartbeatRes
+PBMsgGameHeartbeatRes = {}
+PBMsgGameHeartbeatRes.__index = PBMsgGameHeartbeatRes
+function PBMsgGameHeartbeatRes.Create()
+	local obj = setmetatable({},PBMsgGameHeartbeatRes)
+	return obj
+end
+
+function PBMsgGameHeartbeatRes.DeSerialize(obj)
+	local fieldCount = deserialize_int32()
+	local option,optionLength = deserialize_optional()
+	return obj
+end
+
+function PBMsgGameHeartbeatRes.Serialize(obj)
+	local fieldCount = 0
+	serialize_int32(fieldCount)
+	local flag = {}
+	serialize_optional(flag)
+end
+
+function PBMsgGameHeartbeatRes.GetSize(obj)
+	local size = 0
+	size = size + 5
 	return size
 end
 

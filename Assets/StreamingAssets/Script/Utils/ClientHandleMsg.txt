@@ -27,8 +27,12 @@ function ClientHandleMsg.Handle(msgId,data,dataLength)
       handleFunc(data,dataLength)
     end
     Client.ServerMsgGet:Do(msgId)
-    if msgId ~= enumMSGID_MODULE_05.ID_ROLE_SESSION_ID_NOTICE then
+    if msgId ~= enumMSGID_MODULE_05.ID_ROLE_SESSION_ID_NOTICE and msgId ~= enumMSGID_MODULE_05.ID_GAME_HEARTBEAT_RES then
         Client.CloseLoadingUI()
+    end
+
+    if Client.m_CurrentState == EClientState.E_CS_Table then
+        Client.PingTime = LuaDateTime.Ticks_Now()
     end
 end
 --------------------------------------
@@ -253,4 +257,9 @@ HandleFuncs[enumMSGID_MODULE_05.ID_GAME_ROOM_CHAT_RES] = function(data, dataLeng
     local data = LuaProto.deserialize(PBMsgGameRoomChatRes, data, dataLength)
 
     LuaUIViewCtr.UIPanel["MJTableUI"].HandleGameRoomChat(LuaUIViewCtr.UIPanel["MJTableUI"], data.type_id, data.chat, data.roleid)
+end
+
+HandleFuncs[enumMSGID_MODULE_05.ID_GAME_HEARTBEAT_RES] = function(data, dataLength)
+    local data = LuaProto.deserialize(PBMsgGameHeartbeatRes, data, dataLength)
+
 end

@@ -9,7 +9,9 @@ sendMsgNameTable =  Util.TableInvert(NetOpcodes_C2S)
 function ClientSendMsg.SendNetMsg(netCode,buffer,bufferLength )
 	LuaDebug.Log("sendId:"..netCode)
 	LuaNetwork.SendNetMessage(netCode,buffer,bufferLength)
-	Client.OpenLoadingUI()
+	if netCode ~= enumMSGID_MODULE_05.ID_GAME_HEARTBEAT_REQ then
+		Client.OpenLoadingUI()
+	end
 end
 
 --Base type msg send
@@ -255,4 +257,11 @@ function ClientSendMsg.SendGameRoomChat(typeId, context)
 
 	local buffer, length = LuaProto.serialize(data)
 	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_ROOM_CHAT_REQ, buffer, length)
+end
+
+function ClientSendMsg.SendGameHeartBeat()
+	local data = PBMsgGameHeartbeatReq.Create()
+
+	local buffer, length = LuaProto.serialize(data)
+	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_HEARTBEAT_REQ, buffer, length)
 end
