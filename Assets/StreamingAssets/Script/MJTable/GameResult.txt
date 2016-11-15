@@ -52,6 +52,8 @@ function GameResult:Init(data, roleList)
          self.Ready:SetActive(false)
          self.Share:SetActive(false)
          Timer.NewEvent(self,40,40,GameResult.GetResult, false, nil)
+     else
+        Client.RoleInfo.Used = Client.RoleInfo.Used + 1
      end
  end
 
@@ -63,7 +65,6 @@ end
 
 function GameResult:Ready_OnClick()
     --发送准备协议
-    Client.RoleInfo.Used = Client.RoleInfo.Used + 1
     ClientSendMsg.SendReadyRoom()
 
     --self.gameObject:Destroy1()
