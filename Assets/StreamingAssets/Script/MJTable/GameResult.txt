@@ -52,8 +52,6 @@ function GameResult:Init(data, roleList)
          self.Ready:SetActive(false)
          self.Share:SetActive(false)
          Timer.NewEvent(self,40,40,GameResult.GetResult, false, nil)
-     else
-        Client.RoleInfo.Used = Client.RoleInfo.Used + 1
      end
  end
 
