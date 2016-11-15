@@ -152,7 +152,7 @@ end
 
 function ClientSendMsg.SendReadyRoom()
 	local data = PBMsgReadyReq.Create()
-	data.used = Client.RoleInfo.Used
+	--data.used = Client.RoleInfo.Used
 
 	local buffer,length = LuaProto.serialize(data)
 	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_READY_REQ, buffer, length)
