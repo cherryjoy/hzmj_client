@@ -577,11 +577,16 @@ extern "C"
             CGFloat height = size.height;
             CGFloat scaledWidth = 400;//width*0.05;
             CGFloat scaledHeight = 400*(height/width);
-            UIGraphicsBeginImageContext(size);//thiswillcrop
+            UIGraphicsBeginImageContext(CGSizeMake(scaledWidth,scaledHeight));//thiswillcrop
             [img drawInRect:CGRectMake(0,0,scaledWidth,scaledHeight)];
             UIImage* newImage=UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
-            [message setThumbImage:newImage];
+            NSData *compImg = UIImageJPEGRepresentation(newImage, 0.5);
+            [message setThumbImage:[UIImage imageWithData:compImg]];
+            
+            UIImage *imgJPeg = [UIImage imageWithData:compImg];//建立UIIMage为jpeg格式
+            UIImageWriteToSavedPhotosAlbum(imgJPeg,nil,nil,nil);//保存到相册
+            
             SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
             req.bText = NO;
             req.message = message;
