@@ -8,17 +8,6 @@ function UnityLevelMgr.LoadLevel (levelName,sceneId)
         SceneManager.LoadScene1(levelName,1)
     else
         Client.CurrentCityId = 0
-        --[[
-        if levelName == "Login" then
-            if Application.get_platform()==ERuntimePlatform.WindowsPlayer or Application.get_platform()==ERuntimePlatform.WindowsEditor then
-               SceneManager.LoadScene("Resources/Scene/level/scene_login_dawn")
-           else
-               ResLoader.Load("Scene/level/scene_login_dawn")
-               SceneManager.LoadScene("scene_login_dawn")
-           end
-
-       end
-       --]]
         SceneManager.LoadScene1(levelName,1)
     end
 

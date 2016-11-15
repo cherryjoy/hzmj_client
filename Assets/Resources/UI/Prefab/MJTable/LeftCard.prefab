@@ -103,7 +103,7 @@ MonoBehaviour:
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 27
-  mHeight: 61
+  mHeight: 59
   mDepth: 2
   mIsHidePanel: 0
   mAtlas: {fileID: 11410790, guid: 05dc6a2920cf0464d9fadc29033bf794, type: 2}

@@ -23,6 +23,7 @@ Text = {
     Save = "保存",
     NoSave ="不保存",
     Disconnected = "网络连接失败，请重新登录",
+    MsgNotReturn = "网络消息发送失败，请确保网络畅通后重试",
     PingTooHigh = "您目前的网速较慢，请提高网速后再进行PK对战。建议在WiFi或3/4G网络下PK",
     Setting = "设置",
     Back = "返回",
@@ -105,10 +106,11 @@ Text = {
     BalanceRoleId = "ID:%d",
     InviteTitle = "红中麻将房间号【%d】",
     InviteContext = "我在[樱桃红中麻将]开了%d局，%d个码，%d倍的房间，快来一起玩吧",
-    TableDelete = "["..ColorFilter.Color_51BF53.."]房间【%d】[-]被["..ColorFilter.Color_51BF53.."]【%s】[-]删除了",
+    TableDelete = "["..ColorFilter.Color_51BF53.."]房间【%d】[-]被["..ColorFilter.Color_51BF53.."]【%s】[-]解散了",
     RecordVoiceTimeShort = "录音时间太短",
     RecordVoiceSend = "手指松开发送",
     AdminRoleName = "系统",
+    CreateRoomNotCards = "房卡不足",
 }
 
 TextSever = {

@@ -29,7 +29,7 @@ function TableTop:CardInfoSync(handnum)
     end
 
     local pos = self.Grid:get_transform():get_localPosition()
-    local posX = pos:X() + self.Grid:cellWidth()*(13 - handnum)
+    local posX = -220 + self.Grid:cellWidth()*(13 - handnum)
     self.Grid:get_transform():set_localPosition(LuaVector3.Create(posX, pos:y(), pos:z()))
     self.Grid:Reposition()
 end
@@ -92,9 +92,6 @@ function TableTop:SetLeftCard(card)
 end
 
 function TableTop:LeftCardReposition()
-    --local pos = self.LeftCardGrid:get_transform():get_localPosition()
-    --local posX = pos:X() + self.LeftCardGrid:cellWidth()*self.LeftNum
-    --self.LeftCardGrid:get_transform():set_localPosition(LuaVector3.Create(posX, pos:y(), pos:z()))
     self.LeftCardGrid:Reposition()
 end
 

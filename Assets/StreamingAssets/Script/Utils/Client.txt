@@ -175,6 +175,15 @@ function Client.FuncApplicationPause(isPause)
     Client.ApplicationPause:Do(isPause)
 end
 
+function Client.IsDebugPlatform()
+    if GameDefine_isLoginDebug == nil or GameDefine_isLoginDebug == true or
+    Application.get_platform()==ERuntimePlatform.WindowsPlayer or Application.get_platform()==ERuntimePlatform.WindowsEditor then
+        return true
+    end
+
+    return false
+end
+
 -----------------------------Events------------------------------
 
 -----common

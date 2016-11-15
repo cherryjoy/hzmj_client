@@ -4,7 +4,7 @@ function MJTableCtrl:Start( )
     local mt=TextureMgr.get_Instance():LoadTexture("MJTable/MJTable", true)
     self.Texture:set_material(mt)
 
-    if Application.get_platform()==ERuntimePlatform.WindowsPlayer or Application.get_platform()==ERuntimePlatform.WindowsEditor then
+    if Client.IsDebugPlatform() then
         if self.DebugWin ~= nil then
             self.DebugWin:SetActive(true)
         end
@@ -55,8 +55,8 @@ function MJTableCtrl:EnterRoomSync(rolelist)
     for i = 1, #rolelist do
         --LuaDebug.Log("roleList[i].roleid: "..rolelist[i].roleid)
         --LuaDebug.Log("roleList[i].direct: "..rolelist[i].direct)
-        --LuaDebug.Log("roleList[i].rolename: "..rolelist[i].rolename)
-        --LuaDebug.Log("roleList[i].integral: "..rolelist[i].integral)
+        LuaDebug.Log("roleList[i].rolename: "..rolelist[i].rolename)
+        LuaDebug.Log("roleList[i].integral: "..rolelist[i].integral)
     end
 
     MJTableCtrl.InitRoleList(self, self.myDirect, rolelist)
@@ -212,6 +212,13 @@ function MJTableCtrl:GameReady(roleStateList)
                 else
                     self["Drect"..j].TableHead.Zhuang:SetActive(true)
                 end
+
+                -- 刷新rolelist中的庄主信息
+                for k = 1, #(self.roleList) do
+                    if self.roleList[k].roleid == roleStateList[i].roleid then
+                        self.roleList[k].makers = roleStateList[i].makers
+                    end
+                end
             end
         end
     end
@@ -243,10 +250,9 @@ function MJTableCtrl:IsPengGang(roleId, card)
 end
 
 function MJTableCtrl:HandlePlayCard(roleId, index, card, result)
-    if roleId == self.Drect1.roleId and result ~= nil then
-        Client.BottomPlayCard:Do(roleId, index, card)
-        return
-    end
+    --if roleId == self.Drect1.roleId and result ~= nil then
+    --    return
+    --end
 
     LuaDebug.Log("roleId: "..roleId..", play card, type: "..card.type_id..", id: "..card.code_id)
     -- 播放出牌
@@ -255,8 +261,10 @@ function MJTableCtrl:HandlePlayCard(roleId, index, card, result)
     self.TowardCard:SetActive(true)
     MJTableCtrl.DoCountDownFinish(self)
     -- 判断当前的牌是否能碰、杠
-    if result ~= nil and result ~= 0 then
-        MJTableCtrl.IsPengGang(self, roleId, card)
+    if roleId ~= self.Drect1.roleId then
+        if result ~= 0 then
+            MJTableCtrl.IsPengGang(self, roleId, card)
+        end
     end
 
     for i = 1, 4 do

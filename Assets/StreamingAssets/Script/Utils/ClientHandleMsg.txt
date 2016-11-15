@@ -118,6 +118,9 @@ HandleFuncs[enumMSGID_MODULE_05.ID_ERROR_CODE_NOTICE] = function(data, dataLengt
 
     for i = 1, #data.err_para do
         LuaDebug.Log("err_para "..i.." : "..data.err_para[i])
+        if data.err_para[i] == 1100 then
+            LuaMessageBox.ShowSingle(Text.CreateRoomNotCards, nil, Text.Confirm, self)
+        end
     end
 
     if data.err_code == -10000 then

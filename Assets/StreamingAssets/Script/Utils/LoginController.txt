@@ -87,7 +87,7 @@ end
 
 function LoginController:SendServerListRequest()
     --初始化默认数据
-    if Application.get_platform()==ERuntimePlatform.WindowsPlayer or Application.get_platform()==ERuntimePlatform.WindowsEditor then
+    if Client.IsDebugPlatform() then
         require "Utils/GameDefine"
     end
     self.MyServerListInfo = {}
@@ -112,7 +112,7 @@ end
 
 function LoginController:Init()
     local serverList = nil
-    if Application.get_platform()==ERuntimePlatform.WindowsPlayer or Application.get_platform()==ERuntimePlatform.WindowsEditor then
+    if Client.IsDebugPlatform() then
         require "Utils/GameDefine"
         serverList = GameDefine_inside_serverlist_url
     else
@@ -543,7 +543,7 @@ end
 ------------------充值---------------------
 function LoginController:StartDownloadChargeList()
     local serverList = nil
-    if Application.get_platform()==ERuntimePlatform.WindowsPlayer or Application.get_platform()==ERuntimePlatform.WindowsEditor then
+    if Client.IsDebugPlatform() then
         require "Utils/GameDefine"
         serverList = GameDefine_inside_charge_url
     else

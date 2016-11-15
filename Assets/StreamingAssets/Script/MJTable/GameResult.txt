@@ -16,7 +16,7 @@ function GameResult:Init(data, roleList)
             local info = MJTableCtrl.GetRoleInfo(data.role_cards[i].roleid, roleList)
             ref.Init(ref, data.role_cards[i], info)
             ref.Background:set_enabled(true)
-            if data.role_list ~= nil then
+            if data.role_list ~= nil and #(data.role_list) > 0 then
                 for j = 1, #(data.role_list) do
                     if Client.RoleInfo.RoleID == data.role_list[j] then
                         ref.SetCodeCards(ref, data.code_cards)
@@ -41,7 +41,7 @@ function GameResult:Init(data, roleList)
              ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(-400, 250 - num*90, 0))
              local info = MJTableCtrl.GetRoleInfo(data.role_cards[i].roleid, roleList)
              ref.Init(ref, data.role_cards[i], info)
-             if data.role_list ~= nil then
+             if data.role_list ~= nil and #(data.role_list) > 0 then
                  for j = 1, #(data.role_list) do
                      if data.role_cards[i].roleid == data.role_list[j] then
                          ref.SetCodeCards(ref, data.code_cards)

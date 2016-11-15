@@ -6,6 +6,15 @@ function TableBottom:Start( )
     Client.TableChooseCard = Client.TableChooseCard + {self, TableBottom.ChooseCard}
     Client.TablePlayCardEnd = Client.TablePlayCardEnd + {self, TableBottom.PlayCardEnd}
     Client.DeleteCard = Client.DeleteCard + {self, TableBottom.DeleteCard}
+
+    self.cardSize = 1
+    LuaDebug.Log("Screen.get_width(): "..Screen.get_width())
+    if Screen.get_width() >= 1136 then
+        self.cardSize = 1.1
+    end
+
+    self.Grid:get_transform():set_localScale(LuaVector3.Create(self.cardSize, self.cardSize, 1))
+    self.CardNew:get_transform():set_localScale(LuaVector3.Create(self.cardSize, self.cardSize, 1))
 end
 
 function TableBottom:OnDestroy( )
@@ -144,10 +153,12 @@ end
 
 function TableBottom:HandlePlayCard(i, card)
     self.CanPlayCard = false
-    self.lastIndex = nil
+    i = self.lastIndex
     if i ~= nil then
         self.handCard[i].Animation(self.handCard[i])
     end
+
+    self.lastIndex = nil
 end
 
 function TableBottom:SetPlayCard(card)
@@ -207,7 +218,7 @@ function TableBottom:HandleGetCard(card)
 
     ref.Init(ref, card, handCardNum + 1)
     ref.Shinning:set_enabled(true)
-    ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(768, 0, 0))
+    --ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(768, 0, 0))
 
     self.CanPlayCard = true
 end
@@ -309,7 +320,7 @@ function TableBottom:SetHeadCardPosition()
     local num = #(self.handCard)
     LuaDebug.Log("handCard num: "..num)
     local oldPos = self.Grid:get_transform():get_localPosition()
-    local posX = (13 - num)*58 -348
+    local posX = (13 - num)*58*self.cardSize -348
     if posX < -348 then
         posX = -348
     end

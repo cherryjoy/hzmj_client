@@ -22,7 +22,6 @@ function PlatformHandler.onSdkInit()
 	LuaDebug.Log('onSdkInit')
 	PlatformHandler.EnterChooseRoleUI=false
 	PlatformHandler.state = PlatformSDKController.mSelf():SDKState()
-	--if not GameDefine_IsDefaultAuth and not PlatformHandler.InitFinish then
 	if not PlatformHandler.InitFinish then
 		local param = string.format("{%s,\"gameId\":\"%s\",\"serverId\":\"%s\"}",GameDefine_InitConfig,
 			GameDefine_gameID,PlayerPrefsEx.GetString("lastServerID"))

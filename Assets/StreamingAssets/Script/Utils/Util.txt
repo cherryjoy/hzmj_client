@@ -660,7 +660,7 @@ function Util.LoadLoginScene()
     --CacheManager.get_Instance():model_cache():ClearAllCache()
 
     require("Utils/TimerManager")
-    if Application.get_platform()==ERuntimePlatform.WindowsPlayer or Application.get_platform()==ERuntimePlatform.WindowsEditor then
+    if Client.IsDebugPlatform() then
     else
         --ResLoader.Load("Scene/level/scene_login_dawn")
     end
