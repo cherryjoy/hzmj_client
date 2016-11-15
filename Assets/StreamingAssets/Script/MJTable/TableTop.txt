@@ -28,6 +28,9 @@ function TableTop:CardInfoSync(handnum)
         end
     end
 
+    local pos = self.Grid:get_transform():get_localPosition()
+    local posX = pos:X() + self.Grid:cellWidth()*(13 - handnum)
+    self.Grid:get_transform():set_localPosition(LuaVector3.Create(posX, pos:y(), pos:z()))
     self.Grid:Reposition()
 end
 
