@@ -1,6 +1,5 @@
 --SteamingAssets 目录下的platformconfig中的值会覆盖此文件中的值
-GameDefine_version = "0.1.0"
-GameDefine_versioncode = 23
+GameDefine_version = "1.0.1"
 GameDefine_gameID = 584
 GameDefine_AppHashCode = "ae2dbe456c09d76852beca29e146aedc"
 GameDefine_platformCode = 5
@@ -13,7 +12,6 @@ GameDefine_GetRoleInfoURL = "http://www.cherryjoy.com/hzmj/getGatewayRoles"
 GameDefine_GetActiveCodeAwardURL = "http://www.cherryjoy.com/hzmj/activate.php"
 GameDefine_QATips = "客服微信号：CHERRYJOY"
 GameDefine_IsNeedAddPlatformSDKObj = true
-GameDefine_IsDefaultAuth = true
 GameDefine_isLoginDebug = true
 GameDefine_InitConfig = '"appkey":"appkey"'
 GameDefine_ProductName = "red"

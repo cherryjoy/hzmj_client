@@ -1,4 +1,4 @@
-GameDefine_version = "1.0.0"
+GameDefine_version = "1.0.1"
 GameDefine_gameID = 584
 GameDefine_platformCode = 5
 GameDefine_windows_cache_path = "F:/MaJiang/hzmj_client/assetbundles"
@@ -7,7 +7,6 @@ GameDefine_outside_serverlist_url = "http://www.cherryjoy.com/hzmj/cj_hzmj.xml"
 GameDefine_AppHashCode = 123456
 GameDefine_GetRoleInfoURL = ""
 GameDefine_IsNeedAddPlatformSDKObj = true
-GameDefine_IsDefaultAuth = true
 GameDefine_isLoginDebug = false
 GameDefine_InitConfig = '"appid":"wx71ed68a2c3f97352","appsecret":"0586d4bede4d2044251bc10893f6f140","logintype":"server"'
 GameDefine_ProductName = "red"
