@@ -1,4 +1,4 @@
-assetbundles:1194672818
+assetbundles:3669609146
 material_mat:3486227220
 material_tga:3138788352
 shader:340253071
@@ -83,11 +83,11 @@ ui/prefab/announcementui_prefab:3181192711
 ui/prefab/commonui_prefab:1398403246
 ui/prefab/home_prefab:125777383
 ui/prefab/login_prefab:2232198887
-ui/prefab/mjtable_prefab:3103184869
+ui/prefab/mjtable_prefab:1530658297
 ui/prefab/newscenemusthave_prefab:2545927519
 ui/prefab/syssetting_prefab:3718759070
 ui/prefab/toolsui_prefab:1022845590
 ui/prefab/tooltips_prefab:1309114729
-ui/prefab/uitools_prefab:641807320
+ui/prefab/uitools_prefab:2901036608
 ui/prefab/update_prefab:3568009834
 ui/prefab/toolsui/messagebox:3758090184
