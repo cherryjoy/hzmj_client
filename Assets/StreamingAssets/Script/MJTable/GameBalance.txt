@@ -29,7 +29,7 @@ function GameBalance:ReturnHall_OnClick()
 end
 
 function GameBalance:Share_OnClick()
-    PlatformHandler.CallShare("", "", "", "screenshot.png")
+    PlatformHandler.CallShare("", "", "", "screenshot.png", "")
 end
 
 function GameBalance.GetRoleIdOfMaxNum(balances)

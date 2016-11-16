@@ -28,14 +28,14 @@ end
 function MainUICtrl:Help_OnClick()
 	-- Application.CaptureScreenshot("截取全屏.png", 0);
     LuaDebug.Log("Help_OnClick")
-    PlatformHandler.CallShare("", "", "", "screenshot.png")
+
+    if Client.IsDebugPlatform() then
+        PlatformHandler.CallShare("", "", "", "screenshot.png", "")
+    end
 end
 
 function MainUICtrl:Setting_OnClick()
-    local url = "http://www.cherryjoy.com:9999/download/?"
-    local context = "987695_1000013_20161191759164.wav"
-    local roleId = 1000013
-	WWWPortraitLoader.DownLoadVoice(url, context, roleId, "DownLoadVoiceSuccess", "DownLoadVoiceFail")
+    
 end
 
 function MainUICtrl:JoinGame_OnClick()
