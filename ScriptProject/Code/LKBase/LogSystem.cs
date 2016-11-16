@@ -120,10 +120,10 @@ public class LogSystem : MonoBehaviour
                 }
                 lua.Pop(2);
 
-                string request = string.Format("{0}?GameID={1}&PlayerID={2}&RoleId={3}&logString={4}&StackTrace={5}&LogType={6}&RoleName={7}&platform={8}&servernum={9}&gateway_id={10}&machine={11}&version={12}&GameName={13}&sid={14}", 
-                   "http://cjhzmj-log.cherryjoy.com:8066/index.php", gameId, userId, roleId, System.Uri.EscapeDataString(logString), System.Uri.EscapeDataString(stackTrace), System.Uri.EscapeDataString(type.ToString()),
+                string request = string.Format("{0}?GameID={1}&PlayerID={2}&RoleId={3}&logString={4}&StackTrace={5}&LogType={6}&RoleName={7}&platform={8}&servernum={9}&gateway_id={10}&machine={11}&version={12}&GameName={13}",
+                   PluginTool.SharedInstance().logUrl, gameId, userId, roleId, System.Uri.EscapeDataString(logString), System.Uri.EscapeDataString(stackTrace), System.Uri.EscapeDataString(type.ToString()),
                    System.Uri.EscapeDataString(roleName), platform, PlayerPrefs.GetInt("lastServerNum", 0),
-                   PlayerPrefs.GetInt("lastServerID", 0), SystemInfo.deviceModel, version, "arthur2",nowSceneId);
+                   PlayerPrefs.GetInt("lastServerID", 0), SystemInfo.deviceModel, version, "hzmj");
  
                 StartCoroutine(SendException(request, md5str));
             }
