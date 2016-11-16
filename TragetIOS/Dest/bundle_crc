@@ -1,4 +1,4 @@
-assetbundles:3669609146
+assetbundles:3539711689
 material_mat:3486227220
 material_tga:3138788352
 shader:340253071
@@ -88,6 +88,6 @@ ui/prefab/newscenemusthave_prefab:2545927519
 ui/prefab/syssetting_prefab:3718759070
 ui/prefab/toolsui_prefab:1022845590
 ui/prefab/tooltips_prefab:1309114729
-ui/prefab/uitools_prefab:2901036608
+ui/prefab/uitools_prefab:641807320
 ui/prefab/update_prefab:3568009834
 ui/prefab/toolsui/messagebox:3758090184
