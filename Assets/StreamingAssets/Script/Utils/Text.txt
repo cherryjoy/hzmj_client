@@ -111,6 +111,8 @@ Text = {
     RecordVoiceSend = "手指松开发送",
     AdminRoleName = "系统",
     CreateRoomNotCards = "房卡不足",
+    RoomNotExist = "房间不存在",
+    RoomNumIsFull = "房间人数已满",
 }
 
 TextSever = {

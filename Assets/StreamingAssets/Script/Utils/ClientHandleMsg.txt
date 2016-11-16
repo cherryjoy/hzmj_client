@@ -59,7 +59,9 @@ HandleFuncs[enumMSGID_MODULE_05.ID_ROLE_RES] = function(data, dataLength)
 
     Client.m_CurrentState = EClientState.E_CS_Hall
     -- 如果上次是在房间中退出的，则加入房间
-    if Client.RoleInfo.room_pass ~= nil then
+    if Client.roomId ~= nil then
+        ClientSendMsg.SendEnterRoom(Client.RoleInfo.RoleID, Client.roomId)
+    elseif Client.RoleInfo.room_pass ~= nil then
         ClientSendMsg.SendEnterRoom(Client.RoleInfo.RoleID, Client.RoleInfo.room_pass)
     end
 end
@@ -120,6 +122,10 @@ HandleFuncs[enumMSGID_MODULE_05.ID_ERROR_CODE_NOTICE] = function(data, dataLengt
         LuaDebug.Log("err_para "..i.." : "..data.err_para[i])
         if data.err_para[i] == 1100 then
             LuaMessageBox.ShowSingle(Text.CreateRoomNotCards, nil, Text.Confirm, self)
+        elseif data.err_para[i] == 1000 then -- 房间不存在
+            LuaMessageBox.ShowSingle(Text.RoomNotExist, nil, Text.Confirm, self)
+        elseif data.err_para[i] == 1001 then -- 房间已满
+            LuaMessageBox.ShowSingle(Text.RoomNumIsFull, nil, Text.Confirm, self)
         end
     end
 

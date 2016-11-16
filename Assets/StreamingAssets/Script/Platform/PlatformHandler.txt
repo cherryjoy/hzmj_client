@@ -155,6 +155,11 @@ function PlatformHandler.onInitFinish (msg)
 	LuaDebug.Log("InitFinish")
 	PlatformHandler.InitFinish=true
 
+	if json['roomid'] ~= nil then
+		Client.roomId = tonumber(json['roomid'])
+		LuaDebug.Log("Client.roomId: "..Client.roomId)
+	end
+
 	if json['isMusic']=='false' or json['isMusic']==false then
 		PlatformHandler.SetMuteWithMessage()
 	end

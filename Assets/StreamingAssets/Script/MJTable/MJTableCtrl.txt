@@ -55,8 +55,8 @@ function MJTableCtrl:EnterRoomSync(rolelist)
     for i = 1, #rolelist do
         --LuaDebug.Log("roleList[i].roleid: "..rolelist[i].roleid)
         --LuaDebug.Log("roleList[i].direct: "..rolelist[i].direct)
-        LuaDebug.Log("roleList[i].rolename: "..rolelist[i].rolename)
-        LuaDebug.Log("roleList[i].integral: "..rolelist[i].integral)
+        --LuaDebug.Log("roleList[i].rolename: "..rolelist[i].rolename)
+        --LuaDebug.Log("roleList[i].integral: "..rolelist[i].integral)
     end
 
     MJTableCtrl.InitRoleList(self, self.myDirect, rolelist)
@@ -532,7 +532,11 @@ end
 function MJTableCtrl:Invite_OnClick()
     local title = string.format(Text.InviteTitle, self.roomId)
     local desc = string.format(Text.InviteContext, Client.RoleInfo.Amount, self.horse, self.beishu)
-    PlatformHandler.CallShare(title, desc, Client.inviteUrl, "", '{\"code\":1}')
+
+    local param = string.format("{\"code\":1,\"roomid\":\"%s\"}",self.roomId)
+    LuaDebug.Log("param: "..param)
+
+    PlatformHandler.CallShare(title, desc, Client.inviteUrl, "", param)
 end
 
 function MJTableCtrl:HandleGameReenterStateSync(data)

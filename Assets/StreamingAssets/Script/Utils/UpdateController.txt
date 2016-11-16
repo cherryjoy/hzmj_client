@@ -124,7 +124,8 @@ function UpdateController.DownloadServerlistCallback(str)
     			local UpdatePackageFun=function ()
     				local url  = doc.kids[2].el[1].attr.lancherurl
     				if Application.get_platform()==ERuntimePlatform.Android then
-    					UpdateController.DownloadAPK(url)
+    					--UpdateController.DownloadAPK(url)
+						Application.OpenURL(url) --暂时跳转网址
     				else
     					Application.OpenURL(url)
     					return
