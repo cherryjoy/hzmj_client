@@ -1,0 +1,23 @@
+修改包名 com.playfun.tw.qmjs.ios   com.linekong.app.dhss
+修改 Build版本为与Version版本号一致
+Bitcode no
+
+linker flags: -Objc -all_load
+添加 Adsupport.Framework
+添加  libz.dylib, libsqlite3.0.dylib, libc++.dylib, Security.framework, CoreTelephony.framework, CFNetwork.framework，libiPhone-lib.a 
+
+info->URL Types weixin wx71ed68a2c3f97352
+
+LSApplicationQueriesSchemes
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<string>weixin</string>
+	<string>wechat</string>
+</array>
+</plist>
+
+替换UnityAppController.h、UnityAppController.cpp、OnDemeadxxxx，删除原有的引用
+
+添加 Data

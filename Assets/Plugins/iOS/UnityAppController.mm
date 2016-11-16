@@ -39,12 +39,14 @@
 #define WeiXinName @"樱桃红中麻将"
 #define ksendAuthRequestNotification @"ksendAuthRequestNotification"
 #define InitMethod "onInitFinish"
-#define InitCode "{\"code\":1}"
+//#define InitCode "{\"code\":1}"
 #define LoginMethod "onLoginFinish"
 #define ShareMethod "onShareFinish"
+#define BUFFER_SIZE 1024 * 100
 static NSString* myGameObject;
 static NSString* myAppId;
 static NSString* myAppSecret;
+static NSString* myExtent = @"{\"code\":1}";
 
 bool	_ios42orNewer			= false;
 bool	_ios43orNewer			= false;
@@ -413,7 +415,7 @@ extern "C"
         myAppSecret = [responseData valueForKey:@"appsecret"];
         NSLog(@"cjsdkInit %@:%@",myAppId, myAppSecret);
         
-        UnitySendMessage([myGameObject UTF8String], InitMethod, InitCode);
+        UnitySendMessage([myGameObject UTF8String], InitMethod, [myExtent cStringUsingEncoding:NSUTF8StringEncoding]);
     }
     
     // 给Unity3d调用的方法
@@ -530,7 +532,7 @@ extern "C"
         }
     }
     
-    void cjsdkShare(const char* objName, const char* title,const char*desc,const char*contextUrl, const char* imageUrl)
+    void cjsdkShare(const char* objName, const char* title,const char*desc,const char*contextUrl, const char* imageUrl, const char* extent)
     {
         myGameObject = [myCreateString(objName) mutableCopy];
         //NSLog(@"game object name is : %@", myGameObject);
@@ -538,6 +540,7 @@ extern "C"
         NSString *descStr=[NSString stringWithUTF8String:desc];
         NSString *urlStr=[NSString stringWithUTF8String:contextUrl];
         NSString *imageStr=[NSString stringWithUTF8String:imageUrl];
+        NSString *extStr=[NSString stringWithUTF8String:extent];
         //imageStr = @"screenshot.png";
         //NSLog(@"cjsdkShare titleStr:%@",titleStr);
         //NSLog(@"cjsdkShare descStr:%@",descStr);
@@ -547,15 +550,24 @@ extern "C"
         // 分享
         if (nil == imageStr || 0 == imageStr.length)
         {
+            Byte* pBuffer = (Byte *)malloc(BUFFER_SIZE);
+            memset(pBuffer, 0, BUFFER_SIZE);
+            NSData* data = [NSData dataWithBytes:pBuffer length:BUFFER_SIZE];
+            free(pBuffer);
+            
+            UIImage *thumbImage=[UIImage imageNamed:@"AppIcon60x60@2x"];
+            WXAppExtendObject *ext = [WXAppExtendObject object];
+            ext.extInfo = extStr;
+            ext.url = urlStr;
+            ext.fileData = data;
             WXMediaMessage *message = [WXMediaMessage message];
             message.title = titleStr;
             message.description = descStr;
-            UIImage *img=[UIImage imageNamed:@"AppIcon60x60@2x"];
-            [message setThumbImage:img];
-            WXWebpageObject *ext = [WXWebpageObject object];
-            ext.webpageUrl = urlStr;
             message.mediaObject = ext;
+            message.messageExt = @"test";
+            message.messageAction = @"<action>dotaliTest</action>";
             message.mediaTagName = @"WECHAT_TAG_SHARE";
+            [message setThumbImage:thumbImage];
             
             SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
             req.bText = NO;
@@ -598,7 +610,26 @@ extern "C"
 
 - (void)onReq:(BaseReq *)req // 微信向第三方程序发起请求,要求第三方程序响应
 {
-    
+    if ([req isKindOfClass:[ShowMessageFromWXReq class]]) {
+        ShowMessageFromWXReq *showMessageReq = (ShowMessageFromWXReq *)req;
+        WXMediaMessage *msg = showMessageReq.message;
+        
+        //显示微信传过来的内容
+        WXAppExtendObject *obj = msg.mediaObject;
+        
+        //NSString *strTitle = [NSString stringWithFormat:@"微信请求App显示内容"];
+        NSString *strMsg = [NSString stringWithFormat:@"openID: %@, 标题：%@ \n内容：%@ \n附带信息：%@ \n缩略图:%lu bytes\n附加消息:%@\n", req.openID, msg.title, msg.description, obj.extInfo, (unsigned long)msg.thumbData.length, msg.messageExt];
+        
+        NSLog(@"%@", strMsg);
+        myExtent = obj.extInfo;
+    } else if ([req isKindOfClass:[LaunchFromWXReq class]]) {
+        LaunchFromWXReq *launchReq = (LaunchFromWXReq *)req;
+        WXMediaMessage *msg = launchReq.message;
+        //从微信启动App
+        //NSString *strTitle = [NSString stringWithFormat:@"从微信启动"];
+        NSString *strMsg = [NSString stringWithFormat:@"openID: %@, messageExt:%@", req.openID, msg.messageExt];
+        NSLog(@"%@", strMsg);
+    }
 }
 
 - (void)onResp:(BaseResp *)resp // 第三方程序向微信发送了sendReq的请求,那么onResp会被回调
