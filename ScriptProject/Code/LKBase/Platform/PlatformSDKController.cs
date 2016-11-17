@@ -43,7 +43,7 @@ public class PlatformSDKController : MonoBehaviour
 
 	public void ShareScreenShot(string objName, string title, string description, string contextUrl, string picName, string extent)
 	{
-		StartCoroutine(DoScreenShot(objName, title, description, contextUrl, extent, picName));
+        StartCoroutine(DoScreenShot(objName, title, description, contextUrl, picName, extent));
 	}
 
 	IEnumerator DoScreenShot(string objName, string title, string description, string contextUrl, string picName, string extent)
