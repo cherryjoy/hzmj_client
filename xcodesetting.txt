@@ -21,3 +21,12 @@ LSApplicationQueriesSchemes
 替换UnityAppController.h、UnityAppController.cpp、OnDemeadxxxx，删除原有的引用
 
 添加 Data
+
+--微信开放平台所需资源
+安卓APP包名 ：com.cherryjoy.hzmj
+安卓APP签名：32B6CBDA4B424661BA061CB0B56D4F7A
+苹果BundleID：com.linekong.app.dhss
+应用名称：樱桃红中麻将
+应用描述：樱桃红中麻将是平江地区一种休闲娱乐的麻将，节奏快速，极易胡牌。
+官网地址：www.cherryjoy.com
+28*28，108*108 png icon
