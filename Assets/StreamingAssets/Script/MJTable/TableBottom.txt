@@ -320,9 +320,9 @@ function TableBottom:SetHeadCardPosition()
     local num = #(self.handCard)
     LuaDebug.Log("handCard num: "..num)
     local oldPos = self.Grid:get_transform():get_localPosition()
-    local posX = (13 - num)*58*self.cardSize -348
-    if posX < -348 then
-        posX = -348
+    local posX = (13 - num)*58*self.cardSize -348*self.cardSize
+    if posX < -348*self.cardSize then
+        posX = -348*self.cardSize
     end
     self.Grid:get_transform():set_localPosition(LuaVector3.Create(posX, oldPos:y(), oldPos:z()))
     self.Grid:Reposition()
@@ -371,12 +371,7 @@ function TableBottom:HandleGangCard(card, srcRoleId, gangType)
     end
 
     -- 设置位置，重新组牌
-    local num = #(self.handCard)
-    LuaDebug.Log("GangCard handCard num: "..num)
-    local oldPos = self.Grid:get_transform():get_localPosition()
-    local posX = (13 - num)*58 - 348
-    self.Grid:get_transform():set_localPosition(LuaVector3.Create(posX, oldPos:y(), oldPos:z()))
-    self.Grid:Reposition()
+    TableBottom.SetHeadCardPosition(self)
     return index
 end
 
@@ -504,8 +499,6 @@ function TableBottom:TableClear()
     TableBottom.Clear(self)
 
     self.TingCard:SetActive(false)
-
-    --self.Grid:get_transform():set_localPosition(LuaVector3.Create(-348, -230, 0))
 end
 
 function TableBottom:IsHuPai(card)
