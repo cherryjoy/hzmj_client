@@ -113,7 +113,12 @@ function MJTableCtrl:CardInfoSync(cardInfo)
 end
 
 function MJTableCtrl:DeleteRoom_OnClick()
-    ClientSendMsg.SendDeleteRoom(self.roomId)
+    local prefab = LuaUIViewCtr.OpenUIHasBg("ToolsUI/MessageBox")
+    LuaMessageBox.SetDataTable(prefab, {Message = Text.DeleteRoomConfirm,
+                                        ConfirmName = Text.Confirm ,ConfirmFunc = function()
+                                            ClientSendMsg.SendDeleteRoom(self.roomId) end,
+                                        CancelName = Text.Cancel ,CancelFunc = nil,
+                                        ref=self})
 end
 
 function MJTableCtrl.GetCardSprite(card)

@@ -7,11 +7,19 @@ function TableBottom:Start( )
     Client.TablePlayCardEnd = Client.TablePlayCardEnd + {self, TableBottom.PlayCardEnd}
     Client.DeleteCard = Client.DeleteCard + {self, TableBottom.DeleteCard}
 
-    self.cardSize = 1
-    LuaDebug.Log("Screen.get_width(): "..Screen.get_width())
-    if Screen.get_width() >= 1136 then
+    local tempHeight = 640
+    local tempWidth = tempHeight * Screen.get_width() / Screen.get_height()
+    if tempWidth < 960 then
+        self.cardSize = 0.9
+    elseif tempWidth >= 960 and tempWidth < 1050 then
+        self.cardSize = 1
+    elseif tempWidth >= 1050 and tempWidth < 1135 then
         self.cardSize = 1.1
+    elseif tempWidth >= 1135 then
+        self.cardSize = 1.2
     end
+
+    LuaDebug.Log("*****tempWidth: "..tempWidth..", cardSize: "..self.cardSize)
 
     self.Grid:get_transform():set_localScale(LuaVector3.Create(self.cardSize, self.cardSize, 1))
     self.CardNew:get_transform():set_localScale(LuaVector3.Create(self.cardSize, self.cardSize, 1))
