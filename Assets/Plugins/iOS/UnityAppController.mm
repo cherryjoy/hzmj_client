@@ -596,8 +596,8 @@ extern "C"
             NSData *compImg = UIImageJPEGRepresentation(newImage, 0.5);
             [message setThumbImage:[UIImage imageWithData:compImg]];
             
-            UIImage *imgJPeg = [UIImage imageWithData:compImg];//建立UIIMage为jpeg格式
-            UIImageWriteToSavedPhotosAlbum(imgJPeg,nil,nil,nil);//保存到相册
+            //UIImage *imgJPeg = [UIImage imageWithData:compImg];//建立UIIMage为jpeg格式
+            //UIImageWriteToSavedPhotosAlbum(imgJPeg,nil,nil,nil);//保存到相册
             
             SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
             req.bText = NO;
