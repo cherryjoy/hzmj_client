@@ -88,7 +88,7 @@ function Client.NetCloseSocket(reason)
         return
     end
 
-    LuaNetwork.DisConnect()
+    --LuaNetwork.DisConnect()
     --[[
     local prefab = LuaUIViewCtr.OpenUIHasBg("ToolsUI/MessageBox")
     LuaMessageBox.SetDataTable(prefab, {Message = Text.ConnectError.."，代码："..reason,
@@ -131,7 +131,7 @@ function Client.CheckPing()
 end
 
 function Client.PingReachThreshold()
-    LuaNetwork.DisConnect()
+    --LuaNetwork.DisConnect()   DisConnect必须与Connect一起使用，因为涉及到+-委托事件
     local ref = LuaMessageBox.ShowSingle(Text.Disconnected, nil, Text.Confirm, self)
     ref.button_Single:SetActive(false)
 
