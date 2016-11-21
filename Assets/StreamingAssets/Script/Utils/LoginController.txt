@@ -177,8 +177,11 @@ function LoginController:SeverListDownloadSuccss(xmlString)
         Client.voiceUrl = self.doc.kids[2].el[1].attr.voiceurl
         LuaDebug.Log("voiceUrl: "..Client.voiceUrl)
         Client.inviteUrl = self.doc.kids[2].el[1].attr.inviteurl
-       LoginController.InitServerList(self)
-       LuaDebug.Log("inviteUrl: "..Client.inviteUrl)
+        LoginController.InitServerList(self)
+        LuaDebug.Log("inviteUrl: "..Client.inviteUrl)
+        Client.logUrl = self.doc.kids[2].el[1].attr.logurl + "upload/"
+        LuaDebug.Log("logUrl: "..Client.logUrl)
+        PluginTool.SharedInstance().logUrl(Client.logUrl)
     end
     LoginController.ClearTimer(self)
     --LoginController.StartDownloadNoticeList(self)    --开始下载公告
