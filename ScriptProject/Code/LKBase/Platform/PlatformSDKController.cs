@@ -112,6 +112,12 @@ public class PlatformSDKController : MonoBehaviour
         lua.LuaStaticFuncCall(luaPlatformHanderRef, "onShareFinish", msg);
     }
 
+	void onEnterFinish(string msg)
+	{ 
+		LuaState lua = LuaInstance.instance.Get();
+		lua.LuaStaticFuncCall(luaPlatformHanderRef, "onEnterFinish", msg);
+	}
+
     //void onLogoutFinish(string msg)
     //{
     //    LuaState lua = LuaInstance.instance.Get();

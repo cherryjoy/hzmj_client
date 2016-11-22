@@ -191,8 +191,18 @@ function  PlatformHandler.onShareFinish(msg)
 	LuaDebug.Log('onShareFinish: '..msg)
 end
 
-function PlatformHandler.onShareFinish(msg)
+function PlatformHandler.onEnterFinish(msg)
+	LuaDebug.Log('onEnterFinish: '..msg)
 
+	local json = JSON:decode(msg)
+	if json['roomid'] ~= nil then
+		Client.roomId = tonumber(json['roomid'])
+		LuaDebug.Log("Client.roomId: "..Client.roomId)
+		
+		if Client.roomId ~= nil then
+        	ClientSendMsg.SendEnterRoom(Client.RoleInfo.RoleID, Client.roomId)
+        end
+	end
 end
 
 function PlatformHandler.onLogoutFinish(msg)
