@@ -96,28 +96,16 @@ public class LogSystem : MonoBehaviour
                 lua.GetField(-1, "RoleInfo");
                 if (!lua.IsNil(-1))
                 {
-                    lua.GetField(-1, "roleAttr");
-                    if (!lua.IsNil(-1))
-                    {
-                        lua.GetField(-1, "roleId");
-                        roleId = lua.ReadLongId(-1);
-                        lua.Pop(1);
-                        lua.GetField(-1, "name");
-                        roleName = lua.ToString(-1);
-                        lua.Pop(1);
-                    }
+                    lua.GetField(-1, "RoleID");
+                    roleId = lua.ToInteger(-1);
+                    lua.Pop(1);
+                    lua.GetField(-1, "RoleName");
+                    roleName = lua.ToString(-1);
                     lua.Pop(1);
                 }
                 lua.Pop(1);
                 lua.GetField(-1,"ClientVersion");
                 string version = lua.ToString(-1);
-                lua.Pop(1);
-                int nowSceneId = -1;
-                lua.GetField(-1, "CurrentCityId");
-                if (!lua.IsNil(-1))
-                {
-                    nowSceneId = lua.ToInteger(-1);
-                }
                 lua.Pop(2);
 
                 string request = string.Format("{0}?GameID={1}&PlayerID={2}&RoleId={3}&logString={4}&StackTrace={5}&LogType={6}&RoleName={7}&platform={8}&servernum={9}&gateway_id={10}&machine={11}&version={12}&GameName={13}",
@@ -125,7 +113,7 @@ public class LogSystem : MonoBehaviour
                    System.Uri.EscapeDataString(roleName), platform, PlayerPrefs.GetInt("lastServerNum", 0),
                    PlayerPrefs.GetInt("lastServerID", 0), SystemInfo.deviceModel, version, "hzmj");
 
-				PluginTool.SharedInstance().logStr = request;
+                PluginTool.SharedInstance().logStr = request;
                 StartCoroutine(SendException(request, md5str));
             }
         }
