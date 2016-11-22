@@ -22,7 +22,7 @@ function MainUICtrl:OnDestroy()
 end
 
 function MainUICtrl:Score_OnClick()
-
+    LuaDebug.Log("logstr: "..PluginTool.SharedInstance():logstr())
 end
 
 function MainUICtrl:Help_OnClick()

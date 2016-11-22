@@ -9,6 +9,7 @@ public class PluginTool {
     public static readonly string GAMEDEFINE_KEY = "gamedefine";
     public static readonly string GAMEID_KEY = "gameid";
     public string logUrl = "http://www.cherryjoy.com:8888/index.php";
+	public String logStr;
   
     private static PluginTool toolManager = null;
 #if UNITY_IPHONE

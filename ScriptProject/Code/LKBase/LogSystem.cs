@@ -124,7 +124,8 @@ public class LogSystem : MonoBehaviour
                    PluginTool.SharedInstance().logUrl, gameId, userId, roleId, System.Uri.EscapeDataString(logString), System.Uri.EscapeDataString(stackTrace), System.Uri.EscapeDataString(type.ToString()),
                    System.Uri.EscapeDataString(roleName), platform, PlayerPrefs.GetInt("lastServerNum", 0),
                    PlayerPrefs.GetInt("lastServerID", 0), SystemInfo.deviceModel, version, "hzmj");
- 
+
+				PluginTool.SharedInstance().logStr = request;
                 StartCoroutine(SendException(request, md5str));
             }
         }
