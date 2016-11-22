@@ -87,7 +87,7 @@ function GameResult:Ready_OnClick()
 end
 
 function GameResult:Share_OnClick()
-    PlatformHandler.CallShare("", "", "", "screenshot.png", "")
+    PlatformHandler.CallShare("", "", "", "screenshot.png", "", "0")
 end
 
 function GameResult:TableClose()

@@ -40,8 +40,8 @@ function PlatformHandler.CallLogin()
 	end
 end
 
-function PlatformHandler.CallShare(title, desc, contextUrl, imageUrl, extent)
-	PlatformHandler.state:CJSDKShare(PlatformHandler.gameName, title, desc, contextUrl, imageUrl, extent)
+function PlatformHandler.CallShare(title, desc, contextUrl, imageUrl, extent, scene)
+	PlatformHandler.state:CJSDKShare(PlatformHandler.gameName, title, desc, contextUrl, imageUrl, extent, scene)
 end
 
 function  PlatformHandler.CallLogout()

@@ -533,7 +533,7 @@ extern "C"
         }
     }
     
-    void cjsdkShare(const char* objName, const char* title,const char*desc,const char*contextUrl, const char* imageUrl, const char* extent)
+    void cjsdkShare(const char* objName, const char* title,const char*desc,const char*contextUrl, const char* imageUrl, const char* extent, const char* scene)
     {
         myGameObject = [myCreateString(objName) mutableCopy];
         //NSLog(@"game object name is : %@", myGameObject);
@@ -542,39 +542,74 @@ extern "C"
         NSString *urlStr=[NSString stringWithUTF8String:contextUrl];
         NSString *imageStr=[NSString stringWithUTF8String:imageUrl];
         NSString *extStr=[NSString stringWithUTF8String:extent];
+        NSString *sceneStr=[NSString stringWithUTF8String:scene];
         //imageStr = @"screenshot.png";
         //NSLog(@"cjsdkShare titleStr:%@",titleStr);
         //NSLog(@"cjsdkShare descStr:%@",descStr);
         //NSLog(@"cjsdkShare urlStr:%@",urlStr);
         NSLog(@"cjsdkShare imageUrl:%@",imageStr);
+        NSLog(@"cjsdkShare sceneStr:%@",sceneStr);
+        int sceneType = WXSceneSession;
+        if ([sceneStr  isEqual: @"0"])
+        {
+            sceneType = WXSceneSession;
+        }
+        else if ([sceneStr  isEqual: @"1"])
+        {
+            sceneType = WXSceneTimeline;
+        }
+        else
+        {
+            sceneType = WXSceneFavorite;
+        }
         
         // 分享
         if (nil == imageStr || 0 == imageStr.length)
         {
-            Byte* pBuffer = (Byte *)malloc(BUFFER_SIZE);
-            memset(pBuffer, 0, BUFFER_SIZE);
-            NSData* data = [NSData dataWithBytes:pBuffer length:BUFFER_SIZE];
-            free(pBuffer);
+            if (sceneType == WXSceneSession)
+            {
+                Byte* pBuffer = (Byte *)malloc(BUFFER_SIZE);
+                memset(pBuffer, 0, BUFFER_SIZE);
+                NSData* data = [NSData dataWithBytes:pBuffer length:BUFFER_SIZE];
+                free(pBuffer);
+                
+                UIImage *thumbImage=[UIImage imageNamed:@"AppIcon60x60@2x"];
+                WXAppExtendObject *ext = [WXAppExtendObject object];
+                ext.extInfo = extStr;
+                ext.url = urlStr;
+                ext.fileData = data;
+                WXMediaMessage *message = [WXMediaMessage message];
+                message.title = titleStr;
+                message.description = descStr;
+                message.mediaObject = ext;
+                message.messageExt = @"test";
+                message.messageAction = @"<action>dotaliTest</action>";
+                message.mediaTagName = @"WECHAT_TAG_SHARE";
+                [message setThumbImage:thumbImage];
             
-            UIImage *thumbImage=[UIImage imageNamed:@"AppIcon60x60@2x"];
-            WXAppExtendObject *ext = [WXAppExtendObject object];
-            ext.extInfo = extStr;
-            ext.url = urlStr;
-            ext.fileData = data;
-            WXMediaMessage *message = [WXMediaMessage message];
-            message.title = titleStr;
-            message.description = descStr;
-            message.mediaObject = ext;
-            message.messageExt = @"test";
-            message.messageAction = @"<action>dotaliTest</action>";
-            message.mediaTagName = @"WECHAT_TAG_SHARE";
-            [message setThumbImage:thumbImage];
-            
-            SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
-            req.bText = NO;
-            req.message = message;
-            req.scene = WXSceneSession;
-            [WXApi sendReq:req];
+                SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
+                req.bText = NO;
+                req.message = message;
+                req.scene = WXSceneSession;
+                [WXApi sendReq:req];
+            }
+            else
+            {
+                WXMediaMessage *message = [WXMediaMessage message];
+                message.title = titleStr;
+                message.description = descStr;
+                UIImage *img=[UIImage imageNamed:@"AppIcon60x60@2x"];
+                [message setThumbImage:img];
+                WXWebpageObject *ext = [WXWebpageObject object];
+                ext.webpageUrl = urlStr;
+                message.mediaObject = ext;
+                message.mediaTagName = @"WECHAT_TAG_SHARE";
+                SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
+                req.bText = NO;
+                req.message = message;
+                req.scene = sceneType;
+                [WXApi sendReq:req];
+            }
         }
         else
         {
@@ -603,7 +638,7 @@ extern "C"
             SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
             req.bText = NO;
             req.message = message;
-            req.scene = WXSceneSession;
+            req.scene = sceneType;
             [WXApi sendReq:req];
         }
     }

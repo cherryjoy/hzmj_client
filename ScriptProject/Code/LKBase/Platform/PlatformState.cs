@@ -30,10 +30,10 @@ public partial class PlatformState
     private static extern void cjsdkLogin(string objName, string customInfo);
 
     [DllImport("__Internal")]
-	private static extern void cjsdkShare(string objName, string title, string description, string contextUrl, string imageUrl, string extent);
+	private static extern void cjsdkShare(string objName, string title, string description, string contextUrl, string imageUrl, string extent, string scene);
 
     //[DllImport("__Internal")]
-    //private static extern void cjsdkPayment(string pid, string amount, string productName, string customInfo, string ext);
+    //private static extern void cjsdkPayment(string pid, string amount, string productName, string customInfo, string ext, string scene);
 #endif
 
 /**
@@ -108,21 +108,21 @@ public partial class PlatformState
      *  contextUrl 跳转链接
      *  imageUrl 显示图片，为空则默认显示应用图标
      */
-	public void CJSDKShare(string objName, string title, string description, string contextUrl, string imageUrl, string extent)
+	public void CJSDKShare(string objName, string title, string description, string contextUrl, string imageUrl, string extent, string scene)
     {
 		if (string.IsNullOrEmpty(imageUrl))
 		{ 
-			SDKShareCallBack(objName, title, description, contextUrl, imageUrl, extent);
+			SDKShareCallBack(objName, title, description, contextUrl, imageUrl, extent, scene);
 		}
 		else
 		{
 			//imageUrl = "screenshot.png";
 			//Application.CaptureScreenshot(imageUrl, 100);
-			PlatformSDKController.mSelf.ShareScreenShot(objName, title, description, contextUrl, imageUrl, extent);
+			PlatformSDKController.mSelf.ShareScreenShot(objName, title, description, contextUrl, imageUrl, extent, scene);
 		}
     }
 
-	public void SDKShareCallBack(string objName, string title, string description, string contextUrl, string imageUrl, string extent)
+	public void SDKShareCallBack(string objName, string title, string description, string contextUrl, string imageUrl, string extent, string scene)
 	{
 		#if UNITY_ANDROID
         if (mAndroidObj == null)
@@ -141,10 +141,10 @@ public partial class PlatformState
 
         if (mAndroidObj != null)
         {
-            log("share", "title: " + title + ", description: " + description + ", contextUrl: " + contextUrl + ", imageUrl: " + imageUrl + ", extent: " + extent);
+            log("share", "title: " + title + ", description: " + description + ", contextUrl: " + contextUrl + ", imageUrl: " + imageUrl + ", extent: " + extent + ", scene: " + scene);
             try
             {
-                mAndroidObj.Call("CJSDKShare", objName, title, description, contextUrl, imageUrl, extent);
+                mAndroidObj.Call("CJSDKShare", objName, title, description, contextUrl, imageUrl, extent, scene);
             }
             catch (System.Exception ex)
             {
@@ -152,7 +152,7 @@ public partial class PlatformState
             }
         }
 #elif UNITY_IPHONE
-        cjsdkShare(objName, title, description, contextUrl, imageUrl, extent);
+		cjsdkShare(objName, title, description, contextUrl, imageUrl, extent, scene);
 #endif
 	}
 

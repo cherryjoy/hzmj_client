@@ -541,7 +541,7 @@ function MJTableCtrl:Invite_OnClick()
     local param = string.format("{\"code\":1,\"roomid\":\"%s\"}",self.roomId)
     LuaDebug.Log("param: "..param)
 
-    PlatformHandler.CallShare(title, desc, Client.inviteUrl, "", param)
+    PlatformHandler.CallShare(title, desc, Client.inviteUrl, "", param, "0")
 end
 
 function MJTableCtrl:HandleGameReenterStateSync(data)

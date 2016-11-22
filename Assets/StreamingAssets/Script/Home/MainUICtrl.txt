@@ -30,7 +30,7 @@ function MainUICtrl:Help_OnClick()
     LuaDebug.Log("Help_OnClick")
 
     if Client.IsDebugPlatform() then
-        PlatformHandler.CallShare("", "", "", "screenshot.png", "")
+        PlatformHandler.CallShare("", "", "", "screenshot.png", "", "0")
     end
 end
 

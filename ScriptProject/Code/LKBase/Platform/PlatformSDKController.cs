@@ -41,12 +41,12 @@ public class PlatformSDKController : MonoBehaviour
 
     }
 
-	public void ShareScreenShot(string objName, string title, string description, string contextUrl, string picName, string extent)
+	public void ShareScreenShot(string objName, string title, string description, string contextUrl, string picName, string extent, string scene)
 	{
-        StartCoroutine(DoScreenShot(objName, title, description, contextUrl, picName, extent));
+		StartCoroutine(DoScreenShot(objName, title, description, contextUrl, picName, extent, scene));
 	}
 
-	IEnumerator DoScreenShot(string objName, string title, string description, string contextUrl, string picName, string extent)
+	IEnumerator DoScreenShot(string objName, string title, string description, string contextUrl, string picName, string extent, string scene)
 	{
 		yield return new WaitForEndOfFrame();
 		Rect rect = new Rect(Screen.width*0f, Screen.height*0f, Screen.width*1f, Screen.height*1f);
@@ -80,7 +80,7 @@ public class PlatformSDKController : MonoBehaviour
 			System.IO.File.WriteAllBytes(fileName, bytes);
 		}
 
-		PlatformState.Instance.SDKShareCallBack(objName, title, description, contextUrl, picName, extent);
+		PlatformState.Instance.SDKShareCallBack(objName, title, description, contextUrl, picName, extent, scene);
 	}
 
 	/// <summary>
