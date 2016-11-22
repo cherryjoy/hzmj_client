@@ -42,6 +42,7 @@
 //#define InitCode "{\"code\":1}"
 #define LoginMethod "onLoginFinish"
 #define ShareMethod "onShareFinish"
+#define EnterMethod "onEnterFinish"
 #define BUFFER_SIZE 1024 * 100
 static NSString* myGameObject;
 static NSString* myAppId;
@@ -622,6 +623,11 @@ extern "C"
         
         NSLog(@"%@", strMsg);
         myExtent = obj.extInfo;
+        if (nil != myAppSecret)
+        {
+            NSLog(@"UnitySendMessage %@", myExtent);
+            UnitySendMessage([myGameObject UTF8String], EnterMethod, [myExtent cStringUsingEncoding:NSUTF8StringEncoding]);
+        }
     } else if ([req isKindOfClass:[LaunchFromWXReq class]]) {
         LaunchFromWXReq *launchReq = (LaunchFromWXReq *)req;
         WXMediaMessage *msg = launchReq.message;
