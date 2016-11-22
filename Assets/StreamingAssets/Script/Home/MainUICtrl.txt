@@ -22,7 +22,9 @@ function MainUICtrl:OnDestroy()
 end
 
 function MainUICtrl:Score_OnClick()
-    LuaDebug.Log("logstr: "..PluginTool.SharedInstance():logstr())
+    if Client.IsDebugPlatform() then
+        LuaDebug.Log("logstr: "..PluginTool.SharedInstance():logStr())
+    end
 end
 
 function MainUICtrl:Help_OnClick()
@@ -35,7 +37,9 @@ function MainUICtrl:Help_OnClick()
 end
 
 function MainUICtrl:Setting_OnClick()
-    
+    if Client.IsDebugPlatform() then
+        PluginTool.SharedInstance().logStr()
+    end
 end
 
 function MainUICtrl:JoinGame_OnClick()
