@@ -322,6 +322,8 @@ function MJTableCtrl:HandleGetCard(roleId, card)
             self.ResultCard:SetActive(true)
             self.Win:SetActive(true)
             self.Peng:SetActive(false)
+        else
+            self.Win:SetActive(false)
         end
     end
 
