@@ -32,7 +32,11 @@ function MainUICtrl:Help_OnClick()
     LuaDebug.Log("Help_OnClick")
 
     if Client.IsDebugPlatform() then
-        PlatformHandler.CallShare("", "", "", "screenshot.png", "", "0")
+        --PlatformHandler.CallShare("", "", "", "screenshot.png", "", "0")
+        local param = string.format("{\"code\":1,\"roomid\":\"555555\"}")
+        LuaDebug.Log("param: "..param)
+
+        PlatformHandler.CallShare("test title", "test desc", Client.inviteUrl, "", param, "1")
     end
 end
 
