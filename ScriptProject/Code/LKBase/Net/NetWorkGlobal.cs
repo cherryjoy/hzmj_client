@@ -37,7 +37,7 @@ public class CNetWorkGlobal
 
 	public bool SendNetMessage (int msgID,byte[]  data)
 	{
-		//if (IsConnected() == true)
+		if (IsConnected() == true)
 		{
             return m_Ctrl.SendMessage(msgID, data);
 		}
@@ -45,12 +45,12 @@ public class CNetWorkGlobal
 	}
 
     public bool SendByteThisFrame() {
-        //if (IsConnected() == true)
+        if (IsConnected() == true)
         {
             return m_Ctrl.SendByteThisFrame();
         }
 
-		//return false;
+		return false;
     }
 
 	public void Update ()
