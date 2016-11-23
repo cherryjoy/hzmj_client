@@ -9,7 +9,9 @@ public class PluginTool {
     public static readonly string GAMEDEFINE_KEY = "gamedefine";
     public static readonly string GAMEID_KEY = "gameid";
     public string logUrl = "http://www.cherryjoy.com:8888/index.php";
-	public String logStr;
+	public string logStr;
+    public int ReceiveTimeout = 5000;
+    public int SendTimeout = 5000;
   
     private static PluginTool toolManager = null;
 #if UNITY_IPHONE

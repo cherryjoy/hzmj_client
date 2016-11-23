@@ -42,6 +42,7 @@ Text = {
     Announcement = "公告",
     RepeatLogin = "用户在其他设备登录",
     LeaveSIGUSR2 = "服务器维护，请稍后再登录游戏",
+    LeavePing = "您一段时间没有进行游戏，请重新连接",
 
 -----------------------------Login登录验证-------------------------------------------
     ServerListError="服务器列表下载失败,请重试",
@@ -114,7 +115,7 @@ Text = {
     CreateRoomNotCards = "房卡不足",
     RoomNotExist = "房间不存在",
     RoomNumIsFull = "房间人数已满",
-    DeleteRoomConfirm = "在有战绩的情况下解散房间会正常结算，确定解散房间吗", 
+    DeleteRoomConfirm = "在有战绩的情况下解散房间会正常结算，确定解散房间吗",
 }
 
 TextSever = {

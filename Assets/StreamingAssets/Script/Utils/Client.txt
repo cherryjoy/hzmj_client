@@ -44,13 +44,12 @@ function Client.ListenNetwork( state,ip,port )
             Client.lastPort = port
             --ClientInfo.isFirstLogin = false
             --Client.NetConnectFail()
-        else
-            if Client.m_CurrentState == EClientState.E_CS_Table then
-                local ref = LuaMessageBox.ShowSingle(Text.Disconnected, nil, Text.Confirm, self)
-                ref.button_Single:SetActive(false)
-            end
         end
+
+         Client.OpenNetLoadingUI()
         Client.ConnectGoWrong:Do()
+    elseif state == EClientNetWorkState.NORMAL then
+        Client.NetConnectSuccess:Do()
     end
 end
 
@@ -83,12 +82,11 @@ end
 function Client.NetCloseSocket(reason)
     -- EMCJ_LEAVE_REPEAT_LOGIN 3，帐号在其他设备登录，只能杀进程了
     if reason == enumEMCJLogInOutReason.EMCJ_LEAVE_REPEAT_LOGIN then
-        local ref = LuaMessageBox.ShowSingle(Text.RepeatLogin, nil, Text.Confirm, self)
-        ref.button_Single:SetActive(false)
-        return
-    else if reason == enumEMCJLogInOutReason.EMCJ_LEAVE_SIGUSR2 then
-        local ref = LuaMessageBox.ShowSingle(Text.LeaveSIGUSR2, nil, Text.Confirm, self)
-        ref.button_Single:SetActive(false)
+        local ref = LuaMessageBox.ShowSingle(Text.RepeatLogin, function() Application.Quit() end, Text.Exit, self)
+    elseif reason == enumEMCJLogInOutReason.EMCJ_LEAVE_SIGUSR2 then
+        local ref = LuaMessageBox.ShowSingle(Text.LeaveSIGUSR2, function() Application.Quit() end, Text.Exit, self)
+    elseif reason == enumEMCJLogInOutReason.EMCJ_LEAVE_PING_ERROR then
+        local ref = LuaMessageBox.ShowSingle(Text.LeavePing, Client.RetryConnectByLastIp, Text.RetryText, self)
     end
 
     --LuaNetwork.DisConnect()
@@ -114,29 +112,42 @@ function Client.CloseLoadingUI()
     end
 end
 
-Client.PingThreshold = 2*60*10000000
-Client.SendPingThreshold = 1*60*10000000
+function Client.OpenNetLoadingUI()
+    LuaDebug.Log("OpenNetLoadingUI")
+    if Client.netLoadingRef == nil then
+		Client.netLoadingRef = LuaUIViewCtr.OpenUINotLose("CommonUI/NetLoadingUI")
+	end
+end
+
+function Client.CloseNetLoadingUI()
+    if Client.netLoadingRef ~= nil then
+        Client.netLoadingRef.gameObject:Destroy1()
+        Client.netLoadingRef = nil
+    end
+end
+
+Client.PingThreshold = 1*60*10000000
+Client.SendPingThreshold = 1*30*10000000
 
 -- ticks 100纳秒   100 毫微秒
 function Client.CheckPing()
-    -- 如果差值大于2分钟，则提示玩家网络异常
+    -- 如果差值大于1分钟，则提示玩家网络异常
+    --LuaDebug.Log("Ticks_Now: "..long_to_id(LuaDateTime.Ticks_Now()))
+    --LuaDebug.Log(".PingTime: "..long_to_id(Client.PingTime))
     if LuaDateTime.LongLess(LuaDateTime.LongAdd(Client.PingTime, long_get(Client.PingThreshold)), LuaDateTime.Ticks_Now()) then
         Client.PingReachThreshold()
         return
     end
 
-    -- 如果这个差值大于1分钟，则向服务器发送心跳消息
-    --LuaDebug.Log("Client.PingTime: "..long_to_id(Client.PingTime))
-    --LuaDebug.Log("Ticks_Now: "..long_to_id(LuaDateTime.Ticks_Now()))
-    if LuaDateTime.LongLess(LuaDateTime.LongAdd(Client.PingTime, long_get(Client.SendPingThreshold)), LuaDateTime.Ticks_Now()) then
+    -- 如果这个差值大于30秒，则向服务器发送心跳消息
+    --if LuaDateTime.LongLess(LuaDateTime.LongAdd(Client.PingTime, long_get(Client.SendPingThreshold)), LuaDateTime.Ticks_Now()) then
         ClientSendMsg.SendGameHeartBeat()
-    end
+    --end
 end
 
 function Client.PingReachThreshold()
-    --LuaNetwork.DisConnect()   DisConnect必须与Connect一起使用，因为涉及到+-委托事件
-    local ref = LuaMessageBox.ShowSingle(Text.Disconnected, nil, Text.Confirm, self)
-    ref.button_Single:SetActive(false)
+    LuaDebug.Log("Client.PingReachThreshold()")
+    Client.OpenNetLoadingUI()
 
     Timer.RemoveGlobalEvent(Client.PingGlobalTimer)
     Client.PingGlobalTimer = nil
@@ -206,6 +217,7 @@ Client.NeedUpdateGame = Event.Create()
 Client.LoginBeReplaced = Event.Create()
 Client.ShowServerList = Event.Create()
 Client.LoginAccountExit = Event.Create()
+Client.NetConnectSuccess = Event.Create()
 
 ----Bag events
 Client.ItemInBagAdded = Event.Create()

@@ -1,0 +1,29 @@
+NetLoadingCtrl = {}
+
+function NetLoadingCtrl:Start( )
+    self.retryTimer = Timer.NewEvent(self,100,10000000,NetLoadingCtrl.RetryConnect, false, nil)
+
+    Client.NetConnectSuccess = Client.NetConnectSuccess + {self,NetLoadingCtrl.NetConnectSuccess}
+
+    Client.RetryConnectByLastIp()
+end
+
+function NetLoadingCtrl:Update()
+    NetLoadingCtrl.Rotatoin(self)
+end
+
+function NetLoadingCtrl:OnDestroy( )
+    Client.NetConnectSuccess = Client.NetConnectSuccess - {self,NetLoadingCtrl.NetConnectSuccess}
+end
+
+function NetLoadingCtrl:Rotatoin()
+    self.Sprite:get_transform():Rotate(LuaVector3.Create(0, 0, -3))
+end
+
+function NetLoadingCtrl:RetryConnect()
+    Client.RetryConnectByLastIp()
+end
+
+function NetLoadingCtrl:NetConnectSuccess()
+    Client.CloseNetLoadingUI()
+end

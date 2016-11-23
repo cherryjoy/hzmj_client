@@ -45,6 +45,13 @@ namespace GEM_NET_LIB
         E_CNWS_ON_DISCONNECTED,
     }
 
+    public enum EClientConnectState
+    { 
+        E_NOT_CONNECT,
+        E_CONNECT,
+        E_NOTICE_CONNECT,
+    }
+
     public delegate void dNetWorkStateCallBack(EClientNetWorkState a_eState, string ip, ushort port);
 
     public class CClientNetworkCtrl
@@ -67,7 +74,7 @@ namespace GEM_NET_LIB
         private object m_eNetWorkState = EClientNetWorkState.E_CNWS_NOT_UNABLE;
         private readonly int CONNECT_TIME_OUT = 10;
         private float connect_timeout = 0;
-        private bool isReceived = false;
+        private EClientConnectState connectState = EClientConnectState.E_NOT_CONNECT;
 
         private LuaState lua_;
         private int net_state_func_handle_ref_;
@@ -133,7 +140,7 @@ namespace GEM_NET_LIB
                 mAsyncArgs.UserToken = m_ClientSocket;
                 mAsyncArgs.Completed += SocketEventArg_Completed;
                 m_ClientSocket.ConnectAsync(mAsyncArgs);
-                isReceived = false;
+                connectState = EClientConnectState.E_NOT_CONNECT;
                 return true;
             }
             return false;
@@ -168,7 +175,13 @@ namespace GEM_NET_LIB
                 mReceiveArgs.SetBuffer(new byte[4096], 0, 4096);
                 mReceiveArgs.Completed += SocketEventArg_Completed;
 
-                isReceived = true;
+                /*if (m_ClientSocket != null)
+                {
+                    m_ClientSocket.ReceiveTimeout = PluginTool.SharedInstance().ReceiveTimeout;
+                    m_ClientSocket.SendTimeout = PluginTool.SharedInstance().SendTimeout;
+                }*/
+
+                connectState = EClientConnectState.E_CONNECT;
                 connect_timeout = 0;
                 Receive();
             }
@@ -316,7 +329,7 @@ namespace GEM_NET_LIB
                         eState = EClientNetWorkState.E_CNWS_NOT_UNABLE;
                     }
                 }
-                else if (isReceived == false)
+                else if (connectState == EClientConnectState.E_NOT_CONNECT)
                 {
                     connect_timeout += Time.deltaTime;
                     if (connect_timeout > CONNECT_TIME_OUT)
@@ -324,6 +337,12 @@ namespace GEM_NET_LIB
                         connect_timeout = 0;
                         DidDisconnect();
                     }
+                }
+                else if (connectState == EClientConnectState.E_CONNECT)
+                {
+                    // 调用lua接口
+                    CallBackNetState(EClientNetWorkState.E_CNWS_NORMAL);
+                    connectState = EClientConnectState.E_NOTICE_CONNECT;
                 }
             }
         }

@@ -14,6 +14,7 @@ ui/prefab/commonui_prefab
 	ui/prefab/commonui/gamehelper|.prefab
 	ui/prefab/commonui/itemlbl|.prefab
 	ui/prefab/commonui/loadingui|.prefab
+	ui/prefab/commonui/netloadingui|.prefab
 ui/prefab/home_prefab
 	ui/prefab/home/createroom|.prefab
 	ui/prefab/home/joingame|.prefab

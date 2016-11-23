@@ -3,7 +3,7 @@ LoadingCtrl = {}
 function LoadingCtrl:Start( )
     --self.num = 0
     Timer.NewEvent(self,20,20,LoadingCtrl.ShowUI, false, nil)
-    Timer.NewEvent(self,80,80,LoadingCtrl.TimeOut, false, nil)
+    Timer.NewEvent(self,60,60,LoadingCtrl.TimeOut, false, nil)
 end
 
 function LoadingCtrl:Update()
@@ -26,7 +26,7 @@ function LoadingCtrl:ShowUI()
 end
 
 function LoadingCtrl:TimeOut()
-    local ref = LuaMessageBox.ShowSingle(Text.MsgNotReturn, nil, Text.Confirm, self)
+    local ref = LuaMessageBox.ShowSingle(Text.MsgNotReturn, function() Client.RetryConnectByLastIp() end, Text.RetryText, self)
     --ref.button_Single:SetActive(false)
     Client.CloseLoadingUI()
 end

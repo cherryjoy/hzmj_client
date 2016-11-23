@@ -15,6 +15,7 @@ function MJTableCtrl:Start( )
     Client.TableClear = Client.TableClear + {self, MJTableCtrl.TableClear}
     Client.TableClose = Client.TableClose + {self, MJTableCtrl.TableClose}
     Client.PlayRecordVoice = Client.PlayRecordVoice + {self, MJTableCtrl.PlayRecordVoice}
+    Client.NetConnectSuccess = Client.NetConnectSuccess + {self,MJTableCtrl.NetConnectSuccess}
 end
 
 function MJTableCtrl:OnDestroy( )
@@ -23,6 +24,7 @@ function MJTableCtrl:OnDestroy( )
     Client.TableClear = Client.TableClear - {self, MJTableCtrl.TableClear}
     Client.TableClose = Client.TableClose - {self, MJTableCtrl.TableClose}
     Client.PlayRecordVoice = Client.PlayRecordVoice - {self, MJTableCtrl.PlayRecordVoice}
+    Client.NetConnectSuccess = Client.NetConnectSuccess - {self,MJTableCtrl.NetConnectSuccess}
 end
 
 function MJTableCtrl:Init(passwd, horse, beishu, rolelist)
@@ -43,7 +45,7 @@ function MJTableCtrl:Init(passwd, horse, beishu, rolelist)
 
     Client.m_CurrentState = EClientState.E_CS_Table
     Client.PingTime = LuaDateTime.Ticks_Now()
-    Client.PingGlobalTimer = Timer.NewGlobalEvent(60,10*60*60*24,Client.CheckPing,false,nil)
+    Client.PingGlobalTimer = Timer.NewGlobalEvent(30,10*60*60*24,Client.CheckPing,false,nil)
 end
 
 function MJTableCtrl:SetJuShuPaiShu()
@@ -604,4 +606,18 @@ function MJTableCtrl:PlayRecordVoice(roleId, length)
             self["Drect"..i].TableHead.PlayRecordVoice(self["Drect"..i].TableHead, length)
         end
     end
+end
+
+function MJTableCtrl:NetConnectSuccess()
+    if Client.PingGlobalTimer == nil then
+        Client.PingTime = LuaDateTime.Ticks_Now()
+        Client.PingGlobalTimer = Timer.NewGlobalEvent(30,10*60*60*24,Client.CheckPing,false,nil)
+    end
+
+    LuaDebug.Log("MJTableCtrl:NetConnectSuccess")
+    ClientSendMsg.SendEnterRoom(Client.RoleInfo.RoleID, self.roomId)
+    ClientSendMsg.SendReadyRoom()
+
+    Client.ResetToward:Do()
+    Client.TableClear:Do()
 end
