@@ -86,6 +86,9 @@ function Client.NetCloseSocket(reason)
         local ref = LuaMessageBox.ShowSingle(Text.RepeatLogin, nil, Text.Confirm, self)
         ref.button_Single:SetActive(false)
         return
+    else if reason == enumEMCJLogInOutReason.EMCJ_LEAVE_SIGUSR2 then
+        local ref = LuaMessageBox.ShowSingle(Text.LeaveSIGUSR2, nil, Text.Confirm, self)
+        ref.button_Single:SetActive(false)
     end
 
     --LuaNetwork.DisConnect()
