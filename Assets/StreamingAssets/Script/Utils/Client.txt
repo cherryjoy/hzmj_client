@@ -46,8 +46,10 @@ function Client.ListenNetwork( state,ip,port )
             --Client.NetConnectFail()
         end
 
-         Client.OpenNetLoadingUI()
-        Client.ConnectGoWrong:Do()
+        --if Client.m_CurrentState == EClientState.E_CS_Table then
+            Client.OpenNetLoadingUI()
+        --end
+        Client.NetConnectFailed:Do()
     elseif state == EClientNetWorkState.NORMAL then
         Client.NetConnectSuccess:Do()
     end
@@ -89,7 +91,6 @@ function Client.NetCloseSocket(reason)
         local ref = LuaMessageBox.ShowSingle(Text.LeavePing, Client.RetryConnectByLastIp, Text.RetryText, self)
     end
 
-    --LuaNetwork.DisConnect()
     --[[
     local prefab = LuaUIViewCtr.OpenUIHasBg("ToolsUI/MessageBox")
     LuaMessageBox.SetDataTable(prefab, {Message = Text.ConnectError.."，代码："..reason,
@@ -186,6 +187,11 @@ function Client.FuncUIDestroy(uiRefTable,luaBehavType)
 end
 
 function Client.FuncApplicationPause(isPause)
+    -- 切回来时判断一下，如果网络没有连接则重连一下
+    if not LuaNetwork.IsConnected() then
+        Client.RetryConnectByLastIp()
+    end
+
     Client.ApplicationPause:Do(isPause)
 end
 
@@ -212,12 +218,12 @@ Client.SetBigBtnMoveInOut = Event.Create()
 Client.SessionCreated = Event.Create()
 Client.LoginSuccess = Event.Create()
 Client.ConnectSuccess = Event.Create()
-Client.ConnectGoWrong = Event.Create()
 Client.NeedUpdateGame = Event.Create()
 Client.LoginBeReplaced = Event.Create()
 Client.ShowServerList = Event.Create()
 Client.LoginAccountExit = Event.Create()
 Client.NetConnectSuccess = Event.Create()
+Client.NetConnectFailed = Event.Create()
 
 ----Bag events
 Client.ItemInBagAdded = Event.Create()

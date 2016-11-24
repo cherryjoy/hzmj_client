@@ -136,9 +136,9 @@ end
 
 --Listen event
 function LuaUIViewCtr:ApplicationPause(isPause)
-    if Application.get_platform()==ERuntimePlatform.IPhonePlayer then
-        LuaUIViewCtr.LocalNotification(isPause)
-    end
+    --if Application.get_platform()==ERuntimePlatform.IPhonePlayer then
+    --    LuaUIViewCtr.LocalNotification(isPause)
+    --end
 end
 
 function LuaUIViewCtr:PlayerLevelUp(roleLevel)

@@ -36,7 +36,11 @@ function PlatformHandler.CallLogin()
 			local loginExt = PlayerPrefsEx.GetString("loginExt")
 			PlatformHandler.state:CJSDKLogin(PlatformHandler.gameName,loginExt)
 			PlatformHandler.Logining=true
+		else
+			LuaDebug.LogError("call sdk login, but is sdk logining")
 		end
+	else
+		LuaDebug.LogError("call sdk login, but not init finish success")
 	end
 end
 

@@ -56,7 +56,7 @@ function LoginController:Start()
     Client.LoginSuccess = Client.LoginSuccess + {self,LoginController.LoginSuccess}
     Client.RoleSummarySuccess = Client.RoleSummarySuccess + {self,LoginController.RoleSummarySuccess}
     Client.ShowServerList = Client.ShowServerList + {self,LoginController.ShowServerList}
-    Client.ConnectGoWrong = Client.ConnectGoWrong + {self,LoginController.ConnectGoWrong}
+    Client.NetConnectFailed = Client.NetConnectFailed + {self,LoginController.NetConnectFailed}
     self.userName=PlayerPrefsEx.GetString("userName")
     self.password=PlayerPrefsEx.GetString("password")
     LoginController.GetClientVersion()
@@ -143,7 +143,7 @@ function LoginController:OnDestroy(  )
     Client.LoginSuccess = Client.LoginSuccess - {self,LoginController.LoginSuccess}
     Client.RoleSummarySuccess = Client.RoleSummarySuccess - {self,LoginController.RoleSummarySuccess}
     Client.ShowServerList = Client.ShowServerList - {self,LoginController.ShowServerList}
-    Client.ConnectGoWrong = Client.ConnectGoWrong - {self,LoginController.ConnectGoWrong}
+    Client.NetConnectFailed = Client.NetConnectFailed - {self,LoginController.NetConnectFailed}
     Client.LoginPlayers = {}
     LoginController.ClearTimer(self)
 end
@@ -468,7 +468,7 @@ function LoginController:ConnectSuccess()
     Client.m_CurrentState=EClientState.E_CS_Login
 end
 
-function LoginController:ConnectGoWrong ()
+function LoginController:NetConnectFailed ()
     self.IsConnect = false
     LoginController.UpdateServerInfo(self)
 end
