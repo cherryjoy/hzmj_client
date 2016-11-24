@@ -84,9 +84,9 @@ end
 function Client.NetCloseSocket(reason)
     -- EMCJ_LEAVE_REPEAT_LOGIN 3，帐号在其他设备登录，只能杀进程了
     if reason == enumEMCJLogInOutReason.EMCJ_LEAVE_REPEAT_LOGIN then
-        local ref = LuaMessageBox.ShowSingle(Text.RepeatLogin, function() Application.Quit() end, Text.Exit, self)
+        local ref = LuaMessageBox.ShowSingle(Text.RepeatLogin, Client.ExitGame, Text.Exit, self)
     elseif reason == enumEMCJLogInOutReason.EMCJ_LEAVE_SIGUSR2 then
-        local ref = LuaMessageBox.ShowSingle(Text.LeaveSIGUSR2, function() Application.Quit() end, Text.Exit, self)
+        local ref = LuaMessageBox.ShowSingle(Text.LeaveSIGUSR2, Client.ExitGame, Text.Exit, self)
     elseif reason == enumEMCJLogInOutReason.EMCJ_LEAVE_PING_ERROR then
         local ref = LuaMessageBox.ShowSingle(Text.LeavePing, Client.RetryConnectByLastIp, Text.RetryText, self)
     end
@@ -98,6 +98,23 @@ function Client.NetCloseSocket(reason)
                                         CancelName = Text.Cancel ,CancelFunc = Client.ShowServerListFunc,
                                         ref=self})
     --]]
+end
+
+function Client.LoginAgain()
+    UnityLevelMgr.LoadLevelName("Update")
+end
+
+function Client.ExitGame()
+    LuaDebug.Log("Client.ExitGame")
+    Application.Quit()
+end
+
+function Client.SeriousError(tips)
+    local prefab = LuaUIViewCtr.OpenUIHasBg("ToolsUI/MessageBox")
+    LuaMessageBox.SetDataTable(prefab, {Message = tips,
+                                        ConfirmName = Text.LoginAgain ,ConfirmFunc = Client.LoginAgain,
+                                        CancelName = Text.ExitGame ,CancelFunc = Client.ExitGame,
+                                        ref=self})
 end
 
 function Client.OpenLoadingUI()

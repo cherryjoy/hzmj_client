@@ -130,8 +130,7 @@ HandleFuncs[enumMSGID_MODULE_05.ID_ERROR_CODE_NOTICE] = function(data, dataLengt
     end
 
     if data.err_code == -10000 then
-        local ref = LuaMessageBox.ShowSingle(Text.Disconnected, nil, Text.Confirm, self)
-        ref.button_Single:SetActive(false)
+        Client.SeriousError(Text.SessionFailed)
     end
 end
 

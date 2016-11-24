@@ -44,6 +44,10 @@ Text = {
     LeaveSIGUSR2 = "服务器维护，请稍后再登录游戏",
     LeavePing = "您一段时间没有进行游戏，请重新连接",
 
+    ConnectTimeout = "连接服务器超时",
+    LoginAgain = "重新登录",
+    SessionFailed = "连接会话失效，请重新登录",
+
 -----------------------------Login登录验证-------------------------------------------
     ServerListError="服务器列表下载失败,请重试",
     ConnectError="连接服务器失败,请检查网络",
