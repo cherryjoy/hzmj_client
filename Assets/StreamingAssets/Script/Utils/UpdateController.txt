@@ -1,6 +1,7 @@
 
 require("Utils/UpdateConfig")
 require "Utils/LuaMessageBox"
+require "Utils/TimerManager"
 UpdateController = {}
 UpdateController.BGPath="Update/UpdateBG"
 function UpdateController:Start()
@@ -109,6 +110,14 @@ function UpdateController.DownloadServerlist()
 	UpdateController.UpdateCtrSelf.VersionLbl:set_text("V"..clientVersion)
 	LuaDebug.Log("serverList url: "..GameDefine_outside_serverlist_url)
 	UpdateController.UpdateCtr:HttpDownLoadXml(GameDefine_outside_serverlist_url,"DownloadServerlistCallback","DownLoadErrorCallback")
+	UpdateController.downloadTimer = Timer.NewEvent(UpdateController,50,50,UpdateController.DownLoadOverTime)
+end
+
+function UpdateController:DownLoadOverTime()
+    if self.OverTimeMsgBox then
+        self.OverTimeMsgBox = LuaMessageBox.ShowSingle(Text.ConnectError2,UpdateController.DownloadServerlist,Text.Confirm,UpdateController)
+        self.OverTimeMsgBox.gameObject:get_transform().set_localPosition(LuaVector3.Create(0,0,-502))
+    end
 end
 
 function UpdateController.DownloadServerlistCallback(str)
