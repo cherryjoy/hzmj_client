@@ -7,9 +7,12 @@ ClientSendMsg = {}
 
 sendMsgNameTable =  Util.TableInvert(NetOpcodes_C2S)
 function ClientSendMsg.SendNetMsg(netCode,buffer,bufferLength )
-	LuaDebug.Log("sendId:"..netCode)
-	LuaNetwork.SendNetMessage(netCode,buffer,bufferLength)
 	if netCode ~= enumMSGID_MODULE_05.ID_GAME_HEARTBEAT_REQ then
+		LuaDebug.Log("sendId:"..netCode)
+	end
+
+	LuaNetwork.SendNetMessage(netCode,buffer,bufferLength)
+	if netCode ~= enumMSGID_MODULE_05.ID_GAME_HEARTBEAT_REQ and netCode ~= enumMSGID_MODULE_05.ID_GAME_WIN_CARD_REQ then
 		Client.OpenLoadingUI()
 	end
 end

@@ -19,15 +19,15 @@ require("NetProtocol/module_05_core")
 ClientHandleMsg = {}
 --msgNameTable =  Util.TableInvert(NetOpcodes_S2C)
 function ClientHandleMsg.Handle(msgId,data,dataLength)
-    -- if NetOpcodes_S2C.S2C_CHEAT_CHECK ~= msgId then
+    if enumMSGID_MODULE_05.ID_GAME_HEARTBEAT_RES ~= msgId then
          LuaDebug.Log("recv msgID: " .. msgId)
-    -- end
+    end
     local handleFunc = HandleFuncs[msgId]
     if handleFunc then
       handleFunc(data,dataLength)
     end
     Client.ServerMsgGet:Do(msgId)
-    if msgId ~= enumMSGID_MODULE_05.ID_ROLE_SESSION_ID_NOTICE and msgId ~= enumMSGID_MODULE_05.ID_GAME_HEARTBEAT_RES then
+    if msgId ~= enumMSGID_MODULE_05.ID_ROLE_SESSION_ID_NOTICE and msgId ~= enumMSGID_MODULE_05.ID_GAME_HEARTBEAT_RES and msgId ~= enumMSGID_MODULE_05.ID_GAME_WIN_CARD_REQ then
         Client.CloseLoadingUI()
     end
 
