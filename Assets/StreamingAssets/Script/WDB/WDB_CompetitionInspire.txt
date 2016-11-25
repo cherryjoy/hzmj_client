@@ -1,9 +1,0 @@
-WDB_CompetitionInspire = {}
---[[
-	WDB_CompetitionInspire.Id
-	WDB_CompetitionInspire.InspireLevel
-	WDB_CompetitionInspire.Consume
-	WDB_CompetitionInspire.Num
-]]--
-
-LuaDBTable.SetLuaTableField("CompetitionInspire")

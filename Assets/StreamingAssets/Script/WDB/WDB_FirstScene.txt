@@ -1,8 +1,0 @@
-WDB_FirstScene = {}
---[[
-	WDB_FirstScene.ID
-	WDB_FirstScene.Type
-	WDB_FirstScene.Parm
-]]--
-
-LuaDBTable.SetLuaTableField("FirstScene")

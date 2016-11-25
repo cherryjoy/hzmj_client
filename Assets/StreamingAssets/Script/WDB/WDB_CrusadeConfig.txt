@@ -1,9 +1,0 @@
-WDB_CrusadeConfig = {}
---[[
-	WDB_CrusadeConfig.Id
-	WDB_CrusadeConfig.Name
-	WDB_CrusadeConfig.Param
-	WDB_CrusadeConfig.Param2
-]]--
-
-LuaDBTable.SetLuaTableField("CrusadeConfig")

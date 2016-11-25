@@ -1,8 +1,0 @@
-WDB_Soul_Quality = {}
---[[
-	WDB_Soul_Quality.Id
-	WDB_Soul_Quality.QualityId
-	WDB_Soul_Quality.QualityNum
-]]--
-
-LuaDBTable.SetLuaTableField("Soul_Quality")

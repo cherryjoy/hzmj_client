@@ -1,9 +1,0 @@
-WDB_Gem_Shop = {}
---[[
-	WDB_Gem_Shop.ID
-	WDB_Gem_Shop.Name
-	WDB_Gem_Shop.MoneyType
-	WDB_Gem_Shop.Num
-]]--
-
-LuaDBTable.SetLuaTableField("Gem_Shop")

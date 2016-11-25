@@ -1,7 +1,0 @@
-WDB_Equip_WashQuality = {}
---[[
-	WDB_Equip_WashQuality.QualityId
-	WDB_Equip_WashQuality.QualityNum
-]]--
-
-LuaDBTable.SetLuaTableField("Equip_WashQuality")

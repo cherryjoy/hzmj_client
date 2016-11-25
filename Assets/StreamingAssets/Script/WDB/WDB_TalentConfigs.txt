@@ -1,9 +1,0 @@
-WDB_TalentConfigs = {}
---[[
-	WDB_TalentConfigs.TalentId
-	WDB_TalentConfigs.TalentName
-	WDB_TalentConfigs.UnLock
-	WDB_TalentConfigs.Icon
-]]--
-
-LuaDBTable.SetLuaTableField("TalentConfigs")

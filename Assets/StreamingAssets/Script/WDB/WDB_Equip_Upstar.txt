@@ -1,7 +1,0 @@
-WDB_Equip_Upstar = {}
---[[
-	WDB_Equip_Upstar.StarLv
-	WDB_Equip_Upstar.Money0
-]]--
-
-LuaDBTable.SetLuaTableField("Equip_Upstar")

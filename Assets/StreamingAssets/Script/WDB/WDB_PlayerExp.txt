@@ -1,7 +1,0 @@
-WDB_PlayerExp = {}
---[[
-	WDB_PlayerExp.Level
-	WDB_PlayerExp.Experience
-]]--
-
-LuaDBTable.SetLuaTableField("PlayerExp")

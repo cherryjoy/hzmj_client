@@ -1,9 +1,0 @@
-WDB_Godcity = {}
---[[
-	WDB_Godcity.Id
-	WDB_Godcity.Name
-	WDB_Godcity.Desc
-	WDB_Godcity.FairyDesc
-]]--
-
-LuaDBTable.SetLuaTableField("Godcity")

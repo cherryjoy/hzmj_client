@@ -1,9 +1,0 @@
-WDB_UnlockItemPrice = {}
---[[
-	WDB_UnlockItemPrice.Id
-	WDB_UnlockItemPrice.ItemID
-	WDB_UnlockItemPrice.PlayerPriceType
-	WDB_UnlockItemPrice.PlayerPrice
-]]--
-
-LuaDBTable.SetLuaTableField("UnlockItemPrice")

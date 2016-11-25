@@ -566,8 +566,8 @@ function Util.AddItemNameToAwards(awards)
         if award.type == EAwardType.ITEM then
             award.ItemName = LuaCDataMgr.Item():GetData2(award.itemId,WDB_Item.Name)
         else
-            require "WDB/WDB_RewardTypeIcon"
-            award.ItemName =  LuaCDataMgr.RewardTypeIcon():GetData2(award.type, WDB_RewardTypeIcon.Name)
+            --require "WDB/WDB_RewardTypeIcon"
+            --award.ItemName =  LuaCDataMgr.RewardTypeIcon():GetData2(award.type, WDB_RewardTypeIcon.Name)
         end
     end
 end

@@ -179,7 +179,7 @@ function LuaUIViewCtr:FinishBattle(sceneId,data)
     if data.pass then
         Client.RoleInfo.GuideMgr:ListenGuideEvent(GuideTriggerType.FinishBattle,sceneId)
     else
-        local sceneType = LuaCDataMgr.GameScene():GetData2(sceneId,WDB_GameScene.SceneType)
+        --local sceneType = LuaCDataMgr.GameScene():GetData2(sceneId,WDB_GameScene.SceneType)
         Client.RoleInfo.GuideMgr:ListenGuideEvent(GuideTriggerType.FailFromBattle,sceneType)
         Client.RoleInfo.GuideMgr.ListenBuffer = {trigger = GuideTriggerType.FailFromBattle, param = sceneType}
         --LuaDebug.Log("FinishBattle Failed***********")

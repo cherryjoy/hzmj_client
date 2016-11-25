@@ -1,9 +1,0 @@
-WDB_MinerConfig = {}
---[[
-	WDB_MinerConfig.Id
-	WDB_MinerConfig.Name
-	WDB_MinerConfig.Param
-	WDB_MinerConfig.Param2
-]]--
-
-LuaDBTable.SetLuaTableField("MinerConfig")

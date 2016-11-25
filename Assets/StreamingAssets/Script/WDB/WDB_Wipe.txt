@@ -1,8 +1,0 @@
-WDB_Wipe = {}
---[[
-	WDB_Wipe.Id
-	WDB_Wipe.Times
-	WDB_Wipe.Weighing
-]]--
-
-LuaDBTable.SetLuaTableField("Wipe")

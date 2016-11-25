@@ -1,9 +1,0 @@
-WDB_HoroscopeLevel = {}
---[[
-	WDB_HoroscopeLevel.ID
-    WDB_HoroscopeLevel.Lv
-    WDB_HoroscopeLevel.Experience
-    WDB_HoroscopeLevel.RewardBonus
-]]--
-
-LuaDBTable.SetLuaTableField("HoroscopeLevel")

@@ -1,9 +1,0 @@
-WDB_Miner = {}
---[[
-	WDB_Miner.ID
-	WDB_Miner.Lv
-	WDB_Miner.Experience
-	WDB_Miner.RewardBonus
-]]--
-
-LuaDBTable.SetLuaTableField("Miner")

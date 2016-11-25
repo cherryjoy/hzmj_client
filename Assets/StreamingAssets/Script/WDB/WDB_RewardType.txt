@@ -1,7 +1,0 @@
-WDB_RewardType = {}
---[[
-	WDB_RewardType.Id
-	WDB_RewardType.Desc
-]]--
-
-LuaDBTable.SetLuaTableField("RewardType")

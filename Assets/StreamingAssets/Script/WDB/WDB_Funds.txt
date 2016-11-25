@@ -1,7 +1,0 @@
-WDB_Funds = {}
---[[
-	WDB_Funds.Id
-	WDB_Funds.ReDiamond
-]]--
-
-LuaDBTable.SetLuaTableField("Funds")

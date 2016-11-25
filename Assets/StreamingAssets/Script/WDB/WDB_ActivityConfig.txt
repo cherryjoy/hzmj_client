@@ -1,9 +1,0 @@
-WDB_ActivityConfig = {}
---[[
-	WDB_ActivityConfig.Id
-	WDB_ActivityConfig.Name
-	WDB_ActivityConfig.Param
-	WDB_ActivityConfig.Param2
-]]--
-
-LuaDBTable.SetLuaTableField("ActivityConfig")
