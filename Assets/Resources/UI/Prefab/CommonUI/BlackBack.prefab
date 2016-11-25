@@ -41,14 +41,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeFlag: -1
-  mMat: {fileID: 2100000, guid: 3f6b4fa04f2e5194f8e2ca20b001c5a1, type: 2}
+  mMat: {fileID: 2100000, guid: 241c457ed1d7bb34da265e04ba211dd5, type: 2}
   mColor: {r: 1, g: 1, b: 1, a: 0.49019608}
   mPivot: 4
   mWidth: 1600
   mHeight: 1024
   mDepth: -2
   mIsHidePanel: 0
-  mAtlas: {fileID: 11403532, guid: 9704350d40dfb384d9af5a77b3a57845, type: 2}
+  mAtlas: {fileID: 11450336, guid: 93e6d2d88100e9749948507d1a27beac, type: 2}
   mSpriteName: black
   IsKeepOriSize: 0
   mFillCenter: 1
