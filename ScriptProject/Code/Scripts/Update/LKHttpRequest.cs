@@ -105,6 +105,8 @@ class LKHttpRequest
             }
             return;
         }
+
+        Debug.Log("httpResponse.ContentLength: " + httpResponse.ContentLength);
         downloadLength = httpResponse.ContentLength;
         ReadFromStream();
 

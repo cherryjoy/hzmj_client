@@ -22,7 +22,7 @@ class LKHttpRequest2File : LKHttpRequest
         url =  url + "?id=" + DateTime.Now.Ticks.ToString();
         Debug.Log(url);
         Debug.Log(writeSizeFilePath);
-        httpRequest = (HttpWebRequest)WebRequest.Create(url);
+        httpRequest = (HttpWebRequest)HttpWebRequest.Create(url);
         httpRequest.ReadWriteTimeout = 5000;
         httpRequest.Timeout = 5000;
         httpRequest.Method = "GET";
@@ -68,6 +68,7 @@ class LKHttpRequest2File : LKHttpRequest
             case HTTPEQUESTSTATE.HTTPEQUESTBEGIAN:
                 if (downLoadBeginCallBack != null)
                 {
+                    Debug.Log("downloadLength: " + (int)downloadLength);
                     downLoadBeginCallBack(offset,(int)downloadLength);
                 }
                 //CallLuaFun(downLoadBeginCallBack, downloadLength.ToString());
