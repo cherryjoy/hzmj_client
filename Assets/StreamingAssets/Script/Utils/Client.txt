@@ -206,7 +206,10 @@ end
 function Client.FuncApplicationPause(isPause)
     -- 切回来时判断一下，如果网络没有连接则重连一下
     if not LuaNetwork.IsConnected() then
-        Client.RetryConnectByLastIp()
+        local lastIpStr = PlayerPrefsEx.GetString("LastIp")
+        if lastIpStr ~= "" then
+            Client.RetryConnectByLastIp()
+        end
     end
 
     Client.ApplicationPause:Do(isPause)
