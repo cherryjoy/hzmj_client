@@ -1,0 +1,24 @@
+ManifestFileVersion: 0
+CRC: 2901036608
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: d05aeeb8684f82469e43d086adee9fe9
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 9799df7d10a7a99bb6b51b617d35a633
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: -147829242, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+- Class: 114
+  Script: {fileID: 981088900, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/UI/Prefab/UITools/FastTools.prefab
+Dependencies: []
