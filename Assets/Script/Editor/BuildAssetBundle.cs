@@ -9,6 +9,12 @@ using System.Runtime.InteropServices;
 
 public class BuildAssetBundle : EditorWindow
 {
+    [MenuItem("CJ-TOOL/PlayerPrefsDeleteAll")]
+    static void PlayerPrefsDeleteAll()
+    {
+        PlayerPrefs.DeleteAll();
+    }
+
     BuildTarget platform_ = EditorUserBuildSettings.activeBuildTarget;
 	[MenuItem("CJ-TOOL/BuildAssetBundle")]
     static void OpenWindow()
@@ -22,18 +28,21 @@ public class BuildAssetBundle : EditorWindow
     [MenuItem("CJ-TOOL/一键导出Win资源")]
     static void OneKeyBuildWin()
     {
+        string path = "F:\\MaJiang\\hzmj_client\\TragetWin\\" + PlayerSettings.bundleVersion;
         CommandBuild.OneKeyBuild("F:\\MaJiang\\hzmj_client\\TragetWin", BuildTarget.StandaloneWindows, false, true, false, true, true, true, true);
     }
 
     [MenuItem("CJ-TOOL/一键导出Android资源")]
     static void OneKeyBuildAndroid()
     {
-        CommandBuild.OneKeyBuild("F:\\MaJiang\\hzmj_client\\TragetAndroid", BuildTarget.Android, false, true, false, true, true, true, true);
+        string path = "F:\\MaJiang\\hzmj_client\\TragetAndroid\\" + PlayerSettings.bundleVersion;
+        CommandBuild.OneKeyBuild(path, BuildTarget.Android, false, true, false, true, true, true, true);
     }
 
     [MenuItem("CJ-TOOL/一键导出IOS资源")]
     static void OneKeyBuildIOS()
     {
+        string path = "F:\\MaJiang\\hzmj_client\\TragetIOS\\" + PlayerSettings.bundleVersion;
         CommandBuild.OneKeyBuild("F:\\MaJiang\\hzmj_client\\TragetIOS", BuildTarget.iOS, false, true, false, true, true, true, true);
 		//CommandBuild.OneKeyBuild("/Users/smartlean/Documents/majiang/hzmj_client/TragetIOS", BuildTarget.iOS, false, true, false, true, true, true, true);
     }

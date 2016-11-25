@@ -43,7 +43,7 @@ public partial class PlatformState
 */
     public void CJSDKInit(string objName, string ext)
     {
-        Debug.Log("objname : " + objName + " ext : " + ext);
+        //Debug.Log("objname : " + objName + " ext : " + ext);
 #if UNITY_ANDROID
         if (mAndroidObj == null)
         {
