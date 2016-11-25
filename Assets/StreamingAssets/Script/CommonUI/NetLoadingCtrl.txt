@@ -1,7 +1,7 @@
 NetLoadingCtrl = {}
 
 function NetLoadingCtrl:Start( )
-    self.retryTimer = Timer.NewEvent(self,100,10000000,NetLoadingCtrl.RetryConnect, false, nil)
+    self.retryTimer = Timer.NewEvent(self,100,6*100,NetLoadingCtrl.RetryConnect, false, NetLoadingCtrl.ConnectTimeout)
 
     Client.NetConnectSuccess = Client.NetConnectSuccess + {self,NetLoadingCtrl.NetConnectSuccess}
 
@@ -25,5 +25,11 @@ function NetLoadingCtrl:RetryConnect()
 end
 
 function NetLoadingCtrl:NetConnectSuccess()
+    Client.CloseNetLoadingUI()
+end
+
+function NetLoadingCtrl:ConnectTimeout()
+    local prefab = LuaUIViewCtr.OpenUIHasBg("ToolsUI/MessageBox")
+    Client.SeriousError(Text.ConnectTimeout)
     Client.CloseNetLoadingUI()
 end

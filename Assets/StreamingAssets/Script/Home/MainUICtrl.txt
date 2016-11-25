@@ -23,7 +23,7 @@ end
 
 function MainUICtrl:Score_OnClick()
     if Client.IsDebugPlatform() then
-        LuaDebug.Log("logstr: "..PluginTool.SharedInstance():logStr())
+
     end
 end
 
@@ -42,7 +42,7 @@ end
 
 function MainUICtrl:Setting_OnClick()
     if Client.IsDebugPlatform() then
-        PluginTool.SharedInstance().logStr()
+        Client.SeriousError(Text.ConnectTimeout)
     end
 end
 
