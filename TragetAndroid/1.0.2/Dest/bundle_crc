@@ -1,5 +1,5 @@
-assetbundles:376927068
-material_mat:1971796873
+assetbundles:71333970
+material_mat:3484665019
 material_tga:112992083
 shader:381184948
 music/card/101:4131178786
@@ -82,8 +82,8 @@ ui/fonts/msyh:4133582701
 ui/prefab/announcementui_prefab:1044037172
 ui/prefab/commonui_prefab:907725247
 ui/prefab/home_prefab:1246839608
-ui/prefab/login_prefab:280973005
-ui/prefab/mjtable_prefab:2280315660
+ui/prefab/login_prefab:3725720226
+ui/prefab/mjtable_prefab:1282633269
 ui/prefab/newscenemusthave_prefab:1766436413
 ui/prefab/syssetting_prefab:2586437180
 ui/prefab/toolsui_prefab:1022845590
