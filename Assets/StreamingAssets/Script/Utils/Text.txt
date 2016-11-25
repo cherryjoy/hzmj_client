@@ -2,7 +2,7 @@ require "Utils/ColorFilter"
 --require "Utils/GlobalEnum"
 Text = {
     SDCardNotFound = "未检测到SD卡，请插入SD卡后重试",
-    FreeStorage="存储空间不足，请准备至少200MB可用空间",
+    FreeStorage="存储空间不足，请准备至少30MB可用空间",
     CopyData =  "构建您的麻将世界，不消耗流量",
     UnzipData = "正在解压文件，请不要关闭游戏",
     ConnectError2 = "网络无法连接，请检查后再开始游戏",

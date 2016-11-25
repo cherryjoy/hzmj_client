@@ -57,7 +57,7 @@ function UpdateController.CheackFreeStorage()
 	if Application.get_platform()==ERuntimePlatform.WindowsPlayer or Application.get_platform()==ERuntimePlatform.WindowsEditor then
 		return true
 	else
-		return PluginTool.SharedInstance():GetClientFreeStorage()>400
+		return PluginTool.SharedInstance():GetClientFreeStorage()>30
 	end
 end
 
