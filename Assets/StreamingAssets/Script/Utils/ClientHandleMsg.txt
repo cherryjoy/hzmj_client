@@ -174,7 +174,6 @@ HandleFuncs[enumMSGID_MODULE_05.ID_GAME_READY_RES] = function(data,dataLength)
 
     Client.RoleInfo.Used = data.used
     Client.RoleInfo.RestCard = 112
-    LuaDebug.Log("data.roleid: "..data.roleid)
     if data.roleid == Client.RoleInfo.RoleID then
         Client.ResetToward:Do()
         Client.TableClear:Do()
@@ -228,7 +227,7 @@ end
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_PASS_CARD_RES] = function(data, dataLength)
     local data = LuaProto.deserialize(PBMsgGamePassCardRes, data, dataLength)
 
-    LuaUIViewCtr.UIPanel["MJTableUI"].HandleGuoCard(LuaUIViewCtr.UIPanel["MJTableUI"])
+    --LuaUIViewCtr.UIPanel["MJTableUI"].HandleGuoCard(LuaUIViewCtr.UIPanel["MJTableUI"])
 end
 
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_WIN_GAME_RES] = function(data, dataLength)
