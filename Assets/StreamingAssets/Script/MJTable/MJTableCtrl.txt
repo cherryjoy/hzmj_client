@@ -257,9 +257,9 @@ function MJTableCtrl:IsPengGang(roleId, card)
 end
 
 function MJTableCtrl:HandlePlayCard(roleId, index, card, result)
-    --if roleId == self.Drect1.roleId and result ~= nil then
-    --    return
-    --end
+    if roleId == self.Drect1.roleId and result ~= nil then
+        return
+    end
 
     LuaDebug.Log("roleId: "..roleId..", play card, type: "..card.type_id..", id: "..card.code_id)
     -- 播放出牌

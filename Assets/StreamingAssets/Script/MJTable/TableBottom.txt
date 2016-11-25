@@ -144,7 +144,10 @@ function TableBottom:ChooseCard(i)
 
     if i == self.lastIndex then
         ClientSendMsg.SendPlayCard(i, self.handCard[i].card.type_id, self.handCard[i].card.code_id)
-    else
+        self.CanPlayCard = false
+        Client.BottomPlayCard:Do(self.roleId, i, self.handCard[i].card)
+        self.lastIndex = nil
+    else    
         self.lastIndex = i
 
         self.handCard[i].SetPosUp(self.handCard[i])
@@ -160,8 +163,6 @@ function TableBottom:ChooseCard(i)
 end
 
 function TableBottom:HandlePlayCard(i, card)
-    self.CanPlayCard = false
-    i = self.lastIndex
     if i ~= nil then
         self.handCard[i].Animation(self.handCard[i])
     end
