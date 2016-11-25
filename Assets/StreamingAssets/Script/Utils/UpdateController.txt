@@ -172,11 +172,12 @@ function UpdateController.DownloadAPK(url)
 		"DownloadAPKSuccessCallback","DownLoadErrorCallback")
 end
 
-function UpdateController.DownloadAPKBeginCallback( length )
+function UpdateController.DownloadAPKBeginCallback(offsset, length )
 	UpdateController.UpdateCtrSelf.VersionLbl:get_gameObject():SetActive(false)
 	UpdateController.ProgressBar:get_gameObject():SetActive(true)
-	LuaDebug.Log("DownloadUpdateBeginDataCallback  "..length..'  '..type(length))
+	LuaDebug.Log("DownloadAPKBeginCallback  offsset: "..offsset..", length: "..length)
 	UpdateController.NeedDownSize=tonumber(string.format("%.3f",tonumber(length)/1024/1024))
+	UpdateController.AllDownSize=tonumber(string.format("%.2f",tonumber(offsset)/1024/1024))+UpdateController.NeedDownSize
 	local str = string.format(Text.ReadUpdateAPK,UpdateController.NeedDownSize)
 	LuaMessageBox.ShowSingle(str,UpdateController.ConfirmDownload,Text.Confirm,UpdateController)
 end
@@ -216,6 +217,7 @@ end
 
 function UpdateController.DownloadUpdateBeginDataCallback(offsset,length)
 	UpdateController.ProgressBar:get_gameObject():SetActive(true)
+	LuaDebug.Log("DownloadUpdateBeginDataCallback  offsset: "..offsset..", length: "..length)
 	UpdateController.NeedDownSize=tonumber(string.format("%.2f",tonumber(length)/1024/1024))
 	UpdateController.AllDownSize=tonumber(string.format("%.2f",tonumber(offsset)/1024/1024))+UpdateController.NeedDownSize
 	local str = string.format(Text.ReadUpdate,UpdateController.NeedDownSize)
