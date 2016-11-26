@@ -74,7 +74,7 @@ end
 
 function TableLeft:PlayCardSync(cards)
     for i = 1, #cards do
-        TableLeft.SetPlayCard(self, cards[i])
+        self.lastCard = TableLeft.SetPlayCard(self, cards[i])
     end
 end
 

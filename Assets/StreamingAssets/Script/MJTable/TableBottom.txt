@@ -115,7 +115,7 @@ end
 
 function TableBottom:PlayCardSync(cards)
     for i = 1, #cards do
-        TableBottom.SetPlayCard(self, cards[i])
+        self.lastCard = TableBottom.SetPlayCard(self, cards[i])
     end
 
     self.PlayedCardsGrid:Reposition()
@@ -147,7 +147,7 @@ function TableBottom:ChooseCard(i)
         self.CanPlayCard = false
         Client.BottomPlayCard:Do(self.roleId, i, self.handCard[i].card)
         self.lastIndex = nil
-    else    
+    else
         self.lastIndex = i
 
         self.handCard[i].SetPosUp(self.handCard[i])

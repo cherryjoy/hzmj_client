@@ -10,8 +10,6 @@ function MJTableCtrl:Start( )
         end
     end
 
-    self.getCardNum = 0
-
     Client.BottomPlayCard = Client.BottomPlayCard + {self, MJTableCtrl.HandlePlayCard}
     Client.ResetToward = Client.ResetToward + {self, MJTableCtrl.ResetToward}
     Client.TableClear = Client.TableClear + {self, MJTableCtrl.TableClear}
@@ -287,7 +285,6 @@ function MJTableCtrl:HandleGetCard(roleId, card)
     LuaDebug.Log("roleid: "..roleId)
 
     Client.RoleInfo.RestCard = Client.RoleInfo.RestCard - 1
-    self.getCardNum = self.getCardNum + 1
 
     MJTableCtrl.SetJuShuPaiShu(self)
     -- 摸牌只对自己广播牌，其他方只广播roleId
@@ -622,7 +619,7 @@ function MJTableCtrl:NetConnectSuccess()
     ClientSendMsg.SendEnterRoom(Client.RoleInfo.RoleID, self.roomId)
     ClientSendMsg.SendReadyRoom()
 
-    Client.RoleInfo.RestCard = 112 - self.getCardNum
+    Client.RoleInfo.RestCard = 112
     Client.ResetToward:Do()
     Client.TableClear:Do()
 end

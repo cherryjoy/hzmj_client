@@ -77,7 +77,7 @@ end
 
 function TableTop:PlayCardSync(cards)
     for i = 1, #cards do
-        TableTop.SetPlayCard(self, cards[i])
+        self.lastCard = TableTop.SetPlayCard(self, cards[i])  -- 这里是取最后一张
     end
 end
 
