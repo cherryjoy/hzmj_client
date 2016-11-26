@@ -220,14 +220,14 @@ function UpdateController.DownloadUpdateBeginDataCallback(offsset,length)
 	LuaDebug.Log("DownloadUpdateBeginDataCallback  offsset: "..offsset..", length: "..length)
 	UpdateController.NeedDownSize=tonumber(string.format("%.2f",tonumber(length)/1024/1024))
 	UpdateController.AllDownSize=tonumber(string.format("%.2f",tonumber(offsset)/1024/1024))+UpdateController.NeedDownSize
-
+	--[[
 	-- 如果小于1M则直接更新
 	if length < 1*1024*1024 then
 		LuaDebug.Log("less than 1M, update...")
 		UpdateController.ConfirmDownload()
 		return
 	end
-
+	--]]
 	local str = string.format(Text.ReadUpdate,UpdateController.NeedDownSize)
 	LuaMessageBox.ShowSingle(str,UpdateController.ConfirmDownload,Text.Confirm,UpdateController)
 end
