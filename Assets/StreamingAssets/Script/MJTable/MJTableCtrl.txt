@@ -636,7 +636,6 @@ end
 function MJTableCtrl:PlayRecordVoice(roleId, length)
     local musicMgr=MusicManager.get_Instance()
     musicMgr:set_MusicVolume(0)
-    musicMgr:set_AudioVolume(0)
 
     local len = math.ceil(length)
 
@@ -652,7 +651,6 @@ end
 function MJTableCtrl:PlayRecordVoiceEnd()
     local musicMgr=MusicManager.get_Instance()
     musicMgr:set_MusicVolume(PlayerPrefsEx.GetFloat("bgmValue"))
-    musicMgr:set_AudioVolume(PlayerPrefsEx.GetFloat("ggmValue"))
 end
 
 function MJTableCtrl:NetConnectSuccess()
