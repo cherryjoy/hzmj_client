@@ -46,6 +46,8 @@ function MJTableCtrl:Init(passwd, horse, beishu, rolelist)
     Client.m_CurrentState = EClientState.E_CS_Table
     Client.PingTime = LuaDateTime.Ticks_Now()
     Client.PingGlobalTimer = Timer.NewGlobalEvent(30,10*60*60*24,Client.CheckPing,false,nil)
+
+    self.passType = enumCARD_PASS_TYPE.CARD_PASS_NULL_CARD
 end
 
 function MJTableCtrl:SetJuShuPaiShu()
@@ -238,6 +240,7 @@ function MJTableCtrl:IsPengGang(roleId, card)
     if peng or gangType then
         self.ResultCard:SetActive(true)
         if gangType then
+            self.passType = enumCARD_PASS_TYPE.CARD_PASS_DEAL_CARD
             self.Gang:SetActive(true)
             self.Peng:SetActive(true)
             self.Win:SetActive(false)
@@ -247,6 +250,7 @@ function MJTableCtrl:IsPengGang(roleId, card)
         end
 
         if peng then
+            self.passType = enumCARD_PASS_TYPE.CARD_PASS_DEAL_CARD
             self.Peng:SetActive(true)
             self.Win:SetActive(false)
         end
@@ -296,6 +300,7 @@ function MJTableCtrl:HandleGetCard(roleId, card)
         gangType, tmpHandCard = self.Drect1.IsGangAHandCard(self.Drect1)
         if gangType then
             self.ResultCard:SetActive(true)
+            self.passType = enumCARD_PASS_TYPE.CARD_PASS_NULL_CARD
             self.Gang:SetActive(true)
             self.Peng:SetActive(false)
             self.tempGangType = gangType
@@ -309,6 +314,7 @@ function MJTableCtrl:HandleGetCard(roleId, card)
             end
             if gangType then
                 self.ResultCard:SetActive(true)
+                self.passType = enumCARD_PASS_TYPE.CARD_PASS_NULL_CARD
                 self.Gang:SetActive(true)
                 self.Peng:SetActive(false)
                 self.tempGangType = gangType
@@ -323,6 +329,7 @@ function MJTableCtrl:HandleGetCard(roleId, card)
         local huPai = self.Drect1.IsHuPai(self.Drect1, card)
         if huPai then
             self.ResultCard:SetActive(true)
+            self.passType = enumCARD_PASS_TYPE.CARD_PASS_NULL_CARD
             self.Win:SetActive(true)
             self.Peng:SetActive(false)
         else
@@ -378,7 +385,7 @@ function MJTableCtrl:Gang_OnClick()
 end
 
 function MJTableCtrl:Guo_OnClick()
-    ClientSendMsg.SendGuoCard()
+    ClientSendMsg.SendGuoCard(self.passType)
 
     self.ResultCard:SetActive(false)
 end

@@ -64,6 +64,20 @@ enumCARD_GANG_TYPE = {
 	CARD_GANG_G_TYPE = 2,
 }
 
+enumCARD_PASS_TYPE = {
+	CARD_PASS_NULL_CARD = 0,
+	CARD_PASS_DEAL_CARD = 1,
+}
+
+enumCARD_ACTION_TYPE = {
+	CARD_ACTION_NULL = 0,
+	CARD_ACTION_PLAY = 1,
+	CARD_ACTION_DEAL = 2,
+	CARD_ACTION_PENG = 3,
+	CARD_ACTION_GANG = 4,
+	CARD_ACTION_WINN = 5,
+}
+
 enumEMCJLogInOutReason = {
 	EMCJ_LOGIN_GAME = 1,
 	EMCJ_LEAVE_LEAVEGAME = 2,
@@ -187,6 +201,60 @@ function PB_CARD_GANG_TYPE.Serialize(obj)
 end
 
 function PB_CARD_GANG_TYPE.GetSize(obj)
+	local size = 0
+	size = size + 5
+	return size
+end
+
+-- PB_CARD_PASS_TYPE
+PB_CARD_PASS_TYPE = {}
+PB_CARD_PASS_TYPE.__index = PB_CARD_PASS_TYPE
+function PB_CARD_PASS_TYPE.Create()
+	local obj = setmetatable({},PB_CARD_PASS_TYPE)
+	return obj
+end
+
+function PB_CARD_PASS_TYPE.DeSerialize(obj)
+	local fieldCount = deserialize_int32()
+	local option,optionLength = deserialize_optional()
+	return obj
+end
+
+function PB_CARD_PASS_TYPE.Serialize(obj)
+	local fieldCount = 0
+	serialize_int32(fieldCount)
+	local flag = {}
+	serialize_optional(flag)
+end
+
+function PB_CARD_PASS_TYPE.GetSize(obj)
+	local size = 0
+	size = size + 5
+	return size
+end
+
+-- PB_CARD_ACTION_TYPE
+PB_CARD_ACTION_TYPE = {}
+PB_CARD_ACTION_TYPE.__index = PB_CARD_ACTION_TYPE
+function PB_CARD_ACTION_TYPE.Create()
+	local obj = setmetatable({},PB_CARD_ACTION_TYPE)
+	return obj
+end
+
+function PB_CARD_ACTION_TYPE.DeSerialize(obj)
+	local fieldCount = deserialize_int32()
+	local option,optionLength = deserialize_optional()
+	return obj
+end
+
+function PB_CARD_ACTION_TYPE.Serialize(obj)
+	local fieldCount = 0
+	serialize_int32(fieldCount)
+	local flag = {}
+	serialize_optional(flag)
+end
+
+function PB_CARD_ACTION_TYPE.GetSize(obj)
 	local size = 0
 	size = size + 5
 	return size
@@ -3002,11 +3070,15 @@ function PBMsgWinGameRes.DeSerialize(obj)
 			end
 		end
 	end
+
+	if (fieldCount >= 4) then
+		obj.role_list = deserialize_int32_array()
+	end
 	return obj
 end
 
 function PBMsgWinGameRes.Serialize(obj)
-	local fieldCount = 3
+	local fieldCount = 4
 	serialize_int32(fieldCount)
 	local flag = {}
 	if(obj.roleid ~= nil) then
@@ -3041,6 +3113,7 @@ function PBMsgWinGameRes.Serialize(obj)
 	else
 		serialize_int32(0)
 	end
+	serialize_int32_array(obj.role_list)
 end
 
 function PBMsgWinGameRes.GetSize(obj)
@@ -3057,7 +3130,12 @@ function PBMsgWinGameRes.GetSize(obj)
 			size = size + (obj.card[i]):GetSize()
 		end
 	end
-	size = size + 11
+	if (obj.role_list ~= nil) then
+		for i=1,#(obj.role_list) do
+			size = size + 4
+		end
+	end
+	size = size + 16
 	return size
 end
 
@@ -3845,19 +3923,33 @@ end
 function PBMsgGamePassCardReq.DeSerialize(obj)
 	local fieldCount = deserialize_int32()
 	local option,optionLength = deserialize_optional()
+	if(has_optional_flag(0,optionLength,option)) then
+		obj.state = deserialize_int32()
+	end
 	return obj
 end
 
 function PBMsgGamePassCardReq.Serialize(obj)
-	local fieldCount = 0
+	local fieldCount = 1
 	serialize_int32(fieldCount)
 	local flag = {}
+	if(obj.state ~= nil) then
+		flag[1] = true
+	else
+		flag[1] = false
+	end
 	serialize_optional(flag)
+	if(obj.state ~= nil) then
+		serialize_int32(obj.state)
+	end
 end
 
 function PBMsgGamePassCardReq.GetSize(obj)
 	local size = 0
-	size = size + 5
+	if (obj.state ~= nil) then
+		size = size + 4
+	end
+	size = size + 6
 	return size
 end
 

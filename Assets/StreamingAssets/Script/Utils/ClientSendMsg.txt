@@ -214,8 +214,9 @@ function ClientSendMsg.SendGangCard(index, typeId, codeId, srcRoleId, gangType)
 	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_GANG_CARD_REQ, buffer, length)
 end
 
-function ClientSendMsg.SendGuoCard()
+function ClientSendMsg.SendGuoCard(passType)
 	local data = PBMsgGamePassCardReq.Create()
+	data.state = passType
 
 	local buffer, length = LuaProto.serialize(data)
 	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_PASS_CARD_REQ, buffer, length)
