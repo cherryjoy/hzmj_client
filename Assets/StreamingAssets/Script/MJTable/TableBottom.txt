@@ -49,10 +49,15 @@ function TableBottom:CardInfoSync(handcard)
     for i = 1, handCardNum do
         local card = handcard[i]
         --LuaDebug.Log("card.type_id: "..card.type_id..", card.code_id: "..card.code_id)
-        ---if i <= 5 then
-        ---    card = handcard[1]
-        ---end
-
+        --[[
+        if i <= 3 then
+            card = handcard[1]
+            local tempCard = {}
+            tempCard.type_id = enumCARD_TYPE.CARD_HONG_TYPE
+            tempCard.code_id = 0
+            card = tempCard
+        end
+        --]]
         local ref = nil
         if i == 14 then
             MJTableCtrl.HandleGetCard(LuaUIViewCtr.UIPanel["MJTableUI"], self.roleId, card)
@@ -511,6 +516,22 @@ function TableBottom:TableClear()
 end
 
 function TableBottom:IsHuPai(card)
+    -- 先判断加上card是否有四个红中，或者手里直接有四个红中
+    if card.type_id == enumCARD_TYPE.CARD_HONG_TYPE then
+        local num = TableBottom.GetSameCardNum(self, card)
+        if num >= 3 then
+            return true
+        end
+    end
+
+    local tempCard = {}
+    tempCard.type_id = enumCARD_TYPE.CARD_HONG_TYPE
+    tempCard.code_id = 0
+    local num = TableBottom.GetSameCardNum(self, tempCard)
+    if num >= 4 then
+        return true
+    end
+
     for i = 1, #(self.tingCard) do
         local ref = self.tingCard[i]
         if ref.gameObject:get_activeSelf() then
