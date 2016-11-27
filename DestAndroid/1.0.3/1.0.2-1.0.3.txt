@@ -1,0 +1,11 @@
+assetbundles:2042908759
+ui/prefab/login_prefab:-1585852400
+asset_dependency:1793400410
+MJTable/MJTableCtrl.txt:1230039518
+MJTable/TableBottom.txt:-134489111
+NetProtocol/module_05_core.txt:-541799408
+Utils/ClientHandleMsg.txt:110774112
+Utils/ClientSendMsg.txt:292295696
+Utils/GameDefine.txt:-1840295755
+Utils/LoginController.txt:563798185
+Utils/UpdateController.txt:-363844597

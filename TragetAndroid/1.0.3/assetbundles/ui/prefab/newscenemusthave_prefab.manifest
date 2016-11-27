@@ -1,0 +1,22 @@
+ManifestFileVersion: 0
+CRC: 1766436413
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: cbb9fe9dbe6c0d74f4b56092801ca0f7
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: e9237c0e33889913cdd2ede5bacdd848
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 570105799, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/UI/Prefab/NewSceneMustHave/GameCoreUpdate.prefab
+Dependencies: []

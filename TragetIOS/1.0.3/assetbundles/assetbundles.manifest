@@ -1,0 +1,300 @@
+ManifestFileVersion: 0
+CRC: 459059323
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: material_tga
+      Dependencies: {}
+    Info_1:
+      Name: ui/texture_tga
+      Dependencies: {}
+    Info_2:
+      Name: ui/atlas/bit32/login
+      Dependencies:
+        Dependency_0: shader
+    Info_3:
+      Name: ui/atlas/bit16/emotion
+      Dependencies:
+        Dependency_0: shader
+    Info_4:
+      Name: shader
+      Dependencies: {}
+    Info_5:
+      Name: ui/prefab/commonui_prefab
+      Dependencies:
+        Dependency_0: music/ui/buttonclick_13
+        Dependency_1: ui/fonts/msyh
+        Dependency_2: ui/atlas/bit32/base
+    Info_6:
+      Name: material_mat
+      Dependencies:
+        Dependency_0: material_tga
+        Dependency_1: shader
+    Info_7:
+      Name: ui/prefab/tooltips_prefab
+      Dependencies:
+        Dependency_0: music/ui/buttonclick_13
+    Info_8:
+      Name: ui/prefab/announcementui_prefab
+      Dependencies:
+        Dependency_0: music/ui/buttonclick_13
+    Info_9:
+      Name: ui/prefab/login_prefab
+      Dependencies:
+        Dependency_0: ui/atlas/bit32/login
+        Dependency_1: music/ui/buttonclick_13
+        Dependency_2: ui/atlas/bit32/base
+    Info_10:
+      Name: ui/prefab/newscenemusthave_prefab
+      Dependencies: {}
+    Info_11:
+      Name: ui/prefab/syssetting_prefab
+      Dependencies:
+        Dependency_0: music/ui/buttonclick_13
+    Info_12:
+      Name: ui/texture_mat
+      Dependencies:
+        Dependency_0: ui/texture_tga
+    Info_13:
+      Name: ui/prefab/uitools_prefab
+      Dependencies: {}
+    Info_14:
+      Name: ui/prefab/update_prefab
+      Dependencies:
+        Dependency_0: ui/atlas/bit32/login
+    Info_15:
+      Name: music/ui/buttonclick_13
+      Dependencies: {}
+    Info_16:
+      Name: ui/fonts/hzgb
+      Dependencies: {}
+    Info_17:
+      Name: ui/fonts/msyh
+      Dependencies: {}
+    Info_18:
+      Name: ui/prefab/home_prefab
+      Dependencies:
+        Dependency_0: music/ui/buttonclick_13
+        Dependency_1: ui/atlas/bit32/home
+    Info_19:
+      Name: ui/prefab/mjtable_prefab
+      Dependencies:
+        Dependency_0: music/ui/buttonclick_13
+        Dependency_1: ui/atlas/bit32/compass
+        Dependency_2: ui/atlas/bit32/mahjong
+        Dependency_3: ui/atlas/bit32/mjtable
+    Info_20:
+      Name: ui/atlas/bit32/compass
+      Dependencies:
+        Dependency_0: shader
+    Info_21:
+      Name: ui/atlas/bit32/home
+      Dependencies:
+        Dependency_0: shader
+    Info_22:
+      Name: ui/atlas/bit32/mahjong
+      Dependencies:
+        Dependency_0: shader
+    Info_23:
+      Name: ui/atlas/bit32/mjtable
+      Dependencies:
+        Dependency_0: shader
+    Info_24:
+      Name: ui/prefab/toolsui/messagebox
+      Dependencies:
+        Dependency_0: music/ui/buttonclick_13
+        Dependency_1: ui/fonts/msyh
+        Dependency_2: ui/atlas/bit32/base
+    Info_25:
+      Name: ui/atlas/bit32/base
+      Dependencies:
+        Dependency_0: shader
+    Info_26:
+      Name: music/card/101
+      Dependencies: {}
+    Info_27:
+      Name: music/card/102
+      Dependencies: {}
+    Info_28:
+      Name: music/card/103
+      Dependencies: {}
+    Info_29:
+      Name: music/card/104
+      Dependencies: {}
+    Info_30:
+      Name: music/card/105
+      Dependencies: {}
+    Info_31:
+      Name: music/card/106
+      Dependencies: {}
+    Info_32:
+      Name: music/card/107
+      Dependencies: {}
+    Info_33:
+      Name: music/card/108
+      Dependencies: {}
+    Info_34:
+      Name: music/card/109
+      Dependencies: {}
+    Info_35:
+      Name: music/card/111
+      Dependencies: {}
+    Info_36:
+      Name: music/card/112
+      Dependencies: {}
+    Info_37:
+      Name: music/card/113
+      Dependencies: {}
+    Info_38:
+      Name: music/card/114
+      Dependencies: {}
+    Info_39:
+      Name: music/card/115
+      Dependencies: {}
+    Info_40:
+      Name: music/card/116
+      Dependencies: {}
+    Info_41:
+      Name: music/card/117
+      Dependencies: {}
+    Info_42:
+      Name: music/card/118
+      Dependencies: {}
+    Info_43:
+      Name: music/card/119
+      Dependencies: {}
+    Info_44:
+      Name: music/card/121
+      Dependencies: {}
+    Info_45:
+      Name: music/card/122
+      Dependencies: {}
+    Info_46:
+      Name: music/card/123
+      Dependencies: {}
+    Info_47:
+      Name: music/card/124
+      Dependencies: {}
+    Info_48:
+      Name: music/card/125
+      Dependencies: {}
+    Info_49:
+      Name: music/card/126
+      Dependencies: {}
+    Info_50:
+      Name: music/card/127
+      Dependencies: {}
+    Info_51:
+      Name: music/card/128
+      Dependencies: {}
+    Info_52:
+      Name: music/card/129
+      Dependencies: {}
+    Info_53:
+      Name: music/card/130
+      Dependencies: {}
+    Info_54:
+      Name: music/card/201
+      Dependencies: {}
+    Info_55:
+      Name: music/card/202
+      Dependencies: {}
+    Info_56:
+      Name: music/card/203
+      Dependencies: {}
+    Info_57:
+      Name: music/card/204
+      Dependencies: {}
+    Info_58:
+      Name: music/card/205
+      Dependencies: {}
+    Info_59:
+      Name: music/card/206
+      Dependencies: {}
+    Info_60:
+      Name: music/card/207
+      Dependencies: {}
+    Info_61:
+      Name: music/card/208
+      Dependencies: {}
+    Info_62:
+      Name: music/card/209
+      Dependencies: {}
+    Info_63:
+      Name: music/card/211
+      Dependencies: {}
+    Info_64:
+      Name: music/card/212
+      Dependencies: {}
+    Info_65:
+      Name: music/card/213
+      Dependencies: {}
+    Info_66:
+      Name: music/card/214
+      Dependencies: {}
+    Info_67:
+      Name: music/card/215
+      Dependencies: {}
+    Info_68:
+      Name: music/card/216
+      Dependencies: {}
+    Info_69:
+      Name: music/card/217
+      Dependencies: {}
+    Info_70:
+      Name: music/card/218
+      Dependencies: {}
+    Info_71:
+      Name: music/card/219
+      Dependencies: {}
+    Info_72:
+      Name: music/card/221
+      Dependencies: {}
+    Info_73:
+      Name: music/card/222
+      Dependencies: {}
+    Info_74:
+      Name: music/card/223
+      Dependencies: {}
+    Info_75:
+      Name: music/card/224
+      Dependencies: {}
+    Info_76:
+      Name: music/card/225
+      Dependencies: {}
+    Info_77:
+      Name: music/card/226
+      Dependencies: {}
+    Info_78:
+      Name: music/card/227
+      Dependencies: {}
+    Info_79:
+      Name: music/card/228
+      Dependencies: {}
+    Info_80:
+      Name: music/card/229
+      Dependencies: {}
+    Info_81:
+      Name: music/card/230
+      Dependencies: {}
+    Info_82:
+      Name: music/common/1gang
+      Dependencies: {}
+    Info_83:
+      Name: music/common/1hu
+      Dependencies: {}
+    Info_84:
+      Name: music/common/1peng
+      Dependencies: {}
+    Info_85:
+      Name: music/common/2gang
+      Dependencies: {}
+    Info_86:
+      Name: music/common/2hu
+      Dependencies: {}
+    Info_87:
+      Name: music/common/2peng
+      Dependencies: {}
+    Info_88:
+      Name: music/scene/bgm
+      Dependencies: {}
