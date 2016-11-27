@@ -557,16 +557,33 @@ function MJTableCtrl:Invite_OnClick()
 end
 
 function MJTableCtrl:HandleGameReenterStateSync(data)
-    if data.state == 0 then --0: 最后一次发给我的牌，1: 最后一次打的牌, 2: 碰了该我打牌
-        LuaDebug.Log("state: "..data.state..", type_id: "..data.card.type_id..", code_id"..data.card.code_id..", roleId: "..tostring(data.roleid))
-        MJTableCtrl.HandleGetCard(self, Client.RoleInfo.RoleID, data.card)
-    elseif data.state == 1 then
-        LuaDebug.Log("state: "..data.state..", type_id: "..data.card.type_id..", code_id"..data.card.code_id..", roleId: "..tostring(data.roleid))
-        -- 判断当前的牌是否能碰、杠
-        MJTableCtrl.IsPengGang(self, data.roleid, data.card)
-    else
-        LuaDebug.Log("state: "..data.state..", roleId: "..tostring(data.roleid))
-        self.Drect1.CanPlayCard = true
+    LuaDebug.Log("state: "..data.state..", type_id: "..data.card.type_id..", code_id"..data.card.code_id..", roleId: "..tostring(data.roleid))
+    if data.state == enumCARD_ACTION_TYPE.CARD_ACTION_PLAY then
+        if data.roleid == Client.RoleInfo.RoleID then
+            -- 没有处理
+        else
+            -- 判断当前的牌是否能碰、杠
+            MJTableCtrl.IsPengGang(self, data.roleid, data.card)
+        end
+    elseif data.state == enumCARD_ACTION_TYPE.CARD_ACTION_DEAL then
+        if data.roleid == Client.RoleInfo.RoleID then
+            MJTableCtrl.HandleGetCard(self, data.roleid, data.card)
+        else
+
+        end
+    elseif data.state == enumCARD_ACTION_TYPE.CARD_ACTION_PENG then
+        if data.roleid == Client.RoleInfo.RoleID then
+            self.Drect1.CanPlayCard = true
+        else
+
+        end
+    elseif data.state == enumCARD_ACTION_TYPE.CARD_ACTION_GANG then
+        LuaDebug.LogError("CARD_ACTION_GANG, client not have this state")
+        if data.roleid == Client.RoleInfo.RoleID then
+
+        else
+
+        end
     end
 end
 
