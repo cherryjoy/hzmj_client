@@ -59,10 +59,10 @@ HandleFuncs[enumMSGID_MODULE_05.ID_ROLE_RES] = function(data, dataLength)
 
     Client.m_CurrentState = EClientState.E_CS_Hall
     -- 如果上次是在房间中退出的，则加入房间
-    if Client.roomId ~= nil then
-        ClientSendMsg.SendEnterRoom(Client.RoleInfo.RoleID, Client.roomId)
-    elseif Client.RoleInfo.room_pass ~= nil then
+    if Client.RoleInfo.room_pass ~= nil then
         ClientSendMsg.SendEnterRoom(Client.RoleInfo.RoleID, Client.RoleInfo.room_pass)
+    elseif Client.roomId ~= nil then
+        ClientSendMsg.SendEnterRoom(Client.RoleInfo.RoleID, Client.roomId)
     end
 end
 
