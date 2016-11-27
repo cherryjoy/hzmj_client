@@ -1,4 +1,4 @@
-﻿--SteamingAssets 目录下的platformconfig中的值会覆盖此文件中的值
+--platformconfig can over this
 GameDefine_version = "1.0.3"
 GameDefine_gameID = 584
 GameDefine_AppHashCode = "ae2dbe456c09d76852beca29e146aedc"
