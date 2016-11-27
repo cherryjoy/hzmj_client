@@ -25,7 +25,7 @@ function LoginController:Start()
     --end
 
     if not PlayerPrefs.HasKey("bgmValue") then
-        PlayerPrefsEx.SetFloat("bgmValue",1)
+        PlayerPrefsEx.SetFloat("bgmValue",0.5)
     end
 
     if not PlayerPrefs.HasKey("ggmValue") then
