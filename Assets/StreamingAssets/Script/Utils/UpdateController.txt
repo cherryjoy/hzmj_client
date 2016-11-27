@@ -125,7 +125,13 @@ function UpdateController.DownloadServerlistCallback(str)
 		local SLAXML = require "Utils/slaxdom"
     	local doc = SLAXML:dom(str)
     	UpdateConfig.xmlVersion = doc.kids[2].el[1].attr.version
-    	local updateServer = doc.kids[2].el[1].attr.updateserver
+		local updateServer = nil
+		if Application.get_platform()==ERuntimePlatform.Android then
+    		updateServer = doc.kids[2].el[1].attr.updateserver
+		else
+			updateServer = doc.kids[2].el[1].attr.updateiosserver
+		end
+		LuaDebug.Log("updateServer: "..updateServer)
     	local updateMode =  doc.kids[2].el[1].attr.lanchermode
     	local lancherversion  = doc.kids[2].el[1].attr.lancherversion
     	if UpdateConfig.CompareVersion(lancherversion,PluginTool.SharedInstance():GetVersionName()) then
