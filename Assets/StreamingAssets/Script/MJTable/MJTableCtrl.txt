@@ -607,9 +607,17 @@ end
 
 function MJTableCtrl:Voice_OnPress(isPressed)
     if isPressed then
+        local musicMgr=MusicManager.get_Instance()
+        musicMgr:set_MusicVolume(0)
+        musicMgr:set_AudioVolume(0)
+
         self.RecordVoice.StartRecord(self.RecordVoice)
         RecordVoice.get_Instance():StartRecord()
     else
+        local musicMgr=MusicManager.get_Instance()
+        musicMgr:set_MusicVolume(PlayerPrefsEx.GetFloat("bgmValue"))
+        musicMgr:set_AudioVolume(PlayerPrefsEx.GetFloat("ggmValue"))
+
         self.RecordVoice.EndRecord(self.RecordVoice)
         local url = Client.voiceUrl.."upload/?"
         RecordVoice.get_Instance():EndRecord(self.roomId, self.Drect1.roleId, url, "VoiceRecordSuccess", "VoiceRecordFail")
@@ -626,11 +634,25 @@ function MJTableCtrl:HandleGameRoomChat(typeId, context, roleId)
 end
 
 function MJTableCtrl:PlayRecordVoice(roleId, length)
+    local musicMgr=MusicManager.get_Instance()
+    musicMgr:set_MusicVolume(0)
+    musicMgr:set_AudioVolume(0)
+
+    local len = math.ceil(length)
+
+    Timer.NewEvent(self,len*10,len*10,MJTableCtrl.PlayRecordVoiceEnd, false, nil)
+
     for i = 1, 4 do
         if self["Drect"..i].roleId == roleId then
-            self["Drect"..i].TableHead.PlayRecordVoice(self["Drect"..i].TableHead, length)
+            self["Drect"..i].TableHead.PlayRecordVoice(self["Drect"..i].TableHead, len)
         end
     end
+end
+
+function MJTableCtrl:PlayRecordVoiceEnd()
+    local musicMgr=MusicManager.get_Instance()
+    musicMgr:set_MusicVolume(PlayerPrefsEx.GetFloat("bgmValue"))
+    musicMgr:set_AudioVolume(PlayerPrefsEx.GetFloat("ggmValue"))
 end
 
 function MJTableCtrl:NetConnectSuccess()
