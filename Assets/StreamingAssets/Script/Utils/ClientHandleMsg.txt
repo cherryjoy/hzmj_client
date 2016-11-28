@@ -263,7 +263,9 @@ end
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_ROOM_CHAT_RES] = function(data, dataLength)
     local data = LuaProto.deserialize(PBMsgGameRoomChatRes, data, dataLength)
 
-    LuaUIViewCtr.UIPanel["MJTableUI"].HandleGameRoomChat(LuaUIViewCtr.UIPanel["MJTableUI"], data.type_id, data.chat, data.roleid)
+    if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil then
+        LuaUIViewCtr.UIPanel["MJTableUI"].HandleGameRoomChat(LuaUIViewCtr.UIPanel["MJTableUI"], data.type_id, data.chat, data.roleid)
+    end
 end
 
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_HEARTBEAT_RES] = function(data, dataLength)
