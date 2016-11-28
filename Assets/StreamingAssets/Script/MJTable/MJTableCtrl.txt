@@ -562,6 +562,15 @@ end
 function MJTableCtrl:HandleGameReenterStateSync(data)
     LuaDebug.Log("state: "..data.state..", type_id: "..data.card.type_id..", code_id"..data.card.code_id..", roleId: "..tostring(data.roleid))
     if data.state == enumCARD_ACTION_TYPE.CARD_ACTION_PLAY then
+        self.CD = 0
+        self.CountDown:set_text(tostring(self.CD))
+        self.CountDown:set_enabled(true)
+
+        local spriteName, myDirect = MJTableCtrl.GetMyDirectSprite(data.roleid, self.roleList)
+        LuaDebug.Log("my direction: "..myDirect)
+        self.TimerBack:set_spriteName(spriteName)
+        self.TimerBack:get_gameObject():SetActive(true)
+
         if data.roleid == Client.RoleInfo.RoleID then
             -- 没有处理
         else
@@ -569,12 +578,18 @@ function MJTableCtrl:HandleGameReenterStateSync(data)
             MJTableCtrl.IsPengGang(self, data.roleid, data.card)
         end
     elseif data.state == enumCARD_ACTION_TYPE.CARD_ACTION_DEAL then
+        --计时
+        MJTableCtrl.CountDownStart(self, data.roleid)
+
         if data.roleid == Client.RoleInfo.RoleID then
             MJTableCtrl.HandleGetCard(self, data.roleid, data.card)
         else
 
         end
     elseif data.state == enumCARD_ACTION_TYPE.CARD_ACTION_PENG then
+        --计时
+        MJTableCtrl.CountDownStart(self, data.roleid)
+
         if data.roleid == Client.RoleInfo.RoleID then
             self.Drect1.CanPlayCard = true
         else
