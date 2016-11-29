@@ -58,16 +58,11 @@ function TableBottom:CardInfoSync(handcard)
             card = tempCard
         end
         --]]
-        local ref = nil
-        if i == 14 then
-            MJTableCtrl.HandleGetCard(LuaUIViewCtr.UIPanel["MJTableUI"], self.roleId, card)
-        else
-            ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCard",self.Grid:get_gameObject())
-            ref.gameObject:set_name("MyCard")
-            ref.Message:target(ref.gameObject)
-            self.handCard[i] = ref
-            ref.Init(ref, card, i)
-        end
+        local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCard",self.Grid:get_gameObject())
+        ref.gameObject:set_name("MyCard")
+        ref.Message:target(ref.gameObject)
+        self.handCard[i] = ref
+        ref.Init(ref, card, i)
     end
 
     TableBottom.SortCard(self)

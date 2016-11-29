@@ -163,7 +163,9 @@ HandleFuncs[enumMSGID_MODULE_05.ID_GAME_ROOM_ENTER_RES] = function(data,dataLeng
         LuaUIViewCtr.UIPanel["MJTableUI"].SetJuShuPaiShu(LuaUIViewCtr.UIPanel["MJTableUI"])
 
         -- 关闭主界面
-        LuaUIViewCtr.UIPanel["MainUI"].gameObject:SetActive(false)
+        if LuaUIViewCtr.UIPanel["MainUI"] ~= nil then
+            LuaUIViewCtr.UIPanel["MainUI"].gameObject:SetActive(false)
+        end
     end
 
     LuaUIViewCtr.UIPanel["MJTableUI"].EnterRoomSync(LuaUIViewCtr.UIPanel["MJTableUI"], data.rolelist)
@@ -179,15 +181,19 @@ HandleFuncs[enumMSGID_MODULE_05.ID_GAME_READY_RES] = function(data,dataLength)
         Client.TableClear:Do()
     end
 
-    LuaUIViewCtr.UIPanel["MJTableUI"].SetJuShuPaiShu(LuaUIViewCtr.UIPanel["MJTableUI"])
-    LuaUIViewCtr.UIPanel["MJTableUI"].GameReady(LuaUIViewCtr.UIPanel["MJTableUI"], data.rolestate)
+    if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil then
+        LuaUIViewCtr.UIPanel["MJTableUI"].SetJuShuPaiShu(LuaUIViewCtr.UIPanel["MJTableUI"])
+        LuaUIViewCtr.UIPanel["MJTableUI"].GameReady(LuaUIViewCtr.UIPanel["MJTableUI"], data.rolestate)
+    end
 end
 
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_ROOM_CARD_SYNC] = function(data, dataLength)
     local data = LuaProto.deserialize(PBRoomCardInfoSync, data, dataLength)
 
     --LuaDebug.Log("card num: "..#(data.owncards.handcard));
-    LuaUIViewCtr.UIPanel["MJTableUI"].CardInfoSync(LuaUIViewCtr.UIPanel["MJTableUI"], data)
+    if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil then
+        LuaUIViewCtr.UIPanel["MJTableUI"].CardInfoSync(LuaUIViewCtr.UIPanel["MJTableUI"], data)
+    end
 end
 
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_DELETE_ROOM_RES] = function(data, dataLength)
@@ -195,33 +201,47 @@ HandleFuncs[enumMSGID_MODULE_05.ID_GAME_DELETE_ROOM_RES] = function(data, dataLe
 
     LuaDebug.Log("result: "..data.result)
 
-    LuaUIViewCtr.UIPanel["MainUI"].gameObject:SetActive(true)
-    LuaUIViewCtr.UIPanel["MJTableUI"].DeleteTable(LuaUIViewCtr.UIPanel["MJTableUI"], data.roleid)
+    if LuaUIViewCtr.UIPanel["MainUI"] ~= nil then
+        uaUIViewCtr.UIPanel["MainUI"].gameObject:SetActive(true)
+    end
+
+    if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil then
+        LuaUIViewCtr.UIPanel["MJTableUI"].DeleteTable(LuaUIViewCtr.UIPanel["MJTableUI"], data.roleid)
+    end
+
     Client.TableClose:Do()
 end
 
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_PLAY_CARD_RES] = function(data, dataLength)
     local data = LuaProto.deserialize(PBMsgPlayCardRes, data, dataLength)
 
-    LuaUIViewCtr.UIPanel["MJTableUI"].HandlePlayCard(LuaUIViewCtr.UIPanel["MJTableUI"], data.roleid, data.index, data.card, data.result)
+    if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil then
+        LuaUIViewCtr.UIPanel["MJTableUI"].HandlePlayCard(LuaUIViewCtr.UIPanel["MJTableUI"], data.roleid, data.index, data.card, data.result)
+    end
 end
 
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_GET_CARD_RES] = function(data, dataLength)
     local data = LuaProto.deserialize(PBMsgGameGetCardRes, data, dataLength)
 
-    LuaUIViewCtr.UIPanel["MJTableUI"].HandleGetCard(LuaUIViewCtr.UIPanel["MJTableUI"], data.roleid, data.card)
+    if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil then
+        LuaUIViewCtr.UIPanel["MJTableUI"].HandleGetCard(LuaUIViewCtr.UIPanel["MJTableUI"], data.roleid, data.card)
+    end
 end
 
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_PENG_CARD_RES] = function(data, dataLength)
     local data = LuaProto.deserialize(PBMsgPengCardRes, data, dataLength)
 
-    LuaUIViewCtr.UIPanel["MJTableUI"].HandlePengCard(LuaUIViewCtr.UIPanel["MJTableUI"], data.roleid, data.index, data.card, data.srcid)
+    if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil then
+        LuaUIViewCtr.UIPanel["MJTableUI"].HandlePengCard(LuaUIViewCtr.UIPanel["MJTableUI"], data.roleid, data.index, data.card, data.srcid)
+    end
 end
 
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_GANG_CARD_RES] = function(data, dataLength)
     local data = LuaProto.deserialize(PBMsgGangCardRes, data, dataLength)
 
-    LuaUIViewCtr.UIPanel["MJTableUI"].HandleGangCard(LuaUIViewCtr.UIPanel["MJTableUI"], data.roleid, data.index, data.card, data.state, data.srcid)
+    if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil then
+        LuaUIViewCtr.UIPanel["MJTableUI"].HandleGangCard(LuaUIViewCtr.UIPanel["MJTableUI"], data.roleid, data.index, data.card, data.state, data.srcid)
+    end
 end
 
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_PASS_CARD_RES] = function(data, dataLength)
@@ -234,31 +254,42 @@ HandleFuncs[enumMSGID_MODULE_05.ID_GAME_WIN_GAME_RES] = function(data, dataLengt
     local data = LuaProto.deserialize(PBMsgWinGameRes, data, dataLength)
     LuaDebug.Log("data.count: "..data.count)
     LuaDebug.Log("data.card: "..#(data.card))
-    LuaUIViewCtr.UIPanel["MJTableUI"].HandleWinGame(LuaUIViewCtr.UIPanel["MJTableUI"], data.roleid, data.count, data.card)
+
+    if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil then
+        LuaUIViewCtr.UIPanel["MJTableUI"].HandleWinGame(LuaUIViewCtr.UIPanel["MJTableUI"], data.roleid, data.count, data.card)
+    end
 end
 
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_WIN_CARD_RES] = function(data, dataLength)
     local data = LuaProto.deserialize(PBMsgGameWinCardRes, data, dataLength)
 
-    LuaUIViewCtr.UIPanel["MJTableUI"].HandleTingCard(LuaUIViewCtr.UIPanel["MJTableUI"], data.card)
+    if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil then
+        LuaUIViewCtr.UIPanel["MJTableUI"].HandleTingCard(LuaUIViewCtr.UIPanel["MJTableUI"], data.card)
+    end
 end
 
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_RESULT_RES] = function(data, dataLength)
     local data = LuaProto.deserialize(PBMsgGameResultRes, data, dataLength)
 
-    LuaUIViewCtr.UIPanel["MJTableUI"].HandleGameResult(LuaUIViewCtr.UIPanel["MJTableUI"], data)
+    if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil then
+        LuaUIViewCtr.UIPanel["MJTableUI"].HandleGameResult(LuaUIViewCtr.UIPanel["MJTableUI"], data)
+    end
 end
 
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_BALANCE_RES] = function(data, dataLength)
     local data = LuaProto.deserialize(PBMsgGameBalanceRes, data, dataLength)
 
-    LuaUIViewCtr.UIPanel["MJTableUI"].HandleGameBalance(LuaUIViewCtr.UIPanel["MJTableUI"], data.balances)
+    if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil then
+        LuaUIViewCtr.UIPanel["MJTableUI"].HandleGameBalance(LuaUIViewCtr.UIPanel["MJTableUI"], data.balances)
+    end
 end
 
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_REENTER_STATE_SYNC] = function(data, dataLength)
     local data = LuaProto.deserialize(PBMsgGameReenterStateSync, data, dataLength)
 
-    LuaUIViewCtr.UIPanel["MJTableUI"].HandleGameReenterStateSync(LuaUIViewCtr.UIPanel["MJTableUI"], data)
+    if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil then
+        LuaUIViewCtr.UIPanel["MJTableUI"].HandleGameReenterStateSync(LuaUIViewCtr.UIPanel["MJTableUI"], data)
+    end
 end
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_ROOM_CHAT_RES] = function(data, dataLength)
     local data = LuaProto.deserialize(PBMsgGameRoomChatRes, data, dataLength)
