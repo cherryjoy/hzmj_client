@@ -492,9 +492,13 @@ function MJTableCtrl:HandleTingCard(cards)
 end
 
 function MJTableCtrl:HandleGameResult(data)
-    local ref = LuaUIViewCtr.OpenUINotLose("MJTable/GameResult")
-    ref.Init(ref, data, self.roleList)
-    self.GameResult = ref
+    if self.GameResult ~= nil then
+        LuaDebug.Log("GameResult exist, but recv GameResult msg")
+        return
+    end
+
+    self.GameResult = LuaUIViewCtr.OpenUINotLose("MJTable/GameResult")
+    self.GameResult.Init(ref, data, self.roleList)
 
     for i = 1, #(data.role_cards) do
         LuaDebug.Log("HandleGameResult roleid: "..data.role_cards[i].roleid..", score: "..data.role_cards[i].score)
@@ -522,6 +526,7 @@ end
 function MJTableCtrl:TableClear()
     if self.GameResult ~= nil then
         self.GameResult.gameObject:Destroy1()
+        self.GameResult = nil
     end
 
     for i = 1, 4 do
