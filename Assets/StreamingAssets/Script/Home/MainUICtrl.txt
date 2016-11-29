@@ -28,9 +28,8 @@ function MainUICtrl:Score_OnClick()
 end
 
 function MainUICtrl:Help_OnClick()
-	-- Application.CaptureScreenshot("截取全屏.png", 0);
-    LuaDebug.Log("Help_OnClick")
-
+	local ref = LuaUIViewCtr.OpenUIHasBg("Home/HelpUI")
+    --[[
     if Client.IsDebugPlatform() then
         --PlatformHandler.CallShare("", "", "", "screenshot.png", "", "0")
         local param = string.format("{\"code\":1,\"roomid\":\"555555\"}")
@@ -38,6 +37,7 @@ function MainUICtrl:Help_OnClick()
 
         PlatformHandler.CallShare("test title", "test desc", Client.inviteUrl, "", param, "1")
     end
+    --]]
 end
 
 function MainUICtrl:Setting_OnClick()

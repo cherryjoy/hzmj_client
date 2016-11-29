@@ -1,0 +1,14 @@
+HelpCtrl = {}
+
+function HelpCtrl:Start( )
+    local mt=TextureMgr.get_Instance():LoadTexture("Home/chuangjianfangjian", true)
+    self.Texture:set_material(mt)
+end
+
+function HelpCtrl:OnDestroy( )
+
+end
+
+function CreateRoomCtrl:Close_OnClick()
+    self.gameObject:Destroy1()
+end
