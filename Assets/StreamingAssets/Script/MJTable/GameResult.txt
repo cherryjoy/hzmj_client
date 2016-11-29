@@ -65,25 +65,16 @@ function GameResult:Init(data, roleList)
 
          self.RestCardsGrid:Reposition()
      end
-
-     if Client.RoleInfo.Used + 1 == Client.RoleInfo.Amount then
-         self.Ready:SetActive(false)
-         self.Share:SetActive(false)
-         Timer.NewEvent(self,40,40,GameResult.GetResult, false, nil)
-     end
- end
-
-function GameResult:GetResult()
-    ClientSendMsg.SendGameBalance()
-
-    self.gameObject:Destroy1()
 end
 
 function GameResult:Ready_OnClick()
-    --发送准备协议
-    ClientSendMsg.SendReadyRoom()
-
-    --self.gameObject:Destroy1()
+    if Client.RoleInfo.Used + 1 == Client.RoleInfo.Amount then
+        ClientSendMsg.SendGameBalance()
+        self.gameObject:Destroy1()
+    else
+        --发送准备协议
+        ClientSendMsg.SendReadyRoom()
+    end
 end
 
 function GameResult:Share_OnClick()
