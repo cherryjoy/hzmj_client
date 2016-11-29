@@ -206,7 +206,8 @@ end
 function Client.FuncApplicationPause(isPause)
     -- 切回来时判断一下，如果网络没有连接则重连一下
     if Client.m_CurrentState == EClientState.E_CS_Table or Client.m_CurrentState == EClientState.E_CS_Hall then
-        if not LuaNetwork.IsConnected() then
+        --if not LuaNetwork.IsConnected() then
+        if not isPause then
             Client.RetryConnectByLastIp()
         end
     end
