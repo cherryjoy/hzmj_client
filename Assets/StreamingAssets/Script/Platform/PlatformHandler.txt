@@ -5,8 +5,7 @@ function PlatformHandler.Start()
 	Client.EnterGameSuccess = Client.EnterGameSuccess + {PlatformHandler,PlatformHandler.CallSDKEnterGame}
 	Client.PlayerLevelUp = Client.PlayerLevelUp + {PlatformHandler,PlatformHandler.CallPlayerLevelUp}
 	Client.RoleSummarySuccess = Client.RoleSummarySuccess + {PlatformHandler,PlatformHandler.RoleSummarySuccess}
-	Client.ConnectSuccess = Client.ConnectSuccess + {PlatformHandler,PlatformHandler.ConnectSuccess}
-	--Client.ChooseRoleExitBtn = Client.ChooseRoleExitBtn+{PlatformHandler,PlatformHandler.ChooseRoleExitBtn}
+	Client.NetConnectSuccess = Client.NetConnectSuccess + {PlatformHandler,PlatformHandler.NetConnectSuccess}
 end
 
 function PlatformHandler.OnDestroy()
@@ -14,13 +13,11 @@ function PlatformHandler.OnDestroy()
 	Client.EnterGameSuccess = Client.EnterGameSuccess - {PlatformHandler,PlatformHandler.CallSDKEnterGame}
 	Client.PlayerLevelUp = Client.PlayerLevelUp - {PlatformHandler,PlatformHandler.CallPlayerLevelUp}
 	Client.RoleSummarySuccess = Client.RoleSummarySuccess - {PlatformHandler,PlatformHandler.RoleSummarySuccess}
-	Client.ConnectSuccess = Client.ConnectSuccess - {PlatformHandler,PlatformHandler.ConnectSuccess}
-	--Client.ChooseRoleExitBtn = Client.ChooseRoleExitBtn- {PlatformHandler,PlatformHandler.ChooseRoleExitBtn}
+	Client.NetConnectSuccess = Client.NetConnectSuccess - {PlatformHandler,PlatformHandler.NetConnectSuccess}
 end
 
 function PlatformHandler.onSdkInit()
 	LuaDebug.Log('onSdkInit')
-	PlatformHandler.EnterChooseRoleUI=false
 	PlatformHandler.state = PlatformSDKController.mSelf():SDKState()
 	if not PlatformHandler.InitFinish then
 		local param = string.format("{%s,\"gameId\":\"%s\",\"serverId\":\"%s\"}",GameDefine_InitConfig,
@@ -114,7 +111,6 @@ function PlatformHandler.CallSDKEnterGame()
 	jsonTb["roleUnion"]=Client.RoleInfo.roleAttr.roleUnion or ""
 	jsonTb["roleBalance"]=Client.RoleInfo.roleAttr.roleBalance or "0"
 	msg = JSON:encode_pretty(jsonTb)
-	PlatformHandler.EnterChooseRoleUI=false
 	--LuaDebug.Log(msg)
 	PlatformHandler.state:OKSDKEnterGame(msg)
 end
@@ -135,17 +131,13 @@ end
 function PlatformHandler.RoleSummarySuccess()
 	--LuaDebug.Log("loginsuccess")
  	PlatformHandler.Logining=false
- 	PlatformHandler.EnterChooseRoleUI=true
 end
 
-function PlatformHandler.ConnectSuccess()
-	-- body
+function PlatformHandler.NetConnectSuccess()
+	-- body，网络重连后，需要把这个标识，重置下，防止调用不了CallLogin
 	PlatformHandler.Logining=false
 end
 
-function  PlatformHandler.ChooseRoleExitBtn()
-	PlatformHandler.EnterChooseRoleUI=false
-end
 --------------------------------------------------------------------------------------
 -------SDK CallBack
 --------------------------------------------------------------------------------------
@@ -214,13 +206,7 @@ function PlatformHandler.onLogoutFinish(msg)
 	LuaDebug.Log("get_loadedLevelName "..Application.get_loadedLevelName())
 	local json = JSON:decode(msg)
 	if json["code"]==1 then
-		if  Client.m_CurrentState==EClientState.E_CS_ChooseRole then
-			LuaDebug.Log("EnterChooseRoleUI ")
-			PlatformHandler.EnterChooseRoleUI=false
-			Client.LoginAccountExit:Do()
-
-			--PlatformHandler.CallLogin()
-		elseif Client.m_CurrentState==EClientState.E_CS_Login or Client.m_CurrentState==EClientState.E_CS_Reconect then
+		if Client.m_CurrentState==EClientState.E_CS_Login or Client.m_CurrentState==EClientState.E_CS_Reconect then
 			LuaDebug.Log("get_loadedLevelName "..Application.get_loadedLevelName())
 			PlatformHandler.CallLogin()
 		else

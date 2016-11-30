@@ -597,19 +597,6 @@ function Util.ChangeBtnStyle(imageBtn,style)
     imageBtn:JustRefresh()
 end
 
-function Util.EnterCity (cityInfo)
-    Client.RoleInfo.CitySceneIdMgr:SetLastCitySceneId(cityInfo.cityId)
-    Client.m_CurrentState=EClientState.E_CS_Hall
-    UnityLevelMgr.LoadLevel("GameHall",Client.RoleInfo.CitySceneIdMgr:GetLastCitySceneId())
-end
-
-function Util.QuitGang()
-    Client.RoleInfo.BackCityOpenUI.UIName = nil
-    Client.RoleInfo.BackCityOpenUI.UITitileName = nil
-    Client.RoleInfo.CitySceneIdMgr:ResetLastCityIdNormal()
-    ClientSendMsg.SendCityEnter(Client.RoleInfo.CitySceneIdMgr:GetLastNormalCitySceneId())
-end
-
 ---------------array-----------------
 --分割字符串
 --@str 源字符串
