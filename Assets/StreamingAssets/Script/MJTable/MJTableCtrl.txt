@@ -498,7 +498,7 @@ function MJTableCtrl:HandleGameResult(data)
     end
 
     self.GameResult = LuaUIViewCtr.OpenUINotLose("MJTable/GameResult")
-    self.GameResult.Init(ref, data, self.roleList)
+    self.GameResult.Init(self.GameResult, data, self.roleList)
 
     for i = 1, #(data.role_cards) do
         LuaDebug.Log("HandleGameResult roleid: "..data.role_cards[i].roleid..", score: "..data.role_cards[i].score)
@@ -537,6 +537,12 @@ function MJTableCtrl:TableClear()
     -- 方向不再闪烁
     self.CountDown:set_enabled(false)
     self.TimerBack:get_gameObject():SetActive(false)
+
+    -- 把碰杠胡界面置为false
+    self.ResultCard:SetActive(false)
+    self.Gang:SetActive(false)
+    self.Peng:SetActive(false)
+    self.Win:SetActive(false)
 end
 
 function MJTableCtrl:HandleGameBalance(balances)
@@ -586,11 +592,10 @@ function MJTableCtrl:HandleGameReenterStateSync(data)
         --计时
         MJTableCtrl.CountDownStart(self, data.roleid)
 
-        if data.roleid == Client.RoleInfo.RoleID then
+        --if data.roleid == Client.RoleInfo.RoleID then
             MJTableCtrl.HandleGetCard(self, data.roleid, data.card)
-        else
-
-        end
+        --else
+        --end
     elseif data.state == enumCARD_ACTION_TYPE.CARD_ACTION_PENG then
         --计时
         MJTableCtrl.CountDownStart(self, data.roleid)
