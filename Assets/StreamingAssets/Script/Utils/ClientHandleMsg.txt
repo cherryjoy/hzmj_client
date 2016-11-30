@@ -202,7 +202,7 @@ HandleFuncs[enumMSGID_MODULE_05.ID_GAME_DELETE_ROOM_RES] = function(data, dataLe
     LuaDebug.Log("result: "..data.result)
 
     if LuaUIViewCtr.UIPanel["MainUI"] ~= nil then
-        uaUIViewCtr.UIPanel["MainUI"].gameObject:SetActive(true)
+        LuaUIViewCtr.UIPanel["MainUI"].gameObject:SetActive(true)
     end
 
     if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil then
