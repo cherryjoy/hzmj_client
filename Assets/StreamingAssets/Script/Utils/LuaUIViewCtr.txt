@@ -8,7 +8,6 @@ function LuaUIViewCtr:Start ()
     end
     Client.SessionCreated = Client.SessionCreated +{self,LuaUIViewCtr.SessionCreated}
     Client.EnterGameSuccess = Client.EnterGameSuccess + {self,LuaUIViewCtr.EnterGameSuccess}
-    Client.CityEnter = Client.CityEnter + {self,LuaUIViewCtr.CityEnter}
     Client.PlayerLevelUp = Client.PlayerLevelUp + {self, LuaUIViewCtr.PlayerLevelUp}
     Client.ShowToolTips = Client.ShowToolTips + {self,LuaUIViewCtr.OnShowToolTips}
     Client.EnterBattle = Client.EnterBattle + {self, LuaUIViewCtr.EnterBattle}
@@ -37,7 +36,6 @@ end
 function LuaUIViewCtr:OnDestroy ()
     Client.SessionCreated = Client.SessionCreated -{self,LuaUIViewCtr.SessionCreated}
     Client.EnterGameSuccess = Client.EnterGameSuccess - {self,LuaUIViewCtr.EnterGameSuccess}
-    Client.CityEnter = Client.CityEnter - {self,LuaUIViewCtr.CityEnter}
     Client.PlayerLevelUp = Client.PlayerLevelUp - {self, LuaUIViewCtr.PlayerLevelUp}
     Client.ShowToolTips = Client.ShowToolTips - {self,LuaUIViewCtr.OnShowToolTips}
     Client.EnterBattle = Client.EnterBattle - {self, LuaUIViewCtr.EnterBattle}
@@ -61,7 +59,7 @@ end
 
 function LuaUIViewCtr:SessionCreated()
     local clientState = Client.m_CurrentState
-    if clientState~=EClientState.E_CS_Login and clientState ~= EClientState.E_CS_ChooseRole and clientState ~= EClientState.E_CS_Reconect then
+    if clientState~=EClientState.E_CS_Login and clientState ~= EClientState.E_CS_Reconect then
        if not GameDefine_isLoginDebug then
            local platformInfo = Client.PlatformInfo
            local userId=platformInfo.userId
@@ -78,18 +76,7 @@ function LuaUIViewCtr:SessionCreated()
 end
 
 function LuaUIViewCtr:EnterGameSuccess()
-   ClientSendMsg.SendCityEnter(Client.RoleInfo.roleAttr.cityId)
-end
-
-function LuaUIViewCtr:CityEnter(data)
-    local curState =  Client.m_CurrentState
-   if curState ~= EClientState.E_CS_Login and curState ~= EClientState.E_CS_ChooseRole then
-       if BattleCommonCtr ~= nil then
-           BattleCommonCtr.ClearSceneWhenExit()
-       end
-       --require "Utils/MainCity"
-      Util.EnterCity(data)
-   end
+   --ClientSendMsg.SendCityEnter(Client.RoleInfo.roleAttr.cityId)
 end
 
 function LuaUIViewCtr:ContinueGuide(delayParam)
@@ -209,19 +196,19 @@ function LuaUIViewCtr:ScenePassSuccess (sceneInfo)
 end
 
 function LuaUIViewCtr:UIOpen (uirefTable)
-    if Client.m_CurrentState~=EClientState.E_CS_Login and Client.m_CurrentState~=EClientState.E_CS_Reconect and Client.m_CurrentState ~= EClientState.E_CS_ChooseRole then
+    if Client.m_CurrentState~=EClientState.E_CS_Login and Client.m_CurrentState~=EClientState.E_CS_Reconect then
         --Client.RoleInfo.GuideMgr:ListenGuideEnd(GuideEndType.UIOpen,uirefTable.uiName)
     end
 end
 
 function LuaUIViewCtr:UIDestroy (uirefTable)
-    if Client.m_CurrentState~=EClientState.E_CS_Login and Client.m_CurrentState~=EClientState.E_CS_Reconect and Client.m_CurrentState ~= EClientState.E_CS_ChooseRole then
+    if Client.m_CurrentState~=EClientState.E_CS_Login and Client.m_CurrentState~=EClientState.E_CS_Reconect then
         --Client.RoleInfo.GuideMgr:ListenGuideEnd(GuideEndType.UIDestroy,uirefTable.uiName)
     end
 end
 
 function LuaUIViewCtr:ServerMsgGet (msgId)
-    if Client.m_CurrentState~=EClientState.E_CS_Login and Client.m_CurrentState~=EClientState.E_CS_Reconect and Client.m_CurrentState ~= EClientState.E_CS_ChooseRole then
+    if Client.m_CurrentState~=EClientState.E_CS_Login and Client.m_CurrentState~=EClientState.E_CS_Reconect then
         --Client.RoleInfo.GuideMgr:ListenGuideEnd(GuideEndType.ServerReturn,msgId)
     end
 end

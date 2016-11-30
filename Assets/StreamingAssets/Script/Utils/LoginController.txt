@@ -64,7 +64,6 @@ function LoginController:Start()
         self.VersionLbl:set_text("V"..Client.ClientVersion)
     end
     --self.AccountMusicPath = LuaCDataMgr.GameConfig():GetData2(90, WDB_GameConfig.Param2)
-    --self.ChooseRoleMusicPath = LuaCDataMgr.GameConfig():GetData2(91, WDB_GameConfig.Param2)
 
     MusicManager.get_Instance():PlayBackMusic("Music/Scene/bgm")
     local musicMgr=MusicManager.get_Instance()
@@ -420,28 +419,14 @@ function LoginController:LoginSuccess()
     self.LoginUI:SetActive(false)
 end
 
+-- 获取具体的玩家信息
 function LoginController:RoleSummarySuccess()
     if LuaUIViewCtr.UIPanel["ServerList"] ~= nil then
         LuaUIViewCtr.UIPanel["ServerList"]:Destroy1()
     end
-    Client.m_CurrentState=EClientState.E_CS_ChooseRole
-    if self.LoginUI:get_activeInHierarchy() then
-        LoginControl.self_():IsCheck(true)
-    end
 
-    self.LoginUI:SetActive(false)
     self.HeadUpParent:SetActive(true)
-    if self.ChooseRoleRef then
-        self.ChooseRoleRef.gameObject:SetActive(true)
-    else
-        self.ChooseRoleRef = LuaUIViewCtr.OpenUINotLose("Login/ChooseRoleUI")
-        if self.ChooseRoleRef ~= nil then
-            self.ChooseRoleRef.LoginUIRoot = self
-        end
-    end
 
-    ChooseRoleUI.RefreshRoleList(self.ChooseRoleRef)
-    -- MusicManager.get_Instance():PlayBackMusic(self.ChooseRoleMusicPath)
     if LoginPanel["LoginInput"] ~= nil then
        LoginPanel["LoginInput"].gameObject:Destroy1()
     end
