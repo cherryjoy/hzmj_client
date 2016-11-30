@@ -2,8 +2,8 @@ LoadingCtrl = {}
 
 function LoadingCtrl:Start( )
     --self.num = 0
-    Timer.NewEvent(self,20,20,LoadingCtrl.ShowUI, false, nil)
-    Timer.NewEvent(self,60,60,LoadingCtrl.TimeOut, false, nil)
+    self.showTimer = Timer.NewEvent(self,20,20,LoadingCtrl.ShowUI, false, nil)
+    self.timer = Timer.NewEvent(self,60,60,LoadingCtrl.TimeOut, false, nil)
 end
 
 function LoadingCtrl:Update()
@@ -14,7 +14,15 @@ function LoadingCtrl:Update()
 end
 
 function LoadingCtrl:OnDestroy( )
+    if self.showTimer ~= nil then
+        Timer.RemoveEvent(self,self.showTimer)
+        self.showTimer = nil
+    end
 
+    if self.timer ~= nil then
+        Timer.RemoveEvent(self,self.timer)
+        self.timer = nil
+    end
 end
 
 function LoadingCtrl:Rotatoin()
@@ -23,10 +31,12 @@ end
 
 function LoadingCtrl:ShowUI()
     self.Sprite:set_enabled(true)
+    self.showTimer = nil
 end
 
 function LoadingCtrl:TimeOut()
     local ref = LuaMessageBox.ShowSingle(Text.MsgNotReturn, function() Client.RetryConnectByLastIp() end, Text.RetryText, self)
+    self.timer = nil
     --ref.button_Single:SetActive(false)
     Client.CloseLoadingUI()
 end
