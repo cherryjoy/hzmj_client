@@ -41,6 +41,12 @@ enumMSGID_MODULE_05 = {
 	ID_GAME_ROOM_CHAT_RES = 1320,
 	ID_GAME_HEARTBEAT_REQ = 1321,
 	ID_GAME_HEARTBEAT_RES = 1322,
+	ID_ROLE_BASE_INFO_REQ = 1323,
+	ID_ROLE_BASE_INFO_RES = 1324,
+	ID_ROLE_NUMERIC_VALUE_REQ = 1325,
+	ID_ROLE_NUMERIC_VALUE_RES = 1326,
+	ID_ROOM_QUIT_CONFIRM_REQ = 1337,
+	ID_ROOM_QUIT_CONFIRM_RES = 1338,
 	ID_MODULE_05_END = 1535,
 }
 
@@ -2335,17 +2341,25 @@ function PBRoomCardInfoSync.DeSerialize(obj)
 			end
 		end
 	end
+	if(has_optional_flag(1,optionLength,option)) then
+		obj.leftnum = deserialize_int32()
+	end
 	return obj
 end
 
 function PBRoomCardInfoSync.Serialize(obj)
-	local fieldCount = 3
+	local fieldCount = 4
 	serialize_int32(fieldCount)
 	local flag = {}
 	if(obj.owncards ~= nil) then
 		flag[1] = true
 	else
 		flag[1] = false
+	end
+	if(obj.leftnum ~= nil) then
+		flag[2] = true
+	else
+		flag[2] = false
 	end
 	serialize_optional(flag)
 	if(obj.owncards ~= nil) then
@@ -2388,6 +2402,9 @@ function PBRoomCardInfoSync.Serialize(obj)
 	else
 		serialize_int32(0)
 	end
+	if(obj.leftnum ~= nil) then
+		serialize_int32(obj.leftnum)
+	end
 end
 
 function PBRoomCardInfoSync.GetSize(obj)
@@ -2406,6 +2423,9 @@ function PBRoomCardInfoSync.GetSize(obj)
 			size = size + 5
 			size = size + (obj.tablecards[i]):GetSize()
 		end
+	end
+	if (obj.leftnum ~= nil) then
+		size = size + 4
 	end
 	size = size + 21
 	return size
@@ -4690,6 +4710,460 @@ end
 function PBMsgGameHeartbeatRes.GetSize(obj)
 	local size = 0
 	size = size + 5
+	return size
+end
+
+-- PBMsgRoleBaseInfoExReq
+PBMsgRoleBaseInfoExReq = {}
+PBMsgRoleBaseInfoExReq.__index = PBMsgRoleBaseInfoExReq
+function PBMsgRoleBaseInfoExReq.Create()
+	local obj = setmetatable({},PBMsgRoleBaseInfoExReq)
+	return obj
+end
+
+function PBMsgRoleBaseInfoExReq.DeSerialize(obj)
+	local fieldCount = deserialize_int32()
+	local option,optionLength = deserialize_optional()
+	return obj
+end
+
+function PBMsgRoleBaseInfoExReq.Serialize(obj)
+	local fieldCount = 0
+	serialize_int32(fieldCount)
+	local flag = {}
+	serialize_optional(flag)
+end
+
+function PBMsgRoleBaseInfoExReq.GetSize(obj)
+	local size = 0
+	size = size + 5
+	return size
+end
+
+-- PBMsgRoleBaseInfoExRes
+PBMsgRoleBaseInfoExRes = {}
+PBMsgRoleBaseInfoExRes.__index = PBMsgRoleBaseInfoExRes
+function PBMsgRoleBaseInfoExRes.Create()
+	local obj = setmetatable({},PBMsgRoleBaseInfoExRes)
+	return obj
+end
+
+function PBMsgRoleBaseInfoExRes.DeSerialize(obj)
+	local fieldCount = deserialize_int32()
+	local option,optionLength = deserialize_optional()
+	if(has_optional_flag(0,optionLength,option)) then
+		obj.roleid = deserialize_int32()
+	end
+	if(has_optional_flag(1,optionLength,option)) then
+		obj.name = deserialize_string()
+	end
+	if(has_optional_flag(2,optionLength,option)) then
+		obj.cardnum = deserialize_int32()
+	end
+	if(has_optional_flag(3,optionLength,option)) then
+		obj.roundnum = deserialize_int32()
+	end
+	if(has_optional_flag(4,optionLength,option)) then
+		obj.roundwin = deserialize_int32()
+	end
+	if(has_optional_flag(5,optionLength,option)) then
+		obj.score = deserialize_int32()
+	end
+	return obj
+end
+
+function PBMsgRoleBaseInfoExRes.Serialize(obj)
+	local fieldCount = 6
+	serialize_int32(fieldCount)
+	local flag = {}
+	if(obj.roleid ~= nil) then
+		flag[1] = true
+	else
+		flag[1] = false
+	end
+	if(obj.name ~= nil) then
+		flag[2] = true
+	else
+		flag[2] = false
+	end
+	if(obj.cardnum ~= nil) then
+		flag[3] = true
+	else
+		flag[3] = false
+	end
+	if(obj.roundnum ~= nil) then
+		flag[4] = true
+	else
+		flag[4] = false
+	end
+	if(obj.roundwin ~= nil) then
+		flag[5] = true
+	else
+		flag[5] = false
+	end
+	if(obj.score ~= nil) then
+		flag[6] = true
+	else
+		flag[6] = false
+	end
+	serialize_optional(flag)
+	if(obj.roleid ~= nil) then
+		serialize_int32(obj.roleid)
+	end
+	if(obj.name ~= nil) then
+		serialize_string(obj.name)
+	end
+	if(obj.cardnum ~= nil) then
+		serialize_int32(obj.cardnum)
+	end
+	if(obj.roundnum ~= nil) then
+		serialize_int32(obj.roundnum)
+	end
+	if(obj.roundwin ~= nil) then
+		serialize_int32(obj.roundwin)
+	end
+	if(obj.score ~= nil) then
+		serialize_int32(obj.score)
+	end
+end
+
+function PBMsgRoleBaseInfoExRes.GetSize(obj)
+	local size = 0
+	if (obj.roleid ~= nil) then
+		size = size + 4
+	end
+	if (obj.name ~= nil) then
+		local sizeStr = string.len(obj.name)
+		size = size + serialize_get_str_actual_size(sizeStr)
+	end
+	if (obj.cardnum ~= nil) then
+		size = size + 4
+	end
+	if (obj.roundnum ~= nil) then
+		size = size + 4
+	end
+	if (obj.roundwin ~= nil) then
+		size = size + 4
+	end
+	if (obj.score ~= nil) then
+		size = size + 4
+	end
+	size = size + 6
+	return size
+end
+
+-- PBRoleNumericValue
+PBRoleNumericValue = {}
+PBRoleNumericValue.__index = PBRoleNumericValue
+function PBRoleNumericValue.Create()
+	local obj = setmetatable({},PBRoleNumericValue)
+	return obj
+end
+
+function PBRoleNumericValue.DeSerialize(obj)
+	local fieldCount = deserialize_int32()
+	local option,optionLength = deserialize_optional()
+	if(has_optional_flag(0,optionLength,option)) then
+		obj.level = deserialize_int32()
+	end
+	if(has_optional_flag(1,optionLength,option)) then
+		obj.name = deserialize_string()
+	end
+	if(has_optional_flag(2,optionLength,option)) then
+		obj.cardnum = deserialize_int32()
+	end
+	if(has_optional_flag(3,optionLength,option)) then
+		obj.roundnum = deserialize_int32()
+	end
+	if(has_optional_flag(4,optionLength,option)) then
+		obj.roundwin = deserialize_int32()
+	end
+	if(has_optional_flag(5,optionLength,option)) then
+		obj.score = deserialize_int32()
+	end
+	return obj
+end
+
+function PBRoleNumericValue.Serialize(obj)
+	local fieldCount = 6
+	serialize_int32(fieldCount)
+	local flag = {}
+	if(obj.level ~= nil) then
+		flag[1] = true
+	else
+		flag[1] = false
+	end
+	if(obj.name ~= nil) then
+		flag[2] = true
+	else
+		flag[2] = false
+	end
+	if(obj.cardnum ~= nil) then
+		flag[3] = true
+	else
+		flag[3] = false
+	end
+	if(obj.roundnum ~= nil) then
+		flag[4] = true
+	else
+		flag[4] = false
+	end
+	if(obj.roundwin ~= nil) then
+		flag[5] = true
+	else
+		flag[5] = false
+	end
+	if(obj.score ~= nil) then
+		flag[6] = true
+	else
+		flag[6] = false
+	end
+	serialize_optional(flag)
+	if(obj.level ~= nil) then
+		serialize_int32(obj.level)
+	end
+	if(obj.name ~= nil) then
+		serialize_string(obj.name)
+	end
+	if(obj.cardnum ~= nil) then
+		serialize_int32(obj.cardnum)
+	end
+	if(obj.roundnum ~= nil) then
+		serialize_int32(obj.roundnum)
+	end
+	if(obj.roundwin ~= nil) then
+		serialize_int32(obj.roundwin)
+	end
+	if(obj.score ~= nil) then
+		serialize_int32(obj.score)
+	end
+end
+
+function PBRoleNumericValue.GetSize(obj)
+	local size = 0
+	if (obj.level ~= nil) then
+		size = size + 4
+	end
+	if (obj.name ~= nil) then
+		local sizeStr = string.len(obj.name)
+		size = size + serialize_get_str_actual_size(sizeStr)
+	end
+	if (obj.cardnum ~= nil) then
+		size = size + 4
+	end
+	if (obj.roundnum ~= nil) then
+		size = size + 4
+	end
+	if (obj.roundwin ~= nil) then
+		size = size + 4
+	end
+	if (obj.score ~= nil) then
+		size = size + 4
+	end
+	size = size + 6
+	return size
+end
+
+-- PBMsgRoleNumericValueReq
+PBMsgRoleNumericValueReq = {}
+PBMsgRoleNumericValueReq.__index = PBMsgRoleNumericValueReq
+function PBMsgRoleNumericValueReq.Create()
+	local obj = setmetatable({},PBMsgRoleNumericValueReq)
+	return obj
+end
+
+function PBMsgRoleNumericValueReq.DeSerialize(obj)
+	local fieldCount = deserialize_int32()
+	local option,optionLength = deserialize_optional()
+	return obj
+end
+
+function PBMsgRoleNumericValueReq.Serialize(obj)
+	local fieldCount = 0
+	serialize_int32(fieldCount)
+	local flag = {}
+	serialize_optional(flag)
+end
+
+function PBMsgRoleNumericValueReq.GetSize(obj)
+	local size = 0
+	size = size + 5
+	return size
+end
+
+-- PBMsgRoleNumericValueRes
+PBMsgRoleNumericValueRes = {}
+PBMsgRoleNumericValueRes.__index = PBMsgRoleNumericValueRes
+function PBMsgRoleNumericValueRes.Create()
+	local obj = setmetatable({},PBMsgRoleNumericValueRes)
+	return obj
+end
+
+function PBMsgRoleNumericValueRes.DeSerialize(obj)
+	local fieldCount = deserialize_int32()
+	local option,optionLength = deserialize_optional()
+	if(has_optional_flag(0,optionLength,option)) then
+		local numericSize = deserialize_data_length()
+		local numericStartPos = get_position()
+		obj.numeric = PBRoleNumericValue.Create()
+		obj.numeric = obj.numeric:DeSerialize()
+		set_position(numericSize+numericStartPos )
+	end
+	if(has_optional_flag(1,optionLength,option)) then
+		obj.server_time = deserialize_int32()
+	end
+	return obj
+end
+
+function PBMsgRoleNumericValueRes.Serialize(obj)
+	local fieldCount = 2
+	serialize_int32(fieldCount)
+	local flag = {}
+	if(obj.numeric ~= nil) then
+		flag[1] = true
+	else
+		flag[1] = false
+	end
+	if(obj.server_time ~= nil) then
+		flag[2] = true
+	else
+		flag[2] = false
+	end
+	serialize_optional(flag)
+	if(obj.numeric ~= nil) then
+		local WaitPos = get_position()
+	set_position(WaitPos+4)
+	obj.numeric:Serialize()
+	local MaxPosNow = get_position()
+	local RealSize = MaxPosNow-(WaitPos+4)
+	set_position(WaitPos)
+	serialize_data_length(RealSize)
+	set_position(MaxPosNow)
+	end
+	if(obj.server_time ~= nil) then
+		serialize_int32(obj.server_time)
+	end
+end
+
+function PBMsgRoleNumericValueRes.GetSize(obj)
+	local size = 0
+	if (obj.numeric ~= nil) then
+		size = size + obj.numeric:GetSize()
+	end
+	if (obj.server_time ~= nil) then
+		size = size + 4
+	end
+	size = size + 11
+	return size
+end
+
+-- PBMsgRoomQuitConfirmReq
+PBMsgRoomQuitConfirmReq = {}
+PBMsgRoomQuitConfirmReq.__index = PBMsgRoomQuitConfirmReq
+function PBMsgRoomQuitConfirmReq.Create()
+	local obj = setmetatable({},PBMsgRoomQuitConfirmReq)
+	return obj
+end
+
+function PBMsgRoomQuitConfirmReq.DeSerialize(obj)
+	local fieldCount = deserialize_int32()
+	local option,optionLength = deserialize_optional()
+	if(has_optional_flag(0,optionLength,option)) then
+		obj.room_pass = deserialize_int32()
+	end
+	if(has_optional_flag(1,optionLength,option)) then
+		obj.agree = deserialize_int32()
+	end
+	return obj
+end
+
+function PBMsgRoomQuitConfirmReq.Serialize(obj)
+	local fieldCount = 2
+	serialize_int32(fieldCount)
+	local flag = {}
+	if(obj.room_pass ~= nil) then
+		flag[1] = true
+	else
+		flag[1] = false
+	end
+	if(obj.agree ~= nil) then
+		flag[2] = true
+	else
+		flag[2] = false
+	end
+	serialize_optional(flag)
+	if(obj.room_pass ~= nil) then
+		serialize_int32(obj.room_pass)
+	end
+	if(obj.agree ~= nil) then
+		serialize_int32(obj.agree)
+	end
+end
+
+function PBMsgRoomQuitConfirmReq.GetSize(obj)
+	local size = 0
+	if (obj.room_pass ~= nil) then
+		size = size + 4
+	end
+	if (obj.agree ~= nil) then
+		size = size + 4
+	end
+	size = size + 6
+	return size
+end
+
+-- PBMsgRoomQuitConfirmRes
+PBMsgRoomQuitConfirmRes = {}
+PBMsgRoomQuitConfirmRes.__index = PBMsgRoomQuitConfirmRes
+function PBMsgRoomQuitConfirmRes.Create()
+	local obj = setmetatable({},PBMsgRoomQuitConfirmRes)
+	return obj
+end
+
+function PBMsgRoomQuitConfirmRes.DeSerialize(obj)
+	local fieldCount = deserialize_int32()
+	local option,optionLength = deserialize_optional()
+	if(has_optional_flag(0,optionLength,option)) then
+		obj.result = deserialize_int32()
+	end
+	if(has_optional_flag(1,optionLength,option)) then
+		obj.roleid = deserialize_int32()
+	end
+	return obj
+end
+
+function PBMsgRoomQuitConfirmRes.Serialize(obj)
+	local fieldCount = 2
+	serialize_int32(fieldCount)
+	local flag = {}
+	if(obj.result ~= nil) then
+		flag[1] = true
+	else
+		flag[1] = false
+	end
+	if(obj.roleid ~= nil) then
+		flag[2] = true
+	else
+		flag[2] = false
+	end
+	serialize_optional(flag)
+	if(obj.result ~= nil) then
+		serialize_int32(obj.result)
+	end
+	if(obj.roleid ~= nil) then
+		serialize_int32(obj.roleid)
+	end
+end
+
+function PBMsgRoomQuitConfirmRes.GetSize(obj)
+	local size = 0
+	if (obj.result ~= nil) then
+		size = size + 4
+	end
+	if (obj.roleid ~= nil) then
+		size = size + 4
+	end
+	size = size + 6
 	return size
 end
 

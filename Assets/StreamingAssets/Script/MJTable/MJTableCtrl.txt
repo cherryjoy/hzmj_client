@@ -72,13 +72,15 @@ function MJTableCtrl:CardInfoSync(cardInfo)
     -- 强行清一下桌面
     Client.ResetToward:Do()
     Client.TableClear:Do()
+
+    Client.RoleInfo.RestCard = cardInfo.leftnum
     -- 关闭 邀请
     self.Invite:SetActive(false)
 
     -- 同步自己的牌
     if cardInfo.owncards ~= nil then
         LuaDebug.Log("card num: "..#(cardInfo.owncards.handcard))
-        Client.RoleInfo.RestCard = Client.RoleInfo.RestCard - #(cardInfo.owncards.handcard)
+        --Client.RoleInfo.RestCard = Client.RoleInfo.RestCard - #(cardInfo.owncards.handcard)
         self.Drect1.CardInfoSync(self.Drect1, cardInfo.owncards.handcard)
     end
 
@@ -91,7 +93,7 @@ function MJTableCtrl:CardInfoSync(cardInfo)
         for j = 1, 4 do
             if self["Drect"..j].roleId == cardInfo.othercards[i].roleid then
                 LuaDebug.Log("drect "..j.." : "..cardInfo.othercards[i].handnum)
-                Client.RoleInfo.RestCard = Client.RoleInfo.RestCard - cardInfo.othercards[i].handnum
+                --Client.RoleInfo.RestCard = Client.RoleInfo.RestCard - cardInfo.othercards[i].handnum
                 self["Drect"..j].CardInfoSync(self["Drect"..j], cardInfo.othercards[i].handnum)
                 self["Drect"..j].LeftCardSync(self["Drect"..j], cardInfo.othercards[i])
             end
@@ -691,7 +693,7 @@ function MJTableCtrl:NetConnectSuccess()
     ClientSendMsg.SendEnterRoom(Client.RoleInfo.RoleID, self.roomId)
     ClientSendMsg.SendReadyRoom()
 
-    Client.RoleInfo.RestCard = 112
+    --Client.RoleInfo.RestCard = 112
     Client.ResetToward:Do()
     Client.TableClear:Do()
 end

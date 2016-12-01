@@ -175,7 +175,7 @@ HandleFuncs[enumMSGID_MODULE_05.ID_GAME_READY_RES] = function(data,dataLength)
     local data = LuaProto.deserialize(PBMsgReadyRes, data, dataLength)
 
     Client.RoleInfo.Used = data.used
-    Client.RoleInfo.RestCard = 112
+    --Client.RoleInfo.RestCard = 112
     if data.roleid == Client.RoleInfo.RoleID then
         Client.ResetToward:Do()
         Client.TableClear:Do()
