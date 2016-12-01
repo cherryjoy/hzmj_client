@@ -3,12 +3,14 @@ HelpCtrl = {}
 function HelpCtrl:Start( )
     local mt=TextureMgr.get_Instance():LoadTexture("Home/chuangjianfangjian", true)
     self.Texture:set_material(mt)
+
+    self.Text:set_text(Text.HelpContent)
 end
 
 function HelpCtrl:OnDestroy( )
 
 end
 
-function CreateRoomCtrl:Close_OnClick()
+function HelpCtrl:Close_OnClick()
     self.gameObject:Destroy1()
 end
