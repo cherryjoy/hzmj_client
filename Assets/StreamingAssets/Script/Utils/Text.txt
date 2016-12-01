@@ -97,6 +97,7 @@ Text = {
     RoleName = "名字: %s",
     RoleId = "编号: %d",
     RoleCardNum = "房卡: %s",
+    HelpTips = "玩法简介",
 
     -------------------Table--------------------
     TableName = "房号:%d",
