@@ -13,7 +13,11 @@ function RoleBalance:Init(info, roleInfo)
     self.GangMNum:set_text(string.format(Text.BalanceGangMNum, info.gangm + info.gangg))
     self.GangANum:set_text(string.format(Text.BalanceGangANum, info.ganga))
     self.CodeNum:set_text(string.format(Text.BalanceCodeNum, info.code_count))
-    self.Total:set_text(string.format(Text.BalanceTotol, info.score))
+    local scoreStr = tostring(info.score)
+    if info.score > 0 then
+        scoreStr = "+"..scoreStr
+    end
+    self.Total:set_text(string.format(Text.BalanceTotol, scoreStr))
 
     -- 头像信息
     local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/HeadInfo",self.gameObject)

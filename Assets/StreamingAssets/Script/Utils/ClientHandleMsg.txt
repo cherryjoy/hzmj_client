@@ -49,7 +49,7 @@ HandleFuncs[enumMSGID_MODULE_05.ID_ROLE_RES] = function(data, dataLength)
     --PlayerPrefsEx.SetString("userId",data.userId .. "")
     Client.RoleInfo = pbMsg
     if Client.RoleInfo.sex == nil then   -- 1 为男性    2为女性
-        Client.RoleInfo.sex = 2
+        Client.RoleInfo.sex = ESexType.Female
     end
 
     LuaUIViewCtr.UIPanel["MainUI"] = LuaUIViewCtr.OpenUIHasBg("Home/MainUI")
@@ -175,7 +175,7 @@ HandleFuncs[enumMSGID_MODULE_05.ID_GAME_READY_RES] = function(data,dataLength)
     local data = LuaProto.deserialize(PBMsgReadyRes, data, dataLength)
 
     Client.RoleInfo.Used = data.used
-    --Client.RoleInfo.RestCard = 112
+    Client.RoleInfo.RestCard = 112
     if data.roleid == Client.RoleInfo.RoleID then
         Client.ResetToward:Do()
         Client.TableClear:Do()

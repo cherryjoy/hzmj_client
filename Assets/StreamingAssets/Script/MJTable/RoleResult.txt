@@ -69,7 +69,11 @@ function RoleResult:Init(result, info)
     self.HandCardsGrid:Reposition()
 
     -- 分数
-    self.Score:set_text(tostring(result.score))
+    local scoreStr = tostring(result.score)
+    if result.score > 0 then
+        scoreStr = "+"..scoreStr
+    end
+    self.Score:set_text(scoreStr)
 end
 
 function RoleResult.SortCard(cards)

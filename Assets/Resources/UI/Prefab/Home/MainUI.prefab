@@ -308,6 +308,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 486206}
   - 114: {fileID: 11457078}
+  - 65: {fileID: 6555672}
+  - 114: {fileID: 11473194}
+  - 114: {fileID: 11414522}
   m_Layer: 8
   m_Name: Icon
   m_TagString: Untagged
@@ -925,6 +928,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 239, y: 317, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &6555672
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 157490}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 76, y: 76, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6559228
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -1113,6 +1128,20 @@ MonoBehaviour:
   mSpriteName: z_bangzhu
   IsKeepOriSize: 0
   mFillCenter: 1
+--- !u!114 &11414522
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 157490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1892511743, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: b0e713473f4d48b4a87c07c6a8a3fbe3, type: 3}
+  trigger: 0
+  volume: 1
 --- !u!114 &11417336
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1562,6 +1591,21 @@ MonoBehaviour:
   ViewportOffset: {x: 0, y: 0, z: 0}
   updateAllTheTime: 0
   direction: 2
+--- !u!114 &11473194
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 157490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1646491362, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 140654}
+  functionName: OnClick
+  trigger: 0
+  includeChildren: 0
 --- !u!114 &11477086
 MonoBehaviour:
   m_ObjectHideFlags: 1

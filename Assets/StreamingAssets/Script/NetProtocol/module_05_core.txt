@@ -45,8 +45,10 @@ enumMSGID_MODULE_05 = {
 	ID_ROLE_BASE_INFO_RES = 1324,
 	ID_ROLE_NUMERIC_VALUE_REQ = 1325,
 	ID_ROLE_NUMERIC_VALUE_RES = 1326,
-	ID_ROOM_QUIT_CONFIRM_REQ = 1337,
-	ID_ROOM_QUIT_CONFIRM_RES = 1338,
+	ID_ROOM_DELETE_CONFIRM_REQ = 1337,
+	ID_ROOM_DELETE_CONFIRM_RES = 1338,
+	ID_ROOM_DELETE_AGREE_REQ = 1339,
+	ID_ROOM_DELETE_AGREE_RES = 1340,
 	ID_MODULE_05_END = 1535,
 }
 
@@ -1010,11 +1012,14 @@ function PBMsgRoleInfoRes.DeSerialize(obj)
 	if(has_optional_flag(14,optionLength,option)) then
 		obj.unionid = deserialize_string()
 	end
+	if(has_optional_flag(15,optionLength,option)) then
+		obj.address = deserialize_string()
+	end
 	return obj
 end
 
 function PBMsgRoleInfoRes.Serialize(obj)
-	local fieldCount = 16
+	local fieldCount = 17
 	serialize_int32(fieldCount)
 	local flag = {}
 	if(obj.RoleName ~= nil) then
@@ -1092,6 +1097,11 @@ function PBMsgRoleInfoRes.Serialize(obj)
 	else
 		flag[15] = false
 	end
+	if(obj.address ~= nil) then
+		flag[16] = true
+	else
+		flag[16] = false
+	end
 	serialize_optional(flag)
 	if(obj.RoleName ~= nil) then
 		serialize_string(obj.RoleName)
@@ -1138,6 +1148,9 @@ function PBMsgRoleInfoRes.Serialize(obj)
 	serialize_string_array(obj.privilege)
 	if(obj.unionid ~= nil) then
 		serialize_string(obj.unionid)
+	end
+	if(obj.address ~= nil) then
+		serialize_string(obj.address)
 	end
 end
 
@@ -1202,6 +1215,10 @@ function PBMsgRoleInfoRes.GetSize(obj)
 	end
 	if (obj.unionid ~= nil) then
 		local sizeStr = string.len(obj.unionid)
+		size = size + serialize_get_str_actual_size(sizeStr)
+	end
+	if (obj.address ~= nil) then
+		local sizeStr = string.len(obj.address)
 		size = size + serialize_get_str_actual_size(sizeStr)
 	end
 	size = size + 13
@@ -4769,11 +4786,14 @@ function PBMsgRoleBaseInfoExRes.DeSerialize(obj)
 	if(has_optional_flag(5,optionLength,option)) then
 		obj.score = deserialize_int32()
 	end
+	if(has_optional_flag(6,optionLength,option)) then
+		obj.address = deserialize_string()
+	end
 	return obj
 end
 
 function PBMsgRoleBaseInfoExRes.Serialize(obj)
-	local fieldCount = 6
+	local fieldCount = 7
 	serialize_int32(fieldCount)
 	local flag = {}
 	if(obj.roleid ~= nil) then
@@ -4806,6 +4826,11 @@ function PBMsgRoleBaseInfoExRes.Serialize(obj)
 	else
 		flag[6] = false
 	end
+	if(obj.address ~= nil) then
+		flag[7] = true
+	else
+		flag[7] = false
+	end
 	serialize_optional(flag)
 	if(obj.roleid ~= nil) then
 		serialize_int32(obj.roleid)
@@ -4824,6 +4849,9 @@ function PBMsgRoleBaseInfoExRes.Serialize(obj)
 	end
 	if(obj.score ~= nil) then
 		serialize_int32(obj.score)
+	end
+	if(obj.address ~= nil) then
+		serialize_string(obj.address)
 	end
 end
 
@@ -4847,6 +4875,10 @@ function PBMsgRoleBaseInfoExRes.GetSize(obj)
 	end
 	if (obj.score ~= nil) then
 		size = size + 4
+	end
+	if (obj.address ~= nil) then
+		local sizeStr = string.len(obj.address)
+		size = size + serialize_get_str_actual_size(sizeStr)
 	end
 	size = size + 6
 	return size
@@ -5057,15 +5089,15 @@ function PBMsgRoleNumericValueRes.GetSize(obj)
 	return size
 end
 
--- PBMsgRoomQuitConfirmReq
-PBMsgRoomQuitConfirmReq = {}
-PBMsgRoomQuitConfirmReq.__index = PBMsgRoomQuitConfirmReq
-function PBMsgRoomQuitConfirmReq.Create()
-	local obj = setmetatable({},PBMsgRoomQuitConfirmReq)
+-- PBMsgRoomDeleteConfirmReq
+PBMsgRoomDeleteConfirmReq = {}
+PBMsgRoomDeleteConfirmReq.__index = PBMsgRoomDeleteConfirmReq
+function PBMsgRoomDeleteConfirmReq.Create()
+	local obj = setmetatable({},PBMsgRoomDeleteConfirmReq)
 	return obj
 end
 
-function PBMsgRoomQuitConfirmReq.DeSerialize(obj)
+function PBMsgRoomDeleteConfirmReq.DeSerialize(obj)
 	local fieldCount = deserialize_int32()
 	local option,optionLength = deserialize_optional()
 	if(has_optional_flag(0,optionLength,option)) then
@@ -5077,7 +5109,7 @@ function PBMsgRoomQuitConfirmReq.DeSerialize(obj)
 	return obj
 end
 
-function PBMsgRoomQuitConfirmReq.Serialize(obj)
+function PBMsgRoomDeleteConfirmReq.Serialize(obj)
 	local fieldCount = 2
 	serialize_int32(fieldCount)
 	local flag = {}
@@ -5100,7 +5132,7 @@ function PBMsgRoomQuitConfirmReq.Serialize(obj)
 	end
 end
 
-function PBMsgRoomQuitConfirmReq.GetSize(obj)
+function PBMsgRoomDeleteConfirmReq.GetSize(obj)
 	local size = 0
 	if (obj.room_pass ~= nil) then
 		size = size + 4
@@ -5112,15 +5144,15 @@ function PBMsgRoomQuitConfirmReq.GetSize(obj)
 	return size
 end
 
--- PBMsgRoomQuitConfirmRes
-PBMsgRoomQuitConfirmRes = {}
-PBMsgRoomQuitConfirmRes.__index = PBMsgRoomQuitConfirmRes
-function PBMsgRoomQuitConfirmRes.Create()
-	local obj = setmetatable({},PBMsgRoomQuitConfirmRes)
+-- PBMsgRoomDeleteConfirmRes
+PBMsgRoomDeleteConfirmRes = {}
+PBMsgRoomDeleteConfirmRes.__index = PBMsgRoomDeleteConfirmRes
+function PBMsgRoomDeleteConfirmRes.Create()
+	local obj = setmetatable({},PBMsgRoomDeleteConfirmRes)
 	return obj
 end
 
-function PBMsgRoomQuitConfirmRes.DeSerialize(obj)
+function PBMsgRoomDeleteConfirmRes.DeSerialize(obj)
 	local fieldCount = deserialize_int32()
 	local option,optionLength = deserialize_optional()
 	if(has_optional_flag(0,optionLength,option)) then
@@ -5132,7 +5164,7 @@ function PBMsgRoomQuitConfirmRes.DeSerialize(obj)
 	return obj
 end
 
-function PBMsgRoomQuitConfirmRes.Serialize(obj)
+function PBMsgRoomDeleteConfirmRes.Serialize(obj)
 	local fieldCount = 2
 	serialize_int32(fieldCount)
 	local flag = {}
@@ -5155,12 +5187,108 @@ function PBMsgRoomQuitConfirmRes.Serialize(obj)
 	end
 end
 
-function PBMsgRoomQuitConfirmRes.GetSize(obj)
+function PBMsgRoomDeleteConfirmRes.GetSize(obj)
 	local size = 0
 	if (obj.result ~= nil) then
 		size = size + 4
 	end
 	if (obj.roleid ~= nil) then
+		size = size + 4
+	end
+	size = size + 6
+	return size
+end
+
+-- PBMsgRoomDeleteAgreeReq
+PBMsgRoomDeleteAgreeReq = {}
+PBMsgRoomDeleteAgreeReq.__index = PBMsgRoomDeleteAgreeReq
+function PBMsgRoomDeleteAgreeReq.Create()
+	local obj = setmetatable({},PBMsgRoomDeleteAgreeReq)
+	return obj
+end
+
+function PBMsgRoomDeleteAgreeReq.DeSerialize(obj)
+	local fieldCount = deserialize_int32()
+	local option,optionLength = deserialize_optional()
+	if(has_optional_flag(0,optionLength,option)) then
+		obj.agree = deserialize_int32()
+	end
+	return obj
+end
+
+function PBMsgRoomDeleteAgreeReq.Serialize(obj)
+	local fieldCount = 1
+	serialize_int32(fieldCount)
+	local flag = {}
+	if(obj.agree ~= nil) then
+		flag[1] = true
+	else
+		flag[1] = false
+	end
+	serialize_optional(flag)
+	if(obj.agree ~= nil) then
+		serialize_int32(obj.agree)
+	end
+end
+
+function PBMsgRoomDeleteAgreeReq.GetSize(obj)
+	local size = 0
+	if (obj.agree ~= nil) then
+		size = size + 4
+	end
+	size = size + 6
+	return size
+end
+
+-- PBMsgRoomDeleteAgreeRes
+PBMsgRoomDeleteAgreeRes = {}
+PBMsgRoomDeleteAgreeRes.__index = PBMsgRoomDeleteAgreeRes
+function PBMsgRoomDeleteAgreeRes.Create()
+	local obj = setmetatable({},PBMsgRoomDeleteAgreeRes)
+	return obj
+end
+
+function PBMsgRoomDeleteAgreeRes.DeSerialize(obj)
+	local fieldCount = deserialize_int32()
+	local option,optionLength = deserialize_optional()
+	if(has_optional_flag(0,optionLength,option)) then
+		obj.roleid = deserialize_int32()
+	end
+	if(has_optional_flag(1,optionLength,option)) then
+		obj.agree = deserialize_int32()
+	end
+	return obj
+end
+
+function PBMsgRoomDeleteAgreeRes.Serialize(obj)
+	local fieldCount = 2
+	serialize_int32(fieldCount)
+	local flag = {}
+	if(obj.roleid ~= nil) then
+		flag[1] = true
+	else
+		flag[1] = false
+	end
+	if(obj.agree ~= nil) then
+		flag[2] = true
+	else
+		flag[2] = false
+	end
+	serialize_optional(flag)
+	if(obj.roleid ~= nil) then
+		serialize_int32(obj.roleid)
+	end
+	if(obj.agree ~= nil) then
+		serialize_int32(obj.agree)
+	end
+end
+
+function PBMsgRoomDeleteAgreeRes.GetSize(obj)
+	local size = 0
+	if (obj.roleid ~= nil) then
+		size = size + 4
+	end
+	if (obj.agree ~= nil) then
 		size = size + 4
 	end
 	size = size + 6

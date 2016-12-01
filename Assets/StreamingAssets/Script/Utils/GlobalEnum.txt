@@ -1,38 +1,11 @@
 --GlobalEnum = {}
-EBagType = {
-	CommonBag = 0,
-	EquipBag = 1,
-	SpiritBag  = 2,
-	HallowBag = 3,
-	GemBag = 4,
-	GhostBag = 5,--魔魂
-	GhostEquipBag = 6, --魔魂装备
-	AmuletBag = 7,--符文
-	EquipPutOnBag = 20,--装备部位
-	HallowPart = 21,--圣器部位
-	HallowAumlet = 22,--圣器符文
-	EquipShowBag = 23,--装备展示背包，包含已装备的和背包里面的
-}--各种不同类型的背包
 
-EItemSoldTipTime=
+ -- 1 为男性    2为女性
+ESexType =
 {
-  None = 0,
-  One = 1,
-  Two = 2,
-  Max = 3,
-}--物品出售提示次数
-
-EItemSoldFlag=
-{
-  CanSold = 0,
-  CantSold = 1,
-}--物品是否可出售标识
-
-EAttrType={
-	Attack=10,
-	Defense=20,
-	Life=30,
-}--攻击，防御，生命等属性
+	Male = 1,
+	Female = 2,
+}
 
 EItemQuality =
 {
@@ -91,69 +64,6 @@ EUpPromptType =
 	SceneStar = 30000000,
 }
 
-ECDTimeType =
-{
-	Arena = 1,
-    DragonFight = 3, --屠龙战纪两次挑战boss时间间隔
-	MineCDTime = 4,
-	Sinew = 5,
-	HeadCustom = 6, -- 头像上传CD
-	SoulBattle = 14,---魔魂秘境购买次数自动恢复
-	GhostShopDayCount = 15,--魔魂商店刷新次数
-	DailyMoney = 21,
-	DailyExp = 22,
-	DailyDia = 23,
-	DailyRei = 24,
-}--各个系统的倒计时
-
-EGameSceneType = {
-	Simple = 1,
-	Hard = 2,
-	SoulBattle = 16,
-}--关卡战役难度
-
-EBattleType =
-{
-	Nomal =1,
-	Multiplayer = 2,
-	Activity = 3,
-	SoulBattle = 5,
-}--关卡类型
-
-ESceneType ={
-	E_NONE = -1;
-	E_PVP = 0;
-    E_PVE_MORE = 1;
-    E_PVE_ONE = 2;
-    E_PVP_AI = 3;
-}
-
-------------------------------行为类型--------------------------
-EActorType =
-{
-	E_INVALID = 0,
-	E_PLAYER = 1,	--玩家
-	E_MONSTER = 2,	--怪
-	E_BULLET = 3,	--子弹
-	E_DROPOBJ = 4,  --掉落装备
-}
-------------------------------玩家状态--------------------------
-EStateType =
-{
-	OffLine = 0, --离线
-	OnLine = 1,	--在线
-}
-
-
------------------------玩家类型---------------------------------
-EPlayerNetType =
-{
-	E_LOCAL_MainPlayer = 0, --本地主角
-	E_NET_MainPlayer = 1,   --网络主角
-	E_NET_Player = 2,       --网络玩家
-	E_AI_Player = 3,        --AI玩家
-}
-
 EAwardType = {
     INVALID = -1,    --无效
 	GROUP = 0,       --组
@@ -188,28 +98,12 @@ EAwardType = {
 
 }
 
---红点类型redPoint
-RedPointType = {
-	GVGEntrance = 1,		--军团入围赛
-	GVGKnockout = 2,		--军团淘汰赛
-	KiloTowerRewardPress = 3,      --千层塔进度奖励
-	FairySecretPoint = 4,  --精灵秘境
-}
-
 -----UI类型-----
 LuaBehavType = {
 	Normal = -1,
     Main = 0,
 }
 
------小助手类型-----
-HelpType = {
-	Wantupgrade = 1,		--1：我要升级
-	WantStrong = 2,        	--2：我要变强
-	wantFairy = 3,			--3：我要精灵
-	WantHallow = 4,        	--4：我要圣器
-	wantGhost = 5,			--5：我要魔魂
-}
 -----货币提示类型-----
 CurrencyType = {
 	MONEY = 2,       --金币
@@ -220,128 +114,9 @@ CurrencyType = {
 	RED_DIAMOND = 10,--红钻
 }
 
-SignInFlagType = {
-	CanSignIn = 1,				--可签
-	FinishedSignIn = 2,			--已签
-	PatchSignIn = 3,			--补签
-}
-
-SignInTipType = {
-	DefaultSignIn = 1,
-	FullAwardSignIn = 2,
-}
-
------日常活动类型-----
-ActivityType = {
-	Trial = 1,    --日常试炼
-	Honor = 2,    --荣誉殿堂
-	KingTower = 9, --王者之塔
-}
-
-ArenaType = {
-	HonourBattle = 110,
-	BattleGod = 111,  --荣誉殿堂/战神之争(改名字了)
-	KingArmy = 112,
-}
-
-ActivityConfigId = {
-	DailyTrialCost = 1,
-}
-
-ChatSwitchTabType = {
-	WorldTab = 1,
-	Corps = 2,
-	Friend = 3,
-	Group = 7,
-	Team = 8,
-}
-
 BraketChar = {
 	LeftBraket = "\\<",
 	RightBraket = "\\>",
-}
-
-EToolTipPanelType =
-{
-	RolePutOnEquip = 1,
-	BagEquip = 2,
-	HallowBag = 3,
-	HallowPart = 4,
-	AmuletBag = 5,
-	AmuletPart = 6,
-	EquipShowBag = 7,
-	RoleGem = 8,--角色装备上的宝石
-	BagGem = 9,--背包内宝石
-	HallowBagShow = 10, --圣器背包展示
-	HallowPartShow = 11,--装备圣器展示
-	OtherRoleEquipHallow = 12,
-	BagItem = 13,
-}--ToolTip显示类型
-
-EToolTipDataType =
-{
-	RolePutOnEquip = 1,
-	ItemBagEquip = 2,
-	NDBDataEquip = 3,
-	EmptyRolePutOnEquip = 4,
-	OtherRolePutOnEquip = 5,
-	OtherRoleBagEquip = 6,
-}
-
-TextureRootPath = {
-	SkillIconRootPath = "UI/Icon/SkillIcon/",
-	RewardRootPath = "UI/Icon/ItemIcon/",
-	AttriRootPath = "UI/Icon/AttrIcon/",
-	SceneRootPath = "UI/Res/Battle/City/Items/",
-	BannerPath = "UI/Icon/",
-	StreamBannerPath = "Battle/City/Items/",
-}
-
-AudioRootPath={
-	GameHallUIBtnAudioRootPath="Music/UI/",
-
-}
-
-EOpenUIType = {
-	FairyComplexUI = 1,
-	FairyEquipTip = 2,
-	FairySecondComplexUI = 3,
-}
-
-EAwardListFreshType = {
-	awardList = 1,
-	awardReceive = 2,
-	awardNext = 3,
-}
---解锁类型
-EUnlockType = {
-	Level = 0,
-	GameScene = 1,
-}
-
-EBattleAwardState =
-{
-	Locked = 0,
-	Opened = 1,
-	Obtained = 2,
-}
-
-EGameSceneStarConditionType =
-{
-	Invalid = -1,
-	Passed = 0,
-	BloodVial = 1,
-	BloodVolume = 2,
-	TimeRemaining = 3,
-	TimeRequired = 4,
-}
-
-ENPCType = {
-	NomalNPC = 0,
-	CityGateway = 1,
-	BattleGateway = 2,
-	CastleDefend = 3,
-	MinerNPC = 5,
 }
 
 RewardType = {
@@ -369,56 +144,6 @@ RewardType = {
 	PveMoreEmploy = 41,		--多人本雇佣奖励
 }
 
-ShopType = {
-	Ghost = 0,    	--魔魂商店
-	Honor = 1,  	--荣誉商店
-	Diamond = 2,    --宝箱商店
-	Dragon = 3,   	--屠龙商店
-	KiloTower = 5,  --千层塔
-	Gem = 6,--宝石商店
-	CastleDefend = 7, --守卫皇城商店
-	TAMER = 8,		 --驯兽商店
-	SigIn_Score = 10, 	--签到积分商店
-}
-
-MatterEvent = {
-	Nothing = 0, 		--没产生任何奖励
-	MatterAward = 1,	--物资奖励
-	DoubleAward = 2,	--下次双倍奖励
-	FreeAward = 3,		--本次免费
-}
-
-ERoomType =
-{
-	PVP = 0,
-	PVEMore = 1,
-	KingTower = 4,
-}
-
-ERoomState =
-{
-	WAIT = 1,--等待状态
-	CLOSED = 2,--房间关闭
-	FULL = 3,--房间已满
-	LOAD = 4,--加载状态
-	FIGHT = 5,--战斗状态
-	TIME_UP = 6,--战斗时间到
-	READY = 7,--准备状态  加入的人员点击准备
-	FIGHT_READY = 8, --连续打多个关卡中间结束
-}
-
-EToolTipActionType = {
-	Blue = 1,
-  Orange = 2,
-}
-
-EFairyAvatar = {
-	FreeReady="tFreeReady",
-	Struggle="tStruggle",
-	StruggleFree="tStruggleFree",
-	Ready="tReady",
-	StruggleReady="tStruggleReady",
-}
 ---全局配置表中数据
 EGlobalConfig =
 {
@@ -432,117 +157,13 @@ EGlobalConfig =
 	HallowRemoveID = 114,
 }
 
-SettlementAction = {
-	SceneEnter = 2,
-    SceneSelect = 1,
-	GameHallBack = 3,
-    BattleAgin = 4,
-}
-
---活动id列表
-activityIdList = {
-	DailyMoney = 101,
-	DailyExp = 201,
-	DailyDia = 301,
-	DailyRei = 401,
-	HonorHall = 501,
-	Dragon = 601,
-	CastleDefend = 701,
-	DragongGuess = 801,
-	CorpsSelectedGame = 1101,
-	KingTower = 1201,
-	SevenDayActive = 1301,
-}
-
-OpenType =
-{
-  All = 0,  			-- 0 默认全开
-  TrialSys = 1,			-- 1 日常副本
-  System = 2,			-- 2 系统
-  PVPandPVAI = 3,		-- 3 竞技场
-  CorpsGrade = 4, 		-- 4 军团等级
-}--开启方式
-
 ------------排行榜--------------
-
-RankType =
-{
-	GradeRank = 1,
-	PowerRank = 2,
-	CorpsRank = 3,
-	BeastRank = 4,
-	FlowerRank = 5,
-}
-------------排行榜--------------
-
-
 EBtnStyle = {
 	Orange = 1,
 	Blue = 2,
 	Gray = 3,
 }
---Item表中的Function字段
-EItemFunction = {
-	FairyMat = 0,
-	RoleEquip = 1,
-	RoleEquipStepupMat = 15,
-	Gem = 21,
-	Hallow = 6,
-}
 
-EOccupation = {
-	XueMei = 0 ,
-	DaJian = 1,
-	JinglingWangzi = 2,
-}
---City类型，对于表中的CityType
-ECityType = {
-	Main = 0,--主线City
-	Activity = 1,--活动City
-	Knightage = 2,---骑士团
-	DragonSlay = 3,--屠龙战记
-	Spacial = 4,--其它
-	CastleDefend = 5, -- 守卫皇城
-	Kilo = 6, --千层塔
-	Mine = 7,--挖矿
-	GVG = 8,--军团战活动主城
-}
-
-EGemStoneType = {
-	Ruby = 1, --红宝石
-	Topaz = 2, -- 黄宝石
-	Sapphire = 3,--蓝宝石
-	Colorfull = 4,--多彩
-}
-
-EGemPartType = {
-	Ruby = 1, --红宝石
-	Topaz = 2, -- 黄宝石
-	Sapphire = 3,--蓝宝石
-	Colorfull1 = 4,--多彩1
-	Colorfull2 = 5,--多彩2
-}
-
-EEquipType = {
-	Weapon = 0,--武器
-	Cuirass = 1,--胸甲
-	Helmet = 2,--头盔
-	Shoes = 3,--鞋子
-	Necklace = 4,--项链
-	Ring = 5,--戒指
-	IceHallow = 6,--冰圣器
-	FireHallow = 7,--火圣器
-}
-
-EPlayerState = {
-	Actie = 0,
-	Hide = 1,
-}
-
-ERankType = {
-	Now = 0, --本次排行
-	Last = 1, --上次排行
-}
 
 --是否隐藏网络玩家
 ENetPlayerStates = {
@@ -550,28 +171,6 @@ ENetPlayerStates = {
     Hide = 1,
 }
 
---守卫皇城配置枚举
-ECastleDefend = {
-	NeedVipLevel = 1,
-	ShopRefreshTime = 11,
-	CallEnemyNum = 12,
-	CallEnemyCost = 13,
-	AwardCount = 17,
-}
-
-ECastleDefendFight = {
-	Free = 0,
-	Fight = 1,
-}
-
-ECastleDefendNpcType = {
-	SOLDIER = 1, --小兵
-	ELITE = 2, --精英
-	FORWARD = 3, --前锋
-	FALSE_CHIEF = 4, --假首领
-	TRUE_CHIEF =5, --真首领
-	SPY = 6, --密探
-}
 --平台
 ERuntimePlatform =
 {
@@ -601,87 +200,4 @@ ERuntimePlatform =
         PSMPlayer = 26,
         XboxOne = 27,
         SamsungTVPlayer = 28,
-}
-
-EMaskType =
-{
-	None = 0,
-	MaskStart = 1,
-	MaskEnd = 2,
-}
-
-ECityNameState = {
-	Visible = 1,
-	Disable = 0,
-}
-
-EHallowType ={
-	Fire = 0,
-	Ice = 1,
-	MAX = 2,
-}
-
-EAmuletAttrType = {
-	Purple = 1,
-	Red = 2,
-	Blue = 3,
-	Yellow = 4,
-}
-
-EHallowAumletTitleItem = {
-	LeftDBIndex = 105000,
-	CenterDBIndex = 105001,
-	RightDBIndex = 105002,
-}
-
-CorpsActivityIdList = {
-	KiloTower = 2,
-	Mine = 3,
-	Astrology = 1,
-}
-
----GVG
-EGVGGroupType = {
-	Left = 0,
-	Right = 1,
-}
-
-EGVGFinalGameState = {
-	Ready = 1,
-	Fight = 2,
-	End = 3,
-}
-
-EGVGFinalPlayerState = {
-	Normal = 1,
-	Fight = 2,
-	Dead = 3,
-}
-
-EGVGProgressState = {
-	[1] = "入围赛",--Text.GVGKnockOutTitle,
-	[2] = "八强赛",--Text.GVG8Fight,
-	[3] = "四强赛",--Text.GVG4Fight,
-	[4] = "半决赛",--Text.GVG2Fight,
-	[5] = "夺城战",--Text.GVGFinal
-}
-EGvgStateInfo = {
-	InProcess = 1,
-	End = 2,
-}
-
-EMaterialState = {
-	normal = 0,
-	discolorationWound = 1,
-	dissolve = 2,
-	alphaDissolve = 3,
-	transparent = 4,
-	highlight = 5,
-	wound = 6,
-}
-
-ETowardDirection = {
-	E_RIGHT = 1,
-	E_MIDDLE = 0,
-	E_LEFT = -1,
 }

@@ -12,7 +12,11 @@ function TableHead:Init(info)
     LuaUIViewCtr.FlushPortraitInfo("Home/homeHeadCusPic", info.imageurl, self.Icon)
 
     self.Name:set_text(info.rolename)
-    self.Score:set_text(tostring(info.integral))
+    local scoreStr = tostring(info.integral)
+    if info.integral > 0 then
+        scoreStr = "+"..scoreStr
+    end
+    self.Score:set_text(scoreStr)
     if info.host ~= 0 then
         self.FangZhu:SetActive(true)
     end

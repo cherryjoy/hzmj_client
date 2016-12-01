@@ -48,6 +48,9 @@ Text = {
     LoginAgain = "重新登录",
     SessionFailed = "连接会话失效，请重新登录",
 
+    Male = "男",
+    Female = "女",
+
 -----------------------------Login登录验证-------------------------------------------
     ServerListError="服务器列表下载失败,请重试",
     ConnectError="连接服务器失败,请检查网络",
@@ -109,7 +112,7 @@ Text = {
     BalanceGangMNum = "公杠次数     %d",
     BalanceGangANum = "暗杠次数     %d",
     BalanceCodeNum = "中码个数     %d",
-    BalanceTotol = "总分数 %d",
+    BalanceTotol = "总分数 %s",
     BalanceRoleId = "ID:%d",
     InviteTitle = "红中麻将房间号【%d】",
     InviteContext = "我在[樱桃红中麻将]开了%d局，%d个码，%d倍的房间，快来一起玩吧",
