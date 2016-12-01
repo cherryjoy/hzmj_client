@@ -684,12 +684,16 @@ function MJTableCtrl:PlayRecordVoiceEnd()
 end
 
 function MJTableCtrl:NetConnectSuccess()
+    LuaDebug.Log("MJTableCtrl:NetConnectSuccess")
+    if Client.m_CurrentState ~= EClientState.E_CS_Table then
+        return
+    end
+
     if Client.PingGlobalTimer == nil then
         Client.PingTime = LuaDateTime.Ticks_Now()
         Client.PingGlobalTimer = Timer.NewGlobalEvent(30,10*60*60*24,Client.CheckPing,false,nil)
     end
 
-    LuaDebug.Log("MJTableCtrl:NetConnectSuccess")
     ClientSendMsg.SendEnterRoom(Client.RoleInfo.RoleID, self.roomId)
     ClientSendMsg.SendReadyRoom()
 

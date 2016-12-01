@@ -22,6 +22,8 @@ function GameBalance:Init(balances, roleList)
             ref.Background:set_color(LuaColor.Get(1,0,0,1))
         end
     end
+
+    Client.m_CurrentState = EClientState.E_CS_Hall
 end
 
 function GameBalance:ReturnHall_OnClick()
