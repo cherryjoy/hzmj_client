@@ -18,10 +18,14 @@ end
 
 function TableRight:CardInfoSync(handnum)
     for i = 1, handnum do
-        local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/RightCard",self.Grid:get_gameObject())
-        ref.Back:set_depth(i + 2)
-        ref.gameObject:set_name("RightCard")
-        self.handCard[i] = ref
+        if i == 14 then
+            MJTableCtrl.HandleGetCard(LuaUIViewCtr.UIPanel["MJTableUI"], self.roleId, nil)
+        else
+            local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/RightCard",self.Grid:get_gameObject())
+            ref.Back:set_depth(i + 2)
+            ref.gameObject:set_name("RightCard")
+            self.handCard[i] = ref
+        end
     end
 
     self.Grid:Reposition()
