@@ -145,7 +145,7 @@ public class UISlider : IgnoreTimeScale
 		
 		// Direction to the point on the plane in scaled local space
 		Vector3 localCursor = mTrans.InverseTransformPoint(ray.GetPoint(dist));
-		Vector3 dir = localCursor + localOffset;
+		Vector3 dir = localCursor;// + localOffset;
 		// Update the slider
 		Set( (direction == Direction.Horizontal) ? dir.x / mCol.size.x : dir.y / mCol.size.y );
 	}
