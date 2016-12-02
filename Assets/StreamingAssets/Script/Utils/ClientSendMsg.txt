@@ -269,3 +269,11 @@ function ClientSendMsg.SendGameHeartBeat()
 	local buffer, length = LuaProto.serialize(data)
 	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_HEARTBEAT_REQ, buffer, length)
 end
+
+function ClientSendMsg.SendRoleBaseInfo()
+	local data = PBMsgRoleBaseInfoExReq。Create()
+
+	local buffer, length = LuaProto.serialize(data)
+	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_ROLE_BASE_INFO_REQ, bufferm length)
+end
+

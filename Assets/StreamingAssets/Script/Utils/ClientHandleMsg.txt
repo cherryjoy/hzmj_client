@@ -303,3 +303,17 @@ HandleFuncs[enumMSGID_MODULE_05.ID_GAME_HEARTBEAT_RES] = function(data, dataLeng
     local data = LuaProto.deserialize(PBMsgGameHeartbeatRes, data, dataLength)
 
 end
+
+HandleFuncs[enumMSGID_MODULE_05.ID_ROLE_BASE_INFO_RES] = function(data, dataLength)
+    local data = LuaProto.deserialize(PBMsgRoleBaseInfoExRes, data, dataLength)
+
+    local ref = LuaUIViewCtr.OpenUIHasBg("CommonUI/RoleInfoUI")
+    ref.Init(ref, data.name, 2, data.roleid, data.address, data.cardnum)
+end
+
+HandleFuncs[enumMSGID_MODULE_05.ID_ROLE_NUMERIC_VALUE_RES] = function(data, dataLength)
+    local data = LuaProto.deserialize(PBMsgRoleNumericValueRes, data, dataLength)
+
+    Client.RoleInfo.integral = data.numeric.cardnum
+end
+
