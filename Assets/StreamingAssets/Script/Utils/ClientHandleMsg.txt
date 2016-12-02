@@ -317,3 +317,19 @@ HandleFuncs[enumMSGID_MODULE_05.ID_ROLE_NUMERIC_VALUE_RES] = function(data, data
     Client.RoleInfo.integral = data.numeric.cardnum
 end
 
+HandleFuncs[enumMSGID_MODULE_05.ID_ROOM_DELETE_CONFIRM_RES] = function(data, dataLength)
+    -- body
+    local data = LuaProto.deserialize(PBMsgRoomDeleteConfirmRes, data, dataLength)
+
+
+end
+
+HandleFuncs[enumMSGID_MODULE_05.ID_ROOM_DELETE_AGREE_RES] = function(data, dataLength)
+    -- body
+    local data = LuaProto.deserialize(PBMsgRoomDeleteAgreeRes, data, dataLength)
+
+    
+end
+
+
+
