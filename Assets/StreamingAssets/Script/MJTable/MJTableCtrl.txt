@@ -72,7 +72,7 @@ function MJTableCtrl:CardInfoSync(cardInfo)
     -- 强行清一下桌面
     Client.ResetToward:Do()
     Client.TableClear:Do()
-
+    LuaDebug.Log("leftnum: "..cardInfo.leftnum)
     Client.RoleInfo.RestCard = cardInfo.leftnum
     -- 关闭 邀请
     self.Invite:SetActive(false)
@@ -700,4 +700,13 @@ function MJTableCtrl:NetConnectSuccess()
     --Client.RoleInfo.RestCard = 112
     Client.ResetToward:Do()
     Client.TableClear:Do()
+end
+
+function MJTableCtrl:Help_OnClick()
+	local ref = LuaUIViewCtr.OpenUIHasBg("Home/HelpUI")
+end
+
+function MJTableCtrl:Setting_OnClick()
+    local ref = LuaUIViewCtr.OpenUIHasBg("CommonUI/SettingUI")
+    ref.Init(ref)
 end

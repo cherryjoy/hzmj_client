@@ -1,0 +1,56 @@
+SettingCtr = {}
+
+function SettingCtr:Start( )
+
+end
+
+function SettingCtr:OnDestroy( )
+
+end
+
+function SettingCtr:Init()
+    self.Music:rawValue(PlayerPrefsEx.GetFloat("bgmValue"))
+    self.Voice:rawValue(PlayerPrefsEx.GetFloat("ggmValue"))
+
+    if Client.m_CurrentState == EClientState.E_CS_Table then
+        self.DeleteRoom:SetActive(true)
+    end
+end
+
+function SettingCtr:Close_OnClick()
+    self.gameObject:Destroy1()
+end
+
+function SettingCtr:Music_OnChangeValue()
+    --LuaDebug.Log("Music: "..self.Music:rawValue())
+
+    PlayerPrefsEx.SetFloat("bgmValue",self.Music:rawValue())
+
+    local musicMgr=MusicManager.get_Instance()
+    musicMgr:set_MusicVolume(PlayerPrefsEx.GetFloat("bgmValue"))
+end
+
+function SettingCtr:Voice_OnChangeValue()
+    --LuaDebug.Log("Voice: "..self.Voice:rawValue())
+
+    PlayerPrefsEx.SetFloat("ggmValue",self.Voice:rawValue())
+
+    local musicMgr=MusicManager.get_Instance()
+    musicMgr:set_AudioVolume(PlayerPrefsEx.GetFloat("ggmValue"))
+end
+
+function SettingCtr:DeleteRoom_OnClick()
+    if LuaUIViewCtr.UIPanel["MJTableUI"] == nil then
+        LuaDebug.LogError("DeleteRoom_OnClick, but MJTableUI is nil")
+        return
+    end
+
+    local prefab = LuaUIViewCtr.OpenUIHasBg("ToolsUI/MessageBox")
+    LuaMessageBox.SetDataTable(prefab, {Message = Text.DeleteRoomConfirm,
+                                        ConfirmName = Text.Confirm ,ConfirmFunc = function()
+                                            ClientSendMsg.SendDeleteRoom(LuaUIViewCtr.UIPanel["MJTableUI"].roomId) end,
+                                        CancelName = Text.Cancel ,CancelFunc = nil,
+                                        ref=self})
+
+    self.gameObject:Destroy1()
+end

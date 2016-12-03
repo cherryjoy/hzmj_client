@@ -150,13 +150,13 @@ MonoBehaviour:
   method: 5
   mDestroyAfterTween: 0
   style: 0
-  duration: 0.05
+  duration: 0.1
   tweenGroup: 0
   eventReceiver: {fileID: 151526}
   callWhenFinished: OnEventWithMessage
   isSenderToMessage: 1
   delayTime: 0
-  waitTime: 0.3
+  waitTime: 0.5
   callWhenWait: 
   IsSendMsg: 1
   from: {x: 420, y: -230, z: 0}

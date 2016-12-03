@@ -23,7 +23,7 @@ end
 
 function MainUICtrl:Score_OnClick()
     if Client.IsDebugPlatform() then
-
+        Client.SeriousError(Text.ConnectTimeout)
     end
 end
 
@@ -41,9 +41,8 @@ function MainUICtrl:Help_OnClick()
 end
 
 function MainUICtrl:Setting_OnClick()
-    if Client.IsDebugPlatform() then
-        Client.SeriousError(Text.ConnectTimeout)
-    end
+    local ref = LuaUIViewCtr.OpenUIHasBg("CommonUI/SettingUI")
+    ref.Init(ref)
 end
 
 function MainUICtrl:JoinGame_OnClick()
@@ -56,9 +55,8 @@ end
 
 function MainUICtrl:Icon_OnClick()
     local ref = LuaUIViewCtr.OpenUIHasBg("CommonUI/RoleInfoUI")
-    ref.Init(ref, Client.RoleInfo.RoleName, Client.RoleInfo.sex, Client.RoleInfo.RoleID, Client.RoleInfo.address, Client.RoleInfo.integral)
+    ref.Init(ref, Client.RoleInfo.RoleName, Client.RoleInfo.sex, Client.RoleInfo.RoleID, Client.RoleInfo.address, Client.RoleInfo.integral, Client.RoleInfo.imageurl)
 end
-
 
 function MainUICtrl:TableClose()
     self.gameObject:SetActive(true)

@@ -64,7 +64,9 @@ public class UISlider : IgnoreTimeScale
 			UIEventListener listener = UIEventListener.Add(thumb.gameObject);
 			listener.onPress += OnPressThumb;
 			listener.onDrag += OnDragThumb;
-		}	
+		}
+
+        Set(rawValue);
 	}
 	
 	void OnEnable()
@@ -150,9 +152,7 @@ public class UISlider : IgnoreTimeScale
 		Set( (direction == Direction.Horizontal) ? dir.x / mCol.size.x : dir.y / mCol.size.y );
 	}
 
-#if UNITY_EDITOR
 	void Update () { Set(rawValue); }
-#endif
 
 	/// <summary>
 	/// Update the visible slider.

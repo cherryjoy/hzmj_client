@@ -270,15 +270,16 @@ function ClientSendMsg.SendGameHeartBeat()
 	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_HEARTBEAT_REQ, buffer, length)
 end
 
-function ClientSendMsg.SendRoleBaseInfo()
+function ClientSendMsg.SendRoleBaseInfo(roleId)
 	local data = PBMsgRoleBaseInfoExReq.Create()
+	data.roleid = roleId
 
 	local buffer, length = LuaProto.serialize(data)
 	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_ROLE_BASE_INFO_REQ, buffer, length)
 end
 
 function ClientSendMsg.SendRoomDeleteConfirm(roomId)
-	-- body 
+	-- body
 	local data = PBMsgRoomDeleteConfirmReq.Create()
 	data.room_pass = roomId
 
@@ -294,7 +295,3 @@ function ClientSendMsg.SendRoomDeleteAgree(agree)
 	local buffer, length = LuaProto.serialize(data)
 	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_ROOM_DELETE_AGREE_REQ, buffer, length)
 end
-
-
-
-

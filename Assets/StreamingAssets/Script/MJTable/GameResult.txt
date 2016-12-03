@@ -20,12 +20,14 @@ function GameResult:Init(data, roleList)
                 for j = 1, #(data.role_list) do
                     if Client.RoleInfo.RoleID == data.role_list[j] then
                         ref.SetCodeCards(ref, data.code_cards)
+                        ref.SetWinCard(ref, data.win_card)
                         break
                     end
                 end
             else
                 if Client.RoleInfo.RoleID == data.roleid then
                     ref.SetCodeCards(ref, data.code_cards)
+                    ref.SetWinCard(ref, data.win_card)
                 end
             end
             break
@@ -45,12 +47,14 @@ function GameResult:Init(data, roleList)
                  for j = 1, #(data.role_list) do
                      if data.role_cards[i].roleid == data.role_list[j] then
                          ref.SetCodeCards(ref, data.code_cards)
+                         ref.SetWinCard(ref, data.win_card)
                          break
                      end
                  end
              else
                  if data.role_cards[i].roleid == data.roleid then
                      ref.SetCodeCards(ref, data.code_cards)
+                     ref.SetWinCard(ref, data.win_card)
                  end
              end
          end
@@ -60,7 +64,7 @@ function GameResult:Init(data, roleList)
          for i = 1, #(data.rest_cards) do
              local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCard", self.RestCardsGrid:get_gameObject())
              ref.gameObject:get_transform():set_localScale(LuaVector3.Create(0.6, 0.6, 1))
-             ref.Init(ref, data.rest_cards[i], i)
+             ref.Init(ref, data.rest_cards[i], i, true)
          end
 
          self.RestCardsGrid:Reposition()

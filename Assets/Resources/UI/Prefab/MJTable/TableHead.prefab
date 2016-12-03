@@ -57,6 +57,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 468672}
   - 114: {fileID: 11433554}
+  - 114: {fileID: 11472894}
   m_Layer: 8
   m_Name: TableHead
   m_TagString: Untagged
@@ -121,6 +122,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 424490}
   - 114: {fileID: 11471210}
+  - 65: {fileID: 6586152}
+  - 114: {fileID: 11477294}
+  - 114: {fileID: 11498156}
   m_Layer: 8
   m_Name: Icon
   m_TagString: Untagged
@@ -239,6 +243,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 468672}
   m_RootOrder: 4
+--- !u!65 &6586152
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 197526}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 80, y: 80, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &11414556
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -467,6 +483,46 @@ MonoBehaviour:
   mIsHidePanel: 0
   UVOffset: {x: 0, y: 0, z: 0, w: 0}
   MaterialPath: 
+--- !u!114 &11472894
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 141624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1517656706, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11477294
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 197526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1646491362, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 141624}
+  functionName: OnClick
+  trigger: 0
+  includeChildren: 0
+--- !u!114 &11498156
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 197526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1892511743, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: b0e713473f4d48b4a87c07c6a8a3fbe3, type: 3}
+  trigger: 0
+  volume: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

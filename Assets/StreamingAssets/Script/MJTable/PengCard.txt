@@ -9,6 +9,8 @@ function PengCard:OnDestroy( )
 end
 
 function PengCard:TableClear()
-    self.gameObject:SetActive(false)
-    self.gameObject:Destroy1()
+    if not notClear then
+        self.gameObject:SetActive(false)
+        self.gameObject:Destroy1()
+    end
 end

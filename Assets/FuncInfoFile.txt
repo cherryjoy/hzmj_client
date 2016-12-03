@@ -17650,6 +17650,804 @@ ParamType:     System.Object   System.Object
 
 
 ================================
+UnityEngine.AudioSource
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_volume
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   set_volume
+ParamType:     System.Single
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_pitch
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   set_pitch
+ParamType:     System.Single
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_time
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   set_time
+ParamType:     System.Single
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_timeSamples
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   set_timeSamples
+ParamType:     System.Int32
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_clip
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   set_clip
+ParamType:     UnityEngine.AudioClip
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_outputAudioMixerGroup
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   set_outputAudioMixerGroup
+ParamType:     UnityEngine.Audio.AudioMixerGroup
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   Play
+ParamType:     System.UInt64
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   Play1
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   PlayDelayed
+ParamType:     System.Single
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   PlayScheduled
+ParamType:     System.Double
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   SetScheduledStartTime
+ParamType:     System.Double
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   SetScheduledEndTime
+ParamType:     System.Double
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   Stop
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   Pause
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   UnPause
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_isPlaying
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_isVirtual
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   PlayOneShot
+ParamType:     UnityEngine.AudioClip   System.Single
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   PlayOneShot1
+ParamType:     UnityEngine.AudioClip
+
+
+Class:   UnityEngine.AudioSource
+FuncName:  Static  PlayClipAtPoint
+ParamType:     UnityEngine.AudioClip   UnityEngine.Vector3
+
+
+Class:   UnityEngine.AudioSource
+FuncName:  Static  PlayClipAtPoint1
+ParamType:     UnityEngine.AudioClip   UnityEngine.Vector3   System.Single
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_loop
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   set_loop
+ParamType:     System.Boolean
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_ignoreListenerVolume
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   set_ignoreListenerVolume
+ParamType:     System.Boolean
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_playOnAwake
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   set_playOnAwake
+ParamType:     System.Boolean
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_ignoreListenerPause
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   set_ignoreListenerPause
+ParamType:     System.Boolean
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_velocityUpdateMode
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   set_velocityUpdateMode
+ParamType:     UnityEngine.AudioVelocityUpdateMode
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_panStereo
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   set_panStereo
+ParamType:     System.Single
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_spatialBlend
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   set_spatialBlend
+ParamType:     System.Single
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_spatialize
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   set_spatialize
+ParamType:     System.Boolean
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   SetCustomCurve
+ParamType:     UnityEngine.AudioSourceCurveType   UnityEngine.AnimationCurve
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   GetCustomCurve
+ParamType:     UnityEngine.AudioSourceCurveType
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_reverbZoneMix
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   set_reverbZoneMix
+ParamType:     System.Single
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_bypassEffects
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   set_bypassEffects
+ParamType:     System.Boolean
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_bypassListenerEffects
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   set_bypassListenerEffects
+ParamType:     System.Boolean
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_bypassReverbZones
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   set_bypassReverbZones
+ParamType:     System.Boolean
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_dopplerLevel
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   set_dopplerLevel
+ParamType:     System.Single
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_spread
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   set_spread
+ParamType:     System.Single
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_priority
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   set_priority
+ParamType:     System.Int32
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_mute
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   set_mute
+ParamType:     System.Boolean
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_minDistance
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   set_minDistance
+ParamType:     System.Single
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_maxDistance
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   set_maxDistance
+ParamType:     System.Single
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_rolloffMode
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   set_rolloffMode
+ParamType:     UnityEngine.AudioRolloffMode
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   GetOutputData
+ParamType:     System.Int32   System.Int32
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   GetOutputData1
+ParamType:     System.Single[]   System.Int32
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   GetSpectrumData
+ParamType:     System.Int32   System.Int32   UnityEngine.FFTWindow
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   GetSpectrumData1
+ParamType:     System.Single[]   System.Int32   UnityEngine.FFTWindow
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_minVolume
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   set_minVolume
+ParamType:     System.Single
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_maxVolume
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   set_maxVolume
+ParamType:     System.Single
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_rolloffFactor
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   set_rolloffFactor
+ParamType:     System.Single
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   SetSpatializerFloat
+ParamType:     System.Int32   System.Single
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   GetSpatializerFloat
+ParamType:     System.Int32   System.Single&
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_panLevel
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   set_panLevel
+ParamType:     System.Single
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_pan
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   set_pan
+ParamType:     System.Single
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_enabled
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   set_enabled
+ParamType:     System.Boolean
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_isActiveAndEnabled
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_transform
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_gameObject
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   GetComponent
+ParamType:     System.Type
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   GetComponent1
+ParamType:     System.String
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   GetComponentInChildren
+ParamType:     System.Type   System.Boolean
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   GetComponentInChildren1
+ParamType:     System.Type
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   GetComponentsInChildren
+ParamType:     System.Type
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   GetComponentsInChildren1
+ParamType:     System.Type   System.Boolean
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   GetComponentInParent
+ParamType:     System.Type
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   GetComponentsInParent
+ParamType:     System.Type
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   GetComponentsInParent1
+ParamType:     System.Type   System.Boolean
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   GetComponents
+ParamType:     System.Type
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   GetComponents1
+ParamType:     System.Type   System.Collections.Generic.List`1[UnityEngine.Component]
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_tag
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   set_tag
+ParamType:     System.String
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   CompareTag
+ParamType:     System.String
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   SendMessageUpwards
+ParamType:     System.String   System.Object   UnityEngine.SendMessageOptions
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   SendMessageUpwards1
+ParamType:     System.String   System.Object
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   SendMessageUpwards2
+ParamType:     System.String
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   SendMessageUpwards3
+ParamType:     System.String   UnityEngine.SendMessageOptions
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   SendMessage
+ParamType:     System.String   System.Object   UnityEngine.SendMessageOptions
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   SendMessage1
+ParamType:     System.String   System.Object
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   SendMessage2
+ParamType:     System.String
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   SendMessage3
+ParamType:     System.String   UnityEngine.SendMessageOptions
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   BroadcastMessage
+ParamType:     System.String   System.Object   UnityEngine.SendMessageOptions
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   BroadcastMessage1
+ParamType:     System.String   System.Object
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   BroadcastMessage2
+ParamType:     System.String
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   BroadcastMessage3
+ParamType:     System.String   UnityEngine.SendMessageOptions
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_rigidbody
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_rigidbody2D
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_camera
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_light
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_animation
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_constantForce
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_renderer
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_audio
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_guiText
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_networkView
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_guiElement
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_guiTexture
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_collider
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_collider2D
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_hingeJoint
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_particleEmitter
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_particleSystem
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:  Static  Destroy
+ParamType:     UnityEngine.Object   System.Single
+
+
+Class:   UnityEngine.AudioSource
+FuncName:  Static  Destroy1
+ParamType:     UnityEngine.Object
+
+
+Class:   UnityEngine.AudioSource
+FuncName:  Static  DestroyImmediate
+ParamType:     UnityEngine.Object   System.Boolean
+
+
+Class:   UnityEngine.AudioSource
+FuncName:  Static  DestroyImmediate1
+ParamType:     UnityEngine.Object
+
+
+Class:   UnityEngine.AudioSource
+FuncName:  Static  FindObjectsOfType
+ParamType:     System.Type
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_name
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   set_name
+ParamType:     System.String
+
+
+Class:   UnityEngine.AudioSource
+FuncName:  Static  DontDestroyOnLoad
+ParamType:     UnityEngine.Object
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   get_hideFlags
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   set_hideFlags
+ParamType:     UnityEngine.HideFlags
+
+
+Class:   UnityEngine.AudioSource
+FuncName:  Static  DestroyObject
+ParamType:     UnityEngine.Object   System.Single
+
+
+Class:   UnityEngine.AudioSource
+FuncName:  Static  DestroyObject1
+ParamType:     UnityEngine.Object
+
+
+Class:   UnityEngine.AudioSource
+FuncName:  Static  FindSceneObjectsOfType
+ParamType:     System.Type
+
+
+Class:   UnityEngine.AudioSource
+FuncName:  Static  FindObjectsOfTypeIncludingAssets
+ParamType:     System.Type
+
+
+Class:   UnityEngine.AudioSource
+FuncName:  Static  FindObjectsOfTypeAll
+ParamType:     System.Type
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   ToString
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   Equals
+ParamType:     System.Object
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   GetHashCode
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   GetInstanceID
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:  Static  Instantiate
+ParamType:     UnityEngine.Object   UnityEngine.Vector3   UnityEngine.Quaternion
+
+
+Class:   UnityEngine.AudioSource
+FuncName:  Static  Instantiate1
+ParamType:     UnityEngine.Object
+
+
+Class:   UnityEngine.AudioSource
+FuncName:  Static  FindObjectOfType
+ParamType:     System.Type
+
+
+Class:   UnityEngine.AudioSource
+FuncName:  Static  op_Implicit
+ParamType:     UnityEngine.Object
+
+
+Class:   UnityEngine.AudioSource
+FuncName:  Static  op_Equality
+ParamType:     UnityEngine.Object   UnityEngine.Object
+
+
+Class:   UnityEngine.AudioSource
+FuncName:  Static  op_Inequality
+ParamType:     UnityEngine.Object   UnityEngine.Object
+
+
+Class:   UnityEngine.AudioSource
+FuncName:  Static  Equals1
+ParamType:     System.Object   System.Object
+
+
+Class:   UnityEngine.AudioSource
+FuncName:   GetType
+ParamType:  NULL
+
+
+Class:   UnityEngine.AudioSource
+FuncName:  Static  ReferenceEquals
+ParamType:     System.Object   System.Object
+
+
+================================
 NGUIText
 
 Class:   NGUIText
@@ -25424,16 +26222,6 @@ ParamType:     System.Int32   System.Byte[]
 
 
 Class:   CNetWorkGlobal
-FuncName:   SendCastNetMessage
-ParamType:     System.Int32   System.Int32   System.Byte[]
-
-
-Class:   CNetWorkGlobal
-FuncName:   SendNetEmptyMessage
-ParamType:     System.Int32
-
-
-Class:   CNetWorkGlobal
 FuncName:   SendByteThisFrame
 ParamType:  NULL
 
@@ -26109,7 +26897,7 @@ ParamType:  NULL
 
 Class:   PlatformSDKController
 FuncName:   ShareScreenShot
-ParamType:     System.String   System.String   System.String   System.String   System.String
+ParamType:     System.String   System.String   System.String   System.String   System.String   System.String   System.String
 
 
 Class:   PlatformSDKController
@@ -26602,12 +27390,12 @@ ParamType:     System.String   System.String
 
 Class:   PlatformState
 FuncName:   CJSDKShare
-ParamType:     System.String   System.String   System.String   System.String   System.String
+ParamType:     System.String   System.String   System.String   System.String   System.String   System.String   System.String
 
 
 Class:   PlatformState
 FuncName:   SDKShareCallBack
-ParamType:     System.String   System.String   System.String   System.String   System.String
+ParamType:     System.String   System.String   System.String   System.String   System.String   System.String   System.String
 
 
 Class:   PlatformState
@@ -26666,6 +27454,16 @@ ParamType:     System.String   UnityEngine.Texture2D
 Class:   WWWPortraitLoader
 FuncName:  Static  DeleteImageFromLocal
 ParamType:     System.String
+
+
+Class:   WWWPortraitLoader
+FuncName:  Static  UploadVoice
+ParamType:     System.String   System.String   System.Byte[]   System.String   System.String
+
+
+Class:   WWWPortraitLoader
+FuncName:  Static  DownLoadVoice
+ParamType:     System.String   System.String   System.Int32   System.String   System.String
 
 
 Class:   WWWPortraitLoader
@@ -27129,6 +27927,59 @@ ParamType:  NULL
 
 
 Class:   WWWPortraitLoader
+FuncName:  Static  ReferenceEquals
+ParamType:     System.Object   System.Object
+
+
+================================
+RecordVoice
+
+Class:   RecordVoice
+FuncName:   StartRecord
+ParamType:  NULL
+
+
+Class:   RecordVoice
+FuncName:   EndRecord
+ParamType:     System.Int32   System.Int32   System.String   System.String   System.String
+
+
+Class:   RecordVoice
+FuncName:   Save
+ParamType:     System.String   UnityEngine.AudioClip
+
+
+Class:   RecordVoice
+FuncName:  Static  get_Instance
+ParamType:  NULL
+
+
+Class:   RecordVoice
+FuncName:   Equals
+ParamType:     System.Object
+
+
+Class:   RecordVoice
+FuncName:  Static  Equals1
+ParamType:     System.Object   System.Object
+
+
+Class:   RecordVoice
+FuncName:   GetHashCode
+ParamType:  NULL
+
+
+Class:   RecordVoice
+FuncName:   GetType
+ParamType:  NULL
+
+
+Class:   RecordVoice
+FuncName:   ToString
+ParamType:  NULL
+
+
+Class:   RecordVoice
 FuncName:  Static  ReferenceEquals
 ParamType:     System.Object   System.Object
 
@@ -30084,1442 +30935,504 @@ FuncName:  Static  ReferenceEquals
 ParamType:     System.Object   System.Object
 
 
-ualityChecker
-FuncName:  Static  ReferenceEquals
-ParamType:     System.Object   System.Object
-
-
-Name:   StopMove
-ParamType:     System.Boolean
-
-
-Class:   CityPlayerControl
-FuncName:   ColliderEnabled
-ParamType:     System.Boolean
-
-
-Class:   CityPlayerControl
-FuncName:   DoStart
-ParamType:  NULL
-
-
-Class:   CityPlayerControl
-FuncName:   DoLateUpdate
-ParamType:  NULL
-
-
-Class:   CityPlayerControl
-FuncName:   Equals
+Equals
 ParamType:     System.Object
 
 
-Class:   CityPlayerControl
+Class:   GameQualityChecker
 FuncName:  Static  Equals1
 ParamType:     System.Object   System.Object
 
 
-Class:   CityPlayerControl
+Class:   GameQualityChecker
 FuncName:   GetHashCode
 ParamType:  NULL
 
 
-Class:   CityPlayerControl
+Class:   GameQualityChecker
 FuncName:   GetType
 ParamType:  NULL
 
 
-Class:   CityPlayerControl
+Class:   GameQualityChecker
 FuncName:   ToString
 ParamType:  NULL
 
 
-Class:   CityPlayerControl
+Class:   GameQualityChecker
 FuncName:  Static  ReferenceEquals
 ParamType:     System.Object   System.Object
 
 
 ================================
-MapControl
+UILocalAnchor
 
-Class:   MapControl
-FuncName:   LoadScene
-ParamType:     System.Int32
-
-
-Class:   MapControl
-FuncName:   LoadMap
-ParamType:     System.String   System.String   System.Boolean
-
-
-Class:   MapControl
-FuncName:   SetMoveRange
-ParamType:     UnityEngine.Rect
-
-
-Class:   MapControl
-FuncName:   GetMoveRange
-ParamType:  NULL
-
-
-Class:   MapControl
-FuncName:   InRange
-ParamType:     System.Single   System.Single
-
-
-Class:   MapControl
-FuncName:   FixPos
-ParamType:     UnityEngine.Vector3&
-
-
-Class:   MapControl
-FuncName:   FixPos1
-ParamType:     System.Single&   System.Single&
-
-
-Class:   MapControl
-FuncName:   FixPosX
-ParamType:     System.Single&
-
-
-Class:   MapControl
-FuncName:   FixPosZ
-ParamType:     System.Single&
-
-
-Class:   MapControl
-FuncName:   OutRangeX
-ParamType:     System.Single
-
-
-Class:   MapControl
-FuncName:   ChangeLightDirection
-ParamType:     UnityEngine.GameObject
-
-
-Class:   MapControl
-FuncName:  Static  get_Instance
-ParamType:  NULL
-
-
-Class:   MapControl
-FuncName:   Equals
-ParamType:     System.Object
-
-
-Class:   MapControl
-FuncName:  Static  Equals1
-ParamType:     System.Object   System.Object
-
-
-Class:   MapControl
-FuncName:   GetHashCode
-ParamType:  NULL
-
-
-Class:   MapControl
-FuncName:   GetType
-ParamType:  NULL
-
-
-Class:   MapControl
-FuncName:   ToString
-ParamType:  NULL
-
-
-Class:   MapControl
-FuncName:  Static  ReferenceEquals
-ParamType:     System.Object   System.Object
-
-
-================================
-SpawnControl
-
-Class:   SpawnControl
-FuncName:   Init
-ParamType:     ModelGameScene
-
-
-Class:   SpawnControl
-FuncName:   GetSpawnPos
-ParamType:     System.Int32   System.Int32
-
-
-Class:   SpawnControl
-FuncName:   GetSpawnRot
-ParamType:     System.Int32
-
-
-Class:   SpawnControl
-FuncName:   Equals
-ParamType:     System.Object
-
-
-Class:   SpawnControl
-FuncName:  Static  Equals1
-ParamType:     System.Object   System.Object
-
-
-Class:   SpawnControl
-FuncName:   GetHashCode
-ParamType:  NULL
-
-
-Class:   SpawnControl
-FuncName:   GetType
-ParamType:  NULL
-
-
-Class:   SpawnControl
-FuncName:   ToString
-ParamType:  NULL
-
-
-Class:   SpawnControl
-FuncName:  Static  ReferenceEquals
-ParamType:     System.Object   System.Object
-
-
-================================
-LKUIRoot
-
-Class:   LKUIRoot
-FuncName:   InitRoot
-ParamType:  NULL
-
-
-Class:   LKUIRoot
-FuncName:   OnDestroy
-ParamType:  NULL
-
-
-Class:   LKUIRoot
-FuncName:   Equals
-ParamType:     System.Object
-
-
-Class:   LKUIRoot
-FuncName:  Static  Equals1
-ParamType:     System.Object   System.Object
-
-
-Class:   LKUIRoot
-FuncName:   GetHashCode
-ParamType:  NULL
-
-
-Class:   LKUIRoot
-FuncName:   GetType
-ParamType:  NULL
-
-
-Class:   LKUIRoot
-FuncName:   ToString
-ParamType:  NULL
-
-
-Class:   LKUIRoot
-FuncName:  Static  ReferenceEquals
-ParamType:     System.Object   System.Object
-
-
-================================
-ShadowControl
-
-Class:   ShadowControl
-FuncName:   Init
-ParamType:  NULL
-
-
-Class:   ShadowControl
-FuncName:   Update
-ParamType:     System.Single
-
-
-Class:   ShadowControl
-FuncName:   AddVisibleObject
-ParamType:     FightObject
-
-
-Class:   ShadowControl
-FuncName:   RemoveVisibleObject
-ParamType:     FightObject
-
-
-Class:   ShadowControl
-FuncName:   OnDestroy
-ParamType:  NULL
-
-
-Class:   ShadowControl
-FuncName:   SetShadowHeight
-ParamType:     System.Single
-
-
-Class:   ShadowControl
-FuncName:   Equals
-ParamType:     System.Object
-
-
-Class:   ShadowControl
-FuncName:  Static  Equals1
-ParamType:     System.Object   System.Object
-
-
-Class:   ShadowControl
-FuncName:   GetHashCode
-ParamType:  NULL
-
-
-Class:   ShadowControl
-FuncName:   GetType
-ParamType:  NULL
-
-
-Class:   ShadowControl
-FuncName:   ToString
-ParamType:  NULL
-
-
-Class:   ShadowControl
-FuncName:  Static  ReferenceEquals
-ParamType:     System.Object   System.Object
-
-
-================================
-FightObject
-
-Class:   FightObject
-FuncName:   get_Trans_
-ParamType:  NULL
-
-
-Class:   FightObject
-FuncName:   GetPlayerNetType
-ParamType:  NULL
-
-
-Class:   FightObject
-FuncName:   GetActorType
-ParamType:  NULL
-
-
-Class:   FightObject
-FuncName:   DoStart
-ParamType:  NULL
-
-
-Class:   FightObject
-FuncName:   DoUpdate
-ParamType:  NULL
-
-
-Class:   FightObject
-FuncName:   DoLateUpdate
-ParamType:  NULL
-
-
-Class:   FightObject
-FuncName:   DoEnd
-ParamType:  NULL
-
-
-Class:   FightObject
-FuncName:   EnableAIInput
-ParamType:     System.Boolean
-
-
-Class:   FightObject
-FuncName:   InputUpdate
-ParamType:  NULL
-
-
-Class:   FightObject
-FuncName:   GetInputCtrByIndex
-ParamType:     System.Int32
-
-
-Class:   FightObject
-FuncName:   GetJoystickCtr
-ParamType:  NULL
-
-
-Class:   FightObject
-FuncName:   GetAIInputCtr
-ParamType:  NULL
-
-
-Class:   FightObject
-FuncName:   SetInputCtr
-ParamType:     InputControlBase
-
-
-Class:   FightObject
-FuncName:   Set2InputCtr
-ParamType:     InputControlBase   InputControlBase
-
-
-Class:   FightObject
-FuncName:   Set3InputCtr
-ParamType:     InputControlBase   InputControlBase   InputControlBase
-
-
-Class:   FightObject
-FuncName:   Equals
-ParamType:     System.Object
-
-
-Class:   FightObject
-FuncName:  Static  Equals1
-ParamType:     System.Object   System.Object
-
-
-Class:   FightObject
-FuncName:   GetHashCode
-ParamType:  NULL
-
-
-Class:   FightObject
-FuncName:   GetType
-ParamType:  NULL
-
-
-Class:   FightObject
-FuncName:   ToString
-ParamType:  NULL
-
-
-Class:   FightObject
-FuncName:  Static  ReferenceEquals
-ParamType:     System.Object   System.Object
-
-
-================================
-AnimationCallback
-
-Class:   AnimationCallback
-FuncName:   get_CurState
-ParamType:  NULL
-
-
-Class:   AnimationCallback
-FuncName:   get_LogicState
-ParamType:  NULL
-
-
-Class:   AnimationCallback
-FuncName:   get_AnimState
-ParamType:  NULL
-
-
-Class:   AnimationCallback
-FuncName:   add_OnAttachTargetNodeEvent
-ParamType:     AnimationCallback+AttachNodeHandler
-
-
-Class:   AnimationCallback
-FuncName:   remove_OnAttachTargetNodeEvent
-ParamType:     AnimationCallback+AttachNodeHandler
-
-
-Class:   AnimationCallback
-FuncName:   get_Blader
-ParamType:  NULL
-
-
-Class:   AnimationCallback
-FuncName:   DoStart
-ParamType:  NULL
-
-
-Class:   AnimationCallback
-FuncName:   ResetState
-ParamType:  NULL
-
-
-Class:   AnimationCallback
-FuncName:   ChangeStateMachineData
-ParamType:     SimpleStateMachineData
-
-
-Class:   AnimationCallback
-FuncName:   OnBroadCastMsg
-ParamType:     InputData
-
-
-Class:   AnimationCallback
-FuncName:   DoUpdate
-ParamType:  NULL
-
-
-Class:   AnimationCallback
-FuncName:   DoEnd
-ParamType:  NULL
-
-
-Class:   AnimationCallback
-FuncName:   LoadRenderNode
-ParamType:     System.Int32   System.String
-
-
-Class:   AnimationCallback
-FuncName:   DestroyRenderNodeContent
-ParamType:     System.Int32
-
-
-Class:   AnimationCallback
-FuncName:   AttachModelAssetEffect
-ParamType:     System.String
-
-
-Class:   AnimationCallback
-FuncName:   AttachModelAsset
-ParamType:     System.String   System.String
-
-
-Class:   AnimationCallback
-FuncName:   AttachEffect
-ParamType:     System.String
-
-
-Class:   AnimationCallback
-FuncName:   StopModelAssetEffect
-ParamType:     System.String
-
-
-Class:   AnimationCallback
-FuncName:   ClearModelAssetEffect
-ParamType:  NULL
-
-
-Class:   AnimationCallback
-FuncName:   SetRenderNodeActive
-ParamType:     System.Int32   System.Boolean
-
-
-Class:   AnimationCallback
-FuncName:   AttachTargetNode
-ParamType:     System.Int32   System.String
-
-
-Class:   AnimationCallback
-FuncName:   DetachNode
-ParamType:     UnityEngine.GameObject
-
-
-Class:   AnimationCallback
-FuncName:   GetBodyBoneTransform
-ParamType:     System.Int32
-
-
-Class:   AnimationCallback
-FuncName:   DrawAttributeInfo
-ParamType:     AttributeControl
-
-
-Class:   AnimationCallback
-FuncName:   DrawLabel
-ParamType:     System.String   System.Object   System.String
-
-
-Class:   AnimationCallback
-FuncName:   MakeTex
-ParamType:     System.Int32   System.Int32   UnityEngine.Color
-
-
-Class:   AnimationCallback
-FuncName:   OnBecameVisible
-ParamType:  NULL
-
-
-Class:   AnimationCallback
-FuncName:   OnBecameInvisible
-ParamType:  NULL
-
-
-Class:   AnimationCallback
-FuncName:   SetNodeActive
-ParamType:     SimpleAnimationEvent
-
-
-Class:   AnimationCallback
-FuncName:   LockCamera
-ParamType:     System.Boolean
-
-
-Class:   AnimationCallback
-FuncName:   SetCastShadow
-ParamType:     System.Boolean
-
-
-Class:   AnimationCallback
-FuncName:   FindTransformByName
-ParamType:     UnityEngine.GameObject   System.String
-
-
-Class:   AnimationCallback
-FuncName:   GetPrefabNodeList
-ParamType:  NULL
-
-
-Class:   AnimationCallback
-FuncName:   ShowOrHide
-ParamType:     System.Boolean
-
-
-Class:   AnimationCallback
-FuncName:   SetPrefabNodeActive
-ParamType:     System.Boolean
-
-
-Class:   AnimationCallback
-FuncName:   SetModelAssetEffectActive
-ParamType:     System.Boolean
-
-
-Class:   AnimationCallback
-FuncName:   ChangeLightTexture
-ParamType:     System.String
-
-
-Class:   AnimationCallback
-FuncName:   ReLoadSkillEffect
-ParamType:  NULL
-
-
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   Invoke
 ParamType:     System.String   System.Single
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   InvokeRepeating
 ParamType:     System.String   System.Single   System.Single
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   CancelInvoke
 ParamType:  NULL
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   CancelInvoke1
 ParamType:     System.String
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   IsInvoking
 ParamType:     System.String
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   IsInvoking1
 ParamType:  NULL
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   StartCoroutine
 ParamType:     System.Collections.IEnumerator
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   StartCoroutine_Auto
 ParamType:     System.Collections.IEnumerator
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   StartCoroutine1
 ParamType:     System.String   System.Object
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   StartCoroutine2
 ParamType:     System.String
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   StopCoroutine
 ParamType:     System.String
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   StopCoroutine1
 ParamType:     System.Collections.IEnumerator
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   StopCoroutine2
 ParamType:     UnityEngine.Coroutine
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   StopAllCoroutines
 ParamType:  NULL
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:  Static  print
 ParamType:     System.Object
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   get_useGUILayout
 ParamType:  NULL
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   set_useGUILayout
 ParamType:     System.Boolean
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   get_enabled
 ParamType:  NULL
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   set_enabled
 ParamType:     System.Boolean
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   get_isActiveAndEnabled
 ParamType:  NULL
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   get_transform
 ParamType:  NULL
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   get_gameObject
 ParamType:  NULL
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   GetComponent
 ParamType:     System.Type
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   GetComponent1
 ParamType:     System.String
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   GetComponentInChildren
 ParamType:     System.Type   System.Boolean
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   GetComponentInChildren1
 ParamType:     System.Type
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   GetComponentsInChildren
 ParamType:     System.Type
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   GetComponentsInChildren1
 ParamType:     System.Type   System.Boolean
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   GetComponentInParent
 ParamType:     System.Type
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   GetComponentsInParent
 ParamType:     System.Type
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   GetComponentsInParent1
 ParamType:     System.Type   System.Boolean
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   GetComponents
 ParamType:     System.Type
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   GetComponents1
 ParamType:     System.Type   System.Collections.Generic.List`1[UnityEngine.Component]
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   get_tag
 ParamType:  NULL
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   set_tag
 ParamType:     System.String
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   CompareTag
 ParamType:     System.String
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   SendMessageUpwards
 ParamType:     System.String   System.Object   UnityEngine.SendMessageOptions
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   SendMessageUpwards1
 ParamType:     System.String   System.Object
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   SendMessageUpwards2
 ParamType:     System.String
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   SendMessageUpwards3
 ParamType:     System.String   UnityEngine.SendMessageOptions
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   SendMessage
 ParamType:     System.String   System.Object   UnityEngine.SendMessageOptions
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   SendMessage1
 ParamType:     System.String   System.Object
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   SendMessage2
 ParamType:     System.String
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   SendMessage3
 ParamType:     System.String   UnityEngine.SendMessageOptions
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   BroadcastMessage
 ParamType:     System.String   System.Object   UnityEngine.SendMessageOptions
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   BroadcastMessage1
 ParamType:     System.String   System.Object
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   BroadcastMessage2
 ParamType:     System.String
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   BroadcastMessage3
 ParamType:     System.String   UnityEngine.SendMessageOptions
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   get_rigidbody
 ParamType:  NULL
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   get_rigidbody2D
 ParamType:  NULL
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   get_camera
 ParamType:  NULL
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   get_light
 ParamType:  NULL
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   get_animation
 ParamType:  NULL
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   get_constantForce
 ParamType:  NULL
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   get_renderer
 ParamType:  NULL
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   get_audio
 ParamType:  NULL
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   get_guiText
 ParamType:  NULL
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   get_networkView
 ParamType:  NULL
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   get_guiElement
 ParamType:  NULL
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   get_guiTexture
 ParamType:  NULL
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   get_collider
 ParamType:  NULL
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   get_collider2D
 ParamType:  NULL
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   get_hingeJoint
 ParamType:  NULL
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   get_particleEmitter
 ParamType:  NULL
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   get_particleSystem
 ParamType:  NULL
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:  Static  Destroy
 ParamType:     UnityEngine.Object   System.Single
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:  Static  Destroy1
 ParamType:     UnityEngine.Object
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:  Static  DestroyImmediate
 ParamType:     UnityEngine.Object   System.Boolean
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:  Static  DestroyImmediate1
 ParamType:     UnityEngine.Object
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:  Static  FindObjectsOfType
 ParamType:     System.Type
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   get_name
 ParamType:  NULL
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   set_name
 ParamType:     System.String
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:  Static  DontDestroyOnLoad
 ParamType:     UnityEngine.Object
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   get_hideFlags
 ParamType:  NULL
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   set_hideFlags
 ParamType:     UnityEngine.HideFlags
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:  Static  DestroyObject
 ParamType:     UnityEngine.Object   System.Single
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:  Static  DestroyObject1
 ParamType:     UnityEngine.Object
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:  Static  FindSceneObjectsOfType
 ParamType:     System.Type
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:  Static  FindObjectsOfTypeIncludingAssets
 ParamType:     System.Type
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:  Static  FindObjectsOfTypeAll
 ParamType:     System.Type
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   ToString
 ParamType:  NULL
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   Equals
 ParamType:     System.Object
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   GetHashCode
 ParamType:  NULL
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   GetInstanceID
 ParamType:  NULL
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:  Static  Instantiate
 ParamType:     UnityEngine.Object   UnityEngine.Vector3   UnityEngine.Quaternion
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:  Static  Instantiate1
 ParamType:     UnityEngine.Object
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:  Static  FindObjectOfType
 ParamType:     System.Type
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:  Static  op_Implicit
 ParamType:     UnityEngine.Object
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:  Static  op_Equality
 ParamType:     UnityEngine.Object   UnityEngine.Object
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:  Static  op_Inequality
 ParamType:     UnityEngine.Object   UnityEngine.Object
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:  Static  Equals1
 ParamType:     System.Object   System.Object
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:   GetType
 ParamType:  NULL
 
 
-Class:   AnimationCallback
+Class:   UILocalAnchor
 FuncName:  Static  ReferenceEquals
 ParamType:     System.Object   System.Object
 
 
-================================
-SimpleAnimator
-
-Class:   SimpleAnimator
-FuncName:   get_Pause
-ParamType:  NULL
-
-
-Class:   SimpleAnimator
-FuncName:   set_Pause
-ParamType:     System.Boolean
-
-
-Class:   SimpleAnimator
-FuncName:   add_OnStateChangeDel
-ParamType:     SimpleAnimator+DelegateOnStateChange
-
-
-Class:   SimpleAnimator
-FuncName:   remove_OnStateChangeDel
-ParamType:     SimpleAnimator+DelegateOnStateChange
-
-
-Class:   SimpleAnimator
-FuncName:   add_OnAnimatorMoveDel
-ParamType:     SimpleAnimator+DelegateOnAnimatorMove
-
-
-Class:   SimpleAnimator
-FuncName:   remove_OnAnimatorMoveDel
-ParamType:     SimpleAnimator+DelegateOnAnimatorMove
-
-
-Class:   SimpleAnimator
-FuncName:   add_OnEventFire
-ParamType:     SimpleAnimator+DelegateOnEventFire
-
-
-Class:   SimpleAnimator
-FuncName:   remove_OnEventFire
-ParamType:     SimpleAnimator+DelegateOnEventFire
-
-
-Class:   SimpleAnimator
-FuncName:   add_OnExitTimeSatisfied
-ParamType:     SimpleAnimator+DelegateOnExitTimeSatisfied
-
-
-Class:   SimpleAnimator
-FuncName:   remove_OnExitTimeSatisfied
-ParamType:     SimpleAnimator+DelegateOnExitTimeSatisfied
-
-
-Class:   SimpleAnimator
-FuncName:   add_OnTransition
-ParamType:     SimpleAnimator+DelegetOnTransition
-
-
-Class:   SimpleAnimator
-FuncName:   remove_OnTransition
-ParamType:     SimpleAnimator+DelegetOnTransition
-
-
-Class:   SimpleAnimator
-FuncName:   add_OnEndTransition
-ParamType:     SimpleAnimator+DelegetOnEndTransition
-
-
-Class:   SimpleAnimator
-FuncName:   remove_OnEndTransition
-ParamType:     SimpleAnimator+DelegetOnEndTransition
-
-
-Class:   SimpleAnimator
-FuncName:   Init
-ParamType:     UnityEngine.Animation   UnityEngine.Transform   UnityEngine.Transform
-
-
-Class:   SimpleAnimator
-FuncName:   LoadAnimationClip
-ParamType:  NULL
-
-
-Class:   SimpleAnimator
-FuncName:   set_speed
-ParamType:     System.Single
-
-
-Class:   SimpleAnimator
-FuncName:   get_speed
-ParamType:  NULL
-
-
-Class:   SimpleAnimator
-FuncName:   AddNewState
-ParamType:     SimpleState
-
-
-Class:   SimpleAnimator
-FuncName:   AddNewState1
-ParamType:     UnityEngine.Vector2
-
-
-Class:   SimpleAnimator
-FuncName:   AddNewRandomClipState
-ParamType:     UnityEngine.Vector2
-
-
-Class:   SimpleAnimator
-FuncName:   DeleteState
-ParamType:     SimpleState
-
-
-Class:   SimpleAnimator
-FuncName:   GetState
-ParamType:     System.String
-
-
-Class:   SimpleAnimator
-FuncName:   GetState1
-ParamType:     System.Int32
-
-
-Class:   SimpleAnimator
-FuncName:   GetStateByHash
-ParamType:     System.Int32   System.Boolean
-
-
-Class:   SimpleAnimator
-FuncName:   ContainStateName
-ParamType:     System.String
-
-
-Class:   SimpleAnimator
-FuncName:   AddTransition
-ParamType:     SimpleState   SimpleState
-
-
-Class:   SimpleAnimator
-FuncName:   ChangeParameterName
-ParamType:     System.String   System.String
-
-
-Class:   SimpleAnimator
-FuncName:   RemoveParameter
-ParamType:     System.Int32
-
-
-Class:   SimpleAnimator
-FuncName:   BuildParameterList
-ParamType:  NULL
-
-
-Class:   SimpleAnimator
-FuncName:   GetNewTriggerName
-ParamType:  NULL
-
-
-Class:   SimpleAnimator
-FuncName:   GetNewBoolName
-ParamType:  NULL
-
-
-Class:   SimpleAnimator
-FuncName:   GetNewFloatName
-ParamType:  NULL
-
-
-Class:   SimpleAnimator
-FuncName:   GetNewIntName
-ParamType:  NULL
-
-
-Class:   SimpleAnimator
-FuncName:   AddBoolParameter
-ParamType:     System.String
-
-
-Class:   SimpleAnimator
-FuncName:   RemoveBoolParameter
-ParamType:     System.String
-
-
-Class:   SimpleAnimator
-FuncName:   AddTriggerParameter
-ParamType:     System.String
-
-
-Class:   SimpleAnimator
-FuncName:   RemoveTriggerParameter
-ParamType:     System.String
-
-
-Class:   SimpleAnimator
-FuncName:   AddIntParameter
-ParamType:     System.String   System.Int32
-
-
-Class:   SimpleAnimator
-FuncName:   RemoveIntParameter
-ParamType:     System.String
-
-
-Class:   SimpleAnimator
-FuncName:   AddFloatParameter
-ParamType:     System.String   System.Single
-
-
-Class:   SimpleAnimator
-FuncName:   RemoveFloatParameter
-ParamType:     System.String
-
-
-Class:   SimpleAnimator
-FuncName:   SetTrigger
-ParamType:     System.String
-
-
-Class:   SimpleAnimator
-FuncName:   SetBool
-ParamType:     System.String   System.Boolean   System.Boolean
-
-
-Class:   SimpleAnimator
-FuncName:   SetFloat
-ParamType:     System.String   System.Single
-
-
-Class:   SimpleAnimator
-FuncName:   SetInt
-ParamType:     System.String   System.Int32
-
-
-Class:   SimpleAnimator
-FuncName:   CheckNeedToChangeState
-ParamType:     System.String
-
-
-Class:   SimpleAnimator
-FuncName:   GetParameterIndex
-ParamType:     System.String
-
-
-Class:   SimpleAnimator
-FuncName:   InLogicState
-ParamType:     ELogicState
-
-
-Class:   SimpleAnimator
-FuncName:   Update
-ParamType:  NULL
-
-
-Class:   SimpleAnimator
-FuncName:   SampleOnce
-ParamType:  NULL
-
-
-Class:   SimpleAnimator
-FuncName:   EnterState
-ParamType:     SimpleState
-
-
-Class:   SimpleAnimator
-FuncName:   CrossFade
-ParamType:     SimpleState   SimpleState   System.Single
-
-
-Class:   SimpleAnimator
-FuncName:   ChangeState
-ParamType:     SimpleTransition
-
-
-Class:   SimpleAnimator
-FuncName:   EnterStateByName
-ParamType:     System.String
-
-
-Class:   SimpleAnimator
-FuncName:   EnterStateByHash
-ParamType:     System.Int32
-
-
-Class:   SimpleAnimator
-FuncName:   EnterDefaultState
-ParamType:     System.Single
-
-
-Class:   SimpleAnimator
-FuncName:   GetSimpleState
-ParamType:     System.String
-
-
-Class:   SimpleAnimator
-FuncName:   Equals
-ParamType:     System.Object
-
-
-Class:   SimpleAnimator
-FuncName:  Static  Equals1
-ParamType:     System.Object   System.Object
-
-
-Class:   SimpleAnimator
-FuncName:   GetHashCode
-ParamType:  NULL
-
-
-Class:   SimpleAnimator
-FuncName:   GetType
-ParamType:  NULL
-
-
-Class:   SimpleAnimator
-FuncName:   ToString
-ParamType:  NULL
-
-
-Class:   SimpleAnimator
-FuncName:  Static  ReferenceEquals
-ParamType:     System.Object   System.Object
-
-
-================================
-MoveControl
-
-Class:   MoveControl
-FuncName:   add_on_pos_change_
-ParamType:     MoveControl+EventPosWillChange
-
-
-Class:   MoveControl
-FuncName:   remove_on_pos_change_
-ParamType:     MoveControl+EventPosWillChange
-
-
-Class:   MoveControl
-FuncName:   get_MoveDirectX
-ParamType:  NULL
-
-
-Class:   MoveControl
-FuncName:   get_SpawnPos
-ParamType:  NULL
-
-
-Class:   MoveControl
-FuncName:   DoStart
-ParamType:  NULL
-
-
-Class:   MoveControl
-FuncName:   DoEnd
-ParamType:  NULL
-
-
-Class:   MoveControl
-FuncName:   DoUpdate
-ParamType:  NULL
-
-
-Class:   MoveControl
-FuncName:   DisableMove
-ParamType:     EMoveTrigger   ECmdFrom
-
-
-Class:   MoveControl
-FuncName:   MoveImmediately
-ParamType:     System.Single   System.Single
+  System.Single
 
 
 Class:   MoveControl

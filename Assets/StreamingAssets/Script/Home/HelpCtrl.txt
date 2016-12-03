@@ -1,8 +1,8 @@
 HelpCtrl = {}
 
 function HelpCtrl:Start( )
-    local mt=TextureMgr.get_Instance():LoadTexture("Home/help", true)
-    self.Texture:set_material(mt)
+    --local mt=TextureMgr.get_Instance():LoadTexture("Home/help", true)
+    --self.Texture:set_material(mt)
 
     self.Text:set_text(Text.HelpContent)
 end

@@ -8,7 +8,9 @@ function RoleInfoCtr:OnDestroy( )
 
 end
 
-function RoleInfoCtr:Init(name, sex, id, ip, card)
+function RoleInfoCtr:Init(name, sex, id, ip, card, imageUrl)
+    LuaUIViewCtr.FlushPortraitInfo("Home/homeHeadCusPic", imageUrl, self.Icon)
+
     self.Name:set_text(name)
 
     if sex == ESexType.Male then

@@ -9,6 +9,8 @@ function TableHead:OnDestroy( )
 end
 
 function TableHead:Init(info)
+    self.roleId = info.roleid
+
     LuaUIViewCtr.FlushPortraitInfo("Home/homeHeadCusPic", info.imageurl, self.Icon)
 
     self.Name:set_text(info.rolename)
@@ -47,4 +49,14 @@ function TableHead:PlayVoiceFinish()
         self.PlayTimer = nil
     end
     self.Speak:set_enabled(false)
+end
+
+function TableHead:Icon_OnClick()
+    if self.roleId == Client.RoleInfo.RoleID then
+        local ref = LuaUIViewCtr.OpenUIHasBg("CommonUI/RoleInfoUI")
+        ref.Init(ref, Client.RoleInfo.RoleName, Client.RoleInfo.sex, Client.RoleInfo.RoleID, Client.RoleInfo.address, Client.RoleInfo.integral, Client.RoleInfo.imageurl)
+    else
+        ClientSendMsg.SendRoleBaseInfo(self.roleId)
+    end
+    --ref.Init(ref, data.name, data.sex, data.roleid, data.address, data.cardnum, data.imageurl)
 end

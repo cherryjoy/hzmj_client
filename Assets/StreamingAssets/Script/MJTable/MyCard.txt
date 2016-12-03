@@ -8,8 +8,9 @@ function MyCard:OnDestroy( )
     Client.TableClear = Client.TableClear - {self, MyCard.TableClear}
 end
 
-function MyCard:Init(card, index)
+function MyCard:Init(card, index, notClear)
     self.index = index
+    self.notClear = notClear
 
     local spriteName = MJTableCtrl.GetCardSprite(card)
     self.Sprite:set_spriteName(spriteName)
@@ -33,9 +34,13 @@ function MyCard:Card_OnClick()
 end
 
 function MyCard:Animation()
+    local parentPos = self.gameObject:get_transform():get_parent():get_localPosition()
+    local parentScale = self.gameObject:get_transform():get_parent():get_localScale()
+
     local pos = self.gameObject:get_transform():get_localPosition()
+    --self.TweenPos:Reset()
     self.TweenPos:from(LuaVector3.Create(pos:x(), pos:y(), pos:z()))
-    self.TweenPos:to(LuaVector3.Create(348, 150, 0))
+    self.TweenPos:to(LuaVector3.Create(-parentPos:x()/parentScale:x(), 150, 0))
     self.TweenPos:set_enabled(true)
 end
 
@@ -45,6 +50,8 @@ function MyCard:MyCard_TweenEnd()
 end
 
 function MyCard:TableClear()
-    self.gameObject:SetActive(false)
-    self.gameObject:Destroy1()
+    if not self.notClear then
+        self.gameObject:SetActive(false)
+        self.gameObject:Destroy1()
+    end
 end

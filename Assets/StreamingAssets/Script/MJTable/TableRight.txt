@@ -93,7 +93,7 @@ end
 
 function TableRight:LeftCardReposition()
     local pos = self.LeftCardGrid:get_transform():get_localPosition()
-    local posY = (self.LeftNum -1)*26 -160
+    local posY = (self.LeftNum -1)*26 -150
     self.LeftCardGrid:get_transform():set_localPosition(LuaVector3.Create(pos:x(), posY, pos:z()))
     self.LeftCardGrid:Reposition()
 end

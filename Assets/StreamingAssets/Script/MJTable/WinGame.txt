@@ -16,7 +16,7 @@ function WinGame:Init(roleId, count, cards)
         local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCard", self.Grid:get_gameObject())
         local card = cards[i]
         LuaDebug.Log("type: "..card.type_id..", code: "..card.code_id)
-        ref.Init(ref, cards[i], i)
+        ref.Init(ref, cards[i], i, true)
     end
 
     self.Grid:get_transform():set_localPosition(LuaVector3.Create(-30*(num - 1), 0, 0))

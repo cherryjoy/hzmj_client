@@ -110,11 +110,13 @@ function Client.ExitGame()
 end
 
 function Client.SeriousError(tips)
-    local prefab = LuaUIViewCtr.OpenUIHasBg("ToolsUI/MessageBox")
-    LuaMessageBox.SetDataTable(prefab, {Message = tips,
+    if Client.seriousErrorRef == nil then
+        Client.seriousErrorRef = LuaUIViewCtr.OpenUIHasBg("ToolsUI/MessageBox")
+        LuaMessageBox.SetDataTable(Client.seriousErrorRef, {Message = tips,
                                         ConfirmName = Text.LoginAgain ,ConfirmFunc = Client.LoginAgain,
                                         CancelName = Text.ExitGame ,CancelFunc = Client.ExitGame,
                                         ref=self})
+    end
 end
 
 function Client.OpenLoadingUI()

@@ -83,7 +83,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &162090
 GameObject:
   m_ObjectHideFlags: 1
@@ -128,7 +128,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 457872}
-  - 114: {fileID: 11404968}
+  - 114: {fileID: 11410026}
   m_Layer: 8
   m_Name: Background
   m_TagString: Untagged
@@ -214,7 +214,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 166448}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 322, y: 235, z: 0}
+  m_LocalPosition: {x: 245, y: 185, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -260,7 +260,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 125936}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -34, z: -1}
+  m_LocalPosition: {x: 0, y: 12, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -288,7 +288,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 197476}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -300, y: 189, z: 0}
+  m_LocalPosition: {x: -195, y: 95, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -317,7 +317,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 626, y: 380, z: 1}
+  m_Size: {x: 400, y: 200, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6534464
 BoxCollider:
@@ -343,7 +343,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 960, y: 640, z: 1}
   m_Center: {x: 0, y: 0, z: 1}
---- !u!114 &11404968
+--- !u!114 &11410026
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -351,19 +351,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 178534}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1019752268, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+  m_Script: {fileID: 345385021, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  changeFlag: 1
-  mMat: {fileID: 0}
+  changeFlag: -1
+  mMat: {fileID: 2100000, guid: 241c457ed1d7bb34da265e04ba211dd5, type: 2}
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 733
-  mHeight: 562
+  mWidth: 516
+  mHeight: 396
   mDepth: 0
   mIsHidePanel: 0
-  UVOffset: {x: 0, y: 0, z: 0, w: 0}
-  MaterialPath: 
+  mAtlas: {fileID: 11450336, guid: 93e6d2d88100e9749948507d1a27beac, type: 2}
+  mSpriteName: Z_tankuang_c
+  IsKeepOriSize: 0
 --- !u!114 &11418318
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -411,22 +412,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   changeFlag: -1
   mMat: {fileID: 0}
-  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mColor: {r: 0.54901963, g: 0.36078432, b: 0.16078432, a: 1}
   mPivot: 0
   mWidth: 20
   mHeight: 20
   mDepth: 2
   mIsHidePanel: 0
-  mText: 
-  mMaxLineWidth: 600
+  mText: "\u7EA2\u4E2D\u9EBB\u5C06\u73A9\u6CD5\uFF1A\n\u5148\u78B0\u4E86\u7684\u724C\uFF0C\u540E\u9762\u6709\u81EA\u5DF1\u6478\u5230\u4E00\u4E2A\u8BE5\u724C\uFF0C\u5219\u53EF\u4EE5\u9009\u62E9\u201C\u6760\u201D\uFF0C\uFF08\u516C\u6760\u5FC5\u987B\u7B2C\u4E00\u65F6\u95F4\u6760\uFF0C\u5219\u4E0D\u80FD\u518D\u6760\uFF09\u3002"
+  mMaxLineWidth: 380
   mEncoding: 1
   mMultiline: 1
   mPassword: 0
   mShowLastChar: 0
   mEffectStyle: 0
   mEffectColor: {r: 0, g: 0, b: 0, a: 1}
-  mTopColor: {r: 0.96862745, g: 0.76862746, b: 0.3647059, a: 1}
-  mBottomColor: {r: 0.96862745, g: 0.76862746, b: 0.3647059, a: 1}
+  mTopColor: {r: 1, g: 1, b: 1, a: 1}
+  mBottomColor: {r: 1, g: 1, b: 1, a: 1}
   mSpaceingY: 0
   mSpaceingX: 0
   mFontSize: 24
@@ -453,7 +454,7 @@ MonoBehaviour:
   mHeight: 34
   mDepth: 10
   mIsHidePanel: 0
-  mText: Text not Found!
+  mText: "\u73A9\u6CD5\u7B80\u4ECB"
   mMaxLineWidth: 0
   mEncoding: 1
   mMultiline: 1
@@ -486,7 +487,7 @@ MonoBehaviour:
   depthPass: 0
   mDebugInfo: 0
   mClipping: 3
-  mClipRange: {x: 0, y: 0, z: 626, w: 380}
+  mClipRange: {x: 0, y: 0, z: 400, w: 200}
   mClipSoftness: {x: 1, y: 1}
   mDepthFlag: 0
   mWorldToLocal:
@@ -497,7 +498,7 @@ MonoBehaviour:
     e10: 0
     e11: 320
     e12: 0
-    e13: 33.500008
+    e13: -12.499992
     e20: 0
     e21: 0
     e22: 320
@@ -571,7 +572,7 @@ MonoBehaviour:
   ScriptName: HelpCtrl
   lua_params:
   - Obj: {fileID: 178534}
-    regObj: {fileID: 11404968}
+    regObj: {fileID: 11410026}
     Name: Texture
     TypeIndex: 1
   - Obj: {fileID: 197476}

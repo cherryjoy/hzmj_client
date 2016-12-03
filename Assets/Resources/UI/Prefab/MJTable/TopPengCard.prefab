@@ -69,7 +69,7 @@ Transform:
   m_GameObject: {fileID: 161494}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: -1, z: 1}
+  m_LocalScale: {x: 0.8, y: -0.8, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 411640}
@@ -134,7 +134,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 39
   mHeight: 59
-  mDepth: 2
+  mDepth: 4
   mIsHidePanel: 0
   mAtlas: {fileID: 11410790, guid: 05dc6a2920cf0464d9fadc29033bf794, type: 2}
   mSpriteName: tileBase_meUp_0
@@ -156,7 +156,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 25
   mHeight: 37
-  mDepth: 3
+  mDepth: 5
   mIsHidePanel: 0
   mAtlas: {fileID: 11410790, guid: 05dc6a2920cf0464d9fadc29033bf794, type: 2}
   mSpriteName: tile_meUp_2

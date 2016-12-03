@@ -10,6 +10,7 @@ end
 
 function RoleResult:Init(result, info)
     self.LeftNum = 0
+    self.handeCard = {}
 
     --头像
     local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/TableHead",self.gameObject)
@@ -63,7 +64,8 @@ function RoleResult:Init(result, info)
     for i = 1, #sortedCards do
         local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCard", self.HandCardsGrid:get_gameObject())
         ref.gameObject:get_transform():set_localScale(LuaVector3.Create(0.53, 0.53, 1))
-        ref.Init(ref, sortedCards[i], i)
+        ref.Init(ref, sortedCards[i], i, true)
+        self.handeCard[i] = ref
     end
 
     self.HandCardsGrid:Reposition()
@@ -141,6 +143,7 @@ function RoleResult:SetLeftCard(card)
     local spriteName = MJTableCtrl.GetLeftCardSprite(card)
     ref.Card:set_spriteName(spriteName)
     ref.Card:MakePixelPerfectWithSizeInAtlas()
+    ref.notClear = true
 
     self.LeftNum = self.LeftNum + 1
 end
@@ -149,8 +152,19 @@ function RoleResult:SetCodeCards(cards)
     for i = 1, #cards do
         local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCard", self.CodeCardsGrid:get_gameObject())
         ref.gameObject:get_transform():set_localScale(LuaVector3.Create(0.53, 0.53, 1))
-        ref.Init(ref, cards[i], i)
+        ref.Init(ref, cards[i], i, true)
     end
 
     self.CodeCardsGrid:Reposition()
+end
+
+function RoleResult:SetWinCard(card)
+    LuaDebug.Log("SetWinCard, type: "..card.type_id..", id: "..card.code_id)
+    for i = 1, #(self.handeCard) do
+        local tempCard = self.handeCard[i].card
+        if tempCard.type_id == card.type_id and tempCard.code_id == card.code_id then
+                self.handeCard[i].Shinning:set_enabled(true)
+            break
+        end
+    end
 end

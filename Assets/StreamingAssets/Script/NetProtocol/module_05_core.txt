@@ -4741,19 +4741,33 @@ end
 function PBMsgRoleBaseInfoExReq.DeSerialize(obj)
 	local fieldCount = deserialize_int32()
 	local option,optionLength = deserialize_optional()
+	if(has_optional_flag(0,optionLength,option)) then
+		obj.roleid = deserialize_int32()
+	end
 	return obj
 end
 
 function PBMsgRoleBaseInfoExReq.Serialize(obj)
-	local fieldCount = 0
+	local fieldCount = 1
 	serialize_int32(fieldCount)
 	local flag = {}
+	if(obj.roleid ~= nil) then
+		flag[1] = true
+	else
+		flag[1] = false
+	end
 	serialize_optional(flag)
+	if(obj.roleid ~= nil) then
+		serialize_int32(obj.roleid)
+	end
 end
 
 function PBMsgRoleBaseInfoExReq.GetSize(obj)
 	local size = 0
-	size = size + 5
+	if (obj.roleid ~= nil) then
+		size = size + 4
+	end
+	size = size + 6
 	return size
 end
 
@@ -4789,11 +4803,17 @@ function PBMsgRoleBaseInfoExRes.DeSerialize(obj)
 	if(has_optional_flag(6,optionLength,option)) then
 		obj.address = deserialize_string()
 	end
+	if(has_optional_flag(7,optionLength,option)) then
+		obj.imageurl = deserialize_string()
+	end
+	if(has_optional_flag(8,optionLength,option)) then
+		obj.sex = deserialize_int32()
+	end
 	return obj
 end
 
 function PBMsgRoleBaseInfoExRes.Serialize(obj)
-	local fieldCount = 7
+	local fieldCount = 9
 	serialize_int32(fieldCount)
 	local flag = {}
 	if(obj.roleid ~= nil) then
@@ -4831,6 +4851,16 @@ function PBMsgRoleBaseInfoExRes.Serialize(obj)
 	else
 		flag[7] = false
 	end
+	if(obj.imageurl ~= nil) then
+		flag[8] = true
+	else
+		flag[8] = false
+	end
+	if(obj.sex ~= nil) then
+		flag[9] = true
+	else
+		flag[9] = false
+	end
 	serialize_optional(flag)
 	if(obj.roleid ~= nil) then
 		serialize_int32(obj.roleid)
@@ -4852,6 +4882,12 @@ function PBMsgRoleBaseInfoExRes.Serialize(obj)
 	end
 	if(obj.address ~= nil) then
 		serialize_string(obj.address)
+	end
+	if(obj.imageurl ~= nil) then
+		serialize_string(obj.imageurl)
+	end
+	if(obj.sex ~= nil) then
+		serialize_int32(obj.sex)
 	end
 end
 
@@ -4880,7 +4916,14 @@ function PBMsgRoleBaseInfoExRes.GetSize(obj)
 		local sizeStr = string.len(obj.address)
 		size = size + serialize_get_str_actual_size(sizeStr)
 	end
-	size = size + 6
+	if (obj.imageurl ~= nil) then
+		local sizeStr = string.len(obj.imageurl)
+		size = size + serialize_get_str_actual_size(sizeStr)
+	end
+	if (obj.sex ~= nil) then
+		size = size + 4
+	end
+	size = size + 7
 	return size
 end
 
