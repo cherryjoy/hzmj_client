@@ -1,7 +1,9 @@
+AccountManager
 AutoScreenScale
 FrameLayoutHelper
 FrameTitleLayoutHelper
 GameCoreUpdate
+GMWindow
 LocalizationLabelText
 LuaBehaviour
 LuaBehaviourUpdate
