@@ -1,11 +1,15 @@
 RoleInfoCtr = {}
 
 function RoleInfoCtr:Start( )
-
+    Client.TableClose = Client.TableClose + {self, RoleInfoCtr.TableClose}
 end
 
 function RoleInfoCtr:OnDestroy( )
+    Client.TableClose = Client.TableClose - {self, RoleInfoCtr.TableClose}
+end
 
+function RoleInfoCtr:TableClose()
+    self.gameObject:Destroy1()
 end
 
 function RoleInfoCtr:Init(name, sex, id, ip, card, imageUrl)

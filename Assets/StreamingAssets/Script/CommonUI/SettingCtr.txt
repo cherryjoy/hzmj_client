@@ -1,11 +1,11 @@
 SettingCtr = {}
 
 function SettingCtr:Start( )
-
+    Client.TableClose = Client.TableClose + {self, SettingCtr.TableClose}
 end
 
 function SettingCtr:OnDestroy( )
-
+    Client.TableClose = Client.TableClose - {self, SettingCtr.TableClose}
 end
 
 function SettingCtr:Init()
@@ -23,6 +23,10 @@ function SettingCtr:Init()
             end
         end
     end
+end
+
+function SettingCtr:TableClose()
+    self.gameObject:Destroy1()
 end
 
 function SettingCtr:Close_OnClick()

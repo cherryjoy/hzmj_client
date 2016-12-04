@@ -1,14 +1,17 @@
 HelpCtrl = {}
 
 function HelpCtrl:Start( )
-    --local mt=TextureMgr.get_Instance():LoadTexture("Home/help", true)
-    --self.Texture:set_material(mt)
+    Client.TableClose = Client.TableClose + {self, HelpCtrl.TableClose}
 
     self.Text:set_text(Text.HelpContent)
 end
 
 function HelpCtrl:OnDestroy( )
+    Client.TableClose = Client.TableClose - {self, HelpCtrl.TableClose}
+end
 
+function HelpCtrl:TableClose()
+    self.gameObject:Destroy1()
 end
 
 function HelpCtrl:Close_OnClick()
