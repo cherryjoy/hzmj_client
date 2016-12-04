@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 677666725
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 52217aaf84915b0e7f06127222f6c584
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c516f2a3b2b6b67ef759f6410a790acd
+HashAppended: 0
+ClassTypes:
+- Class: 83
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Music/UI/buttonClick_13.wav
+Dependencies: []
