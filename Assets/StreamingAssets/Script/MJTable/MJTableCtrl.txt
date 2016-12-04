@@ -198,7 +198,7 @@ function MJTableCtrl:InitRoleList(myDirect, roleList)
         end
 
         local roleInfo = roleList[index]
-        if roleInfo ~= nil then
+        if roleInfo ~= nil and roleInfo.roleid ~= 0 then
             self["Drect"..idx].SetHeadInfo(self["Drect"..idx], roleInfo, self.TowardCard)
             self["Drect"..idx].TableHead.gameObject:SetActive(true)
         else
