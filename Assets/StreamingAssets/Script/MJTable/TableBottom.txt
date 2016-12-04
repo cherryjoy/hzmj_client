@@ -460,19 +460,20 @@ function TableBottom:RemoveHandCard(card, numTotal)
 end
 
 function TableBottom:HandleTingCard(cards)
-    for i = 1, #(self.tingCard) do
-        self.tingCard[i].gameObject:SetActive(false)
-        self.tingCard[i].gameObject:Destroy1()
-    end
-
     if cards == nil then
         self.TingCard:SetActive(false)
+        for i = 1, #(self.tingCard) do
+            self.tingCard[i].gameObject:SetActive(false)
+        end
         return
     end
 
     local num = #cards
     if num == 0 then
         self.TingCard:SetActive(false)
+        for i = 1, #(self.tingCard) do
+            self.tingCard[i].gameObject:SetActive(false)
+        end
         return
     end
 
@@ -484,11 +485,21 @@ function TableBottom:HandleTingCard(cards)
 
     -- 生成牌
     for i = 1, num do
-        ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCard",self.TingCardGird:get_gameObject())
-        ref.gameObject:get_transform():set_localScale(LuaVector3.Create(0.46, 0.46, 1))
+        local ref = self.tingCard[i]
+        if ref == nil then
+            ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCard",self.TingCardGird:get_gameObject())
+            ref.gameObject:get_transform():set_localScale(LuaVector3.Create(0.46, 0.46, 1))
+        end
         self.tingCard[i] = ref
         ref.Init(ref, cards[i], i)
         ref.gameObject:SetActive(true)
+    end
+
+    local tingCardNum = #(self.tingCard)
+    if tingCardNum > num then
+        for i = num + 1, tingCardNum do
+            self.tingCard[i].gameObject:SetActive(false)
+        end
     end
 
     self.TingCardGird:Reposition()
