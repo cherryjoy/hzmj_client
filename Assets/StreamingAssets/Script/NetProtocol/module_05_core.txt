@@ -991,7 +991,7 @@ function PBMsgRoleInfoRes.DeSerialize(obj)
 		obj.openid = deserialize_string()
 	end
 	if(has_optional_flag(9,optionLength,option)) then
-		obj.sex = deserialize_string()
+		obj.sex = deserialize_int32()
 	end
 	if(has_optional_flag(10,optionLength,option)) then
 		obj.province = deserialize_string()
@@ -1131,7 +1131,7 @@ function PBMsgRoleInfoRes.Serialize(obj)
 		serialize_string(obj.openid)
 	end
 	if(obj.sex ~= nil) then
-		serialize_string(obj.sex)
+		serialize_int32(obj.sex)
 	end
 	if(obj.province ~= nil) then
 		serialize_string(obj.province)
@@ -1188,8 +1188,7 @@ function PBMsgRoleInfoRes.GetSize(obj)
 		size = size + serialize_get_str_actual_size(sizeStr)
 	end
 	if (obj.sex ~= nil) then
-		local sizeStr = string.len(obj.sex)
-		size = size + serialize_get_str_actual_size(sizeStr)
+		size = size + 4
 	end
 	if (obj.province ~= nil) then
 		local sizeStr = string.len(obj.province)
@@ -4783,31 +4782,31 @@ function PBMsgRoleBaseInfoExRes.DeSerialize(obj)
 	local fieldCount = deserialize_int32()
 	local option,optionLength = deserialize_optional()
 	if(has_optional_flag(0,optionLength,option)) then
-		obj.roleid = deserialize_int32()
-	end
-	if(has_optional_flag(1,optionLength,option)) then
-		obj.name = deserialize_string()
-	end
-	if(has_optional_flag(2,optionLength,option)) then
-		obj.cardnum = deserialize_int32()
-	end
-	if(has_optional_flag(3,optionLength,option)) then
-		obj.roundnum = deserialize_int32()
-	end
-	if(has_optional_flag(4,optionLength,option)) then
-		obj.roundwin = deserialize_int32()
-	end
-	if(has_optional_flag(5,optionLength,option)) then
-		obj.score = deserialize_int32()
-	end
-	if(has_optional_flag(6,optionLength,option)) then
-		obj.address = deserialize_string()
-	end
-	if(has_optional_flag(7,optionLength,option)) then
 		obj.imageurl = deserialize_string()
 	end
-	if(has_optional_flag(8,optionLength,option)) then
+	if(has_optional_flag(1,optionLength,option)) then
+		obj.address = deserialize_string()
+	end
+	if(has_optional_flag(2,optionLength,option)) then
 		obj.sex = deserialize_int32()
+	end
+	if(has_optional_flag(3,optionLength,option)) then
+		obj.cardnum = deserialize_int32()
+	end
+	if(has_optional_flag(4,optionLength,option)) then
+		obj.roleid = deserialize_int32()
+	end
+	if(has_optional_flag(5,optionLength,option)) then
+		obj.name = deserialize_string()
+	end
+	if(has_optional_flag(6,optionLength,option)) then
+		obj.roundnum = deserialize_int32()
+	end
+	if(has_optional_flag(7,optionLength,option)) then
+		obj.roundwin = deserialize_int32()
+	end
+	if(has_optional_flag(8,optionLength,option)) then
+		obj.score = deserialize_int32()
 	end
 	return obj
 end
@@ -4816,60 +4815,69 @@ function PBMsgRoleBaseInfoExRes.Serialize(obj)
 	local fieldCount = 9
 	serialize_int32(fieldCount)
 	local flag = {}
-	if(obj.roleid ~= nil) then
+	if(obj.imageurl ~= nil) then
 		flag[1] = true
 	else
 		flag[1] = false
 	end
-	if(obj.name ~= nil) then
+	if(obj.address ~= nil) then
 		flag[2] = true
 	else
 		flag[2] = false
 	end
-	if(obj.cardnum ~= nil) then
+	if(obj.sex ~= nil) then
 		flag[3] = true
 	else
 		flag[3] = false
 	end
-	if(obj.roundnum ~= nil) then
+	if(obj.cardnum ~= nil) then
 		flag[4] = true
 	else
 		flag[4] = false
 	end
-	if(obj.roundwin ~= nil) then
+	if(obj.roleid ~= nil) then
 		flag[5] = true
 	else
 		flag[5] = false
 	end
-	if(obj.score ~= nil) then
+	if(obj.name ~= nil) then
 		flag[6] = true
 	else
 		flag[6] = false
 	end
-	if(obj.address ~= nil) then
+	if(obj.roundnum ~= nil) then
 		flag[7] = true
 	else
 		flag[7] = false
 	end
-	if(obj.imageurl ~= nil) then
+	if(obj.roundwin ~= nil) then
 		flag[8] = true
 	else
 		flag[8] = false
 	end
-	if(obj.sex ~= nil) then
+	if(obj.score ~= nil) then
 		flag[9] = true
 	else
 		flag[9] = false
 	end
 	serialize_optional(flag)
+	if(obj.imageurl ~= nil) then
+		serialize_string(obj.imageurl)
+	end
+	if(obj.address ~= nil) then
+		serialize_string(obj.address)
+	end
+	if(obj.sex ~= nil) then
+		serialize_int32(obj.sex)
+	end
+	if(obj.cardnum ~= nil) then
+		serialize_int32(obj.cardnum)
+	end
 	if(obj.roleid ~= nil) then
 		serialize_int32(obj.roleid)
 	end
 	if(obj.name ~= nil) then
 		serialize_string(obj.name)
-	end
-	if(obj.cardnum ~= nil) then
-		serialize_int32(obj.cardnum)
 	end
 	if(obj.roundnum ~= nil) then
 		serialize_int32(obj.roundnum)
@@ -4880,28 +4888,30 @@ function PBMsgRoleBaseInfoExRes.Serialize(obj)
 	if(obj.score ~= nil) then
 		serialize_int32(obj.score)
 	end
-	if(obj.address ~= nil) then
-		serialize_string(obj.address)
-	end
-	if(obj.imageurl ~= nil) then
-		serialize_string(obj.imageurl)
-	end
-	if(obj.sex ~= nil) then
-		serialize_int32(obj.sex)
-	end
 end
 
 function PBMsgRoleBaseInfoExRes.GetSize(obj)
 	local size = 0
+	if (obj.imageurl ~= nil) then
+		local sizeStr = string.len(obj.imageurl)
+		size = size + serialize_get_str_actual_size(sizeStr)
+	end
+	if (obj.address ~= nil) then
+		local sizeStr = string.len(obj.address)
+		size = size + serialize_get_str_actual_size(sizeStr)
+	end
+	if (obj.sex ~= nil) then
+		size = size + 4
+	end
+	if (obj.cardnum ~= nil) then
+		size = size + 4
+	end
 	if (obj.roleid ~= nil) then
 		size = size + 4
 	end
 	if (obj.name ~= nil) then
 		local sizeStr = string.len(obj.name)
 		size = size + serialize_get_str_actual_size(sizeStr)
-	end
-	if (obj.cardnum ~= nil) then
-		size = size + 4
 	end
 	if (obj.roundnum ~= nil) then
 		size = size + 4
@@ -4910,17 +4920,6 @@ function PBMsgRoleBaseInfoExRes.GetSize(obj)
 		size = size + 4
 	end
 	if (obj.score ~= nil) then
-		size = size + 4
-	end
-	if (obj.address ~= nil) then
-		local sizeStr = string.len(obj.address)
-		size = size + serialize_get_str_actual_size(sizeStr)
-	end
-	if (obj.imageurl ~= nil) then
-		local sizeStr = string.len(obj.imageurl)
-		size = size + serialize_get_str_actual_size(sizeStr)
-	end
-	if (obj.sex ~= nil) then
 		size = size + 4
 	end
 	size = size + 7

@@ -12,8 +12,16 @@ function SettingCtr:Init()
     self.Music:rawValue(PlayerPrefsEx.GetFloat("bgmValue"))
     self.Voice:rawValue(PlayerPrefsEx.GetFloat("ggmValue"))
 
-    if Client.m_CurrentState == EClientState.E_CS_Table then
-        self.DeleteRoom:SetActive(true)
+    if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil then
+        if Client.m_CurrentState == EClientState.E_CS_Table then
+            self.DeleteRoom:SetActive(true)
+        elseif Client.m_CurrentState == EClientState.E_CS_TableReady then
+            if Client.RoleInfo.RoleID == LuaUIViewCtr.UIPanel["MJTableUI"].GetHostId(LuaUIViewCtr.UIPanel["MJTableUI"]) then
+                self.DeleteRoom:SetActive(true)
+            else
+                self.QuitRoom:SetActive(true)
+            end
+        end
     end
 end
 
@@ -52,5 +60,15 @@ function SettingCtr:DeleteRoom_OnClick()
                                         CancelName = Text.Cancel ,CancelFunc = nil,
                                         ref=self})
 
+    self.gameObject:Destroy1()
+end
+
+function SettingCtr:QuitRoom_OnClick()
+    if LuaUIViewCtr.UIPanel["MJTableUI"] == nil then
+        LuaDebug.LogError("QuitRoom_OnClick, but MJTableUI is nil")
+        return
+    end
+
+    ClientSendMsg.SendGameQuitRoom(LuaUIViewCtr.UIPanel["MJTableUI"].roomId)
     self.gameObject:Destroy1()
 end

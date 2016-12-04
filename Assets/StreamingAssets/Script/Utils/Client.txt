@@ -27,6 +27,7 @@ EClientState={
     E_CS_Login = 0,
     E_CS_Hall=1,
     E_CS_Table=2,
+    E_CS_TableReady=3,
 }
 
 ----------------City init var-----------------------
@@ -46,9 +47,7 @@ function Client.ListenNetwork( state,ip,port )
             --Client.NetConnectFail()
         end
 
-        --if Client.m_CurrentState == EClientState.E_CS_Table then
-            Client.OpenNetLoadingUI()
-        --end
+        Client.OpenNetLoadingUI()
         Client.NetConnectFailed:Do()
     elseif state == EClientNetWorkState.NORMAL then
         Client.NetConnectSuccess:Do()
@@ -207,7 +206,8 @@ end
 
 function Client.FuncApplicationPause(isPause)
     -- 切回来时判断一下，如果网络没有连接则重连一下
-    if Client.m_CurrentState == EClientState.E_CS_Table or Client.m_CurrentState == EClientState.E_CS_Hall then
+    if Client.m_CurrentState == EClientState.E_CS_Table or Client.m_CurrentState == EClientState.E_CS_Hall
+        or Client.m_CurrentState == EClientState.E_CS_TableReady then
         --if not LuaNetwork.IsConnected() then
         if not isPause then
             Client.RetryConnectByLastIp()

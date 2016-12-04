@@ -30935,35 +30935,6 @@ FuncName:  Static  ReferenceEquals
 ParamType:     System.Object   System.Object
 
 
-Equals
-ParamType:     System.Object
-
-
-Class:   GameQualityChecker
-FuncName:  Static  Equals1
-ParamType:     System.Object   System.Object
-
-
-Class:   GameQualityChecker
-FuncName:   GetHashCode
-ParamType:  NULL
-
-
-Class:   GameQualityChecker
-FuncName:   GetType
-ParamType:  NULL
-
-
-Class:   GameQualityChecker
-FuncName:   ToString
-ParamType:  NULL
-
-
-Class:   GameQualityChecker
-FuncName:  Static  ReferenceEquals
-ParamType:     System.Object   System.Object
-
-
 ================================
 UILocalAnchor
 
@@ -31409,6 +31380,30 @@ ParamType:     UnityEngine.Object
 
 Class:   UILocalAnchor
 FuncName:  Static  op_Equality
+ParamType:     UnityEngine.Object   UnityEngine.Object
+
+
+Class:   UILocalAnchor
+FuncName:  Static  op_Inequality
+ParamType:     UnityEngine.Object   UnityEngine.Object
+
+
+Class:   UILocalAnchor
+FuncName:  Static  Equals1
+ParamType:     System.Object   System.Object
+
+
+Class:   UILocalAnchor
+FuncName:   GetType
+ParamType:  NULL
+
+
+Class:   UILocalAnchor
+FuncName:  Static  ReferenceEquals
+ParamType:     System.Object   System.Object
+
+
+Name:  Static  op_Equality
 ParamType:     UnityEngine.Object   UnityEngine.Object
 
 

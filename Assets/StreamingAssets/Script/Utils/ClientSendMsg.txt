@@ -295,3 +295,11 @@ function ClientSendMsg.SendRoomDeleteAgree(agree)
 	local buffer, length = LuaProto.serialize(data)
 	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_ROOM_DELETE_AGREE_REQ, buffer, length)
 end
+
+function ClientSendMsg.SendGameQuitRoom(roomId)
+	local data = PBMsgGameQuitRoomReq.Create()
+	data.room_pass = roomId
+
+	local buffer, length = LuaProto.serialize(data)
+	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_QUIT_ROOM_REQ, buffer, length)
+end

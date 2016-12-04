@@ -84,10 +84,14 @@ function GameResult:OK_OnClick()
 end
 
 function GameResult:Ready_OnClick()
+    if self.sendReady then
+        LuaDebug.LogError("sendReady, cannot send again")
+        return
+    end
+    
     --发送准备协议
     ClientSendMsg.SendReadyRoom()
-
-    --self.gameObject:Destroy1()
+    self.sendReady = true
 end
 
 function GameResult:Share_OnClick()

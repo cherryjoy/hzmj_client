@@ -140,10 +140,13 @@ end
 function TableLeft:SetHeadInfo(info, toward)
     self.toward = toward
     self.roleId = info.roleid
-    local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/TableHead",self.HeadInfo)
-    ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(-425, 50, 0))
-    ref.Init(ref, info)
-    self.TableHead = ref
+    if self.TableHead == nil then
+        local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/TableHead",self.HeadInfo)
+        ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(-425, 50, 0))
+        self.TableHead = ref
+    end
+
+    self.TableHead.Init(self.TableHead, info)
 end
 
 function TableLeft:HandleGetCard(card)

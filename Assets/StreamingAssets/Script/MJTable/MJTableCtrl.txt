@@ -43,7 +43,7 @@ function MJTableCtrl:Init(passwd, horse, beishu, rolelist)
     self.Direction:get_transform():set_localEulerAngles(LuaVector3.Create(0, 0, angle))
     self.TimerBack:set_spriteName(spriteName)
 
-    Client.m_CurrentState = EClientState.E_CS_Table
+    Client.m_CurrentState = EClientState.E_CS_TableReady
     Client.PingTime = LuaDateTime.Ticks_Now()
     Client.PingGlobalTimer = Timer.NewGlobalEvent(30,10*60*60*24,Client.CheckPing,false,nil)
 
@@ -69,9 +69,7 @@ function MJTableCtrl:EnterRoomSync(rolelist)
 end
 
 function MJTableCtrl:CardInfoSync(cardInfo)
-    -- 强行清一下桌面
-    Client.ResetToward:Do()
-    Client.TableClear:Do()
+    Client.m_CurrentState = EClientState.E_CS_Table
     LuaDebug.Log("leftnum: "..cardInfo.leftnum)
     Client.RoleInfo.RestCard = cardInfo.leftnum
     -- 关闭 邀请
@@ -201,9 +199,14 @@ function MJTableCtrl:InitRoleList(myDirect, roleList)
 
         local roleInfo = roleList[index]
         if roleInfo ~= nil then
-            if self["Drect"..idx].TableHead == nil then
-                self["Drect"..idx].SetHeadInfo(self["Drect"..idx], roleInfo, self.TowardCard)
+            self["Drect"..idx].SetHeadInfo(self["Drect"..idx], roleInfo, self.TowardCard)
+            self["Drect"..idx].TableHead.gameObject:SetActive(true)
+        else
+            if self["Drect"..idx].TableHead ~= nil then
+                self["Drect"..idx].TableHead.gameObject:SetActive(false)
             end
+
+            self["Drect"..idx].Ready:SetActive(false)
         end
 
         idx = idx + 1
@@ -573,8 +576,9 @@ function MJTableCtrl:Invite_OnClick()
 end
 
 function MJTableCtrl:HandleGameReenterStateSync(data)
-    LuaDebug.Log("state: "..data.state..", type_id: "..data.card.type_id..", code_id"..data.card.code_id..", roleId: "..tostring(data.roleid))
+    LuaDebug.Log("HandleGameReenterStateSync state: "..data.state)
     if data.state == enumCARD_ACTION_TYPE.CARD_ACTION_PLAY then
+        LuaDebug.Log("type_id: "..data.card.type_id..", code_id"..data.card.code_id..", roleId: "..tostring(data.roleid))
         self.CD = 0
         self.CountDown:set_text(tostring(self.CD))
         self.CountDown:set_enabled(true)
@@ -594,10 +598,12 @@ function MJTableCtrl:HandleGameReenterStateSync(data)
         --计时
         MJTableCtrl.CountDownStart(self, data.roleid)
 
-        --if data.roleid == Client.RoleInfo.RoleID then
+        if data.roleid == Client.RoleInfo.RoleID then
+            LuaDebug.Log("type_id: "..data.card.type_id..", code_id"..data.card.code_id..", roleId: "..tostring(data.roleid))
             MJTableCtrl.HandleGetCard(self, data.roleid, data.card)
-        --else
-        --end
+        else
+            MJTableCtrl.HandleGetCard(self, data.roleid, nil)
+        end
     elseif data.state == enumCARD_ACTION_TYPE.CARD_ACTION_PENG then
         --计时
         MJTableCtrl.CountDownStart(self, data.roleid)
@@ -685,7 +691,7 @@ end
 
 function MJTableCtrl:NetConnectSuccess()
     LuaDebug.Log("MJTableCtrl:NetConnectSuccess")
-    if Client.m_CurrentState ~= EClientState.E_CS_Table then
+    if Client.m_CurrentState ~= EClientState.E_CS_Table and Client.m_CurrentState ~= EClientState.E_CS_TableReady then
         return
     end
 
@@ -709,4 +715,13 @@ end
 function MJTableCtrl:Setting_OnClick()
     local ref = LuaUIViewCtr.OpenUIHasBg("CommonUI/SettingUI")
     ref.Init(ref)
+end
+
+function MJTableCtrl:GetHostId()
+    for i = 1, #(self.roleList) do
+        local info = self.roleList[i]
+        if info.host ~= 0 then
+            return info.roleid
+        end
+    end
 end
