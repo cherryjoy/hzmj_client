@@ -154,10 +154,10 @@ end
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_ROOM_ENTER_RES] = function(data,dataLength)
     local data = LuaProto.deserialize(PBMsgEnterRoomRes, data, dataLength)
     LuaDebug.Log("enter room: "..data.passwd)
+    Client.RoleInfo.Used = data.used
     if LuaUIViewCtr.UIPanel["MJTableUI"] == nil then
         local ref = LuaUIViewCtr.OpenUIHasBg("MJTable/MJTable")
         LuaUIViewCtr.UIPanel["MJTableUI"] = ref
-        Client.RoleInfo.Used = data.used
         Client.RoleInfo.Amount = data.amount
         Client.RoleInfo.RestCard = 112
         ClientSendMsg.SendReadyRoom()

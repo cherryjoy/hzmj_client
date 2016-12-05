@@ -75,6 +75,10 @@ function MJTableCtrl:CardInfoSync(cardInfo)
     -- 关闭 邀请
     self.Invite:SetActive(false)
 
+    -- 强行刷一下桌面
+   Client.ResetToward:Do()
+   Client.TableClear:Do()
+
     -- 同步自己的牌
     if cardInfo.owncards ~= nil then
         LuaDebug.Log("card num: "..#(cardInfo.owncards.handcard))
