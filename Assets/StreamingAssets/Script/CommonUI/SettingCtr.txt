@@ -57,9 +57,6 @@ function SettingCtr:DeleteRoom_OnClick()
         return
     end
 
-    local ref = LuaUIViewCtr.OpenUIHasBg("MJTable/DeleteRoomUI")
-    ref.Init(ref, Client.RoleInfo.RoleID)
-
     ClientSendMsg.SendRoomDeleteConfirm(LuaUIViewCtr.UIPanel["MJTableUI"].roomId)
     --[[
     local prefab = LuaUIViewCtr.OpenUIHasBg("ToolsUI/MessageBox")

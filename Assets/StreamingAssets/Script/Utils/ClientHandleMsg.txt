@@ -320,17 +320,18 @@ HandleFuncs[enumMSGID_MODULE_05.ID_ROOM_DELETE_CONFIRM_RES] = function(data, dat
     -- body
     local data = LuaProto.deserialize(PBMsgRoomDeleteConfirmRes, data, dataLength)
 
-    if data.roleid ~= Client.RoleInfo.RoleID then
-        local ref = LuaUIViewCtr.OpenUIHasBg("MJTable/DeleteRoomUI")
-        ref.Init(ref, data.roleid)
+    if LuaUIViewCtr.UIPanel["DeleteRoomUI"] == nil then
+        LuaUIViewCtr.UIPanel["DeleteRoomUI"] = LuaUIViewCtr.OpenUIHasBg("MJTable/DeleteRoomUI")
     end
+
+    LuaUIViewCtr.UIPanel["DeleteRoomUI"].Init(LuaUIViewCtr.UIPanel["DeleteRoomUI"], data.roleid)
 end
 
 HandleFuncs[enumMSGID_MODULE_05.ID_ROOM_DELETE_AGREE_RES] = function(data, dataLength)
     -- body
     local data = LuaProto.deserialize(PBMsgRoomDeleteAgreeRes, data, dataLength)
 
-    Client.DeleteRoomAgree:Do(data.roleid, data.agree)
+    Client.DeleteRoomAgree:Do(data.deletelist)
 end
 
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_QUIT_ROOM_RES] = function(data, dataLength)

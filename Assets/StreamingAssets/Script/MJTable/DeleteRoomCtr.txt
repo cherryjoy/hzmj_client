@@ -2,15 +2,19 @@ DeleteRoomCtr = {}
 
 function DeleteRoomCtr:Start( )
     Client.DeleteRoomAgree = Client.DeleteRoomAgree + {self, DeleteRoomCtr.AgreeState}
+    Client.TableClose = Client.TableClose + {self, DeleteRoomCtr.TableClose}
 end
 
 function DeleteRoomCtr:OnDestroy( )
     Client.DeleteRoomAgree = Client.DeleteRoomAgree - {self, DeleteRoomCtr.AgreeState}
+    Client.TableClose = Client.TableClose - {self, DeleteRoomCtr.TableClose}
 
     if self.timer ~= nil then
         Timer.RemoveEvent(self,self.timer)
         self.timer = nil
     end
+
+    LuaUIViewCtr.UIPanel["DeleteRoomUI"] = nil
 end
 
 function DeleteRoomCtr:Init(roleId)
@@ -19,13 +23,18 @@ function DeleteRoomCtr:Init(roleId)
         return
     end
 
+    if roleId == Client.RoleInfo.RoleID then
+        self.Agree:SetActive(false)
+        self.Refuse:SetActive(false)
+    end
+
     local name = tableRef.GetRoleName(tableRef, roleId)
     self.Title:set_text(string.format(Text.DeleteRoomTitle, name))
 
-    self.cd = 300
+    self.cd = 180
     self.TimeTips:set_text(string.format(Text.DeleteRoomCountDown, self.cd))
     if self.timer == nil then
-        self.timer = Timer.NewEvent(self,10,10*300,DeleteRoomCtr.DoCountDown, false, DeleteRoomCtr.DoCountDownFinish)
+        self.timer = Timer.NewEvent(self,10,10*180,DeleteRoomCtr.DoCountDown, false, DeleteRoomCtr.DoCountDownFinish)
     end
 
     -- 内容
@@ -39,7 +48,6 @@ function DeleteRoomCtr:Init(roleId)
 end
 
 function DeleteRoomCtr:Agree_OnClick()
-    LuaDebug.Log("Agree_OnClick")
     ClientSendMsg.SendRoomDeleteAgree(0)
 end
 
@@ -47,7 +55,7 @@ function DeleteRoomCtr:Refuse_OnClick()
     ClientSendMsg.SendRoomDeleteAgree(1)
 end
 
-function DeleteRoomCtr:AgreeState(roleId, result)
+function DeleteRoomCtr:AgreeState(deleteList)
     self.Agree:SetActive(false)
     self.Refuse:SetActive(false)
 
@@ -56,15 +64,19 @@ function DeleteRoomCtr:AgreeState(roleId, result)
         return
     end
 
-    for i = 1, #(tableRef.roleList) do
-        if tableRef.roleList[i].roleid == roleId then
-            if result == 0 then
-                self["Name"..i]:set_text(string.format(Text.DeleteRoomChoosedAgree, tableRef.roleList[i].rolename))
-            else
-                self["Name"..i]:set_text(string.format(Text.DeleteRoomChoose, tableRef.roleList[i].rolename))
-            end
+    for k = 1, #deleteList do
+        local roleId = deleteList[k].roleid
+        local result = deleteList[k].agree
+        for i = 1, #(tableRef.roleList) do
+            if tableRef.roleList[i].roleid == roleId then
+                if result == 0 then
+                    self["Name"..i]:set_text(string.format(Text.DeleteRoomChoosedAgree, tableRef.roleList[i].rolename))
+                else
+                    self["Name"..i]:set_text(string.format(Text.DeleteRoomChoose, tableRef.roleList[i].rolename))
+                end
 
-            break
+                break
+            end
         end
     end
 end
@@ -77,5 +89,9 @@ end
 function DeleteRoomCtr:DoCountDownFinish()
     -- 是否发送请求结算协议
 
+    self.gameObject:Destroy1()
+end
+
+function DeleteRoomCtr:TableClose()
     self.gameObject:Destroy1()
 end

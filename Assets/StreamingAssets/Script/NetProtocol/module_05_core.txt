@@ -5282,15 +5282,15 @@ function PBMsgRoomDeleteAgreeReq.GetSize(obj)
 	return size
 end
 
--- PBMsgRoomDeleteAgreeRes
-PBMsgRoomDeleteAgreeRes = {}
-PBMsgRoomDeleteAgreeRes.__index = PBMsgRoomDeleteAgreeRes
-function PBMsgRoomDeleteAgreeRes.Create()
-	local obj = setmetatable({},PBMsgRoomDeleteAgreeRes)
+-- PBDeleteAgree
+PBDeleteAgree = {}
+PBDeleteAgree.__index = PBDeleteAgree
+function PBDeleteAgree.Create()
+	local obj = setmetatable({},PBDeleteAgree)
 	return obj
 end
 
-function PBMsgRoomDeleteAgreeRes.DeSerialize(obj)
+function PBDeleteAgree.DeSerialize(obj)
 	local fieldCount = deserialize_int32()
 	local option,optionLength = deserialize_optional()
 	if(has_optional_flag(0,optionLength,option)) then
@@ -5302,7 +5302,7 @@ function PBMsgRoomDeleteAgreeRes.DeSerialize(obj)
 	return obj
 end
 
-function PBMsgRoomDeleteAgreeRes.Serialize(obj)
+function PBDeleteAgree.Serialize(obj)
 	local fieldCount = 2
 	serialize_int32(fieldCount)
 	local flag = {}
@@ -5325,7 +5325,7 @@ function PBMsgRoomDeleteAgreeRes.Serialize(obj)
 	end
 end
 
-function PBMsgRoomDeleteAgreeRes.GetSize(obj)
+function PBDeleteAgree.GetSize(obj)
 	local size = 0
 	if (obj.roleid ~= nil) then
 		size = size + 4
@@ -5334,6 +5334,68 @@ function PBMsgRoomDeleteAgreeRes.GetSize(obj)
 		size = size + 4
 	end
 	size = size + 6
+	return size
+end
+
+-- PBMsgRoomDeleteAgreeRes
+PBMsgRoomDeleteAgreeRes = {}
+PBMsgRoomDeleteAgreeRes.__index = PBMsgRoomDeleteAgreeRes
+function PBMsgRoomDeleteAgreeRes.Create()
+	local obj = setmetatable({},PBMsgRoomDeleteAgreeRes)
+	return obj
+end
+
+function PBMsgRoomDeleteAgreeRes.DeSerialize(obj)
+	local fieldCount = deserialize_int32()
+	local option,optionLength = deserialize_optional()
+
+	if (fieldCount >= 1) then
+		obj.deletelist = {}
+		local len = deserialize_int32()
+		if (len > 0) then
+			for i=1,len do
+				local deletelistSize = deserialize_data_length()
+				local deletelistStartPos = get_position()
+				obj.deletelist[i] = PBDeleteAgree.Create()
+				obj.deletelist[i] = (obj.deletelist[i]):DeSerialize()
+				set_position(deletelistSize+deletelistStartPos )
+			end
+		end
+	end
+	return obj
+end
+
+function PBMsgRoomDeleteAgreeRes.Serialize(obj)
+	local fieldCount = 1
+	serialize_int32(fieldCount)
+	local flag = {}
+	serialize_optional(flag)
+	if (obj.deletelist ~= nil) then
+		serialize_int32(#(obj.deletelist))
+		for i=1, #(obj.deletelist) do
+			local WaitPos = get_position()
+			set_position(WaitPos+4)
+			obj.deletelist[i]:Serialize()
+			local MaxPosNow = get_position()
+			local RealSize = MaxPosNow-(WaitPos+4)
+			set_position(WaitPos)
+			serialize_data_length(RealSize)
+			set_position(MaxPosNow)
+		end
+	else
+		serialize_int32(0)
+	end
+end
+
+function PBMsgRoomDeleteAgreeRes.GetSize(obj)
+	local size = 0
+	if (obj.deletelist ~= nil) then
+		for i=1,#(obj.deletelist) do
+			size = size + 5
+			size = size + (obj.deletelist[i]):GetSize()
+		end
+	end
+	size = size + 10
 	return size
 end
 
