@@ -57,12 +57,19 @@ function SettingCtr:DeleteRoom_OnClick()
         return
     end
 
+    local ref = LuaUIViewCtr.OpenUIHasBg("MJTable/DeleteRoomUI")
+    ref.Init(ref, Client.RoleInfo.RoleID)
+
+    ClientSendMsg.SendRoomDeleteConfirm(LuaUIViewCtr.UIPanel["MJTableUI"].roomId)
+    --[[
     local prefab = LuaUIViewCtr.OpenUIHasBg("ToolsUI/MessageBox")
     LuaMessageBox.SetDataTable(prefab, {Message = Text.DeleteRoomConfirm,
                                         ConfirmName = Text.Confirm ,ConfirmFunc = function()
-                                            ClientSendMsg.SendDeleteRoom(LuaUIViewCtr.UIPanel["MJTableUI"].roomId) end,
+                                            ClientSendMsg.SendDeleteRoom(LuaUIViewCtr.UIPanel["MJTableUI"].roomId)
+                                        end,
                                         CancelName = Text.Cancel ,CancelFunc = nil,
                                         ref=self})
+    --]]
 
     self.gameObject:Destroy1()
 end

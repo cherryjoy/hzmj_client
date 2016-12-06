@@ -729,3 +729,11 @@ function MJTableCtrl:GetHostId()
         end
     end
 end
+
+function MJTableCtrl:GetRoleName(roleId)
+    for i = 1, #(self.roleList) do
+        if self.roleList[i].roleid == roleId then
+            return self.roleList[i].rolename
+        end
+    end
+end

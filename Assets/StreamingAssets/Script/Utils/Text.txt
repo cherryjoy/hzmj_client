@@ -169,6 +169,15 @@ Text = {
                     "中一个码，则每人多出2分，中4个，则每人多出8分。一码全中，从敦上摸一张牌，数字是多少就中多少个码。\n\n"..
                     "抢杠：按照正常扎码，但是所有的钱全部由被抢的人出，比如，抢杠后，胡牌玩家中两个码，则每人出6分，赢家得18分，这个18分全部由被抢玩家出。\n\n"..
                     "扎码数量由开房时确定，（2-4个），如果胡牌人手里没有红中，则加一个码。（如果剩余牌不够，则有多少牌扎多少牌）。\n\n\n",
+
+    DeleteRoomTitle = "玩家【%s】申请解散房间",
+    DeleteRoomCountDown = "倒计时（%d）",
+    DeleteRoomChoose = "%s正在选择...",
+    DeleteRoomChoosedAgree = "%s选择了同意",
+    DeleteRoomChoosedRefuse = "%s选择了不同意",
+    DeleteRoomTips = "三个或以上玩家同意即为通过，请你选择：",
+    DeleteRoomAgree = "同意",
+    DeleteRoomRefuse = "不同意",
 }
 
 TextSever = {
