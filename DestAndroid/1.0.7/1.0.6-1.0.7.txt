@@ -1,0 +1,15 @@
+assetbundles:2042908759
+ui/atlas/bit32/base:277568791
+ui/prefab/commonui_prefab:-1616504686
+ui/prefab/home_prefab:-759191278
+ui/prefab/mjtable_prefab:1788168768
+asset_dependency:1793400410
+CommonUI/SettingCtr.txt:1928987111
+Home/MainUICtrl.txt:618218766
+MJTable/DeleteRoomCtr.txt:-1796560621
+MJTable/MJTableCtrl.txt:1230039518
+NetProtocol/module_05_core.txt:-541799408
+Utils/Client.txt:-2000550301
+Utils/ClientHandleMsg.txt:110774112
+Utils/GameDefine.txt:-1840295755
+Utils/Text.txt:1814888447
