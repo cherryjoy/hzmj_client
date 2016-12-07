@@ -56,8 +56,20 @@ function DeleteRoomCtr:Refuse_OnClick()
 end
 
 function DeleteRoomCtr:AgreeState(deleteList)
-    self.Agree:SetActive(false)
-    self.Refuse:SetActive(false)
+    local num = 0
+    local agreeNum = 0
+    for k = 1, #deleteList do
+        if deleteList[k].roleid == Client.RoleInfo.RoleID then
+            self.Agree:SetActive(false)
+            self.Refuse:SetActive(false)
+        end
+
+        if deleteList[k].agree ~= 0 then
+            num = num + 1
+        else
+            agreeNum = agreeNum + 1
+        end
+    end
 
     local tableRef = LuaUIViewCtr.UIPanel["MJTableUI"]
     if tableRef == nil then
@@ -67,16 +79,28 @@ function DeleteRoomCtr:AgreeState(deleteList)
     for k = 1, #deleteList do
         local roleId = deleteList[k].roleid
         local result = deleteList[k].agree
+        LuaDebug.Log("AgreeState roleId: "..roleId..", result: "..result)
         for i = 1, #(tableRef.roleList) do
             if tableRef.roleList[i].roleid == roleId then
                 if result == 0 then
                     self["Name"..i]:set_text(string.format(Text.DeleteRoomChoosedAgree, tableRef.roleList[i].rolename))
                 else
-                    self["Name"..i]:set_text(string.format(Text.DeleteRoomChoose, tableRef.roleList[i].rolename))
+                    self["Name"..i]:set_text(string.format(Text.DeleteRoomChoosedRefuse, tableRef.roleList[i].rolename))
                 end
 
                 break
             end
+        end
+    end
+
+    if num >= 2 then
+        self.gameObject:Destroy1()
+    end
+
+    if agreeNum >= 3 then
+        if self.timer ~= nil then
+            Timer.RemoveEvent(self,self.timer)
+            self.timer = nil
         end
     end
 end

@@ -279,7 +279,7 @@ function MJTableCtrl:HandlePlayCard(roleId, index, card, result)
 
     LuaDebug.Log("roleId: "..roleId..", play card, type: "..card.type_id..", id: "..card.code_id)
     -- 播放出牌
-    NGUITools.PlaySoundByPath("Music/Card/"..Client.RoleInfo.sex..card.type_id..card.code_id)
+    NGUITools.PlaySoundByPath("Music/Card/"..MJTableCtrl.GetRoleSex(self, roleId)..card.type_id..card.code_id)
 
     self.TowardCard:SetActive(true)
     MJTableCtrl.DoCountDownFinish(self)
@@ -418,7 +418,7 @@ function MJTableCtrl:Win_OnClick()
 end
 
 function MJTableCtrl:HandlePengCard(roleId, index, card, srcRoleId)
-    NGUITools.PlaySoundByPath("Music/Common/"..Client.RoleInfo.sex.."peng")
+    NGUITools.PlaySoundByPath("Music/Common/"..MJTableCtrl.GetRoleSex(self, roleId).."peng")
     -- 重置
     Client.ResetToward:Do()
     --消掉打牌方的牌
@@ -443,7 +443,7 @@ function MJTableCtrl:HandlePengCard(roleId, index, card, srcRoleId)
 end
 
 function MJTableCtrl:HandleGangCard(roleId, index, card, state, srcRoleId)
-    NGUITools.PlaySoundByPath("Music/Common/"..Client.RoleInfo.sex.."gang")
+    NGUITools.PlaySoundByPath("Music/Common/"..MJTableCtrl.GetRoleSex(self, roleId).."gang")
     -- 重置
     Client.ResetToward:Do()
 
@@ -474,7 +474,7 @@ function MJTableCtrl:HandleGangCard(roleId, index, card, state, srcRoleId)
 end
 
 function MJTableCtrl:HandleWinGame(roleId, count, cards)
-    NGUITools.PlaySoundByPath("Music/Common/"..Client.RoleInfo.sex.."hu")
+    NGUITools.PlaySoundByPath("Music/Common/"..MJTableCtrl.GetRoleSex(self, roleId).."hu")
 
     local ref = LuaUIViewCtr.OpenUIHasBg("MJTable/WinGame")
     ref.Init(ref, roleId, count, cards)
@@ -526,7 +526,11 @@ function MJTableCtrl:HandleGameResult(data)
     for i = 1, 4 do
         for j = 1, #(self.roleList) do
             if self["Drect"..i].roleId == self.roleList[j].roleid then
-                self["Drect"..i].TableHead.Score:set_text(tostring(self.roleList[j].integral))
+                local scoreStr = tostring(self.roleList[j].integral)
+                if self.roleList[j].integral > 0 then
+                    scoreStr = "+"..scoreStr
+                end
+                self["Drect"..i].TableHead.Score:set_text(scoreStr)
             end
         end
     end
@@ -734,6 +738,19 @@ function MJTableCtrl:GetRoleName(roleId)
     for i = 1, #(self.roleList) do
         if self.roleList[i].roleid == roleId then
             return self.roleList[i].rolename
+        end
+    end
+end
+
+function MJTableCtrl:GetRoleSex(roleId)
+    for i = 1, #(self.roleList) do
+        if self.roleList[i].roleid == roleId then
+            local sex = self.roleList[i].sex
+            if sex ~= ESexType.Male then
+                sex = ESexType.Female
+            end
+
+            return sex
         end
     end
 end

@@ -48,7 +48,7 @@ HandleFuncs[enumMSGID_MODULE_05.ID_ROLE_RES] = function(data, dataLength)
     --PlayerPrefsEx.SetString("password",data.password)
     --PlayerPrefsEx.SetString("userId",data.userId .. "")
     Client.RoleInfo = pbMsg
-    if Client.RoleInfo.sex == nil then   -- 1 为男性    2为女性
+    if Client.RoleInfo.sex == nil then   -- 0 未设置性别 1 为男性    2为女性
         Client.RoleInfo.sex = ESexType.Female
     end
 
@@ -314,6 +314,7 @@ HandleFuncs[enumMSGID_MODULE_05.ID_ROLE_NUMERIC_VALUE_RES] = function(data, data
     local data = LuaProto.deserialize(PBMsgRoleNumericValueRes, data, dataLength)
 
     Client.RoleInfo.integral = data.numeric.cardnum
+    Client.RefreshNumericVlaue:Do()
 end
 
 HandleFuncs[enumMSGID_MODULE_05.ID_ROOM_DELETE_CONFIRM_RES] = function(data, dataLength)

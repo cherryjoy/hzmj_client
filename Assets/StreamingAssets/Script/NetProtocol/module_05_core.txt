@@ -49,6 +49,8 @@ enumMSGID_MODULE_05 = {
 	ID_ROOM_DELETE_CONFIRM_RES = 1338,
 	ID_ROOM_DELETE_AGREE_REQ = 1339,
 	ID_ROOM_DELETE_AGREE_RES = 1340,
+	ID_ROOM_BALANCE_RECORD_REQ = 1341,
+	ID_ROOM_BALANCE_RECORD_RES = 1342,
 	ID_MODULE_05_END = 1535,
 }
 
@@ -360,11 +362,14 @@ function RoleBaseInfo.DeSerialize(obj)
 	if(has_optional_flag(8,optionLength,option)) then
 		obj.direct = deserialize_int32()
 	end
+	if(has_optional_flag(9,optionLength,option)) then
+		obj.sex = deserialize_int32()
+	end
 	return obj
 end
 
 function RoleBaseInfo.Serialize(obj)
-	local fieldCount = 9
+	local fieldCount = 10
 	serialize_int32(fieldCount)
 	local flag = {}
 	if(obj.rolename ~= nil) then
@@ -412,6 +417,11 @@ function RoleBaseInfo.Serialize(obj)
 	else
 		flag[9] = false
 	end
+	if(obj.sex ~= nil) then
+		flag[10] = true
+	else
+		flag[10] = false
+	end
 	serialize_optional(flag)
 	if(obj.rolename ~= nil) then
 		serialize_string(obj.rolename)
@@ -439,6 +449,9 @@ function RoleBaseInfo.Serialize(obj)
 	end
 	if(obj.direct ~= nil) then
 		serialize_int32(obj.direct)
+	end
+	if(obj.sex ~= nil) then
+		serialize_int32(obj.sex)
 	end
 end
 
@@ -471,6 +484,9 @@ function RoleBaseInfo.GetSize(obj)
 		size = size + 4
 	end
 	if (obj.direct ~= nil) then
+		size = size + 4
+	end
+	if (obj.sex ~= nil) then
 		size = size + 4
 	end
 	size = size + 7
@@ -5393,6 +5409,283 @@ function PBMsgRoomDeleteAgreeRes.GetSize(obj)
 		for i=1,#(obj.deletelist) do
 			size = size + 5
 			size = size + (obj.deletelist[i]):GetSize()
+		end
+	end
+	size = size + 10
+	return size
+end
+
+-- PBMsgRoomBalanceRecordReq
+PBMsgRoomBalanceRecordReq = {}
+PBMsgRoomBalanceRecordReq.__index = PBMsgRoomBalanceRecordReq
+function PBMsgRoomBalanceRecordReq.Create()
+	local obj = setmetatable({},PBMsgRoomBalanceRecordReq)
+	return obj
+end
+
+function PBMsgRoomBalanceRecordReq.DeSerialize(obj)
+	local fieldCount = deserialize_int32()
+	local option,optionLength = deserialize_optional()
+	if(has_optional_flag(0,optionLength,option)) then
+		obj.page = deserialize_int32()
+	end
+	if(has_optional_flag(1,optionLength,option)) then
+		obj.num = deserialize_int32()
+	end
+	return obj
+end
+
+function PBMsgRoomBalanceRecordReq.Serialize(obj)
+	local fieldCount = 2
+	serialize_int32(fieldCount)
+	local flag = {}
+	if(obj.page ~= nil) then
+		flag[1] = true
+	else
+		flag[1] = false
+	end
+	if(obj.num ~= nil) then
+		flag[2] = true
+	else
+		flag[2] = false
+	end
+	serialize_optional(flag)
+	if(obj.page ~= nil) then
+		serialize_int32(obj.page)
+	end
+	if(obj.num ~= nil) then
+		serialize_int32(obj.num)
+	end
+end
+
+function PBMsgRoomBalanceRecordReq.GetSize(obj)
+	local size = 0
+	if (obj.page ~= nil) then
+		size = size + 4
+	end
+	if (obj.num ~= nil) then
+		size = size + 4
+	end
+	size = size + 6
+	return size
+end
+
+-- PBRoleRecord
+PBRoleRecord = {}
+PBRoleRecord.__index = PBRoleRecord
+function PBRoleRecord.Create()
+	local obj = setmetatable({},PBRoleRecord)
+	return obj
+end
+
+function PBRoleRecord.DeSerialize(obj)
+	local fieldCount = deserialize_int32()
+	local option,optionLength = deserialize_optional()
+	if(has_optional_flag(0,optionLength,option)) then
+		obj.nickname = deserialize_string()
+	end
+	if(has_optional_flag(1,optionLength,option)) then
+		obj.score = deserialize_int32()
+	end
+	return obj
+end
+
+function PBRoleRecord.Serialize(obj)
+	local fieldCount = 2
+	serialize_int32(fieldCount)
+	local flag = {}
+	if(obj.nickname ~= nil) then
+		flag[1] = true
+	else
+		flag[1] = false
+	end
+	if(obj.score ~= nil) then
+		flag[2] = true
+	else
+		flag[2] = false
+	end
+	serialize_optional(flag)
+	if(obj.nickname ~= nil) then
+		serialize_string(obj.nickname)
+	end
+	if(obj.score ~= nil) then
+		serialize_int32(obj.score)
+	end
+end
+
+function PBRoleRecord.GetSize(obj)
+	local size = 0
+	if (obj.nickname ~= nil) then
+		local sizeStr = string.len(obj.nickname)
+		size = size + serialize_get_str_actual_size(sizeStr)
+	end
+	if (obj.score ~= nil) then
+		size = size + 4
+	end
+	size = size + 6
+	return size
+end
+
+-- PBRoomBalanceRecord
+PBRoomBalanceRecord = {}
+PBRoomBalanceRecord.__index = PBRoomBalanceRecord
+function PBRoomBalanceRecord.Create()
+	local obj = setmetatable({},PBRoomBalanceRecord)
+	return obj
+end
+
+function PBRoomBalanceRecord.DeSerialize(obj)
+	local fieldCount = deserialize_int32()
+	local option,optionLength = deserialize_optional()
+	if(has_optional_flag(0,optionLength,option)) then
+		obj.roomid = deserialize_int32()
+	end
+	if(has_optional_flag(1,optionLength,option)) then
+		obj.amount = deserialize_int32()
+	end
+	if(has_optional_flag(2,optionLength,option)) then
+		obj.time = deserialize_int32()
+	end
+
+	if (fieldCount >= 4) then
+		obj.records = {}
+		local len = deserialize_int32()
+		if (len > 0) then
+			for i=1,len do
+				local recordsSize = deserialize_data_length()
+				local recordsStartPos = get_position()
+				obj.records[i] = PBRoleRecord.Create()
+				obj.records[i] = (obj.records[i]):DeSerialize()
+				set_position(recordsSize+recordsStartPos )
+			end
+		end
+	end
+	return obj
+end
+
+function PBRoomBalanceRecord.Serialize(obj)
+	local fieldCount = 4
+	serialize_int32(fieldCount)
+	local flag = {}
+	if(obj.roomid ~= nil) then
+		flag[1] = true
+	else
+		flag[1] = false
+	end
+	if(obj.amount ~= nil) then
+		flag[2] = true
+	else
+		flag[2] = false
+	end
+	if(obj.time ~= nil) then
+		flag[3] = true
+	else
+		flag[3] = false
+	end
+	serialize_optional(flag)
+	if(obj.roomid ~= nil) then
+		serialize_int32(obj.roomid)
+	end
+	if(obj.amount ~= nil) then
+		serialize_int32(obj.amount)
+	end
+	if(obj.time ~= nil) then
+		serialize_int32(obj.time)
+	end
+	if (obj.records ~= nil) then
+		serialize_int32(#(obj.records))
+		for i=1, #(obj.records) do
+			local WaitPos = get_position()
+			set_position(WaitPos+4)
+			obj.records[i]:Serialize()
+			local MaxPosNow = get_position()
+			local RealSize = MaxPosNow-(WaitPos+4)
+			set_position(WaitPos)
+			serialize_data_length(RealSize)
+			set_position(MaxPosNow)
+		end
+	else
+		serialize_int32(0)
+	end
+end
+
+function PBRoomBalanceRecord.GetSize(obj)
+	local size = 0
+	if (obj.roomid ~= nil) then
+		size = size + 4
+	end
+	if (obj.amount ~= nil) then
+		size = size + 4
+	end
+	if (obj.time ~= nil) then
+		size = size + 4
+	end
+	if (obj.records ~= nil) then
+		for i=1,#(obj.records) do
+			size = size + 5
+			size = size + (obj.records[i]):GetSize()
+		end
+	end
+	size = size + 11
+	return size
+end
+
+-- PBMsgBalanceRecordRes
+PBMsgBalanceRecordRes = {}
+PBMsgBalanceRecordRes.__index = PBMsgBalanceRecordRes
+function PBMsgBalanceRecordRes.Create()
+	local obj = setmetatable({},PBMsgBalanceRecordRes)
+	return obj
+end
+
+function PBMsgBalanceRecordRes.DeSerialize(obj)
+	local fieldCount = deserialize_int32()
+	local option,optionLength = deserialize_optional()
+
+	if (fieldCount >= 1) then
+		obj.record_list = {}
+		local len = deserialize_int32()
+		if (len > 0) then
+			for i=1,len do
+				local record_listSize = deserialize_data_length()
+				local record_listStartPos = get_position()
+				obj.record_list[i] = PBRoomBalanceRecord.Create()
+				obj.record_list[i] = (obj.record_list[i]):DeSerialize()
+				set_position(record_listSize+record_listStartPos )
+			end
+		end
+	end
+	return obj
+end
+
+function PBMsgBalanceRecordRes.Serialize(obj)
+	local fieldCount = 1
+	serialize_int32(fieldCount)
+	local flag = {}
+	serialize_optional(flag)
+	if (obj.record_list ~= nil) then
+		serialize_int32(#(obj.record_list))
+		for i=1, #(obj.record_list) do
+			local WaitPos = get_position()
+			set_position(WaitPos+4)
+			obj.record_list[i]:Serialize()
+			local MaxPosNow = get_position()
+			local RealSize = MaxPosNow-(WaitPos+4)
+			set_position(WaitPos)
+			serialize_data_length(RealSize)
+			set_position(MaxPosNow)
+		end
+	else
+		serialize_int32(0)
+	end
+end
+
+function PBMsgBalanceRecordRes.GetSize(obj)
+	local size = 0
+	if (obj.record_list ~= nil) then
+		for i=1,#(obj.record_list) do
+			size = size + 5
+			size = size + (obj.record_list[i]):GetSize()
 		end
 	end
 	size = size + 10

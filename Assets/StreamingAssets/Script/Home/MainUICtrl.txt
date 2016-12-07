@@ -5,6 +5,7 @@ function MainUICtrl:Start()
     self.Texture:set_material(mt)
 
     Client.TableClose = Client.TableClose + {self, MainUICtrl.TableClose}
+    Client.RefreshNumericVlaue = Client.RefreshNumericVlaue + {self, MainUICtrl.RefreshNumericVlaue}
 end
 
 function MainUICtrl:Init(name, id, cardNum, imageUrl)
@@ -15,10 +16,15 @@ function MainUICtrl:Init(name, id, cardNum, imageUrl)
     LuaUIViewCtr.FlushPortraitInfo("Home/homeHeadCusPic", imageUrl, self.Icon)
 
     Client.TableClose = Client.TableClose - {self, MainUICtrl.TableClose}
+    Client.RefreshNumericVlaue = Client.RefreshNumericVlaue - {self, MainUICtrl.RefreshNumericVlaue}
 end
 
 function MainUICtrl:OnDestroy()
 
+end
+
+function MainUICtrl:RefreshNumericVlaue()
+    self.Card:set_text(string.format(Text.RoleCardNum, tostring(Client.RoleInfo.integral)))
 end
 
 function MainUICtrl:Score_OnClick()

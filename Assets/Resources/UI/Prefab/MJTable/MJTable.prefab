@@ -4897,7 +4897,7 @@ MonoBehaviour:
   arrangement: 1
   maxPerLine: 0
   cellWidth: 200
-  cellHeight: 23
+  cellHeight: 22
   repositionNow: 0
   sorted: 0
   hideInactive: 1
@@ -5375,7 +5375,7 @@ MonoBehaviour:
   arrangement: 1
   maxPerLine: 0
   cellWidth: 200
-  cellHeight: 23
+  cellHeight: 22
   repositionNow: 0
   sorted: 0
   hideInactive: 1
