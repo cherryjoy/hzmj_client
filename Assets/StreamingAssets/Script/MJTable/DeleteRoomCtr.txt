@@ -89,7 +89,7 @@ end
 function DeleteRoomCtr:DoCountDownFinish()
     -- 是否发送请求结算协议
 
-    self.gameObject:Destroy1()
+    --self.gameObject:Destroy1()
 end
 
 function DeleteRoomCtr:TableClose()
