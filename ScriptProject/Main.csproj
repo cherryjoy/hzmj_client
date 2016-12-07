@@ -73,9 +73,9 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="LKBase.csproj">
+    <ProjectReference Include="CJBase.csproj">
       <Project>{d14fae4e-eb17-4d7e-90a8-037935f4a521}</Project>
-      <Name>LKBase</Name>
+      <Name>CJBase</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

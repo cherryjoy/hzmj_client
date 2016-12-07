@@ -48,9 +48,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="LKBase.csproj">
+    <ProjectReference Include="CJBase.csproj">
       <Project>{D14FAE4E-EB17-4D7E-90A8-037935F4A521}</Project>
-      <Name>LKBase</Name>
+      <Name>CJBase</Name>
     </ProjectReference>
     <ProjectReference Include="Main.csproj">
       <Project>{C7B311AA-A0E2-4B44-9F75-91265C258D90}</Project>
