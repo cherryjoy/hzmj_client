@@ -28,9 +28,10 @@ function MainUICtrl:RefreshNumericVlaue()
 end
 
 function MainUICtrl:Score_OnClick()
-    if Client.IsDebugPlatform() then
-        Client.SeriousError(Text.ConnectTimeout)
-    end
+    --ClientSendMsg.SendRoomBalanceRecord()
+
+    local ref = LuaUIViewCtr.OpenUIHasBg("Home/BalanceRecord")
+    ref.Init(ref, {})
 end
 
 function MainUICtrl:Help_OnClick()

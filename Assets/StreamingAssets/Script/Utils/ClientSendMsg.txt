@@ -303,3 +303,10 @@ function ClientSendMsg.SendGameQuitRoom(roomId)
 	local buffer, length = LuaProto.serialize(data)
 	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_QUIT_ROOM_REQ, buffer, length)
 end
+
+function ClientSendMsg.SendRoomBalanceRecord()
+	local data = PBMsgRoomBalanceRecordReq.Create()
+
+	local buffer, length = LuaProto.serialize(data)
+	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_ROOM_BALANCE_RECORD_REQ, buffer, length)
+end

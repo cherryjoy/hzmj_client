@@ -1,0 +1,26 @@
+BalanceRecordCtrl = {}
+
+function BalanceRecordCtrl:Start( )
+
+end
+
+function BalanceRecordCtrl:OnDestroy( )
+
+end
+
+function BalanceRecordCtrl:Init(recordList)
+    self.recordList = recordList
+    --self.DragTarget:SetDataSources(#self.recordList, false)
+    self.DragTarget:SetDataSources(10, false)
+end
+
+function BalanceRecordCtrl:Close_OnClick()
+    self.gameObject:Destroy1()
+end
+
+function BalanceRecordCtrl:SetCellData(index)
+    local recordCell = self.Cells[index%self.CellsCount+1]
+    local recordInfo = self.recordList[index+1]
+    --LuaDebug.Log("roomid: ".. recordInfo.roomid)
+    BalanceCell.SetCellData(self.Cells[index%self.CellsCount+1],recordInfo,index)
+end

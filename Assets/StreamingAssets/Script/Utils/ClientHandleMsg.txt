@@ -254,7 +254,7 @@ HandleFuncs[enumMSGID_MODULE_05.ID_GAME_WIN_GAME_RES] = function(data, dataLengt
     LuaDebug.Log("data.card: "..#(data.card))
 
     if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil then
-        LuaUIViewCtr.UIPanel["MJTableUI"].HandleWinGame(LuaUIViewCtr.UIPanel["MJTableUI"], data.roleid, data.count, data.card)
+        LuaUIViewCtr.UIPanel["MJTableUI"].HandleWinGame(LuaUIViewCtr.UIPanel["MJTableUI"], data.roleid, data.count, data.card, data.role_list)
     end
 end
 
@@ -340,4 +340,12 @@ HandleFuncs[enumMSGID_MODULE_05.ID_GAME_QUIT_ROOM_RES] = function(data, dataLeng
 
     LuaDebug.Log("data.result: "..data.result)
     Client.TableClose:Do()
+end
+
+HandleFuncs[enumMSGID_MODULE_05.ID_ROOM_BALANCE_RECORD_RES] = function(data, dataLength)
+    local data = LuaProto.deserialize(PBMsgBalanceRecordRes, data, dataLength)
+
+    LuaDebug.Log("record num: "..#(data.record_list))
+    local ref = LuaUIViewCtr.OpenUIHasBg("Home/BalanceRecord")
+    ref.Init(ref, data.record_list)
 end

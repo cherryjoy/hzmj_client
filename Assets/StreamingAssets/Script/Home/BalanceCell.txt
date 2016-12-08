@@ -1,0 +1,14 @@
+BalanceCell = {}
+
+function BalanceCell:Start( )
+
+end
+
+function BalanceCell:OnDestroy( )
+
+end
+
+
+function BalanceCell:SetCellData(cell, index)
+    self.RoomId:set_text(tostring(index))
+end

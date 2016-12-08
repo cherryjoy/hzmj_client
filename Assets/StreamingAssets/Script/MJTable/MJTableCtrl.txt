@@ -473,8 +473,13 @@ function MJTableCtrl:HandleGangCard(roleId, index, card, state, srcRoleId)
     end
 end
 
-function MJTableCtrl:HandleWinGame(roleId, count, cards)
-    NGUITools.PlaySoundByPath("Music/Common/"..MJTableCtrl.GetRoleSex(self, roleId).."hu")
+function MJTableCtrl:HandleWinGame(roleId, count, cards, roleList)
+    if roleList ~= nil and #roleList > 0 then
+        --取第一个抢胡的人的性别
+        NGUITools.PlaySoundByPath("Music/Common/"..MJTableCtrl.GetRoleSex(self, roleList[1]).."hu")
+    else
+        NGUITools.PlaySoundByPath("Music/Common/"..MJTableCtrl.GetRoleSex(self, roleId).."hu")
+    end
 
     local ref = LuaUIViewCtr.OpenUIHasBg("MJTable/WinGame")
     ref.Init(ref, roleId, count, cards)
