@@ -9,6 +9,19 @@ function BalanceCell:OnDestroy( )
 end
 
 
-function BalanceCell:SetCellData(cell, index)
-    self.RoomId:set_text(tostring(index))
+function BalanceCell:SetCellData(info, index)
+    self.RoomId:set_text(string.format(Text.BalanceRecordRoomId, info.roomid))
+    self.JuShu:set_text(string.format(Text.BalanceRecordJuShu, info.used, info.amount))
+    self.Time:set_text(string.format(Text.BalanceRecordTime, info.time))
+
+    for i = 1, #(info.records) do
+        local record = info.records[i]
+        self["Name"..i]:set_text(record.nickname)
+        local str = tostring(record.score)
+        if record.score > 0 then
+            str = "+"..str
+        end
+
+        self["Score"..i]:set_text(str)
+    end
 end

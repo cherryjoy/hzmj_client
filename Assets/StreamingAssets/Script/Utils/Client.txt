@@ -145,8 +145,8 @@ function Client.CloseNetLoadingUI()
     end
 end
 
-Client.PingThreshold = 1*60*10000000
-Client.SendPingThreshold = 1*30*10000000
+Client.PingThreshold = 1*30*10000000
+Client.SendPingThreshold = 1*10*10000000
 
 -- ticks 100纳秒   100 毫微秒
 function Client.CheckPing()

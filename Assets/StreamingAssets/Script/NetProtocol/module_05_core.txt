@@ -3311,11 +3311,14 @@ function PBRoleResult.DeSerialize(obj)
 	if(has_optional_flag(3,optionLength,option)) then
 		obj.username = deserialize_string()
 	end
+	if(has_optional_flag(4,optionLength,option)) then
+		obj.amount = deserialize_int32()
+	end
 	return obj
 end
 
 function PBRoleResult.Serialize(obj)
-	local fieldCount = 9
+	local fieldCount = 10
 	serialize_int32(fieldCount)
 	local flag = {}
 	if(obj.roleid ~= nil) then
@@ -3337,6 +3340,11 @@ function PBRoleResult.Serialize(obj)
 		flag[4] = true
 	else
 		flag[4] = false
+	end
+	if(obj.amount ~= nil) then
+		flag[5] = true
+	else
+		flag[5] = false
 	end
 	serialize_optional(flag)
 	if(obj.roleid ~= nil) then
@@ -3426,6 +3434,9 @@ function PBRoleResult.Serialize(obj)
 	if(obj.username ~= nil) then
 		serialize_string(obj.username)
 	end
+	if(obj.amount ~= nil) then
+		serialize_int32(obj.amount)
+	end
 end
 
 function PBRoleResult.GetSize(obj)
@@ -3472,6 +3483,9 @@ function PBRoleResult.GetSize(obj)
 	if (obj.username ~= nil) then
 		local sizeStr = string.len(obj.username)
 		size = size + serialize_get_str_actual_size(sizeStr)
+	end
+	if (obj.amount ~= nil) then
+		size = size + 4
 	end
 	size = size + 31
 	return size
@@ -3741,11 +3755,25 @@ function PBMsgGameGetCardRes.DeSerialize(obj)
 		obj.card = obj.card:DeSerialize()
 		set_position(cardSize+cardStartPos )
 	end
+
+	if (fieldCount >= 3) then
+		obj.cardlist = {}
+		local len = deserialize_int32()
+		if (len > 0) then
+			for i=1,len do
+				local cardlistSize = deserialize_data_length()
+				local cardlistStartPos = get_position()
+				obj.cardlist[i] = PBCard.Create()
+				obj.cardlist[i] = (obj.cardlist[i]):DeSerialize()
+				set_position(cardlistSize+cardlistStartPos )
+			end
+		end
+	end
 	return obj
 end
 
 function PBMsgGameGetCardRes.Serialize(obj)
-	local fieldCount = 2
+	local fieldCount = 3
 	serialize_int32(fieldCount)
 	local flag = {}
 	if(obj.roleid ~= nil) then
@@ -3772,6 +3800,21 @@ function PBMsgGameGetCardRes.Serialize(obj)
 	serialize_data_length(RealSize)
 	set_position(MaxPosNow)
 	end
+	if (obj.cardlist ~= nil) then
+		serialize_int32(#(obj.cardlist))
+		for i=1, #(obj.cardlist) do
+			local WaitPos = get_position()
+			set_position(WaitPos+4)
+			obj.cardlist[i]:Serialize()
+			local MaxPosNow = get_position()
+			local RealSize = MaxPosNow-(WaitPos+4)
+			set_position(WaitPos)
+			serialize_data_length(RealSize)
+			set_position(MaxPosNow)
+		end
+	else
+		serialize_int32(0)
+	end
 end
 
 function PBMsgGameGetCardRes.GetSize(obj)
@@ -3782,7 +3825,13 @@ function PBMsgGameGetCardRes.GetSize(obj)
 	if (obj.card ~= nil) then
 		size = size + obj.card:GetSize()
 	end
-	size = size + 11
+	if (obj.cardlist ~= nil) then
+		for i=1,#(obj.cardlist) do
+			size = size + 5
+			size = size + (obj.cardlist[i]):GetSize()
+		end
+	end
+	size = size + 16
 	return size
 end
 
@@ -5544,10 +5593,13 @@ function PBRoomBalanceRecord.DeSerialize(obj)
 		obj.amount = deserialize_int32()
 	end
 	if(has_optional_flag(2,optionLength,option)) then
-		obj.time = deserialize_int32()
+		obj.used = deserialize_int32()
+	end
+	if(has_optional_flag(3,optionLength,option)) then
+		obj.time = deserialize_string()
 	end
 
-	if (fieldCount >= 4) then
+	if (fieldCount >= 5) then
 		obj.records = {}
 		local len = deserialize_int32()
 		if (len > 0) then
@@ -5564,7 +5616,7 @@ function PBRoomBalanceRecord.DeSerialize(obj)
 end
 
 function PBRoomBalanceRecord.Serialize(obj)
-	local fieldCount = 4
+	local fieldCount = 5
 	serialize_int32(fieldCount)
 	local flag = {}
 	if(obj.roomid ~= nil) then
@@ -5577,10 +5629,15 @@ function PBRoomBalanceRecord.Serialize(obj)
 	else
 		flag[2] = false
 	end
-	if(obj.time ~= nil) then
+	if(obj.used ~= nil) then
 		flag[3] = true
 	else
 		flag[3] = false
+	end
+	if(obj.time ~= nil) then
+		flag[4] = true
+	else
+		flag[4] = false
 	end
 	serialize_optional(flag)
 	if(obj.roomid ~= nil) then
@@ -5589,8 +5646,11 @@ function PBRoomBalanceRecord.Serialize(obj)
 	if(obj.amount ~= nil) then
 		serialize_int32(obj.amount)
 	end
+	if(obj.used ~= nil) then
+		serialize_int32(obj.used)
+	end
 	if(obj.time ~= nil) then
-		serialize_int32(obj.time)
+		serialize_string(obj.time)
 	end
 	if (obj.records ~= nil) then
 		serialize_int32(#(obj.records))
@@ -5617,8 +5677,12 @@ function PBRoomBalanceRecord.GetSize(obj)
 	if (obj.amount ~= nil) then
 		size = size + 4
 	end
-	if (obj.time ~= nil) then
+	if (obj.used ~= nil) then
 		size = size + 4
+	end
+	if (obj.time ~= nil) then
+		local sizeStr = string.len(obj.time)
+		size = size + serialize_get_str_actual_size(sizeStr)
 	end
 	if (obj.records ~= nil) then
 		for i=1,#(obj.records) do

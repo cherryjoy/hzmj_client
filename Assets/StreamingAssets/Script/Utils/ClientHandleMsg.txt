@@ -222,7 +222,7 @@ HandleFuncs[enumMSGID_MODULE_05.ID_GAME_GET_CARD_RES] = function(data, dataLengt
     local data = LuaProto.deserialize(PBMsgGameGetCardRes, data, dataLength)
 
     if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil then
-        LuaUIViewCtr.UIPanel["MJTableUI"].HandleGetCard(LuaUIViewCtr.UIPanel["MJTableUI"], data.roleid, data.card)
+        LuaUIViewCtr.UIPanel["MJTableUI"].HandleGetCard(LuaUIViewCtr.UIPanel["MJTableUI"], data.roleid, data.card, data.cardlist)
     end
 end
 

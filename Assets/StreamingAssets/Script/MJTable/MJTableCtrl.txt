@@ -297,7 +297,7 @@ function MJTableCtrl:HandlePlayCard(roleId, index, card, result)
     end
 end
 
-function MJTableCtrl:HandleGetCard(roleId, card)
+function MJTableCtrl:HandleGetCard(roleId, card, cardList)
     LuaDebug.Log("roleid: "..roleId)
 
     Client.RoleInfo.RestCard = Client.RoleInfo.RestCard - 1
@@ -306,6 +306,11 @@ function MJTableCtrl:HandleGetCard(roleId, card)
     -- 摸牌只对自己广播牌，其他方只广播roleId
     if card ~= nil then
         LuaDebug.Log("get card, type: "..card.type_id..", id: "..card.code_id)
+        -- 先判断cardList是否与手牌一致
+        if cardList ~= nil then
+            self.Drect1.CorrectHandCard(self.Drect1, cardList)
+        end
+
         -- 先判断手里的牌是否有杠
         local gangType = nil
         local tmpHandCard = nil
@@ -438,7 +443,7 @@ function MJTableCtrl:HandlePengCard(roleId, index, card, srcRoleId)
     if roleId == self.Drect1.roleId then
         self.Drect1.HandlePengCard(self.Drect1, card, self.tempRoleId)
         self.ResultCard:SetActive(false)
-        self.Drect1.CanPlayCard = true
+        self.Drect1.CanPlayCardState(self.Drect1, true)
     end
 end
 
@@ -469,7 +474,7 @@ function MJTableCtrl:HandleGangCard(roleId, index, card, state, srcRoleId)
     if roleId == self.Drect1.roleId then
         self.Drect1.HandleGangCard(self.Drect1, card, self.tempRoleId, self.tempGangType)
         self.ResultCard:SetActive(false)
-        self.Drect1.CanPlayCard = true
+        self.Drect1.CanPlayCardState(self.Drect1, true)
     end
 end
 
@@ -522,7 +527,7 @@ function MJTableCtrl:HandleGameResult(data)
     for i = 1, #(self.roleList) do
         for j = 1, #(data.role_cards) do
             if self.roleList[i].roleid == data.role_cards[j].roleid then
-                self.roleList[i].integral = self.roleList[i].integral + data.role_cards[j].score
+                self.roleList[i].integral = data.role_cards[j].amount
                 break
             end
         end
@@ -622,7 +627,7 @@ function MJTableCtrl:HandleGameReenterStateSync(data)
         MJTableCtrl.CountDownStart(self, data.roleid)
 
         if data.roleid == Client.RoleInfo.RoleID then
-            self.Drect1.CanPlayCard = true
+            self.Drect1.CanPlayCardState(self.Drect1, true)
         else
 
         end

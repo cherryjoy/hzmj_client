@@ -30,7 +30,7 @@ end
 
 function MyCard:Card_OnClick()
     LuaDebug.Log("out card, type: "..self.card.type_id..", id: "..self.card.code_id..", index: "..self.index)
-    Client.TableChooseCard:Do(self.index)
+    Client.TableChooseCard:Do(self.index, true)
 end
 
 function MyCard:Animation()
@@ -53,5 +53,28 @@ function MyCard:TableClear()
     if not self.notClear then
         self.gameObject:SetActive(false)
         self.gameObject:Destroy1()
+    end
+end
+
+function MyCard:Card_OnPress(isPressed)
+    LuaDebug.Log("Card_OnPress isPressed: "..tostring(isPressed))
+    if isPressed then
+        self.oldPos = self.gameObject:get_transform():get_localPosition()
+        self.Back:set_depth(25)
+        self.Sprite:set_depth(26)
+        self.Shinning:set_depth(27)
+    else
+        local newPos = self.gameObject:get_transform():get_localPosition()
+        if newPos:y() > 90 then
+            Client.TableChooseCard:Do(self.index, false)
+            Client.TableChooseCard:Do(self.index, false)
+        else
+            self.gameObject:get_transform():set_localPosition(LuaVector3.Create(self.oldPos:x(), self.oldPos:y(), self.oldPos:z()))
+            self.oldPos = nil
+        end
+
+        self.Back:set_depth(21)
+        self.Sprite:set_depth(22)
+        self.Shinning:set_depth(23)
     end
 end

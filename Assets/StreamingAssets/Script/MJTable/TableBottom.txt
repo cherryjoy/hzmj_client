@@ -23,6 +23,8 @@ function TableBottom:Start( )
 
     self.Grid:get_transform():set_localScale(LuaVector3.Create(self.cardSize, self.cardSize, 1))
     self.CardNew:get_transform():set_localScale(LuaVector3.Create(self.cardSize, self.cardSize, 1))
+
+    self.showOutLine = false
 end
 
 function TableBottom:OnDestroy( )
@@ -34,7 +36,7 @@ end
 function TableBottom:Clear()
     self.PlayNum = 0
     self.LeftNum = 0
-    self.CanPlayCard = false
+    TableBottom.CanPlayCardState(self, false)
     self.handCard = {}
     self.pengCard = {}
     self.gangCardM = {}
@@ -59,7 +61,7 @@ function TableBottom:CardInfoSync(handcard)
             card = tempCard
         end
         --]]
-        local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCard",self.Grid:get_gameObject())
+        local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyHandCard",self.Grid:get_gameObject())
         ref.gameObject:set_name("MyCard")
         ref.Message:target(ref.gameObject)
         self.handCard[i] = ref
@@ -132,26 +134,35 @@ function TableBottom:SetLeftCard(card)
     self.LeftNum = self.LeftNum + 1
 end
 
-function TableBottom:ChooseCard(i)
+function TableBottom:ChooseCard(i, isClick)
     if not self.CanPlayCard then
         return
     end
 
     if self.lastIndex ~= nil and self.lastIndex ~= i then
         -- 回归原位
-        self.handCard[self.lastIndex].ResetPos(self.handCard[self.lastIndex])
+        --if isClick then
+            self.handCard[self.lastIndex].ResetPos(self.handCard[self.lastIndex])
+        --end
+
         self.lastIndex = nil
+
+        --if not isClick then
+        --    return
+        --end
     end
 
     if i == self.lastIndex then
         ClientSendMsg.SendPlayCard(i, self.handCard[i].card.type_id, self.handCard[i].card.code_id)
-        self.CanPlayCard = false
+        TableBottom.CanPlayCardState(self, false)
         Client.BottomPlayCard:Do(self.roleId, i, self.handCard[i].card)
         self.lastIndex = nil
     else
         self.lastIndex = i
 
-        self.handCard[i].SetPosUp(self.handCard[i])
+        if isClick then
+            self.handCard[i].SetPosUp(self.handCard[i])
+        end
 
         -- 已经听牌，并且选择的是最后一张牌则不请求听牌
         --local handCardNum = #(self.handCard)
@@ -187,6 +198,8 @@ function TableBottom:SetPlayCard(card)
 end
 
 function TableBottom:PlayCardEnd(i)
+    self.OutLine:set_enabled(false)
+
     local card = self.handCard[i].card
     local ref = TableBottom.SetPlayCard(self, card)
 
@@ -224,7 +237,7 @@ end
 
 function TableBottom:HandleGetCard(card)
     local handCardNum = #(self.handCard)
-    local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCard",self.CardNew)
+    local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyHandCard",self.CardNew)
     ref.gameObject:set_name("MyCard")
     ref.Message:target(ref.gameObject)
     self.handCard[handCardNum + 1] = ref
@@ -233,7 +246,11 @@ function TableBottom:HandleGetCard(card)
     ref.Shinning:set_enabled(true)
     --ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(768, 0, 0))
 
-    self.CanPlayCard = true
+    TableBottom.CanPlayCardState(self, true)
+
+    if not self.showOutLine then
+        self.OutLine:set_enabled(true)
+    end
 end
 
 function TableBottom:DeleteCard(srcRoleId)
@@ -541,4 +558,76 @@ function TableBottom:IsHuPai(card)
     end
 
     return false
+end
+
+function TableBottom:CanPlayCardState(state)
+    self.CanPlayCard = state
+    self.PlayMask:set_enabled(not state)
+end
+
+function TableBottom:CorrectHandCard(cardList)
+    --先分组，再排序
+    local wanList = {}
+    local tongList = {}
+    local tiaoList = {}
+    local zhongList = {}
+
+    local num = #(cardList)
+    for i = 1, num do
+        local card = cardList[i]
+        if card.type_id == enumCARD_TYPE.CARD_TIAO_TYPE then
+            table.insert(tiaoList, card)
+        elseif card.type_id == enumCARD_TYPE.CARD_TONG_TYPE then
+            table.insert(tongList, card)
+        elseif card.type_id == enumCARD_TYPE.CARD_WANG_TYPE then
+            table.insert(wanList, card)
+        elseif card.type_id == enumCARD_TYPE.CARD_HONG_TYPE then
+            table.insert(zhongList, card)
+        end
+    end
+
+    table.sort(wanList, function(a, b)
+            return a.code_id < b.code_id
+    end)
+
+    table.sort(tongList, function(a, b)
+            return a.code_id < b.code_id
+    end)
+
+    table.sort(tiaoList, function(a, b)
+            return a.code_id < b.code_id
+    end)
+
+    local newCardList = {}
+    local index = 1
+    for i = 1, #wanList do
+        newCardList[index] = wanList[i]
+        index = index + 1
+    end
+
+    for i = 1, #tongList do
+        newCardList[index] = tongList[i]
+        index = index + 1
+    end
+
+    for i = 1, #tiaoList do
+        newCardList[index] = tiaoList[i]
+        index = index + 1
+    end
+
+    for i = 1, #zhongList do
+        newCardList[index] = zhongList[i]
+        index = index + 1
+    end
+
+    local num = #(self.handCard)
+    for i = 1, num do
+        local card = self.handCard[i].card
+        local newCard = newCardList[i]
+        if card.type_id == newCard.type_id and card.code_id == newCard.code_id then
+        else
+            LuaDebug.LogError("index: "..i..",new type_id: "..newCard.type_id..",new code_id: "..newCard.code_id..", old type_id: "..card.type_id..", old code_id: "..card.code_id)
+            self.handCard[i].Init(self.handCard[i], newCard, i)
+        end
+    end
 end

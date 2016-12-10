@@ -178,6 +178,10 @@ Text = {
     DeleteRoomTips = "三个或以上玩家同意即为通过，请你选择：",
     DeleteRoomAgree = "同意",
     DeleteRoomRefuse = "不同意",
+
+    BalanceRecordRoomId = "房间号：%d",
+    BalanceRecordJuShu = "%d/%d局",
+    BalanceRecordTime = "时间：%s",
 }
 
 TextSever = {

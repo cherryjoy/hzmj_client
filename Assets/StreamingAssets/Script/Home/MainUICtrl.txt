@@ -28,10 +28,10 @@ function MainUICtrl:RefreshNumericVlaue()
 end
 
 function MainUICtrl:Score_OnClick()
-    --ClientSendMsg.SendRoomBalanceRecord()
+    ClientSendMsg.SendRoomBalanceRecord()
 
-    local ref = LuaUIViewCtr.OpenUIHasBg("Home/BalanceRecord")
-    ref.Init(ref, {})
+    --local ref = LuaUIViewCtr.OpenUIHasBg("Home/BalanceRecord")
+    --ref.Init(ref, {})
 end
 
 function MainUICtrl:Help_OnClick()
