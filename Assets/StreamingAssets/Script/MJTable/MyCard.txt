@@ -42,6 +42,7 @@ function MyCard:Animation()
     self.TweenPos:from(LuaVector3.Create(pos:x(), pos:y(), pos:z()))
     self.TweenPos:to(LuaVector3.Create(-parentPos:x()/parentScale:x(), 150, 0))
     self.TweenPos:set_enabled(true)
+    --self.TweenPos:Play(true)
 end
 
 function MyCard:MyCard_TweenEnd()
@@ -65,7 +66,7 @@ function MyCard:Card_OnPress(isPressed)
         self.Shinning:set_depth(27)
     else
         local newPos = self.gameObject:get_transform():get_localPosition()
-        if newPos:y() > 90 then
+        if newPos:y() > 60 then
             Client.TableChooseCard:Do(self.index, false)
             Client.TableChooseCard:Do(self.index, false)
         else

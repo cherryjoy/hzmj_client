@@ -23,8 +23,6 @@ function TableBottom:Start( )
 
     self.Grid:get_transform():set_localScale(LuaVector3.Create(self.cardSize, self.cardSize, 1))
     self.CardNew:get_transform():set_localScale(LuaVector3.Create(self.cardSize, self.cardSize, 1))
-
-    self.showOutLine = false
 end
 
 function TableBottom:OnDestroy( )
@@ -211,6 +209,8 @@ function TableBottom:PlayCardEnd(i)
     -- 整理手牌
     if i ~= handCardNum then
         self.handCard[i].Init(self.handCard[i], self.handCard[handCardNum].card, i)
+        --self.handCard[i].TweenPos:waitTime(0.5)
+        --self.handCard[i].TweenPos:Reset()
         self.handCard[handCardNum].gameObject:Destroy1()
         self.handCard[handCardNum] = nil
         TableBottom.SortCard(self)
@@ -247,10 +247,6 @@ function TableBottom:HandleGetCard(card)
     --ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(768, 0, 0))
 
     TableBottom.CanPlayCardState(self, true)
-
-    if not self.showOutLine then
-        self.OutLine:set_enabled(true)
-    end
 end
 
 function TableBottom:DeleteCard(srcRoleId)
@@ -563,6 +559,7 @@ end
 function TableBottom:CanPlayCardState(state)
     self.CanPlayCard = state
     self.PlayMask:set_enabled(not state)
+    self.OutLine:set_enabled(state)
 end
 
 function TableBottom:CorrectHandCard(cardList)
