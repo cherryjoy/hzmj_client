@@ -38,11 +38,9 @@ function MyCard:Animation()
     local parentScale = self.gameObject:get_transform():get_parent():get_localScale()
 
     local pos = self.gameObject:get_transform():get_localPosition()
-    --self.TweenPos:Reset()
     self.TweenPos:from(LuaVector3.Create(pos:x(), pos:y(), pos:z()))
     self.TweenPos:to(LuaVector3.Create(-parentPos:x()/parentScale:x(), 150, 0))
     self.TweenPos:set_enabled(true)
-    --self.TweenPos:Play(true)
 end
 
 function MyCard:MyCard_TweenEnd()
