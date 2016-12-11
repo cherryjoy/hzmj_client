@@ -298,6 +298,7 @@ public abstract class UITweener : IgnoreTimeScale
 	public void Reset() { mFactor = (mAmountPerDelta < 0f) ? 1f : 0f; }
     public void ResetFactor(bool forward)
     {
+        mWait = false;
         if (forward)
         {
             mFactor = 1;
