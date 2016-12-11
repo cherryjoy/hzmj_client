@@ -829,7 +829,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 192092}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10000, y: 5, z: 0}
+  m_LocalPosition: {x: 350, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -1460,12 +1460,12 @@ MonoBehaviour:
   changeFlag: -1
   mMat: {fileID: 0}
   mColor: {r: 1, g: 1, b: 1, a: 1}
-  mPivot: 4
+  mPivot: 3
   mWidth: 24
   mHeight: 24
   mDepth: 10
   mIsHidePanel: 0
-  mText: 
+  mText: "\u6A31\u6843\u7EA2\u4E2D\u9EBB\u5C06\u662F\u4E00\u6B3E\u719F\u4EBA\u9EBB\u5C06\uFF0C\u4F9B\u4EB2\u670B\u597D\u53CB\u4F11\u95F2\u5A31\u4E50\u3002\u8BF7\u5927\u5BB6\u6587\u660E\u6E38\u620F\uFF0C\u7981\u6B62\u8D4C\u535A\u3002"
   mMaxLineWidth: 0
   mEncoding: 1
   mMultiline: 0
