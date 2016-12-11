@@ -181,6 +181,10 @@ function LoginController:SeverListDownloadSuccss(xmlString)
         Client.logUrl = self.doc.kids[2].el[1].attr.logurl.."upload/"
         LuaDebug.Log("logUrl: "..Client.logUrl)
         PluginTool.SharedInstance():logUrl(Client.logUrl)
+
+        -- bannerNotice
+        Client.bannerNotice = self.doc.kids[2].el[1].attr.bannerNotice
+        LuaDebug.Log("bannerNotice: "..Client.bannerNotice)
     end
     LoginController.ClearTimer(self)
     --LoginController.StartDownloadNoticeList(self)    --开始下载公告
