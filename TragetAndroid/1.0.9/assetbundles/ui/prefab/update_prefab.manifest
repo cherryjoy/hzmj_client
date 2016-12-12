@@ -1,0 +1,62 @@
+ManifestFileVersion: 0
+CRC: 1140824848
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: d7629aac9f5eeb7e971bd07dec5d686d
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 352555a0471bdb5cf035f1109b8563d8
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 20
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 81
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: -1143446969, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+- Class: 114
+  Script: {fileID: -371560238, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+- Class: 114
+  Script: {fileID: -1924787031, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+- Class: 114
+  Script: {fileID: 1582492658, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+- Class: 114
+  Script: {fileID: 1645047593, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+- Class: 114
+  Script: {fileID: -755684769, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+- Class: 114
+  Script: {fileID: 1348251788, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+- Class: 114
+  Script: {fileID: -1267949273, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+- Class: 114
+  Script: {fileID: -369096700, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+- Class: 114
+  Script: {fileID: 1990421164, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+- Class: 114
+  Script: {fileID: -558937122, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+- Class: 114
+  Script: {fileID: 345385021, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+- Class: 114
+  Script: {fileID: -1019752268, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+- Class: 114
+  Script: {fileID: 229864096, guid: f1bae04813ec7b648a64859185b83283, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 128
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/UI/Prefab/Update/UpdateControl.prefab
+Dependencies:
+- F:/MaJiang/hzmj_client/assetbundles/ui/atlas/bit32/login
+- F:/MaJiang/hzmj_client/assetbundles/ui/atlas/bit32/base
