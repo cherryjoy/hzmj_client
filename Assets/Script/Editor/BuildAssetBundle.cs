@@ -1052,10 +1052,11 @@ public class BuildAssetBundle : EditorWindow
     FileInfo[] GetSmallAssetBundles()
     {
         string[] assetbundlesBuffer ={"/music/ui/buttonclick_13",
-                                     "/ui/atlas/bit16/Emotion",
-                                     "/ui/atlas/bit32/baseui",
+                                     "/ui/atlas/bit32/base",
                                      "/ui/atlas/bit32/login",
                                      "/ui/fonts/msyh",
+                                     "/ui/prefab/update_prefab",
+                                     "/ui/prefab/commonui_prefab",
                                      "/ui/prefab/toolsui/messagebox",
                                      "/assetbundles","/shader"};
 

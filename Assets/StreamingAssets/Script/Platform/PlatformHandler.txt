@@ -20,10 +20,15 @@ function PlatformHandler.onSdkInit()
 	LuaDebug.Log('onSdkInit')
 	PlatformHandler.state = PlatformSDKController.mSelf():SDKState()
 	if not PlatformHandler.InitFinish then
-		local param = string.format("{%s,\"gameId\":\"%s\",\"serverId\":\"%s\"}",GameDefine_InitConfig,
-			GameDefine_gameID,PlayerPrefsEx.GetString("lastServerID"))
+		local shortCut = PlayerPrefsEx.GetString("shortCut")
+		local param = string.format("{%s,\"gameId\":\"%s\",\"serverId\":\"%s\",\"shortCut\":\"%s\"}",GameDefine_InitConfig,
+			GameDefine_gameID,PlayerPrefsEx.GetString("lastServerID"), shortCut)
 		PlatformHandler.gameName=PlatformSDKController.mSelf():get_gameObject():get_name()
 		PlatformHandler.state:CJSDKInit(PlatformHandler.gameName,param)
+
+		if shortCut == "" then
+			PlayerPrefsEx.SetString("shortCut", "true")
+		end
 	end
 end
 

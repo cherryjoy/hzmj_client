@@ -25,13 +25,11 @@ function MainUICtrl:Init(name, id, cardNum, imageUrl)
     self.Card:set_text(string.format(Text.RoleCardNum, tostring(cardNum)))
 
     LuaUIViewCtr.FlushPortraitInfo("Home/homeHeadCusPic", imageUrl, self.Icon)
-
-    Client.TableClose = Client.TableClose - {self, MainUICtrl.TableClose}
-    Client.RefreshNumericVlaue = Client.RefreshNumericVlaue - {self, MainUICtrl.RefreshNumericVlaue}
 end
 
 function MainUICtrl:OnDestroy()
-
+    Client.TableClose = Client.TableClose - {self, MainUICtrl.TableClose}
+    Client.RefreshNumericVlaue = Client.RefreshNumericVlaue - {self, MainUICtrl.RefreshNumericVlaue}
 end
 
 function MainUICtrl:RefreshNumericVlaue()
