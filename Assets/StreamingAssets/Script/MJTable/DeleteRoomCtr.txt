@@ -31,10 +31,10 @@ function DeleteRoomCtr:Init(roleId)
     local name = tableRef.GetRoleName(tableRef, roleId)
     self.Title:set_text(string.format(Text.DeleteRoomTitle, name))
 
-    self.cd = 180
+    self.cd = 300
     self.TimeTips:set_text(string.format(Text.DeleteRoomCountDown, self.cd))
     if self.timer == nil then
-        self.timer = Timer.NewEvent(self,10,10*180,DeleteRoomCtr.DoCountDown, false, DeleteRoomCtr.DoCountDownFinish)
+        self.timer = Timer.NewEvent(self,10,10*300,DeleteRoomCtr.DoCountDown, false, DeleteRoomCtr.DoCountDownFinish)
     end
 
     -- 内容
@@ -112,8 +112,9 @@ end
 
 function DeleteRoomCtr:DoCountDownFinish()
     -- 是否发送请求结算协议
+    --ClientSendMsg.SendGameResult()
 
-    --self.gameObject:Destroy1()
+    self.gameObject:Destroy1()
 end
 
 function DeleteRoomCtr:TableClose()

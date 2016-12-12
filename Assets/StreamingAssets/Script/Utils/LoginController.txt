@@ -395,6 +395,11 @@ end
 
 --开始游戏
 function LoginController:StartGameBtn_OnClick()
+    if not self.Check:get_enabled() then
+        LuaMessageBox.ShowSingle(Text.UserProtocolTips, nil, Text.Confirm, self)
+        return
+    end
+
     if not GameDefine_isLoginDebug then
         if self.IsConnect then
             PlatformHandler.CallLogin()

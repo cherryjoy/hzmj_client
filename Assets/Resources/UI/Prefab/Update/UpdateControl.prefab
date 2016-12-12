@@ -674,7 +674,7 @@ MonoBehaviour:
   mDepth: 0
   mIsHidePanel: 0
   mAtlas: {fileID: 11450336, guid: 93e6d2d88100e9749948507d1a27beac, type: 2}
-  mSpriteName: jindutiao
+  mSpriteName: jb_white
   IsKeepOriSize: 0
   mFillCenter: 1
 --- !u!114 &11423774

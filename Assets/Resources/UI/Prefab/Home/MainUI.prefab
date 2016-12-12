@@ -241,6 +241,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 475676}
   - 114: {fileID: 11438490}
+  - 114: {fileID: 11416486}
   m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
@@ -800,7 +801,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 144078}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -344, y: -2, z: 0}
+  m_LocalPosition: {x: -344, y: -2, z: -2}
   m_LocalScale: {x: 0.9, y: 0.9, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -1198,6 +1199,43 @@ MonoBehaviour:
   audioClip: {fileID: 8300000, guid: b0e713473f4d48b4a87c07c6a8a3fbe3, type: 3}
   trigger: 0
   volume: 1
+--- !u!114 &11416486
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 144078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1267949273, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showProgress: 1
+  showInPanelTool: 1
+  depthPass: 0
+  mDebugInfo: 0
+  mClipping: 0
+  mClipRange: {x: 0, y: 0, z: 0, w: 0}
+  mClipSoftness: {x: 1, y: 1}
+  mDepthFlag: 0
+  mWorldToLocal:
+    e00: 355.55557
+    e01: 0
+    e02: 0
+    e03: 382.7778
+    e10: 0
+    e11: 355.55557
+    e12: 0
+    e13: -173.88889
+    e20: 0
+    e21: 0
+    e22: 320
+    e23: 3
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 1
+  ChangeMtl: 0
 --- !u!114 &11417336
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1358,7 +1396,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 50
   mHeight: 55
-  mDepth: 2
+  mDepth: 0
   mIsHidePanel: 0
   mAtlas: {fileID: 11495814, guid: 4692061f104ab46409ece630eec5b15a, type: 2}
   mSpriteName: homelaba
@@ -1519,7 +1557,7 @@ MonoBehaviour:
   depthPass: 0
   mDebugInfo: 0
   mClipping: 3
-  mClipRange: {x: 0, y: 0, z: 600, w: 0}
+  mClipRange: {x: 0, y: 0, z: 700, w: 0}
   mClipSoftness: {x: 1, y: 1}
   mDepthFlag: 0
   mWorldToLocal:
