@@ -88,7 +88,7 @@ public class UIHyperLabel : MonoBehaviour
 
     }
 
-    void OnDestory() {
+    void OnDestroy() {
         LuaState lua = LuaInstance.instance.Get();
         lua.L_Unref(LuaAPI.LUA_REGISTRYINDEX,ref click_func_ref);
     }
