@@ -36,6 +36,18 @@ public class TableViewDynamicHeightController : MonoBehaviour
         Init();
     }
 
+    void OnDestroy() {
+        ClearLuaRef();
+    }
+
+    void ClearLuaRef() {
+        LuaState lua_ = LuaInstance.instance.Get();
+        if (set_cell_func_ref != LuaAPI.LUA_REFNIL)
+            lua_.L_Unref(LuaAPI.LUA_REGISTRYINDEX,ref set_cell_func_ref);
+        if (cells_ref != LuaAPI.LUA_REFNIL)
+            lua_.L_Unref(LuaAPI.LUA_REGISTRYINDEX, ref cells_ref);
+    }
+
     void Update()
     {
         if (dragTargetTrans.localPosition == cachePos)
