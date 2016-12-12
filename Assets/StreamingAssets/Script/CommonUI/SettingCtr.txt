@@ -22,6 +22,8 @@ function SettingCtr:Init()
                 self.QuitRoom:SetActive(true)
             end
         end
+    else
+        self.Logout:SetActive(true)
     end
 end
 
@@ -80,4 +82,10 @@ function SettingCtr:QuitRoom_OnClick()
 
     ClientSendMsg.SendGameQuitRoom(LuaUIViewCtr.UIPanel["MJTableUI"].roomId)
     self.gameObject:Destroy1()
+end
+
+function SettingCtr:Logout_OnClick()
+    PlayerPrefsEx.SetString("userName", "")
+    PlayerPrefsEx.SetString("loginExt", "")
+    Client.LoginAgain()
 end

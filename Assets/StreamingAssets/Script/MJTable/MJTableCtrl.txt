@@ -728,6 +728,7 @@ end
 
 function MJTableCtrl:Help_OnClick()
 	local ref = LuaUIViewCtr.OpenUIHasBg("Home/HelpUI")
+    ref.Init(ref, Text.HelpContent)
 end
 
 function MJTableCtrl:Setting_OnClick()

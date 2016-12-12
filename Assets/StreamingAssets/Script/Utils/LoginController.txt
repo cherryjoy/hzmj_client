@@ -192,7 +192,10 @@ function LoginController:SeverListDownloadSuccss(xmlString)
     LoginController.CheakUpdate(self)
 
     LuaDebug.Log("serverlist download success")
-    LoginController.DefaultServerLogic(self)          --连接服务器
+    local userName = PlayerPrefsEx.GetString("userName")
+    if userName ~= "" then
+        LoginController.DefaultServerLogic(self)          --连接服务器
+    end
 
     Timer.NewEvent(self,20,20,LoginController.ShowStartGameBtn)
 end
@@ -764,4 +767,17 @@ function LoginController:CheakUpdate()
         box.gameObject:get_transform():set_localPosition(LuaVector3.Create(0,0,-550))
     end
 
+end
+
+function LoginController:AgreeProtocol_OnClick()
+    if self.Check:get_enabled() then
+        self.Check:set_enabled(false)
+    else
+        self.Check:set_enabled(true)
+    end
+end
+
+function LoginController:UserProtocol_OnClick()
+    local ref = LuaUIViewCtr.OpenUIHasBg("Home/HelpUI")
+    ref.Init(ref, Text.UserProtocol)
 end

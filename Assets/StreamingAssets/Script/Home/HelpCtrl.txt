@@ -2,8 +2,10 @@ HelpCtrl = {}
 
 function HelpCtrl:Start( )
     Client.TableClose = Client.TableClose + {self, HelpCtrl.TableClose}
+end
 
-    self.Text:set_text(Text.HelpContent)
+function HelpCtrl:Init(str)
+    self.Text:set_text(str)
 end
 
 function HelpCtrl:OnDestroy( )
