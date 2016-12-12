@@ -22,7 +22,7 @@ public static class PanelVertexBuffer
 				return bufferMaps[i];
 			}
 		}
-		if (sizeNeed >  30000)
+		if (sizeNeed >  60000)
 		{
 			UnityEngine.LKDebug.LogWarning(" Size Too Larger : " + sizeNeed);
 		}
