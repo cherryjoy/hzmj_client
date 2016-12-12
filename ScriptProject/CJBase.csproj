@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D14FAE4E-EB17-4D7E-90A8-037935F4A521}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LKBase</RootNamespace>
+    <AssemblyName>LKBase</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;UNITY_EDITOR;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_MONO;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_GENERICS;ENABLE_SUBSTANCE;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_PROFILER;UNITY_TEAM_LICENSE;UNITY_5</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_MONO;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_GENERICS;ENABLE_SUBSTANCE;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;UNITY_4_3_4;UNITY_4_3;ENABLE_PROFILER;UNITY_TEAM_LICENSE;UNITY_5;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleaseIOS|AnyCPU'">
+    <OutputPath>bin\ReleaseIOS\</OutputPath>
+    <DefineConstants>TRACE;UNITY_IPHONE;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_AUDIO_FMOD;ENABLE_MONO;ENABLE_GENERICS;ENABLE_SUBSTANCE;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;UNITY_4_3_4;UNITY_4_3;UNITY_TEAM_LICENSE;DISONGUI;ASSETBUNDLE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <DebugType>
+    </DebugType>
+    <PlatformTarget>anycpu</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleaseAndroid|AnyCPU'">
+    <OutputPath>bin\ReleaseAndroid\</OutputPath>
+    <DefineConstants>TRACE;UNITY_ANDROID;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_AUDIO_FMOD;ENABLE_MONO;ENABLE_GENERICS;ENABLE_SUBSTANCE;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;UNITY_4_3_4;UNITY_4_3;UNITY_TEAM_LICENSE;DISONGUI;ASSETBUNDLE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>lib\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UnityEditor, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\UnityEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\UnityEngine.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Bundle\" />
+    <Folder Include="Code\CJBase\NGUI\Scripts\Internal\Code\LKBaseUI\" />
+    <Folder Include="Code\CJBase\NGUI\Shaders\" />
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Code\CJBase\DataMgr\AutherFile.cs" />
+    <Compile Include="Code\CJBase\DataMgr\CDataMgr.cs" />
+    <Compile Include="Code\CJBase\DataMgr\ResLoader.cs" />
+    <Compile Include="Code\CJBase\DataMgr\WDBBase\WDBCommon.cs" />
+    <Compile Include="Code\CJBase\DataMgr\WDBBase\WDBData.cs" />
+    <Compile Include="Code\CJBase\GameLua\ClassWrapper\LuaClassFactory.cs" />
+    <Compile Include="Code\CJBase\GameLua\ClassWrapper\LuaDateTime.cs" />
+    <Compile Include="Code\CJBase\GameLua\ClassWrapper\LuaDebug.cs" />
+    <Compile Include="Code\CJBase\GameLua\ClassWrapper\LuaNetwork.cs" />
+    <Compile Include="Code\CJBase\GameLua\ClassWrapper\LuaNTools.cs" />
+    <Compile Include="Code\CJBase\GameLua\ClassWrapper\LuaDBTable.cs" />
+    <Compile Include="Code\CJBase\GameLua\ClassWrapper\LuaUtil.cs" />
+    <Compile Include="Code\CJBase\GameLua\GameCoreUpdate.cs" />
+    <Compile Include="Code\CJBase\GameLua\LuaBehaviour.cs" />
+    <Compile Include="Code\CJBase\GameLua\LuaBehaviourUpdate.cs" />
+    <Compile Include="Code\CJBase\GameLua\LuaClass.cs" />
+    <Compile Include="Code\CJBase\GameLua\LuaClassList.cs" />
+    <Compile Include="Code\CJBase\GameLua\ClientInitController.cs" />
+    <Compile Include="Code\CJBase\GameLua\LuaDragReceiver.cs" />
+    <Compile Include="Code\CJBase\GameLua\LuaHoverMessageReceiver.cs" />
+    <Compile Include="Code\CJBase\GameLua\LuaInstance.cs" />
+    <Compile Include="Code\CJBase\GameLua\ClassWrapper\LuaLong.cs" />
+    <Compile Include="Code\CJBase\GameLua\LuaMessageReceiver.cs" />
+    <Compile Include="Code\CJBase\GameLua\LuaObject.cs" />
+    <Compile Include="Code\CJBase\GameLua\LuaPressMessageReceiver.cs" />
+    <Compile Include="Code\CJBase\GameLua\MsgRecv.cs" />
+    <Compile Include="Code\CJBase\GameLua\MsgRecvWithId.cs" />
+    <Compile Include="Code\CJBase\GameLua\LuaWrapper.cs" />
+    <Compile Include="Code\CJBase\GameLua\Register.cs" />
+    <Compile Include="Code\CJBase\GameLua\StructWrapper\LuaColor.cs" />
+    <Compile Include="Code\CJBase\GameLua\StructWrapper\LuaQuaternion.cs" />
+    <Compile Include="Code\CJBase\GameLua\StructWrapper\LuaVector3.cs" />
+    <Compile Include="Code\CJBase\GameLua\UniLua\CSharpFunctionDelegate.cs" />
+    <Compile Include="Code\CJBase\GameLua\UniLua\LuaAPI.cs" />
+    <Compile Include="Code\CJBase\GameLua\UniLua\LuaObjectPool.cs" />
+    <Compile Include="Code\CJBase\GameLua\UniLua\LuaState.cs" />
+    <Compile Include="Code\CJBase\GameLua\UniLua\LuaType.cs" />
+    <Compile Include="Code\CJBase\GameLua\UniLua\ThreadStatus.cs" />
+    <Compile Include="Code\CJBase\GameQualityChecker.cs" />
+    <Compile Include="Code\CJBase\Gem\GemSingleton.cs" />
+    <Compile Include="Code\CJBase\Gem\GemType.cs" />
+    <Compile Include="Code\CJBase\Gem\UIPathManager.cs" />
+    <Compile Include="Code\CJBase\GlobalUpdate.cs" />
+    <Compile Include="Code\CJBase\GMWindow.cs" />
+    <Compile Include="Code\CJBase\HashSecurity.cs" />
+    <Compile Include="Code\CJBase\LogSystem.cs" />
+    <Compile Include="Code\CJBase\MusicManager.cs" />
+    <Compile Include="Code\CJBase\Net\ClientHandleMessage.cs" />
+    <Compile Include="Code\CJBase\Net\ClientNetWork.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Code\CJBase\Net\ClientSendMessage.cs" />
+    <Compile Include="Code\CJBase\Net\ENetMessageID.cs" />
+    <Compile Include="Code\CJBase\Net\NetStreamReader.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Code\CJBase\Net\NetStreamWriter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Code\CJBase\Net\NetWorkGlobal.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Code\CJBase\Net\PingManager.cs" />
+    <Compile Include="Code\CJBase\Net\UnSafeMsgStruct\UsStructTo.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\ClipboardHelper.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\ClipOccur.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Helper\AutoDestroy.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Helper\AutoDisable.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Helper\UIHideParent.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Helper\UIPrefabDummy.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\LanguageSelection.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\UIAddPage.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\UIButtonColor.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\UIButtonKeys.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\UIButtonMessage.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\UIButtonOffset.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\UIButtonOutScript.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\UIButtonPlayAnimation.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\UIButtonRotation.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\UIButtonScale.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\UIButtonSound.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\UIButtonText.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\UIButtonTween.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\UICheckbox.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\UICheckboxControlledComponent.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\UICheckboxControlledObject.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\UIDragCamera.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\UIDragObject.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\UIDragPage.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\UIDragPageEx.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\UIDragRefresh.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\UIDragXPage.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\UIForwardEvents.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\UIGrid.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\UIImageButton.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\UIImageButtonSimple.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\UIPageController.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\UIPageControllerEx.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\UIPageControllerPosition.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\UIPopupList.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\UIRadioButton.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\UIRadioComplexButton.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\UIRadioLableButton.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\UIRadioScaleButton.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\UIRadioUnactiveButton.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\UISelectButton.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\UISlider.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\UISliderColors.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\UITable.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\UITurnButtonController.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Interaction\UIWorldRadioButton.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Internal\ActiveAnimation.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Internal\AnimationOrTween.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Internal\BetterList.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Internal\BMFont.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Internal\BMGlyph.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Internal\ByteReader.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Internal\IgnoreTimeScale.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Internal\Localization.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Internal\NGUIDebug.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Internal\NGUIMath.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Internal\NGUITools.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Internal\NGUITools_CreateUtil.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Internal\UIDragRotation.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Internal\UIDrawCall.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Internal\UIEventListener.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Internal\UIGeometry.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Internal\UIOrder.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Internal\UIWidget.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Internal\UpdateManager.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\LKDebug.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Other\AutoFullScreenScale.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Other\AutoScreenScale.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Other\ChatInput.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Other\LagPosition.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Other\LagRotation.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Other\LoadLevelOnClick.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Other\PanWithMouse.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Other\PlayIdleAnimations.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Other\SetColorOnSelection.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Other\ShaderQuality.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Other\Spin.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Other\SpinWithMouse.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Other\TypewriterEffect.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Other\WindowAutoYaw.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Other\WindowDragTilt.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Tweening\SpringPosition.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Tweening\SpringRotation.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Tweening\TweenColor.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Tweening\TweenColorAlpha.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Tweening\TweenNumRoll.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Tweening\TweenPosition.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Tweening\TweenRegion.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Tweening\TweenRotation.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Tweening\TweenScale.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Tweening\TweenTransform.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Tweening\TweenWait.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Tweening\TweenWorldPosition.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\Tweening\UITweener.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\UI\AccountManager.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\UI\CenterMultiWidget.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\UI\GridViewController.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\UI\TableViewDynamicHeightController.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\UI\UIHyperLabel.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\UI\NGUIText.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\UI\PanelVertexBuffer.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\UI\UIAnchor.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\UI\UIAtlas.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\UI\UICamera.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\UI\UIColorLabel.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\UI\UIColorSprite.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\UI\UIDisable.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\UI\UIEqualRatioScale.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\UI\UIFilledSprite.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\UI\UIFont.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\UI\UIInput.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\UI\UIInputSaved.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\UI\UILabel.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\UI\UILocalAnchor.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\UI\UILocalize.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\UI\UIMatchSize.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\UI\UIOrthoCamera.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\UI\UIPanel.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\UI\UIParticle.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\UI\UIRoot.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\UI\UISlicedSprite.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\UI\UISprite.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\UI\UISprite2color.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\UI\UISpriteAnimation.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\UI\UITextList.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\UI\UITexture.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\UI\UITextureAnimation.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\UI\UITiledSprite.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\UI\UITrail.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\UI\UIViewport.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\UI\TableViewController.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\UI\UIVoiceChat.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\UI\UIWidgetScaleDependOnOther.cs" />
+    <Compile Include="Code\CJBase\Platform\PlatformSDKController.cs" />
+    <Compile Include="Code\CJBase\Platform\PlatformState.cs" />
+    <Compile Include="Code\CJBase\Platform\WWWPortraitLoader.cs" />
+    <Compile Include="Code\CJBase\PlayerPrefsEx.cs" />
+    <Compile Include="Code\CJBase\PluginTool.cs" />
+    <Compile Include="Code\CJBase\TextureMgr.cs" />
+    <Compile Include="Code\CJBase\Timer.cs" />
+    <Compile Include="Code\CJBase\NGUI\Scripts\UI\UILineFlowLayout .cs" />
+    <Compile Include="Code\CJBase\RecordVoice.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
