@@ -1055,7 +1055,8 @@ public class BuildAssetBundle : EditorWindow
                                      "/ui/atlas/bit32/base",
                                      "/ui/atlas/bit32/login",
                                      "/ui/fonts/msyh",
-                                     "/ui/prefab/UpdateControl",
+                                     "/ui/prefab/update_prefab",
+                                     "/ui/prefab/commonui_prefab",
                                      "/ui/prefab/toolsui/messagebox",
                                      "/assetbundles","/shader"};
 
