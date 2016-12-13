@@ -980,7 +980,7 @@ GameObject:
   - 114: {fileID: 11493300}
   - 114: {fileID: 11478792}
   m_Layer: 8
-  m_Name: Help
+  m_Name: Chat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2284,7 +2284,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 155994}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -35, y: -2, z: 0}
+  m_LocalPosition: {x: 35, y: -70, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -3009,7 +3009,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 70, y: 81, z: 1}
+  m_Size: {x: 70, y: 70, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6549700
 BoxCollider:
@@ -3057,7 +3057,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 70, y: 81, z: 1}
+  m_Size: {x: 70, y: 70, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6578672
 BoxCollider:
@@ -4274,10 +4274,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targets:
   - {fileID: 11498840}
-  normalSprite: bangzhu
-  hoverSprite: bangzhu
-  pressedSprite: bangzhu_h
-  disableSprite: bangzhu
+  normalSprite: chat
+  hoverSprite: chat
+  pressedSprite: chat_h
+  disableSprite: chat
 --- !u!114 &11444900
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5704,7 +5704,7 @@ MonoBehaviour:
   mDepth: 30
   mIsHidePanel: 0
   mAtlas: {fileID: 11450336, guid: 93e6d2d88100e9749948507d1a27beac, type: 2}
-  mSpriteName: bangzhu
+  mSpriteName: chat
   IsKeepOriSize: 0
   mFillCenter: 1
 --- !u!1001 &100100000

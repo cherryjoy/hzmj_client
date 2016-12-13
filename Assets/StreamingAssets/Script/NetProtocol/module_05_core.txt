@@ -4271,11 +4271,14 @@ function PBBalanceInfo.DeSerialize(obj)
 	if(has_optional_flag(7,optionLength,option)) then
 		obj.username = deserialize_string()
 	end
+	if(has_optional_flag(8,optionLength,option)) then
+		obj.host = deserialize_int32()
+	end
 	return obj
 end
 
 function PBBalanceInfo.Serialize(obj)
-	local fieldCount = 8
+	local fieldCount = 9
 	serialize_int32(fieldCount)
 	local flag = {}
 	if(obj.roleid ~= nil) then
@@ -4318,6 +4321,11 @@ function PBBalanceInfo.Serialize(obj)
 	else
 		flag[8] = false
 	end
+	if(obj.host ~= nil) then
+		flag[9] = true
+	else
+		flag[9] = false
+	end
 	serialize_optional(flag)
 	if(obj.roleid ~= nil) then
 		serialize_int32(obj.roleid)
@@ -4342,6 +4350,9 @@ function PBBalanceInfo.Serialize(obj)
 	end
 	if(obj.username ~= nil) then
 		serialize_string(obj.username)
+	end
+	if(obj.host ~= nil) then
+		serialize_int32(obj.host)
 	end
 end
 
@@ -4371,6 +4382,9 @@ function PBBalanceInfo.GetSize(obj)
 	if (obj.username ~= nil) then
 		local sizeStr = string.len(obj.username)
 		size = size + serialize_get_str_actual_size(sizeStr)
+	end
+	if (obj.host ~= nil) then
+		size = size + 4
 	end
 	size = size + 7
 	return size

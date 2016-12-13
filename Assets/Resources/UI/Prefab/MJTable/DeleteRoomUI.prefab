@@ -218,6 +218,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &172924
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 463684}
+  - 114: {fileID: 11488076}
+  - 114: {fileID: 11440734}
+  m_Layer: 8
+  m_Name: WaitTips
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &185096
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,6 +374,7 @@ Transform:
   - {fileID: 424702}
   - {fileID: 406932}
   - {fileID: 476282}
+  - {fileID: 463684}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &423228
@@ -413,6 +431,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 414340}
   m_RootOrder: 3
+--- !u!4 &463684
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 172924}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -145, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 414340}
+  m_RootOrder: 11
 --- !u!4 &471348
 Transform:
   m_ObjectHideFlags: 1
@@ -808,6 +839,19 @@ MonoBehaviour:
   mAtlas: {fileID: 11450336, guid: 93e6d2d88100e9749948507d1a27beac, type: 2}
   mSpriteName: fanhuidatingdianji
   IsKeepOriSize: 0
+--- !u!114 &11440734
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 172924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 403543416, guid: f1bae04813ec7b648a64859185b83283, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTextKeyID: DeleteRoomWaitTips
+  textLabel: {fileID: 11488076}
 --- !u!114 &11447276
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -997,6 +1041,10 @@ MonoBehaviour:
     regObj: {fileID: 153460}
     Name: 
     TypeIndex: 5
+  - Obj: {fileID: 172924}
+    regObj: {fileID: 11488076}
+    Name: 
+    TypeIndex: 1
   LuaBehavArray: []
   IsOnClickPassGameObject: 0
   isArray: 0
@@ -1025,7 +1073,7 @@ MonoBehaviour:
     e00: 320
     e01: 0
     e02: 0
-    e03: 0.49999237
+    e03: 0.50001097
     e10: 0
     e11: 320
     e12: 0
@@ -1074,6 +1122,42 @@ MonoBehaviour:
   mAtlas: {fileID: 11450336, guid: 93e6d2d88100e9749948507d1a27beac, type: 2}
   mSpriteName: Z_tankuang_c
   IsKeepOriSize: 0
+--- !u!114 &11488076
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 172924}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1348251788, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  changeFlag: -1
+  mMat: {fileID: 0}
+  mColor: {r: 0.96862745, g: 0.76862746, b: 0.3647059, a: 1}
+  mPivot: 4
+  mWidth: 22
+  mHeight: 22
+  mDepth: 10
+  mIsHidePanel: 0
+  mText: Text not Found!
+  mMaxLineWidth: 0
+  mEncoding: 1
+  mMultiline: 1
+  mPassword: 0
+  mShowLastChar: 0
+  mEffectStyle: 0
+  mEffectColor: {r: 0, g: 0, b: 0, a: 1}
+  mTopColor: {r: 1, g: 1, b: 1, a: 1}
+  mBottomColor: {r: 1, g: 1, b: 1, a: 1}
+  mSpaceingY: 0
+  mSpaceingX: 0
+  mFontSize: 24
+  mFontStyle: 0
+  mTrueTypeFont: {fileID: 0}
+  mLineWidth: 0
+  fixedWidthForChinese: 0
 --- !u!114 &11488856
 MonoBehaviour:
   m_ObjectHideFlags: 1

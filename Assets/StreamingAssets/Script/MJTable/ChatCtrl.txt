@@ -1,0 +1,9 @@
+ChatCtrl = {}
+
+function ChatCtrl:Start( )
+
+end
+
+function ChatCtrl:OnDestroy( )
+
+end
