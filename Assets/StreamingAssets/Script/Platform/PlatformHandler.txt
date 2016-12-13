@@ -206,7 +206,9 @@ function PlatformHandler.onEnterFinish(msg)
 end
 
 function PlatformHandler:EnterRoom()
-	ClientSendMsg.SendEnterRoom(Client.RoleInfo.RoleID, Client.roomId)
+	if Client.m_CurrentState == EClientState.E_CS_Hall then
+		ClientSendMsg.SendEnterRoom(Client.RoleInfo.RoleID, Client.roomId)
+	end
 end
 
 function PlatformHandler.onLogoutFinish(msg)

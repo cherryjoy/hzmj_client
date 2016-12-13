@@ -26,6 +26,7 @@ function DeleteRoomCtr:Init(roleId)
     if roleId == Client.RoleInfo.RoleID then
         self.Agree:SetActive(false)
         self.Refuse:SetActive(false)
+        self.WaitTips:set_enabled(true)
     end
 
     local name = tableRef.GetRoleName(tableRef, roleId)
@@ -62,6 +63,7 @@ function DeleteRoomCtr:AgreeState(deleteList)
         if deleteList[k].roleid == Client.RoleInfo.RoleID then
             self.Agree:SetActive(false)
             self.Refuse:SetActive(false)
+            self.WaitTips:set_enabled(true)
         end
 
         if deleteList[k].agree ~= 0 then

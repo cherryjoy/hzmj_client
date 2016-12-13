@@ -13,14 +13,14 @@ function SettingCtr:Init()
     self.Voice:rawValue(PlayerPrefsEx.GetFloat("ggmValue"))
 
     if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil then
-        if Client.m_CurrentState == EClientState.E_CS_Table then
-            self.DeleteRoom:SetActive(true)
-        elseif Client.m_CurrentState == EClientState.E_CS_TableReady then
+        if Client.m_CurrentState == EClientState.E_CS_TableReady and Client.RoleInfo.Used == 0 then
             if Client.RoleInfo.RoleID == LuaUIViewCtr.UIPanel["MJTableUI"].GetHostId(LuaUIViewCtr.UIPanel["MJTableUI"]) then
                 self.DeleteRoom:SetActive(true)
             else
                 self.QuitRoom:SetActive(true)
             end
+        else
+            self.DeleteRoom:SetActive(true)
         end
     else
         self.Logout:SetActive(true)
@@ -59,9 +59,7 @@ function SettingCtr:DeleteRoom_OnClick()
         return
     end
 
-    if Client.m_CurrentState == EClientState.E_CS_Table then
-        ClientSendMsg.SendRoomDeleteConfirm(LuaUIViewCtr.UIPanel["MJTableUI"].roomId)
-    elseif Client.m_CurrentState == EClientState.E_CS_TableReady then
+    if Client.m_CurrentState == EClientState.E_CS_TableReady and Client.RoleInfo.Used == 0 then
         local prefab = LuaUIViewCtr.OpenUIHasBg("ToolsUI/MessageBox")
         LuaMessageBox.SetDataTable(prefab, {Message = Text.DeleteRoomConfirm,
                                             ConfirmName = Text.Confirm ,ConfirmFunc = function()
@@ -69,6 +67,8 @@ function SettingCtr:DeleteRoom_OnClick()
                                             end,
                                             CancelName = Text.Cancel ,CancelFunc = nil,
                                             ref=self})
+    else
+        ClientSendMsg.SendRoomDeleteConfirm(LuaUIViewCtr.UIPanel["MJTableUI"].roomId)
     end
 
     self.gameObject:Destroy1()

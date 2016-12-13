@@ -13,11 +13,11 @@ function HeadInfo:Init(info)
 
     self.Name:set_text(info.rolename)
     self.ID:set_text(string.format(Text.BalanceRoleId, info.roleid))
-    --[[
+
     if info.host ~= 0 then
         self.FangZhu:SetActive(true)
     end
-
+    --[[
     if info.makers ~= 0 then
         self.Zhuang:SetActive(true)
     end
