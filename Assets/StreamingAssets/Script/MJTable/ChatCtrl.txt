@@ -1,9 +1,39 @@
 ChatCtrl = {}
 
 function ChatCtrl:Start( )
+    for i = 1, 7 do
+        local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/ChatWordCell",self.WordGrid:get_gameObject())
+        ref.Init(ref, i, self)
+        ref.Drag:target(self.WordGrid:get_transform())
+    end
 
+    self.initEmotion = false
 end
 
 function ChatCtrl:OnDestroy( )
 
+end
+
+function ChatCtrl:Word_OnClick()
+    self.WordPanel:SetActive(true)
+    self.EmotionPanel:SetActive(false)
+end
+
+function ChatCtrl:Emotion_OnClick()
+    self.WordPanel:SetActive(false)
+    self.EmotionPanel:SetActive(true)
+
+    if not self.initEmotion then
+        for i = 1, 63 do
+            local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/ChatEmotionCell",self.EmotionGrid:get_gameObject())
+            ref.Init(ref, i, self)
+            ref.Drag:target(self.EmotionGrid:get_transform())
+        end
+
+        self.initEmotion = true
+    end
+end
+
+function ChatCtrl:Mask_OnClick()
+    self.gameObject:Destroy1()
 end

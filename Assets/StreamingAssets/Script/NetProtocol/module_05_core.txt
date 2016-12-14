@@ -102,6 +102,21 @@ enumEMCJLogInOutReason = {
 	EMCJ_LEAVE_SELF = 11,
 }
 
+enumEMCJErrorCode = {
+	EMCJ_CARD_NOT_ENOUGH = 1000,
+	EMCJ_ROOM_NOT_EXIST = 1001,
+	EMCJ_READY_NOT_EXIST = 1002,
+	EMCJ_ROOM_OVER = 1003,
+	EMCJ_NOT_REAL_WIN = 1004,
+	EMCJ_NOT_REPLY_RESULT = 1005,
+	EMCJ_ROOM_FULL = 1006,
+	EMCJ_NOT_IN_ROOM = 1007,
+	EMCJ_NO_ENTER_ROOM = 1008,
+	EMCJ_PLAYER_SESSION_FAIL = 10000,
+	EMCJ_USER_ACCOUNT_CREATE_DUPLICATE_NAME = 10001,
+	EMCJ_USER_ACCOUNT_CREATE_INVALID_NAME = 10002,
+}
+
 enumROOM_CHAT_TYPE = {
 	EM_CHAT_WORD_TYPE = 1,
 	EM_CHAT_VOIC_TYPE = 2,
@@ -292,6 +307,33 @@ function PB_LOGIN_OUT_REASON.Serialize(obj)
 end
 
 function PB_LOGIN_OUT_REASON.GetSize(obj)
+	local size = 0
+	size = size + 5
+	return size
+end
+
+-- PB_CJ_ERROR_CODE
+PB_CJ_ERROR_CODE = {}
+PB_CJ_ERROR_CODE.__index = PB_CJ_ERROR_CODE
+function PB_CJ_ERROR_CODE.Create()
+	local obj = setmetatable({},PB_CJ_ERROR_CODE)
+	return obj
+end
+
+function PB_CJ_ERROR_CODE.DeSerialize(obj)
+	local fieldCount = deserialize_int32()
+	local option,optionLength = deserialize_optional()
+	return obj
+end
+
+function PB_CJ_ERROR_CODE.Serialize(obj)
+	local fieldCount = 0
+	serialize_int32(fieldCount)
+	local flag = {}
+	serialize_optional(flag)
+end
+
+function PB_CJ_ERROR_CODE.GetSize(obj)
 	local size = 0
 	size = size + 5
 	return size

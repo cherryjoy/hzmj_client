@@ -1,0 +1,22 @@
+ChatWordCell = {}
+
+function ChatWordCell:Start( )
+
+end
+
+function ChatWordCell:OnDestroy( )
+
+end
+
+function ChatWordCell:Init(index, chatCtrl)
+    self.chatCtrl = chatCtrl
+    self.index = index
+    self.Text:set_text(Text["chatword"..index])
+end
+
+function ChatWordCell:Line_OnClick()
+    Client.PlayChatContent:Do(Client.RoleInfo.RoleID, enumROOM_CHAT_TYPE.EM_CHAT_WORD_TYPE, self.index)
+    ClientSendMsg.SendGameRoomChat(enumROOM_CHAT_TYPE.EM_CHAT_WORD_TYPE, tostring(self.index))
+
+    self.chatCtrl.gameObject:Destroy1()
+end

@@ -114,25 +114,36 @@ end
 HandleFuncs[enumMSGID_MODULE_05.ID_ERROR_CODE_NOTICE] = function(data, dataLength)
     local data = LuaProto.deserialize(PBMsgErrorCodeNotice, data, dataLength)
 
-    LuaDebug.Log("errcode: "..data.err_code)
-    LuaDebug.Log("err_type: "..data.err_type)
-    -- ERR_PLAYER_SESSION_FAIL -10000，需要重新登录
+    LuaDebug.Log("errcode: "..data.err_code) -- 错误码
+    LuaDebug.Log("err_type: "..data.err_type) -- msgid
+    if data.err_code == enumEMCJErrorCode.EMCJ_CARD_NOT_ENOUGH then
+        LuaMessageBox.ShowSingle(Text.CreateRoomNotCards, nil, Text.Confirm, self)
+    elseif data.err_code == enumEMCJErrorCode.EMCJ_ROOM_NOT_EXIST then
+        LuaMessageBox.ShowSingle(Text.RoomNotExist, nil, Text.Confirm, self)
+    elseif data.err_code == enumEMCJErrorCode.EMCJ_READY_NOT_EXIST then
 
-    for i = 1, #data.err_para do
-        LuaDebug.Log("err_para "..i.." : "..data.err_para[i])
-        if data.err_para[i] == 1100 then
-            LuaMessageBox.ShowSingle(Text.CreateRoomNotCards, nil, Text.Confirm, self)
-        elseif data.err_para[i] == 1000 then -- 房间不存在
-            LuaMessageBox.ShowSingle(Text.RoomNotExist, nil, Text.Confirm, self)
-        elseif data.err_para[i] == 1001 then -- 房间已满
-            LuaMessageBox.ShowSingle(Text.RoomNumIsFull, nil, Text.Confirm, self)
-        elseif data.err_para[i] == 2001 then -- 牌局已结束
-            Client.TableClose:Do()
+    elseif data.err_code == enumEMCJErrorCode.EMCJ_ROOM_OVER then
+        Client.TableClose:Do()
+    elseif data.err_code == enumEMCJErrorCode.EMCJ_NOT_REAL_WIN then
+
+    elseif data.err_code == enumEMCJErrorCode.EMCJ_NOT_REPLY_RESULT	then
+
+    elseif data.err_code == enumEMCJErrorCode.EMCJ_ROOM_FULL then
+        LuaMessageBox.ShowSingle(Text.RoomNumIsFull, nil, Text.Confirm, self)
+    elseif data.err_code == enumEMCJErrorCode.EMCJ_NOT_IN_ROOM then
+
+    elseif data.err_code == enumEMCJErrorCode.EMCJ_NO_ENTER_ROOM then
+        if data.err_para ~= nil and #(data.err_para) > 0 then
+            local roomId = data.err_para[1]
+            ClientSendMsg.SendEnterRoom(Client.RoleInfo.RoleID, roomId)
+            LogError.Log("EMCJ_NO_ENTER_ROOM roomId: "..roomId)
         end
-    end
-
-    if data.err_code == -10000 then
+    elseif data.err_code == enumEMCJErrorCode.EMCJ_PLAYER_SESSION_FAIL then
         Client.SeriousError(Text.SessionFailed)
+    elseif data.err_code == enumEMCJErrorCode.EMCJ_USER_ACCOUNT_CREATE_DUPLICATE_NAME then
+
+    elseif data.err_code == enumEMCJErrorCode.EMCJ_USER_ACCOUNT_CREATE_INVALID_NAME then
+
     end
 end
 

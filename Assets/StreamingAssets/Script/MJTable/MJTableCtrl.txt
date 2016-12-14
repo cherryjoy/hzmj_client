@@ -16,6 +16,7 @@ function MJTableCtrl:Start( )
     Client.TableClose = Client.TableClose + {self, MJTableCtrl.TableClose}
     Client.PlayRecordVoice = Client.PlayRecordVoice + {self, MJTableCtrl.PlayRecordVoice}
     Client.NetConnectSuccess = Client.NetConnectSuccess + {self,MJTableCtrl.NetConnectSuccess}
+    Client.PlayChatContent = Client.PlayChatContent + {self, MJTableCtrl.PlayChatContent}
 end
 
 function MJTableCtrl:OnDestroy( )
@@ -683,8 +684,28 @@ function MJTableCtrl:HandleGameRoomChat(typeId, context, roleId)
         return
     end
 
-    local url = Client.voiceUrl.."download/?"
-	WWWPortraitLoader.DownLoadVoice(url, context, roleId, "DownLoadVoiceSuccess", "DownLoadVoiceFail")
+    if typeId == enumROOM_CHAT_TYPE.EM_CHAT_WORD_TYPE then
+        MJTableCtrl.PlayChatContent(self, roleId, typeId, context)
+    elseif typeId == enumROOM_CHAT_TYPE.EM_CHAT_EXPR_TYPE then
+        MJTableCtrl.PlayChatContent(self, roleId, typeId, context)
+    elseif typeId == enumROOM_CHAT_TYPE.EM_CHAT_VOIC_TYPE then
+        local url = Client.voiceUrl.."download/?"
+	    WWWPortraitLoader.DownLoadVoice(url, context, roleId, "DownLoadVoiceSuccess", "DownLoadVoiceFail")
+    end
+end
+
+function MJTableCtrl:PlayChatContent(roleId, type, indexStr)
+    if type == enumROOM_CHAT_TYPE.EM_CHAT_WORD_TYPE then
+        LuaDebug.Log("Music/Chat/chatword"..indexStr)
+        -- 播放声音
+        NGUITools.PlaySoundByPath("Music/Chat/chatword"..indexStr)
+    end
+
+    for i = 1, 4 do
+        if self["Drect"..i].roleId == roleId then
+            self["Drect"..i].TableHead.PlayChatContent(self["Drect"..i].TableHead, type, indexStr, i)
+        end
+    end
 end
 
 function MJTableCtrl:PlayRecordVoice(roleId, length)
@@ -697,7 +718,7 @@ function MJTableCtrl:PlayRecordVoice(roleId, length)
 
     for i = 1, 4 do
         if self["Drect"..i].roleId == roleId then
-            self["Drect"..i].TableHead.PlayRecordVoice(self["Drect"..i].TableHead, len)
+            self["Drect"..i].TableHead.PlayRecordVoice(self["Drect"..i].TableHead, len, i)
         end
     end
 end

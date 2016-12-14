@@ -1064,11 +1064,11 @@ MonoBehaviour:
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 37
-  mHeight: 43
+  mHeight: 37
   mDepth: 3
   mIsHidePanel: 0
   mAtlas: {fileID: 11450336, guid: 93e6d2d88100e9749948507d1a27beac, type: 2}
-  mSpriteName: xiaohongdian
+  mSpriteName: tishihongdian
   IsKeepOriSize: 0
 --- !u!114 &11433706
 MonoBehaviour:
@@ -1086,11 +1086,11 @@ MonoBehaviour:
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 37
-  mHeight: 43
+  mHeight: 37
   mDepth: 3
   mIsHidePanel: 0
   mAtlas: {fileID: 11450336, guid: 93e6d2d88100e9749948507d1a27beac, type: 2}
-  mSpriteName: xiaohongdian
+  mSpriteName: tishihongdian
   IsKeepOriSize: 0
 --- !u!114 &11435342
 MonoBehaviour:

@@ -28,7 +28,32 @@ function TableHead:Init(info)
     end
 end
 
-function TableHead:PlayRecordVoice(length)
+function TableHead:PlayChatContent(type, indexStr, i)
+    if type == enumROOM_CHAT_TYPE.EM_CHAT_EXPR_TYPE then
+        local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/ChatEmotionCell",self.gameObject)
+        ref.Init(ref, tonumber(indexStr), self)
+        ref.BoxCollider:set_enabled(false)
+        ref.TweenPos:set_enabled(true)
+        ref.TweenAlpha:set_enabled(true)
+        ref.gameObject:get_transform():set_localScale(LuaVector3.Create(1.5, 1.5, 1))
+    elseif type == enumROOM_CHAT_TYPE.EM_CHAT_WORD_TYPE then
+        local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/ChatWord",self.gameObject)
+        ref.Init(ref, tonumber(indexStr))
+
+        if i == 2 or i == 3 then
+            ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(-300, -60, 0))
+            ref.Background:get_transform():set_localPosition(LuaVector3.Create(250, 0, 0))
+            ref.Background:get_transform():set_localScale(LuaVector3.Create(1, 1, 1))
+        end
+    end
+end
+
+function TableHead:PlayRecordVoice(length, i)
+    if i == 2 or i == 3 then
+        ref.Speak:get_transform():set_localPosition(LuaVector3.Create(-60, 0, 0))
+        ref.Speak:get_transform():set_localScale(LuaVector3.Create(-1, 1, 1))
+    end
+
     self.Speak:set_spriteName("speak0")
     self.Speak:set_enabled(true)
     self.PlayNum = 0

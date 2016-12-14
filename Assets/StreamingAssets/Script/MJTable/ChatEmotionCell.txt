@@ -1,0 +1,29 @@
+ChatEmotionCell = {}
+
+function ChatEmotionCell:Start( )
+
+end
+
+function ChatEmotionCell:OnDestroy( )
+
+end
+
+function ChatEmotionCell:Init(index, chatCtrl)
+    self.chatCtrl = chatCtrl
+    self.index = index
+    self.Emotion:set_spriteName("e"..index)
+end
+
+function ChatEmotionCell:Emotion_OnClick()
+    Client.PlayChatContent:Do(Client.RoleInfo.RoleID, enumROOM_CHAT_TYPE.EM_CHAT_EXPR_TYPE, self.index)
+
+    ClientSendMsg.SendGameRoomChat(enumROOM_CHAT_TYPE.EM_CHAT_EXPR_TYPE, tostring(self.index))
+
+    self.chatCtrl.gameObject:Destroy1()
+end
+
+function ChatEmotionCell:Emotion_TweenEnd()
+    LuaDebug.Log("Emotion_TweenEnd")
+
+    self.gameObject:Destroy1()
+end

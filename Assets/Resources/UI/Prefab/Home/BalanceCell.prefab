@@ -360,7 +360,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 109802}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -300, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -597,7 +597,7 @@ MonoBehaviour:
   mDepth: 10
   mIsHidePanel: 0
   mText: "\u6797\u98CE000000000000"
-  mMaxLineWidth: 140
+  mMaxLineWidth: 120
   mEncoding: 1
   mMultiline: 0
   mPassword: 0
@@ -721,14 +721,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   changeFlag: -1
   mMat: {fileID: 2100000, guid: 241c457ed1d7bb34da265e04ba211dd5, type: 2}
-  mColor: {r: 1, g: 1, b: 1, a: 0.27450982}
+  mColor: {r: 1, g: 1, b: 1, a: 0.5019608}
   mPivot: 4
-  mWidth: 530
+  mWidth: 500
   mHeight: 2
   mDepth: 3
   mIsHidePanel: 0
   mAtlas: {fileID: 11450336, guid: 93e6d2d88100e9749948507d1a27beac, type: 2}
-  mSpriteName: gk_saodangditu
+  mSpriteName: playerinfoline
   IsKeepOriSize: 0
 --- !u!114 &11441386
 MonoBehaviour:
@@ -750,7 +750,7 @@ MonoBehaviour:
   mDepth: 10
   mIsHidePanel: 0
   mText: "\u6797\u98CE\u6797\u98CE\u6797\u98CE\u6797\u98CE"
-  mMaxLineWidth: 140
+  mMaxLineWidth: 120
   mEncoding: 1
   mMultiline: 0
   mPassword: 0
@@ -858,7 +858,7 @@ MonoBehaviour:
   mDepth: 10
   mIsHidePanel: 0
   mText: "\u6797\u98CE"
-  mMaxLineWidth: 140
+  mMaxLineWidth: 120
   mEncoding: 1
   mMultiline: 0
   mPassword: 0
@@ -894,7 +894,7 @@ MonoBehaviour:
   mDepth: 10
   mIsHidePanel: 0
   mText: "\u6797\u98CE"
-  mMaxLineWidth: 140
+  mMaxLineWidth: 120
   mEncoding: 1
   mMultiline: 0
   mPassword: 0
