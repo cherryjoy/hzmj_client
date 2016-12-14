@@ -47,7 +47,7 @@ MonoBehaviour:
     outer:
       serializedVersion: 2
       x: 0
-      y: 841
+      y: 814
       width: 94
       height: 92
     outerOffset:
@@ -59,13 +59,13 @@ MonoBehaviour:
     oriOuter:
       serializedVersion: 2
       x: 0
-      y: 841
+      y: 814
       width: 94
       height: 92
     inner:
       serializedVersion: 2
       x: 20
-      y: 861
+      y: 834
       width: 54
       height: 52
     paddingLeft: 0
@@ -75,8 +75,8 @@ MonoBehaviour:
   - name: anniudikuang2
     outer:
       serializedVersion: 2
-      x: 0
-      y: 742
+      x: 60
+      y: 926
       width: 182
       height: 98
     outerOffset:
@@ -87,14 +87,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 0
-      y: 742
+      x: 60
+      y: 926
       width: 182
       height: 98
     inner:
       serializedVersion: 2
-      x: 0
-      y: 742
+      x: 60
+      y: 926
       width: 182
       height: 98
     paddingLeft: 0
@@ -104,8 +104,8 @@ MonoBehaviour:
   - name: anniudikuang
     outer:
       serializedVersion: 2
-      x: 125
-      y: 926
+      x: 0
+      y: 715
       width: 185
       height: 98
     outerOffset:
@@ -116,14 +116,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 125
-      y: 926
+      x: 0
+      y: 715
       width: 185
       height: 98
     inner:
       serializedVersion: 2
-      x: 125
-      y: 926
+      x: 0
+      y: 715
       width: 185
       height: 98
     paddingLeft: 0.0054054055
@@ -133,8 +133,8 @@ MonoBehaviour:
   - name: loading
     outer:
       serializedVersion: 2
-      x: 0
-      y: 651
+      x: 95
+      y: 835
       width: 89
       height: 90
     outerOffset:
@@ -145,14 +145,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 0
-      y: 651
+      x: 95
+      y: 835
       width: 89
       height: 90
     inner:
       serializedVersion: 2
-      x: 0
-      y: 651
+      x: 95
+      y: 835
       width: 89
       height: 90
     paddingLeft: 0.056179777
@@ -162,8 +162,8 @@ MonoBehaviour:
   - name: an_anniuclose
     outer:
       serializedVersion: 2
-      x: 0
-      y: 565
+      x: 185
+      y: 840
       width: 175
       height: 85
     outerOffset:
@@ -174,14 +174,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 0
-      y: 565
+      x: 185
+      y: 840
       width: 175
       height: 85
     inner:
       serializedVersion: 2
-      x: 0
-      y: 565
+      x: 185
+      y: 840
       width: 175
       height: 85
     paddingLeft: 0.022857143
@@ -191,8 +191,8 @@ MonoBehaviour:
   - name: an_anniu
     outer:
       serializedVersion: 2
-      x: 90
-      y: 656
+      x: 243
+      y: 939
       width: 175
       height: 85
     outerOffset:
@@ -203,14 +203,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 90
-      y: 656
+      x: 243
+      y: 939
       width: 175
       height: 85
     inner:
       serializedVersion: 2
-      x: 90
-      y: 656
+      x: 243
+      y: 939
       width: 175
       height: 85
     paddingLeft: 0.022857143
@@ -220,8 +220,8 @@ MonoBehaviour:
   - name: an_anniucommon
     outer:
       serializedVersion: 2
-      x: 183
-      y: 840
+      x: 0
+      y: 629
       width: 175
       height: 85
     outerOffset:
@@ -232,14 +232,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 183
-      y: 840
+      x: 0
+      y: 629
       width: 175
       height: 85
     inner:
       serializedVersion: 2
-      x: 183
-      y: 840
+      x: 0
+      y: 629
       width: 175
       height: 85
     paddingLeft: 0.022857143
@@ -249,8 +249,8 @@ MonoBehaviour:
   - name: close_h
     outer:
       serializedVersion: 2
-      x: 95
-      y: 869
+      x: 0
+      y: 572
       width: 55
       height: 56
     outerOffset:
@@ -261,14 +261,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 95
-      y: 869
+      x: 0
+      y: 572
       width: 55
       height: 56
     inner:
       serializedVersion: 2
-      x: 95
-      y: 869
+      x: 0
+      y: 572
       width: 55
       height: 56
     paddingLeft: 0
@@ -278,8 +278,8 @@ MonoBehaviour:
   - name: close
     outer:
       serializedVersion: 2
-      x: 311
-      y: 968
+      x: 0
+      y: 515
       width: 55
       height: 56
     outerOffset:
@@ -290,14 +290,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 311
-      y: 968
+      x: 0
+      y: 515
       width: 55
       height: 56
     inner:
       serializedVersion: 2
-      x: 311
-      y: 968
+      x: 0
+      y: 515
       width: 55
       height: 56
     paddingLeft: 0
@@ -308,7 +308,7 @@ MonoBehaviour:
     outer:
       serializedVersion: 2
       x: 0
-      y: 462
+      y: 412
       width: 102
       height: 102
     outerOffset:
@@ -320,13 +320,13 @@ MonoBehaviour:
     oriOuter:
       serializedVersion: 2
       x: 0
-      y: 462
+      y: 412
       width: 102
       height: 102
     inner:
       serializedVersion: 2
       x: 0
-      y: 462
+      y: 412
       width: 102
       height: 102
     paddingLeft: 0
@@ -336,8 +336,8 @@ MonoBehaviour:
   - name: black
     outer:
       serializedVersion: 2
-      x: 95
-      y: 927
+      x: 60
+      y: 919
       width: 6
       height: 6
     outerOffset:
@@ -348,14 +348,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 95
-      y: 927
+      x: 60
+      y: 919
       width: 6
       height: 6
     inner:
       serializedVersion: 2
-      x: 97
-      y: 929
+      x: 62
+      y: 921
       width: 2
       height: 2
     paddingLeft: 0
@@ -366,7 +366,7 @@ MonoBehaviour:
     outer:
       serializedVersion: 2
       x: 0
-      y: 95
+      y: 45
       width: 516
       height: 366
     outerOffset:
@@ -378,13 +378,13 @@ MonoBehaviour:
     oriOuter:
       serializedVersion: 2
       x: 0
-      y: 95
+      y: 45
       width: 516
       height: 366
     inner:
       serializedVersion: 2
       x: 0
-      y: 95
+      y: 45
       width: 516
       height: 366
     paddingLeft: 0
@@ -394,8 +394,8 @@ MonoBehaviour:
   - name: userinfo_head
     outer:
       serializedVersion: 2
-      x: 176
-      y: 550
+      x: 56
+      y: 523
       width: 106
       height: 105
     outerOffset:
@@ -406,14 +406,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 176
-      y: 550
+      x: 56
+      y: 523
       width: 106
       height: 105
     inner:
       serializedVersion: 2
-      x: 176
-      y: 550
+      x: 56
+      y: 523
       width: 106
       height: 105
     paddingLeft: 0.009433962
@@ -424,7 +424,7 @@ MonoBehaviour:
     outer:
       serializedVersion: 2
       x: 103
-      y: 516
+      y: 474
       width: 48
       height: 48
     outerOffset:
@@ -436,13 +436,13 @@ MonoBehaviour:
     oriOuter:
       serializedVersion: 2
       x: 103
-      y: 516
+      y: 474
       width: 48
       height: 48
     inner:
       serializedVersion: 2
       x: 119
-      y: 530
+      y: 488
       width: 16
       height: 20
     paddingLeft: 0
@@ -452,8 +452,8 @@ MonoBehaviour:
   - name: xiaohongdian
     outer:
       serializedVersion: 2
-      x: 311
-      y: 930
+      x: 0
+      y: 7
       width: 33
       height: 37
     outerOffset:
@@ -464,14 +464,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 311
-      y: 930
+      x: 0
+      y: 7
       width: 33
       height: 37
     inner:
       serializedVersion: 2
-      x: 311
-      y: 930
+      x: 0
+      y: 7
       width: 33
       height: 37
     paddingLeft: 0.09090909
@@ -481,8 +481,8 @@ MonoBehaviour:
   - name: shuju_wofangshuzhi
     outer:
       serializedVersion: 2
-      x: 95
-      y: 843
+      x: 185
+      y: 814
       width: 17
       height: 25
     outerOffset:
@@ -493,14 +493,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 95
-      y: 843
+      x: 185
+      y: 814
       width: 17
       height: 25
     inner:
       serializedVersion: 2
-      x: 99
-      y: 843
+      x: 189
+      y: 814
       width: 9
       height: 25
     paddingLeft: 0
@@ -510,8 +510,8 @@ MonoBehaviour:
   - name: lv_dikuang
     outer:
       serializedVersion: 2
-      x: 151
-      y: 892
+      x: 34
+      y: 11
       width: 31
       height: 33
     outerOffset:
@@ -522,14 +522,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 151
-      y: 892
+      x: 34
+      y: 11
       width: 31
       height: 33
     inner:
       serializedVersion: 2
-      x: 151
-      y: 892
+      x: 34
+      y: 11
       width: 31
       height: 33
     paddingLeft: 0
@@ -539,8 +539,8 @@ MonoBehaviour:
   - name: Z_tankuang_c
     outer:
       serializedVersion: 2
-      x: 359
-      y: 581
+      x: 186
+      y: 427
       width: 516
       height: 386
     outerOffset:
@@ -551,14 +551,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 359
-      y: 581
+      x: 186
+      y: 427
       width: 516
       height: 386
     inner:
       serializedVersion: 2
-      x: 429
-      y: 671
+      x: 256
+      y: 517
       width: 376
       height: 176
     paddingLeft: 0
@@ -568,8 +568,8 @@ MonoBehaviour:
   - name: bangzhu
     outer:
       serializedVersion: 2
-      x: 266
-      y: 781
+      x: 103
+      y: 415
       width: 59
       height: 58
     outerOffset:
@@ -580,14 +580,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 266
-      y: 781
+      x: 103
+      y: 415
       width: 59
       height: 58
     inner:
       serializedVersion: 2
-      x: 266
-      y: 781
+      x: 103
+      y: 415
       width: 59
       height: 58
     paddingLeft: 0
@@ -597,8 +597,8 @@ MonoBehaviour:
   - name: shezhi
     outer:
       serializedVersion: 2
-      x: 183
-      y: 781
+      x: 361
+      y: 880
       width: 59
       height: 58
     outerOffset:
@@ -609,14 +609,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 183
-      y: 781
+      x: 361
+      y: 880
       width: 59
       height: 58
     inner:
       serializedVersion: 2
-      x: 183
-      y: 781
+      x: 361
+      y: 880
       width: 59
       height: 58
     paddingLeft: 0
@@ -626,8 +626,8 @@ MonoBehaviour:
   - name: shezhi_h
     outer:
       serializedVersion: 2
-      x: 266
-      y: 722
+      x: 361
+      y: 821
       width: 59
       height: 58
     outerOffset:
@@ -638,14 +638,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 266
-      y: 722
+      x: 361
+      y: 821
       width: 59
       height: 58
     inner:
       serializedVersion: 2
-      x: 266
-      y: 722
+      x: 361
+      y: 821
       width: 59
       height: 58
     paddingLeft: 0
@@ -655,8 +655,8 @@ MonoBehaviour:
   - name: bangzhu_h
     outer:
       serializedVersion: 2
-      x: 266
-      y: 663
+      x: 419
+      y: 966
       width: 59
       height: 58
     outerOffset:
@@ -667,14 +667,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 266
-      y: 663
+      x: 419
+      y: 966
       width: 59
       height: 58
     inner:
       serializedVersion: 2
-      x: 266
-      y: 663
+      x: 419
+      y: 966
       width: 59
       height: 58
     paddingLeft: 0
@@ -684,8 +684,8 @@ MonoBehaviour:
   - name: quxiao_h
     outer:
       serializedVersion: 2
-      x: 367
-      y: 972
+      x: 421
+      y: 913
       width: 177
       height: 52
     outerOffset:
@@ -696,14 +696,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 367
-      y: 972
+      x: 421
+      y: 913
       width: 177
       height: 52
     inner:
       serializedVersion: 2
-      x: 367
-      y: 972
+      x: 421
+      y: 913
       width: 177
       height: 52
     paddingLeft: 0
@@ -713,7 +713,7 @@ MonoBehaviour:
   - name: dianji
     outer:
       serializedVersion: 2
-      x: 545
+      x: 479
       y: 972
       width: 177
       height: 52
@@ -725,13 +725,13 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 545
+      x: 479
       y: 972
       width: 177
       height: 52
     inner:
       serializedVersion: 2
-      x: 545
+      x: 479
       y: 972
       width: 177
       height: 52
@@ -742,8 +742,8 @@ MonoBehaviour:
   - name: quxiaodianji
     outer:
       serializedVersion: 2
-      x: 723
-      y: 972
+      x: 421
+      y: 860
       width: 177
       height: 52
     outerOffset:
@@ -754,14 +754,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 723
-      y: 972
+      x: 421
+      y: 860
       width: 177
       height: 52
     inner:
       serializedVersion: 2
-      x: 723
-      y: 972
+      x: 421
+      y: 860
       width: 177
       height: 52
     paddingLeft: 0
@@ -771,8 +771,8 @@ MonoBehaviour:
   - name: dianji_h
     outer:
       serializedVersion: 2
-      x: 103
-      y: 463
+      x: 599
+      y: 919
       width: 177
       height: 52
     outerOffset:
@@ -783,14 +783,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 103
-      y: 463
+      x: 599
+      y: 919
       width: 177
       height: 52
     inner:
       serializedVersion: 2
-      x: 103
-      y: 463
+      x: 599
+      y: 919
       width: 177
       height: 52
     paddingLeft: 0
@@ -800,8 +800,8 @@ MonoBehaviour:
   - name: fanhuidating
     outer:
       serializedVersion: 2
-      x: 281
-      y: 495
+      x: 599
+      y: 864
       width: 205
       height: 54
     outerOffset:
@@ -812,14 +812,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 281
-      y: 495
+      x: 599
+      y: 864
       width: 205
       height: 54
     inner:
       serializedVersion: 2
-      x: 281
-      y: 495
+      x: 599
+      y: 864
       width: 205
       height: 54
     paddingLeft: 0
@@ -829,8 +829,8 @@ MonoBehaviour:
   - name: fanhuidatingdianji
     outer:
       serializedVersion: 2
-      x: 487
-      y: 526
+      x: 777
+      y: 970
       width: 205
       height: 54
     outerOffset:
@@ -841,14 +841,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 487
-      y: 526
+      x: 777
+      y: 970
       width: 205
       height: 54
     inner:
       serializedVersion: 2
-      x: 487
-      y: 526
+      x: 777
+      y: 970
       width: 205
       height: 54
     paddingLeft: 0
@@ -858,8 +858,8 @@ MonoBehaviour:
   - name: gk_saodangditu
     outer:
       serializedVersion: 2
-      x: 281
-      y: 489
+      x: 0
+      y: 1
       width: 773
       height: 5
     outerOffset:
@@ -870,14 +870,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 281
-      y: 489
+      x: 0
+      y: 1
       width: 773
       height: 5
     inner:
       serializedVersion: 2
-      x: 281
-      y: 489
+      x: 0
+      y: 1
       width: 773
       height: 5
     paddingLeft: 0
@@ -887,8 +887,8 @@ MonoBehaviour:
   - name: fm_zhanghaodikuang
     outer:
       serializedVersion: 2
-      x: 281
-      y: 482
+      x: 203
+      y: 814
       width: 444
       height: 6
     outerOffset:
@@ -899,14 +899,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 281
-      y: 482
+      x: 203
+      y: 814
       width: 444
       height: 6
     inner:
       serializedVersion: 2
-      x: 281
-      y: 482
+      x: 203
+      y: 814
       width: 444
       height: 6
     paddingLeft: 0
@@ -916,8 +916,8 @@ MonoBehaviour:
   - name: jindutiao
     outer:
       serializedVersion: 2
-      x: 152
-      y: 530
+      x: 657
+      y: 1005
       width: 102
       height: 19
     outerOffset:
@@ -928,14 +928,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 152
-      y: 530
+      x: 657
+      y: 1005
       width: 102
       height: 19
     inner:
       serializedVersion: 2
-      x: 158
-      y: 530
+      x: 663
+      y: 1005
       width: 90
       height: 19
     paddingLeft: 0
@@ -945,8 +945,8 @@ MonoBehaviour:
   - name: CheckBoxNode_Disable
     outer:
       serializedVersion: 2
-      x: 151
-      y: 872
+      x: 152
+      y: 503
       width: 27
       height: 19
     outerOffset:
@@ -957,14 +957,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 151
-      y: 872
+      x: 152
+      y: 503
       width: 27
       height: 19
     inner:
       serializedVersion: 2
-      x: 151
-      y: 872
+      x: 152
+      y: 503
       width: 27
       height: 19
     paddingLeft: 0.22222222
@@ -974,8 +974,8 @@ MonoBehaviour:
   - name: jindutiao2
     outer:
       serializedVersion: 2
-      x: 283
-      y: 561
+      x: 657
+      y: 985
       width: 102
       height: 19
     outerOffset:
@@ -986,14 +986,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 283
-      y: 561
+      x: 657
+      y: 985
       width: 102
       height: 19
     inner:
       serializedVersion: 2
-      x: 289
-      y: 561
+      x: 663
+      y: 985
       width: 90
       height: 19
     paddingLeft: 0
@@ -1003,8 +1003,8 @@ MonoBehaviour:
   - name: CheckBox_Normal
     outer:
       serializedVersion: 2
-      x: 283
-      y: 622
+      x: 599
+      y: 823
       width: 40
       height: 40
     outerOffset:
@@ -1015,14 +1015,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 283
-      y: 622
+      x: 599
+      y: 823
       width: 40
       height: 40
     inner:
       serializedVersion: 2
-      x: 283
-      y: 622
+      x: 599
+      y: 823
       width: 40
       height: 40
     paddingLeft: 0
@@ -1032,8 +1032,8 @@ MonoBehaviour:
   - name: dibandingbujianbian
     outer:
       serializedVersion: 2
-      x: 281
-      y: 463
+      x: 203
+      y: 821
       width: 115
       height: 18
     outerOffset:
@@ -1044,14 +1044,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 281
-      y: 463
+      x: 203
+      y: 821
       width: 115
       height: 18
     inner:
       serializedVersion: 2
-      x: 281
-      y: 463
+      x: 203
+      y: 821
       width: 115
       height: 18
     paddingLeft: 0
@@ -1061,8 +1061,8 @@ MonoBehaviour:
   - name: jb_white
     outer:
       serializedVersion: 2
-      x: 266
-      y: 658
+      x: 56
+      y: 518
       width: 4
       height: 4
     outerOffset:
@@ -1073,14 +1073,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 266
-      y: 658
+      x: 56
+      y: 518
       width: 4
       height: 4
     inner:
       serializedVersion: 2
-      x: 267
-      y: 659
+      x: 57
+      y: 519
       width: 2
       height: 2
     paddingLeft: 0
@@ -1090,8 +1090,8 @@ MonoBehaviour:
   - name: chat_h
     outer:
       serializedVersion: 2
-      x: 693
-      y: 522
+      x: 517
+      y: 368
       width: 59
       height: 58
     outerOffset:
@@ -1102,14 +1102,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 693
-      y: 522
+      x: 517
+      y: 368
       width: 59
       height: 58
     inner:
       serializedVersion: 2
-      x: 693
-      y: 522
+      x: 517
+      y: 368
       width: 59
       height: 58
     paddingLeft: 0
@@ -1119,8 +1119,8 @@ MonoBehaviour:
   - name: chat
     outer:
       serializedVersion: 2
-      x: 753
-      y: 522
+      x: 517
+      y: 309
       width: 59
       height: 58
     outerOffset:
@@ -1131,14 +1131,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 753
-      y: 522
+      x: 517
+      y: 309
       width: 59
       height: 58
     inner:
       serializedVersion: 2
-      x: 753
-      y: 522
+      x: 517
+      y: 309
       width: 59
       height: 58
     paddingLeft: 0
@@ -1148,8 +1148,8 @@ MonoBehaviour:
   - name: playerinfoline
     outer:
       serializedVersion: 2
-      x: 367
-      y: 968
+      x: 34
+      y: 7
       width: 1133
       height: 3
     outerOffset:
@@ -1160,14 +1160,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 367
-      y: 968
+      x: 34
+      y: 7
       width: 1133
       height: 3
     inner:
       serializedVersion: 2
-      x: 367
-      y: 968
+      x: 34
+      y: 7
       width: 1133
       height: 3
     paddingLeft: 0
@@ -1177,8 +1177,8 @@ MonoBehaviour:
   - name: tipyindaoarrow
     outer:
       serializedVersion: 2
-      x: 113
-      y: 845
+      x: 421
+      y: 836
       width: 36
       height: 23
     outerOffset:
@@ -1189,14 +1189,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 113
-      y: 845
+      x: 421
+      y: 836
       width: 36
       height: 23
     inner:
       serializedVersion: 2
-      x: 113
-      y: 845
+      x: 421
+      y: 836
       width: 36
       height: 23
     paddingLeft: 0
@@ -1206,8 +1206,8 @@ MonoBehaviour:
   - name: tishihongdian
     outer:
       serializedVersion: 2
-      x: 255
-      y: 525
+      x: 152
+      y: 478
       width: 24
       height: 24
     outerOffset:
@@ -1218,14 +1218,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 255
-      y: 525
+      x: 152
+      y: 478
       width: 24
       height: 24
     inner:
       serializedVersion: 2
-      x: 255
-      y: 525
+      x: 152
+      y: 478
       width: 24
       height: 24
     paddingLeft: 0.041666668
@@ -1235,8 +1235,8 @@ MonoBehaviour:
   - name: tipyindao
     outer:
       serializedVersion: 2
-      x: 813
-      y: 525
+      x: 517
+      y: 253
       width: 166
       height: 55
     outerOffset:
@@ -1247,14 +1247,14 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 813
-      y: 525
+      x: 517
+      y: 253
       width: 166
       height: 55
     inner:
       serializedVersion: 2
-      x: 813
-      y: 525
+      x: 517
+      y: 253
       width: 166
       height: 55
     paddingLeft: 0
@@ -1264,8 +1264,8 @@ MonoBehaviour:
   - name: sc_duihuakuang
     outer:
       serializedVersion: 2
-      x: 0
-      y: 934
+      x: 577
+      y: 336
       width: 124
       height: 90
     outerOffset:
@@ -1276,19 +1276,77 @@ MonoBehaviour:
       height: 0
     oriOuter:
       serializedVersion: 2
-      x: 0
-      y: 934
+      x: 577
+      y: 336
       width: 124
       height: 90
     inner:
       serializedVersion: 2
-      x: 80
-      y: 980
+      x: 657
+      y: 382
       width: 20
       height: 24
     paddingLeft: 0
     paddingRight: 0
     paddingTop: 0
+    paddingBottom: 0
+  - name: emotion_h
+    outer:
+      serializedVersion: 2
+      x: 0
+      y: 966
+      width: 59
+      height: 58
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 0
+      y: 966
+      width: 59
+      height: 58
+    inner:
+      serializedVersion: 2
+      x: 0
+      y: 966
+      width: 59
+      height: 58
+    paddingLeft: 0
+    paddingRight: 0.050847456
+    paddingTop: 0.06896552
+    paddingBottom: 0
+  - name: emotion
+    outer:
+      serializedVersion: 2
+      x: 0
+      y: 907
+      width: 59
+      height: 58
+    outerOffset:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    oriOuter:
+      serializedVersion: 2
+      x: 0
+      y: 907
+      width: 59
+      height: 58
+    inner:
+      serializedVersion: 2
+      x: 0
+      y: 907
+      width: 59
+      height: 58
+    paddingLeft: 0
+    paddingRight: 0.050847456
+    paddingTop: 0.06896552
     paddingBottom: 0
   mCoordinates: 0
   mReplacement: {fileID: 0}
