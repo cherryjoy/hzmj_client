@@ -749,7 +749,12 @@ end
 
 function MJTableCtrl:Chat_OnClick()
 	local ref = LuaUIViewCtr.OpenUIHasBg("MJTable/ChatUI")
-    --ref.Init(ref, Text.HelpContent)
+    ref.Init(ref, enumROOM_CHAT_TYPE.EM_CHAT_WORD_TYPE)
+end
+
+function MJTableCtrl:Emotion_OnClick()
+	local ref = LuaUIViewCtr.OpenUIHasBg("MJTable/ChatUI")
+    ref.Init(ref, enumROOM_CHAT_TYPE.EM_CHAT_EXPR_TYPE)
 end
 
 function MJTableCtrl:Setting_OnClick()

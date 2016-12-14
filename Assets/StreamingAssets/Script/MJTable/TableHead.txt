@@ -41,7 +41,7 @@ function TableHead:PlayChatContent(type, indexStr, i)
         ref.Init(ref, tonumber(indexStr))
 
         if i == 2 or i == 3 then
-            ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(-300, -60, 0))
+            ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(-300, -50, 0))
             ref.Background:get_transform():set_localPosition(LuaVector3.Create(250, 0, 0))
             ref.Background:get_transform():set_localScale(LuaVector3.Create(1, 1, 1))
         end

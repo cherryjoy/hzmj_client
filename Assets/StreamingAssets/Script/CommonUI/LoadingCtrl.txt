@@ -35,11 +35,8 @@ function LoadingCtrl:ShowUI()
 end
 
 function LoadingCtrl:TimeOut()
-    local ref = LuaMessageBox.ShowSingle(Text.MsgNotReturn, function() LuaUIViewCtr.OpenUIHasBg("MJTable/ChatUI") end, Text.RetryText, self)
-    --local ref = LuaMessageBox.ShowSingle(Text.MsgNotReturn, function() Client.RetryConnectByLastIp() end, Text.RetryText, self)
+    local ref = LuaMessageBox.ShowSingle(Text.MsgNotReturn, function() Client.RetryConnectByLastIp() end, Text.RetryText, self)
     self.timer = nil
     --ref.button_Single:SetActive(false)
     Client.CloseLoadingUI()
-
-
 end

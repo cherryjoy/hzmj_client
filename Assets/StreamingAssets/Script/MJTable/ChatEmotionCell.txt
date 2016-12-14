@@ -23,7 +23,7 @@ function ChatEmotionCell:Emotion_OnClick()
 end
 
 function ChatEmotionCell:Emotion_TweenEnd()
-    LuaDebug.Log("Emotion_TweenEnd")
+    --LuaDebug.Log("Emotion_TweenEnd")
 
     self.gameObject:Destroy1()
 end
