@@ -93,14 +93,14 @@ PlayerSettings:
     16:9: 1
     Others: 1
   bundleIdentifier: com.cherryjoy.hzmj
-  bundleVersion: 1.0.9
+  bundleVersion: 1.1.0
   preloadedAssets: []
   metroEnableIndependentInputSource: 0
   metroEnableLowLatencyPresentationAPI: 0
   xboxOneDisableKinectGpuReservation: 0
   virtualRealitySupported: 0
   productGUID: 6e29ba3147f2a6d40b94d747bbdcaea5
-  AndroidBundleVersionCode: 109
+  AndroidBundleVersionCode: 110
   AndroidMinSdkVersion: 9
   AndroidPreferredInstallLocation: 1
   aotOptions: 
@@ -108,7 +108,7 @@ PlayerSettings:
   stripEngineCode: 0
   iPhoneStrippingLevel: 0
   iPhoneScriptCallOptimization: 0
-  iPhoneBuildNumber: 1.0.9
+  iPhoneBuildNumber: 1.1.0
   ForceInternetPermission: 0
   ForceSDCardPermission: 1
   CreateWallpaper: 0
