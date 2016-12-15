@@ -3246,19 +3246,33 @@ end
 function PBMsgGameResultReq.DeSerialize(obj)
 	local fieldCount = deserialize_int32()
 	local option,optionLength = deserialize_optional()
+	if(has_optional_flag(0,optionLength,option)) then
+		obj.roomid = deserialize_int32()
+	end
 	return obj
 end
 
 function PBMsgGameResultReq.Serialize(obj)
-	local fieldCount = 0
+	local fieldCount = 1
 	serialize_int32(fieldCount)
 	local flag = {}
+	if(obj.roomid ~= nil) then
+		flag[1] = true
+	else
+		flag[1] = false
+	end
 	serialize_optional(flag)
+	if(obj.roomid ~= nil) then
+		serialize_int32(obj.roomid)
+	end
 end
 
 function PBMsgGameResultReq.GetSize(obj)
 	local size = 0
-	size = size + 5
+	if (obj.roomid ~= nil) then
+		size = size + 4
+	end
+	size = size + 6
 	return size
 end
 

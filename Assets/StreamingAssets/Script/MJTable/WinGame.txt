@@ -8,7 +8,9 @@ function WinGame:OnDestroy( )
 
 end
 
-function WinGame:Init(roleId, count, cards)
+function WinGame:Init(roleId, count, cards, roomId)
+    self.roomId = roomId
+
     local num = #cards
     self.Background:set_width(80 + (num - 1)*60)
 
@@ -27,7 +29,7 @@ function WinGame:Init(roleId, count, cards)
 end
 
 function WinGame:GetResult()
-    ClientSendMsg.SendGameResult()
+    ClientSendMsg.SendGameResult(self.roomId)
 
     self.gameObject:Destroy1()
 end

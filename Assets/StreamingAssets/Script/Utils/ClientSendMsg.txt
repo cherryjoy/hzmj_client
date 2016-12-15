@@ -240,8 +240,9 @@ function ClientSendMsg.SendWinGame()
 	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_WIN_GAME_REQ, buffer, length)
 end
 
-function ClientSendMsg.SendGameResult()
+function ClientSendMsg.SendGameResult(roomId)
 	local data = PBMsgGameResultReq.Create()
+	data.roomid = roomId
 
 	local buffer, length = LuaProto.serialize(data)
 	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_RESULT_REQ, buffer, length)
