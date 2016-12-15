@@ -48,6 +48,7 @@ Text = {
     LoginAgain = "重新登录",
     SessionFailed = "连接会话失效，请重新登录",
     Logout = "退出登录",
+    LoginTimeOut = "登录游戏超时",
 
     Male = "男",
     Female = "女",

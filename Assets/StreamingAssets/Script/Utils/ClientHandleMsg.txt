@@ -144,6 +144,10 @@ HandleFuncs[enumMSGID_MODULE_05.ID_ERROR_CODE_NOTICE] = function(data, dataLengt
 
     elseif data.err_code == enumEMCJErrorCode.EMCJ_USER_ACCOUNT_CREATE_INVALID_NAME then
 
+    elseif data.err_code == enumEMCJErrorCode.EMCJ_USER_SESSION_FAIL then
+        Client.SeriousError(Text.SessionFailed)
+    elseif data.err_code == enumEMCJErrorCode.EMCJ_ERR_TIMEOUT then
+        Client.SeriousError(Text.LoginTimeOut)
     end
 end
 
