@@ -518,7 +518,7 @@ function MJTableCtrl:HandleGameResult(data)
     end
 
     self.GameResult = LuaUIViewCtr.OpenUINotLose("MJTable/GameResult")
-    self.GameResult.Init(self.GameResult, data, self.roleList)
+    self.GameResult.Init(self.GameResult, data, self.roleList, self.roomId)
 
     for i = 1, #(data.role_cards) do
         LuaDebug.Log("HandleGameResult roleid: "..data.role_cards[i].roleid..", score: "..data.role_cards[i].score)

@@ -8,7 +8,9 @@ function GameResult:OnDestroy( )
     Client.TableClose = Client.TableClose - {self, GameResult.TableClose}
 end
 
-function GameResult:Init(data, roleList)
+function GameResult:Init(data, roleList, roomId)
+    self.roomId = roomId
+
     for i = 1, #(data.role_cards) do
         if data.role_cards[i].roleid == Client.RoleInfo.RoleID then
             local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/RoleResult",self.Center)
@@ -78,7 +80,7 @@ function GameResult:Init(data, roleList)
  end
 
 function GameResult:OK_OnClick()
-    ClientSendMsg.SendGameBalance()
+    ClientSendMsg.SendGameBalance(self.roomId)
 
     self.gameObject:Destroy1()
 end
@@ -88,7 +90,7 @@ function GameResult:Ready_OnClick()
         LuaDebug.LogError("sendReady, cannot send again")
         return
     end
-    
+
     --发送准备协议
     ClientSendMsg.SendReadyRoom()
     self.sendReady = true
