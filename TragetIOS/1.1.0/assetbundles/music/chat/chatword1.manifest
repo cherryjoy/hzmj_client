@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 528842333
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: c7075cb159bbfdc040aedebd18aefcc7
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c516f2a3b2b6b67ef759f6410a790acd
+HashAppended: 0
+ClassTypes:
+- Class: 83
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Music/Chat/chatword1.mp3
+Dependencies: []
