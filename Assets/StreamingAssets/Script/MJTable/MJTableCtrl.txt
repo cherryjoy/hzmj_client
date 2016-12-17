@@ -414,6 +414,7 @@ end
 
 function MJTableCtrl:WinDebug_OnClick()
     ClientSendMsg.SendWinGame()
+    ClientSendMsg.SendWinGame()
     --LuaUIViewCtr.OpenUIHasBg("MJTable/TablePeng")
 end
 
@@ -478,9 +479,9 @@ function MJTableCtrl:HandleGangCard(roleId, index, card, state, srcRoleId)
     end
 end
 
-function MJTableCtrl:HandleWinGame(roleId, count, cards, roleList)
+function MJTableCtrl:HandleWinGame(data)
     local ref = LuaUIViewCtr.OpenUINotLose("MJTable/WinGame")
-    ref.Init(ref, roleId, count, cards, self.roomId)
+    ref.Init(ref, data, self.roomId)
 
     self.ResultCard:SetActive(false)
 end
@@ -512,15 +513,15 @@ function MJTableCtrl:HandleGameResult(data)
     self.GameResult = LuaUIViewCtr.OpenUINotLose("MJTable/GameResult")
     self.GameResult.Init(self.GameResult, data, self.roleList, self.roomId)
 
-    for i = 1, #(data.role_cards) do
-        LuaDebug.Log("HandleGameResult roleid: "..data.role_cards[i].roleid..", score: "..data.role_cards[i].score)
+    for i = 1, #(data.result_info.role_cards) do
+        LuaDebug.Log("HandleGameResult roleid: "..data.result_info.role_cards[i].roleid..", score: "..data.result_info.role_cards[i].score)
     end
 
     -- 更新积累分数
     for i = 1, #(self.roleList) do
-        for j = 1, #(data.role_cards) do
-            if self.roleList[i].roleid == data.role_cards[j].roleid then
-                self.roleList[i].integral = data.role_cards[j].amount
+        for j = 1, #(data.result_info.role_cards) do
+            if self.roleList[i].roleid == data.result_info.role_cards[j].roleid then
+                self.roleList[i].integral = data.result_info.role_cards[j].amount
                 break
             end
         end
@@ -839,32 +840,54 @@ end
 
 function MJTableCtrl:PlayTableHu(data)
     if data.role_list ~= nil and #(data.role_list) > 0 then
-        --取第一个抢胡的人的性别
-        NGUITools.PlaySoundByPath("Music/Common/"..MJTableCtrl.GetRoleSex(self, data.role_list[1]).."hu")
+        for i = 1, #(data.role_list) do
+            NGUITools.PlaySoundByPath("Music/Common/"..MJTableCtrl.GetRoleSex(self, data.role_list[i]).."hu")
+            local ref = LuaUIViewCtr.OpenUINotLose("MJTable/TableHu")
+            ref.Init(ref, data, data.role_list[i], true)
+
+            for i = 1, 4 do
+                if self["Drect"..i].roleId == data.role_list[i] then
+                    if i == 1 then
+                        ref.TweenPos:from(LuaVector3.Create(0, 30, 0))
+                        ref.TweenPos:to(LuaVector3.Create(0, -150, 0))
+                    elseif i == 2 then
+                        ref.TweenPos:from(LuaVector3.Create(0, 0, 0))
+                        ref.TweenPos:to(LuaVector3.Create(280, 0, 0))
+                    elseif i == 3 then
+                        ref.TweenPos:from(LuaVector3.Create(0, 30, 0))
+                        ref.TweenPos:to(LuaVector3.Create(0, 160, 0))
+                    elseif i == 4 then
+                        ref.TweenPos:from(LuaVector3.Create(0, 0, 0))
+                        ref.TweenPos:to(LuaVector3.Create(-280, 0, 0))
+                    end
+
+                    break
+                end
+            end
+        end
     else
         NGUITools.PlaySoundByPath("Music/Common/"..MJTableCtrl.GetRoleSex(self, data.roleid).."hu")
-    end
+        local ref = LuaUIViewCtr.OpenUINotLose("MJTable/TableHu")
+        ref.Init(ref, data, data.roleid, false)
 
-    local ref = LuaUIViewCtr.OpenUINotLose("MJTable/TableHu")
-    ref.Init(ref, data)
+        for i = 1, 4 do
+            if self["Drect"..i].roleId == data.roleid then
+                if i == 1 then
+                    ref.TweenPos:from(LuaVector3.Create(0, 30, 0))
+                    ref.TweenPos:to(LuaVector3.Create(0, -150, 0))
+                elseif i == 2 then
+                    ref.TweenPos:from(LuaVector3.Create(0, 0, 0))
+                    ref.TweenPos:to(LuaVector3.Create(280, 0, 0))
+                elseif i == 3 then
+                    ref.TweenPos:from(LuaVector3.Create(0, 30, 0))
+                    ref.TweenPos:to(LuaVector3.Create(0, 160, 0))
+                elseif i == 4 then
+                    ref.TweenPos:from(LuaVector3.Create(0, 0, 0))
+                    ref.TweenPos:to(LuaVector3.Create(-280, 0, 0))
+                end
 
-    for i = 1, 4 do
-        if self["Drect"..i].roleId == data.roleid then
-            if i == 1 then
-                ref.TweenPos:from(LuaVector3.Create(0, 30, 0))
-                ref.TweenPos:to(LuaVector3.Create(0, -150, 0))
-            elseif i == 2 then
-                ref.TweenPos:from(LuaVector3.Create(0, 0, 0))
-                ref.TweenPos:to(LuaVector3.Create(280, 0, 0))
-            elseif i == 3 then
-                ref.TweenPos:from(LuaVector3.Create(0, 30, 0))
-                ref.TweenPos:to(LuaVector3.Create(0, 160, 0))
-            elseif i == 4 then
-                ref.TweenPos:from(LuaVector3.Create(0, 0, 0))
-                ref.TweenPos:to(LuaVector3.Create(-280, 0, 0))
+                break
             end
-
-            break
         end
     end
 end

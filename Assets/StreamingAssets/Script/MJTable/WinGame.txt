@@ -8,28 +8,32 @@ function WinGame:OnDestroy( )
 
 end
 
-function WinGame:Init(roleId, count, cards, roomId)
+function WinGame:Init(data, roomId)
+    self.data = data
     self.roomId = roomId
 
-    local num = #cards
+    local num = #(self.data.card)
     self.Background:set_width(80 + (num - 1)*60)
 
     for i = 1, num do
         local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCard", self.Grid:get_gameObject())
-        local card = cards[i]
+        local card = self.data.card[i]
         LuaDebug.Log("type: "..card.type_id..", code: "..card.code_id)
-        ref.Init(ref, cards[i], i, true)
+        ref.Init(ref, self.data.card[i], i, true)
     end
 
     self.Grid:get_transform():set_localPosition(LuaVector3.Create(-30*(num - 1), 0, 0))
     self.Grid:Reposition()
 
     -- 等待请求单局结算
-    Timer.NewEvent(self,40,40,WinGame.GetResult, false, nil)
+    Timer.NewEvent(self,30,30,WinGame.GetResult, false, nil)
 end
 
 function WinGame:GetResult()
-    ClientSendMsg.SendGameResult(self.roomId)
+    --ClientSendMsg.SendGameResult(self.roomId)
+    if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil then
+        LuaUIViewCtr.UIPanel["MJTableUI"].HandleGameResult(LuaUIViewCtr.UIPanel["MJTableUI"], self.data)
+    end
 
     self.gameObject:Destroy1()
 end

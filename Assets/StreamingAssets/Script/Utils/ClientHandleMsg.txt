@@ -136,7 +136,7 @@ HandleFuncs[enumMSGID_MODULE_05.ID_ERROR_CODE_NOTICE] = function(data, dataLengt
         if data.err_para ~= nil and #(data.err_para) > 0 then
             local roomId = data.err_para[1]
             ClientSendMsg.SendEnterRoom(Client.RoleInfo.RoleID, roomId)
-            LogError.Log("EMCJ_NO_ENTER_ROOM roomId: "..roomId)
+            LuaDebug.LogError("EMCJ_NO_ENTER_ROOM roomId: "..roomId)
         end
     elseif data.err_code == enumEMCJErrorCode.EMCJ_PLAYER_SESSION_FAIL then
         Client.SeriousError(Text.SessionFailed)

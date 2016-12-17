@@ -8,7 +8,9 @@ function GameResult:OnDestroy( )
     Client.TableClose = Client.TableClose - {self, GameResult.TableClose}
 end
 
-function GameResult:Init(data, roleList, roomId)
+function GameResult:Init(dataTotal, roleList, roomId)
+    self.dataTotal = dataTotal
+    local data = dataTotal.result_info
     self.roomId = roomId
 
     for i = 1, #(data.role_cards) do
@@ -72,7 +74,7 @@ function GameResult:Init(data, roleList, roomId)
          self.RestCardsGrid:Reposition()
      end
 
-     if Client.RoleInfo.Used + 1 == Client.RoleInfo.Amount then
+     if dataTotal.balances ~= nil and #(dataTotal.balances) > 0 then
          self.Ready:SetActive(false)
          self.Share:SetActive(true)
          self.OK:SetActive(true)
@@ -80,7 +82,10 @@ function GameResult:Init(data, roleList, roomId)
  end
 
 function GameResult:OK_OnClick()
-    ClientSendMsg.SendGameBalance(self.roomId)
+    --ClientSendMsg.SendGameBalance(self.roomId)
+    if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil then
+        LuaUIViewCtr.UIPanel["MJTableUI"].HandleGameBalance(LuaUIViewCtr.UIPanel["MJTableUI"], self.dataTotal.balances)
+    end
 
     self.gameObject:Destroy1()
 end

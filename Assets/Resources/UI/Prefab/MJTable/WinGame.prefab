@@ -88,7 +88,7 @@ Transform:
   m_GameObject: {fileID: 158478}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 495504}
@@ -174,7 +174,7 @@ MonoBehaviour:
   delayTime: 0
   waitTime: 0
   callWhenWait: OnEventWithMessage
-  IsSendMsg: 1
+  IsSendMsg: 0
   from: {x: 0.1, y: 0.1, z: 0}
   to: {x: 1, y: 1, z: 0}
   updateTable: 0
@@ -219,11 +219,11 @@ MonoBehaviour:
     e00: 320
     e01: 0
     e02: 0
-    e03: 0.8913697
+    e03: 0.50001097
     e10: 0
     e11: 320
     e12: 0
-    e13: -0.8913803
+    e13: -30.499992
     e20: 0
     e21: 0
     e22: 320

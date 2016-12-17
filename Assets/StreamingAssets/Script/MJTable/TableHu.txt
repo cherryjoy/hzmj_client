@@ -10,11 +10,11 @@ function TableHu:OnDestroy( )
     Client.TableClose = Client.TableClose - {self, TableHu.TableClose}
 end
 
-function TableHu:Init(data)
+function TableHu:Init(data, roleId, isQiangHu)
     self.data = data
-    if self.data.role_list ~= nil and #(self.data.role_list) > 0 then
+    if isQiangHu then
         if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil then
-            LuaUIViewCtr.UIPanel["MJTableUI"].PlayTableQiangGang(LuaUIViewCtr.UIPanel["MJTableUI"], self.data.roleid)
+            LuaUIViewCtr.UIPanel["MJTableUI"].PlayTableQiangGang(LuaUIViewCtr.UIPanel["MJTableUI"], roleId)
         end
 
         Timer.NewEvent(self,7,7,TableHu.DlayHu, false, nil)
@@ -33,7 +33,7 @@ end
 
 function TableHu:hu1_TweenEnd()
     if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil then
-        LuaUIViewCtr.UIPanel["MJTableUI"].HandleWinGame(LuaUIViewCtr.UIPanel["MJTableUI"], self.data.roleid, self.data.count, self.data.card, self.data.role_list)
+        LuaUIViewCtr.UIPanel["MJTableUI"].HandleWinGame(LuaUIViewCtr.UIPanel["MJTableUI"], self.data)
     end
 
     --self.gameObject:Destroy1()
