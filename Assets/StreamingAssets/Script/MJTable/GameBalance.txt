@@ -13,8 +13,8 @@ function GameBalance:Init(balances, roleList)
         local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/RoleBalance",self.ScoreListGrid:get_gameObject())
         local roleInfo = MJTableCtrl.GetRoleInfo(balances[i].roleid, roleList)
         ref.Init(ref, balances[i], roleInfo)
-        local id = GameBalance.GetRoleIdOfMaxNum(balances)
-        if balances[i].roleid == id then
+        local score = GameBalance.GetRoleIdOfMaxNum(balances)
+        if score > 0 and balances[i].score == score then
             ref.Winner:set_enabled(true)
         end
 
@@ -44,7 +44,7 @@ function GameBalance.GetRoleIdOfMaxNum(balances)
         end
     end
 
-    return balances[index].roleid
+    return maxNum
 end
 
 function GameBalance:TableClose()

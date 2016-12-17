@@ -13,7 +13,7 @@ function ChatCtrl:Init(type)
         self.WordPanel:SetActive(true)
         self.EmotionPanel:SetActive(false)
 
-        for i = 1, 7 do
+        for i = 1, 8 do
             local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/ChatWordCell",self.WordGrid:get_gameObject())
             ref.Init(ref, i, self)
             ref.Drag:target(self.WordGrid:get_transform())
@@ -21,7 +21,7 @@ function ChatCtrl:Init(type)
     elseif type == enumROOM_CHAT_TYPE.EM_CHAT_EXPR_TYPE then
         self.WordPanel:SetActive(false)
         self.EmotionPanel:SetActive(true)
-        
+
         for i = 1, 63 do
             local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/ChatEmotionCell",self.EmotionGrid:get_gameObject())
             ref.Init(ref, i, self)

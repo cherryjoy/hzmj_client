@@ -9,9 +9,9 @@ function ChatWord:OnDestroy( )
 end
 
 function ChatWord:Init(index)
-    self.Text:set_text(Text["chatword"..index])
+    self.Text:set_text(Text["chatword"..Client.RoleInfo.sex..index])
 
-    local num = Util.GetChineseNum(Text["chatword"..index])
+    local num = Util.GetChineseNum(Text["chatword"..Client.RoleInfo.sex..index])
     local line = math.ceil(num / 9)
     self.Background:set_height(80 + (line - 1)*25)
 end

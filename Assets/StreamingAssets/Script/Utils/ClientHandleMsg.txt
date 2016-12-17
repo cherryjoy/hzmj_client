@@ -48,7 +48,7 @@ HandleFuncs[enumMSGID_MODULE_05.ID_ROLE_RES] = function(data, dataLength)
     --PlayerPrefsEx.SetString("password",data.password)
     --PlayerPrefsEx.SetString("userId",data.userId .. "")
     Client.RoleInfo = pbMsg
-    if Client.RoleInfo.sex == nil then   -- 0 未设置性别 1 为男性    2为女性
+    if Client.RoleInfo.sex == nil or Client.RoleInfo.sex == 0 then   -- 0 未设置性别 1 为男性    2为女性
         Client.RoleInfo.sex = ESexType.Female
     end
 
@@ -268,8 +268,10 @@ HandleFuncs[enumMSGID_MODULE_05.ID_GAME_WIN_GAME_RES] = function(data, dataLengt
     LuaDebug.Log("data.count: "..data.count)
     LuaDebug.Log("data.card: "..#(data.card))
 
+    --data.role_list = {}
+    --table.insert(data.role_list, data.roleid)
     if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil then
-        LuaUIViewCtr.UIPanel["MJTableUI"].HandleWinGame(LuaUIViewCtr.UIPanel["MJTableUI"], data.roleid, data.count, data.card, data.role_list)
+        LuaUIViewCtr.UIPanel["MJTableUI"].PlayTableHu(LuaUIViewCtr.UIPanel["MJTableUI"], data)
     end
 end
 

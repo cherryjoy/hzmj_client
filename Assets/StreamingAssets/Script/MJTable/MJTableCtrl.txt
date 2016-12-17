@@ -413,13 +413,13 @@ function MJTableCtrl:Win_OnClick()
 end
 
 function MJTableCtrl:WinDebug_OnClick()
-    --ClientSendMsg.SendWinGame()
-    LuaUIViewCtr.OpenUIHasBg("MJTable/TablePeng")
+    ClientSendMsg.SendWinGame()
+    --LuaUIViewCtr.OpenUIHasBg("MJTable/TablePeng")
 end
 
 function MJTableCtrl:HandlePengCard(roleId, index, card, srcRoleId)
     NGUITools.PlaySoundByPath("Music/Common/"..MJTableCtrl.GetRoleSex(self, roleId).."peng")
-    LuaUIViewCtr.OpenUIHasBg("MJTable/TablePeng")
+
     -- 重置
     Client.ResetToward:Do()
     --消掉打牌方的牌
@@ -431,12 +431,14 @@ function MJTableCtrl:HandlePengCard(roleId, index, card, srcRoleId)
     -- 判断是哪方碰牌
     for i = 2, 4 do
         if self["Drect"..i].roleId == roleId then
+            MJTableCtrl.PlayTablePeng(self, i)
             self["Drect"..i].HandlePengCard(self["Drect"..i], card)
         end
     end
 
     -- 自己可以打牌了
     if roleId == self.Drect1.roleId then
+        MJTableCtrl.PlayTablePeng(self, 1)
         self.Drect1.HandlePengCard(self.Drect1, card, self.tempRoleId)
         self.ResultCard:SetActive(false)
         self.Drect1.CanPlayCardState(self.Drect1, true)
@@ -462,12 +464,14 @@ function MJTableCtrl:HandleGangCard(roleId, index, card, state, srcRoleId)
     -- 判断是哪方杠牌
     for i = 2, 4 do
         if self["Drect"..i].roleId == roleId then
+            MJTableCtrl.PlayTableGang(self, state, i)
             self["Drect"..i].HandleGangCard(self["Drect"..i], card, state)
         end
     end
 
     -- 自己可以打牌了
     if roleId == self.Drect1.roleId then
+        MJTableCtrl.PlayTableGang(self, state, 1)
         self.Drect1.HandleGangCard(self.Drect1, card, self.tempRoleId, self.tempGangType)
         self.ResultCard:SetActive(false)
         self.Drect1.CanPlayCardState(self.Drect1, true)
@@ -475,14 +479,7 @@ function MJTableCtrl:HandleGangCard(roleId, index, card, state, srcRoleId)
 end
 
 function MJTableCtrl:HandleWinGame(roleId, count, cards, roleList)
-    if roleList ~= nil and #roleList > 0 then
-        --取第一个抢胡的人的性别
-        NGUITools.PlaySoundByPath("Music/Common/"..MJTableCtrl.GetRoleSex(self, roleList[1]).."hu")
-    else
-        NGUITools.PlaySoundByPath("Music/Common/"..MJTableCtrl.GetRoleSex(self, roleId).."hu")
-    end
-
-    local ref = LuaUIViewCtr.OpenUIHasBg("MJTable/WinGame")
+    local ref = LuaUIViewCtr.OpenUINotLose("MJTable/WinGame")
     ref.Init(ref, roleId, count, cards, self.roomId)
 
     self.ResultCard:SetActive(false)
@@ -691,9 +688,8 @@ end
 
 function MJTableCtrl:PlayChatContent(roleId, type, indexStr)
     if type == enumROOM_CHAT_TYPE.EM_CHAT_WORD_TYPE then
-        LuaDebug.Log("Music/Chat/chatword"..indexStr)
         -- 播放声音
-        NGUITools.PlaySoundByPath("Music/Chat/chatword"..indexStr)
+        NGUITools.PlaySoundByPath("Music/Chat/chatword"..Client.RoleInfo.sex..indexStr)
     end
 
     for i = 1, 4 do
@@ -783,6 +779,92 @@ function MJTableCtrl:GetRoleSex(roleId)
             end
 
             return sex
+        end
+    end
+end
+
+function MJTableCtrl:PlayTablePeng(i)
+    local ref = LuaUIViewCtr.OpenUINotLose("MJTable/TablePeng")
+
+    if i == 1 then
+        ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(0, -100, -50))
+    elseif i == 2 then
+        ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(250, 30, -50))
+    elseif i == 3 then
+        ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(0, 160, -50))
+    elseif i == 4 then
+        ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(-250, 30, -50))
+    end
+end
+
+function MJTableCtrl:PlayTableGang(type, i)
+    local ref = nil
+    if type == enumCARD_GANG_TYPE.CARD_GANG_M_TYPE then
+        ref = LuaUIViewCtr.OpenUINotLose("MJTable/TableGongGang")
+    elseif type == enumCARD_GANG_TYPE.CARD_GANG_A_TYPE then
+        ref = LuaUIViewCtr.OpenUINotLose("MJTable/TableAnGang")
+    elseif type == enumCARD_GANG_TYPE.CARD_GANG_G_TYPE then
+        ref = LuaUIViewCtr.OpenUINotLose("MJTable/TableGongGang")
+    end
+
+    if i == 1 then
+        ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(0, -100, -50))
+    elseif i == 2 then
+        ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(250, 30, -50))
+    elseif i == 3 then
+        ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(0, 160, -50))
+    elseif i == 4 then
+        ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(-250, 30, -50))
+    end
+end
+
+function MJTableCtrl:PlayTableQiangGang(roleId)
+    for i = 1, 4 do
+        if self["Drect"..i].roleId == roleId then
+            local ref = LuaUIViewCtr.OpenUINotLose("MJTable/TableQiangGang")
+            if i == 1 then
+                ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(0, -100, -50))
+            elseif i == 2 then
+                ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(250, 30, -50))
+            elseif i == 3 then
+                ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(0, 160, -50))
+            elseif i == 4 then
+                ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(-250, 30, -50))
+            end
+        end
+
+        break
+    end
+end
+
+function MJTableCtrl:PlayTableHu(data)
+    if data.role_list ~= nil and #(data.role_list) > 0 then
+        --取第一个抢胡的人的性别
+        NGUITools.PlaySoundByPath("Music/Common/"..MJTableCtrl.GetRoleSex(self, data.role_list[1]).."hu")
+    else
+        NGUITools.PlaySoundByPath("Music/Common/"..MJTableCtrl.GetRoleSex(self, data.roleid).."hu")
+    end
+
+    local ref = LuaUIViewCtr.OpenUINotLose("MJTable/TableHu")
+    ref.Init(ref, data)
+
+    for i = 1, 4 do
+        if self["Drect"..i].roleId == data.roleid then
+            if i == 1 then
+                ref.TweenPos:from(LuaVector3.Create(0, 30, 0))
+                ref.TweenPos:to(LuaVector3.Create(0, -150, 0))
+            elseif i == 2 then
+                ref.TweenPos:from(LuaVector3.Create(0, 0, 0))
+                ref.TweenPos:to(LuaVector3.Create(280, 0, 0))
+            elseif i == 3 then
+                ref.TweenPos:from(LuaVector3.Create(0, 30, 0))
+                ref.TweenPos:to(LuaVector3.Create(0, 160, 0))
+            elseif i == 4 then
+                ref.TweenPos:from(LuaVector3.Create(0, 0, 0))
+                ref.TweenPos:to(LuaVector3.Create(-280, 0, 0))
+            end
+
+            break
         end
     end
 end

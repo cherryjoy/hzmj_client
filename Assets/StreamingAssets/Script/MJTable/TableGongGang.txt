@@ -1,0 +1,33 @@
+TableGongGang = {}
+
+function TableGongGang:Start( )
+
+end
+
+function TableGongGang:OnDestroy( )
+
+end
+
+function TableGongGang:Left_TweenWait()
+    LuaDebug.Log("Left_TweenWait")
+
+    local mt=TextureMgr.get_Instance():LoadTexture("Boom/boom1", true)
+    self.Background:set_material(mt)
+
+    if self.timer == nil then
+        self.cd = 1
+        self.timer = Timer.NewEvent(self,1,17,TableGongGang.DoCountDown, false, TableGongGang.DoCountDownFinish)
+    end
+end
+
+function TableGongGang:Left_TweenEnd()
+    LuaDebug.Log("Left_TweenEnd")
+
+    self.gameObject:Destroy1()
+end
+
+function TableGongGang:DoCountDown()
+    self.cd = self.cd + 1
+    local mt=TextureMgr.get_Instance():LoadTexture("Boom/boom"..self.cd, true)
+    self.Background:set_material(mt)
+end

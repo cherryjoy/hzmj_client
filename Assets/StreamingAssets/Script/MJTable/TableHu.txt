@@ -1,0 +1,54 @@
+TableHu = {}
+
+function TableHu:Start( )
+    Client.TableClear = Client.TableClear + {self, TableHu.TableClear}
+    Client.TableClose = Client.TableClose + {self, TableHu.TableClose}
+end
+
+function TableHu:OnDestroy( )
+    Client.TableClear = Client.TableClear - {self, TableHu.TableClear}
+    Client.TableClose = Client.TableClose - {self, TableHu.TableClose}
+end
+
+function TableHu:Init(data)
+    self.data = data
+    if self.data.role_list ~= nil and #(self.data.role_list) > 0 then
+        if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil then
+            LuaUIViewCtr.UIPanel["MJTableUI"].PlayTableQiangGang(LuaUIViewCtr.UIPanel["MJTableUI"], self.data.roleid)
+        end
+
+        Timer.NewEvent(self,7,7,TableHu.DlayHu, false, nil)
+    else
+        self.hu1:set_enabled(true)
+        self.TweenScale:set_enabled(true)
+        self.TweenPos:set_enabled(true)
+    end
+
+end
+
+function TableHu:hu1_TweenWait()
+    self.hu2:set_enabled(true)
+    NGUITools.PlaySoundByPath("Music/Common/out")
+end
+
+function TableHu:hu1_TweenEnd()
+    if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil then
+        LuaUIViewCtr.UIPanel["MJTableUI"].HandleWinGame(LuaUIViewCtr.UIPanel["MJTableUI"], self.data.roleid, self.data.count, self.data.card, self.data.role_list)
+    end
+
+    --self.gameObject:Destroy1()
+end
+
+function TableHu:DlayHu()
+    self.hu1:set_enabled(true)
+    self.TweenScale:set_enabled(true)
+    self.TweenPos:set_enabled(true)
+end
+
+function TableHu:TableClear()
+    self.gameObject:Destroy1()
+end
+
+function TableHu:TableClose()
+    self.gameObject:Destroy1()
+end

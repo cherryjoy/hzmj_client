@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 53072b5685fe6db49bdbf5bde2da7cd4
-timeCreated: 1481733217
+guid: 848d3f819acba25468880ddf73acb42e
+timeCreated: 1481952352
 licenseType: Pro
 AudioImporter:
   serializedVersion: 6
@@ -18,5 +18,5 @@ AudioImporter:
   loadInBackground: 0
   3D: 1
   userData: 
-  assetBundleName: music/chat/chatword6
+  assetBundleName: 
   assetBundleVariant: 
