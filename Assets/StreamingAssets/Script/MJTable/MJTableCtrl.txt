@@ -821,7 +821,9 @@ end
 
 function MJTableCtrl:PlayTableQiangGang(roleId)
     for i = 1, 4 do
+        --LuaDebug.Log("PlayTableQiangGang roleId 11111: "..roleId)
         if self["Drect"..i].roleId == roleId then
+            --LuaDebug.Log("PlayTableQiangGang roleId 22222: "..roleId)
             local ref = LuaUIViewCtr.OpenUINotLose("MJTable/TableQiangGang")
             if i == 1 then
                 ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(0, -100, -50))
@@ -832,21 +834,21 @@ function MJTableCtrl:PlayTableQiangGang(roleId)
             elseif i == 4 then
                 ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(-250, 30, -50))
             end
-        end
 
-        break
+            break
+        end
     end
 end
 
 function MJTableCtrl:PlayTableHu(data)
     if data.role_list ~= nil and #(data.role_list) > 0 then
-        for i = 1, #(data.role_list) do
-            NGUITools.PlaySoundByPath("Music/Common/"..MJTableCtrl.GetRoleSex(self, data.role_list[i]).."hu")
+        for k = 1, #(data.role_list) do
+            NGUITools.PlaySoundByPath("Music/Common/"..MJTableCtrl.GetRoleSex(self, data.role_list[k]).."hu")
             local ref = LuaUIViewCtr.OpenUINotLose("MJTable/TableHu")
-            ref.Init(ref, data, data.role_list[i], true)
+            ref.Init(ref, data, data.role_list[k], true)
 
             for i = 1, 4 do
-                if self["Drect"..i].roleId == data.role_list[i] then
+                if self["Drect"..i].roleId == data.role_list[k] then
                     if i == 1 then
                         ref.TweenPos:from(LuaVector3.Create(0, 30, 0))
                         ref.TweenPos:to(LuaVector3.Create(0, -150, 0))
