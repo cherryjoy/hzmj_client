@@ -11,7 +11,7 @@ end
 function ChatWordCell:Init(index, chatCtrl)
     self.chatCtrl = chatCtrl
     self.index = index
-    LuaDebug.Log("******* chatword"..Client.RoleInfo.sex..index)
+    --LuaDebug.Log("******* chatword"..Client.RoleInfo.sex..index)
     self.Text:set_text(Text["chatword"..Client.RoleInfo.sex..index])
 end
 

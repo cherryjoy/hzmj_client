@@ -689,7 +689,7 @@ end
 function MJTableCtrl:PlayChatContent(roleId, type, indexStr)
     if type == enumROOM_CHAT_TYPE.EM_CHAT_WORD_TYPE then
         -- 播放声音
-        NGUITools.PlaySoundByPath("Music/Chat/chatword"..Client.RoleInfo.sex..indexStr)
+        NGUITools.PlaySoundByPath("Music/Chat/chatword"..MJTableCtrl.GetRoleSex(self, roleId)..indexStr)
     end
 
     for i = 1, 4 do
