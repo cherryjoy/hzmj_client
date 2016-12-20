@@ -23,7 +23,7 @@ function SettingCtr:Init()
             self.DeleteRoom:SetActive(true)
         end
     else
-        self.Logout:SetActive(true)
+        self.ExitGame:SetActive(true)
     end
 end
 
@@ -84,8 +84,6 @@ function SettingCtr:QuitRoom_OnClick()
     self.gameObject:Destroy1()
 end
 
-function SettingCtr:Logout_OnClick()
-    PlayerPrefsEx.SetString("userName", "")
-    PlayerPrefsEx.SetString("loginExt", "")
-    Client.LoginAgain()
+function SettingCtr:ExitGame_OnClick()
+    Client.ExitGame()
 end

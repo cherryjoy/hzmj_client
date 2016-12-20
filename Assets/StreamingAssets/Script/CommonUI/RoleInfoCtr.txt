@@ -26,8 +26,18 @@ function RoleInfoCtr:Init(name, sex, id, ip, card, imageUrl)
     self.IDValue:set_text(tostring(id))
     self.IPValue:set_text(ip)
     self.CardValue:set_text(tostring(card))
+
+    if Client.m_CurrentState == EClientState.E_CS_Hall then
+        self.Logout:SetActive(true)
+    end
 end
 
 function RoleInfoCtr:Close_OnClick()
     self.gameObject:Destroy1()
+end
+
+function RoleInfoCtr:Logout_OnClick()
+    PlayerPrefsEx.SetString("userName", "")
+    PlayerPrefsEx.SetString("loginExt", "")
+    Client.LoginAgain()
 end

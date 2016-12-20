@@ -180,7 +180,7 @@ GameObject:
   - 114: {fileID: 11463798}
   - 114: {fileID: 11496576}
   m_Layer: 8
-  m_Name: Logout
+  m_Name: ExitGame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1248,7 +1248,7 @@ MonoBehaviour:
   mHeight: 28
   mDepth: 10
   mIsHidePanel: 0
-  mText: "\u9000\u51FA\u767B\u5F55"
+  mText: "\u9000\u51FA\u6E38\u620F"
   mMaxLineWidth: 0
   mEncoding: 1
   mMultiline: 1
@@ -1345,7 +1345,7 @@ MonoBehaviour:
   m_Script: {fileID: 403543416, guid: f1bae04813ec7b648a64859185b83283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mTextKeyID: Logout
+  mTextKeyID: ExitGame
   textLabel: {fileID: 11450282}
 --- !u!114 &11471232
 MonoBehaviour:
