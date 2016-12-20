@@ -39,23 +39,23 @@ end
 
 function CreateRoomCtrl:Ma2_OnClick()
     self.Ma2Check:set_enabled(true)
-    self.Ma3Check:set_enabled(false)
+    self.Ma6Check:set_enabled(false)
     self.Ma4Check:set_enabled(false)
 
     self.mashu = 2
 end
 
-function CreateRoomCtrl:Ma3_OnClick()
+function CreateRoomCtrl:Ma6_OnClick()
     self.Ma2Check:set_enabled(false)
-    self.Ma3Check:set_enabled(true)
+    self.Ma6Check:set_enabled(true)
     self.Ma4Check:set_enabled(false)
 
-    self.mashu = 3
+    self.mashu = 6
 end
 
 function CreateRoomCtrl:Ma4_OnClick()
     self.Ma2Check:set_enabled(false)
-    self.Ma3Check:set_enabled(false)
+    self.Ma6Check:set_enabled(false)
     self.Ma4Check:set_enabled(true)
 
     self.mashu = 4

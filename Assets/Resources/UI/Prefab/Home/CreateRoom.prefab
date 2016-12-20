@@ -757,7 +757,7 @@ GameObject:
   - 114: {fileID: 11401554}
   - 114: {fileID: 11490080}
   m_Layer: 8
-  m_Name: Ma3
+  m_Name: Ma6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1233,7 +1233,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 107398}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 170, y: 0, z: 0}
+  m_LocalPosition: {x: 20, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -1401,7 +1401,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 184274}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20, y: 0, z: 0}
+  m_LocalPosition: {x: 170, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -1937,7 +1937,7 @@ MonoBehaviour:
     TypeIndex: 1
   - Obj: {fileID: 166934}
     regObj: {fileID: 11498740}
-    Name: Ma3Check
+    Name: Ma6Check
     TypeIndex: 1
   - Obj: {fileID: 185062}
     regObj: {fileID: 11469094}
@@ -2326,7 +2326,7 @@ MonoBehaviour:
   mHeight: 40
   mDepth: 10
   mIsHidePanel: 0
-  mText: "3\u4E2A"
+  mText: "6\u4E2A"
   mMaxLineWidth: 0
   mEncoding: 1
   mMultiline: 1
