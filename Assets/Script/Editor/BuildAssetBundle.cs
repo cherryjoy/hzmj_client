@@ -47,6 +47,28 @@ public class BuildAssetBundle : EditorWindow
 		//CommandBuild.OneKeyBuild("/Users/smartlean/Documents/majiang/hzmj_client/TragetIOS", BuildTarget.iOS, false, true, false, true, true, true, true);
     }
 
+    [MenuItem("CJ-TOOL/一键导出Win资源Debug")]
+    static void OneKeyBuildWinDebug()
+    {
+        string path = "F:\\MaJiang\\hzmj_client\\TragetWin\\" + PlayerSettings.bundleVersion;
+        CommandBuild.OneKeyBuild("F:\\MaJiang\\hzmj_client\\TragetWin", BuildTarget.StandaloneWindows, true, true, false, true, true, true, true);
+    }
+
+    [MenuItem("CJ-TOOL/一键导出Android资源Debug")]
+    static void OneKeyBuildAndroidDebug()
+    {
+        string path = "F:\\MaJiang\\hzmj_client\\TragetAndroid\\" + PlayerSettings.bundleVersion;
+        CommandBuild.OneKeyBuild(path, BuildTarget.Android, true, true, false, true, true, true, true);
+    }
+
+    [MenuItem("CJ-TOOL/一键导出IOS资源Debug")]
+    static void OneKeyBuildIOSDebug()
+    {
+        string path = "F:\\MaJiang\\hzmj_client\\TragetIOS\\" + PlayerSettings.bundleVersion;
+        CommandBuild.OneKeyBuild("F:\\MaJiang\\hzmj_client\\TragetIOS", BuildTarget.iOS, true, true, false, true, true, true, true);
+        //CommandBuild.OneKeyBuild("/Users/smartlean/Documents/majiang/hzmj_client/TragetIOS", BuildTarget.iOS, false, true, false, true, true, true, true);
+    }
+
     bool lua_debug_ = false;
 
     // export the bundle path
