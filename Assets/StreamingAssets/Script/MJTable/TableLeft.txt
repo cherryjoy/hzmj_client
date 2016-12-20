@@ -183,7 +183,7 @@ function TableLeft:HandleGangCard(card, gangType)
         numTotal = 3
     elseif gangType == enumCARD_GANG_TYPE.CARD_GANG_A_TYPE then
         total = 4
-        numTotal = 4
+        numTotal = 3
     elseif gangType == enumCARD_GANG_TYPE.CARD_GANG_G_TYPE then
         total = 1
         numTotal = 1
