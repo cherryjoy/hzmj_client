@@ -430,20 +430,34 @@ function MJTableCtrl:HandlePengCard(roleId, index, card, srcRoleId)
     --计时
     MJTableCtrl.CountDownStart(self, roleId)
 
+    -- 自己可以打牌了
+    if roleId == self.Drect1.roleId then
+        -- 判断是否有暗杠
+        local gangType = nil
+        local tmpHandCard = nil
+        gangType, tmpHandCard = self.Drect1.IsGangAHandCard(self.Drect1)
+        if gangType then
+            self.ResultCard:SetActive(true)
+            self.passType = enumCARD_PASS_TYPE.CARD_PASS_NULL_CARD
+            self.Gang:SetActive(true)
+            self.Peng:SetActive(false)
+            self.tempGangType = gangType
+            self.tempCard = tmpHandCard
+            self.tempRoleId = roleId
+        end
+
+        MJTableCtrl.PlayTablePeng(self, 1)
+        self.Drect1.HandlePengCard(self.Drect1, card, self.tempRoleId)
+        self.ResultCard:SetActive(false)
+        self.Drect1.CanPlayCardState(self.Drect1, true)
+    end
+
     -- 判断是哪方碰牌
     for i = 2, 4 do
         if self["Drect"..i].roleId == roleId then
             MJTableCtrl.PlayTablePeng(self, i)
             self["Drect"..i].HandlePengCard(self["Drect"..i], card)
         end
-    end
-
-    -- 自己可以打牌了
-    if roleId == self.Drect1.roleId then
-        MJTableCtrl.PlayTablePeng(self, 1)
-        self.Drect1.HandlePengCard(self.Drect1, card, self.tempRoleId)
-        self.ResultCard:SetActive(false)
-        self.Drect1.CanPlayCardState(self.Drect1, true)
     end
 end
 
