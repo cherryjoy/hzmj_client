@@ -1,12 +1,12 @@
 DeleteRoomCtr = {}
 
 function DeleteRoomCtr:Start( )
-    Client.DeleteRoomAgree = Client.DeleteRoomAgree + {self, DeleteRoomCtr.AgreeState}
+    --Client.DeleteRoomAgree = Client.DeleteRoomAgree + {self, DeleteRoomCtr.AgreeState}
     Client.TableClose = Client.TableClose + {self, DeleteRoomCtr.TableClose}
 end
 
 function DeleteRoomCtr:OnDestroy( )
-    Client.DeleteRoomAgree = Client.DeleteRoomAgree - {self, DeleteRoomCtr.AgreeState}
+    --Client.DeleteRoomAgree = Client.DeleteRoomAgree - {self, DeleteRoomCtr.AgreeState}
     Client.TableClose = Client.TableClose - {self, DeleteRoomCtr.TableClose}
 
     if self.timer ~= nil then

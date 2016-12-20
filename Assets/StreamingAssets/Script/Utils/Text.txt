@@ -34,6 +34,8 @@ Text = {
     CurrentServer = "当前服务器：",
     RecommondServer = "推荐服务器",
     AccountName = "账号：",
+    CreateDuplicateName = "用户名重复",
+    CreateInvalidName = "用户名含有敏感字",
 
     Click = "点击",
     Button = "按钮",

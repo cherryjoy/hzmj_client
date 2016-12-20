@@ -413,8 +413,9 @@ function MJTableCtrl:Win_OnClick()
 end
 
 function MJTableCtrl:WinDebug_OnClick()
+    --ClientSendMsg.SendGameQuitRoom(LuaUIViewCtr.UIPanel["MJTableUI"].roomId)
     ClientSendMsg.SendWinGame()
-    ClientSendMsg.SendWinGame()
+    --ClientSendMsg.SendWinGame()
     --LuaUIViewCtr.OpenUIHasBg("MJTable/TablePeng")
 end
 
@@ -732,7 +733,7 @@ function MJTableCtrl:NetConnectSuccess()
     end
 
     ClientSendMsg.SendEnterRoom(Client.RoleInfo.RoleID, self.roomId)
-    ClientSendMsg.SendReadyRoom()
+    --ClientSendMsg.SendReadyRoom()
 
     --Client.RoleInfo.RestCard = 112
     Client.ResetToward:Do()

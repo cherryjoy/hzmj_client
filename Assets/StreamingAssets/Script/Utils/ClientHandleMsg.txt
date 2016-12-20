@@ -120,18 +120,22 @@ HandleFuncs[enumMSGID_MODULE_05.ID_ERROR_CODE_NOTICE] = function(data, dataLengt
         LuaMessageBox.ShowSingle(Text.CreateRoomNotCards, nil, Text.Confirm, self)
     elseif data.err_code == enumEMCJErrorCode.EMCJ_ROOM_NOT_EXIST then
         LuaMessageBox.ShowSingle(Text.RoomNotExist, nil, Text.Confirm, self)
+        -- 如果在房间中，需要返回大厅
+        if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil then
+            Client.TableClose:Do()
+        end
     elseif data.err_code == enumEMCJErrorCode.EMCJ_READY_NOT_EXIST then
-
+        LuaDebug.Log("EMCJ_READY_NOT_EXIST")
     elseif data.err_code == enumEMCJErrorCode.EMCJ_ROOM_OVER then
         Client.TableClose:Do()
     elseif data.err_code == enumEMCJErrorCode.EMCJ_NOT_REAL_WIN then
-
+        LuaDebug.Log("EMCJ_NOT_REAL_WIN")
     elseif data.err_code == enumEMCJErrorCode.EMCJ_NOT_REPLY_RESULT	then
-
+        LuaDebug.Log("EMCJ_NOT_REPLY_RESULT")
     elseif data.err_code == enumEMCJErrorCode.EMCJ_ROOM_FULL then
         LuaMessageBox.ShowSingle(Text.RoomNumIsFull, nil, Text.Confirm, self)
     elseif data.err_code == enumEMCJErrorCode.EMCJ_NOT_IN_ROOM then
-
+        LuaDebug.Log("EMCJ_NOT_IN_ROOM")
     elseif data.err_code == enumEMCJErrorCode.EMCJ_NO_ENTER_ROOM then
         if data.err_para ~= nil and #(data.err_para) > 0 then
             local roomId = data.err_para[1]
@@ -141,9 +145,9 @@ HandleFuncs[enumMSGID_MODULE_05.ID_ERROR_CODE_NOTICE] = function(data, dataLengt
     elseif data.err_code == enumEMCJErrorCode.EMCJ_PLAYER_SESSION_FAIL then
         Client.SeriousError(Text.SessionFailed)
     elseif data.err_code == enumEMCJErrorCode.EMCJ_USER_ACCOUNT_CREATE_DUPLICATE_NAME then
-
+        LuaMessageBox.ShowSingle(Text.CreateDuplicateName, nil, Text.Confirm, self)
     elseif data.err_code == enumEMCJErrorCode.EMCJ_USER_ACCOUNT_CREATE_INVALID_NAME then
-
+        LuaMessageBox.ShowSingle(Text.CreateInvalidName, nil, Text.Confirm, self)
     elseif data.err_code == enumEMCJErrorCode.EMCJ_USER_SESSION_FAIL then
         Client.SeriousError(Text.SessionFailed)
     elseif data.err_code == enumEMCJErrorCode.EMCJ_ERR_TIMEOUT then
@@ -175,7 +179,7 @@ HandleFuncs[enumMSGID_MODULE_05.ID_GAME_ROOM_ENTER_RES] = function(data,dataLeng
         LuaUIViewCtr.UIPanel["MJTableUI"] = ref
         Client.RoleInfo.Amount = data.amount
         Client.RoleInfo.RestCard = 112
-        ClientSendMsg.SendReadyRoom()
+        --ClientSendMsg.SendReadyRoom()
         LuaUIViewCtr.UIPanel["MJTableUI"].Init(LuaUIViewCtr.UIPanel["MJTableUI"], data.passwd, data.horse, data.addition, data.rolelist)
         LuaUIViewCtr.UIPanel["MJTableUI"].SetJuShuPaiShu(LuaUIViewCtr.UIPanel["MJTableUI"])
 
@@ -349,7 +353,10 @@ HandleFuncs[enumMSGID_MODULE_05.ID_ROOM_DELETE_AGREE_RES] = function(data, dataL
     -- body
     local data = LuaProto.deserialize(PBMsgRoomDeleteAgreeRes, data, dataLength)
 
-    Client.DeleteRoomAgree:Do(data.deletelist)
+    --Client.DeleteRoomAgree:Do(data.deletelist)
+    if LuaUIViewCtr.UIPanel["DeleteRoomUI"] ~= nil then
+        LuaUIViewCtr.UIPanel["DeleteRoomUI"].AgreeState(LuaUIViewCtr.UIPanel["DeleteRoomUI"], data.deletelist)
+    end
 end
 
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_QUIT_ROOM_RES] = function(data, dataLength)
