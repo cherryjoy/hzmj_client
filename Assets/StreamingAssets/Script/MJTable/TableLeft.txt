@@ -19,6 +19,7 @@ function TableLeft:Clear()
 end
 
 function TableLeft:CardInfoSync(handnum)
+    --LuaDebug.LogError("handnum: "..handnum)
     for i = 1, handnum do
         if i == 14 then
             MJTableCtrl.HandleGetCard(LuaUIViewCtr.UIPanel["MJTableUI"], self.roleId, nil)
@@ -55,11 +56,11 @@ function TableLeft:LeftCardSync(owncards)
 
     if owncards.gangcarda ~= nil then
         for i = 1, #(owncards.gangcarda) do
-            local card = owncards.gangcarda[i]
-            TableLeft.SetLeftCard(self, card)
             for num = 1, 3 do
                 TableLeft.SetLeftDownCard(self)
             end
+            local card = owncards.gangcarda[i]
+            TableLeft.SetLeftCard(self, card)
         end
     end
 
@@ -82,7 +83,7 @@ function TableLeft:PlayCardSync(cards)
 end
 
 function TableLeft:SetLeftCard(card)
-    LuaDebug.Log("left card, type: "..card.type_id..", id: "..card.code_id)
+    --LuaDebug.Log("left card, type: "..card.type_id..", id: "..card.code_id)
     local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/LeftPengCard",self.LeftCardGrid:get_gameObject())
     local spriteName = MJTableCtrl.GetLeftRightCardSprite(card)
     ref.Card:set_spriteName(spriteName)
@@ -95,7 +96,8 @@ function TableLeft:SetLeftCard(card)
 end
 
 function TableLeft:SetLeftDownCard()
-    LuaUIViewCtr.OpenUINotLoseNest("MJTable/LeftPengCardDown",self.LeftCardGrid:get_gameObject())
+    local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/LeftPengCardDown",self.LeftCardGrid:get_gameObject())
+    ref.Back:set_depth(2 + self.LeftNum)
 
     self.LeftNum = self.LeftNum + 1
 end

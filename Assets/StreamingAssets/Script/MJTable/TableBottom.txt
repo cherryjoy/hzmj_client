@@ -97,6 +97,7 @@ function TableBottom:LeftCardSync(owncards)
     if owncards.gangcarda ~= nil then
         for i = 1, #(owncards.gangcarda) do
             local card = owncards.gangcarda[i]
+            --LuaDebug.LogError("type_id: "..card.type_id..", code_id: "..card.code_id)
             table.insert(self.gangCardA, card)
             TableBottom.SetLeftCard(self, card)
             for num = 1, 3 do
