@@ -275,7 +275,11 @@ HandleFuncs[enumMSGID_MODULE_05.ID_GAME_WIN_GAME_RES] = function(data, dataLengt
     --data.role_list = {}
     --table.insert(data.role_list, data.roleid)
     if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil then
-        LuaUIViewCtr.UIPanel["MJTableUI"].PlayTableHu(LuaUIViewCtr.UIPanel["MJTableUI"], data)
+        if data.card ~= nil or #(data.card) > 0 then
+            LuaUIViewCtr.UIPanel["MJTableUI"].PlayTableHu(LuaUIViewCtr.UIPanel["MJTableUI"], data)
+        else
+            LuaUIViewCtr.UIPanel["MJTableUI"].HandleGameResult(LuaUIViewCtr.UIPanel["MJTableUI"], data)
+        end
     end
 end
 
