@@ -1,11 +1,7 @@
 TableBottom = {}
 
-function TableBottom:Start( )
+function TableBottom:Init()
     TableBottom.Clear(self)
-
-    Client.TableChooseCard = Client.TableChooseCard + {self, TableBottom.ChooseCard}
-    Client.TablePlayCardEnd = Client.TablePlayCardEnd + {self, TableBottom.PlayCardEnd}
-    Client.DeleteCard = Client.DeleteCard + {self, TableBottom.DeleteCard}
 
     local tempHeight = 640
     local tempWidth = tempHeight * Screen.get_width() / Screen.get_height()
@@ -25,6 +21,12 @@ function TableBottom:Start( )
     self.CardNew:get_transform():set_localScale(LuaVector3.Create(self.cardSize, self.cardSize, 1))
 end
 
+function TableBottom:Start()
+    Client.TableChooseCard = Client.TableChooseCard + {self, TableBottom.ChooseCard}
+    Client.TablePlayCardEnd = Client.TablePlayCardEnd + {self, TableBottom.PlayCardEnd}
+    Client.DeleteCard = Client.DeleteCard + {self, TableBottom.DeleteCard}
+end
+
 function TableBottom:OnDestroy( )
     Client.TableChooseCard = Client.TableChooseCard - {self,TableBottom.ChooseCard}
     Client.TablePlayCardEnd = Client.TablePlayCardEnd - {self, TableBottom.PlayCardEnd}
@@ -32,6 +34,7 @@ function TableBottom:OnDestroy( )
 end
 
 function TableBottom:Clear()
+    --LuaDebug.LogError("TableBottom:Clear")
     self.PlayNum = 0
     self.LeftNum = 0
     TableBottom.CanPlayCardState(self, false)
@@ -95,8 +98,9 @@ function TableBottom:LeftCardSync(owncards)
         for i = 1, #(owncards.gangcarda) do
             local card = owncards.gangcarda[i]
             table.insert(self.gangCardA, card)
-            for num = 1, 4 do
-                TableBottom.SetLeftCard(self, card)
+            TableBottom.SetLeftCard(self, card)
+            for num = 1, 3 do
+                TableBottom.SetLeftDownCard(self)
             end
         end
     end
@@ -129,6 +133,11 @@ function TableBottom:SetLeftCard(card)
     ref.Card:set_spriteName(spriteName)
     ref.Card:MakePixelPerfectWithSizeInAtlas()
 
+    self.LeftNum = self.LeftNum + 1
+end
+
+function TableBottom:SetLeftDownCard()
+    LuaUIViewCtr.OpenUINotLoseNest("MJTable/PengCardDown",self.LeftCardGrid:get_gameObject())
     self.LeftNum = self.LeftNum + 1
 end
 
@@ -388,8 +397,11 @@ function TableBottom:HandleGangCard(card, srcRoleId, gangType)
         TableBottom.SortCard(self)
     elseif gangType == enumCARD_GANG_TYPE.CARD_GANG_A_TYPE then --暗杠
         table.insert(self.gangCardA, card)
-        for num = 1, 4 do
+        --for num = 1, 4 do
             TableBottom.SetLeftCard(self, card)
+        --end
+        for num = 1, 3 do
+            TableBottom.SetLeftDownCard(self)
         end
 
         self.LeftCardGrid:Reposition()

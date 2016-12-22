@@ -1,8 +1,10 @@
 TableTop = {}
 
-function TableTop:Start( )
+function TableTop:Init( )
     TableTop.Clear(self)
+end
 
+function TableTop:Start( )
     Client.DeleteCard = Client.DeleteCard + {self, TableTop.DeleteCard}
 end
 
@@ -58,8 +60,9 @@ function TableTop:LeftCardSync(owncards)
     if owncards.gangcarda ~= nil then
         for i = 1, #(owncards.gangcarda) do
             local card = owncards.gangcarda[i]
-            for num = 1, 4 do
-                TableTop.SetLeftCard(self, card)
+            TableTop.SetLeftCard(self, card)
+            for num = 1, 3 do
+                TableTop.SetLeftDownCard(self)
             end
         end
     end
@@ -88,6 +91,12 @@ function TableTop:SetLeftCard(card)
     local spriteName = MJTableCtrl.GetLeftCardSprite(card)
     ref.Card:set_spriteName(spriteName)
     ref.Card:MakePixelPerfectWithSizeInAtlas()
+
+    self.LeftNum = self.LeftNum + 1
+end
+
+function TableTop:SetLeftDownCard()
+    LuaUIViewCtr.OpenUINotLoseNest("MJTable/TopPengCardDown",self.LeftCardGrid:get_gameObject())
 
     self.LeftNum = self.LeftNum + 1
 end
@@ -146,7 +155,7 @@ function TableTop:SetHeadInfo(info, toward)
         ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(284, 0, 0))
         self.TableHead = ref
     end
-    
+
     self.TableHead.Init(self.TableHead, info)
 end
 
@@ -177,26 +186,29 @@ end
 
 function TableTop:HandleGangCard(card, gangType)
     -- 添加杠牌
-    local total = 0
-    local numTotal = 0
     if gangType == enumCARD_GANG_TYPE.CARD_GANG_M_TYPE then
-        total = 4
-        numTotal = 3
+        for num = 1, 4 do
+            TableTop.SetLeftCard(self, card)
+        end
+
+        TableTop.LeftCardReposition(self)
+        -- 减少手牌
+        TableTop.RemoveHandCard(self, 3)
     elseif gangType == enumCARD_GANG_TYPE.CARD_GANG_A_TYPE then
-        total = 4
-        numTotal = 4
-    elseif gangType == enumCARD_GANG_TYPE.CARD_GANG_G_TYPE then
-        total = 1
-        numTotal = 1
-    end
-    for num = 1, total do
         TableTop.SetLeftCard(self, card)
+        for num = 1, 3 do
+            TableTop.SetLeftDownCard(self)
+        end
+
+        TableTop.LeftCardReposition(self)
+        -- 减少手牌
+        TableTop.RemoveHandCard(self, 3)
+    elseif gangType == enumCARD_GANG_TYPE.CARD_GANG_G_TYPE then
+        TableTop.SetLeftCard(self, card)
+        TableTop.LeftCardReposition(self)
+        -- 减少手牌
+        TableTop.RemoveHandCard(self, 1)
     end
-
-    TableTop.LeftCardReposition(self)
-
-    -- 减少手牌
-    TableTop.RemoveHandCard(self, numTotal)
 end
 
 function TableTop:RemoveHandCard(numTotal)

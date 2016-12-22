@@ -288,11 +288,15 @@ HandleFuncs[enumMSGID_MODULE_05.ID_GAME_WIN_CARD_RES] = function(data, dataLengt
 end
 
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_RESULT_RES] = function(data, dataLength)
+    LuaDebug.LogError("ID_GAME_RESULT_RES is not used!")
+    return
+    --[[
     local data = LuaProto.deserialize(PBMsgGameResultRes, data, dataLength)
 
     if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil then
         LuaUIViewCtr.UIPanel["MJTableUI"].HandleGameResult(LuaUIViewCtr.UIPanel["MJTableUI"], data)
     end
+    --]]
 end
 
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_BALANCE_RES] = function(data, dataLength)

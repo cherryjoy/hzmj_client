@@ -30,8 +30,9 @@ function RoleResult:Init(result, info)
 
     if result.ganga_cards ~= nil then
         for i = 1, #(result.ganga_cards) do
-            for num = 1, 4 do
-                RoleResult.SetLeftCard(self, result.ganga_cards[i])
+            RoleResult.SetLeftCard(self, result.ganga_cards[i])
+            for num = 1, 3 do
+                RoleResult.SetLeftDownCard(self)
             end
         end
     end
@@ -55,9 +56,9 @@ function RoleResult:Init(result, info)
     self.LeftCardsGrid:Reposition()
 
     -- 手牌
-    local posX = 80
+    local posX = 60
     if self.LeftNum > 0 then
-        posX = posX + 20 + 31*self.LeftNum
+        posX = posX + 20 + 27*self.LeftNum
     end
     self.HandCardsGrid:get_transform():set_localPosition(LuaVector3.Create(posX, -28, 0))
     local sortedCards = RoleResult.SortCard(result.hand_cards)
@@ -139,12 +140,18 @@ end
 function RoleResult:SetLeftCard(card)
     LuaDebug.Log("left card, type: "..card.type_id..", id: "..card.code_id)
     local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/PengCard",self.LeftCardsGrid:get_gameObject())
-    ref.Card:get_transform():set_localScale(LuaVector3.Create(0.8, 0.8, 1))
+    ref.Card:get_transform():set_localScale(LuaVector3.Create(0.7, 0.7, 1))
     local spriteName = MJTableCtrl.GetLeftCardSprite(card)
     ref.Card:set_spriteName(spriteName)
     ref.Card:MakePixelPerfectWithSizeInAtlas()
     ref.notClear = true
 
+    self.LeftNum = self.LeftNum + 1
+end
+
+function RoleResult:SetLeftDownCard()
+    local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/PengCardDown",self.LeftCardsGrid:get_gameObject())
+    ref.notClear = true
     self.LeftNum = self.LeftNum + 1
 end
 
