@@ -127,6 +127,7 @@ Text = {
     AdminRoleName = "系统",
     CreateRoomNotCards = "房卡不足",
     RoomNotExist = "房间不存在",
+    RoomOver = "牌局已结束，请在战绩中查看分数",
     RoomNumIsFull = "房间人数已满",
     DeleteRoomConfirm = "在有战绩的情况下解散房间会正常结算，确定解散房间吗",
     HelpContent =   "红中麻将玩法：\n\n"..

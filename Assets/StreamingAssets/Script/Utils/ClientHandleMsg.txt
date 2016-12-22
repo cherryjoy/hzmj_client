@@ -119,10 +119,12 @@ HandleFuncs[enumMSGID_MODULE_05.ID_ERROR_CODE_NOTICE] = function(data, dataLengt
     if data.err_code == enumEMCJErrorCode.EMCJ_CARD_NOT_ENOUGH then
         LuaMessageBox.ShowSingle(Text.CreateRoomNotCards, nil, Text.Confirm, self)
     elseif data.err_code == enumEMCJErrorCode.EMCJ_ROOM_NOT_EXIST then
-        LuaMessageBox.ShowSingle(Text.RoomNotExist, nil, Text.Confirm, self)
         -- 如果在房间中，需要返回大厅
         if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil then
             Client.TableClose:Do()
+            LuaMessageBox.ShowSingle(Text.RoomOver, nil, Text.Confirm, self)
+        else
+            LuaMessageBox.ShowSingle(Text.RoomNotExist, nil, Text.Confirm, self)
         end
     elseif data.err_code == enumEMCJErrorCode.EMCJ_READY_NOT_EXIST then
         LuaDebug.Log("EMCJ_READY_NOT_EXIST")

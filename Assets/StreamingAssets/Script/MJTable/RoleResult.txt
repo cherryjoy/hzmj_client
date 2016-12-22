@@ -151,6 +151,7 @@ end
 
 function RoleResult:SetLeftDownCard()
     local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/PengCardDown",self.LeftCardsGrid:get_gameObject())
+    ref.Card:get_transform():set_localScale(LuaVector3.Create(0.7, 0.7, 1))
     ref.notClear = true
     self.LeftNum = self.LeftNum + 1
 end
