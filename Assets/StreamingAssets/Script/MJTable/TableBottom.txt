@@ -6,13 +6,13 @@ function TableBottom:Init()
     local tempHeight = 640
     local tempWidth = tempHeight * Screen.get_width() / Screen.get_height()
     if tempWidth < 960 then
-        self.cardSize = 0.9
-    elseif tempWidth >= 960 and tempWidth < 1050 then
-        self.cardSize = 1
-    elseif tempWidth >= 1050 and tempWidth < 1135 then
         self.cardSize = 1.1
-    elseif tempWidth >= 1135 then
+    elseif tempWidth >= 960 and tempWidth < 1050 then
+        self.cardSize = 1.1
+    elseif tempWidth >= 1050 and tempWidth < 1135 then
         self.cardSize = 1.2
+    elseif tempWidth >= 1135 then
+        self.cardSize = 1.28
     end
 
     LuaDebug.Log("*****tempWidth: "..tempWidth..", cardSize: "..self.cardSize)
@@ -37,6 +37,7 @@ function TableBottom:Clear()
     --LuaDebug.LogError("TableBottom:Clear")
     self.PlayNum = 0
     self.LeftNum = 0
+    --LuaDebug.LogError("LeftNum: "..self.LeftNum)
     TableBottom.CanPlayCardState(self, false)
     self.handCard = {}
     self.pengCard = {}
@@ -135,6 +136,7 @@ function TableBottom:SetLeftCard(card)
     ref.Card:MakePixelPerfectWithSizeInAtlas()
 
     self.LeftNum = self.LeftNum + 1
+    --LuaDebug.LogError("LeftNum: "..self.LeftNum)
 end
 
 function TableBottom:SetLeftDownCard()
@@ -264,6 +266,12 @@ function TableBottom:HandleGetCard(card)
         end
     end
 
+    -- 设置 摸牌的位置
+    local oldPos = self.Grid:get_transform():get_localPosition()
+    local num = #(self.handCard)
+    local posX = oldPos:x() + num*58*self.cardSize + 15
+    self.CardNew:get_transform():set_localPosition(LuaVector3.Create(posX, oldPos:y(), oldPos:z()))
+
     local handCardNum = #(self.handCard)
     local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyHandCard",self.CardNew)
     ref.gameObject:set_name("MyCard")
@@ -374,12 +382,21 @@ function TableBottom:SetHeadCardPosition()
     local num = #(self.handCard)
     LuaDebug.Log("handCard num: "..num)
     local oldPos = self.Grid:get_transform():get_localPosition()
-    local posX = (13 - num)*58*self.cardSize -348*self.cardSize
-    if posX < -348*self.cardSize then
-        posX = -348*self.cardSize
+
+    --local posX = (13 - num)*58*self.cardSize -6*58*self.cardSize
+    local minVlaue = -6*58*self.cardSize - 58*self.cardSize/2
+    local posX = minVlaue
+    if self.LeftNum > 0 then
+        posX = posX + self.LeftNum * 40 + 70
     end
+
     self.Grid:get_transform():set_localPosition(LuaVector3.Create(posX, oldPos:y(), oldPos:z()))
     self.Grid:Reposition()
+
+    -- 设置 摸牌的位置
+    oldPos = self.Grid:get_transform():get_localPosition()
+    posX = posX + num*58*self.cardSize + 15
+    self.CardNew:get_transform():set_localPosition(LuaVector3.Create(posX, oldPos:y(), oldPos:z()))
 end
 
 function TableBottom:HandleGangCard(card, srcRoleId, gangType)

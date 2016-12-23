@@ -158,6 +158,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &105122
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 497146}
+  - 114: {fileID: 11461480}
+  m_Layer: 8
+  m_Name: Background
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &112858
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,7 +240,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &137462
 GameObject:
   m_ObjectHideFlags: 1
@@ -396,7 +412,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100008}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -101, y: -86, z: -10}
+  m_LocalPosition: {x: -90, y: -110, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -422,6 +438,7 @@ Transform:
   - {fileID: 400028}
   - {fileID: 437458}
   - {fileID: 447498}
+  - {fileID: 497146}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &400018
@@ -457,7 +474,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.1, y: -86, z: -10}
+  m_LocalPosition: {x: 0.1, y: -110, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -511,7 +528,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100040}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 36.9, z: 0}
+  m_LocalPosition: {x: 0, y: 15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -702,7 +719,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 195744}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 102, y: -86, z: -10}
+  m_LocalPosition: {x: 90, y: -110, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -710,6 +727,19 @@ Transform:
   - {fileID: 495740}
   m_Father: {fileID: 400012}
   m_RootOrder: 0
+--- !u!4 &497146
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 105122}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 400012}
+  m_RootOrder: 7
 --- !u!65 &6500000
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -783,10 +813,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targets:
   - {fileID: 11400058}
-  normalSprite: an_anniuclose
-  hoverSprite: an_anniuclose
-  pressedSprite: an_anniuclose
-  disableSprite: an_anniuclose
+  normalSprite: anniu
+  hoverSprite: anniu
+  pressedSprite: anniu_h
+  disableSprite: anniu
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -810,7 +840,7 @@ MonoBehaviour:
     e00: 320
     e01: 0
     e02: 0
-    e03: 0.49999237
+    e03: 0.5000114
     e10: 0
     e11: 320
     e12: 0
@@ -852,14 +882,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   changeFlag: -1
   mMat: {fileID: 0}
-  mColor: {r: 0.83137256, g: 0.89411765, b: 0.93333334, a: 1}
+  mColor: {r: 0.5882353, g: 0.3254902, b: 0.17254902, a: 1}
   mPivot: 4
   mWidth: 24
   mHeight: 24
   mDepth: 10
   mIsHidePanel: 0
   mText: 
-  mMaxLineWidth: 350
+  mMaxLineWidth: 300
   mEncoding: 1
   mMultiline: 1
   mPassword: 0
@@ -909,7 +939,7 @@ MonoBehaviour:
     e00: 320
     e01: 0
     e02: 0
-    e03: 0.49999237
+    e03: 0.5000114
     e10: 0
     e11: 320
     e12: 0
@@ -1032,10 +1062,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targets:
   - {fileID: 11400068}
-  normalSprite: an_anniu
-  hoverSprite: an_anniu
-  pressedSprite: an_anniu
-  disableSprite: an_anniu
+  normalSprite: anniu
+  hoverSprite: anniu
+  pressedSprite: anniu_h
+  disableSprite: anniu
 --- !u!114 &11400036
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1076,8 +1106,8 @@ MonoBehaviour:
   mMultiline: 0
   mPassword: 0
   mShowLastChar: 0
-  mEffectStyle: 1
-  mEffectColor: {r: 0, g: 0, b: 0, a: 0.8}
+  mEffectStyle: 2
+  mEffectColor: {r: 0.17254902, g: 0.11372549, b: 0.11372549, a: 1}
   mTopColor: {r: 1, g: 1, b: 1, a: 1}
   mBottomColor: {r: 1, g: 1, b: 1, a: 1}
   mSpaceingY: 0
@@ -1102,12 +1132,12 @@ MonoBehaviour:
   mMat: {fileID: 2100000, guid: 241c457ed1d7bb34da265e04ba211dd5, type: 2}
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 140
-  mHeight: 68
+  mWidth: 160
+  mHeight: 54
   mDepth: 6
   mIsHidePanel: 0
   mAtlas: {fileID: 11450336, guid: 93e6d2d88100e9749948507d1a27beac, type: 2}
-  mSpriteName: an_anniuclose
+  mSpriteName: anniu
   IsKeepOriSize: 0
   mFillCenter: 1
 --- !u!114 &11400064
@@ -1135,8 +1165,8 @@ MonoBehaviour:
   mMultiline: 0
   mPassword: 0
   mShowLastChar: 0
-  mEffectStyle: 1
-  mEffectColor: {r: 0, g: 0, b: 0, a: 0.8}
+  mEffectStyle: 2
+  mEffectColor: {r: 0.17254902, g: 0.11372549, b: 0.11372549, a: 1}
   mTopColor: {r: 1, g: 1, b: 1, a: 1}
   mBottomColor: {r: 1, g: 1, b: 1, a: 1}
   mSpaceingY: 0
@@ -1161,12 +1191,12 @@ MonoBehaviour:
   mMat: {fileID: 2100000, guid: 241c457ed1d7bb34da265e04ba211dd5, type: 2}
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 140
-  mHeight: 68
+  mWidth: 160
+  mHeight: 54
   mDepth: 5
   mIsHidePanel: 0
   mAtlas: {fileID: 11450336, guid: 93e6d2d88100e9749948507d1a27beac, type: 2}
-  mSpriteName: an_anniu
+  mSpriteName: anniu
   IsKeepOriSize: 0
   mFillCenter: 1
 --- !u!114 &11437458
@@ -1223,14 +1253,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeFlag: -1
-  mMat: {fileID: 2100000, guid: 3f6b4fa04f2e5194f8e2ca20b001c5a1, type: 2}
+  mMat: {fileID: 0}
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 0
   mWidth: 440
   mHeight: 271
   mDepth: 2
   mIsHidePanel: 0
-  mAtlas: {fileID: 11403532, guid: 9704350d40dfb384d9af5a77b3a57845, type: 2}
+  mAtlas: {fileID: 0}
   mSpriteName: dibanxiabujianbian
   IsKeepOriSize: 0
 --- !u!114 &11437464
@@ -1245,14 +1275,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeFlag: -1
-  mMat: {fileID: 2100000, guid: 3f6b4fa04f2e5194f8e2ca20b001c5a1, type: 2}
+  mMat: {fileID: 0}
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 0
   mWidth: 436
   mHeight: 267
   mDepth: 3
   mIsHidePanel: 0
-  mAtlas: {fileID: 11403532, guid: 9704350d40dfb384d9af5a77b3a57845, type: 2}
+  mAtlas: {fileID: 0}
   mSpriteName: dibanjianbian
   IsKeepOriSize: 0
   mFillCenter: 1
@@ -1268,14 +1298,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeFlag: -1
-  mMat: {fileID: 2100000, guid: 3f6b4fa04f2e5194f8e2ca20b001c5a1, type: 2}
+  mMat: {fileID: 0}
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 2
   mWidth: 220
   mHeight: 18
   mDepth: 4
   mIsHidePanel: 0
-  mAtlas: {fileID: 11403532, guid: 9704350d40dfb384d9af5a77b3a57845, type: 2}
+  mAtlas: {fileID: 0}
   mSpriteName: dibandingbujianbian
   IsKeepOriSize: 0
 --- !u!114 &11437468
@@ -1290,14 +1320,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeFlag: -1
-  mMat: {fileID: 2100000, guid: 3f6b4fa04f2e5194f8e2ca20b001c5a1, type: 2}
+  mMat: {fileID: 0}
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 2
   mWidth: 220
   mHeight: 18
   mDepth: 5
   mIsHidePanel: 0
-  mAtlas: {fileID: 11403532, guid: 9704350d40dfb384d9af5a77b3a57845, type: 2}
+  mAtlas: {fileID: 0}
   mSpriteName: dibandingbujianbian
   IsKeepOriSize: 0
 --- !u!114 &11437470
@@ -1312,14 +1342,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeFlag: -1
-  mMat: {fileID: 2100000, guid: 3f6b4fa04f2e5194f8e2ca20b001c5a1, type: 2}
+  mMat: {fileID: 0}
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 2
   mWidth: 220
   mHeight: 1
   mDepth: 6
   mIsHidePanel: 0
-  mAtlas: {fileID: 11403532, guid: 9704350d40dfb384d9af5a77b3a57845, type: 2}
+  mAtlas: {fileID: 0}
   mSpriteName: dibandingguangtiao
   IsKeepOriSize: 0
 --- !u!114 &11437472
@@ -1334,14 +1364,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeFlag: -1
-  mMat: {fileID: 2100000, guid: 3f6b4fa04f2e5194f8e2ca20b001c5a1, type: 2}
+  mMat: {fileID: 0}
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 2
   mWidth: 220
   mHeight: 1
   mDepth: 7
   mIsHidePanel: 0
-  mAtlas: {fileID: 11403532, guid: 9704350d40dfb384d9af5a77b3a57845, type: 2}
+  mAtlas: {fileID: 0}
   mSpriteName: dibandingguangtiao
   IsKeepOriSize: 0
 --- !u!114 &11437474
@@ -1356,14 +1386,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeFlag: -1
-  mMat: {fileID: 2100000, guid: 3f6b4fa04f2e5194f8e2ca20b001c5a1, type: 2}
+  mMat: {fileID: 0}
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 0
   mWidth: 410
   mHeight: 135
   mDepth: 8
   mIsHidePanel: 0
-  mAtlas: {fileID: 11403532, guid: 9704350d40dfb384d9af5a77b3a57845, type: 2}
+  mAtlas: {fileID: 0}
   mSpriteName: mianbianbantoukuang
   IsKeepOriSize: 0
   mFillCenter: 1
@@ -1382,6 +1412,28 @@ MonoBehaviour:
   functionName: OnClick
   trigger: 0
   includeChildren: 0
+--- !u!114 &11461480
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 105122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 345385021, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  changeFlag: -1
+  mMat: {fileID: 2100000, guid: 241c457ed1d7bb34da265e04ba211dd5, type: 2}
+  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mPivot: 4
+  mWidth: 425
+  mHeight: 304
+  mDepth: 0
+  mIsHidePanel: 0
+  mAtlas: {fileID: 11450336, guid: 93e6d2d88100e9749948507d1a27beac, type: 2}
+  mSpriteName: Z_tankuang_a
+  IsKeepOriSize: 0
 --- !u!114 &11465684
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1544,8 +1596,8 @@ MonoBehaviour:
   mMultiline: 0
   mPassword: 0
   mShowLastChar: 0
-  mEffectStyle: 1
-  mEffectColor: {r: 0, g: 0, b: 0, a: 0.8}
+  mEffectStyle: 2
+  mEffectColor: {r: 0.17254902, g: 0.11372549, b: 0.11372549, a: 1}
   mTopColor: {r: 1, g: 1, b: 1, a: 1}
   mBottomColor: {r: 1, g: 1, b: 1, a: 1}
   mSpaceingY: 0
@@ -1570,12 +1622,12 @@ MonoBehaviour:
   mMat: {fileID: 2100000, guid: 241c457ed1d7bb34da265e04ba211dd5, type: 2}
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 140
-  mHeight: 68
+  mWidth: 160
+  mHeight: 54
   mDepth: 7
   mIsHidePanel: 0
   mAtlas: {fileID: 11450336, guid: 93e6d2d88100e9749948507d1a27beac, type: 2}
-  mSpriteName: an_anniu
+  mSpriteName: anniu
   IsKeepOriSize: 0
   mFillCenter: 1
 --- !u!114 &11495744
@@ -1623,10 +1675,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targets:
   - {fileID: 11495742}
-  normalSprite: an_anniu
-  hoverSprite: an_anniu
-  pressedSprite: an_anniu
-  disableSprite: an_anniu
+  normalSprite: anniu
+  hoverSprite: anniu
+  pressedSprite: anniu_h
+  disableSprite: anniu
 --- !u!114 &11495750
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -549,7 +549,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 165674}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 508, y: 260.00003, z: 0}
+  m_LocalPosition: {x: 507.5, y: 260.50003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -697,7 +697,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 122854}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -518, y: 267.00003, z: 0}
+  m_LocalPosition: {x: -518.5, y: 267.50003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -856,7 +856,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 119624}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 276.00003, z: 0}
+  m_LocalPosition: {x: 0, y: 276.50003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -1222,11 +1222,11 @@ MonoBehaviour:
     e00: 355.55557
     e01: 0
     e02: 0
-    e03: 382.7778
+    e03: 382.22223
     e10: 0
     e11: 355.55557
     e12: 0
-    e13: -173.88889
+    e13: -173.33333
     e20: 0
     e21: 0
     e22: 320
@@ -1319,7 +1319,7 @@ MonoBehaviour:
   - {fileID: 11441692}
   normalSprite: joinGame
   hoverSprite: joinGame
-  pressedSprite: joingame1
+  pressedSprite: joinGame
   disableSprite: joinGame
 --- !u!114 &11426198
 MonoBehaviour:
@@ -1425,11 +1425,11 @@ MonoBehaviour:
     e00: 320
     e01: 0
     e02: 0
-    e03: 0.50001097
+    e03: 0
     e10: 0
     e11: 320
     e12: 0
-    e13: -0.49999237
+    e13: 0
     e20: 0
     e21: 0
     e22: 320
@@ -1564,11 +1564,11 @@ MonoBehaviour:
     e00: 320
     e01: 0
     e02: 0
-    e03: 0.50001097
+    e03: 0
     e10: 0
     e11: 320
     e12: 0
-    e13: -158.5
+    e13: -158
     e20: 0
     e21: 0
     e22: 320
@@ -1780,7 +1780,7 @@ MonoBehaviour:
   - {fileID: 11486040}
   normalSprite: Z_chuangjianfangjian__button
   hoverSprite: Z_chuangjianfangjian__button
-  pressedSprite: Z_chuangjianfangjian__button_h
+  pressedSprite: Z_chuangjianfangjian__button
   disableSprite: Z_chuangjianfangjian__button
 --- !u!114 &11481090
 MonoBehaviour:

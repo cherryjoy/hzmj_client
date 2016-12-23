@@ -86,13 +86,13 @@ function MJTableCtrl:CardInfoSync(cardInfo)
    Client.TableClear:Do()
 
     -- 同步自己的牌
+    self.Drect1.LeftCardSync(self.Drect1, cardInfo.owncards)
+    
     if cardInfo.owncards ~= nil then
         LuaDebug.Log("card num: "..#(cardInfo.owncards.handcard))
         --Client.RoleInfo.RestCard = Client.RoleInfo.RestCard - #(cardInfo.owncards.handcard)
         self.Drect1.CardInfoSync(self.Drect1, cardInfo.owncards.handcard)
     end
-
-    self.Drect1.LeftCardSync(self.Drect1, cardInfo.owncards)
 
     -- 同步其他人的牌
     LuaDebug.Log("#(cardInfo.othercards): "..#(cardInfo.othercards))
