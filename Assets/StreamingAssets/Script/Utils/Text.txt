@@ -134,7 +134,7 @@ Text = {
     RoomNotExist = "房间不存在",
     RoomOver = "牌局已结束，请在战绩中查看",
     RoomNumIsFull = "房间人数已满",
-    DeleteRoomConfirm = "在有战绩的情况下解散房间会正常结算，确定解散房间吗",
+    DeleteRoomConfirm = "确定解散房间吗",
     HelpContent =   "红中麻将玩法：\n\n"..
                     "一、牌数共112张牌：\n"..
                     "包括1-9筒、1-9条、1-9万各4张，外加4张红中。\n\n"..
