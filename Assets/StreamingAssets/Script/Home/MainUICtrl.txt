@@ -75,6 +75,12 @@ function MainUICtrl:Icon_OnClick()
     ref.Init(ref, Client.RoleInfo.RoleName, Client.RoleInfo.sex, Client.RoleInfo.RoleID, Client.RoleInfo.address, Client.RoleInfo.integral, Client.RoleInfo.imageurl)
 end
 
+function MainUICtrl:Add_OnClick()
+    if Client.addCardNotice ~= nil then
+        LuaMessageBox.ShowSingle(Client.addCardNotice, nil, Text.Confirm, self)
+    end
+end
+
 function MainUICtrl:TableClose()
     self.gameObject:SetActive(true)
 end

@@ -108,6 +108,10 @@ Text = {
     HelpTips = "玩法简介",
 
     -------------------Table--------------------
+    Ready = "准备",
+    Share = "分享",
+    QuitRoom = "返回大厅",
+    DeleteRoom = "解散房间",
     TableName = "房号:%d",
     MaShuName = "%d倍 %d个码",
     JuShuName = "%d/%d局 剩%d张",
@@ -121,7 +125,8 @@ Text = {
     BalanceRoleId = "ID:%d",
     InviteTitle = "红中麻将房间号【%d】",
     InviteContext = "我在[樱桃红中麻将]开了%d局，%d个码，%d倍的房间，快来一起玩吧",
-    TableDelete = "["..ColorFilter.Color_51BF53.."]房间【%d】[-]被["..ColorFilter.Color_51BF53.."]【%s】[-]解散了",
+    --TableDelete = "["..ColorFilter.Color_51BF53.."]房间【%d】[-]被["..ColorFilter.Color_51BF53.."]【%s】[-]解散了",
+    TableDelete = "房间【%d】被【%s】解散了",
     RecordVoiceTimeShort = "录音时间太短",
     RecordVoiceSend = "手指松开发送",
     AdminRoleName = "系统",

@@ -185,6 +185,8 @@ function LoginController:SeverListDownloadSuccss(xmlString)
         -- bannerNotice
         Client.bannerNotice = self.doc.kids[2].el[1].attr.bannerNotice
         LuaDebug.Log("bannerNotice: "..Client.bannerNotice)
+        Client.addCardNotice = self.doc.kids[2].el[1].attr.addCardNotice
+        LuaDebug.Log("addCardNotice: "..Client.addCardNotice)
     end
     LoginController.ClearTimer(self)
     --LoginController.StartDownloadNoticeList(self)    --开始下载公告

@@ -1107,7 +1107,7 @@ MonoBehaviour:
   mPassword: 0
   mShowLastChar: 0
   mEffectStyle: 2
-  mEffectColor: {r: 0.17254902, g: 0.11372549, b: 0.11372549, a: 1}
+  mEffectColor: {r: 0.3647059, g: 0.1882353, b: 0.1882353, a: 1}
   mTopColor: {r: 1, g: 1, b: 1, a: 1}
   mBottomColor: {r: 1, g: 1, b: 1, a: 1}
   mSpaceingY: 0
@@ -1166,7 +1166,7 @@ MonoBehaviour:
   mPassword: 0
   mShowLastChar: 0
   mEffectStyle: 2
-  mEffectColor: {r: 0.17254902, g: 0.11372549, b: 0.11372549, a: 1}
+  mEffectColor: {r: 0.3647059, g: 0.1882353, b: 0.1882353, a: 1}
   mTopColor: {r: 1, g: 1, b: 1, a: 1}
   mBottomColor: {r: 1, g: 1, b: 1, a: 1}
   mSpaceingY: 0
@@ -1597,7 +1597,7 @@ MonoBehaviour:
   mPassword: 0
   mShowLastChar: 0
   mEffectStyle: 2
-  mEffectColor: {r: 0.17254902, g: 0.11372549, b: 0.11372549, a: 1}
+  mEffectColor: {r: 0.36764705, g: 0.19193338, b: 0.19193338, a: 1}
   mTopColor: {r: 1, g: 1, b: 1, a: 1}
   mBottomColor: {r: 1, g: 1, b: 1, a: 1}
   mSpaceingY: 0
