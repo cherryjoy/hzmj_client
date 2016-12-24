@@ -75,7 +75,7 @@ end
 function Client.RetryConnectByLastIp()
     local lastIpStr = PlayerPrefsEx.GetString("LastIp")
     local lastPortStr = PlayerPrefsEx.GetString("LastPort")
-    LuaDebug.Log("ip: "..lastIpStr..", prot: "..lastPortStr)
+    --LuaDebug.Log("ip: "..lastIpStr..", prot: "..lastPortStr)
     LuaNetwork.DisConnect()
     LuaNetwork.Connect(lastIpStr, lastPortStr)
 end
