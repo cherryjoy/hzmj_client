@@ -119,7 +119,6 @@ function LoginController:Init()
         serverList = GameDefine_outside_serverlist_url
     end
     serverList = serverList .. "?id=" .. LuaLong.ToString(LuaDateTime.Ticks_Now())
-    LuaDebug.Log("serverList: "..serverList)
     if serverList ~= nil or serverList ~="" then
         self.ClientInitCtr:StartDownload(serverList,"SeverListDownloadSuccss","SeverListDownloadFail")
         self.downloadTimer = Timer.NewEvent(self,50,50,LoginController.DownLoadOverTime)
@@ -175,26 +174,26 @@ function LoginController:SeverListDownloadSuccss(xmlString)
     self.doc = SLAXML:dom(xmlString)
     if self.doc ~= nil then
         Client.voiceUrl = self.doc.kids[2].el[1].attr.voiceurl
-        LuaDebug.Log("voiceUrl: "..Client.voiceUrl)
+        --LuaDebug.Log("voiceUrl: "..Client.voiceUrl)
         Client.inviteUrl = self.doc.kids[2].el[1].attr.inviteurl
         LoginController.InitServerList(self)
-        LuaDebug.Log("inviteUrl: "..Client.inviteUrl)
+        --LuaDebug.Log("inviteUrl: "..Client.inviteUrl)
         Client.logUrl = self.doc.kids[2].el[1].attr.logurl.."upload/"
-        LuaDebug.Log("logUrl: "..Client.logUrl)
+        --LuaDebug.Log("logUrl: "..Client.logUrl)
         PluginTool.SharedInstance():logUrl(Client.logUrl)
 
         -- bannerNotice
         Client.bannerNotice = self.doc.kids[2].el[1].attr.bannerNotice
-        LuaDebug.Log("bannerNotice: "..Client.bannerNotice)
+        --LuaDebug.Log("bannerNotice: "..Client.bannerNotice)
         Client.addCardNotice = self.doc.kids[2].el[1].attr.addCardNotice
-        LuaDebug.Log("addCardNotice: "..Client.addCardNotice)
+        --LuaDebug.Log("addCardNotice: "..Client.addCardNotice)
     end
     LoginController.ClearTimer(self)
     --LoginController.StartDownloadNoticeList(self)    --开始下载公告
     --LoginController.StartDownloadChargeList(self)    --开始下载充值配置
     LoginController.CheakUpdate(self)
 
-    LuaDebug.Log("serverlist download success")
+    --LuaDebug.Log("serverlist download success")
     local userName = PlayerPrefsEx.GetString("userName")
     if userName ~= "" then
         LoginController.DefaultServerLogic(self)          --连接服务器

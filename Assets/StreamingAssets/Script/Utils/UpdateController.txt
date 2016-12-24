@@ -131,7 +131,7 @@ function UpdateController.DownloadServerlistCallback(str)
 		else
 			updateServer = doc.kids[2].el[1].attr.updateiosserver
 		end
-		LuaDebug.Log("updateServer: "..updateServer)
+		--LuaDebug.Log("updateServer: "..updateServer)
     	local updateMode =  doc.kids[2].el[1].attr.lanchermode
     	local lancherversion  = doc.kids[2].el[1].attr.lancherversion
     	if UpdateConfig.CompareVersion(lancherversion,PluginTool.SharedInstance():GetVersionName()) then
