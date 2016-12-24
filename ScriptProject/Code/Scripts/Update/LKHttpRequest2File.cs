@@ -20,7 +20,7 @@ class LKHttpRequest2File : LKHttpRequest
         writeSizeFilePath = wSizeFilePath;
         System.Net.ServicePointManager.DefaultConnectionLimit = 100;
         url =  url + "?id=" + DateTime.Now.Ticks.ToString();
-        Debug.Log(url);
+        //Debug.Log(url);
         Debug.Log(writeSizeFilePath);
         httpRequest = (HttpWebRequest)HttpWebRequest.Create(url);
         httpRequest.ReadWriteTimeout = 5000;

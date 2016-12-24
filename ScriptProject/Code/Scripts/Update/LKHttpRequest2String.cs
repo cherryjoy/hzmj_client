@@ -37,7 +37,7 @@ class LKHttpRequest2String : LKHttpRequest
         switch ((HTTPEQUESTSTATE)httpRequestState)
         {
             case HTTPEQUESTSTATE.HTTPEQUESTEND:
-                UnityEngine.Debug.Log("str  " + str);
+                //UnityEngine.Debug.Log("str  " + str);
                 downLoadEndCallback(str);    
             //CallLuaFun(downLoadEndCallback, str);
                 lock (httpRequestState)

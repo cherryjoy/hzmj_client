@@ -60,7 +60,7 @@ public partial class PlatformState
 
         if (mAndroidObj != null)
         {
-            log("init", "ext is " + ext);
+            //log("init", "ext is " + ext);
             try
             {
                 mAndroidObj.Call("CJSDKInit", objName, ext);
