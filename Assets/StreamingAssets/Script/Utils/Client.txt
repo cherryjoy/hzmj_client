@@ -37,7 +37,7 @@ Client.CurrentCityId = 0
 
 function Client.ListenNetwork( state,ip,port )
     require "Utils/TishiCentre"
-    LuaDebug.Log(ip .. "  netState call " .. state)
+    LuaDebug.Log("netState call " .. state)
     if  state ==  EClientNetWorkState.DISCONNECTED or state == EClientNetWorkState.CONNECTED_FAILED or state == EClientNetWorkState.NOT_UNABLE then
         if Client.m_CurrentState==EClientState.E_CS_Login or Client.m_CurrentState==EClientState.E_CS_Reconect then
             Client.m_CurrentState = EClientState.E_CS_Reconect
