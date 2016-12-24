@@ -387,7 +387,13 @@ function TableBottom:SetHeadCardPosition()
     local minVlaue = -6*58*self.cardSize - 58*self.cardSize/2
     local posX = minVlaue
     if self.LeftNum > 0 then
-        posX = posX + self.LeftNum * 40 + 70
+        if self.cardSize < 1.2 then
+            posX = posX + self.LeftNum * 40 + 40
+        elseif self.cardSize >=1.2 and self.cardSize < 1.28 then
+            posX = posX + self.LeftNum * 40 + 55
+        else
+            posX = posX + self.LeftNum * 40 + 70
+        end
     end
 
     self.Grid:get_transform():set_localPosition(LuaVector3.Create(posX, oldPos:y(), oldPos:z()))
