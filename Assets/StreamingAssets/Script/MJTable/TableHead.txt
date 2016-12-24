@@ -50,8 +50,8 @@ end
 
 function TableHead:PlayRecordVoice(length, i)
     if i == 2 or i == 3 then
-        ref.Speak:get_transform():set_localPosition(LuaVector3.Create(-60, 0, 0))
-        ref.Speak:get_transform():set_localScale(LuaVector3.Create(-1, 1, 1))
+        self.Speak:get_transform():set_localPosition(LuaVector3.Create(-60, 0, 0))
+        self.Speak:get_transform():set_localScale(LuaVector3.Create(-1, 1, 1))
     end
 
     self.Speak:set_spriteName("speak0")
