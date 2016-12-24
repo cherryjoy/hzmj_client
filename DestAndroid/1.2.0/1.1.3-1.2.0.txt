@@ -1,0 +1,6 @@
+assetbundles:2042908759
+ui/prefab/mjtable_prefab:1788168768
+asset_dependency:1793400410
+MJTable/TableBottom.txt:-134489111
+MJTable/TableHead.txt:656912132
+Utils/GameDefine.txt:-1840295755
