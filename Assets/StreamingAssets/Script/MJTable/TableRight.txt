@@ -142,20 +142,21 @@ function TableRight:HandlePlayCard(i, card)
         self.AnimCard.gameObject:set_name("MyCardRight")
     else
         -- 重置参数
-        self.AnimCard.TweenPos:waitTime(0.5)
+        self.AnimCard.TweenPos:waitTime(0.4)
         self.AnimCard.TweenPos:ResetFactor(false)
         self.AnimCard.TweenPos:set_enabled(false)
         self.AnimCard.TweenPos:from(LuaVector3.Create(330, 0, 0))
-        self.AnimCard.TweenPos:to(LuaVector3.Create(150, 0, 0))
+        self.AnimCard.TweenPos:to(LuaVector3.Create(160, 0, 0))
         self.AnimCard.gameObject:SetActive(true)
         self.AnimCard.TweenPos:set_enabled(true)
     end
 
     self.AnimCard.gameObject:get_transform():set_localPosition(LuaVector3.Create(330, 0, 0))
-    self.AnimCard.Init(self.AnimCard, card, i)
+    self.AnimCard.Init(self.AnimCard, card, i, true)
 end
 
 function TableRight:PlayCardEnd(card)
+    NGUITools.PlaySoundByPath("Music/Common/outcard")
     self.AnimCard.gameObject:SetActive(false)
     local ref = TableRight.SetPlayCard(self, card)
 

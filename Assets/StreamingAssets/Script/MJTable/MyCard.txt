@@ -39,7 +39,7 @@ function MyCard:Animation()
 
     local pos = self.gameObject:get_transform():get_localPosition()
     self.TweenPos:from(LuaVector3.Create(pos:x(), pos:y(), pos:z()))
-    self.TweenPos:to(LuaVector3.Create(-parentPos:x()/parentScale:x(), 150, 0))
+    self.TweenPos:to(LuaVector3.Create(-parentPos:x()/parentScale:x(), 120, 0))
     self.TweenPos:set_enabled(true)
 end
 
@@ -50,6 +50,14 @@ end
 
 function MyCard:MyCardRight_TweenEnd()
     Client.TablePlayRightCardEnd:Do(self.card)
+end
+
+function MyCard:MyCardLeft_TweenEnd()
+    Client.TablePlayLeftCardEnd:Do(self.card)
+end
+
+function MyCard:MyCardTop_TweenEnd()
+    Client.TablePlayTopCardEnd:Do(self.card)
 end
 
 function MyCard:TableClear()

@@ -6,10 +6,12 @@ end
 
 function TableLeft:Start( )
     Client.DeleteCard = Client.DeleteCard + {self, TableLeft.DeleteCard}
+    Client.TablePlayLeftCardEnd = Client.TablePlayLeftCardEnd + {self, TableLeft.PlayCardEnd}
 end
 
 function TableLeft:OnDestroy( )
     Client.DeleteCard = Client.DeleteCard - {self, TableLeft.DeleteCard}
+    Client.TablePlayLeftCardEnd = Client.TablePlayLeftCardEnd - {self, TableLeft.PlayCardEnd}
 end
 
 function TableLeft:Clear()
@@ -130,22 +132,39 @@ end
 
 function TableLeft:HandlePlayCard(i, card)
     --LuaDebug.Log("play card, type: "..card.type_id..", id: "..card.code_id)
+    if self.GetCard:get_activeSelf() then
+        self.GetCard:SetActive(false)
+    else
+        TableLeft.RemoveHandCard(self, 1)
+    end
+
+    if self.AnimCard == nil then
+        self.AnimCard = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCardLeft",self.gameObject)
+        self.AnimCard.gameObject:set_name("MyCardLeft")
+    else
+        -- 重置参数
+        self.AnimCard.TweenPos:waitTime(0.4)
+        self.AnimCard.TweenPos:ResetFactor(false)
+        self.AnimCard.TweenPos:set_enabled(false)
+        self.AnimCard.TweenPos:from(LuaVector3.Create(-330, 0, 0))
+        self.AnimCard.TweenPos:to(LuaVector3.Create(-160, 0, 0))
+        self.AnimCard.gameObject:SetActive(true)
+        self.AnimCard.TweenPos:set_enabled(true)
+    end
+
+    self.AnimCard.gameObject:get_transform():set_localPosition(LuaVector3.Create(-330, 0, 0))
+    self.AnimCard.Init(self.AnimCard, card, i, true)
+end
+
+function TableLeft:PlayCardEnd(card)
+    NGUITools.PlaySoundByPath("Music/Common/outcard")
+    self.AnimCard.gameObject:SetActive(false)
     local ref = TableLeft.SetPlayCard(self, card)
 
     self.toward:get_transform():SetParent(ref.Card:get_transform())
     self.toward:get_transform():set_localPosition(LuaVector3.Create(0, 0, 0))
 
     self.lastCard = ref
-
-    if self.GetCard:get_activeSelf() then
-        self.GetCard:SetActive(false)
-    else
-        TableLeft.RemoveHandCard(self, 1)  --TODO 应该没有用了
-    end
-end
-
-function TableLeft:PlayCardEnd()
-
 end
 
 function TableLeft:SetHeadInfo(info, toward)

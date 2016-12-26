@@ -37,7 +37,7 @@ function MJTableCtrl:Init(passwd, horse, beishu, rolelist)
     MJTableCtrl.SetJuShuPaiShu(self)
 
     local spriteName, myDirect = MJTableCtrl.GetMyDirectSprite(Client.RoleInfo.RoleID, rolelist)
-    LuaDebug.Log("my direction: "..myDirect)
+    --LuaDebug.Log("my direction: "..myDirect)
     self.myDirect = myDirect
 
     local angle = self.Direction:get_transform():get_localEulerAngles():z() - (myDirect - 1)*90
@@ -61,7 +61,7 @@ function MJTableCtrl:SetJuShuPaiShu()
 end
 
 function MJTableCtrl:EnterRoomSync(rolelist)
-    LuaDebug.Log("rolelist: "..#rolelist)
+    --LuaDebug.Log("rolelist: "..#rolelist)
     for i = 1, #rolelist do
         --LuaDebug.Log("roleList[i].roleid: "..rolelist[i].roleid)
         --LuaDebug.Log("roleList[i].direct: "..rolelist[i].direct)
@@ -76,7 +76,7 @@ end
 
 function MJTableCtrl:CardInfoSync(cardInfo)
     Client.m_CurrentState = EClientState.E_CS_Table
-    LuaDebug.Log("leftnum: "..cardInfo.leftnum)
+    --LuaDebug.Log("leftnum: "..cardInfo.leftnum)
     Client.RoleInfo.RestCard = cardInfo.leftnum
     -- 关闭 邀请
     self.Invite:SetActive(false)
@@ -87,20 +87,20 @@ function MJTableCtrl:CardInfoSync(cardInfo)
 
     -- 同步自己的牌
     self.Drect1.LeftCardSync(self.Drect1, cardInfo.owncards)
-    
+
     if cardInfo.owncards ~= nil then
-        LuaDebug.Log("card num: "..#(cardInfo.owncards.handcard))
+        --LuaDebug.Log("card num: "..#(cardInfo.owncards.handcard))
         --Client.RoleInfo.RestCard = Client.RoleInfo.RestCard - #(cardInfo.owncards.handcard)
         self.Drect1.CardInfoSync(self.Drect1, cardInfo.owncards.handcard)
     end
 
     -- 同步其他人的牌
-    LuaDebug.Log("#(cardInfo.othercards): "..#(cardInfo.othercards))
+    --LuaDebug.Log("#(cardInfo.othercards): "..#(cardInfo.othercards))
     for i = 1, #(cardInfo.othercards) do
         --LuaDebug.Log("othercards roleid: "..cardInfo.othercards[i].roleid..", handnum: "..cardInfo.othercards[i].handnum)
         for j = 1, 4 do
             if self["Drect"..j].roleId == cardInfo.othercards[i].roleid then
-                LuaDebug.Log("drect "..j.." : "..cardInfo.othercards[i].handnum)
+                --LuaDebug.Log("drect "..j.." : "..cardInfo.othercards[i].handnum)
                 --Client.RoleInfo.RestCard = Client.RoleInfo.RestCard - cardInfo.othercards[i].handnum
                 self["Drect"..j].CardInfoSync(self["Drect"..j], cardInfo.othercards[i].handnum)
                 self["Drect"..j].LeftCardSync(self["Drect"..j], cardInfo.othercards[i])
@@ -110,11 +110,11 @@ function MJTableCtrl:CardInfoSync(cardInfo)
 
     -- 同步桌上的牌
     if cardInfo.tablecards ~= nil then
-        LuaDebug.Log("#(cardInfo.tablecards): "..#(cardInfo.tablecards))
+        --LuaDebug.Log("#(cardInfo.tablecards): "..#(cardInfo.tablecards))
         for i = 1, #(cardInfo.tablecards) do
             for j = 1, 4 do
                 if self["Drect"..j].roleId == cardInfo.tablecards[i].roleid then
-                    LuaDebug.Log("drect "..j.." : "..#(cardInfo.tablecards[i].cards))
+                    --LuaDebug.Log("drect "..j.." : "..#(cardInfo.tablecards[i].cards))
                     self["Drect"..j].PlayCardSync(self["Drect"..j], cardInfo.tablecards[i].cards)
                 end
             end
@@ -224,7 +224,7 @@ function MJTableCtrl:InitRoleList(myDirect, roleList)
 end
 
 function MJTableCtrl:GameReady(roleStateList)
-    LuaDebug.Log("roleStateList num: "..#roleStateList)
+    --LuaDebug.Log("roleStateList num: "..#roleStateList)
     for i = 1, #roleStateList do
         LuaDebug.Log("roleId : "..tostring(roleStateList[i].roleid)..", state : "..tostring(roleStateList[i].state))
         for j = 1, 4 do

@@ -208,6 +208,7 @@ function TableBottom:SetPlayCard(card)
 end
 
 function TableBottom:PlayCardEnd(i)
+    NGUITools.PlaySoundByPath("Music/Common/outcard")
     self.OutLine:set_enabled(false)
 
     local card = self.handCard[i].card

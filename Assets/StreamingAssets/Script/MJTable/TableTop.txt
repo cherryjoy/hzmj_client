@@ -6,10 +6,12 @@ end
 
 function TableTop:Start( )
     Client.DeleteCard = Client.DeleteCard + {self, TableTop.DeleteCard}
+    Client.TablePlayTopCardEnd = Client.TablePlayTopCardEnd + {self, TableTop.PlayCardEnd}
 end
 
 function TableTop:OnDestroy( )
     Client.DeleteCard = Client.DeleteCard - {self, TableTop.DeleteCard}
+    Client.TablePlayTopCardEnd = Client.TablePlayTopCardEnd - {self, TableTop.PlayCardEnd}
 end
 
 function TableTop:Clear()
@@ -86,7 +88,7 @@ function TableTop:PlayCardSync(cards)
 end
 
 function TableTop:SetLeftCard(card)
-    LuaDebug.Log("left card, type: "..card.type_id..", id: "..card.code_id)
+    --LuaDebug.Log("left card, type: "..card.type_id..", id: "..card.code_id)
     local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/TopPengCard",self.LeftCardGrid:get_gameObject())
     local spriteName = MJTableCtrl.GetLeftCardSprite(card)
     ref.Card:set_spriteName(spriteName)
@@ -129,22 +131,39 @@ end
 
 function TableTop:HandlePlayCard(i, card, toward)
     --LuaDebug.Log("play card, type: "..card.type_id..", id: "..card.code_id)
+    if self.GetCard:get_activeSelf() then
+        self.GetCard:SetActive(false)
+    else
+        TableTop.RemoveHandCard(self, 1)
+    end
+
+    if self.AnimCard == nil then
+        self.AnimCard = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCardTop",self.gameObject)
+        self.AnimCard.gameObject:set_name("MyCardTop")
+    else
+        -- 重置参数
+        self.AnimCard.TweenPos:waitTime(0.4)
+        self.AnimCard.TweenPos:ResetFactor(false)
+        self.AnimCard.TweenPos:set_enabled(false)
+        self.AnimCard.TweenPos:from(LuaVector3.Create(0, 250, 0))
+        self.AnimCard.TweenPos:to(LuaVector3.Create(0, 140, 0))
+        self.AnimCard.gameObject:SetActive(true)
+        self.AnimCard.TweenPos:set_enabled(true)
+    end
+
+    self.AnimCard.gameObject:get_transform():set_localPosition(LuaVector3.Create(0, 250, 0))
+    self.AnimCard.Init(self.AnimCard, card, i, true)
+end
+
+function TableTop:PlayCardEnd(card)
+    NGUITools.PlaySoundByPath("Music/Common/outcard")
+    self.AnimCard.gameObject:SetActive(false)
     local ref = TableTop.SetPlayCard(self, card)
 
     self.toward:get_transform():SetParent(ref.TopPlayCard:get_transform())
     self.toward:get_transform():set_localPosition(LuaVector3.Create(0, 0, 0))
 
     self.lastCard = ref
-
-    if self.GetCard:get_activeSelf() then
-        self.GetCard:SetActive(false)
-    else
-        TableTop.RemoveHandCard(self, 1)
-    end
-end
-
-function TableTop:PlayCardEnd()
-
 end
 
 function TableTop:SetHeadInfo(info, toward)
