@@ -6,10 +6,12 @@ end
 
 function TableRight:Start()
     Client.DeleteCard = Client.DeleteCard + {self, TableRight.DeleteCard}
+    Client.TablePlayRightCardEnd = Client.TablePlayRightCardEnd + {self, TableRight.PlayCardEnd}
 end
 
 function TableRight:OnDestroy( )
     Client.DeleteCard = Client.DeleteCard - {self, TableRight.DeleteCard}
+    Client.TablePlayRightCardEnd = Client.TablePlayRightCardEnd - {self, TableRight.PlayCardEnd}
 end
 
 function TableRight:Clear()
@@ -129,24 +131,39 @@ end
 
 function TableRight:HandlePlayCard(i, card)
     --LuaDebug.Log("play card, type: "..card.type_id..", id: "..card.code_id)
+    if self.GetCard:get_activeSelf() then
+        self.GetCard:SetActive(false)
+    else
+        TableRight.RemoveHandCard(self, 1)
+    end
+
+    if self.AnimCard == nil then
+        self.AnimCard = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCardRight",self.gameObject)
+        self.AnimCard.gameObject:set_name("MyCardRight")
+    else
+        -- 重置参数
+        self.AnimCard.TweenPos:waitTime(0.5)
+        self.AnimCard.TweenPos:ResetFactor(false)
+        self.AnimCard.TweenPos:set_enabled(false)
+        self.AnimCard.TweenPos:from(LuaVector3.Create(330, 0, 0))
+        self.AnimCard.TweenPos:to(LuaVector3.Create(150, 0, 0))
+        self.AnimCard.gameObject:SetActive(true)
+        self.AnimCard.TweenPos:set_enabled(true)
+    end
+
+    self.AnimCard.gameObject:get_transform():set_localPosition(LuaVector3.Create(330, 0, 0))
+    self.AnimCard.Init(self.AnimCard, card, i)
+end
+
+function TableRight:PlayCardEnd(card)
+    self.AnimCard.gameObject:SetActive(false)
     local ref = TableRight.SetPlayCard(self, card)
 
     self.toward:get_transform():SetParent(ref.RightPlayCard:get_transform())
     self.toward:get_transform():set_localPosition(LuaVector3.Create(0, 0, 0))
 
     self.lastCard = ref
-
-    if self.GetCard:get_activeSelf() then
-        self.GetCard:SetActive(false)
-    else
-        TableRight.RemoveHandCard(self, 1)
-    end
 end
-
-function TableRight:PlayCardEnd()
-
-end
-
 
 function TableRight:SetHeadInfo(info, toward)
     self.toward = toward

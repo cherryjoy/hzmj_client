@@ -44,8 +44,12 @@ function MyCard:Animation()
 end
 
 function MyCard:MyCard_TweenEnd()
-    LuaDebug.Log("MyCard_TweenEnd card, type: "..self.card.type_id..", id: "..self.card.code_id)
+    --LuaDebug.Log("MyCard_TweenEnd card, type: "..self.card.type_id..", id: "..self.card.code_id)
     Client.TablePlayCardEnd:Do(self.index)
+end
+
+function MyCard:MyCardRight_TweenEnd()
+    Client.TablePlayRightCardEnd:Do(self.card)
 end
 
 function MyCard:TableClear()
