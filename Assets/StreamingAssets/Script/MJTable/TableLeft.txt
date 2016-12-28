@@ -161,6 +161,7 @@ function TableLeft:PlayCardEnd(card)
     self.AnimCard.gameObject:SetActive(false)
     local ref = TableLeft.SetPlayCard(self, card)
 
+    self.toward:SetActive(true)
     self.toward:get_transform():SetParent(ref.Card:get_transform())
     self.toward:get_transform():set_localPosition(LuaVector3.Create(0, 0, 0))
 
@@ -185,8 +186,10 @@ end
 
 function TableLeft:DeleteCard(srcRoleId)
     if self.roleId == srcRoleId then
-        self.lastCard.Card:get_gameObject():Destroy1()
-        self.PlayNum = self.PlayNum - 1
+        if self.lastCard ~= nil then
+            self.lastCard.Card:get_gameObject():Destroy1()
+            self.PlayNum = self.PlayNum - 1
+        end
     end
 end
 

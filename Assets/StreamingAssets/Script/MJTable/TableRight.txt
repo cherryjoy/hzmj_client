@@ -160,6 +160,7 @@ function TableRight:PlayCardEnd(card)
     self.AnimCard.gameObject:SetActive(false)
     local ref = TableRight.SetPlayCard(self, card)
 
+    self.toward:SetActive(true)
     self.toward:get_transform():SetParent(ref.RightPlayCard:get_transform())
     self.toward:get_transform():set_localPosition(LuaVector3.Create(0, 0, 0))
 
@@ -184,8 +185,10 @@ end
 
 function TableRight:DeleteCard(srcRoleId)
     if self.roleId == srcRoleId then
-        self.lastCard.RightPlayCard:Destroy1()
-        self.PlayNum = self.PlayNum - 1
+        if self.lastCard ~= nil then
+            self.lastCard.RightPlayCard:Destroy1()
+            self.PlayNum = self.PlayNum - 1
+        end
     end
 end
 

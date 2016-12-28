@@ -215,6 +215,7 @@ function TableBottom:PlayCardEnd(i)
     local ref = TableBottom.SetPlayCard(self, card)
 
     self.PlayedCardsGrid:Reposition()
+    self.toward:SetActive(true)
     self.toward:get_transform():SetParent(ref.Card:get_transform())
     self.toward:get_transform():set_localPosition(LuaVector3.Create(0, 0, 0))
 
@@ -288,8 +289,10 @@ end
 
 function TableBottom:DeleteCard(srcRoleId)
     if self.roleId == srcRoleId then
-        self.lastCard.Card:get_gameObject():Destroy1()
-        self.PlayNum = self.PlayNum - 1
+        if self.lastCard ~= nil then
+            self.lastCard.Card:get_gameObject():Destroy1()
+            self.PlayNum = self.PlayNum - 1
+        end
     end
 end
 

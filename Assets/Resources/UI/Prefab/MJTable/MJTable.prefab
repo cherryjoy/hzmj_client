@@ -2581,7 +2581,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 180566}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -560, y: -223, z: -0.0000019073486}
+  m_LocalPosition: {x: -488, y: -223, z: -0.0000019073486}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -5442,7 +5442,7 @@ MonoBehaviour:
   method: 0
   mDestroyAfterTween: 0
   style: 3
-  duration: 0.5
+  duration: 1
   tweenGroup: 0
   eventReceiver: {fileID: 119252}
   callWhenFinished: OnEventWithMessage

@@ -287,7 +287,7 @@ function MJTableCtrl:HandlePlayCard(roleId, index, card, result)
     -- 播放出牌
     NGUITools.PlaySoundByPath("Music/Card/"..MJTableCtrl.GetRoleSex(self, roleId)..card.type_id..card.code_id)
 
-    self.TowardCard:SetActive(true)
+    --self.TowardCard:SetActive(true)
     MJTableCtrl.DoCountDownFinish(self)
     -- 判断当前的牌是否能碰、杠
     if roleId ~= self.Drect1.roleId then
@@ -376,17 +376,18 @@ function MJTableCtrl:CountDownStart(roleId)
     self.TimerBack:get_gameObject():SetActive(true)
     -- 倒计时
     self.CD = 10
-    self.CountDown:set_text(tostring(self.CD))
-    self.CountDown:set_enabled(true)
+    --self.CountDown:set_text(tostring(self.CD))
+    --self.CountDown:set_enabled(true)
 
     if self.timer == nil then
-        self.timer = Timer.NewEvent(self,10,100,MJTableCtrl.DoCountDown, false, MJTableCtrl.DoCountDownFinish)
+        self.timer = Timer.NewEvent(self,10,110,MJTableCtrl.DoCountDown, false, MJTableCtrl.DoCountDownFinish)
     end
 end
 
 function MJTableCtrl:DoCountDown()
-    self.CD = self.CD - 1
     self.CountDown:set_text(tostring(self.CD))
+    self.CountDown:set_enabled(true)
+    self.CD = self.CD - 1
 end
 
 function MJTableCtrl:DoCountDownFinish()
