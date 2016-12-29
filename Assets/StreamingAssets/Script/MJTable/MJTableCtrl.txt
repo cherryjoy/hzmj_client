@@ -375,12 +375,12 @@ function MJTableCtrl:CountDownStart(roleId)
     self.TimerBack:set_spriteName(spriteName)
     self.TimerBack:get_gameObject():SetActive(true)
     -- 倒计时
-    self.CD = 10
+    self.CD = 15
     --self.CountDown:set_text(tostring(self.CD))
     --self.CountDown:set_enabled(true)
 
     if self.timer == nil then
-        self.timer = Timer.NewEvent(self,10,110,MJTableCtrl.DoCountDown, false, MJTableCtrl.DoCountDownFinish)
+        self.timer = Timer.NewEvent(self,10,160,MJTableCtrl.DoCountDown, false, MJTableCtrl.DoCountDownFinish)
     end
 end
 
@@ -505,8 +505,6 @@ end
 function MJTableCtrl:HandleWinGame(data)
     local ref = LuaUIViewCtr.OpenUINotLose("MJTable/WinGame")
     ref.Init(ref, data, self.roomId)
-
-    self.ResultCard:SetActive(false)
 end
 
 function MJTableCtrl:ResetToward()
@@ -528,6 +526,7 @@ function MJTableCtrl:HandleTingCard(cards)
 end
 
 function MJTableCtrl:HandleGameResult(data)
+    self.ResultCard:SetActive(false)
     if self.GameResult ~= nil then
         LuaDebug.Log("GameResult exist, but recv GameResult msg")
         return
@@ -864,6 +863,8 @@ function MJTableCtrl:PlayTableQiangGang(roleId)
 end
 
 function MJTableCtrl:PlayTableHu(data)
+    self.ResultCard:SetActive(false)
+
     if data.role_list ~= nil and #(data.role_list) > 0 then
         for k = 1, #(data.role_list) do
             NGUITools.PlaySoundByPath("Music/Common/"..MJTableCtrl.GetRoleSex(self, data.role_list[k]).."hu")

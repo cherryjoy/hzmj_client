@@ -161,6 +161,9 @@ function RoleResult:SetCodeCards(cards)
         local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCard", self.CodeCardsGrid:get_gameObject())
         ref.gameObject:get_transform():set_localScale(LuaVector3.Create(0.53, 0.53, 1))
         ref.Init(ref, cards[i], i, true)
+        if cards[i].code_id == 1 or cards[i].code_id == 5 or cards[i].code_id == 9 then
+            ref.Check:set_enabled(true)
+        end
     end
 
     self.CodeCardsGrid:Reposition()
