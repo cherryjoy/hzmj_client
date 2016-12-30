@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 677910084
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: f5e87ae85cf04bd195379767c89cc8a5
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c516f2a3b2b6b67ef759f6410a790acd
+HashAppended: 0
+ClassTypes:
+- Class: 83
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Music/Scene/bgm.mp3
+Dependencies: []
