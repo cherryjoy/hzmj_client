@@ -115,7 +115,7 @@ function LoginController:Init()
         require "Utils/GameDefine"
         serverList = GameDefine_inside_serverlist_url
     else
-        GameDefine_outside_serverlist_url = "http://hzmj2.applinzi.com/cj_hzmj.xml"
+        --GameDefine_outside_serverlist_url = "http://hzmj2.applinzi.com/cj_hzmj.xml"
         serverList = GameDefine_outside_serverlist_url
     end
     serverList = serverList .. "?id=" .. LuaLong.ToString(LuaDateTime.Ticks_Now())

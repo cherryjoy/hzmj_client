@@ -131,6 +131,10 @@ end
 
 function TableRight:HandlePlayCard(i, card)
     --LuaDebug.Log("play card, type: "..card.type_id..", id: "..card.code_id)
+    local ref = TableRight.SetPlayCard(self, card)
+    ref.gameObject:SetActive(false)
+    self.lastCard = ref
+
     if self.GetCard:get_activeSelf() then
         self.GetCard:SetActive(false)
     else
@@ -158,13 +162,15 @@ end
 function TableRight:PlayCardEnd(card)
     NGUITools.PlaySoundByPath("Music/Common/outcard")
     self.AnimCard.gameObject:SetActive(false)
-    local ref = TableRight.SetPlayCard(self, card)
 
-    self.toward:SetActive(true)
-    self.toward:get_transform():SetParent(ref.RightPlayCard:get_transform())
-    self.toward:get_transform():set_localPosition(LuaVector3.Create(0, 0, 0))
-
-    self.lastCard = ref
+    if self.lastCard ~= nil then
+        if self.lastCard.gameObject ~= nil and not self.lastCard.gameObject:Equals(nil) and self.lastCard.gameObject:get_activeSelf() then
+            self.lastCard.gameObject:SetActive(true)
+            self.toward:SetActive(true)
+            self.toward:get_transform():SetParent(self.lastCard.RightPlayCard:get_transform())
+            self.toward:get_transform():set_localPosition(LuaVector3.Create(0, 0, 0))
+        end
+    end
 end
 
 function TableRight:SetHeadInfo(info, toward)

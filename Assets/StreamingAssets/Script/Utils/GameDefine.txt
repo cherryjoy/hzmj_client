@@ -1,5 +1,5 @@
 --platformconfig can over this
-GameDefine_version = "1.2.0"
+GameDefine_version = "1.2.2"
 GameDefine_gameID = 584
 GameDefine_AppHashCode = "ae2dbe456c09d76852beca29e146aedc"
 GameDefine_platformCode = 5

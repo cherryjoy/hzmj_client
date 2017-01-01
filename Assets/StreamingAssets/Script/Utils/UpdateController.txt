@@ -108,7 +108,7 @@ function UpdateController.DownloadServerlist()
 	UpdateController.ProgressLabel:set_text(Text.CheckUpdate)
 	local clientVersion = UpdateConfig.ReadClientVersionFromSdcard()
 	UpdateController.UpdateCtrSelf.VersionLbl:set_text("V"..clientVersion)
-	GameDefine_outside_serverlist_url = "http://hzmj2.applinzi.com/cj_hzmj.xml"
+	--GameDefine_outside_serverlist_url = "http://hzmj2.applinzi.com/cj_hzmj.xml"
 	UpdateController.UpdateCtr:HttpDownLoadXml(GameDefine_outside_serverlist_url,"DownloadServerlistCallback","DownLoadErrorCallback")
 	UpdateController.downloadTimer = Timer.NewEvent(UpdateController,50,50,UpdateController.DownLoadOverTime)
 end
