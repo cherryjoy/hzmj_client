@@ -1,0 +1,22 @@
+ManifestFileVersion: 0
+CRC: 267960871
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: c9135b2341c8118794f0970f07110cc2
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: fa3924242a2a156456239784e70a9a9d
+HashAppended: 0
+ClassTypes:
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 128
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/UI/Fonts/HZGB.TTF
+Dependencies: []
