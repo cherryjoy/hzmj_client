@@ -164,7 +164,7 @@ function TableTop:PlayCardEnd(card)
     self.AnimCard.gameObject:SetActive(false)
 
     if self.lastCard ~= nil then
-        if self.lastCard.gameObject ~= nil and not self.lastCard.gameObject:Equals(nil) and self.lastCard.gameObject:get_activeSelf() then
+        if self.lastCard.gameObject ~= nil and (not self.lastCard.gameObject:Equals(nil)) then
             self.lastCard.gameObject:SetActive(true)
             self.toward:SetActive(true)
             self.toward:get_transform():SetParent(self.lastCard.TopPlayCard:get_transform())
