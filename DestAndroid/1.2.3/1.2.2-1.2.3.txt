@@ -1,0 +1,12 @@
+asset_dependency:1793400410
+Home/MainUICtrl.txt:618218766
+MJTable/GameResult.txt:-1068887829
+MJTable/MJTableCtrl.txt:1230039518
+MJTable/MyCard.txt:-1413505978
+MJTable/TableBottom.txt:-134489111
+MJTable/TableHead.txt:656912132
+MJTable/TableLeft.txt:-718841627
+MJTable/TableRight.txt:287492228
+MJTable/TableTop.txt:-1141757595
+Utils/Client.txt:-2000550301
+Utils/ClientSendMsg.txt:292295696
