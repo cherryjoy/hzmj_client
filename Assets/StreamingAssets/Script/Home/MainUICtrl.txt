@@ -71,8 +71,9 @@ function MainUICtrl:CreateRoom_OnClick()
 end
 
 function MainUICtrl:Icon_OnClick()
-    local ref = LuaUIViewCtr.OpenUIHasBg("CommonUI/RoleInfoUI")
-    ref.Init(ref, Client.RoleInfo.RoleName, Client.RoleInfo.sex, Client.RoleInfo.RoleID, Client.RoleInfo.address, Client.RoleInfo.integral, Client.RoleInfo.imageurl)
+    --local ref = LuaUIViewCtr.OpenUIHasBg("CommonUI/RoleInfoUI")
+    --ref.Init(ref, Client.RoleInfo.RoleName, Client.RoleInfo.sex, Client.RoleInfo.RoleID, Client.RoleInfo.address, Client.RoleInfo.integral, Client.RoleInfo.imageurl)
+    ClientSendMsg.SendRoleBaseInfo(Client.RoleInfo.RoleID)
 end
 
 function MainUICtrl:Add_OnClick()

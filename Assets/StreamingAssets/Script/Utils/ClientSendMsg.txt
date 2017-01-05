@@ -12,7 +12,8 @@ function ClientSendMsg.SendNetMsg(netCode,buffer,bufferLength )
 	end
 
 	LuaNetwork.SendNetMessage(netCode,buffer,bufferLength)
-	if netCode ~= enumMSGID_MODULE_05.ID_GAME_HEARTBEAT_REQ and netCode ~= enumMSGID_MODULE_05.ID_GAME_WIN_CARD_REQ then
+	if netCode ~= enumMSGID_MODULE_05.ID_GAME_HEARTBEAT_REQ and netCode ~= enumMSGID_MODULE_05.ID_GAME_WIN_CARD_REQ
+	 	and netCode ~= enumMSGID_MODULE_05.ID_ROLE_NUMERIC_VALUE_REQ then
 		Client.OpenLoadingUI()
 	end
 end
@@ -311,4 +312,11 @@ function ClientSendMsg.SendRoomBalanceRecord()
 
 	local buffer, length = LuaProto.serialize(data)
 	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_ROOM_BALANCE_RECORD_REQ, buffer, length)
+end
+
+function ClientSendMsg.SendRoleNumericValue()
+	local data = PBMsgRoleNumericValueReq.Create()
+
+	local buffer, length = LuaProto.serialize(data)
+	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_ROLE_NUMERIC_VALUE_REQ, buffer, length)
 end

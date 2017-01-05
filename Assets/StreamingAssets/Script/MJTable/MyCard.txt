@@ -80,8 +80,10 @@ function MyCard:Card_OnPress(isPressed)
             Client.TableChooseCard:Do(self.index, false)
             Client.TableChooseCard:Do(self.index, false)
         else
-            self.gameObject:get_transform():set_localPosition(LuaVector3.Create(self.oldPos:x(), self.oldPos:y(), self.oldPos:z()))
-            self.oldPos = nil
+            if self.oldPos ~= nil then
+                self.gameObject:get_transform():set_localPosition(LuaVector3.Create(self.oldPos:x(), self.oldPos:y(), self.oldPos:z()))
+                self.oldPos = nil
+            end
         end
 
         self.Back:set_depth(21)

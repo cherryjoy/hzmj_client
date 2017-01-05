@@ -51,6 +51,10 @@ function Client.ListenNetwork( state,ip,port )
         Client.NetConnectFailed:Do()
     elseif state == EClientNetWorkState.NORMAL then
         Client.NetConnectSuccess:Do()
+        if Client.m_CurrentState == EClientState.E_CS_Table or Client.m_CurrentState == EClientState.E_CS_Hall
+            or Client.m_CurrentState == EClientState.E_CS_TableReady then
+                ClientSendMsg.SendRoleNumericValue()
+        end
     end
 end
 

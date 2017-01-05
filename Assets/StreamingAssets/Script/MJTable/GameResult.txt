@@ -6,6 +6,11 @@ end
 
 function GameResult:OnDestroy( )
     Client.TableClose = Client.TableClose - {self, GameResult.TableClose}
+
+    if self.retryTimer ~= nil then
+        Timer.RemoveEvent(self,self.retryTimer)
+        self.retryTimer = nil
+    end
 end
 
 function GameResult:Init(dataTotal, roleList, roomId)
@@ -99,6 +104,9 @@ function GameResult:Ready_OnClick()
     --发送准备协议
     ClientSendMsg.SendReadyRoom()
     self.sendReady = true
+    if self.retryTimer == nil then
+        self.retryTimer = Timer.NewEvent(self,60,60,GameResult.RetryReady, false, nil)
+    end
 end
 
 function GameResult:Share_OnClick()
@@ -107,4 +115,10 @@ end
 
 function GameResult:TableClose()
     self.gameObject:Destroy1()
+end
+
+function GameResult:RetryReady()
+    self.sendReady = false
+
+    self.retryTimer = nil
 end
