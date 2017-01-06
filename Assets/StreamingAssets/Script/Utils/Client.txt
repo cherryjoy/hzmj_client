@@ -221,6 +221,16 @@ function Client.FuncApplicationPause(isPause)
     Client.ApplicationPause:Do(isPause)
 end
 
+function Client.EscapeBtnOnClick()
+    if Client.EscRef == nil then
+        Client.EscRef = LuaUIViewCtr.OpenUIHasBg("ToolsUI/MessageBox")
+        LuaMessageBox.SetDataTable(Client.EscRef, {Message = Text.ExitGame,
+                                            ConfirmName = Text.Confirm ,ConfirmFunc = Client.ExitGame,
+                                            CancelName = Text.Cancel ,CancelFunc = function () Client.EscRef = nil  end,
+                                            ref=self})
+    end
+end
+
 function Client.IsDebugPlatform()
     if GameDefine_isLoginDebug == nil or GameDefine_isLoginDebug == true or
     Application.get_platform()==ERuntimePlatform.WindowsPlayer or Application.get_platform()==ERuntimePlatform.WindowsEditor then
