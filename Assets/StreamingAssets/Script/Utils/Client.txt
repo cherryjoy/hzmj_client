@@ -224,7 +224,7 @@ end
 function Client.EscapeBtnOnClick()
     if Client.EscRef == nil then
         Client.EscRef = LuaUIViewCtr.OpenUIHasBg("ToolsUI/MessageBox")
-        LuaMessageBox.SetDataTable(Client.EscRef, {Message = Text.ExitGame,
+        LuaMessageBox.SetDataTable(Client.EscRef, {Message = Text.ExitGameConfirm,
                                             ConfirmName = Text.Confirm ,ConfirmFunc = Client.ExitGame,
                                             CancelName = Text.Cancel ,CancelFunc = function () Client.EscRef = nil  end,
                                             ref=self})

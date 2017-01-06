@@ -18,6 +18,7 @@ Text = {
     Confirm = "确定",
     Cancel = "取消",
     ExitGame = "退出游戏",
+    ExitGameConfirm = "确定要退出游戏吗？",
     ContinueGame = "继续游戏",
     Restore = "恢复",
     Save = "保存",
