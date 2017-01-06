@@ -507,9 +507,11 @@ function MJTableCtrl:HandleWinGame(data)
 end
 
 function MJTableCtrl:ResetToward()
-    self.TowardCard:get_transform():SetParent(self.Direction:get_transform())
-    self.TowardCard:get_transform():set_localPosition(LuaVector3.Create(0, 0, 0))
-    self.TowardCard:SetActive(false)
+    if self.TowardCard ~= nil then
+        self.TowardCard:get_transform():SetParent(self.Direction:get_transform())
+        self.TowardCard:get_transform():set_localPosition(LuaVector3.Create(0, 0, 0))
+        self.TowardCard:SetActive(false)
+    end
 end
 
 function MJTableCtrl:TableClose()

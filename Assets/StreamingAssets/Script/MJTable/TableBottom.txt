@@ -257,15 +257,17 @@ function TableBottom:HandleGetCard(card)
     -- 在处理之前先检查Cardnew下面是否已经有牌
     local tempCardTrans = self.CardNew:get_transform():Find("MyCard")
     if tempCardTrans ~= nil then
-        LuaDebug.LogError("before HandleGetCard, here is a card in hand 1111")
+        --LuaDebug.LogError("before HandleGetCard, here is a card in hand 1111")
         if not tempCardTrans:Equals(nil) then
-            LuaDebug.LogError("before HandleGetCard, here is a card in hand 2222")
+            --LuaDebug.LogError("before HandleGetCard, here is a card in hand 2222")
             local tempCardObj = tempCardTrans:get_gameObject()
             if not tempCardObj:Equals(nil) then
-                LuaDebug.LogError("before HandleGetCard, here is a card in hand 333")
+                --LuaDebug.LogError("before HandleGetCard, here is a card in hand 333")
                 if tempCardObj:get_activeSelf() then
                     LuaDebug.LogError("before HandleGetCard, here is a card in hand 4444")
                     tempCardObj:Destroy1()
+                    -- 重新拉取数据
+                    ClientSendMsg.SendEnterRoom(Client.RoleInfo.RoleID, LuaUIViewCtr.UIPanel["MJTableUI"].roomId)
                 end
             end
         end
