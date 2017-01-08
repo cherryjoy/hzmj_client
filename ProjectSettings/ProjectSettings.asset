@@ -11,7 +11,7 @@ PlayerSettings:
   accelerometerFrequency: 60
   companyName: CherryJoy
   productName: "\u6A31\u6843\u7EA2\u4E2D\u9EBB\u5C06"
-  defaultCursor: {fileID: 2800000, guid: a5f53ec1f47aae74db13d4d20d8205f6, type: 3}
+  defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_ShowUnitySplashScreen: 0
   m_VirtualRealitySplashScreen: {fileID: 2800000, guid: 4190054c4d15411419a913a47d1d1dcf,
@@ -93,14 +93,14 @@ PlayerSettings:
     16:9: 1
     Others: 1
   bundleIdentifier: com.cherryjoy.hzmj
-  bundleVersion: 1.2.3
+  bundleVersion: 1.2.4
   preloadedAssets: []
   metroEnableIndependentInputSource: 0
   metroEnableLowLatencyPresentationAPI: 0
   xboxOneDisableKinectGpuReservation: 0
   virtualRealitySupported: 0
   productGUID: 6e29ba3147f2a6d40b94d747bbdcaea5
-  AndroidBundleVersionCode: 123
+  AndroidBundleVersionCode: 124
   AndroidMinSdkVersion: 9
   AndroidPreferredInstallLocation: 1
   aotOptions: 
@@ -108,7 +108,7 @@ PlayerSettings:
   stripEngineCode: 0
   iPhoneStrippingLevel: 0
   iPhoneScriptCallOptimization: 0
-  iPhoneBuildNumber: 1.2.3
+  iPhoneBuildNumber: 1.2.4
   ForceInternetPermission: 0
   ForceSDCardPermission: 1
   CreateWallpaper: 0
