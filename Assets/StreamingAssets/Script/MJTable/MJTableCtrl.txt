@@ -32,7 +32,7 @@ function MJTableCtrl:Init(passwd, horse, beishu, rolelist)
     self.roomId = passwd
     self.horse = horse
     self.beishu = beishu
-    self.ID:set_text(string.format(Text.TableName, passwd))
+    self.ID:set_text(string.format(Text.TableName, passwd, tostring(Client.ClientVersion)))
     self.MaShu:set_text(string.format(Text.MaShuName, beishu, horse))
     MJTableCtrl.SetJuShuPaiShu(self)
 

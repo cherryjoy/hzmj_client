@@ -3768,7 +3768,7 @@ MonoBehaviour:
   halfPixelOffset: 1
   stretchToFill: 0
   depthOffset: 0
-  ExtraOffset: {x: -100, y: 15, z: 0}
+  ExtraOffset: {x: 0, y: 15, z: 0}
   ViewportOffset: {x: 0, y: 0, z: 0}
   updateAllTheTime: 0
   direction: 2
@@ -5060,7 +5060,7 @@ MonoBehaviour:
   changeFlag: -1
   mMat: {fileID: 0}
   mColor: {r: 1, g: 1, b: 1, a: 1}
-  mPivot: 4
+  mPivot: 5
   mWidth: 22
   mHeight: 22
   mDepth: 50
