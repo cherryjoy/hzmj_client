@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 112992083
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 154f3cf61088d7312c0e6e17dcbeed7f
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 6759894fca659e2049f05064db45ce61
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Material/ShadowTex.tga
+Dependencies: []
