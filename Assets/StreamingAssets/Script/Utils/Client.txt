@@ -213,8 +213,14 @@ function Client.FuncApplicationPause(isPause)
     if Client.m_CurrentState == EClientState.E_CS_Table or Client.m_CurrentState == EClientState.E_CS_Hall
         or Client.m_CurrentState == EClientState.E_CS_TableReady then
         --if not LuaNetwork.IsConnected() then
-        if not isPause then
-            Client.RetryConnectByLastIp()
+        if isPause then
+            LuaNetwork.DisConnect()
+        else
+            --Client.RetryConnectByLastIp()
+            local lastIpStr = PlayerPrefsEx.GetString("LastIp")
+            local lastPortStr = PlayerPrefsEx.GetString("LastPort")
+            --LuaDebug.Log("ip: "..lastIpStr..", prot: "..lastPortStr)
+            LuaNetwork.Connect(lastIpStr, lastPortStr)
         end
     end
 
