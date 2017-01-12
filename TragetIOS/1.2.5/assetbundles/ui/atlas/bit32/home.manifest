@@ -1,0 +1,31 @@
+ManifestFileVersion: 0
+CRC: 3159373234
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: a77f8c3e3edd109272810ec1cf7ce193
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 00370ae3d44832812d113644465dd132
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 1582492658, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/UI/Atlas/Bit32/Home.mat
+- Assets/Resources/UI/Atlas/Bit32/Home_t.png
+- Assets/Resources/UI/Atlas/Bit32/Home.prefab
+Dependencies:
+- F:/MaJiang/hzmj_client/assetbundles/shader
