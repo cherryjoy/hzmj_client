@@ -216,7 +216,7 @@ function TableBottom:PlayCardEnd(i)
 
     self.PlayedCardsGrid:Reposition()
 
-    if self.toward ~= nil then
+    if self.toward ~= nil and not self.toward:Equals(nil) then
         self.toward:SetActive(true)
         self.toward:get_transform():SetParent(ref.Card:get_transform())
         self.toward:get_transform():set_localPosition(LuaVector3.Create(0, 0, 0))
@@ -680,16 +680,44 @@ function TableBottom:CorrectHandCard(cardList)
         index = index + 1
     end
 
-    local num = #(self.handCard)
-    for i = 1, num do
-        local card = self.handCard[i].card
+    -- test
+    --table.insert(newCardList,newCardList[1])
+    --table.remove(newCardList, #newCardList)
+
+    local isAddCard = false
+    for i = 1, #newCardList do
         local newCard = newCardList[i]
-        if newCard ~= nil then
+        if self.handCard[i] ~= nil then
+            local card = self.handCard[i].card
             if card.type_id == newCard.type_id and card.code_id == newCard.code_id then
             else
-                LuaDebug.LogError("index: "..i..",new type_id: "..newCard.type_id..",new code_id: "..newCard.code_id..", old type_id: "..card.type_id..", old code_id: "..card.code_id)
+                LuaDebug.LogError("modify index: "..i..",new type_id: "..newCard.type_id..",new code_id: "..newCard.code_id..", old type_id: "..card.type_id..", old code_id: "..card.code_id)
                 self.handCard[i].Init(self.handCard[i], newCard, i)
             end
+        else
+            local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyHandCard",self.Grid:get_gameObject())
+            ref.gameObject:set_name("MyCard")
+            ref.Message:target(ref.gameObject)
+            self.handCard[i] = ref
+            ref.Init(ref, newCard, i)
+            LuaDebug.LogError("add index: "..i..",new type_id: "..newCard.type_id..",new code_id: "..newCard.code_id)
+
+            isAddCard = true
         end
+    end
+
+    local num = #(self.handCard)
+    if #newCardList < num then
+        for i = #newCardList + 1, num do
+            self.handCard[i].gameObject:SetActive(false)
+            self.handCard[i].gameObject:Destroy1()
+            self.handCard[i] = nil
+            LuaDebug.LogError("remove index: "..i)
+        end
+    end
+
+    if isAddCard then
+        TableBottom.SortCard(self)
+        TableBottom.SetHeadCardPosition(self)
     end
 end

@@ -167,9 +167,11 @@ function TableLeft:PlayCardEnd(card)
     if self.lastCard ~= nil then
         if self.lastCard.gameObject ~= nil and (not self.lastCard.gameObject:Equals(nil)) then
             self.lastCard.gameObject:SetActive(true)
-            self.toward:SetActive(true)
-            self.toward:get_transform():SetParent(self.lastCard.Card:get_transform())
-            self.toward:get_transform():set_localPosition(LuaVector3.Create(0, 0, 0))
+            if self.toward ~= nil and not self.toward:Equals(nil) then
+                self.toward:SetActive(true)
+                self.toward:get_transform():SetParent(self.lastCard.Card:get_transform())
+                self.toward:get_transform():set_localPosition(LuaVector3.Create(0, 0, 0))
+            end
         end
     end
 end
