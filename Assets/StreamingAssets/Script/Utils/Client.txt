@@ -28,6 +28,7 @@ EClientState={
     E_CS_Hall=1,
     E_CS_Table=2,
     E_CS_TableReady=3,
+    E_CS_PlayBack = 4,
 }
 
 ----------------City init var-----------------------
