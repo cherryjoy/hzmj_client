@@ -1,0 +1,9 @@
+assetbundles:2042908759
+ui/prefab/mjtable_prefab:1788168768
+MJTable/MJTableCtrl.txt:1230039518
+MJTable/TableBottom.txt:-134489111
+MJTable/TableLeft.txt:-718841627
+MJTable/TableRight.txt:287492228
+MJTable/TableTop.txt:-1141757595
+Utils/Client.txt:-2000550301
+Utils/Text.txt:1814888447
