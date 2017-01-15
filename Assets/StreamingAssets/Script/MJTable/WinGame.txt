@@ -18,7 +18,7 @@ function WinGame:Init(data, roomId)
     for i = 1, num do
         local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCard", self.Grid:get_gameObject())
         local card = self.data.card[i]
-        LuaDebug.Log("type: "..card.type_id..", code: "..card.code_id)
+        --LuaDebug.Log("type: "..card.type_id..", code: "..card.code_id)
         ref.Init(ref, self.data.card[i], i, true)
     end
 

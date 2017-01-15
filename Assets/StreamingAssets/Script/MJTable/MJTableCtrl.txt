@@ -180,7 +180,7 @@ end
 
 function MJTableCtrl:DoPlay()
     local instructon = self.process.sequence[self.playNum]
-    LuaDebug.Log("******#process.sequence: "..self.playNum.."/"..#self.process.sequence..", instructon.opcode: "..instructon.opcode)
+    --LuaDebug.Log("******#process.sequence: "..self.playNum.."/"..#self.process.sequence..", instructon.opcode: "..instructon.opcode)
     -- ax roldid, bx card int
     if instructon.opcode == enumOP_CODE_TYPE.OP_DEAL then --发牌
         local card = MJTableCtrl.ParseCard(self, instructon.bx)
@@ -325,7 +325,7 @@ end
 function MJTableCtrl:GameReady(roleStateList)
     --LuaDebug.Log("roleStateList num: "..#roleStateList)
     for i = 1, #roleStateList do
-        LuaDebug.Log("roleId : "..tostring(roleStateList[i].roleid)..", state : "..tostring(roleStateList[i].state))
+        --LuaDebug.Log("roleId : "..tostring(roleStateList[i].roleid)..", state : "..tostring(roleStateList[i].state))
         for j = 1, 4 do
             if self["Drect"..j].roleId == roleStateList[i].roleid then
                 if roleStateList[i].state ~= 0 then
@@ -353,7 +353,7 @@ end
 function MJTableCtrl:IsPengGang(roleId, card)
     local peng = self.Drect1.IsPengCard(self.Drect1, card)
     local gangType = self.Drect1.IsGangMPlayCard(self.Drect1, card)
-    LuaDebug.Log("peng: "..tostring(peng)..", gangType: "..tostring(gangType))
+    --LuaDebug.Log("peng: "..tostring(peng)..", gangType: "..tostring(gangType))
     if peng or gangType then
         self.ResultCard:SetActive(true)
         if gangType then
@@ -382,7 +382,7 @@ function MJTableCtrl:HandlePlayCard(roleId, index, card, result)
         return
     end
 
-    LuaDebug.Log("roleId: "..roleId..", play card, type: "..card.type_id..", id: "..card.code_id)
+    --LuaDebug.Log("roleId: "..roleId..", play card, type: "..card.type_id..", id: "..card.code_id)
     -- 播放出牌
     NGUITools.PlaySoundByPath("Music/Card/"..MJTableCtrl.GetRoleSex(self, roleId)..card.type_id..card.code_id)
 
@@ -403,14 +403,14 @@ function MJTableCtrl:HandlePlayCard(roleId, index, card, result)
 end
 
 function MJTableCtrl:HandleGetCard(roleId, card, cardList)
-    LuaDebug.Log("roleid: "..roleId)
+    --LuaDebug.Log("roleid: "..roleId)
 
     Client.RoleInfo.RestCard = Client.RoleInfo.RestCard - 1
 
     MJTableCtrl.SetJuShuPaiShu(self)
     -- 摸牌只对自己广播牌，其他方只广播roleId
-    if card ~= nil then
-        LuaDebug.Log("get card, type: "..card.type_id..", id: "..card.code_id)
+    if self.Drect1.roleId == roleId and card ~= nil then
+        --LuaDebug.Log("get card, type: "..card.type_id..", id: "..card.code_id)
         -- 先判断cardList是否与手牌一致
         if cardList ~= nil then
             self.Drect1.CorrectHandCard(self.Drect1, cardList)
@@ -470,7 +470,7 @@ end
 
 function MJTableCtrl:CountDownStart(roleId)
     local spriteName, myDirect = MJTableCtrl.GetMyDirectSprite(roleId, self.roleList)
-    LuaDebug.Log("my direction: "..myDirect)
+    --LuaDebug.Log("my direction: "..myDirect)
     self.TimerBack:set_spriteName(spriteName)
     self.TimerBack:get_gameObject():SetActive(true)
     -- 倒计时
@@ -486,6 +486,9 @@ end
 function MJTableCtrl:DoCountDown()
     self.CountDown:set_text(tostring(self.CD))
     self.CD = self.CD - 1
+    if self.CD < 0 then
+        self.CD = 0
+    end
 end
 
 function MJTableCtrl:DoCountDownFinish()
@@ -495,7 +498,7 @@ function MJTableCtrl:DoCountDownFinish()
     end
 
     --self.CountDown:set_enabled(false)
-    LuaDebug.Log("DoCountDownFinish")
+    --LuaDebug.Log("DoCountDownFinish")
 end
 
 function MJTableCtrl:Peng_OnClick()
@@ -540,7 +543,7 @@ function MJTableCtrl:HandlePengCard(roleId, index, card, srcRoleId)
         local gangType = nil
         local tmpHandCard = nil
         gangType, tmpHandCard = self.Drect1.IsGangAHandCard(self.Drect1)
-        LuaDebug.Log("HandlePengCard gangType: "..tostring(gangType))
+        --LuaDebug.Log("HandlePengCard gangType: "..tostring(gangType))
         if gangType then
             self.ResultCard:SetActive(true)
             self.passType = enumCARD_PASS_TYPE.CARD_PASS_NULL_CARD
@@ -639,7 +642,7 @@ function MJTableCtrl:HandleGameResult(data)
     self.GameResult.Init(self.GameResult, data, self.roleList, self.roomId)
 
     for i = 1, #(data.result_info.role_cards) do
-        LuaDebug.Log("HandleGameResult roleid: "..data.result_info.role_cards[i].roleid..", score: "..data.result_info.role_cards[i].score)
+        --LuaDebug.Log("HandleGameResult roleid: "..data.result_info.role_cards[i].roleid..", score: "..data.result_info.role_cards[i].score)
     end
 
     -- 更新积累分数
@@ -707,21 +710,21 @@ function MJTableCtrl:Invite_OnClick()
     local desc = string.format(Text.InviteContext, Client.RoleInfo.Amount, self.horse, self.beishu)
 
     local param = string.format("{\"code\":1,\"roomid\":\"%s\"}",self.roomId)
-    LuaDebug.Log("param: "..param)
+    --LuaDebug.Log("param: "..param)
 
     PlatformHandler.CallShare(title, desc, Client.inviteUrl, "", param, "0")
 end
 
 function MJTableCtrl:HandleGameReenterStateSync(data)
-    LuaDebug.Log("HandleGameReenterStateSync state: "..data.state)
+    --LuaDebug.Log("HandleGameReenterStateSync state: "..data.state)
     if data.state == enumCARD_ACTION_TYPE.CARD_ACTION_PLAY then
-        LuaDebug.Log("type_id: "..data.card.type_id..", code_id"..data.card.code_id..", roleId: "..tostring(data.roleid))
+        --LuaDebug.Log("type_id: "..data.card.type_id..", code_id"..data.card.code_id..", roleId: "..tostring(data.roleid))
         self.CD = 0
         self.CountDown:set_text(tostring(self.CD))
         self.CountDown:set_enabled(true)
 
         local spriteName, myDirect = MJTableCtrl.GetMyDirectSprite(data.roleid, self.roleList)
-        LuaDebug.Log("my direction: "..myDirect)
+        --LuaDebug.Log("my direction: "..myDirect)
         self.TimerBack:set_spriteName(spriteName)
         self.TimerBack:get_gameObject():SetActive(true)
 
@@ -736,7 +739,7 @@ function MJTableCtrl:HandleGameReenterStateSync(data)
         MJTableCtrl.CountDownStart(self, data.roleid)
 
         if data.roleid == Client.RoleInfo.RoleID then
-            LuaDebug.Log("type_id: "..data.card.type_id..", code_id"..data.card.code_id..", roleId: "..tostring(data.roleid))
+            --LuaDebug.Log("type_id: "..data.card.type_id..", code_id"..data.card.code_id..", roleId: "..tostring(data.roleid))
             MJTableCtrl.HandleGetCard(self, data.roleid, data.card)
         else
             MJTableCtrl.HandleGetCard(self, data.roleid, nil)

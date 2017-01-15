@@ -165,12 +165,12 @@ function JoinGameCtrl:IsFull()
 end
 
 function JoinGameCtrl:EnterRoom()
-    LuaDebug.Log("enter num: "..self.index)
+    --LuaDebug.Log("enter num: "..self.index)
     local passwd = ""
     for i = 1, #self.number do
         passwd = passwd..self.number[i]
     end
-    LuaDebug.Log("passwd: "..passwd)
+    --LuaDebug.Log("passwd: "..passwd)
     ClientSendMsg.SendEnterRoom(Client.RoleInfo.RoleID, tonumber(passwd))
 
     self.gameObject:Destroy1()

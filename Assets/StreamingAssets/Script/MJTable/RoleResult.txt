@@ -138,7 +138,7 @@ function RoleResult.SortCard(cards)
 end
 
 function RoleResult:SetLeftCard(card)
-    LuaDebug.Log("left card, type: "..card.type_id..", id: "..card.code_id)
+    --LuaDebug.Log("left card, type: "..card.type_id..", id: "..card.code_id)
     local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/PengCard",self.LeftCardsGrid:get_gameObject())
     ref.Card:get_transform():set_localScale(LuaVector3.Create(0.7, 0.7, 1))
     local spriteName = MJTableCtrl.GetLeftCardSprite(card)
@@ -170,7 +170,7 @@ function RoleResult:SetCodeCards(cards)
 end
 
 function RoleResult:SetWinCard(card)
-    LuaDebug.Log("SetWinCard, type: "..card.type_id..", id: "..card.code_id)
+    --LuaDebug.Log("SetWinCard, type: "..card.type_id..", id: "..card.code_id)
     for i = 1, #(self.handeCard) do
         local tempCard = self.handeCard[i].card
         if tempCard.type_id == card.type_id and tempCard.code_id == card.code_id then

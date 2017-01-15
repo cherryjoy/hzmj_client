@@ -137,7 +137,7 @@ function Client.CloseLoadingUI()
 end
 
 function Client.OpenNetLoadingUI()
-    LuaDebug.Log("OpenNetLoadingUI")
+    --LuaDebug.Log("OpenNetLoadingUI")
     if Client.netLoadingRef == nil then
 		Client.netLoadingRef = LuaUIViewCtr.OpenUINotLose("CommonUI/NetLoadingUI")
 	end
@@ -170,7 +170,7 @@ function Client.CheckPing()
 end
 
 function Client.PingReachThreshold()
-    LuaDebug.Log("Client.PingReachThreshold()")
+    --LuaDebug.Log("Client.PingReachThreshold()")
     Client.OpenNetLoadingUI()
 
     Timer.RemoveGlobalEvent(Client.PingGlobalTimer)

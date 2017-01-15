@@ -7,7 +7,7 @@ function MainUICtrl:Start()
     self.NoticeText:set_text(Client.bannerNotice)
     if Client.bannerNotice ~= "" then
         local lineWidth = self.NoticeText:get_relativeSize():x()* self.NoticeText:get_FontSize()
-        LuaDebug.Log("lineWidth: "..lineWidth)
+        --LuaDebug.Log("lineWidth: "..lineWidth)
         self.NoticeText:get_transform():set_localPosition(LuaVector3.Create(350, 5, 0))
         self.NoticeTweenPos:duration(lineWidth/48)
         self.NoticeTweenPos:from(LuaVector3.Create(350, 5, 0))

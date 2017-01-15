@@ -20,7 +20,7 @@ ClientHandleMsg = {}
 --msgNameTable =  Util.TableInvert(NetOpcodes_S2C)
 function ClientHandleMsg.Handle(msgId,data,dataLength)
     if enumMSGID_MODULE_05.ID_GAME_HEARTBEAT_RES ~= msgId then
-         LuaDebug.Log("recv msgID: " .. msgId)
+         --LuaDebug.Log("recv msgID: " .. msgId)
     end
     local handleFunc = HandleFuncs[msgId]
     if handleFunc then
@@ -41,8 +41,8 @@ HandleFuncs = {}
 
 HandleFuncs[enumMSGID_MODULE_05.ID_ROLE_RES] = function(data, dataLength)
     local pbMsg = LuaProto.deserialize(PBMsgRoleInfoRes, data, dataLength)
-    LuaDebug.Log("roleName: "..pbMsg.RoleName)
-    LuaDebug.Log("roleId: "..pbMsg.RoleID)
+    --LuaDebug.Log("roleName: "..pbMsg.RoleName)
+    --LuaDebug.Log("roleId: "..pbMsg.RoleID)
 
     PlayerPrefsEx.SetString("userName", pbMsg.RoleName)
     --PlayerPrefsEx.SetString("password",data.password)
@@ -160,7 +160,7 @@ end
 HandleFuncs[enumMSGID_MODULE_05.ID_ROLE_SESSION_ID_NOTICE] = function(data, dataLength)
     local data = LuaProto.deserialize(PBMsgRoleSessionIdNotice, data, dataLength)
 
-    LuaDebug.Log("session_id: ".. long_to_id(data.session_id))
+    --LuaDebug.Log("session_id: ".. long_to_id(data.session_id))
 
     PingManager.get_Instance():sessionId(long_to_id(data.session_id))
 end
@@ -168,13 +168,13 @@ end
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_ROOM_CREATE_RES] = function(data, dataLength)
     local data = LuaProto.deserialize(PBMsgCreateRoomRes, data, dataLength)
 
-    LuaDebug.Log("passwd: "..data.passwd..", amount: "..data.amount..", horse: "..data.horse..", add: "..data.addition)
+    --LuaDebug.Log("passwd: "..data.passwd..", amount: "..data.amount..", horse: "..data.horse..", add: "..data.addition)
     ClientSendMsg.SendEnterRoom(Client.RoleInfo.RoleID, data.passwd)
 end
 
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_ROOM_ENTER_RES] = function(data,dataLength)
     local data = LuaProto.deserialize(PBMsgEnterRoomRes, data, dataLength)
-    LuaDebug.Log("enter room: "..data.passwd)
+    --LuaDebug.Log("enter room: "..data.passwd)
     Client.RoleInfo.Used = data.used
     if LuaUIViewCtr.UIPanel["MJTableUI"] == nil then
         local ref = LuaUIViewCtr.OpenUIHasBg("MJTable/MJTable")
@@ -222,7 +222,7 @@ end
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_DELETE_ROOM_RES] = function(data, dataLength)
     local data = LuaProto.deserialize(PBMsgGameDeleteRoomRes, data, dataLength)
 
-    LuaDebug.Log("result: "..data.result)
+    --LuaDebug.Log("result: "..data.result)
 
     if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil then
         LuaUIViewCtr.UIPanel["MJTableUI"].DeleteTable(LuaUIViewCtr.UIPanel["MJTableUI"], data.roleid)
@@ -271,8 +271,8 @@ end
 
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_WIN_GAME_RES] = function(data, dataLength)
     local data = LuaProto.deserialize(PBMsgWinGameRes, data, dataLength)
-    LuaDebug.Log("data.count: "..data.count)
-    LuaDebug.Log("data.card: "..#(data.card))
+    --LuaDebug.Log("data.count: "..data.count)
+    --LuaDebug.Log("data.card: "..#(data.card))
 
     --data.role_list = {}
     --table.insert(data.role_list, data.roleid)
@@ -337,7 +337,7 @@ HandleFuncs[enumMSGID_MODULE_05.ID_ROLE_BASE_INFO_RES] = function(data, dataLeng
     local data = LuaProto.deserialize(PBMsgRoleBaseInfoExRes, data, dataLength)
 
     local ref = LuaUIViewCtr.OpenUIHasBg("CommonUI/RoleInfoUI")
-    LuaDebug.Log("data.imageurl: "..tostring(data.imageurl))
+    --LuaDebug.Log("data.imageurl: "..tostring(data.imageurl))
     ref.Init(ref, data.name, data.sex, data.roleid, data.address, data.cardnum, data.imageurl)
 end
 
@@ -372,14 +372,14 @@ end
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_QUIT_ROOM_RES] = function(data, dataLength)
     local data = LuaProto.deserialize(PBMsgGameQuitRoomRes, data, dataLength)
 
-    LuaDebug.Log("data.result: "..data.result)
+    --LuaDebug.Log("data.result: "..data.result)
     Client.TableClose:Do()
 end
 
 HandleFuncs[enumMSGID_MODULE_05.ID_ROOM_BALANCE_RECORD_RES] = function(data, dataLength)
     local data = LuaProto.deserialize(PBMsgBalanceRecordRes, data, dataLength)
 
-    LuaDebug.Log("record num: "..#(data.record_list))
+    --LuaDebug.Log("record num: "..#(data.record_list))
     local ref = LuaUIViewCtr.OpenUIHasBg("Home/BalanceRecord")
     ref.Init(ref, data.record_list)
 end

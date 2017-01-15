@@ -58,7 +58,7 @@ function PlayBackCell:Play4_OnClick()
 end
 
 function PlayBackCell:Play_OnClick(viewId)
-    LuaDebug.Log("Play_OnClick")
+    --LuaDebug.Log("Play_OnClick")
     local process = self.data.processlist[self.index]
 
     for i = 1, #self.data.rolelist do

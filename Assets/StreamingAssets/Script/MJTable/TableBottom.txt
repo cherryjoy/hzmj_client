@@ -15,7 +15,7 @@ function TableBottom:Init()
         self.cardSize = 1.28
     end
 
-    LuaDebug.Log("*****tempWidth: "..tempWidth..", cardSize: "..self.cardSize)
+    --LuaDebug.Log("*****tempWidth: "..tempWidth..", cardSize: "..self.cardSize)
 
     self.Grid:get_transform():set_localScale(LuaVector3.Create(self.cardSize, self.cardSize, 1))
     self.CardNew:get_transform():set_localScale(LuaVector3.Create(self.cardSize, self.cardSize, 1))
@@ -302,7 +302,7 @@ function TableBottom:DeleteCard(srcRoleId)
 end
 
 function TableBottom:IsPengCard(card)
-    LuaDebug.Log("IsPengCard")
+    --LuaDebug.Log("IsPengCard")
     local num = TableBottom.GetSameCardNum(self, card)
     if num >= 2 then
         return true
@@ -324,7 +324,7 @@ function TableBottom:IsGangAHandCard()
 end
 
 function TableBottom:IsGangACard(card)
-    LuaDebug.Log("IsGangACard")
+    --LuaDebug.Log("IsGangACard")
     local num = TableBottom.GetSameCardNum(self, card)
     if num == 3 then
         return enumCARD_GANG_TYPE.CARD_GANG_A_TYPE
@@ -334,7 +334,7 @@ function TableBottom:IsGangACard(card)
 end
 
 function TableBottom:IsGangMPlayCard(card)
-    LuaDebug.Log("IsGangMPlayCard")
+    --LuaDebug.Log("IsGangMPlayCard")
     local num = TableBottom.GetSameCardNum(self, card)
     if num == 3 then
         return enumCARD_GANG_TYPE.CARD_GANG_M_TYPE
@@ -344,7 +344,7 @@ function TableBottom:IsGangMPlayCard(card)
 end
 
 function TableBottom:IsGangMGetCard(card)
-    LuaDebug.Log("IsGangMGetCard")
+    --LuaDebug.Log("IsGangMGetCard")
     for i = 1, #(self.pengCard) do
         local tmp = self.pengCard[i]
         if card.type_id == tmp.type_id and card.code_id == tmp.code_id then
@@ -389,7 +389,7 @@ end
 
 function TableBottom:SetHeadCardPosition()
     local num = #(self.handCard)
-    LuaDebug.Log("handCard num: "..num)
+    --LuaDebug.Log("handCard num: "..num)
     local oldPos = self.Grid:get_transform():get_localPosition()
 
     --local posX = (13 - num)*58*self.cardSize -6*58*self.cardSize
@@ -556,7 +556,7 @@ function TableBottom:HandleTingCard(cards)
         return
     end
 
-    LuaDebug.Log("TingCard num: "..num)
+    --LuaDebug.Log("TingCard num: "..num)
     self.TingCard:SetActive(true)
     -- 计算长度
     self.TingBG:set_width(109 + (num - 1)*28)

@@ -211,7 +211,7 @@ function TableLeft:HandlePengCard(card)
 
     --减少手牌
     local num = #(self.handCard)
-    LuaDebug.Log("num: "..num)
+    --LuaDebug.Log("num: "..num)
     TableLeft.RemoveHandCard(self, 2)
 end
 

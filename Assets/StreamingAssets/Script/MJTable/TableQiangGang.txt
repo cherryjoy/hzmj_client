@@ -9,7 +9,7 @@ function TableQiangGang:OnDestroy( )
 end
 
 function TableQiangGang:Left_TweenWait()
-    LuaDebug.Log("Left_TweenWait")
+    --LuaDebug.Log("Left_TweenWait")
 
     local mt=TextureMgr.get_Instance():LoadTexture("Boom/boom1", true)
     self.Background:set_material(mt)
@@ -21,7 +21,7 @@ function TableQiangGang:Left_TweenWait()
 end
 
 function TableQiangGang:Left_TweenEnd()
-    LuaDebug.Log("Left_TweenEnd")
+    --LuaDebug.Log("Left_TweenEnd")
 
     self.gameObject:Destroy1()
 end

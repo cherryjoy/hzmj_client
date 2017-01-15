@@ -29,7 +29,7 @@ function MyCard:ResetPos()
 end
 
 function MyCard:Card_OnClick()
-    LuaDebug.Log("out card, type: "..self.card.type_id..", id: "..self.card.code_id..", index: "..self.index)
+    --LuaDebug.Log("out card, type: "..self.card.type_id..", id: "..self.card.code_id..", index: "..self.index)
     Client.TableChooseCard:Do(self.index, true)
 end
 
@@ -68,7 +68,7 @@ function MyCard:TableClear()
 end
 
 function MyCard:Card_OnPress(isPressed)
-    LuaDebug.Log("Card_OnPress isPressed: "..tostring(isPressed))
+    --LuaDebug.Log("Card_OnPress isPressed: "..tostring(isPressed))
     if isPressed then
         self.oldPos = self.gameObject:get_transform():get_localPosition()
         self.Back:set_depth(25)

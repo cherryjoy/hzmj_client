@@ -8,7 +8,7 @@ ClientSendMsg = {}
 sendMsgNameTable =  Util.TableInvert(NetOpcodes_C2S)
 function ClientSendMsg.SendNetMsg(netCode,buffer,bufferLength )
 	if netCode ~= enumMSGID_MODULE_05.ID_GAME_HEARTBEAT_REQ then
-		LuaDebug.Log("sendId:"..netCode)
+		--LuaDebug.Log("sendId:"..netCode)
 	end
 
 	LuaNetwork.SendNetMessage(netCode,buffer,bufferLength)
@@ -146,7 +146,7 @@ function  ClientSendMsg.SendCreateRoom(amount, horse, addition)
 end
 
 function ClientSendMsg.SendEnterRoom(roleid, passwd)
-	LuaDebug.Log("roleId: "..roleid..", passwd: "..tostring(passwd))
+	--LuaDebug.Log("roleId: "..roleid..", passwd: "..tostring(passwd))
 	local data = PBMsgEnterRoomReq.Create()
 	data.roleid = roleid
 	data.passwd = passwd
@@ -165,7 +165,7 @@ end
 function ClientSendMsg.SendDeleteRoom(roomId)
 	local data = PBMsgGameDeleteRoomReq.Create()
 	data.room_pass = roomId
-	LuaDebug.Log("data.room_pass: "..data.room_pass)
+	--LuaDebug.Log("data.room_pass: "..data.room_pass)
 	local buffer, length = LuaProto.serialize(data)
 	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_DELETE_ROOM_REQ, buffer, length)
 end
@@ -179,7 +179,7 @@ function ClientSendMsg.SendPlayCard(index, typeId, codeId)
 	card.code_id = codeId
 
 	data.card = card
-	LuaDebug.Log("index: "..data.index.."data.card.type_id: "..data.card.type_id..", data.card.code_id: "..data.card.code_id)
+	--LuaDebug.Log("index: "..data.index.."data.card.type_id: "..data.card.type_id..", data.card.code_id: "..data.card.code_id)
 	local buffer, length = LuaProto.serialize(data)
 	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_PLAY_CARD_REQ, buffer, length)
 end
@@ -194,7 +194,7 @@ function ClientSendMsg.SendPengCard(index, typeId, codeId, srcRoleId)
 	card.code_id = codeId
 
 	data.card = card
-	LuaDebug.Log("index: "..data.index.."data.card.type_id: "..data.card.type_id..", data.card.code_id: "..data.card.code_id)
+	--LuaDebug.Log("index: "..data.index.."data.card.type_id: "..data.card.type_id..", data.card.code_id: "..data.card.code_id)
 	local buffer, length = LuaProto.serialize(data)
 	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_PENG_CARD_REQ, buffer, length)
 end
@@ -210,7 +210,7 @@ function ClientSendMsg.SendGangCard(index, typeId, codeId, srcRoleId, gangType)
 	card.code_id = codeId
 
 	data.card = card
-	LuaDebug.Log("index: "..data.index.."data.card.type_id: "..data.card.type_id..", data.card.code_id: "..data.card.code_id..", state: "..gangType)
+	--LuaDebug.Log("index: "..data.index.."data.card.type_id: "..data.card.type_id..", data.card.code_id: "..data.card.code_id..", state: "..gangType)
 	local buffer, length = LuaProto.serialize(data)
 	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_GANG_CARD_REQ, buffer, length)
 end
