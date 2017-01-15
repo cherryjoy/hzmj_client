@@ -56,6 +56,21 @@ function MJTableCtrl:Init(passwd, horse, beishu, rolelist)
     end
 end
 
+function MJTableCtrl:InitPlayBack(roleList, viewId)
+    local spriteName, myDirect = MJTableCtrl.GetMyDirectSprite(viewId, roleList)
+    self.myDirect = myDirect
+    local angle = self.Direction:get_transform():get_localEulerAngles():z() - (myDirect - 1)*90
+    self.Direction:get_transform():set_localEulerAngles(LuaVector3.Create(0, 0, angle))
+    self.TimerBack:set_spriteName(spriteName)
+
+    Client.m_CurrentState = EClientState.E_CS_TableReady
+    self.passType = enumCARD_PASS_TYPE.CARD_PASS_NULL_CARD
+    -- 初始化
+    for i = 1, 4 do
+        self["Drect"..i].Init(self["Drect"..i])
+    end
+end
+
 function MJTableCtrl:SetJuShuPaiShu()
     self.JuShu:set_text(string.format(Text.JuShuName, Client.RoleInfo.Used + 1, Client.RoleInfo.Amount, Client.RoleInfo.RestCard))
 end
@@ -127,6 +142,91 @@ function MJTableCtrl:CardInfoSync(cardInfo)
     end
 
     MJTableCtrl.SetJuShuPaiShu(self)
+end
+
+function MJTableCtrl:CardInfoPlayBackSync(process, viewId)
+    Client.RoleInfo.RestCard = 112
+    Client.RoleInfo.Used = 1
+    Client.RoleInfo.Amount = 8
+    self.process = process
+    local cards = {}
+    for i = 1, #process.rolecard do
+        if viewId == process.rolecard[i].roleid then
+            for j = 1, #process.rolecard[i].cards do
+                local card = MJTableCtrl.ParseCard(self, process.rolecard[i].cards[j])
+                --LuaDebug.Log("type: "..card.type_id..", code: "..card.code_id)
+                table.insert(cards, card)
+            end
+        end
+    end
+
+    self.Drect1.CardInfoSync(self.Drect1, cards)
+
+    -- 同步其他人的牌
+    for i = 1, #process.rolecard do
+        for j = 1, 4 do
+            if self["Drect"..j].roleId == process.rolecard[i].roleid and self["Drect"..j].roleId ~= viewId then
+                self["Drect"..j].CardInfoSync(self["Drect"..j], #process.rolecard[i].cards)
+            end
+        end
+    end
+
+    -- 启动定时器播放
+    self.playNum = 1
+    self.timerNum  = 10
+    if self.playTimer == nil then
+        self.playTimer = Timer.NewEvent(self,self.timerNum,self.timerNum*(#self.process.sequence - self.playNum + 1), MJTableCtrl.DoPlay, false, MJTableCtrl.DoPlayFinish)
+    end
+end
+
+function MJTableCtrl:DoPlay()
+    local instructon = self.process.sequence[self.playNum]
+    LuaDebug.Log("******#process.sequence: "..self.playNum.."/"..#self.process.sequence..", instructon.opcode: "..instructon.opcode)
+    -- ax roldid, bx card int
+    if instructon.opcode == enumOP_CODE_TYPE.OP_DEAL then --发牌
+        local card = MJTableCtrl.ParseCard(self, instructon.bx)
+        MJTableCtrl.HandleGetCard(self, instructon.ax, card)
+    elseif instructon.opcode == enumOP_CODE_TYPE.OP_PLAY then --打牌
+        local card = MJTableCtrl.ParseCard(self, instructon.bx)
+        MJTableCtrl.HandlePlayCard(self, instructon.ax, instructon.cx, card)
+    elseif instructon.opcode == enumOP_CODE_TYPE.OP_PENG then -- 碰牌 cx为被碰牌玩家的roleid，
+        local card = MJTableCtrl.ParseCard(self, instructon.bx)
+        MJTableCtrl.HandlePengCard(self, instructon.ax, 1, card, instructon.cx)
+    elseif instructon.opcode == enumOP_CODE_TYPE.OP_GANG then -- 杠牌 cx为被杠牌玩家的roleid，dx为杠的类型
+        local card = MJTableCtrl.ParseCard(self, instructon.bx)
+        MJTableCtrl.HandleGangCard(self, instructon.ax, 1, card, instructon.dx, instructon.cx)
+    elseif instructon.opcode == enumOP_CODE_TYPE.OP_STEAL then -- 抢杠 ax为抢杠的玩家roleid，cx、dx、ex为抢杠玩家的roleid
+        local data = {}
+        data.role_list = {}
+        if instructon.cx ~= nil and instructon.cx ~= 0 then
+            table.insert(data.role_list, instructon.cx)
+        end
+
+        if instructon.dx ~= nil and instructon.dx ~= 0 then
+            table.insert(data.role_list, instructon.dx)
+        end
+
+        if instructon.ex ~= nil and instructon.ex ~= 0 then
+            table.insert(data.role_list, instructon.ex)
+        end
+
+        MJTableCtrl.PlayTableHu(self, data)
+    elseif instructon.opcode == enumOP_CODE_TYPE.OP_WIN then -- 胡牌
+        local data = {}
+        data.roleid = instructon.ax
+        MJTableCtrl.PlayTableHu(self, data)
+    elseif instructon.opcode == enumOP_CODE_TYPE.OP_DRAW then -- 亡牌
+
+    end
+
+    self.playNum = self.playNum + 1
+end
+
+function MJTableCtrl:DoPlayFinish()
+    if self.playTimer ~= nil then
+        Timer.RemoveEvent(self, self.playTimer)
+        self.playTimer = nil
+    end
 end
 
 function MJTableCtrl:DeleteRoom_OnClick()
@@ -516,8 +616,11 @@ end
 
 function MJTableCtrl:TableClose()
     Client.m_CurrentState = EClientState.E_CS_Hall
-    Timer.RemoveGlobalEvent(Client.PingGlobalTimer)
-    Client.PingGlobalTimer = nil
+    if Client.PingGlobalTimer ~= nil then
+        Timer.RemoveGlobalEvent(Client.PingGlobalTimer)
+        Client.PingGlobalTimer = nil
+    end
+
     self.gameObject:Destroy1()
     LuaUIViewCtr.UIPanel["MJTableUI"] = nil
 end
@@ -865,7 +968,6 @@ end
 
 function MJTableCtrl:PlayTableHu(data)
     self.ResultCard:SetActive(false)
-
     if data.role_list ~= nil and #(data.role_list) > 0 then
         for k = 1, #(data.role_list) do
             NGUITools.PlaySoundByPath("Music/Common/"..MJTableCtrl.GetRoleSex(self, data.role_list[k]).."hu")
@@ -916,5 +1018,65 @@ function MJTableCtrl:PlayTableHu(data)
                 break
             end
         end
+    end
+end
+
+function MJTableCtrl:Exit_OnClick()
+    Client.LeavePlayBack:Do()
+    Client.TableClose:Do()
+end
+
+function MJTableCtrl:ParseCard(cardNumbuer)
+    local type = math.floor(cardNumbuer/10)
+    local code = cardNumbuer%10
+    local card = {}
+    card.type_id = type
+    card.code_id = code
+
+    return card
+end
+
+function MJTableCtrl:Play_OnClick()
+    if self.Play:get_spriteName() == "replayPlay" then
+        self.Play:set_spriteName("replayPause")
+
+        if self.playTimer ~= nil then
+            Timer.RemoveEvent(self, self.playTimer)
+            self.playTimer = nil
+        end
+    else
+        self.Play:set_spriteName("replayPlay")
+
+        if self.playTimer == nil then
+            self.playTimer = Timer.NewEvent(self,self.timerNum,self.timerNum*(#self.process.sequence - self.playNum + 1), MJTableCtrl.DoPlay, false, MJTableCtrl.DoPlayFinish)
+        end
+    end
+end
+
+function MJTableCtrl:Fast_OnClick()
+    if self.timerNum - 5 > 0 then
+        self.timerNum = self.timerNum - 5
+
+        if self.playTimer ~= nil then
+            Timer.RemoveEvent(self, self.playTimer)
+            self.playTimer = nil
+        end
+
+        if self.playTimer == nil then
+            self.playTimer = Timer.NewEvent(self,self.timerNum,self.timerNum*(#self.process.sequence - self.playNum + 1), MJTableCtrl.DoPlay, false, MJTableCtrl.DoPlayFinish)
+        end
+    end
+end
+
+function MJTableCtrl:Slow_OnClick()
+    self.timerNum = self.timerNum + 5
+
+    if self.playTimer ~= nil then
+        Timer.RemoveEvent(self, self.playTimer)
+        self.playTimer = nil
+    end
+
+    if self.playTimer == nil then
+        self.playTimer = Timer.NewEvent(self,self.timerNum,self.timerNum*(#self.process.sequence - self.playNum + 1), MJTableCtrl.DoPlay, false, MJTableCtrl.DoPlayFinish)
     end
 end

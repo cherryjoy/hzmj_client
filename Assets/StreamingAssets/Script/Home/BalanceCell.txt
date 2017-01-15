@@ -8,8 +8,9 @@ function BalanceCell:OnDestroy( )
 
 end
 
-
-function BalanceCell:SetCellData(info, index)
+function BalanceCell:SetCellData(info, index, dragTarget)
+    self.DragObject:target(dragTarget:get_transform())
+    self.roomId = info.roomid
     self.RoomId:set_text(string.format(Text.BalanceRecordRoomId, info.roomid))
     self.JuShu:set_text(string.format(Text.BalanceRecordJuShu, info.used, info.amount))
     self.Time:set_text(string.format(Text.BalanceRecordTime, info.time))
@@ -24,4 +25,8 @@ function BalanceCell:SetCellData(info, index)
 
         self["Score"..i]:set_text(str)
     end
+end
+
+function BalanceCell:Background_OnClick()
+    ClientSendMsg.SendRoomPlayBack(self.roomId)
 end

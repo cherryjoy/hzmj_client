@@ -51,6 +51,8 @@ enumMSGID_MODULE_05 = {
 	ID_ROOM_DELETE_AGREE_RES = 1340,
 	ID_ROOM_BALANCE_RECORD_REQ = 1341,
 	ID_ROOM_BALANCE_RECORD_RES = 1342,
+	ID_ROOM_PLAY_BACK_REQ = 1343,
+	ID_ROOM_PLAY_BACK_RES = 1344,
 	ID_MODULE_05_END = 1535,
 }
 
@@ -123,6 +125,16 @@ enumROOM_CHAT_TYPE = {
 	EM_CHAT_WORD_TYPE = 1,
 	EM_CHAT_VOIC_TYPE = 2,
 	EM_CHAT_EXPR_TYPE = 3,
+}
+
+enumOP_CODE_TYPE = {
+	OP_DEAL = 1,
+	OP_PLAY = 2,
+	OP_PENG = 3,
+	OP_GANG = 4,
+	OP_STEAL = 5,
+	OP_WIN = 6,
+	OP_DRAW = 7,
 }
 
 -- PB_MSGID_MODULE_05
@@ -6101,6 +6113,624 @@ function PBMsgBalanceRecordRes.GetSize(obj)
 		end
 	end
 	size = size + 10
+	return size
+end
+
+-- PB_OP_CODE_TYPE
+PB_OP_CODE_TYPE = {}
+PB_OP_CODE_TYPE.__index = PB_OP_CODE_TYPE
+function PB_OP_CODE_TYPE.Create()
+	local obj = setmetatable({},PB_OP_CODE_TYPE)
+	return obj
+end
+
+function PB_OP_CODE_TYPE.DeSerialize(obj)
+	local fieldCount = deserialize_int32()
+	local option,optionLength = deserialize_optional()
+	return obj
+end
+
+function PB_OP_CODE_TYPE.Serialize(obj)
+	local fieldCount = 0
+	serialize_int32(fieldCount)
+	local flag = {}
+	serialize_optional(flag)
+end
+
+function PB_OP_CODE_TYPE.GetSize(obj)
+	local size = 0
+	size = size + 5
+	return size
+end
+
+-- PBInstruction
+PBInstruction = {}
+PBInstruction.__index = PBInstruction
+function PBInstruction.Create()
+	local obj = setmetatable({},PBInstruction)
+	return obj
+end
+
+function PBInstruction.DeSerialize(obj)
+	local fieldCount = deserialize_int32()
+	local option,optionLength = deserialize_optional()
+	if(has_optional_flag(0,optionLength,option)) then
+		obj.opcode = deserialize_int32()
+	end
+	if(has_optional_flag(1,optionLength,option)) then
+		obj.ax = deserialize_int32()
+	end
+	if(has_optional_flag(2,optionLength,option)) then
+		obj.bx = deserialize_int32()
+	end
+	if(has_optional_flag(3,optionLength,option)) then
+		obj.cx = deserialize_int32()
+	end
+	if(has_optional_flag(4,optionLength,option)) then
+		obj.dx = deserialize_int32()
+	end
+	if(has_optional_flag(5,optionLength,option)) then
+		obj.ex = deserialize_int32()
+	end
+	return obj
+end
+
+function PBInstruction.Serialize(obj)
+	local fieldCount = 6
+	serialize_int32(fieldCount)
+	local flag = {}
+	if(obj.opcode ~= nil) then
+		flag[1] = true
+	else
+		flag[1] = false
+	end
+	if(obj.ax ~= nil) then
+		flag[2] = true
+	else
+		flag[2] = false
+	end
+	if(obj.bx ~= nil) then
+		flag[3] = true
+	else
+		flag[3] = false
+	end
+	if(obj.cx ~= nil) then
+		flag[4] = true
+	else
+		flag[4] = false
+	end
+	if(obj.dx ~= nil) then
+		flag[5] = true
+	else
+		flag[5] = false
+	end
+	if(obj.ex ~= nil) then
+		flag[6] = true
+	else
+		flag[6] = false
+	end
+	serialize_optional(flag)
+	if(obj.opcode ~= nil) then
+		serialize_int32(obj.opcode)
+	end
+	if(obj.ax ~= nil) then
+		serialize_int32(obj.ax)
+	end
+	if(obj.bx ~= nil) then
+		serialize_int32(obj.bx)
+	end
+	if(obj.cx ~= nil) then
+		serialize_int32(obj.cx)
+	end
+	if(obj.dx ~= nil) then
+		serialize_int32(obj.dx)
+	end
+	if(obj.ex ~= nil) then
+		serialize_int32(obj.ex)
+	end
+end
+
+function PBInstruction.GetSize(obj)
+	local size = 0
+	if (obj.opcode ~= nil) then
+		size = size + 4
+	end
+	if (obj.ax ~= nil) then
+		size = size + 4
+	end
+	if (obj.bx ~= nil) then
+		size = size + 4
+	end
+	if (obj.cx ~= nil) then
+		size = size + 4
+	end
+	if (obj.dx ~= nil) then
+		size = size + 4
+	end
+	if (obj.ex ~= nil) then
+		size = size + 4
+	end
+	size = size + 6
+	return size
+end
+
+-- PBPlayRole
+PBPlayRole = {}
+PBPlayRole.__index = PBPlayRole
+function PBPlayRole.Create()
+	local obj = setmetatable({},PBPlayRole)
+	return obj
+end
+
+function PBPlayRole.DeSerialize(obj)
+	local fieldCount = deserialize_int32()
+	local option,optionLength = deserialize_optional()
+	if(has_optional_flag(0,optionLength,option)) then
+		obj.roleid = deserialize_int32()
+	end
+	if(has_optional_flag(1,optionLength,option)) then
+		obj.nickname = deserialize_string()
+	end
+	if(has_optional_flag(2,optionLength,option)) then
+		obj.imageurl = deserialize_string()
+	end
+	if(has_optional_flag(3,optionLength,option)) then
+		obj.direct = deserialize_int32()
+	end
+	return obj
+end
+
+function PBPlayRole.Serialize(obj)
+	local fieldCount = 4
+	serialize_int32(fieldCount)
+	local flag = {}
+	if(obj.roleid ~= nil) then
+		flag[1] = true
+	else
+		flag[1] = false
+	end
+	if(obj.nickname ~= nil) then
+		flag[2] = true
+	else
+		flag[2] = false
+	end
+	if(obj.imageurl ~= nil) then
+		flag[3] = true
+	else
+		flag[3] = false
+	end
+	if(obj.direct ~= nil) then
+		flag[4] = true
+	else
+		flag[4] = false
+	end
+	serialize_optional(flag)
+	if(obj.roleid ~= nil) then
+		serialize_int32(obj.roleid)
+	end
+	if(obj.nickname ~= nil) then
+		serialize_string(obj.nickname)
+	end
+	if(obj.imageurl ~= nil) then
+		serialize_string(obj.imageurl)
+	end
+	if(obj.direct ~= nil) then
+		serialize_int32(obj.direct)
+	end
+end
+
+function PBPlayRole.GetSize(obj)
+	local size = 0
+	if (obj.roleid ~= nil) then
+		size = size + 4
+	end
+	if (obj.nickname ~= nil) then
+		local sizeStr = string.len(obj.nickname)
+		size = size + serialize_get_str_actual_size(sizeStr)
+	end
+	if (obj.imageurl ~= nil) then
+		local sizeStr = string.len(obj.imageurl)
+		size = size + serialize_get_str_actual_size(sizeStr)
+	end
+	if (obj.direct ~= nil) then
+		size = size + 4
+	end
+	size = size + 6
+	return size
+end
+
+-- PBPlayRoleCard
+PBPlayRoleCard = {}
+PBPlayRoleCard.__index = PBPlayRoleCard
+function PBPlayRoleCard.Create()
+	local obj = setmetatable({},PBPlayRoleCard)
+	return obj
+end
+
+function PBPlayRoleCard.DeSerialize(obj)
+	local fieldCount = deserialize_int32()
+	local option,optionLength = deserialize_optional()
+	if(has_optional_flag(0,optionLength,option)) then
+		obj.roleid = deserialize_int32()
+	end
+	if(has_optional_flag(1,optionLength,option)) then
+		obj.score = deserialize_int32()
+	end
+	if(has_optional_flag(2,optionLength,option)) then
+		obj.amount = deserialize_int32()
+	end
+	if(has_optional_flag(3,optionLength,option)) then
+		obj.makers = deserialize_int32()
+	end
+
+	if (fieldCount >= 5) then
+		obj.cards = deserialize_int32_array()
+	end
+	return obj
+end
+
+function PBPlayRoleCard.Serialize(obj)
+	local fieldCount = 5
+	serialize_int32(fieldCount)
+	local flag = {}
+	if(obj.roleid ~= nil) then
+		flag[1] = true
+	else
+		flag[1] = false
+	end
+	if(obj.score ~= nil) then
+		flag[2] = true
+	else
+		flag[2] = false
+	end
+	if(obj.amount ~= nil) then
+		flag[3] = true
+	else
+		flag[3] = false
+	end
+	if(obj.makers ~= nil) then
+		flag[4] = true
+	else
+		flag[4] = false
+	end
+	serialize_optional(flag)
+	if(obj.roleid ~= nil) then
+		serialize_int32(obj.roleid)
+	end
+	if(obj.score ~= nil) then
+		serialize_int32(obj.score)
+	end
+	if(obj.amount ~= nil) then
+		serialize_int32(obj.amount)
+	end
+	if(obj.makers ~= nil) then
+		serialize_int32(obj.makers)
+	end
+	serialize_int32_array(obj.cards)
+end
+
+function PBPlayRoleCard.GetSize(obj)
+	local size = 0
+	if (obj.roleid ~= nil) then
+		size = size + 4
+	end
+	if (obj.score ~= nil) then
+		size = size + 4
+	end
+	if (obj.amount ~= nil) then
+		size = size + 4
+	end
+	if (obj.makers ~= nil) then
+		size = size + 4
+	end
+	if (obj.cards ~= nil) then
+		for i=1,#(obj.cards) do
+			size = size + 4
+		end
+	end
+	size = size + 11
+	return size
+end
+
+-- PBPlayProcess
+PBPlayProcess = {}
+PBPlayProcess.__index = PBPlayProcess
+function PBPlayProcess.Create()
+	local obj = setmetatable({},PBPlayProcess)
+	return obj
+end
+
+function PBPlayProcess.DeSerialize(obj)
+	local fieldCount = deserialize_int32()
+	local option,optionLength = deserialize_optional()
+	if(has_optional_flag(0,optionLength,option)) then
+		obj.used = deserialize_int32()
+	end
+
+	if (fieldCount >= 2) then
+		obj.rolecard = {}
+		local len = deserialize_int32()
+		if (len > 0) then
+			for i=1,len do
+				local rolecardSize = deserialize_data_length()
+				local rolecardStartPos = get_position()
+				obj.rolecard[i] = PBPlayRoleCard.Create()
+				obj.rolecard[i] = (obj.rolecard[i]):DeSerialize()
+				set_position(rolecardSize+rolecardStartPos )
+			end
+		end
+	end
+
+	if (fieldCount >= 3) then
+		obj.sequence = {}
+		local len = deserialize_int32()
+		if (len > 0) then
+			for i=1,len do
+				local sequenceSize = deserialize_data_length()
+				local sequenceStartPos = get_position()
+				obj.sequence[i] = PBInstruction.Create()
+				obj.sequence[i] = (obj.sequence[i]):DeSerialize()
+				set_position(sequenceSize+sequenceStartPos )
+			end
+		end
+	end
+
+	if (fieldCount >= 4) then
+		obj.codecards = deserialize_int32_array()
+	end
+	if(has_optional_flag(1,optionLength,option)) then
+		obj.time = deserialize_string()
+	end
+	return obj
+end
+
+function PBPlayProcess.Serialize(obj)
+	local fieldCount = 5
+	serialize_int32(fieldCount)
+	local flag = {}
+	if(obj.used ~= nil) then
+		flag[1] = true
+	else
+		flag[1] = false
+	end
+	if(obj.time ~= nil) then
+		flag[2] = true
+	else
+		flag[2] = false
+	end
+	serialize_optional(flag)
+	if(obj.used ~= nil) then
+		serialize_int32(obj.used)
+	end
+	if (obj.rolecard ~= nil) then
+		serialize_int32(#(obj.rolecard))
+		for i=1, #(obj.rolecard) do
+			local WaitPos = get_position()
+			set_position(WaitPos+4)
+			obj.rolecard[i]:Serialize()
+			local MaxPosNow = get_position()
+			local RealSize = MaxPosNow-(WaitPos+4)
+			set_position(WaitPos)
+			serialize_data_length(RealSize)
+			set_position(MaxPosNow)
+		end
+	else
+		serialize_int32(0)
+	end
+	if (obj.sequence ~= nil) then
+		serialize_int32(#(obj.sequence))
+		for i=1, #(obj.sequence) do
+			local WaitPos = get_position()
+			set_position(WaitPos+4)
+			obj.sequence[i]:Serialize()
+			local MaxPosNow = get_position()
+			local RealSize = MaxPosNow-(WaitPos+4)
+			set_position(WaitPos)
+			serialize_data_length(RealSize)
+			set_position(MaxPosNow)
+		end
+	else
+		serialize_int32(0)
+	end
+	serialize_int32_array(obj.codecards)
+	if(obj.time ~= nil) then
+		serialize_string(obj.time)
+	end
+end
+
+function PBPlayProcess.GetSize(obj)
+	local size = 0
+	if (obj.used ~= nil) then
+		size = size + 4
+	end
+	if (obj.rolecard ~= nil) then
+		for i=1,#(obj.rolecard) do
+			size = size + 5
+			size = size + (obj.rolecard[i]):GetSize()
+		end
+	end
+	if (obj.sequence ~= nil) then
+		for i=1,#(obj.sequence) do
+			size = size + 5
+			size = size + (obj.sequence[i]):GetSize()
+		end
+	end
+	if (obj.codecards ~= nil) then
+		for i=1,#(obj.codecards) do
+			size = size + 4
+		end
+	end
+	if (obj.time ~= nil) then
+		local sizeStr = string.len(obj.time)
+		size = size + serialize_get_str_actual_size(sizeStr)
+	end
+	size = size + 21
+	return size
+end
+
+-- PBRoomPlayBackReq
+PBRoomPlayBackReq = {}
+PBRoomPlayBackReq.__index = PBRoomPlayBackReq
+function PBRoomPlayBackReq.Create()
+	local obj = setmetatable({},PBRoomPlayBackReq)
+	return obj
+end
+
+function PBRoomPlayBackReq.DeSerialize(obj)
+	local fieldCount = deserialize_int32()
+	local option,optionLength = deserialize_optional()
+	if(has_optional_flag(0,optionLength,option)) then
+		obj.roomid = deserialize_int32()
+	end
+	return obj
+end
+
+function PBRoomPlayBackReq.Serialize(obj)
+	local fieldCount = 1
+	serialize_int32(fieldCount)
+	local flag = {}
+	if(obj.roomid ~= nil) then
+		flag[1] = true
+	else
+		flag[1] = false
+	end
+	serialize_optional(flag)
+	if(obj.roomid ~= nil) then
+		serialize_int32(obj.roomid)
+	end
+end
+
+function PBRoomPlayBackReq.GetSize(obj)
+	local size = 0
+	if (obj.roomid ~= nil) then
+		size = size + 4
+	end
+	size = size + 6
+	return size
+end
+
+-- PBRoomPlayBackRes
+PBRoomPlayBackRes = {}
+PBRoomPlayBackRes.__index = PBRoomPlayBackRes
+function PBRoomPlayBackRes.Create()
+	local obj = setmetatable({},PBRoomPlayBackRes)
+	return obj
+end
+
+function PBRoomPlayBackRes.DeSerialize(obj)
+	local fieldCount = deserialize_int32()
+	local option,optionLength = deserialize_optional()
+	if(has_optional_flag(0,optionLength,option)) then
+		obj.roomid = deserialize_int32()
+	end
+	if(has_optional_flag(1,optionLength,option)) then
+		obj.hostid = deserialize_int32()
+	end
+
+	if (fieldCount >= 3) then
+		obj.rolelist = {}
+		local len = deserialize_int32()
+		if (len > 0) then
+			for i=1,len do
+				local rolelistSize = deserialize_data_length()
+				local rolelistStartPos = get_position()
+				obj.rolelist[i] = PBPlayRole.Create()
+				obj.rolelist[i] = (obj.rolelist[i]):DeSerialize()
+				set_position(rolelistSize+rolelistStartPos )
+			end
+		end
+	end
+
+	if (fieldCount >= 4) then
+		obj.processlist = {}
+		local len = deserialize_int32()
+		if (len > 0) then
+			for i=1,len do
+				local processlistSize = deserialize_data_length()
+				local processlistStartPos = get_position()
+				obj.processlist[i] = PBPlayProcess.Create()
+				obj.processlist[i] = (obj.processlist[i]):DeSerialize()
+				set_position(processlistSize+processlistStartPos )
+			end
+		end
+	end
+	return obj
+end
+
+function PBRoomPlayBackRes.Serialize(obj)
+	local fieldCount = 4
+	serialize_int32(fieldCount)
+	local flag = {}
+	if(obj.roomid ~= nil) then
+		flag[1] = true
+	else
+		flag[1] = false
+	end
+	if(obj.hostid ~= nil) then
+		flag[2] = true
+	else
+		flag[2] = false
+	end
+	serialize_optional(flag)
+	if(obj.roomid ~= nil) then
+		serialize_int32(obj.roomid)
+	end
+	if(obj.hostid ~= nil) then
+		serialize_int32(obj.hostid)
+	end
+	if (obj.rolelist ~= nil) then
+		serialize_int32(#(obj.rolelist))
+		for i=1, #(obj.rolelist) do
+			local WaitPos = get_position()
+			set_position(WaitPos+4)
+			obj.rolelist[i]:Serialize()
+			local MaxPosNow = get_position()
+			local RealSize = MaxPosNow-(WaitPos+4)
+			set_position(WaitPos)
+			serialize_data_length(RealSize)
+			set_position(MaxPosNow)
+		end
+	else
+		serialize_int32(0)
+	end
+	if (obj.processlist ~= nil) then
+		serialize_int32(#(obj.processlist))
+		for i=1, #(obj.processlist) do
+			local WaitPos = get_position()
+			set_position(WaitPos+4)
+			obj.processlist[i]:Serialize()
+			local MaxPosNow = get_position()
+			local RealSize = MaxPosNow-(WaitPos+4)
+			set_position(WaitPos)
+			serialize_data_length(RealSize)
+			set_position(MaxPosNow)
+		end
+	else
+		serialize_int32(0)
+	end
+end
+
+function PBRoomPlayBackRes.GetSize(obj)
+	local size = 0
+	if (obj.roomid ~= nil) then
+		size = size + 4
+	end
+	if (obj.hostid ~= nil) then
+		size = size + 4
+	end
+	if (obj.rolelist ~= nil) then
+		for i=1,#(obj.rolelist) do
+			size = size + 5
+			size = size + (obj.rolelist[i]):GetSize()
+		end
+	end
+	if (obj.processlist ~= nil) then
+		for i=1,#(obj.processlist) do
+			size = size + 5
+			size = size + (obj.processlist[i]):GetSize()
+		end
+	end
+	size = size + 16
 	return size
 end
 

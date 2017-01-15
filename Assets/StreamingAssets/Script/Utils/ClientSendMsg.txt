@@ -320,3 +320,11 @@ function ClientSendMsg.SendRoleNumericValue()
 	local buffer, length = LuaProto.serialize(data)
 	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_ROLE_NUMERIC_VALUE_REQ, buffer, length)
 end
+
+function ClientSendMsg.SendRoomPlayBack(roomId)
+	local data = PBRoomPlayBackReq.Create()
+	data.roomid = roomId
+
+	local buffer, length = LuaProto.serialize(data)
+	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_ROOM_PLAY_BACK_REQ, buffer, length)
+end

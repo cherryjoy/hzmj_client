@@ -1,0 +1,101 @@
+PlayBackCell = {}
+
+function PlayBackCell:Start( )
+
+end
+
+function PlayBackCell:OnDestroy( )
+
+end
+
+function PlayBackCell:SetCellData(data, index)
+    self.index = index + 1
+    self.data = data
+    local process = data.processlist[index + 1]
+    self.Time:set_text(string.format(Text.BalanceRecordTime, tostring(process.time)))
+    self.Num:set_text(tostring(process.used + 1))
+
+    self.roleList = {}
+
+    for i = 1, #(process.rolecard) do
+        local record = process.rolecard[i]
+        self["Name"..i]:set_text(PlayBackCell.GetRoleName(self, record.roleid))
+        local str = tostring(record.score)
+        if record.score > 0 then
+            str = "+"..str
+        end
+
+        self["Score"..i]:set_text(str)
+    end
+end
+
+function PlayBackCell:Play1_OnClick()
+    local process = self.data.processlist[self.index]
+    local record = process.rolecard[1]
+
+    PlayBackCell.Play_OnClick(self, record.roleid)
+end
+
+function PlayBackCell:Play2_OnClick()
+    local process = self.data.processlist[self.index]
+    local record = process.rolecard[2]
+
+    PlayBackCell.Play_OnClick(self, record.roleid)
+end
+
+function PlayBackCell:Play3_OnClick()
+    local process = self.data.processlist[self.index]
+    local record = process.rolecard[3]
+
+    PlayBackCell.Play_OnClick(self, record.roleid)
+end
+
+function PlayBackCell:Play4_OnClick()
+    local process = self.data.processlist[self.index]
+    local record = process.rolecard[4]
+
+    PlayBackCell.Play_OnClick(self, record.roleid)
+end
+
+function PlayBackCell:Play_OnClick(viewId)
+    LuaDebug.Log("Play_OnClick")
+    local process = self.data.processlist[self.index]
+
+    for i = 1, #self.data.rolelist do
+        for j = 1, #process.rolecard do
+            if self.data.rolelist[i].roleid == process.rolecard[j].roleid then
+                self.data.rolelist[i].integral = process.rolecard[j].amount
+                if self.data.rolelist[i].roleid == self.data.hostid then
+                    self.data.rolelist[i].host = 1
+                else
+                    self.data.rolelist[i].host = 0
+                end
+                self.data.rolelist[i].makers = process.rolecard[j].makers
+                self.data.rolelist[i].rolename = self.data.rolelist[i].nickname
+            end
+        end
+    end
+
+    -- 进入牌桌
+    local ref = LuaUIViewCtr.OpenUIHasBg("MJTable/MJTablePlayBack")
+    ref.InitPlayBack(ref, self.data.rolelist, viewId)
+    ref.EnterRoomSync(ref, self.data.rolelist)
+    ref.CardInfoPlayBackSync(ref, process, viewId)
+    --LuaUIViewCtr.UIPanel["MJTableUI"] = ref
+
+    -- 关闭主界面
+    if LuaUIViewCtr.UIPanel["MainUI"] ~= nil then
+        LuaUIViewCtr.UIPanel["MainUI"].gameObject:SetActive(false)
+    end
+
+    Client.EnterPlayBack:Do()
+end
+
+function PlayBackCell:GetRoleName(roleId)
+    for i = 1, #self.data.rolelist do
+        local role = self.data.rolelist[i]
+        if role.roleid == roleId then
+            return role.nickname
+        end
+    end
+end

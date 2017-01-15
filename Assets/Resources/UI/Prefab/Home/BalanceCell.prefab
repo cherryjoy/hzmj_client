@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 440202}
   - 114: {fileID: 11410988}
+  - 114: {fileID: 11478510}
   m_Layer: 8
   m_Name: BalanceCell
   m_TagString: Untagged
@@ -231,6 +232,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 413048}
   - 114: {fileID: 11438778}
+  - 65: {fileID: 6502096}
+  - 114: {fileID: 11452228}
+  - 114: {fileID: 11402888}
+  - 114: {fileID: 11494290}
   m_Layer: 8
   m_Name: Background
   m_TagString: Untagged
@@ -360,7 +365,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 109802}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -300, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -477,6 +482,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 420492}
   m_RootOrder: 5
+--- !u!65 &6502096
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 196662}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 540, y: 100, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &11402888
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 196662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1892511743, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: b0e713473f4d48b4a87c07c6a8a3fbe3, type: 3}
+  trigger: 0
+  volume: 1
 --- !u!114 &11410988
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -536,6 +567,10 @@ MonoBehaviour:
     regObj: {fileID: 11496922}
     Name: Score4
     TypeIndex: 1
+  - Obj: {fileID: 196662}
+    regObj: {fileID: 11494290}
+    Name: DragObject
+    TypeIndex: 5
   LuaBehavArray: []
   IsOnClickPassGameObject: 0
   isArray: 0
@@ -838,6 +873,32 @@ MonoBehaviour:
   mTrueTypeFont: {fileID: 0}
   mLineWidth: 0
   fixedWidthForChinese: 0
+--- !u!114 &11452228
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 196662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1646491362, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 109802}
+  functionName: OnClick
+  trigger: 0
+  includeChildren: 0
+--- !u!114 &11478510
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 109802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1517656706, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11483746
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -910,6 +971,25 @@ MonoBehaviour:
   mTrueTypeFont: {fileID: 0}
   mLineWidth: 0
   fixedWidthForChinese: 0
+--- !u!114 &11494290
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 196662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 78492813, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  scale: {x: 0, y: 1, z: 0}
+  scrollWheelFactor: 0
+  restrictWithinPanel: 1
+  dragEffect: 2
+  momentumAmount: 25
+  backTop: 1
+  IgnoreTexture: 0
 --- !u!114 &11494516
 MonoBehaviour:
   m_ObjectHideFlags: 1

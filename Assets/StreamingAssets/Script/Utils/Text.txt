@@ -107,6 +107,7 @@ Text = {
     RoleId = "编号: %d",
     RoleCardNum = "房卡: %s",
     HelpTips = "玩法简介",
+    RoomScore = "房间战绩",
 
     -------------------Table--------------------
     Ready = "准备",

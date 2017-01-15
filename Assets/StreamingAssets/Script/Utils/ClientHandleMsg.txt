@@ -383,3 +383,12 @@ HandleFuncs[enumMSGID_MODULE_05.ID_ROOM_BALANCE_RECORD_RES] = function(data, dat
     local ref = LuaUIViewCtr.OpenUIHasBg("Home/BalanceRecord")
     ref.Init(ref, data.record_list)
 end
+
+HandleFuncs[enumMSGID_MODULE_05.ID_ROOM_PLAY_BACK_RES] = function(data, dataLength)
+    local data = LuaProto.deserialize(PBRoomPlayBackRes, data, dataLength)
+
+    --LuaDebug.Log("processNum: "..#(data.processlist))
+
+    local ref = LuaUIViewCtr.OpenUINotLose("Home/PlayBackUI")
+    ref.Init(ref, data)
+end

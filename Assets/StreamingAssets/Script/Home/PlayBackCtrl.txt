@@ -1,0 +1,35 @@
+PlayBackCtrl = {}
+
+function PlayBackCtrl:Start( )
+    Client.EnterPlayBack = Client.EnterPlayBack + {self, PlayBackCtrl.EnterPlayBack}
+    Client.LeavePlayBack = Client.LeavePlayBack + {self, PlayBackCtrl.LeavePlayBack}
+end
+
+function PlayBackCtrl:OnDestroy( )
+    Client.EnterPlayBack = Client.EnterPlayBack - {self, PlayBackCtrl.EnterPlayBack}
+    Client.LeavePlayBack = Client.LeavePlayBack - {self, PlayBackCtrl.LeavePlayBack}
+end
+
+function PlayBackCtrl:SetCellData(index)
+    --LuaDebug.Log("roomid: ".. self.playBackData.roomid)
+    PlayBackCell.SetCellData(self.Cells[index%self.CellsCount+1],self.playBackData,index)
+end
+
+function PlayBackCtrl:Init(data)
+    LuaDebug.Log("process num: "..#(data.processlist))
+
+    self.playBackData = data
+    self.DragTarget:SetDataSources(#data.processlist, false)
+end
+
+function PlayBackCtrl:Close_OnClick()
+    self.gameObject:Destroy1()
+end
+
+function PlayBackCtrl:EnterPlayBack()
+    self.gameObject:SetActive(false)
+end
+
+function PlayBackCtrl:LeavePlayBack()
+    self.gameObject:SetActive(true)
+end
