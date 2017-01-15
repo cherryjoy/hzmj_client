@@ -1710,7 +1710,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100282}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -70, y: -3, z: 0}
+  m_LocalPosition: {x: -130, y: -3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -2003,7 +2003,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 175124}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -100, z: -200}
+  m_LocalPosition: {x: 0, y: -318, z: -200}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -2075,7 +2075,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 197154}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25, y: -3, z: 0}
+  m_LocalPosition: {x: 40, y: -3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -3004,7 +3004,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 191224}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -24, y: 0, z: 0}
+  m_LocalPosition: {x: -40, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -3017,7 +3017,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 176476}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 70, y: 0, z: 0}
+  m_LocalPosition: {x: 130, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -3225,7 +3225,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 40, y: 40, z: 1}
+  m_Size: {x: 80, y: 80, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6549876
 BoxCollider:
@@ -3249,7 +3249,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 40, y: 40, z: 1}
+  m_Size: {x: 80, y: 80, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6552704
 BoxCollider:
@@ -3297,7 +3297,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 40, y: 40, z: 1}
+  m_Size: {x: 80, y: 80, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6574612
 BoxCollider:
@@ -3309,7 +3309,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 40, y: 40, z: 1}
+  m_Size: {x: 80, y: 80, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6578202
 BoxCollider:
@@ -3395,8 +3395,8 @@ MonoBehaviour:
   mMat: {fileID: 2100000, guid: 241c457ed1d7bb34da265e04ba211dd5, type: 2}
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 36
-  mHeight: 36
+  mWidth: 72
+  mHeight: 72
   mDepth: 3
   mIsHidePanel: 0
   mAtlas: {fileID: 11450336, guid: 93e6d2d88100e9749948507d1a27beac, type: 2}
@@ -3753,8 +3753,8 @@ MonoBehaviour:
   mMat: {fileID: 2100000, guid: 241c457ed1d7bb34da265e04ba211dd5, type: 2}
   mColor: {r: 1, g: 1, b: 1, a: 0.627451}
   mPivot: 4
-  mWidth: 205
-  mHeight: 50
+  mWidth: 410
+  mHeight: 100
   mDepth: 2
   mIsHidePanel: 0
   mAtlas: {fileID: 11450336, guid: 93e6d2d88100e9749948507d1a27beac, type: 2}
@@ -4046,8 +4046,8 @@ MonoBehaviour:
   mMat: {fileID: 2100000, guid: 241c457ed1d7bb34da265e04ba211dd5, type: 2}
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 35
-  mHeight: 33
+  mWidth: 70
+  mHeight: 66
   mDepth: 3
   mIsHidePanel: 0
   mAtlas: {fileID: 11450336, guid: 93e6d2d88100e9749948507d1a27beac, type: 2}
@@ -4225,7 +4225,7 @@ MonoBehaviour:
   halfPixelOffset: 1
   stretchToFill: 0
   depthOffset: 0
-  ExtraOffset: {x: 0, y: 220, z: 0}
+  ExtraOffset: {x: 0, y: 200, z: 0}
   ViewportOffset: {x: 0, y: 0, z: 0}
   updateAllTheTime: 0
   direction: 2
@@ -4780,8 +4780,8 @@ MonoBehaviour:
   mMat: {fileID: 2100000, guid: 241c457ed1d7bb34da265e04ba211dd5, type: 2}
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 30
-  mHeight: 35
+  mWidth: 60
+  mHeight: 70
   mDepth: 3
   mIsHidePanel: 0
   mAtlas: {fileID: 11450336, guid: 93e6d2d88100e9749948507d1a27beac, type: 2}
@@ -5176,7 +5176,7 @@ MonoBehaviour:
     e10: 0
     e11: 320
     e12: 0
-    e13: 99.50001
+    e13: 317.5
     e20: 0
     e21: 0
     e22: 320
@@ -6046,8 +6046,8 @@ MonoBehaviour:
   mMat: {fileID: 2100000, guid: 241c457ed1d7bb34da265e04ba211dd5, type: 2}
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 35
-  mHeight: 33
+  mWidth: 70
+  mHeight: 66
   mDepth: 3
   mIsHidePanel: 0
   mAtlas: {fileID: 11450336, guid: 93e6d2d88100e9749948507d1a27beac, type: 2}

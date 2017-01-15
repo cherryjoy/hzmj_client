@@ -77,8 +77,6 @@ function PlayBackCell:Play_OnClick(viewId)
     end
 
     -- 进入牌桌
-    Client.m_CurrentState = EClientState.E_CS_PlayBack
-
     local ref = LuaUIViewCtr.OpenUIHasBg("MJTable/MJTablePlayBack")
     ref.InitPlayBack(ref, self.data.rolelist, viewId)
     ref.EnterRoomSync(ref, self.data.rolelist)
@@ -91,6 +89,8 @@ function PlayBackCell:Play_OnClick(viewId)
     end
 
     Client.EnterPlayBack:Do()
+
+    Client.m_CurrentState = EClientState.E_CS_PlayBack
 end
 
 function PlayBackCell:GetRoleName(roleId)

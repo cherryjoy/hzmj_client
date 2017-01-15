@@ -63,7 +63,6 @@ function MJTableCtrl:InitPlayBack(roleList, viewId)
     self.Direction:get_transform():set_localEulerAngles(LuaVector3.Create(0, 0, angle))
     self.TimerBack:set_spriteName(spriteName)
 
-    Client.m_CurrentState = EClientState.E_CS_TableReady
     self.passType = enumCARD_PASS_TYPE.CARD_PASS_NULL_CARD
     -- 初始化
     for i = 1, 4 do
@@ -1022,6 +1021,11 @@ function MJTableCtrl:PlayTableHu(data)
 end
 
 function MJTableCtrl:Exit_OnClick()
+    if self.playTimer ~= nil then
+        Timer.RemoveEvent(self, self.playTimer)
+        self.playTimer = nil
+    end
+
     Client.LeavePlayBack:Do()
     Client.TableClose:Do()
 end
@@ -1054,21 +1058,23 @@ function MJTableCtrl:Play_OnClick()
 end
 
 function MJTableCtrl:Fast_OnClick()
+    self.Play:set_spriteName("replayPlay")
     if self.timerNum - 5 > 0 then
         self.timerNum = self.timerNum - 5
+    end
 
-        if self.playTimer ~= nil then
-            Timer.RemoveEvent(self, self.playTimer)
-            self.playTimer = nil
-        end
+    if self.playTimer ~= nil then
+        Timer.RemoveEvent(self, self.playTimer)
+        self.playTimer = nil
+    end
 
-        if self.playTimer == nil then
-            self.playTimer = Timer.NewEvent(self,self.timerNum,self.timerNum*(#self.process.sequence - self.playNum + 1), MJTableCtrl.DoPlay, false, MJTableCtrl.DoPlayFinish)
-        end
+    if self.playTimer == nil then
+        self.playTimer = Timer.NewEvent(self,self.timerNum,self.timerNum*(#self.process.sequence - self.playNum + 1), MJTableCtrl.DoPlay, false, MJTableCtrl.DoPlayFinish)
     end
 end
 
 function MJTableCtrl:Slow_OnClick()
+    self.Play:set_spriteName("replayPlay")
     self.timerNum = self.timerNum + 5
 
     if self.playTimer ~= nil then
