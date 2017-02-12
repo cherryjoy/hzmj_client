@@ -66,7 +66,11 @@ function MainUICtrl:JoinGame_OnClick()
     local ref = LuaUIViewCtr.OpenUIHasBg("Home/JoinGame")
 end
 
-function MainUICtrl:CreateRoom_OnClick()
+function MainUICtrl:CreateRoomPX_OnClick()
+    local ref = LuaUIViewCtr.OpenUIHasBg("Home/CreateRoomPX")
+end
+
+function MainUICtrl:CreateRoomHZ_OnClick()
     local ref = LuaUIViewCtr.OpenUIHasBg("Home/CreateRoom")
 end
 

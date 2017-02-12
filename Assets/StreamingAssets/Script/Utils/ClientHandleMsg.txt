@@ -180,9 +180,16 @@ HandleFuncs[enumMSGID_MODULE_05.ID_GAME_ROOM_ENTER_RES] = function(data,dataLeng
         local ref = LuaUIViewCtr.OpenUIHasBg("MJTable/MJTable")
         LuaUIViewCtr.UIPanel["MJTableUI"] = ref
         Client.RoleInfo.Amount = data.amount
-        Client.RoleInfo.RestCard = 112
-        --ClientSendMsg.SendReadyRoom()
-        LuaUIViewCtr.UIPanel["MJTableUI"].Init(LuaUIViewCtr.UIPanel["MJTableUI"], data.passwd, data.horse, data.addition, data.rolelist)
+
+        if data.roomtype == enumMAHJONG_TYPE.EM_HONG_TYPE then
+            Client.RoleInfo.RestCard = 112
+            --ClientSendMsg.SendReadyRoom()
+            LuaUIViewCtr.UIPanel["MJTableUI"].Init(LuaUIViewCtr.UIPanel["MJTableUI"], data.passwd, data.horse, data.addition, data.rolelist)
+        elseif data.roomtype == enumMAHJONG_TYPE.EM_PEIX_TYPE then
+            Client.RoleInfo.RestCard = 120
+            LuaUIViewCtr.UIPanel["MJTableUI"].InitPX(LuaUIViewCtr.UIPanel["MJTableUI"], data.passwd, data.pairwin, data.horse, data.muchwin, data.rolelist)
+        end
+
         LuaUIViewCtr.UIPanel["MJTableUI"].SetJuShuPaiShu(LuaUIViewCtr.UIPanel["MJTableUI"])
 
         -- 关闭主界面

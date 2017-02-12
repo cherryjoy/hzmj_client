@@ -136,11 +136,23 @@ function ClientSendMsg.SendGM(command,params)
    LuaDebug.Log(params[1])
 end
 
-function  ClientSendMsg.SendCreateRoom(amount, horse, addition)
+function  ClientSendMsg.SendCreateRoomHZ(amount, horse, addition)
 	local data = PBMsgCreateRoomReq.Create()
+	data.roomtype = enumMAHJONG_TYPE.EM_HONG_TYPE
 	data.amount = amount
 	data.horse = horse
 	data.addition = addition
+	local buffer,length = LuaProto.serialize(data)
+	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_ROOM_CREATE_REQ,buffer,length)
+end
+
+function  ClientSendMsg.SendCreateRoomPX(amount, duoxiang, xiama, qidui)
+	local data = PBMsgCreateRoomReq.Create()
+	data.roomtype = enumMAHJONG_TYPE.EM_PEIX_TYPE
+	data.amount = amount
+	data.pairwin = qidui
+	data.addcode = xiama
+	data.muchwin = duoxiang
 	local buffer,length = LuaProto.serialize(data)
 	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_ROOM_CREATE_REQ,buffer,length)
 end

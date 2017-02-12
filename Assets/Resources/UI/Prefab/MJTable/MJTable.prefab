@@ -1112,6 +1112,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &169432
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 446862}
+  - 114: {fileID: 11486522}
+  m_Layer: 8
+  m_Name: MJTips
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &170012
 GameObject:
   m_ObjectHideFlags: 1
@@ -1614,7 +1630,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 108520}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 468, y: -305, z: -0.0000019073486}
+  m_LocalPosition: {x: 568, y: -305, z: -0.0000019073486}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -2196,6 +2212,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 405484}
   m_RootOrder: 0
+--- !u!4 &446862
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 169432}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -60, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 480156}
+  m_RootOrder: 4
 --- !u!4 &449590
 Transform:
   m_ObjectHideFlags: 1
@@ -2630,6 +2659,7 @@ Transform:
   - {fileID: 485166}
   - {fileID: 431958}
   - {fileID: 403152}
+  - {fileID: 446862}
   m_Father: {fileID: 433164}
   m_RootOrder: 3
 --- !u!4 &481090
@@ -4121,6 +4151,10 @@ MonoBehaviour:
     regObj: {fileID: 134856}
     Name: DebugWin
     TypeIndex: 5
+  - Obj: {fileID: 169432}
+    regObj: {fileID: 11486522}
+    Name: 
+    TypeIndex: 1
   LuaBehavArray:
   - Behav: {fileID: 11419594}
     Name: Drect1
@@ -5323,6 +5357,42 @@ MonoBehaviour:
   mSpriteName: money_frame
   IsKeepOriSize: 0
   mFillCenter: 1
+--- !u!114 &11486522
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 169432}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1348251788, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  changeFlag: -1
+  mMat: {fileID: 0}
+  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mPivot: 4
+  mWidth: 24
+  mHeight: 24
+  mDepth: 50
+  mIsHidePanel: 0
+  mText: "\u6C9B\u53BF\u9EBB\u5C06\uFF0C\u53EF\u80E1\u4E03\u5BF9\uFF0C\u53EF\u4E0B\u7801\uFF0C\u4E00\u70AE\u591A\u54CD"
+  mMaxLineWidth: 0
+  mEncoding: 1
+  mMultiline: 1
+  mPassword: 0
+  mShowLastChar: 0
+  mEffectStyle: 0
+  mEffectColor: {r: 0, g: 0, b: 0, a: 1}
+  mTopColor: {r: 1, g: 1, b: 1, a: 1}
+  mBottomColor: {r: 1, g: 1, b: 1, a: 1}
+  mSpaceingY: 0
+  mSpaceingX: 0
+  mFontSize: 24
+  mFontStyle: 0
+  mTrueTypeFont: {fileID: 0}
+  mLineWidth: 0
+  fixedWidthForChinese: 0
 --- !u!114 &11486912
 MonoBehaviour:
   m_ObjectHideFlags: 1

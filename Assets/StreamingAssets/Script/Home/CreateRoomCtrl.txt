@@ -18,20 +18,30 @@ function CreateRoomCtrl:Close_OnClick()
 end
 
 function CreateRoomCtrl:Create_OnClick()
-    ClientSendMsg.SendCreateRoom(self.jushu, self.mashu, self.beishu)
+    ClientSendMsg.SendCreateRoomHZ(self.jushu, self.mashu, self.beishu)
 
     self.gameObject:Destroy1()
 end
 
 function CreateRoomCtrl:Ju8_OnClick()
     self.Ju8Check:set_enabled(true)
+    self.Ju12Check:set_enabled(false)
     self.Ju16Check:set_enabled(false)
 
     self.jushu = 8
 end
 
+function CreateRoomCtrl:Ju12_OnClick()
+    self.Ju8Check:set_enabled(false)
+    self.Ju12Check:set_enabled(true)
+    self.Ju16Check:set_enabled(false)
+
+    self.jushu = 12
+end
+
 function CreateRoomCtrl:Ju16_OnClick()
     self.Ju8Check:set_enabled(false)
+    self.Ju12Check:set_enabled(false)
     self.Ju16Check:set_enabled(true)
 
     self.jushu = 16

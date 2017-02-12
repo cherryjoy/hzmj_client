@@ -54,15 +54,6 @@ function TableBottom:CardInfoSync(handcard)
     for i = 1, handCardNum do
         local card = handcard[i]
         --LuaDebug.Log("card.type_id: "..card.type_id..", card.code_id: "..card.code_id)
-        --[[
-        if i <= 3 then
-            card = handcard[1]
-            local tempCard = {}
-            tempCard.type_id = enumCARD_TYPE.CARD_HONG_TYPE
-            tempCard.code_id = 0
-            card = tempCard
-        end
-        --]]
         local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyHandCard",self.Grid:get_gameObject())
         ref.gameObject:set_name("MyCard")
         ref.Message:target(ref.gameObject)
@@ -470,6 +461,8 @@ function TableBottom:SortCard()
     local tongList = {}
     local tiaoList = {}
     local zhongList = {}
+    local faList = {}
+    local baiList = {}
 
     local num = #(self.handCard)
     for i = 1, num do
@@ -482,6 +475,10 @@ function TableBottom:SortCard()
             table.insert(wanList, card)
         elseif card.type_id == enumCARD_TYPE.CARD_HONG_TYPE then
             table.insert(zhongList, card)
+        elseif card.type_id == enumCARD_TYPE.CARD_FCAI_TYPE then
+            table.insert(faList, card)
+        elseif card.type_id == enumCARD_TYPE.CARD_BBAN_TYPE then
+            table.insert(baiList, card)
         end
     end
 
@@ -515,6 +512,16 @@ function TableBottom:SortCard()
 
     for i = 1, #zhongList do
         self.handCard[index].Init(self.handCard[index], zhongList[i], index)
+        index = index + 1
+    end
+
+    for i = 1, #faList do
+        self.handCard[index].Init(self.handCard[index], faList[i], index)
+        index = index + 1
+    end
+
+    for i = 1, #baiList do
+        self.handCard[index].Init(self.handCard[index], baiList[i], index)
         index = index + 1
     end
 end
@@ -591,20 +598,22 @@ function TableBottom:TableClear()
 end
 
 function TableBottom:IsHuPai(card)
-    -- 先判断加上card是否有四个红中，或者手里直接有四个红中
-    if card.type_id == enumCARD_TYPE.CARD_HONG_TYPE then
-        local num = TableBottom.GetSameCardNum(self, card)
-        if num >= 3 then
+    if self.mjtype == enumMAHJONG_TYPE.EM_HONG_TYPE then
+        -- 先判断加上card是否有四个红中，或者手里直接有四个红中
+        if card.type_id == enumCARD_TYPE.CARD_HONG_TYPE then
+            local num = TableBottom.GetSameCardNum(self, card)
+            if num >= 3 then
+                return true
+            end
+        end
+
+        local tempCard = {}
+        tempCard.type_id = enumCARD_TYPE.CARD_HONG_TYPE
+        tempCard.code_id = 0
+        local num = TableBottom.GetSameCardNum(self, tempCard)
+        if num >= 4 then
             return true
         end
-    end
-
-    local tempCard = {}
-    tempCard.type_id = enumCARD_TYPE.CARD_HONG_TYPE
-    tempCard.code_id = 0
-    local num = TableBottom.GetSameCardNum(self, tempCard)
-    if num >= 4 then
-        return true
     end
 
     for i = 1, #(self.tingCard) do
@@ -631,6 +640,8 @@ function TableBottom:CorrectHandCard(cardList)
     local tongList = {}
     local tiaoList = {}
     local zhongList = {}
+    local faList = {}
+    local baiList = {}
 
     local num = #(cardList)
     for i = 1, num do
@@ -643,6 +654,10 @@ function TableBottom:CorrectHandCard(cardList)
             table.insert(wanList, card)
         elseif card.type_id == enumCARD_TYPE.CARD_HONG_TYPE then
             table.insert(zhongList, card)
+        elseif card.type_id == enumCARD_TYPE.CARD_FCAI_TYPE then
+            table.insert(faList, card)
+        elseif card.type_id == enumCARD_TYPE.CARD_BBAN_TYPE then
+            table.insert(baiList, card)
         end
     end
 
@@ -680,6 +695,15 @@ function TableBottom:CorrectHandCard(cardList)
         index = index + 1
     end
 
+    for i = 1, #faList do
+        newCardList[index] = faList[i]
+        index = index + 1
+    end
+
+    for i = 1, #baiList do
+        newCardList[index] = baiList[i]
+        index = index + 1
+    end
     -- test
     --table.insert(newCardList,newCardList[1])
     --table.remove(newCardList, #newCardList)

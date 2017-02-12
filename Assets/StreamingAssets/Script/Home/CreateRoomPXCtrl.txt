@@ -1,0 +1,80 @@
+CreateRoomPXCtrl = {}
+
+function CreateRoomPXCtrl:Start( )
+    local mt=TextureMgr.get_Instance():LoadTexture("Home/chuangjianfangjian", true)
+    self.Texture:set_material(mt)
+
+    self.jushu = 8
+
+    self.duoxiang = 0
+    self.xiama = 1
+    self.qidui = 1
+end
+
+function CreateRoomPXCtrl:OnDestroy( )
+
+end
+
+function CreateRoomPXCtrl:Close_OnClick()
+    self.gameObject:Destroy1()
+end
+
+function CreateRoomPXCtrl:Create_OnClick()
+    ClientSendMsg.SendCreateRoomPX(self.jushu, self.duoxiang, self.xiama, self.qidui)
+
+    self.gameObject:Destroy1()
+end
+
+function CreateRoomPXCtrl:Ju8_OnClick()
+    self.Ju8Check:set_enabled(true)
+    self.Ju12Check:set_enabled(false)
+    self.Ju16Check:set_enabled(false)
+
+    self.jushu = 8
+end
+
+function CreateRoomPXCtrl:Ju12_OnClick()
+    self.Ju8Check:set_enabled(false)
+    self.Ju12Check:set_enabled(true)
+    self.Ju16Check:set_enabled(false)
+
+    self.jushu = 12
+end
+
+function CreateRoomPXCtrl:Ju16_OnClick()
+    self.Ju8Check:set_enabled(false)
+    self.Ju12Check:set_enabled(false)
+    self.Ju16Check:set_enabled(true)
+
+    self.jushu = 16
+end
+
+function CreateRoomPXCtrl:DuoXiang_OnClick()
+    if self.DuoXiangCheck:get_enabled() then
+        self.DuoXiangCheck:set_enabled(false)
+        self.duoxiang = 0
+    else
+        self.DuoXiangCheck:set_enabled(true)
+        self.duoxiang = 1
+    end
+end
+
+function CreateRoomPXCtrl:XiaMa_OnClick()
+    if self.XiaMaCheck:get_enabled() then
+        self.XiaMaCheck:set_enabled(false)
+        self.xiama = 0
+    else
+        self.XiaMaCheck:set_enabled(true)
+        self.xiama = 1
+    end
+end
+
+function CreateRoomPXCtrl:QiDui_OnClick()
+    if self.QiDuiCheck:get_enabled() then
+        self.QiDuiCheck:set_enabled(false)
+        self.qidui = 0
+    else
+        self.QiDuiCheck:set_enabled(true)
+        self.qidui = 1
+    end
+end

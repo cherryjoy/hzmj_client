@@ -85,6 +85,8 @@ function RoleResult.SortCard(cards)
     local tongList = {}
     local tiaoList = {}
     local zhongList = {}
+    local faList = {}
+    local baiList = {}
 
     local num = #cards
     for i = 1, num do
@@ -97,6 +99,10 @@ function RoleResult.SortCard(cards)
             table.insert(wanList, card)
         elseif card.type_id == enumCARD_TYPE.CARD_HONG_TYPE then
             table.insert(zhongList, card)
+        elseif card.type_id == enumCARD_TYPE.CARD_FCAI_TYPE then
+            table.insert(faList, card)
+        elseif card.type_id == enumCARD_TYPE.CARD_BBAN_TYPE then
+            table.insert(baiList, card)
         end
     end
 
@@ -131,6 +137,16 @@ function RoleResult.SortCard(cards)
 
     for i = 1, #zhongList do
         sortedCards[index] = zhongList[i]
+        index = index + 1
+    end
+
+    for i = 1, #faList do
+        sortedCards[index] = faList[i]
+        index = index + 1
+    end
+
+    for i = 1, #baiList do
+        sortedCards[index] = baiList[i]
         index = index + 1
     end
 

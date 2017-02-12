@@ -112,7 +112,8 @@ function TableTop:SetPlayCard(card)
     local spriteName = MJTableCtrl.GetLeftCardSprite(card)
     ref.Card:set_spriteName(spriteName)
     ref.Card:MakePixelPerfectWithSizeInAtlas()
-    if card.type_id == enumCARD_TYPE.CARD_WANG_TYPE or card.type_id == enumCARD_TYPE.CARD_HONG_TYPE then
+    if card.type_id == enumCARD_TYPE.CARD_WANG_TYPE or card.type_id == enumCARD_TYPE.CARD_HONG_TYPE
+        or card.type_id == enumCARD_TYPE.CARD_FCAI_TYPE or card.type_id == enumCARD_TYPE.CARD_BBAN_TYPE then
         ref.Card:get_transform():set_localScale(LuaVector3.Create(-1, 1, 1))
     end
 
