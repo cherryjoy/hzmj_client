@@ -446,7 +446,11 @@ function MJTableCtrl:HandlePlayCard(roleId, index, card, result)
 
     --LuaDebug.Log("roleId: "..roleId..", play card, type: "..card.type_id..", id: "..card.code_id)
     -- 播放出牌
-    NGUITools.PlaySoundByPath("Music/Card/"..MJTableCtrl.GetRoleSex(self, roleId)..card.type_id..card.code_id)
+    if self.mjtype == enumMAHJONG_TYPE.EM_HONG_TYPE then
+        NGUITools.PlaySoundByPath("Music/Card/"..MJTableCtrl.GetRoleSex(self, roleId)..card.type_id..card.code_id)
+    elseif self.mjtype == enumMAHJONG_TYPE.EM_PEIX_TYPE then
+        NGUITools.PlaySoundByPath("Music/Card/1"..MJTableCtrl.GetRoleSex(self, roleId)..card.type_id..card.code_id)
+    end
 
     --self.TowardCard:SetActive(true)
     MJTableCtrl.DoCountDownFinish(self)
