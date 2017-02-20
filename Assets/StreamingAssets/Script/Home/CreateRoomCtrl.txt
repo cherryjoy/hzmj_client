@@ -94,3 +94,8 @@ function CreateRoomCtrl:Bei5_OnClick()
 
     self.beishu = 5
 end
+
+function CreateRoomCtrl:Help_OnClick()
+	local ref = LuaUIViewCtr.OpenUIHasBg("Home/HelpUI")
+    ref.Init(ref, Text.HelpContent)
+end

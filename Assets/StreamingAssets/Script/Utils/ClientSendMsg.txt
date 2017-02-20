@@ -8,7 +8,7 @@ ClientSendMsg = {}
 sendMsgNameTable =  Util.TableInvert(NetOpcodes_C2S)
 function ClientSendMsg.SendNetMsg(netCode,buffer,bufferLength )
 	if netCode ~= enumMSGID_MODULE_05.ID_GAME_HEARTBEAT_REQ then
-		--LuaDebug.Log("sendId:"..netCode)
+		LuaDebug.Log("sendId:"..netCode)
 	end
 
 	LuaNetwork.SendNetMessage(netCode,buffer,bufferLength)
@@ -253,6 +253,13 @@ function ClientSendMsg.SendWinGame()
 	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_WIN_GAME_REQ, buffer, length)
 end
 
+function ClientSendMsg.SendWinGamePX()
+	local data = PBMsgWinGameReq.Create()
+
+	local buffer, length = LuaProto.serialize(data)
+	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_PX_GAME_WIN_GAME_REQ, buffer, length)
+end
+
 function ClientSendMsg.SendGameResult(roomId)
 	local data = PBMsgGameResultReq.Create()
 	data.roomid = roomId
@@ -267,6 +274,14 @@ function ClientSendMsg.SendGameBalance(roomId)
 
 	local buffer, length = LuaProto.serialize(data)
 	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_GAME_BALANCE_REQ, buffer, length)
+end
+
+function ClientSendMsg.SendGameBalancePX(roomId)
+	local data = PBPXMsgGameBalanceReq.Create()
+	data.game_id = roomId
+
+	local buffer, length = LuaProto.serialize(data)
+	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_PX_GAME_BALANCE_REQ, buffer, length)
 end
 
 function ClientSendMsg.SendGameRoomChat(typeId, context)
@@ -339,4 +354,12 @@ function ClientSendMsg.SendRoomPlayBack(roomId)
 
 	local buffer, length = LuaProto.serialize(data)
 	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_ROOM_PLAY_BACK_REQ, buffer, length)
+end
+
+function ClientSendMsg.SendPXAddCode(state)
+	local data = PBPXAddCodeReq.Create()
+	data.state = state
+
+	local buffer, length = LuaProto.serialize(data)
+	ClientSendMsg.SendNetMsg(enumMSGID_MODULE_05.ID_PX_GAME_ADD_CODE_REQ, buffer, length)
 end

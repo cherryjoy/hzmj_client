@@ -6,7 +6,7 @@ function CreateRoomPXCtrl:Start( )
 
     self.jushu = 8
 
-    self.duoxiang = 0
+    self.duoxiang = 1
     self.xiama = 1
     self.qidui = 1
 end
@@ -77,4 +77,9 @@ function CreateRoomPXCtrl:QiDui_OnClick()
         self.QiDuiCheck:set_enabled(true)
         self.qidui = 1
     end
+end
+
+function CreateRoomPXCtrl:Help_OnClick()
+	local ref = LuaUIViewCtr.OpenUIHasBg("Home/HelpUI")
+    ref.Init(ref, Text.HelpContentPX)
 end

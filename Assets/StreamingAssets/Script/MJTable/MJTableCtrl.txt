@@ -73,6 +73,7 @@ function MJTableCtrl:InitPX(passwd, pairwin, addcode, muchwin, rolelist)
 
     if addcode == 1 then
         tips = tips..","..Text.XiaMa
+        MJTableCtrl.ReSetAddCode(self)
     end
 
     if muchwin == 1 then
@@ -103,10 +104,10 @@ function MJTableCtrl:InitPX(passwd, pairwin, addcode, muchwin, rolelist)
     end
 
     self.mjtype = enumMAHJONG_TYPE.EM_PEIX_TYPE
-    self.Drect1.mjtype = enumMAHJONG_TYPE.EM_HONG_TYPE
+    self.Drect1.mjtype = enumMAHJONG_TYPE.EM_PEIX_TYPE
 end
 
-function MJTableCtrl:InitPlayBack(roleList, viewId)
+function MJTableCtrl:InitPlayBack(roleList, viewId, roomtype)
     local spriteName, myDirect = MJTableCtrl.GetMyDirectSprite(viewId, roleList)
     self.myDirect = myDirect
     local angle = self.Direction:get_transform():get_localEulerAngles():z() - (myDirect - 1)*90
@@ -118,6 +119,9 @@ function MJTableCtrl:InitPlayBack(roleList, viewId)
     for i = 1, 4 do
         self["Drect"..i].Init(self["Drect"..i])
     end
+
+    self.mjtype = roomtype
+    self.Drect1.mjtype = roomtype
 end
 
 function MJTableCtrl:SetJuShuPaiShu()
@@ -407,6 +411,13 @@ function MJTableCtrl:GameReady(roleStateList)
                         self.roleList[k].makers = roleStateList[i].makers
                     end
                 end
+
+                -- 下码
+                if roleStateList[i].addcode == 0 then
+                    self["Drect"..j].TableHead.AddCode:SetActive(false)
+                else
+                    self["Drect"..j].TableHead.AddCode:SetActive(false)
+                end
             end
         end
     end
@@ -444,6 +455,15 @@ function MJTableCtrl:HandlePlayCard(roleId, index, card, result)
         return
     end
 
+    LuaDebug.Log("result: "..tostring(result))
+
+    if roleId ~= self.Drect1.roleId then
+        if result == 5 then
+            MJTableCtrl.IsPengGang(self, roleId, card)
+            return
+        end
+    end
+
     --LuaDebug.Log("roleId: "..roleId..", play card, type: "..card.type_id..", id: "..card.code_id)
     -- 播放出牌
     if self.mjtype == enumMAHJONG_TYPE.EM_HONG_TYPE then
@@ -457,7 +477,36 @@ function MJTableCtrl:HandlePlayCard(roleId, index, card, result)
     -- 判断当前的牌是否能碰、杠
     if roleId ~= self.Drect1.roleId then
         if result ~= 0 then
-            MJTableCtrl.IsPengGang(self, roleId, card)
+            if result == 4 then
+                -- 判断是否胡牌
+                local huPai = self.Drect1.IsHuPai(self.Drect1, card)
+                if huPai then
+                    MJTableCtrl.IsPengGang(self, roleId, card)
+
+                    self.ResultCard:SetActive(true)
+                    self.passType = enumCARD_PASS_TYPE.CARD_PASS_WINN_CARD
+                    self.Win:SetActive(true)
+                    self.Peng:SetActive(false)
+                else
+                    self.Win:SetActive(false)
+                end
+            elseif result == 5 then
+
+            else
+                MJTableCtrl.IsPengGang(self, roleId, card)
+                if self.mjtype == enumMAHJONG_TYPE.EM_PEIX_TYPE then
+                    -- 判断是否胡牌
+                    local huPai = self.Drect1.IsHuPai(self.Drect1, card)
+                    if huPai then
+                        self.ResultCard:SetActive(true)
+                        self.passType = enumCARD_PASS_TYPE.CARD_PASS_DEAL_CARD
+                        self.Win:SetActive(true)
+                        self.Peng:SetActive(false)
+                    else
+                        self.Win:SetActive(false)
+                    end
+                end
+            end
         end
     end
 
@@ -582,13 +631,20 @@ function MJTableCtrl:Guo_OnClick()
 end
 
 function MJTableCtrl:Win_OnClick()
-    ClientSendMsg.SendWinGame()
+    if self.mjtype == enumMAHJONG_TYPE.EM_HONG_TYPE then
+        ClientSendMsg.SendWinGame()
+    elseif self.mjtype == enumMAHJONG_TYPE.EM_PEIX_TYPE then
+        ClientSendMsg.SendWinGamePX()
+    end
 end
 
 function MJTableCtrl:WinDebug_OnClick()
     --ClientSendMsg.SendGameQuitRoom(LuaUIViewCtr.UIPanel["MJTableUI"].roomId)
-    ClientSendMsg.SendWinGame()
-    --ClientSendMsg.SendWinGame()
+    if self.mjtype == enumMAHJONG_TYPE.EM_HONG_TYPE then
+        ClientSendMsg.SendWinGame()
+    elseif self.mjtype == enumMAHJONG_TYPE.EM_PEIX_TYPE then
+        ClientSendMsg.SendWinGamePX()
+    end
     --LuaUIViewCtr.OpenUIHasBg("MJTable/TablePeng")
 end
 
@@ -707,10 +763,6 @@ function MJTableCtrl:HandleGameResult(data)
     self.GameResult = LuaUIViewCtr.OpenUINotLose("MJTable/GameResult")
     self.GameResult.Init(self.GameResult, data, self.roleList, self.roomId)
 
-    for i = 1, #(data.result_info.role_cards) do
-        --LuaDebug.Log("HandleGameResult roleid: "..data.result_info.role_cards[i].roleid..", score: "..data.result_info.role_cards[i].score)
-    end
-
     -- 更新积累分数
     for i = 1, #(self.roleList) do
         for j = 1, #(data.result_info.role_cards) do
@@ -758,7 +810,7 @@ end
 
 function MJTableCtrl:HandleGameBalance(balances)
     local ref = LuaUIViewCtr.OpenUINotLose("MJTable/GameBalance")
-    ref.Init(ref, balances, self.roleList)
+    ref.Init(ref, balances, self.roleList, self.mjtype)
 end
 
 function MJTableCtrl.GetRoleInfo(roleId, roleList)
@@ -1172,4 +1224,20 @@ function MJTableCtrl:Slow_OnClick()
     if self.playTimer == nil then
         self.playTimer = Timer.NewEvent(self,self.timerNum,self.timerNum*(#self.process.sequence - self.playNum + 1), MJTableCtrl.DoPlay, false, MJTableCtrl.DoPlayFinish)
     end
+end
+
+function MJTableCtrl:ReSetAddCode()
+    self.CodeState:SetActive(true)
+end
+
+function MJTableCtrl:HandleAddCode(data)
+    self.CodeState:SetActive(false)
+end
+
+function MJTableCtrl:AddCode_OnClick()
+    ClientSendMsg.SendPXAddCode(1)
+end
+
+function MJTableCtrl:NoCode_OnClick()
+    ClientSendMsg.SendPXAddCode(0)
 end

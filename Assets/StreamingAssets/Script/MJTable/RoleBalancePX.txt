@@ -1,0 +1,29 @@
+RoleBalancePX = {}
+
+function RoleBalancePX:Start( )
+
+end
+
+function RoleBalancePX:OnDestroy( )
+
+end
+
+function RoleBalancePX:Init(info, roleInfo)
+    self.ZiMoNum:set_text(string.format(Text.BalanceZiMoNum, info.own_win))
+    self.GangMNum:set_text(string.format(Text.BalanceGangMPXNum, info.gangm))
+    self.GangANum:set_text(string.format(Text.BalanceGangAPXNum, info.ganga))
+    self.GangPNum:set_text(string.format(Text.BalanceGangPPXNum, info.gangg))
+    self.JiePaoNum:set_text(string.format(Text.BalanceJiePaoNum, info.meet_gun))
+    self.DianPaoNum:set_text(string.format(Text.BalanceDianPaoNum, info.point_gun))
+    self.AddCodeNum:set_text(string.format(Text.BalanceAddCodeNum, info.add_code))
+    local scoreStr = tostring(info.score)
+    if info.score > 0 then
+        scoreStr = "+"..scoreStr
+    end
+    self.Total:set_text(string.format(Text.BalanceTotol, scoreStr))
+
+    -- 头像信息
+    local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/HeadInfo",self.gameObject)
+    ref.gameObject:get_transform():set_localPosition(LuaVector3.Create(-50, 150, 0))
+    ref.Init(ref, roleInfo)
+end

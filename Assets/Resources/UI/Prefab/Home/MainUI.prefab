@@ -484,7 +484,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &179950
 GameObject:
   m_ObjectHideFlags: 1
@@ -641,7 +641,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 106918}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -130, y: 0, z: 0}
+  m_LocalPosition: {x: -60, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -668,7 +668,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 165674}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 508, y: 260.00003, z: 0}
+  m_LocalPosition: {x: 508.04095, y: 259.99994, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -883,7 +883,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 122854}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -518, y: 267.00003, z: 0}
+  m_LocalPosition: {x: -518.0409, y: 266.99994, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -1057,7 +1057,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 119624}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 276.00003, z: 0}
+  m_LocalPosition: {x: 0, y: 275.99994, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -1498,11 +1498,11 @@ MonoBehaviour:
     e00: 355.55557
     e01: 0
     e02: 0
-    e03: 382.7778
+    e03: 382.82794
     e10: 0
     e11: 355.55557
     e12: 0
-    e13: -173.88889
+    e13: -173.93907
     e20: 0
     e21: 0
     e22: 320
@@ -1716,11 +1716,11 @@ MonoBehaviour:
     e00: 320
     e01: 0
     e02: 0
-    e03: 0.50001097
+    e03: 0.5451457
     e10: 0
     e11: 320
     e12: 0
-    e13: -0.49999237
+    e13: -0.5451584
     e20: 0
     e21: 0
     e22: 320
@@ -1937,11 +1937,11 @@ MonoBehaviour:
     e00: 320
     e01: 0
     e02: 0
-    e03: 0.50001097
+    e03: 0.5451457
     e10: 0
     e11: 320
     e12: 0
-    e13: -158.5
+    e13: -158.54517
     e20: 0
     e21: 0
     e22: 320

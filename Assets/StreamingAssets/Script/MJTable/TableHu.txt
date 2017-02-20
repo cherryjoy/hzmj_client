@@ -32,8 +32,19 @@ function TableHu:hu1_TweenWait()
 end
 
 function TableHu:hu1_TweenEnd()
-    if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil then
-        LuaUIViewCtr.UIPanel["MJTableUI"].HandleWinGame(LuaUIViewCtr.UIPanel["MJTableUI"], self.data)
+    local num = 0
+    if self.data.card ~= nil then
+        num = #(self.data.card)
+    end
+
+    if num == 0 then
+        if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil then
+            LuaUIViewCtr.UIPanel["MJTableUI"].HandleGameResult(LuaUIViewCtr.UIPanel["MJTableUI"], self.data)
+        end
+    else
+        if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil then
+            LuaUIViewCtr.UIPanel["MJTableUI"].HandleWinGame(LuaUIViewCtr.UIPanel["MJTableUI"], self.data)
+        end
     end
 
     --self.gameObject:Destroy1()

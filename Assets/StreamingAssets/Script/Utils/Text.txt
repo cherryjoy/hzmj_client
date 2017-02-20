@@ -110,6 +110,8 @@ Text = {
     RoomScore = "房间战绩",
 
     -------------------Table--------------------
+    AddCode = "下码",
+    NoCode = "不下码",
     Ready = "准备",
     Share = "分享",
     QuitRoom = "返回大厅",
@@ -127,6 +129,13 @@ Text = {
     BalanceGangMNum = "公杠次数     %d",
     BalanceGangANum = "暗杠次数     %d",
     BalanceCodeNum = "中码个数     %d",
+    BalanceZiMoNum = "自摸次数     %d",
+    BalanceGangMPXNum = "直杠次数     %d",
+    BalanceGangAPXNum = "暗杠次数     %d",
+    BalanceGangPPXNum = "后杠个数     %d",
+    BalanceJiePaoNum = "接炮次数     %d",
+    BalanceDianPaoNum = "点炮次数     %d",
+    BalanceAddCodeNum = "下码次数     %d",
     BalanceTotol = "总分数 %s",
     BalanceRoleId = "ID:%d",
     InviteTitle = "红中麻将房间号【%d】",
@@ -139,10 +148,23 @@ Text = {
     RecordVoiceSend = "手指松开发送",
     AdminRoleName = "系统",
     CreateRoomNotCards = "房卡不足",
+    EnterRoomOneLeast = "进入房间需要1张房卡",
+    EnterRoomTwoLeast = "进入房间需要2张房卡",
     RoomNotExist = "房间不存在",
     RoomOver = "牌局已结束，请在战绩中查看",
     RoomNumIsFull = "房间人数已满",
     DeleteRoomConfirm = "确定解散房间吗",
+    HelpContentPX = "沛县麻将玩法：\n\n"..
+                    "沛县麻将为沛县流行的麻将打法，胡牌方式为大众麻将，独具特色的是每局胡牌结算分数固定，又称为“扳倒胡麻将”。\n\n"..
+                    "一、打牌规则\n\n"..
+                    "1、有条（索）、筒（饼）、万和箭牌四种牌共120张；\n"..
+                    "2、可以碰、杠，不能吃牌，碰、杠不算分，优先级低于胡；\n"..
+                    "3、坐庄 第二局起,如果不是庄家胡牌，则轮庄；\n\n"..
+                    "二、计分\n\n"..
+                    "1、胡牌按谁点炮谁输分，自摸三家输分的规则结算；\n"..
+                    "2、不分放枪和自摸，胡牌后，庄家胡数永远*2。\n\n"..
+                    "三、胡牌牌型\n\n"..
+                    "推倒胡：一对将牌加上顺子或杠牌。 如 11 123 234 456 567。\n\n\n",
     HelpContent =   "红中麻将玩法：\n\n"..
                     "一、牌数共112张牌：\n"..
                     "包括1-9筒、1-9条、1-9万各4张，外加4张红中。\n\n"..

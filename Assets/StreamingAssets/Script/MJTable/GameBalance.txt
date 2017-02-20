@@ -8,9 +8,15 @@ function GameBalance:OnDestroy( )
     Client.TableClose = Client.TableClose - {self, GameBalance.TableClose}
 end
 
-function GameBalance:Init(balances, roleList)
+function GameBalance:Init(balances, roleList, mjtype)
     for i = 1, #balances do
-        local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/RoleBalance",self.ScoreListGrid:get_gameObject())
+        local ref = nil
+        if mjtype == enumMAHJONG_TYPE.EM_HONG_TYPE then
+            ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/RoleBalance",self.ScoreListGrid:get_gameObject())
+        elseif mjtype == enumMAHJONG_TYPE.EM_PEIX_TYPE then
+            ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/RoleBalancePX",self.ScoreListGrid:get_gameObject())
+        end
+
         local roleInfo = MJTableCtrl.GetRoleInfo(balances[i].roleid, roleList)
         ref.Init(ref, balances[i], roleInfo)
         local score = GameBalance.GetRoleIdOfMaxNum(balances)

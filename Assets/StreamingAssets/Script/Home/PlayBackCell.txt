@@ -78,7 +78,7 @@ function PlayBackCell:Play_OnClick(viewId)
 
     -- 进入牌桌
     local ref = LuaUIViewCtr.OpenUIHasBg("MJTable/MJTablePlayBack")
-    ref.InitPlayBack(ref, self.data.rolelist, viewId)
+    ref.InitPlayBack(ref, self.data.rolelist, viewId, self.data.roomtype)
     ref.EnterRoomSync(ref, self.data.rolelist)
     ref.CardInfoPlayBackSync(ref, process, viewId)
     --LuaUIViewCtr.UIPanel["MJTableUI"] = ref

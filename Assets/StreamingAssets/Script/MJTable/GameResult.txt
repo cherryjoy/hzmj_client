@@ -107,6 +107,10 @@ function GameResult:Ready_OnClick()
     if self.retryTimer == nil then
         self.retryTimer = Timer.NewEvent(self,60,60,GameResult.RetryReady, false, nil)
     end
+
+    if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil and LuaUIViewCtr.UIPanel["MJTableUI"].xiama == 1 then
+        LuaUIViewCtr.UIPanel["MJTableUI"].ReSetAddCode(LuaUIViewCtr.UIPanel["MJTableUI"])
+    end
 end
 
 function GameResult:Share_OnClick()

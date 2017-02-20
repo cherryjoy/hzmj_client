@@ -4936,7 +4936,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   showProgress: 1
-  showInPanelTool: 1
+  showInPanelTool: 0
   depthPass: 0
   mDebugInfo: 0
   mClipping: 0

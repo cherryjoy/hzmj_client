@@ -20,7 +20,7 @@ ClientHandleMsg = {}
 --msgNameTable =  Util.TableInvert(NetOpcodes_S2C)
 function ClientHandleMsg.Handle(msgId,data,dataLength)
     if enumMSGID_MODULE_05.ID_GAME_HEARTBEAT_RES ~= msgId then
-         --LuaDebug.Log("recv msgID: " .. msgId)
+         LuaDebug.Log("recv msgID: " .. msgId)
     end
     local handleFunc = HandleFuncs[msgId]
     if handleFunc then
@@ -154,6 +154,10 @@ HandleFuncs[enumMSGID_MODULE_05.ID_ERROR_CODE_NOTICE] = function(data, dataLengt
         Client.SeriousError(Text.SessionFailed)
     elseif data.err_code == enumEMCJErrorCode.EMCJ_ERR_TIMEOUT then
         Client.SeriousError(Text.LoginTimeOut)
+    elseif data.err_code == enumEMCJErrorCode.EMCJ_CARD_ONE_LEAST then
+        LuaMessageBox.ShowSingle(Text.EnterRoomOneLeast, nil, Text.Confirm, self)
+    elseif data.err_code == enumEMCJErrorCode.EMCJ_CARD_TWO_LEAST then
+        LuaMessageBox.ShowSingle(Text.EnterRoomTwoLeast, nil, Text.Confirm, self)
     end
 end
 
@@ -278,13 +282,19 @@ end
 
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_WIN_GAME_RES] = function(data, dataLength)
     local data = LuaProto.deserialize(PBMsgWinGameRes, data, dataLength)
-    --LuaDebug.Log("data.count: "..data.count)
-    --LuaDebug.Log("data.card: "..#(data.card))
-
-    --data.role_list = {}
-    --table.insert(data.role_list, data.roleid)
     if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil then
         if data.card ~= nil and #(data.card) > 0 then
+            LuaUIViewCtr.UIPanel["MJTableUI"].PlayTableHu(LuaUIViewCtr.UIPanel["MJTableUI"], data)
+        else
+            LuaUIViewCtr.UIPanel["MJTableUI"].HandleGameResult(LuaUIViewCtr.UIPanel["MJTableUI"], data)
+        end
+    end
+end
+
+HandleFuncs[enumMSGID_MODULE_05.ID_PX_GAME_WIN_GAME_RES] = function(data, dataLength)
+    local data = LuaProto.deserialize(PBPXMsgWinGameRes, data, dataLength)
+    if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil then
+        if data.result_info.win_card ~= nil then
             LuaUIViewCtr.UIPanel["MJTableUI"].PlayTableHu(LuaUIViewCtr.UIPanel["MJTableUI"], data)
         else
             LuaUIViewCtr.UIPanel["MJTableUI"].HandleGameResult(LuaUIViewCtr.UIPanel["MJTableUI"], data)
@@ -303,17 +313,18 @@ end
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_RESULT_RES] = function(data, dataLength)
     LuaDebug.LogError("ID_GAME_RESULT_RES is not used!")
     return
-    --[[
-    local data = LuaProto.deserialize(PBMsgGameResultRes, data, dataLength)
-
-    if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil then
-        LuaUIViewCtr.UIPanel["MJTableUI"].HandleGameResult(LuaUIViewCtr.UIPanel["MJTableUI"], data)
-    end
-    --]]
 end
 
 HandleFuncs[enumMSGID_MODULE_05.ID_GAME_BALANCE_RES] = function(data, dataLength)
     local data = LuaProto.deserialize(PBMsgGameBalanceRes, data, dataLength)
+
+    if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil then
+        LuaUIViewCtr.UIPanel["MJTableUI"].HandleGameBalance(LuaUIViewCtr.UIPanel["MJTableUI"], data.balances)
+    end
+end
+
+HandleFuncs[enumMSGID_MODULE_05.ID_PX_GAME_BALANCE_RES] = function(data, dataLength)
+    local data = LuaProto.deserialize(PBPXMsgGameBalanceRes, data, dataLength)
 
     if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil then
         LuaUIViewCtr.UIPanel["MJTableUI"].HandleGameBalance(LuaUIViewCtr.UIPanel["MJTableUI"], data.balances)
@@ -398,4 +409,12 @@ HandleFuncs[enumMSGID_MODULE_05.ID_ROOM_PLAY_BACK_RES] = function(data, dataLeng
 
     local ref = LuaUIViewCtr.OpenUINotLose("Home/PlayBackUI")
     ref.Init(ref, data)
+end
+
+HandleFuncs[enumMSGID_MODULE_05.ID_PX_GAME_ADD_CODE_RES] = function(data, dataLength)
+    local data = LuaProto.deserialize(PBPXAddCodeRes, data, dataLength)
+
+    if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil then
+        LuaUIViewCtr.UIPanel["MJTableUI"].HandleAddCode(LuaUIViewCtr.UIPanel["MJTableUI"], data)
+    end
 end
