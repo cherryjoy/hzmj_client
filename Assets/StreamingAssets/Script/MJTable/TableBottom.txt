@@ -217,7 +217,7 @@ function TableBottom:PlayCardEnd(i)
     -- 整理手牌
     if i ~= handCardNum then
         self.handCard[i].Init(self.handCard[i], self.handCard[handCardNum].card, i)
-        self.handCard[i].TweenPos:waitTime(0.5)
+        self.handCard[i].TweenPos:waitTime(0.2)
         self.handCard[i].TweenPos:ResetFactor(false)
         self.handCard[i].TweenPos:set_enabled(false)
         self.handCard[handCardNum].gameObject:Destroy1()

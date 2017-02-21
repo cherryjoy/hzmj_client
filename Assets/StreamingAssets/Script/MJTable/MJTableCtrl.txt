@@ -852,7 +852,7 @@ function MJTableCtrl:Invite_OnClick()
 end
 
 function MJTableCtrl:HandleGameReenterStateSync(data)
-    --LuaDebug.Log("HandleGameReenterStateSync state: "..data.state)
+    LuaDebug.Log("HandleGameReenterStateSync state: "..data.state)
     if data.state == enumCARD_ACTION_TYPE.CARD_ACTION_PLAY then
         --LuaDebug.Log("type_id: "..data.card.type_id..", code_id"..data.card.code_id..", roleId: "..tostring(data.roleid))
         self.CD = 0
@@ -895,6 +895,31 @@ function MJTableCtrl:HandleGameReenterStateSync(data)
 
         else
 
+        end
+    elseif data.state == enumCARD_ACTION_TYPE.CARD_ACTION_HU_STATE then
+        --LuaDebug.Log("type_id: "..data.card.type_id..", code_id"..data.card.code_id..", roleId: "..tostring(data.roleid))
+        self.CD = 0
+        self.CountDown:set_text(tostring(self.CD))
+        self.CountDown:set_enabled(true)
+
+        local spriteName, myDirect = MJTableCtrl.GetMyDirectSprite(data.roleid, self.roleList)
+        --LuaDebug.Log("my direction: "..myDirect)
+        self.TimerBack:set_spriteName(spriteName)
+        self.TimerBack:get_gameObject():SetActive(true)
+
+        if data.roleid == Client.RoleInfo.RoleID then
+            -- 没有处理
+        else
+            -- 判断是否胡牌
+            local huPai = self.Drect1.IsHuPai(self.Drect1, data.card)
+            if huPai then
+                self.ResultCard:SetActive(true)
+                self.passType = enumCARD_PASS_TYPE.CARD_PASS_WINN_CARD
+                self.Win:SetActive(true)
+                self.Peng:SetActive(false)
+            else
+                self.Win:SetActive(false)
+            end
         end
     end
 end

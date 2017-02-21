@@ -147,7 +147,7 @@ function TableLeft:HandlePlayCard(i, card)
         self.AnimCard.gameObject:set_name("MyCardLeft")
     else
         -- 重置参数
-        self.AnimCard.TweenPos:waitTime(0.4)
+        self.AnimCard.TweenPos:waitTime(0.2)
         self.AnimCard.TweenPos:ResetFactor(false)
         self.AnimCard.TweenPos:set_enabled(false)
         self.AnimCard.TweenPos:from(LuaVector3.Create(-330, 0, 0))

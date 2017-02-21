@@ -192,7 +192,7 @@ MonoBehaviour:
   callWhenFinished: OnEventWithMessage
   isSenderToMessage: 1
   delayTime: 0
-  waitTime: 0.4
+  waitTime: 0.2
   callWhenWait: 
   IsSendMsg: 1
   from: {x: 330, y: 0, z: 0}

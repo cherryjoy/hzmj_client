@@ -2,6 +2,7 @@ MyCard = {}
 
 function MyCard:Start( )
     Client.TableClear = Client.TableClear + {self, MyCard.TableClear}
+    self.TweenPos:waitTime(0.2)
 end
 
 function MyCard:OnDestroy( )
