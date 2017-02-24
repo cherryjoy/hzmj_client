@@ -77,6 +77,17 @@ function RoleResult:Init(result, info)
         scoreStr = "+"..scoreStr
     end
     self.Score:set_text(scoreStr)
+
+    if result.overtype == 1 then
+        self.HuType:get_gameObject():SetActive(true)
+        self.HuType:set_text(Text.DianPao)
+    elseif result.overtype == 2 then
+        self.HuType:get_gameObject():SetActive(true)
+        self.HuType:set_text(Text.JiePao)
+    elseif result.overtype == 3 then
+        self.HuType:get_gameObject():SetActive(true)
+        self.HuType:set_text(Text.ZiMo)
+    end
 end
 
 function RoleResult.SortCard(cards)
@@ -177,8 +188,10 @@ function RoleResult:SetCodeCards(cards)
         local ref = LuaUIViewCtr.OpenUINotLoseNest("MJTable/MyCard", self.CodeCardsGrid:get_gameObject())
         ref.gameObject:get_transform():set_localScale(LuaVector3.Create(0.53, 0.53, 1))
         ref.Init(ref, cards[i], i, true)
-        if cards[i].code_id == 1 or cards[i].code_id == 5 or cards[i].code_id == 9 or cards[i].code_id == 0  then
-            ref.Check:set_enabled(true)
+        if #cards ~= 1 then -- 硬编码，只有1个时代表为沛县麻将的胡的哪张牌
+            if cards[i].code_id == 1 or cards[i].code_id == 5 or cards[i].code_id == 9 or cards[i].code_id == 0  then
+                ref.Check:set_enabled(true)
+            end
         end
     end
 

@@ -1,4 +1,4 @@
-assetbundles:932578079
+assetbundles:3714896276
 material_mat:759559937
 material_tga:3138788352
 shader:726218442
@@ -90,6 +90,8 @@ music/card/127:2340322808
 music/card/128:3801807590
 music/card/129:72389570
 music/card/130:78036355
+music/card/140:4085006293
+music/card/150:578410562
 music/card/201:2779308985
 music/card/202:2112873444
 music/card/203:4009921981
@@ -118,6 +120,8 @@ music/card/227:4036970201
 music/card/228:780589438
 music/card/229:3531833264
 music/card/230:1812829379
+music/card/240:1558945342
+music/card/250:3115723297
 music/chat/chatword1:2930010532
 music/chat/chatword11:3351260587
 music/chat/chatword12:3983448876
@@ -161,14 +165,14 @@ ui/atlas/bit32/compass:2890851835
 ui/atlas/bit32/home:3303979298
 ui/atlas/bit32/login:474844434
 ui/atlas/bit32/mahjong:2630346524
-ui/atlas/bit32/mjtable:2497874195
+ui/atlas/bit32/mjtable:3092540813
 ui/fonts/hzgb:267960871
 ui/fonts/msyh:3237646272
 ui/prefab/announcementui_prefab:3393668460
 ui/prefab/commonui_prefab:2804498644
-ui/prefab/home_prefab:210467651
+ui/prefab/home_prefab:2000843889
 ui/prefab/login_prefab:3323210490
-ui/prefab/mjtable_prefab:3185118830
+ui/prefab/mjtable_prefab:2265700403
 ui/prefab/newscenemusthave_prefab:2545927519
 ui/prefab/syssetting_prefab:2586437180
 ui/prefab/toolsui_prefab:1022845590

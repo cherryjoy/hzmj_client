@@ -110,6 +110,9 @@ Text = {
     RoomScore = "房间战绩",
 
     -------------------Table--------------------
+    ZiMo = "自摸",
+    DianPao = "点炮",
+    JiePao = "接炮",
     AddCode = "下码",
     NoCode = "不下码",
     Ready = "准备",

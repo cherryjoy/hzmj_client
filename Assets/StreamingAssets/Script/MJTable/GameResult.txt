@@ -13,10 +13,13 @@ function GameResult:OnDestroy( )
     end
 end
 
-function GameResult:Init(dataTotal, roleList, roomId)
+function GameResult:Init(dataTotal, roleList, roomId, mjtype)
     self.dataTotal = dataTotal
     local data = dataTotal.result_info
     self.roomId = roomId
+
+    -- 如果是沛县麻将则把win_card放在中码牌里面来显示
+    table.insert(data.code_cards, data.win_card)
 
     for i = 1, #(data.role_cards) do
         if data.role_cards[i].roleid == Client.RoleInfo.RoleID then
@@ -29,14 +32,18 @@ function GameResult:Init(dataTotal, roleList, roomId)
                 for j = 1, #(data.role_list) do
                     if Client.RoleInfo.RoleID == data.role_list[j] then
                         ref.SetCodeCards(ref, data.code_cards)
-                        ref.SetWinCard(ref, data.win_card)
+                        if mjtype == enumMAHJONG_TYPE.EM_HONG_TYPE then
+                            ref.SetWinCard(ref, data.win_card)
+                        end
                         break
                     end
                 end
             else
                 if Client.RoleInfo.RoleID == data.roleid then
                     ref.SetCodeCards(ref, data.code_cards)
-                    ref.SetWinCard(ref, data.win_card)
+                    if mjtype == enumMAHJONG_TYPE.EM_HONG_TYPE then
+                        ref.SetWinCard(ref, data.win_card)
+                    end
                 end
             end
             break
@@ -56,14 +63,18 @@ function GameResult:Init(dataTotal, roleList, roomId)
                  for j = 1, #(data.role_list) do
                      if data.role_cards[i].roleid == data.role_list[j] then
                          ref.SetCodeCards(ref, data.code_cards)
-                         ref.SetWinCard(ref, data.win_card)
+                         if mjtype == enumMAHJONG_TYPE.EM_HONG_TYPE then
+                             ref.SetWinCard(ref, data.win_card)
+                         end
                          break
                      end
                  end
              else
                  if data.role_cards[i].roleid == data.roleid then
                      ref.SetCodeCards(ref, data.code_cards)
-                     ref.SetWinCard(ref, data.win_card)
+                     if mjtype == enumMAHJONG_TYPE.EM_HONG_TYPE then
+                         ref.SetWinCard(ref, data.win_card)
+                     end
                  end
              end
          end

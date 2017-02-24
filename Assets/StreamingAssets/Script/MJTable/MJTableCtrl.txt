@@ -396,6 +396,11 @@ function MJTableCtrl:GameReady(roleStateList)
             if self["Drect"..j].roleId == roleStateList[i].roleid then
                 if roleStateList[i].state ~= 0 then
                     self["Drect"..j].Ready:SetActive(true)
+                    -- 1 没选择下码
+                    -- 2 选择过下码
+                    if self.Drect1.roleId == roleStateList[i].roleid and roleStateList[i].state == 2 then
+                        MJTableCtrl.HandleAddCode(self, nil)
+                    end
                 end
 
                 -- 刷新庄主信息
@@ -413,10 +418,11 @@ function MJTableCtrl:GameReady(roleStateList)
                 end
 
                 -- 下码
+                --LuaDebug.Log("roleStateList[i].addcode: "..roleStateList[i].addcode)
                 if roleStateList[i].addcode == 0 then
                     self["Drect"..j].TableHead.AddCode:SetActive(false)
-                else
-                    self["Drect"..j].TableHead.AddCode:SetActive(false)
+                elseif roleStateList[i].addcode == 1 then
+                    self["Drect"..j].TableHead.AddCode:SetActive(true)
                 end
             end
         end
@@ -466,11 +472,11 @@ function MJTableCtrl:HandlePlayCard(roleId, index, card, result)
 
     --LuaDebug.Log("roleId: "..roleId..", play card, type: "..card.type_id..", id: "..card.code_id)
     -- 播放出牌
-    if self.mjtype == enumMAHJONG_TYPE.EM_HONG_TYPE then
+    --if self.mjtype == enumMAHJONG_TYPE.EM_HONG_TYPE then
         NGUITools.PlaySoundByPath("Music/Card/"..MJTableCtrl.GetRoleSex(self, roleId)..card.type_id..card.code_id)
-    elseif self.mjtype == enumMAHJONG_TYPE.EM_PEIX_TYPE then
-        NGUITools.PlaySoundByPath("Music/Card/1"..MJTableCtrl.GetRoleSex(self, roleId)..card.type_id..card.code_id)
-    end
+    --elseif self.mjtype == enumMAHJONG_TYPE.EM_PEIX_TYPE then
+    --    NGUITools.PlaySoundByPath("Music/Card/1"..MJTableCtrl.GetRoleSex(self, roleId)..card.type_id..card.code_id)
+    --end
 
     --self.TowardCard:SetActive(true)
     MJTableCtrl.DoCountDownFinish(self)
@@ -628,6 +634,9 @@ function MJTableCtrl:Guo_OnClick()
     ClientSendMsg.SendGuoCard(self.passType)
 
     self.ResultCard:SetActive(false)
+    self.Gang:SetActive(false)
+    self.Peng:SetActive(false)
+    self.Win:SetActive(false)
 end
 
 function MJTableCtrl:Win_OnClick()
@@ -761,7 +770,7 @@ function MJTableCtrl:HandleGameResult(data)
     end
 
     self.GameResult = LuaUIViewCtr.OpenUINotLose("MJTable/GameResult")
-    self.GameResult.Init(self.GameResult, data, self.roleList, self.roomId)
+    self.GameResult.Init(self.GameResult, data, self.roleList, self.roomId, self.mjtype)
 
     -- 更新积累分数
     for i = 1, #(self.roleList) do
@@ -853,6 +862,10 @@ end
 
 function MJTableCtrl:HandleGameReenterStateSync(data)
     LuaDebug.Log("HandleGameReenterStateSync state: "..data.state)
+    if self.mjtype == enumMAHJONG_TYPE.EM_PEIX_TYPE then
+        MJTableCtrl.HandleAddCode(self, nil)
+    end
+
     if data.state == enumCARD_ACTION_TYPE.CARD_ACTION_PLAY then
         --LuaDebug.Log("type_id: "..data.card.type_id..", code_id"..data.card.code_id..", roleId: "..tostring(data.roleid))
         self.CD = 0

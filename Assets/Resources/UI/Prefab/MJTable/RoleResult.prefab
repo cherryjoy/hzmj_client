@@ -32,6 +32,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &113942
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 498936}
+  - 114: {fileID: 11468264}
+  m_Layer: 8
+  m_Name: HuType
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
 --- !u!1 &115584
 GameObject:
   m_ObjectHideFlags: 0
@@ -459,6 +475,7 @@ Transform:
   - {fileID: 476266}
   - {fileID: 401530}
   - {fileID: 464160}
+  - {fileID: 498936}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &490948
@@ -490,6 +507,19 @@ Transform:
   - {fileID: 490948}
   m_Father: {fileID: 455402}
   m_RootOrder: 0
+--- !u!4 &498936
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 113942}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 720, y: -10, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 485052}
+  m_RootOrder: 5
 --- !u!65 &6521444
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -837,6 +867,42 @@ MonoBehaviour:
   mAtlas: {fileID: 11410790, guid: 05dc6a2920cf0464d9fadc29033bf794, type: 2}
   mSpriteName: tile_me_35
   IsKeepOriSize: 0
+--- !u!114 &11468264
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 113942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1348251788, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  changeFlag: -1
+  mMat: {fileID: 0}
+  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mPivot: 4
+  mWidth: 30
+  mHeight: 30
+  mDepth: 50
+  mIsHidePanel: 0
+  mText: "\u81EA\u6478"
+  mMaxLineWidth: 0
+  mEncoding: 1
+  mMultiline: 1
+  mPassword: 0
+  mShowLastChar: 0
+  mEffectStyle: 0
+  mEffectColor: {r: 0, g: 0, b: 0, a: 1}
+  mTopColor: {r: 1, g: 1, b: 1, a: 1}
+  mBottomColor: {r: 1, g: 1, b: 1, a: 1}
+  mSpaceingY: 0
+  mSpaceingX: 0
+  mFontSize: 24
+  mFontStyle: 0
+  mTrueTypeFont: {fileID: 0}
+  mLineWidth: 0
+  fixedWidthForChinese: 0
 --- !u!114 &11473940
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -986,6 +1052,10 @@ MonoBehaviour:
     TypeIndex: 1
   - Obj: {fileID: 165074}
     regObj: {fileID: 11421082}
+    Name: 
+    TypeIndex: 1
+  - Obj: {fileID: 113942}
+    regObj: {fileID: 11468264}
     Name: 
     TypeIndex: 1
   LuaBehavArray: []
