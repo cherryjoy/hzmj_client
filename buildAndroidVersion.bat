@@ -1,5 +1,5 @@
 echo off
 
-DataGen.exe F:\MaJiang\hzmj_client\TragetAndroid F:\MaJiang\hzmj_client\DestAndroid\1.3.0
+DataGen.exe F:\MaJiang\hzmj_client\TragetAndroid F:\MaJiang\hzmj_client\DestAndroid\1.4.1
 
 pause.

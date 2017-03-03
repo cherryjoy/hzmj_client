@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 4027366658
+CRC: 2771521584
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 61e6c1a3d4e9f7a0993cd8309dc5112d
+    Hash: 9a1be474527507b7ac425d34adfb0217
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 9303549c90379c311a40579ca0a58db1
+    Hash: 61661e7d7452180482d56f51cf72564d
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -20,23 +20,11 @@ ClassTypes:
 - Class: 83
   Script: {instanceID: 0}
 - Class: 114
-  Script: {fileID: -1143446969, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
-- Class: 114
   Script: {fileID: -371560238, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
 - Class: 114
   Script: {fileID: -1517656706, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
 - Class: 114
   Script: {fileID: -88855999, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
-- Class: 114
-  Script: {fileID: -1693155780, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
-- Class: 114
-  Script: {fileID: 864754155, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
-- Class: 114
-  Script: {fileID: 2054053621, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
-- Class: 114
-  Script: {fileID: -1924787031, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
-- Class: 114
-  Script: {fileID: 1582492658, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
 - Class: 114
   Script: {fileID: 1646491362, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
 - Class: 114
@@ -48,13 +36,25 @@ ClassTypes:
 - Class: 114
   Script: {fileID: -2023587677, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
 - Class: 114
+  Script: {fileID: -1143446969, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+- Class: 114
+  Script: {fileID: -1693155780, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+- Class: 114
+  Script: {fileID: 864754155, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+- Class: 114
+  Script: {fileID: 2054053621, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+- Class: 114
+  Script: {fileID: -1924787031, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+- Class: 114
+  Script: {fileID: 1582492658, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+- Class: 114
   Script: {fileID: 1348251788, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
+- Class: 114
+  Script: {fileID: 345385021, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
 - Class: 114
   Script: {fileID: -1267949273, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
 - Class: 114
   Script: {fileID: 1990421164, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
-- Class: 114
-  Script: {fileID: 345385021, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
 - Class: 114
   Script: {fileID: -1019752268, guid: 72baa1b05800f0d4788de5f67c761cb1, type: 3}
 - Class: 114
@@ -105,10 +105,10 @@ Assets:
 - Assets/Resources/UI/Prefab/MJTable/HeadInfo.prefab
 - Assets/Resources/UI/Prefab/MJTable/RightPengCardDown.prefab
 Dependencies:
+- F:/MaJiang/hzmj_client/assetbundles/ui/atlas/bit32/mjtable
 - F:/MaJiang/hzmj_client/assetbundles/ui/atlas/bit16/emotion
-- F:/MaJiang/hzmj_client/assetbundles/music/ui/buttonclick_13
 - F:/MaJiang/hzmj_client/assetbundles/ui/atlas/bit32/compass
 - F:/MaJiang/hzmj_client/assetbundles/ui/atlas/bit32/home
-- F:/MaJiang/hzmj_client/assetbundles/ui/atlas/bit32/mahjong
-- F:/MaJiang/hzmj_client/assetbundles/ui/atlas/bit32/mjtable
 - F:/MaJiang/hzmj_client/assetbundles/ui/atlas/bit32/base
+- F:/MaJiang/hzmj_client/assetbundles/ui/atlas/bit32/mahjong
+- F:/MaJiang/hzmj_client/assetbundles/music/ui/buttonclick_13
