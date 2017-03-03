@@ -456,7 +456,7 @@ function MJTableCtrl:IsPengGang(roleId, card)
     end
 end
 
-function MJTableCtrl:HandlePlayCard(roleId, index, card, result)
+function MJTableCtrl:HandlePlayCard(roleId, index, card, result, winner)
     if roleId == self.Drect1.roleId and result ~= nil then
         return
     end
@@ -464,7 +464,17 @@ function MJTableCtrl:HandlePlayCard(roleId, index, card, result)
     LuaDebug.Log("result: "..tostring(result))
 
     if roleId ~= self.Drect1.roleId then
-        if result == 5 then
+        if result == 7 then
+            if winner == self.Drect1.roleId then
+                MJTableCtrl.IsPengGang(self, roleId, card)
+
+                self.ResultCard:SetActive(true)
+                self.passType = enumCARD_PASS_TYPE.CARD_PASS_WINN_CARD
+                self.Win:SetActive(true)
+                self.Peng:SetActive(false)
+                return
+            end
+        elseif result == 5 then
             MJTableCtrl.IsPengGang(self, roleId, card)
             return
         end
@@ -472,18 +482,27 @@ function MJTableCtrl:HandlePlayCard(roleId, index, card, result)
 
     --LuaDebug.Log("roleId: "..roleId..", play card, type: "..card.type_id..", id: "..card.code_id)
     -- 播放出牌
-    --if self.mjtype == enumMAHJONG_TYPE.EM_HONG_TYPE then
+    if self.mjtype == enumMAHJONG_TYPE.EM_HONG_TYPE then
         NGUITools.PlaySoundByPath("Music/Card/"..MJTableCtrl.GetRoleSex(self, roleId)..card.type_id..card.code_id)
-    --elseif self.mjtype == enumMAHJONG_TYPE.EM_PEIX_TYPE then
-    --    NGUITools.PlaySoundByPath("Music/Card/1"..MJTableCtrl.GetRoleSex(self, roleId)..card.type_id..card.code_id)
-    --end
+    elseif self.mjtype == enumMAHJONG_TYPE.EM_PEIX_TYPE then
+        NGUITools.PlaySoundByPath("Music/Card/1"..MJTableCtrl.GetRoleSex(self, roleId)..card.type_id..card.code_id)
+    end
 
     --self.TowardCard:SetActive(true)
     MJTableCtrl.DoCountDownFinish(self)
     -- 判断当前的牌是否能碰、杠
     if roleId ~= self.Drect1.roleId then
         if result ~= 0 then
-            if result == 4 then
+            if result == 6 then
+                if winner == self.Drect1.roleId then
+                    MJTableCtrl.IsPengGang(self, roleId, card)
+
+                    self.ResultCard:SetActive(true)
+                    self.passType = enumCARD_PASS_TYPE.CARD_PASS_WINN_CARD
+                    self.Win:SetActive(true)
+                    self.Peng:SetActive(false)
+                end
+            elseif result == 4 then
                 -- 判断是否胡牌
                 local huPai = self.Drect1.IsHuPai(self.Drect1, card)
                 if huPai then
@@ -631,6 +650,7 @@ function MJTableCtrl:Gang_OnClick()
 end
 
 function MJTableCtrl:Guo_OnClick()
+    LuaDebug.Log("self.passType: "..self.passType )
     ClientSendMsg.SendGuoCard(self.passType)
 
     self.ResultCard:SetActive(false)
@@ -658,7 +678,11 @@ function MJTableCtrl:WinDebug_OnClick()
 end
 
 function MJTableCtrl:HandlePengCard(roleId, index, card, srcRoleId)
-    NGUITools.PlaySoundByPath("Music/Common/"..MJTableCtrl.GetRoleSex(self, roleId).."peng")
+    if self.mjtype == enumMAHJONG_TYPE.EM_HONG_TYPE then
+        NGUITools.PlaySoundByPath("Music/Common/"..MJTableCtrl.GetRoleSex(self, roleId).."peng")
+    elseif self.mjtype == enumMAHJONG_TYPE.EM_PEIX_TYPE then
+        NGUITools.PlaySoundByPath("Music/Common/1"..MJTableCtrl.GetRoleSex(self, roleId).."peng")
+    end
 
     -- 重置
     Client.ResetToward:Do()
@@ -702,7 +726,12 @@ function MJTableCtrl:HandlePengCard(roleId, index, card, srcRoleId)
 end
 
 function MJTableCtrl:HandleGangCard(roleId, index, card, state, srcRoleId)
-    NGUITools.PlaySoundByPath("Music/Common/"..MJTableCtrl.GetRoleSex(self, roleId).."gang")
+    if self.mjtype == enumMAHJONG_TYPE.EM_HONG_TYPE then
+        NGUITools.PlaySoundByPath("Music/Common/"..MJTableCtrl.GetRoleSex(self, roleId).."gang")
+    elseif self.mjtype == enumMAHJONG_TYPE.EM_PEIX_TYPE then
+        NGUITools.PlaySoundByPath("Music/Common/1"..MJTableCtrl.GetRoleSex(self, roleId).."gang")
+    end
+
     -- 重置
     Client.ResetToward:Do()
 
@@ -1146,7 +1175,11 @@ function MJTableCtrl:PlayTableHu(data)
     self.ResultCard:SetActive(false)
     if data.role_list ~= nil and #(data.role_list) > 0 then
         for k = 1, #(data.role_list) do
-            NGUITools.PlaySoundByPath("Music/Common/"..MJTableCtrl.GetRoleSex(self, data.role_list[k]).."hu")
+            if self.mjtype == enumMAHJONG_TYPE.EM_HONG_TYPE then
+                NGUITools.PlaySoundByPath("Music/Common/"..MJTableCtrl.GetRoleSex(self, data.role_list[k]).."hu")
+            elseif self.mjtype == enumMAHJONG_TYPE.EM_PEIX_TYPE then
+                NGUITools.PlaySoundByPath("Music/Common/1"..MJTableCtrl.GetRoleSex(self, data.role_list[k]).."hu")
+            end
             local ref = LuaUIViewCtr.OpenUINotLose("MJTable/TableHu")
             ref.Init(ref, data, data.role_list[k], true)
 
@@ -1171,7 +1204,11 @@ function MJTableCtrl:PlayTableHu(data)
             end
         end
     else
-        NGUITools.PlaySoundByPath("Music/Common/"..MJTableCtrl.GetRoleSex(self, data.roleid).."hu")
+        if self.mjtype == enumMAHJONG_TYPE.EM_HONG_TYPE then
+            NGUITools.PlaySoundByPath("Music/Common/"..MJTableCtrl.GetRoleSex(self, data.roleid).."hu")
+        elseif self.mjtype == enumMAHJONG_TYPE.EM_PEIX_TYPE then
+            NGUITools.PlaySoundByPath("Music/Common/1"..MJTableCtrl.GetRoleSex(self, data.roleid).."hu")
+        end
         local ref = LuaUIViewCtr.OpenUINotLose("MJTable/TableHu")
         ref.Init(ref, data, data.roleid, false)
 

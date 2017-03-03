@@ -246,7 +246,7 @@ HandleFuncs[enumMSGID_MODULE_05.ID_GAME_PLAY_CARD_RES] = function(data, dataLeng
     local data = LuaProto.deserialize(PBMsgPlayCardRes, data, dataLength)
 
     if LuaUIViewCtr.UIPanel["MJTableUI"] ~= nil then
-        LuaUIViewCtr.UIPanel["MJTableUI"].HandlePlayCard(LuaUIViewCtr.UIPanel["MJTableUI"], data.roleid, data.index, data.card, data.result)
+        LuaUIViewCtr.UIPanel["MJTableUI"].HandlePlayCard(LuaUIViewCtr.UIPanel["MJTableUI"], data.roleid, data.index, data.card, data.result, data.winner)
     end
 end
 

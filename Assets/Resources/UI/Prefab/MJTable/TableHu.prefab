@@ -200,13 +200,13 @@ MonoBehaviour:
   method: 0
   mDestroyAfterTween: 0
   style: 0
-  duration: 0.4
+  duration: 0.1
   tweenGroup: 0
   eventReceiver: {fileID: 0}
   callWhenFinished: OnEventWithMessage
   isSenderToMessage: 0
   delayTime: 0
-  waitTime: 0.2
+  waitTime: 0.1
   callWhenWait: OnEventWithMessage
   IsSendMsg: 0
   from: {x: 0.2, y: 0.2, z: 0}
@@ -302,12 +302,12 @@ MonoBehaviour:
   method: 0
   mDestroyAfterTween: 0
   style: 0
-  duration: 0.2
+  duration: 0.1
   tweenGroup: 0
   eventReceiver: {fileID: 138758}
   callWhenFinished: OnEventWithMessage
   isSenderToMessage: 1
-  delayTime: 0.6
+  delayTime: 0.2
   waitTime: 2
   callWhenWait: OnEventWithMessage
   IsSendMsg: 1
