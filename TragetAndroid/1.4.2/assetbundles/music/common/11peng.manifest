@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 911995085
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 24c8f0c45f8496743b72e187d60fa16a
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c516f2a3b2b6b67ef759f6410a790acd
+HashAppended: 0
+ClassTypes:
+- Class: 83
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Music/Common/11peng.mp3
+Dependencies: []

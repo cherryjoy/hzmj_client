@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 1978959670
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 5e64d4deb1d28c4feee8d61fe8ac83eb
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c516f2a3b2b6b67ef759f6410a790acd
+HashAppended: 0
+ClassTypes:
+- Class: 83
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Music/Card/1227.mp3
+Dependencies: []

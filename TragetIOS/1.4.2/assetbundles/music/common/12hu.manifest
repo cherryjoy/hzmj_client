@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 285244369
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 6aff541f78d44544af1e685920fbe59a
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c516f2a3b2b6b67ef759f6410a790acd
+HashAppended: 0
+ClassTypes:
+- Class: 83
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Music/Common/12hu.mp3
+Dependencies: []

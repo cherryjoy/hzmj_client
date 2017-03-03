@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 2940929794
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 4a79421294d32a391463a3dae7da7345
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c516f2a3b2b6b67ef759f6410a790acd
+HashAppended: 0
+ClassTypes:
+- Class: 83
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Music/Common/12gang.mp3
+Dependencies: []
